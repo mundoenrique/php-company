@@ -105,7 +105,7 @@ class Guides extends CI_Controller {
 				if ($view == 'content') {
 					//add JS
 					$addJs=[
-						"jquery-1.10.2.min.js",
+						"jquery-3.6.0.min.js",
 						"jquery-ui-1.10.3.custom.min.js",
 						"jquery.balloon.min.js",
 						"jquery.paginate.js",
@@ -131,7 +131,7 @@ class Guides extends CI_Controller {
 				if ($view == 'detail') {
 					//add JS
 					$addJs=[
-						"jquery-1.10.2.min.js",
+						"jquery-3.6.0.min.js",
 						"jquery-ui-1.10.3.custom.min.js",
 						"jquery.balloon.min.js",
 						"jquery.paginate.js",

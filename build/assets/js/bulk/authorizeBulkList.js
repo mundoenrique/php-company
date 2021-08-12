@@ -158,6 +158,7 @@ $(function () {
 				}
 				inputModal = 	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular"> '+textModal+' '+bulkNum+'</span>';
+
 				if (lang.CONF_REMOTE_AUTH == 'OFF') {
 					inputModal+= 		'<div class="input-group">';
 					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
@@ -168,6 +169,7 @@ $(function () {
 					inputModal+= 		'</div>';
 					inputModal+= 		'<div class="help-block"></div>';
 				}
+
 				inputModal+=	'</form>';
 				appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
 				$('#'+currentIdBtn).on('click', function(e) {

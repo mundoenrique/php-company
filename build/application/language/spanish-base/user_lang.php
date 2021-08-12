@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
+$lang['USER_SIGNIN_BLOCKED'] = 'Usuario bloqueado por intentos fallidos.';
 $lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
 $lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
 $lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
@@ -51,7 +52,7 @@ $lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de 
 //PASS-RECOVER
 $lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
 $lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
-$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
+$lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';

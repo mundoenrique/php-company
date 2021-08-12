@@ -30,7 +30,7 @@ class Novo_Inquiries extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"inquiries/serviceOrders"
 		);
@@ -76,7 +76,8 @@ class Novo_Inquiries extends NOVO_Controller {
 		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
 
 		if(!isset($this->request->bulkId) && !$this->session->flashdata('download'))  {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			exit;
 		}
 
 		$responseAttr = new stdClass();

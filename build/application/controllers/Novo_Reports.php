@@ -30,7 +30,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/reports"
 		);
@@ -40,7 +40,7 @@ class Novo_Reports extends NOVO_Controller {
 		foreach($responseReports->data AS $index => $render) {
 			$this->render->$index = $render;
 		}
-		
+
 		$this->responseAttr($responseReports);
 		$this->render->titlePage =lang('GEN_MENU_REPORTS');
 		$this->views = ['reports/'.$view];
@@ -64,7 +64,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/account_status",
 			"reports/getproductsReports"
@@ -101,7 +101,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/replacement"
 		);
@@ -130,7 +130,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/closing_balance"
 		);
@@ -176,7 +176,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/user_activity"
 		);
@@ -203,7 +203,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/users_activity"
 		);
@@ -230,7 +230,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/recharge_made"
 		);
@@ -270,7 +270,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/issued_cards"
 		);
@@ -307,7 +307,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/category_expense"
 		);
@@ -334,7 +334,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/master_account"
 		);
@@ -362,7 +362,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/statusBulk",
 			"reports/getproductsReports"
@@ -403,7 +403,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"reports/cardholders",
 			"reports/getproductsReports"

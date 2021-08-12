@@ -1,6 +1,6 @@
 'use strict'
 function validateForms(form, options) {
-	var validCountry = typeof country!=='undefined'? country : isoPais;
+	var validCountry = typeof customerUri !== 'undefined' ? customerUri : isoPais;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;

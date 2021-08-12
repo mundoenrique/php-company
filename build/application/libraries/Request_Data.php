@@ -256,7 +256,6 @@ class Request_Data {
 			return $this->orderToProductList($responseList);
 		}
 
-
 	}
 	/**
 	 * @info Método para ordenar los productos para la lista de productos
@@ -273,41 +272,36 @@ class Request_Data {
 		foreach($response->productos AS $pos => $products) {
 			foreach($products AS $key => $value) {
 				switch ($key) {
-					case 'nombre':
-						$programImg = url_title(mb_strtolower($value)).'.svg';
+					case 'descripcion':
+						$productImgName = normalizeName(mb_strtolower($value));
+						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
 
-						if(!file_exists(assetPath('images/programs/'.$this->CI->session->countryUri.'/'.$programImg))) {
-							$programImg = $this->CI->session->countryUri.'_default.svg';
-
-							if(!file_exists(assetPath('images/programs/'.$this->CI->session->countryUri.'/'.$programImg))) {
-								$programImg = 'default.svg';
-							}
+						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
+							$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName].'.svg';
 						}
 
-						$products->programImg = $programImg;
-						break;
-					case 'descripcion':
+						$products->productImg = $productImg;
 						$products->$key = trim(mb_strtoupper($value));
-						break;
-						case 'categoria':
-							$products->$key = trim(ucwords(mb_strtolower($value)));
-						break;
+					break;
+					case 'categoria':
+						$products->$key = trim(ucwords(mb_strtolower($value)));
+					break;
 					case 'idCategoria':
 						$noDeleteCat[] =  $value;
-						break;
+					break;
 					case 'filial':
 						$products->$key = trim(mb_strtoupper($value));
-						break;
+					break;
 					case 'marca':
-						$imgBrand = mb_strtolower($value).'_product.svg';
+						$imgBrand = url_title(trim(mb_strtolower($value))).'_product.svg';
 
 						if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-							$imgBrand = '';
+							$imgBrand = 'default.svg';
 						}
 
 						$products->imgBrand = $imgBrand;
 						$noDeleteBrand[] =  $value;
-						break;
+					break;
 				}
 			}
 		}

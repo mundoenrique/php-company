@@ -1025,7 +1025,7 @@ td > button > i:hover{
   font-weight: 700 !important;
 }
 
-.dataTable thead{
+.dataTable thead, .thead {
 	background-color: #1500a1 !important;
 }
 

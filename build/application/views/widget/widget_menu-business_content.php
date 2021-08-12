@@ -46,7 +46,7 @@
       <?php endforeach; ?>
       <?php if(verifyDisplay('header', '', lang('GEN_TAG_GOUT_MENU'))): ?>
       <li>
-        <a href="<?= base_url($pais.'/cerrar-sesion/inicio')?>" rel="subsection">
+        <a href="<?= base_url($pais.'/sign-out/start')?>" rel="subsection">
           <span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
           <?= lang("SUBMENU_LOGOUT")?>
         </a>

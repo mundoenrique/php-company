@@ -94,7 +94,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
+				$this->response->code = 4;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
@@ -186,7 +186,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = 'empresas';
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_ENTERPRISES');
 			break;
 			case -4:
 				$this->response->code = 1;
@@ -211,26 +211,32 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
 	 */
-	public function CallWs_AddContact_Settings($dataRequest)
+	public function CallWs_addContact_Settings($dataRequest)
 	{
 		log_message('INFO', 'NOVO Settings Model: AddContact Method Initialized');
 
-		$this->dataAccessLog->modulo = 'configuracion';
-		$this->dataAccessLog->function = 'agregar-contacto';
+		$this->dataAccessLog->modulo = 'insertarContactoEmpresa';
+		$this->dataAccessLog->function = 'insertarContactoEmpresa';
 		$this->dataAccessLog->operation = 'insertarContactoEmpresa';
 
 		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
-		$this->dataRequest->nombres = $dataRequest->nombres;
-		$this->dataRequest->apellido = $dataRequest->apellido;
-		$this->dataRequest->cargo = $dataRequest->cargo;
-		$this->dataRequest->email = $dataRequest->email;
-		$this->dataRequest->tipoContacto = $dataRequest->tipoContacto;
-		$this->dataRequest->usuario = $dataRequest->usuario;
+		$this->dataRequest->idExtPer = $dataRequest->nameNewContact;
+		$this->dataRequest->nombres = $dataRequest->nameNewContact;
+		$this->dataRequest->apellido = $dataRequest->surnameNewContact;
+		$this->dataRequest->cargo = $dataRequest->positionNewContact;
+		$this->dataRequest->email = $dataRequest->emailNewContact;
+		$this->dataRequest->tipoContacto = $dataRequest->typeNewContact;
 
-		$this->sendToService('CallWs_AddContact');
+		$this->dataRequest->usuario = [
+			[
+				"userName" => $this->userName,
+				"password" => $dataRequest->newContPass,
+			]
+		];
+
+		$response = $this->sendToService('CallWs_addContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -240,23 +246,135 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case -4:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_EMAIL_USED');
-			break;
-			case -22:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
-			break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
-			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		return $this->responseToTheView('CallWs_addContact');
+	}
+
+		/**
+	 * @info Método para buscar contactos
+	 * @author Diego Acosta García
+	 * @date April 20th, 2021
+	 */
+	public function CallWs_getContacts_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: getContacts Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getContactosPorEmpresa';
+		$this->dataAccessLog->function = 'getContactosPorEmpresa';
+		$this->dataAccessLog->operation = 'getContactosPorEmpresa';
+
+		$this->dataRequest->idOperation = 'getContactosPorEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoContactosMO';
+		$this->dataRequest->lista = [["acrif" => $dataRequest->acrif]];
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->paginaActual = 0;
+		$this->dataRequest->tamanoPagina = 1;
+
+		$response = $this->sendToService('CallWs_getContacts');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				foreach ($response->lista as $key => $value) {
+				  ($response->lista[$key])->id = $key + 1;
+				}
+				$this->response->data = $response->lista;
+				$this->response->diego = $this->session;
+			break;
+			default:
+			$this->response->code = 1;
+				break;
 		}
 
-		return $this->responseToTheView('CallWs_AddContact');
+		return $this->responseToTheView('CallWs_getContacts');
+	}
+
+			/**
+	 * @info Método para eliminar contacto
+	 * @author Diego Acosta García
+	 * @date April 20th, 2021
+	 */
+	public function CallWs_deleteContact_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: deleteContact Method Initialized');
+
+		$this->dataAccessLog->modulo = 'eliminarContactoEmpresa';
+		$this->dataAccessLog->function = 'eliminarContactoEmpresa';
+		$this->dataAccessLog->operation = 'eliminarContactoEmpresa';
+
+		$this->dataRequest->idOperation = 'eliminarContactoEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
+		$this->dataRequest->usuario = [
+			[
+				"userName" => $this->userName,
+				"password" => $dataRequest->pass,
+			]
+		];
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->idExper;
+
+
+		$response = $this->sendToService('CallWs_deleteContact');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $response->lista;
+			break;
+			default:
+			$this->response->code = 1;
+				break;
+		}
+
+		return $this->responseToTheView('CallWs_deleteContact');
+	}
+
+			/**
+	 * @info Método para actualizar contacto existente
+	 * @author Diego Acosta García
+	 * @date April 20th, 2021
+	 */
+	public function CallWs_updateContact_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: updateContact Method Initialized');
+
+		$this->dataAccessLog->modulo = 'updateContactoEmpresa';
+		$this->dataAccessLog->function = 'updateContactoEmpresa';
+		$this->dataAccessLog->operation = 'updateContactoEmpresa';
+
+		$this->dataRequest->idOperation = 'updateContactoEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
+
+		$this->dataRequest->usuario = [
+			[
+				"userName" => $this->userName,
+				"password" => $dataRequest->modifyContactPass,
+			]
+		];
+
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->dniModifyContact;
+		$this->dataRequest->nombres = $dataRequest->nameModifyContact;
+		$this->dataRequest->apellido = $dataRequest->surnameModifyContact;
+		$this->dataRequest->cargo = $dataRequest->positionModifyContact;
+		$this->dataRequest->email = $dataRequest->emailModifyContact;
+		$this->dataRequest->tipoContacto = $dataRequest->typeModifyContact;
+
+
+		$response = $this->sendToService('CallWs_updateContact');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $response->lista;
+			break;
+			default:
+			$this->response->code = 1;
+				break;
+		}
+
+		return $this->responseToTheView('CallWs_updateContact');
 	}
 
 	/**
@@ -303,10 +421,193 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->modalBtn['btn1']['link']  = 'configuracion';
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SETTING');
 			break;
 		}
 
 		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+	}
+
+	/**
+	 * @info Método para busqueda de sucursales
+	 * @author Diego Acosta García
+	 * @date May 20th, 2021
+	 */
+	public function CallWs_getBranches_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getConsultarSucursales';
+		$this->dataAccessLog->function = 'getConsultarSucursales';
+		$this->dataAccessLog->operation = 'getConsultarSucursales';
+		$this->dataRequest->lista = [
+			[
+				"rif" => $dataRequest->branchListBr
+			]
+		];
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$profile = 'S';
+		$country = $this->customerUri;
+
+		$response = $this->sendToService('CallWs_getBranches');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$infoBranches = $response->lista;
+				$tableBranches = [];
+
+				foreach ($infoBranches as $key0 => $value0) {
+
+					$geographic[$key0] = [
+						"state" => $infoBranches[$key0]->estado,
+						"city"=> $infoBranches[$key0]->ciudad
+					];
+
+					$tableBranches[$key0] = [
+						"id" => $key0,
+						"rifB" => $infoBranches[$key0]->rif,
+						"codB" => $infoBranches[$key0]->cod,
+						"person" => $infoBranches[$key0]->persona,
+						"userNameB" => $infoBranches[$key0]->usuario,
+						"branchName" =>$infoBranches[$key0]->nomb_cia,
+						"branchCode" =>$infoBranches[$key0]->codigo,
+						"contact" =>$infoBranches[$key0]->persona,
+						"phone" =>$infoBranches[$key0]->telefono,
+						"zoneName" =>$infoBranches[$key0]->zona,
+						"address1" =>$infoBranches[$key0]->direccion_1,
+						"address2" =>$infoBranches[$key0]->direccion_2,
+						"address3" =>$infoBranches[$key0]->direccion_3,
+						"areaCode" =>$infoBranches[$key0]->cod_area
+					];
+
+					if (array_key_exists("paisTo", $response)) {
+						$country = $response->paisTo->pais;
+
+						foreach ($response->paisTo->listaEstados as $key1 => $value1) {
+							$stateName = $response->paisTo->listaEstados[$key1]->estados;
+
+								foreach ($response->paisTo->listaEstados[$key1]->listaCiudad as $key2 => $value2) {
+									$cities = [$response->paisTo->listaEstados[$key1]->listaCiudad, $response->paisTo->listaEstados[$key1]->listaCiudad[$key2]->ciudad];
+							};
+						};
+
+						foreach ($cities[0] as $key => $value) {
+							if (array_key_exists('listaDistrito', ($cities[0][$key]))) {
+								$profile = 'L';
+								$districts[$key] = $cities[0][$key]->ListaDistrito;
+							};
+						};
+					};
+
+					$this->response->country = [
+						"countryCodeBranch" =>  $infoBranches[0]->codPais,
+						"countryNameBranch" =>  $country,
+						"statesList" => $response->paisTo->listaEstados
+					];
+				};
+
+				$this->response->data = $tableBranches;
+				$this->response->geoUserData = $geographic;
+				$this->response->geoInfo = $response->paisTo;
+				$this->response->longProfile = $profile;
+				$this->response->infoBranches = $stateName;
+
+				break;
+			case -150:
+				$this->response->code = 7;
+				$this->response->geoInfo = $response->paisTo;
+				$this->response->longProfile = $profile;
+				$this->response->country = [
+					"countryCodeBranch" =>  $response->paisTo->codPais,
+					"countryNameBranch" =>  $country,
+				];
+				break;
+			default:
+				$this->response->code = 2;
+				break;
+		};
+
+		return $this->responseToTheView('CallWs_getBranches');
+	}
+
+	/**
+	 * @info Método para subir archivo de sucursales
+	 * @author Diego Acosta García
+	 * @date May 28th, 2021
+	 */
+	public function CallWs_uploadFileBranches_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: uploadFileBranches Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getSucursalTxt';
+		$this->dataAccessLog->function = 'getSucursalTxt';
+		$this->dataAccessLog->operation = 'getSucursalTxt';
+		$this->dataRequest->idOperation = 'getSucursalTxt';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataRequest->file = $dataRequest->file;
+		$this->isResponseRc = 0;
+
+		switch($this->isResponseRc ) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $dataRequest->file;
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_uploadFileBranches');
+	}
+
+	/**
+	 * @info Método para actualizar sucursal
+	 * @author Diego Acosta García
+	 * @date May 29th, 2021
+	 */
+	public function CallWs_updateBranch_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getActualizarSucursal';
+		$this->dataAccessLog->function = 'getActualizarSucursal';
+		$this->dataAccessLog->operation = 'getActualizarSucursal';
+		$this->dataRequest->idOperation = 'getActualizarSucursal';
+		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
+
+		$this->dataRequest->rif = $dataRequest->rifB;
+		$this->dataRequest->cod = $dataRequest->codB;
+		$this->dataRequest->nom_cia = $dataRequest->branchName;
+		$this->dataRequest->direccion_1 = $dataRequest->address1;
+		$this->dataRequest->direccion_2 = $dataRequest->address2;
+		$this->dataRequest->direccion_3 = $dataRequest->address3;
+		$this->dataRequest->zona = $dataRequest->branchCode;
+		$this->dataRequest->codPais = $dataRequest->countryCodeBranch;
+		$this->dataRequest->estado = $dataRequest->stateCodeBranch;
+		$this->dataRequest->ciudad = $dataRequest->cityCodeBranch;
+		$this->dataRequest->persona = $dataRequest->person;
+		$this->dataRequest->cod_area = $dataRequest->areaCode;
+		$this->dataRequest->telefono = $dataRequest->phone;
+		$this->dataRequest->usuario = $dataRequest->userNameB;
+
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+			$password = $this->session->pass ?: md5($password);
+		}
+
+		$this->dataRequest->password = $password;
+
+		$response = $this->sendToService('CallWs_updateBranch');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_updateBranch');
 	}
 }

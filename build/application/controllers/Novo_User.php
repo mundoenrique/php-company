@@ -12,61 +12,6 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User Controller Class Initialized');
 	}
 	/**
-	 * @info Método que renderiza la vista de login
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function login()
-	{
-		log_message('INFO', 'NOVO User: index Method Initialized');
-
-		if($this->session->has_userdata('logged')) {
-			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
-			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
-			redirect($urlRedirect, 'location');
-			exit();
-		}
-
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
-
-		$view = 'login';
-		$views = ['user/login', 'user/signin'];
-
-		if($this->skin !== 'novo') {
-			$views = ['user/signin'];
-		}
-
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods",
-			"user/login"
-		);
-
-		if($this->skin !== 'pichincha') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/jquery.kwicks",
-				"user/kwicks"
-			);
-		}
-
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/borders"
-			);
-		}
-
-		$this->render->skipProductInf = TRUE;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
-		$this->loadView($view);
-	}
-	/**
 	 * @info Método que renderiza la vista de inicio de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date October 24th, 2020
@@ -75,27 +20,29 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: signIn Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
+		$view = 'signIn';
+
 		if($this->session->has_userdata('logged')) {
-			redirect(base_url('empresas'), 'location', 301);
-			exit();
+			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			exit;
 		}
 
 		if ($this->session->has_userdata('userId')) {
 			clearSessionsVars();
 		}
 
-		$view = 'signIn';
 
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/signIn"
 		);
 
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -124,6 +71,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
@@ -134,7 +82,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->form = $this->request;
 		}
 
-		if($sessionId == 'fin') {
+		if($sessionId == lang('CONF_LINK_SIGNOUT_END')) {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
@@ -174,13 +122,14 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'recoverPass';
 
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
 			"third_party/jquery.validate",
-			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 
@@ -198,12 +147,14 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: recoverAccess Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'recoverAccess';
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/recoverAccess",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -223,33 +174,33 @@ class Novo_User extends NOVO_Controller {
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url('inicio'), 'location');
-			exit();
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
 		}
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/changePassword".lang('CONF_VIEW_SUFFIX'),
+			"user/changePassword-core",
 			"user/passValidate",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 
 		switch($this->session->flashdata('changePassword')) {
 			case 'newUser':
-			$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
+				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
 			break;
 			case 'expiredPass':
-			$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
 			break;
 		}
 
 		$this->render->userType = $this->session->flashdata('userType');
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
@@ -270,9 +221,9 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || $thirdPartySession) {
+		if($redirect == lang('CONF_LINK_SIGNOUT_END') || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url('inicio');
+			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -280,18 +231,19 @@ class Novo_User extends NOVO_Controller {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
-			if($redirect == 'inicio') {
+			if($redirect == lang('CONF_LINK_SIGNOUT_START')) {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
 			}
 
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
 			$this->render->skipProductInf = TRUE;
-			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+			$this->render->titlePage = lang('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('GEN_LINK_LOGIN')), 'location');
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
 		}
 
 	}
@@ -307,17 +259,16 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('empresas'), 'location', 301);
-			exit();
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
 		}
 
 		$views = ['staticpages/content-browser'];
 
-		if(lang('CONF_VIEW_SUFFIX') != '') {
-			$this->includeAssets->cssFiles = [
-				"$this->folder"."$this->skin-browser"
-			];
-		}
+		$this->includeAssets->cssFiles = [
+			"$this->customerUri/"."$this->customerUri-browser",
+			"reboot"
+		];
 
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;
@@ -335,7 +286,6 @@ class Novo_User extends NOVO_Controller {
 	 *
 	 */
 	public function usersManagement()
-
 	{
 		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
 
@@ -348,7 +298,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/usersManagement"
 		);
@@ -395,7 +345,7 @@ class Novo_User extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/userPermissions"
 		);
@@ -425,6 +375,159 @@ class Novo_User extends NOVO_Controller {
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
 		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/*
+	|--------------------------------------------------------------------------
+	| TEMPORAL METHODS
+	|--------------------------------------------------------------------------
+	*/
+	/**
+	 * @info Método que renderiza la vista de login
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function login()
+	{
+		log_message('INFO', 'NOVO User: index Method Initialized');
+
+		if($this->session->has_userdata('logged')) {
+			$urlRedirect = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
+			redirect($urlRedirect, 'Location', 302);
+			exit;
+		}
+
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
+
+		$view = 'login';
+		$views = ['user/login', 'user/signin'];
+
+		if($this->customerUri == 'bp') {
+			$views = ['user/signin'];
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.balloon",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"user/login"
+		);
+
+		if($this->customerUri !== 'bp') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/jquery.kwicks",
+				"user/kwicks"
+			);
+		}
+
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/borders"
+			);
+		}
+
+		$this->render->skipProductInf = TRUE;
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista para recuperar la contraseña
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function passwordRecovery()
+	{
+		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+
+		$view = 'recoverPass';
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"user/recoverPass",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods"
+		);
+
+		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->render->activeHeader = TRUE;
+		$this->render->skipProductInf = TRUE;
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista para cambiar la contraseña
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function changePass()
+	{
+		log_message('INFO', 'NOVO User: changePass Method Initialized');
+
+		$view = 'changePassword';
+
+		if(!$this->session->flashdata('changePassword')) {
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"user/changePassword",
+			"user/passValidate",
+			"third_party/jquery.balloon",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods"
+		);
+
+		switch($this->session->flashdata('changePassword')) {
+			case 'newUser':
+				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
+			break;
+			case 'expiredPass':
+				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+			break;
+		}
+
+		$this->render->userType = $this->session->flashdata('userType');
+		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->activeHeader = TRUE;
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista de segerencias de navegador
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date November 25th, 2020
+	 */
+	public function browsers()
+	{
+		log_message('INFO', 'NOVO User: browsers Method Initialized');
+
+		$view = 'browsers';
+
+		if(!$this->session->flashdata('messageBrowser')) {
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
+		}
+
+		$views = ['staticpages/content-browser'];
+
+		$messageBrowser = $this->session->flashdata('messageBrowser');
+		$this->render->activeHeader = TRUE;
+		$this->render->platform = $messageBrowser->platform;
+		$this->render->title = $messageBrowser->title;
+		$this->render->msg1 = $messageBrowser->msg1;
+		$this->render->msg2 = $messageBrowser->msg2;
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
 		$this->loadView($view);
 	}
 }

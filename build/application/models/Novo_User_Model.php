@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('CONF_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -93,17 +93,17 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri'),
+					'customerSess' => $this->config->item('customer'),
+					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'false',
 					'idUsuario' => $response->usuario->idUsuario,
-					'pais' => $this->config->item('country'),
+					'pais' => $this->config->item('customer'),
 					'nombreCompleto' => $fullName,
 					'logged_in' => TRUE
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 				$this->response->modal = TRUE;
 			break;
 			case -2:
@@ -119,17 +119,17 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri'),
+					'customerSess' => $this->config->item('customer'),
+					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url('inf-condiciones');
+				$this->response->data = base_url(lang('CONF_LINK_TERMS'));
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 				if($this->isResponseRc === -185) {
-					$this->response->data = base_url('cambiar-clave');
+					$this->response->data = base_url(lang('CONF_LINK_CHANGE_PASS'));
 					$this->session->set_flashdata('changePassword', 'expiredPass');
 				}
 			break;
@@ -146,9 +146,14 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
 			case -8:
-			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_SUSPENDED');
+				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
+				$this->response->position = lang('CONF_VALID_POSITION');
+			break;
+			case -35:
+				$this->response->code = 1;
+				$this->response->msg = lang('USER_SIGNIN_BLOCKED');
 				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
@@ -220,12 +225,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
-		$this->dataAccessLog->userName = $this->country;
+		$this->dataAccessLog->userName = $this->customer;
 
 		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
 		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
 
-		switch ($this->country) {
+		switch ($this->customer) {
 			case 'Bdb':
 				$this->token = $dataRequest->sessionId;
 			break;
@@ -244,7 +249,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_SingleSignon');
 
-		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('CONF_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -276,9 +281,9 @@ class Novo_User_Model extends NOVO_Model {
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->customer, 'REMOTE_ADDR'),
+					'customerSess' => $this->config->item('customer'),
+					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'true',
           'enterpriseInf' => [
@@ -287,21 +292,21 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 			break;
 			case -28:
 				$userData = [
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'countrySess' => $this->config->item('country')
+					'customerSess' => $this->config->item('customer')
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
-				$this->response->data = base_url('cerrar-sesion/fin');
+				$this->response->data = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END'));
 			break;
 			default:
-				$this->response->data = base_url('ingresar/fin');
+				$this->response->data = base_url('ingresar/'.lang('CONF_LINK_SIGNOUT_END'));
 			break;
 		}
 
@@ -341,7 +346,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 			case -6:
@@ -482,7 +487,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 			break;
 			case -286:
 				$map = 1;
@@ -545,7 +550,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = 'inicio';
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = $this->session->has_userdata('logged') ? 'destroy' :  'redirect';
 			break;
 			case -4:
@@ -584,6 +589,24 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->code = 0;
 
 		return $this->responseToTheView('callWs_KeepSession');
+	}
+	/**
+	 * @info Método para el cambiar el idioma de la aplicaición
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2021
+	 */
+	public function callWs_ChangeLanguage_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ChangeLanguage Method Initialized');
+
+		$response = new stdClass();
+		$response->rc =  0;
+		$this->makeAnswer($response, 'callWs_ChangeLanguage');
+		$this->response->code = 0;
+
+		languageCookie(lang('GEN_AFTER_LANG'));
+
+		return $this->responseToTheView('ChangeLanguage');
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -638,7 +661,7 @@ class Novo_User_Model extends NOVO_Model {
 		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha Customer: "' .$this->config->item('customer');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
@@ -650,7 +673,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->title = lang('GEN_SYSTEM_NAME');
 			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
-			$this->response->modalBtn['btn1']['link'] = 'inicio';
+			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 			$this->response->modalBtn['btn1']['action'] = 'redirect';
 		}
 
@@ -827,7 +850,7 @@ class Novo_User_Model extends NOVO_Model {
 				if ($this->userName == $user) {
 					$this->response->modalBtn['btn1']['action'] = 'redirect';
 				} else {
-					$this->response->modalBtn['btn1']['link'] = 'permisos-usuario';
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USERS_PERMISSIONS');
 				}
 				break;
 		}

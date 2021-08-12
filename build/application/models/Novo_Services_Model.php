@@ -544,7 +544,6 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case 'UPDATE_DATA':
 			case 'DELIVER_TO_CARDHOLDER':
-			case 'SEND_TO_ENTERPRISE':
 			case 'RECEIVE_IN_ENTERPRISE':
 			case 'RECEIVE_IN_BANK':
 			case 'CARD_CANCELLATION':
@@ -661,6 +660,16 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case 504:
+				switch ($dataRequest->action) {
+					case 'SEND_TO_ENTERPRISE':
+					case 'INQUIRY_BALANCE':
+					case 'LOCK_CARD':
+					case 'UNLOCK_CARD':
+						$this->response->msg = lang('GEN_TIMEOUT_HTTP');
+					break;
+				}
 			break;
 		}
 
@@ -1068,14 +1077,6 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->data->params['weeklyQuantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
 					$this->response->data->params['weeklyAmount'] = (float)$response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
 
-					/* unset(
-						$response->maestroDeposito->parametrosRecarga->idExtEmp,
-						$response->maestroDeposito->parametrosRecarga->acprefix,
-						$response->maestroDeposito->parametrosRecarga->usuarioReg,
-						$response->maestroDeposito->parametrosRecarga->tipoComision,
-						$response->maestroDeposito->parametrosRecarga->tipoFactura,
-					); */
-
 					$this->response->data->params['commission'] = (float)$response->maestroDeposito->parametrosRecarga->costoComisionTrans
 						?? '';
 					$this->response->data->params['minAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMinTransDia
@@ -1084,7 +1085,9 @@ class Novo_Services_Model extends NOVO_Model {
 						?? '';
 					$this->response->data->params['maxAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
 						?? '';
-					$this->response->data->params['accuAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+					$this->response->data->params['maxQuanTransDaily'] = (float)$response->maestroDeposito->parametrosRecarga->cantidadMaxTransDia
+						?? '';
+					$this->response->data->params['maxAmountTransDaily'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransDia
 						?? '';
 				}
 
@@ -1153,7 +1156,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('SERVICES_SUCCESSFUL_TRANSFER');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('CONF_INPUT_PASS') == 'ON'
-				 ? 'lotes-autorizacion'	: 'transf-cuenta-maestra';
+				 ? lang('CONF_LINK_BULK_AUTH')	: lang('CONF_LINK_TRANSF_MASTER_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 			case -1:
@@ -1203,7 +1206,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('CallWs_MatesaccountBlanace');
+		return $this->responseToTheView('CallWs_MasterAccountTransfer');
 	}
 	/**
 	 * @info Método obtener clave de autorización
@@ -1228,8 +1231,10 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
+
 		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
 		$this->isResponseRc = 0; */
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -1254,5 +1259,44 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_AuthorizationKey');
+	}
+
+	/**
+	 * @info Método para solictar OTP para abono en cuenta maestra
+	 * @author Luis Molina
+	 * @date May 27th, 2021
+	 */
+	public function CallWs_RechargeAuthorization_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: RechargeAuthorization Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Pagos';
+		$this->dataAccessLog->function = 'Doble Autenticacion';
+		$this->dataAccessLog->operation = 'Generar Token';
+
+		$this->dataRequest->idOperation = 'dobleAutenticacion';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
+
+		$response = $this->sendToService('CallWs_RechargeAuthorization');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_OTP');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			  $this->session->set_flashdata('authToken', $response->bean);
+			break;
+			default:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_OTP_NO_SENT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+		return $this->responseToTheView('CallWs_RechargeAuthorization');
 	}
 }

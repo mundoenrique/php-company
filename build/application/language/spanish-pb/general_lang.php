@@ -1,28 +1,31 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//GENERAL LANGUAGE
-$lang['GEN_FAVICON'] = 'favicon-pb';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOGO_HEADER'] = 'logo-menu.svg';
-$lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_OTP'] = 'Te enviamos un correo con un código de seguridad, indícalo a continuación.';
-$lang['GEN_PASSWORD_NO_VALID'] = 'Usuario y/o contraseña incorrecta, por favor verifica y vuelve a intentar.';
+$lang['GEN_PASSWORD_NO_VALID'] = 'Los datos ingresados son incorrectos.';
 $lang['GEN_STATUS'] = 'Estado';
-//LINKS
-$lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-acceso';
+$lang['GEN_SEND_ACCESS'] = 'Tu transacción ha sido procesada exitosamente. Enviamos un correo a %s, con tus datos de acceso.';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Produbanco - ';
-$lang['GEN_FOTTER_IMAGE_L'] = 'logo-footer.png';
-$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
-$lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
 //DATATABLES
+$lang['GEN_START_DAY']= 'Fecha inicio';
+$lang['GEN_END_DAY']= 'Fecha fin';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Num. lote';
 $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
+$lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
+$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud, por favor intenta mas tarde.';
+$lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas diez usadas</strong>.';
-//SUBMENU
-$lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuarios';//REPUSU
+$lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
+$lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
+//CONTACT
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS'] = [
+	'XXXXX' => 'XXXXXXX',
+];
+$lang['GEN_SO_SUCCESSFULL'] = 'Tu transacción ha sido procesada exitosamente.';
+$lang['GEN_SO_CREATE_INCORRECT'] = 'Los datos ingresados son incorrectos.';
