@@ -7,6 +7,7 @@
 				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseData->idFiscal ?>
 			</span>
 			<form id="enterprise-widget-form" action="<?= base_url($actionForm) ?>" method="POST" form-action="<?= $actionForm ?>">
+				<input type="hidden" name="isGet" value="<?= TRUE; ?>">
 				<select id="enterprise-select" class="select-box custom-select mt-1 mb-4 h6 w-100">
 					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 					<?php foreach($enterpriseList AS $enterprise) : ?>
