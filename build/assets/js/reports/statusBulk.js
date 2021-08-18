@@ -7,7 +7,7 @@ $(function () {
 	var resultStatusBulk = $('#resultStatusBulk');
 	var statusBulkBtn = $('#status-bulk-btn');
 	var downLoad = $('.download');
-
+ 
 	datePicker.datepicker({
 		minDate: lang.CONF_MIN_CONSULT_YEAR,
 		onSelect: function (selectedDate) {

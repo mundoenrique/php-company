@@ -153,7 +153,7 @@ $lang['CONF_FILE'] = 'Archivos de gestión %s';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
-//DATEPICKER
+//DATEPICKER 
 $lang['CONF_MAX_CONSULT_MONTH'] = 3;
 $lang['CONF_MIN_CONSULT_YEAR'] = '-60m';
 //UPPER CASE INPUTS
