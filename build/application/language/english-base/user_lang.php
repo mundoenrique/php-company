@@ -1,65 +1,66 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
-$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
-$lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
-$lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
-$lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
-$lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+$lang['USER_SIGNIN_INVALID_USER']= "Invalid username or password";
+$lang['USER_SIGNIN_WILL_BLOKED']= "The next unsuccessful attempt your user will be blocked";
+$lang['USER_SIGNIN_SUSPENDED'] = 'User not available, is inactive';
+$lang['USER_SIGNIN_NO_MIGRED'] = 'Dear %s your user has not been migrated from the previous application';
+$lang['USER_SIGNIN_OLD_APP'] = 'Previous application user';
+$lang['USER_EXPIRE_TIME'] = 'The time allowed to perform the operation has expired, please try again.';
 $lang['USER_WELCOME_TITLE'] = '';
-$lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
-$lang['LOGIN_WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
-$lang['LOGIN_BTN'] = 'Ingresar';
-$lang['LOGIN_SECURE_OPER_TITLE'] = 'Operaciones seguras';
-$lang['LOGIN_SECURE_OPER_MSG'] = 'Resguardamos la integridad y la privacidad de la información cumpliendo los más altos estándares internacionales de seguridad.';
-$lang['LOGIN_ACCESS_TITLE'] = 'Accesibilidad 7x24';
-$lang['LOGIN_ACCESS_MSG'] = 'La plataforma está disponible las 24 horas del día, los 7 días de la semana y te ofrece conexión directa vía Internet para realizar las operaciones de tu empresa.';
-$lang['LOGIN_AUTOMATIC_UPGRADE_TITLE'] = 'Actualización automática';
-$lang['LOGIN_AUTOMATIC_UPGRADE_MSG'] = 'Las actualizaciones y mejoras de la plataforma se ejecutarán de forma automática, permitiéndole a tu empresa estar siempre al día con las nuevas funcionalidades que se desarrollen.';
-$lang['LOGIN_ONLINE_REPORTS_TITLE'] = 'Reportes Online';
-$lang['LOGIN_ONLINE_REPORTS_MSG'] = 'Obtenga información sobre las operaciones realizadas y gestiona en línea la emisión de reportes y gráficos que facilitan auditorías y controles sobre los gastos realizados por tu empresa.';
-$lang['LOGIN_OPERATIONS_TITLE'] = 'Operaciones';
-$lang['LOGIN_OPERATIONS_MSG'] = 'Consulta, autoriza o anula Lotes de Emisión y Recarga de tarjetas con mayor facilidad y obten la Orden de Servicio para facilitar el pago de operaciones';
-$lang['LOGIN_NEED_HELP_TITLE'] = '¿Necesitas ayuda?';
-$lang['LOGIN_NEED_HELP_MSG'] = 'Nuestros Ejecutivos del Centro de Soporte a  Empresas están a tu orden para ofrecerte mayor información o aclararte cualquier duda.';
-$lang['LOGIN_INFO'] = 'Ventas e información a empresas';
-$lang['LOGIN_INFO-1'] = 'Teléfono: (51-1) 619-8900';
+$lang['LOGIN_RECOVER_PASS'] = 'Did you forget your password?';
+$lang['LOGIN_WELCOME_MESSAGE']='With this system, your company payment procedures are more efficient, secure and faster. Start enjoying all the advantages that Enterprise Online offers you.';
+$lang['LOGIN_BTN'] = 'Log in';
+$lang['LOGIN_SECURE_OPER_TITLE'] = 'Safe operations';
+$lang['LOGIN_SECURE_OPER_MSG'] = 'We safeguard the integrity and privacy of information, complying with the highest international security standards.';
+$lang['LOGIN_ACCESS_TITLE'] = '7x24 accessibility';
+$lang['LOGIN_ACCESS_MSG'] = 'The platform is available 24 hours a day, 7 days a week and offers you a direct connection via the Internet to carry out your business operations.';
+$lang['LOGIN_AUTOMATIC_UPGRADE_TITLE'] = 'Automatic update';
+$lang['LOGIN_AUTOMATIC_UPGRADE_MSG'] = 'The updates and improvements of the platform will be executed automatically, allowing your company to always be up to date with the new functionalities that are developed.';
+$lang['LOGIN_ONLINE_REPORTS_TITLE'] = 'Online reports';
+$lang['LOGIN_ONLINE_REPORTS_MSG'] = 'Obtain information on the operations carried out and manage online the issuance of reports and graphs that facilitate audits and controls on the expenses made by your company.';
+$lang['LOGIN_OPERATIONS_TITLE'] = 'Operactions';
+$lang['LOGIN_OPERATIONS_MSG'] = 'Consult, authorize or cancel Card Issuance and Recharge Batches more easily and obtain the Service Order to facilitate the payment of operations';
+$lang['LOGIN_NEED_HELP_TITLE'] = 'Need help?';
+$lang['LOGIN_NEED_HELP_MSG'] = 'Our Executives of the Business Support Center are at your service to offer you more information or clarify any questions.';
+$lang['LOGIN_INFO'] = 'Sales and information to companies';
+$lang['LOGIN_INFO-1'] = 'Phone: (51-1) 619-8900';
 $lang['LOGIN_INFO-2'] = 'Fax: (51-1) 619-8900 anexo 200';
 $lang['LOGIN_INFO-3'] = 'E-mail: ventas@tebca.com.pe';
-$lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
-$lang['LOGIN_SIGNIN'] = 'Ingresar';
-$lang['LOGIN_RECOVERY_PASSWORD'] = 'Restablecer contraseña';
-$lang['LOGIN_RECOVERY_PASS_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';
+$lang['LOGIN_WIDGET_TITLE'] = 'Affiliate client Peru';
+$lang['LOGIN_SIGNIN'] = 'Log in';
+$lang['LOGIN_RECOVERY_PASSWORD'] = 'Restore password';
+$lang['LOGIN_RECOVERY_PASS_LINK'] = 'Did you forget or lock your password?';
 //TERMS_CONTENT
-$lang['TERMS_MESSAGE'] = 'Estimado usuario debes leer y aceptar los términos de uso y confidencialidad para comenzar a usar nuestra plataforma.';
-$lang["TERMS_TITLE"]='Condiciones Generales, Términos de Uso y Confidencialidad';
+$lang['TERMS_MESSAGE'] = 'Dear user, you must read and accept the terms of use and confidentiality to start using our platform.';
+$lang["TERMS_TITLE"]='General Conditions, Terms of Use and Confidentiality';
 $lang['TERMS_ACCEPT'] = 'Acepto los términos y condiciones.';
-$lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de Beneficios S.A.C.</strong> y <strong>Servitebca Perú, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A.,</strong> ambas sociedades domiciliadas en la ciudad de Lima e inscritas en la partida electrónica 12071991 y 12072298, en fechas 18 de octubre de 2007 y 19 de octubre de 2007 respectivamente, quienes en lo adelante, conjunta o indistintamente, se denominarán “La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de la plataforma electrónica de La Empresa; en lo adelante “La Plataforma”:</p>
-	<p>Sus Usuarios se obligan a leer las presentes Condiciones Generales y Términos de Uso y Confidencialidad cuidadosamente antes de continuar su recorrido en este sitio  web y, de hacerlo, se entenderá que están de acuerdo con las mismas y declaran que aceptan cumplir a cabalidad con las instrucciones y obligaciones aquí contenidas .</p>
-	<p>La Empresa, no se hace responsable por las medidas de seguridad que deben ser tomadas por los Usuarios, cuando obtengan sus claves y contraseñas personales, ni por el uso inadecuado del resguardo de las mismas; en ese sentido, se libera de toda responsabilidad con relación al mal uso de claves, contraseñas, firmas electrónicas, certificados e incluso del mismo hardware en donde se almacena la información que es privilegiada. Esta liberación de responsabilidad, se extiende a cualquier daño causado por los Usuarios derivado del mal uso de la información contenida en La Plataforma. Igualmente, La Empresa no se hace responsable por el incumplimiento o retardo en la prestación de sus servicios, siempre y cuando, sea consecuencia de un caso fortuito y/o fuerza mayor y durante el tiempo que éstos persistan.</p>
-	<p>La Plataforma de La Empresa le proporciona a sus Usuarios las herramientas necesarias para cumplir y hacer uso de los distintos programas que ofrece de manera eficaz, rápida y con total seguridad. Sin embargo, La Empresa no garantiza de forma alguna el servicio ininterrumpido o libre de error a través de este sitio web.</p>
-	<p>Esta Plataforma de La Empresa ofrece el enlace con otros sitios web por lo que el acceso a los mismos será por cuenta y riesgo de los Usuarios. De igual forma, los Usuarios podrán encontrar anuncios referentes a las promociones de los productos y servicios de La Empresa los cuales se regirán por los contratos que los regulan  así como, por los términos y condiciones que rijan las respectivas promociones.</p>
-	<p>La Empresa declara que la data, información y en general los productos y servicios ofrecidos por ésta, cuando pertenecen o se refieren al Usuario, están sometidos a las disposiciones constitucionales, legales y administrativas que garantizan los derechos a la privacidad de las comunicaciones y del acceso a la información personal, según lo dispuesto en el numeral 6 del artículo 2 de la Constitución Política del Perú y en la Ley 29733, Ley de Protección de Datos Personales y su Reglamento, aprobado mediante Decreto Supremo 003-2013-JUS.</p>
-	<p>En tal sentido, los Usuarios entienden que la información contenida, fijada y puesta a disposición del público en La Plataforma de La Empresa son considerados mensajes de datos, según los términos y condiciones que aquí se exponen. Sobre los mensajes de datos se garantizan los derechos a la privacidad de las comunicaciones y del acceso a la información personal.</p>
-	<p>La Empresa declara que los mensajes de datos vienen resguardados por dispositivos de seguridad que brindan, para verificar que no han sido alterados, que han permanecido íntegros durante su generación, comunicación y transmisión, recepción y archivo, y para confirmar la identidad del emisor, con ello se puede evidenciar su origen. Asimismo, estos mensajes de datos son grabados y pueden ser recuperados para ulterior consulta.</p>
-	<p>Así mismo, La Empresa declara que todas las creaciones intelectuales, marcas, slogans, nombres de dominio, diseños y cualquier otro bien inmaterial, estén o no protegidos bajo las normas de Propiedad Intelectual: Propiedad Industrial y Derechos de Autor, tendrán como único titular de los derechos económicos sobre los objetos inmateriales protegidos a La Empresa, quien es la única que los podrá utilizar conforme a la protección y facultades que les otorga en Perú, el sistema jurídico de propiedad intelectual vigente.</p>
-	<p>La Empresa hará sus mejores esfuerzos para el adecuado uso de sus plataformas tecnológicas, garantizando el honor y la intimidad personal y familiar de sus Usuarios, y así lo entienden estos últimos. No obstante, La Empresa se reserva el derecho de suspender el servicio temporalmente en cualquier momento sin previa notificación a los Usuarios, siempre y cuando sea por razones de mantenimiento de La Plataforma u otras razones de carácter técnico que se consideren necesarias y convenientes. En estos casos, no existirá ningún tipo de indemnización por parte de La Empresa a los Usuarios.</p>
-	<p>Los Usuarios, de conformidad con las políticas de seguridad y privacidad de La Plataforma , podrán revocar su consentimiento o autorización por cualquiera de los canales de atención que mantiene La Empresa, si no desea recibir mensajes electrónicos comerciales, en cuyo caso, La Empresa cesará dichos envíos y aplicará las medidas correctivas amigables correspondientes.</p>
-	<p>La Empresa se reserva a su total discreción, emplear todos los medios necesarios a su alcance para retirar de forma inmediata al usuario que infrinja cualquiera de las condiciones de seguridad  y privacidad de La Plataforma , lo cual incluye que los Usuarios hayan enviado información falsa que no sea susceptible de verificarla en cuanto a su autenticidad.</p>
-	<p>Igualmente, La Empresa, tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en La Plataforma  a los fines de notificar a sus Usuarios.</p>
-	<p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma , se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>";
+$lang["TERMS_CONTENT"] = "
+	<p> <strong> Tebca Peru, Electronic Benefit Transfer SAC </strong> and <strong> Servitebca Peru, Electronic Benefit Transfer Service and Payments SA, </strong> both companies domiciled in the city of Lima and registered in electronic entry 12071991 and 12072298, dated October 18, 2007 and October 19, 2007 respectively, who from now on, jointly or indistinctly, will be called The Company, describe the terms and conditions governing the use and confidentiality of the Company's electronic platform are described below; hereinafter The Platform: </p>
+	<p> Its Users are obliged to read these General Conditions and Terms of Use and Confidentiality carefully before continuing their journey on this website and, if they do, it will be understood that they agree with them and declare that they agree to comply fully with the instructions and obligations contained herein. </p>
+	<p> The Company is not responsible for the security measures that must be taken by Users, when they obtain their personal passwords and passwords, nor for the inappropriate use of their protection; In this sense, it is released from all responsibility in relation to the misuse of keys, passwords, electronic signatures, certificates and even the hardware itself where privileged information is stored. This release of liability extends to any damage caused by the Users derived from the misuse of the information contained in the Platform. Likewise, The Company is not responsible for non-compliance or delay in the provision of its services, as long as it is the consequence of a fortuitous event and / or force majeure and for as long as they persist. </p>
+	<p> The Company's Platform provides its Users with the necessary tools to comply with and make use of the different programs it offers efficiently, quickly and with total security. However, The Company does not guarantee in any way the uninterrupted or error-free service through this website. </p>
+	<p> This Company Platform offers the link to other websites so that access to them will be at the Users' risk and expense. Likewise, Users may find advertisements referring to the promotions of the Company's products and services, which will be governed by the contracts that regulate them as well as by the terms and conditions that govern the respective promotions. </p>
+	<p> The Company declares that the data, information and in general the products and services offered by it, when they belong to or refer to the User, are subject to the constitutional, legal and administrative provisions that guarantee the rights to privacy of communications and access to personal information, as provided in paragraph 6 of article 2 of the Political Constitution of Peru and in Law 29733, Personal Data Protection Law and its Regulations, approved by Supreme Decree 003-2013-JUS. </p>
+	<p> In this sense, Users understand that the information contained, posted and made available to the public on The Company's Platform are considered data messages, according to the terms and conditions set forth herein. Regarding data messages, the rights to privacy of communications and access to personal information are guaranteed. </p>
+	<p> The Company declares that the data messages are protected by security devices that provide, to verify that they have not been altered, that they have remained intact during their generation, communication and transmission, reception and filing, and to confirm the identity of the issuer, with this its origin can be evidenced. Likewise, these data messages are recorded and can be retrieved for later reference. </p>
+	<p> Likewise, The Company declares that all intellectual creations, trademarks, slogans, domain names, designs and any other intangible good, whether or not they are protected under the Intellectual Property regulations: Industrial Property and Copyright, will have The Company as the sole owner of the economic rights over the intangible objects, who is the only one who may use them in accordance with the protection and powers granted to them in Peru, the current intellectual property legal system. </p>
+	<p> The Company will make its best efforts for the proper use of its technological platforms, guaranteeing the honor and personal and family privacy of its Users, as understood by the latter. However, The Company reserves the right to temporarily suspend the service at any time without prior notification to the Users, as long as it is for maintenance reasons of the Platform or other technical reasons that are considered necessary and convenient. In these cases, there will be no type of compensation from The Company to the Users. </p>
+	<p> Users, in accordance with the security and privacy policies of The Platform, may revoke their consent or authorization through any of the service channels maintained by The Company, if they do not wish to receive commercial electronic messages, in which case, The The company will cease such shipments and apply the corresponding friendly corrective measures. </p>
+	<p> The Company reserves, at its sole discretion, to use all the necessary means at its disposal to immediately withdraw the user who violates any of the security and privacy conditions of The Platform, which includes that Users have sent false information that cannot be verified as to its authenticity. </p>
+	<p> Likewise, The Company has the right to change the security and privacy policies, and any change will be published on The Platform for the purpose of notifying its Users. </p>
+	<p> Thus, in the event of any violation of the security and privacy conditions, of the systems that use information technology, of the privacy of people and communications and of the intellectual property that are linked to The Platform, you will be will apply the provisions of the Criminal Code on Computer Crimes and other current and applicable regulations of the Peruvian legal system. </p> ";
 //PASS-RECOVER
-$lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
-$lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
+$lang['RECOVER_PASS_FORGOTTEN']= "If you forgot or blocked your password to access <strong>%s</strong>, please enter the information requested below.";
+$lang['RECOVER_PASS_FISCAL_REGISTRY']= 'Company %s';
 $lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
-$lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
-$lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
+$lang['PASSWORD_NEWUSER'] = 'For security reasons it is necessary that you change your password the first time you enter our system "<strong>%s</strong>".';
+$lang['PASSWORD_EXPIRED'] = 'Your password has expired. For security reasons it is necessary that you change it before continuing in our system "<strong>% s </strong>".';
 //USERS MANAGEMENT
-$lang['MANAGEMENT_LIST_USERS'] = 'Listado de usuarios';
+$lang['MANAGEMENT_LIST_USERS'] = 'List of users';
 //USERS PERMISSIONS
-$lang['PERMITS_DELETE_ALL_PERMITS'] = 'Eliminar todos los permisos';
-$lang['PERMITS_ALL_PERMITS'] = 'Todos los permisos';
+$lang['PERMITS_DELETE_ALL_PERMITS'] = 'Remove all permissions';
+$lang['PERMITS_ALL_PERMITS'] = 'All permits';
 $lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
 	'tranIdEmpresa' => 'idEnterprise',
 	'tranIdUsuario' => 'idUser',

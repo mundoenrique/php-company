@@ -97,7 +97,7 @@
             <table id="resultStatusBulk" class="cell-border h6 display responsive w-100">
               <thead class="bg-primary secondary regular">
                 <tr>
-                  <th><?= lang('GEN_BULT_TYPE'); ?></th>
+                  <th><?= lang('BULK_TYPE'); ?></th>
                   <th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
                   <th><?= lang('GEN_STATUS'); ?></th>
                   <th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
