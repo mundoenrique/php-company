@@ -7,10 +7,9 @@ $(function () {
 	var resultStatusBulk = $('#resultStatusBulk');
 	var statusBulkBtn = $('#status-bulk-btn');
 	var downLoad = $('.download');
-	var minYear = lang.CONF_MIN_CONSULT_YEAR;
 
 	datePicker.datepicker({
-		minDate: new Date(minYear, 0, 1),
+		minDate: lang.CONF_MIN_CONSULT_YEAR,
 		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
@@ -22,10 +21,10 @@ $(function () {
 
 			if (inputDate == 'initialDate') {
 				var maxMonth = lang.CONF_MAX_CONSULT_MONTH;
-				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + maxMonth);
 
+				$('#finalDate').datepicker('option', 'minDate', selectedDate);
+				maxTime.setMonth(maxTime.getMonth() + maxMonth);
+				
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
 				} else {
