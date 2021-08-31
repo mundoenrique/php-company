@@ -7,7 +7,7 @@
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS'); ?></a></li>
       </ul>
     </nav>
@@ -35,7 +35,7 @@
             <label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
             <select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">
               <?php foreach($branchOffices AS $pos => $branchOffice): ?>
-              <?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
+              <?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('GEN_TRY_AGAIN') ? '  disabled' : '' ?>
               <option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected'.$disabled ?>>
                 <?= $branchOffice->text; ?>
               </option>

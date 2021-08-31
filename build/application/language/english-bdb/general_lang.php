@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Bank of Bogota';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identification';
 $lang['GEN_PLACE_PASSWORD'] = 'token';
-$lang['POSTMY_OTP'] = 'center top+100';
 $lang['GEN_BULK_DELETE_SO'] = 'Please enter the token to cancel the service order: ';
 //BUTTONS
 $lang['GEN_BTN_DISASS_AUTH'] = 'Awaiting authorization';

@@ -7,7 +7,7 @@
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS') ?></a></li>
       </ul>
     </nav>
@@ -211,7 +211,7 @@
         </div>
 
         <div class="my-5 py-4 center none">
-          <span class="h4"><?= lang('RESP_NO_LIST'); ?></span>
+          <span class="h4"><?= lang('GEN_NO_LIST'); ?></span>
         </div>
 
       </div>

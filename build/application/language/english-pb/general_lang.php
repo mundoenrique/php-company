@@ -19,8 +19,8 @@ $lang['GEN_INVALID_DATA'] = 'The data entered is incorrect.';
 $lang['GEN_MESSAGE_SYSTEM'] = 'We are currently unable to process your request, please try again later.';
 $lang['GEN_TABLE_LAST_SESSION'] = 'Last connection date';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'Your new password must be different from the previous ones.';
-$lang['RESP_PASSWORD_CHANGED'] = 'Your transaction has been successfully processed.';
+$lang['GEN_PASSWORD_USED'] = 'Your new password must be different from the previous ones.';
+$lang['GEN_PASSWORD_CHANGED'] = 'Your transaction has been successfully processed.';
 //CONTACT
 $lang['GEN_CONTACTS_CITY'] = 'CITY';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACT';

@@ -9,96 +9,96 @@ $lang["TERMS_TITLE"]='Terms and conditions of the Banorte Business Debit Card';
 $lang["TERMS_CONTENT"] = '
 <ol>
 	<li>
-		<p><b>Objeto</b></p>
-		<p>	Para tener acceso al Servicio, el Cliente tiene que contratarlo en la Sucursal Banorte o mediante los Medios Electrónicos que Banorte ponga a su disposición, en el entendido que los presentes términos regulan el uso de del portal y los limites operativos de este.</p>
-		<p>Cuando el Cliente celebre con Banorte el Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial respectivo, Banorte dará acceso y pondrá a disposición del Cliente la plataforma la cual permite al Cliente a través de las peticiones que realice a Banorte, expedir a cada uno de los Tarjetahabientes Autorizados designados por el Cliente, una Tarjeta de Débito con cargo a la Cuenta Concentradora (en lo sucesivo, la “<b>Plataforma</b>”).</p>
-		<p>El Cliente, a través de la Plataforma, definirá los comercios en los cuales la(s) Tarjeta(s) de Débito podrán ser utilizadas, y podrá definir limites transaccionales económicos por cada Tarjeta de Débito.</p>
-		<p>Grupo Financiero Banorte, S.A.B. de C.V., sus entidades subsidiarias y filiales en lo sucesivo “Banorte” requieren que el Cliente y todos los visitantes la Plataforma se adhieran a las siguientes reglas y condiciones, y a cualesquiera otros contratos de servicios, según sea el caso, que sean requeridos por Banorte para servicios o productos específicos.</p>
-		<p>Por el hecho de tener acceso a la Plataforma, el Cliente expresa su aceptación y acuerdo con estos términos y condiciones, según sean modificados, así como con cada modificación a los mismos que haga Banorte de momento a momento.</p>
+		<p> <b> Object </b> </p>
+		<p> To have access to the Service, the Client must contract it at the Banorte Branch or through the Electronic Means that Banorte makes available, with the understanding that these terms regulate the use of the portal and its operational limits. </p>
+		<p> When the Client enters into the respective Business Debit Card Service Agreement with Banorte, Banorte will give access and make available to the Client the platform which allows the Client, through the requests made to Banorte, to issue to each of the Authorized Cardholders designated by the Client, a Debit Card charged to the Concentrator Account (hereinafter, the “<b> Platform </b>”). </p>
+		<p> The Client, through the Platform, will define the businesses in which the Debit Card (s) may be used, and may define economic transactional limits for each Debit Card. </p>
+		<p> Grupo Financiero Banorte, S.A.B. de CV, its subsidiaries and affiliates hereinafter "Banorte" require that the Client and all visitors to the Platform adhere to the following rules and conditions, and to any other service contracts, as the case may be, that are required by Banorte for specific services or products. </p>
+		<p> By having access to the Platform, the Client expresses his acceptance and agreement with these terms and conditions, as they are modified, as well as with each modification to them that Banorte makes from moment to moment. </p>
 	</li>
 	<li>
-		<p><b>Definiciones</b></p>
+		<p> <b> Definitions </b> </p>
 		<ul>
-			<li type="disc">
-				<p><b>Cliente:</b> La persona identificada en la Carátula de Activación y Datos Generales del Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial, sus apoderados legales, o a quien esta designe para el uso del Servicio en su representación.</p>
+			<li type = "disc">
+				<p> <b> Client: </b> The person identified in the Activation Cover and General Data of the Contract for the Provision of Business Debit Card Services, his legal representatives, or whoever he designates for the use of the Service in his representation. </p>
 			</li>
-			<li type="disc">
-				<p><b>Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial:</b> Contrato a través del cual, Banorte proporciona el servicio de Tarjeta de Débito Empresarial al Cliente, sujeto a los términos y ahí expuestos.</p>
+			<li type = "disc">
+				<p> <b> Contract for the Provision of Business Debit Card Services: </b> Contract through which Banorte provides the Business Debit Card service to the Client, subject to the terms set forth therein. </ p >
 			</li>
-			<li type="disc">
-				<p><b>Cuenta Concentradora:</b> Cuenta de depósito bancario de dinero a la vista abierta a nombre del Cliente, a través de la cual el Cliente realizará las operaciones bancarias asociadas a las Tarjetas de Débito.</p>
+			<li type = "disc">
+				<p> <b> Concentrator Account: </b> Demand money bank deposit account opened in the name of the Client, through which the Client will carry out the banking operations associated with Debit Cards. </p>
 			</li>
-			<li type="disc">
-				<p><b>Internet:</b> Enlace mundial de redes de ordenadores o sistemas de cómputo a través de estándares de transmisión (protocolos) que facilitan entre dichos sistemas la transmisión y recepción de datos, haciendo posible, entre otros conceptos, la prestación o intercambio de información, de servicios y la realización de transacciones comerciales.</p>
+			<li type = "disc">
+				<p> <b> Internet: </b> Worldwide link of computer networks or computer systems through transmission standards (protocols) that facilitate the transmission and reception of data between said systems, making it possible, among other concepts, the provision or exchange of information, services and the performance of commercial transactions. </p>
 			</li>
-			<li type="disc">
-				<p><b>Medios Electrónicos:</b> Los equipos, programas o sistemas automatizados de procesamiento de datos, desarrollos tecnológicos y/o de telecomunicación que permiten al Cliente enviar instrucciones al Banco para la realización de operaciones.</p>
+			<li type = "disc">
+				<p> <b> Electronic Means: </b> The equipment, programs or automated systems for data processing, technological developments and / or telecommunications that allow the Client to send instructions to the Bank to carry out operations. </p>
 			</li>
-			<li type="disc">
-				<p><b>Servicio:</b> Consiste en la emisión de diversas Tarjetas de Débito asociadas a una Cuenta Concentradora, cuyos perfiles transaccionales, incluyendo los comercios donde podrá utilizarse el medio de disposición y los limites económicos periódicos, serán definidos por el Cliente a través de la Banca Electrónica que tenga contratada para tal efecto con el fin de cubrir sus gastos, incluidos los viáticos.</p>
+			<li type = "disc">
+				<p> <b> Service: </b> It consists of the issuance of various Debit Cards associated with a Concentrator Account, whose transactional profiles, including the businesses where the means of disposal and the periodic economic limits may be used, will be defined by The Client through the Electronic Banking that he has contracted for this purpose in order to cover his expenses, including travel expenses. </p>
 			</li>
-			<li type="disc">
-				<p><b>Tarjeta de Débito:</b> al conjunto de datos integrados con independencia del medio en el que estén almacenados que, al procesarse mediante sistemas determinados, permiten iniciar una instrucción de cargo a la Cuenta Concentradora o, en su caso, un abono producto de la devolución relacionada con dicho cargo por reclamaciones.</p>
+			<li type = "disc">
+				<p> <b> Debit Card: </b> to the set of integrated data regardless of the medium in which they are stored which, when processed through certain systems, allow initiating a charge instruction to the Concentrator Account or, in its case, a credit product of the return related to said charge for claims. </p>
 			</li>
-			<li type="disc">
-				<p><b>Tarjetahabiente Autorizado:</b> Cada una de las personas que son designados por el Cliente a quienes se les expide una Tarjeta de Débito con la cual podrá tener acceso a los servicios objeto del presente Contrato.</p>
+			<li type = "disc">
+				<p> <b> Authorized Cardholder: </b> Each of the persons who are designated by the Client to whom a Debit Card is issued with which they can have access to the services that are the object of this Contract. </ p >
 			</li>
 		</ul>
 	</li>
 	<li>
-		<p><b>Uso de la Tarjeta de Débito:</b></p>
-		<p>Las Tarjetas de Débito permitirán a los Tarjetahabientes Autorizados del Cliente, de manera física o a través de Internet, la adquisición de bienes y servicios a nivel nacional e internacional, cuyos importes, incluyendo impuestos, propinas y gastos diversos serán pagados por Banorte a los comercios autorizados, de manera física o a través de Internet, con cargo a la Cuenta Concentradora que corresponda mediante el plástico que se le proporcione. Los Tarjetahabientes Autorizados documentarán las disposiciones que hagan, mediante la adquisición de bienes y servicios, suscribiendo recibos de transacciones electrónicas, notas de venta, fichas de compra o cualquier otro documento que para tal efecto, sea emitido por los comercios.</p>
-		<p>Los Tarjetahabientes Autorizados en ningún caso podrán hacer disposiciones o retiros mediante el uso de la tarjeta plástica de débito en ventanilla, podrán hacer disposiciones o retiros en Cajeros Automáticos por cantidades que no excedan del importe de disposición máximo diario y/o mensual fijado a cada uno de los Tarjetahabientes Autorizados por el mismo Cliente.</p>
-		<p>La Tarjeta de Débito tendrá la vigencia que en ella se estipule, sin perjuicio de lo señalado en el Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial.</p>
-		<p>El Cliente y sus Tarjetahabientes Autorizados para todos los efectos legales a que haya lugar, expresamente reconocen y aceptan el carácter personal e intransferible de la Tarjeta de Débito, así como la confidencialidad del NIP asignado.</p>
-		<p>Por lo tanto, es exclusiva responsabilidad del Cliente cualquier quebranto que pudiera sufrir como consecuencia del uso indebido que llegara a hacerse de las referidas Tarjetas de Débito o del NIP.</p>
-		<p>El Cliente reconoce y acepta expresamente que las Tarjetas de Débito son propiedad exclusiva del Banco, haciéndose responsable el Cliente de:</p>
-		<ol type="a">
-			<li>Recibir y custodiar las Tarjetas de Débito que le hayan sido entregadas.</li>
-			<li>Acusar de recibido por escrito, a través de la persona designada, la recepción de las Tarjetas de Débito.</li>
-			<li>Mantener registro de las Tarjetas de Débito que se encuentren bajo su custodia.</li>
-			<li>Proteger y salvaguardar las Tarjetas de Débito mientras se encuentren en su posesión, evitando cualquier daño, alteración o modificación a las mismas.</li>
-			<li>Notificar inmediatamente al Banco vía telefónica o mediante correo electrónico, y posteriormente confirmar por escrito en su domicilio, de cualquier pérdida o daño a las Tarjetas de Débito, ocasionados por asalto, robo, incendio o cualquier otra causa. Todas las notificaciones deberán incluir el número de serie de las Tarjetas de Débito pérdidas o dañadas.</li>
-			<li>Las Tarjetas de Débito serán asignadas por el Cliente a los Tarjetahabientes Autorizados para que estos últimos dispongan de los fondos en los términos del Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial, por lo que el Cliente deberá mantener la relación y el Control sobre las Tarjetas de Débito que este asignó a los Tarjetahabientes Autorizados.</li>
+		<p> <b> Use of Debit Card: </b> </p>
+		<p> The Debit Cards will allow the Client Authorized Cardholders, physically or through the Internet, to acquire goods and services at a national and international level, the amounts of which, including taxes, tips and miscellaneous expenses, will be paid by Banorte to authorized businesses, physically or through the Internet, charged to the corresponding Concentrator Account using the plastic provided. The Authorized Cardholders will document the provisions they make, by acquiring goods and services, signing electronic transaction receipts, sales notes, purchase cards or any other document issued for this purpose by the merchants. </p>
+		<p> Authorized Cardholders may in no case make withdrawals or withdrawals through the use of the plastic debit card at the window, they may make withdrawals or withdrawals at ATMs for amounts that do not exceed the maximum daily and / or monthly withdrawal amount set. to each of the Cardholders Authorized by the same Client. </p>
+		<p> The Debit Card will be valid as stipulated therein, without prejudice to what is stated in the Business Debit Card Service Contract. </p>
+		<p> The Client and their Authorized Cardholders for all legal purposes that may arise, expressly acknowledge and accept the personal and non-transferable nature of the Debit Card, as well as the confidentiality of the assigned PIN. </p>
+		<p> Therefore, it is the sole responsibility of the Client for any damage that may be suffered as a result of the improper use that may be made of the aforementioned Debit Cards or PIN. </p>
+		<p> The Client expressly acknowledges and accepts that the Debit Cards are the exclusive property of the Bank, the Client being responsible for: </p>
+		<ol type = "a">
+			<li> Receive and safeguard the Debit Cards that have been delivered. </li>
+			<li> Acknowledge receipt in writing, through the designated person, of receipt of the Debit Cards. </li>
+			<li> Keep a record of the Debit Cards that are in your custody. </li>
+			<li> Protect and safeguard Debit Cards while they are in your possession, avoiding any damage, alteration or modification to them. </li>
+			<li> Immediately notify the Bank by phone or email, and subsequently confirm in writing at your address, of any loss or damage to the Debit Cards, caused by assault, theft, fire or any other cause. All notifications must include the serial number of the lost or damaged Debit Cards. </li>
+			<li> The Debit Cards will be assigned by the Client to the Authorized Cardholders so that the latter have the funds in the terms of the Contract for the Provision of Business Debit Card Services, for which the Client must maintain the relationship and the Control over the Debit Cards that it assigned to Authorized Cardholders. </li>
 		</ol>
 		<br/>
 	</li>
 	<li>
-		<p><b>Acceso a la Plataforma y control de usuarios</b></p>
-		<p>Para que el Cliente pueda utilizar la Plataforma, este deberá realizar lo siguiente:</p>
-		<ol type="a">
-			<li>Tener contratada la Cuenta Concentradora para que Banorte pueda prestar el Servicio.</li>
-			<li>Tener celebrado con Banorte un Contrato de Banca a través de Medios Electrónicos.</li>
-			<li>Tener celebrado con Banorte un Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial.</li>
-			<li>Registrarse previamente en la Plataforma.</li>
+		<p> <b> Access to the Platform and user control </b> </p>
+		<p> In order for the Client to be able to use the Platform, he must do the following: </p>
+		<ol type = "a">
+			<li> Have contracted the Concentrator Account so that Banorte can provide the Service. </li>
+			<li> Have entered into a Banorte Agreement with Banorte through Electronic Means. </li>
+			<li> Have a Business Debit Card Service Agreement signed with Banorte. </li>
+			<li> Register in advance on the Platform. </li>
 		</ol>
-		<br/>
-		<p>Banorte proporcionará al Cliente el(los) usuario(s) y contraseña(s) para ingresar a la Plataforma. El Cliente acepta, de manera expresa e irrevocable, ser el único responsable por el uso que se le dé al(a los) usuario(s) y contraseña(s), liberando a Banorte de cualquier responsabilidad al respecto.</p>
-		<p>Para poder hacer uso de la plataforma el Cliente deberá contar con servicio de acceso a la red “Internet”, a través de la cual podrá conectarse con los sistemas de Banorte, por lo que entiende y reconoce que existe la dependencia, para la comunicación, de un intermediario, dueño de la señal de comunicación.</p>
+	<br/>
+		<p> Banorte will provide the Client with the username (s) and password (s) to enter the Platform. The Client accepts, expressly and irrevocably, to be solely responsible for the use given to the user (s) and password (s), releasing Banorte from any responsibility in this regard. </p>
+		<p> In order to use the platform, the Client must have access service to the "Internet" network, through which they can connect with Banorte systems, for which they understand and acknowledge that there is a dependency, to the communication, of an intermediary, owner of the communication signal. </p>
 	</li>
 	<li>
-		<p><b>Titularidad de derechos, restricciones de uso de la Plataforma</b></p>
-		<p>Las marcas, logotipos, avisos comerciales, signos distintivos, nombres comerciales, patentes, diseños industriales, personajes, y demás derechos de Propiedad Intelectual en lo sucesivo la “Propiedad Intelectual” exhibidas en la Plataforma  son propiedad de Banorte y de terceros según sea el caso. Sin que pueda entenderse que por simple hecho de que el Cliente pueda acceder a la Plataforma tenga derecho alguno sobre dicha Propiedad Intelectual. Se prohíbe al Cliente usar la Propiedad Intelectual sin el permiso por escrito de Banorte o del tercero a quien pertenezca la Propiedad Intelectual. Todo el contenido exhibido o disponible a través de este Sitio está protegido por la legislación nacional e internacional de Derechos de Autor. Se le prohíbe al Cliente modificar, copiar, distribuir, transmitir, exhibir, publicar, vender, otorgar licencias sobre, crear trabajos derivados de o utilizar cualquier contenido de la Plataforma  para cualquier fin comercial, público o ilegal, salvo los estipulados de manera expresa en el Contrato de Servicios correspondiente.</p>
+		<p> <b> Ownership of rights, restrictions on the use of the Platform </b> </p>
+		<p> The brands, logos, commercial notices, distinctive signs, trade names, patents, industrial designs, characters, and other Intellectual Property rights hereinafter the "Intellectual Property" displayed on the Platform are the property of Banorte and third parties according to be the case. Without it being understood that by the simple fact that the Client can access the Platform he has any right over said Intellectual Property. The Client is prohibited from using the Intellectual Property without the written permission of Banorte or the third party to whom the Intellectual Property belongs. All content displayed or available through this Site is protected by national and international copyright legislation. The Client is prohibited from modifying, copying, distributing, transmitting, displaying, publishing, selling, licensing, creating derivative works of or using any content on the Platform for any commercial, public or illegal purpose, except as expressly stipulated in the corresponding Service Contract. </p>
 	</li>
 	<li>
-		<p><b>Garantía y responsabilidad limitada</b></p>
-		<p>La Plataforma se pone a disposición del Cliente, en el estado en el que se encuentra, sin garantía, por lo que Banorte no será responsable ante intermitencia o indisponibilidad de la Plataforma.</p>
+		<p> <b> Warranty and limited liability </b> </p>
+		<p> The Platform is made available to the Client, in the state in which it is located, without guarantee, so Banorte will not be responsible for intermittence or unavailability of the Platform.</p>
 	</li>
 	<li>
-		<p><b>Cambios a las reglas del sitio</b></p>
-		<p>Banorte se reserva el derecho a revisar los Términos y Condiciones en cualquier tiempo, así como para realizar modificaciones en dicho aviso y adaptarlo a novedades legislativas, jurisprudenciales, así como a prácticas del mercado. Asimismo, el Cliente se considerará enterado y obligado por los cambios a los Términos y Condiciones al momento en que el Cliente  ingrese al sitio y haga uso de cualesquier materiales, productos o servicios. Dicho uso o acceso al sitio por parte del Cliente constituirá la aceptación y acuerdo a los cambios de los Términos y Condiciones, independientemente de lo dispuesto en el Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial.</p>
+		<p> <b> Changes to site rules </b></p>
+		<p> Banorte reserves the right to review the Terms and Conditions at any time, as well as to make modifications to said notice and adapt it to new legislation, jurisprudence, as well as market practices. Likewise, the Client will be considered aware and bound by the changes to the Terms and Conditions at the time the Client enters the site and makes use of any materials, products or services. Said use or access to the site by the Client will constitute acceptance and agreement to the changes of the Terms and Conditions, regardless of the provisions of the Contract for the Provision of Business Debit Card Services.</p>
 	</li>
 	<li>
-		<p><b>Domicilios; notificaciones</b></p>
-		<p>El Cliente acepta que si Banorte necesita contactar o enviarle cualquier información en papel y por escrito, Banorte puede hacerlo mediante correo dirigido al Cliente en la dirección de correo que obre en los registros de Banorte o, a la discreción de Banorte, por medio de comunicados electrónicos permitidos legalmente y transmitidos por Banorte a la dirección de correo electrónico del Cliente que obre en los registros de Banorte. Salvo por lo dispuesto en el contrato de servicios correspondiente. Al menos que el comunicado indique otra fecha efectiva, cualquier comunicado enviado por Banorte al Cliente será efectivo cuando se envié por correo a la dirección de correo del Cliente al entregar al proveedor del servicio de correos, y cualquier comunicado electrónico enviado por Banorte al Cliente será efectivo cuando se transmita por Banorte al proveedor del servicio de correo electrónico del Cliente. El Cliente deberá notificar oportunamente a Banorte por escrito, o por correo electrónico con confirmación por escrito enviada por correo dentro de 5 (cinco) días, si el Cliente cambia su servicio de correo o su dirección de correo electrónico o si el proveedor del servicio de correo electrónico del Cliente ya no proporciona tal servicio al Cliente. En ningún caso tendrá responsabilidad Banorte, y el Cliente expresamente libera a Banorte de cualquier reclamo o responsabilidad, por cualquier acto u omisión del Cliente o del proveedor de servicio de correo electrónico del Cliente en el manejo del correo electrónico dirigido a y enviado por el Cliente, o por cualquier falla en el hardware y software computacional o líneas de comunicación que no sean mantenidas por Banorte o bajo el control de Banorte.</p>
+		<p><b> Addresses; notifications </b></p>
+		<p>The Client accepts that if Banorte needs to contact or send any information on paper and in writing, Banorte may do so by mail addressed to the Client at the email address that appears in Banorte records or, at Banorte discretion, by means of electronic communications legally permitted and transmitted by Banorte to the email address of the Client that appears in Banorte records. Except for the provisions of the corresponding service contract. Unless the communication indicates another effective date, any communication sent by Banorte to the Client will be effective when it is sent by mail to the Client email address upon delivery to the postal service provider, and any electronic communication sent by Banorte to the Client will be effective when transmitted by Banorte to the Client email service provider. The Client must promptly notify Banorte in writing, or by email with written confirmation sent by mail within 5 (five) days, if the Client changes their mail service or email address or if the service provider of Customer email no longer provides such service to Customer. In no case will Banorte be liable, and the Client expressly releases Banorte from any claim or responsibility, for any act or omission of the Client or the Client email service provider in handling the email addressed to and sent by the Client, or for any failure in computer hardware and software or communication lines that are not maintained by Banorte or under Banorte control.</p>
 	</li>
 	<li>
-		<p><b>Integridad, autenticidad y archivo de los mensajes de datos</b></p>
-		<p>Será necesario hacer uso de dispositivos de seguridad, entendiendo por estos las contraseñas, claves o mecanismos que servirán para tener acceso a ciertos servicios de la Plataforma (los “dispositivos de seguridad”) a fin de: (a) verificar la identidad del emisor de un mensaje de datos, (b) determinar que un mensaje de datos no ha sido alterado y ha permanecido íntegro durante su generación, comunicación, transmisión, recepción y archivo, y (c) atribuir de manera fehaciente al Cliente que genere tal mensaje de datos. Todas las transacciones identificadas mediante los dispositivos de seguridad, serán grabadas y archivadas en medios electrónicos a fin de hacerlas accesibles para su posterior consulta. Los mensajes de datos recibidos y/o archivados en medios electrónicos, identificados con la combinación de los dispositivos de seguridad del Cliente, serán atribuibles al mismo y servirán para evidenciar su origen. Por consiguiente, el Cliente es responsable de todos los actos, disposiciones, transferencias, etc., que se realicen mediante dichos dispositivos de seguridad, ya sea que el uso de los mismos haya sido autorizadas o no por el mismo. El Cliente acepta y entiende que, todas las operaciones correctamente identificadas con la combinación de sus dispositivos de seguridad, serán consideradas como realizadas directamente por el Cliente. El Cliente es enteramente responsable de mantener la confidencialidad de los dispositivos de seguridad, así como de cualquiera otro número de identificación o clave de usuario, incluyendo su número de cuenta, identificación y contraseña, independientemente de que estos hayan sido proporcionados por Banorte o seleccionados directamente por el Cliente. Lo anterior sin perjuicio de lo pactado en el contrato de servicios.</p>
+		<p> <b> Integrity, authenticity and archiving of data messages </b> </p>
+		<p> It will be necessary to make use of security devices, understanding by these the passwords, keys or mechanisms that will serve to access certain services of the Platform (the "security devices") in order to: (a) verify identity of the issuer of a data message, (b) determine that a data message has not been altered and has remained intact during its generation, communication, transmission, reception and filing, and (c) credibly attribute to the Client that it generates such data message. All transactions identified through security devices will be recorded and filed in electronic media in order to make them accessible for later consultation. The data messages received and / or archived in electronic media, identified with the combination of the Client security devices, will be attributable to the same and will serve to evidence their origin. Consequently, the Client is responsible for all acts, dispositions, transfers, etc., that are carried out through said security devices, whether or not the use of them has been authorized by the same. The Client accepts and understands that all operations correctly identified with the combination of their security devices will be considered as carried out directly by the Client. The Client is entirely responsible for maintaining the confidentiality of the security devices, as well as any other identification number or user password, including his account number, identification and password, regardless of whether these have been provided by Banorte or selected directly. for the client. The foregoing without prejudice to what is agreed in the service contract. </p>
 	</li>
 	<li>
-		<p><b>Cumplimiento de registros electrónicos y documentos firmados</b></p>
-		<p>Un mensaje de datos correctamente identificado con la combinación de los dispositivos de seguridad del usuario a Banorte, será considerada como una comunicación “escrita” o “por escrito” y como una manifestación expresa de la voluntad de su emisor. Cualquier mensaje de datos correctamente identificados con la combinación de dispositivos de seguridad (“documentos firmados”) se considerará para todos los efectos a que haya lugar como: (a) debidamente “firmado” y (b) ser una versión “original” cuando se imprima del archivo electrónica establecido y mantenido por Banorte y sus agentes dados en el curso ordinario de sus operaciones. El Cliente se obliga a no cuestionar la autorización para, o la validez o cumplimiento de los documentos firmados, o la admisión de copias de los mismos, bajo cualquier ley aplicable en relación con si ciertos contratos, archivos o registros electrónicos serán por escrito (en forma documental) o firmados por la parte que será obligada por los mismos. Si los registros electrónicos y documentos firmados, son presentados impresos en papel como pruebas en cualquier procedimiento judicial o cualquier otro, serán admisibles en la misma forma y bajo las mismas condiciones que otros registros de negocios documentales.</p>
+		<p><b> Compliance with electronic records and signed documents </b></p>
+		<p>A data message correctly identified with the combination of the user security devices to Banorte will be considered as a "written" or "written" communication and as an express manifestation of the will of its issuer. Any data message correctly identified with the combination of security devices ("signed documents") will be considered for all purposes where appropriate as: (a) duly "signed" and (b) be an "original" version when print of the electronic file established and maintained by Banorte and its agents given in the ordinary course of their operations. The Client undertakes not to question the authorization for, or the validity or compliance of the signed documents, or the admission of copies thereof, under any applicable law in relation to whether certain contracts, files or electronic records will be in writing (in documentary form) or signed by the party that will be bound by them. If the electronic records and signed documents are presented on paper as evidence in any judicial or any other proceeding, they will be admissible in the same way and under the same conditions as other documentary business records.</p>
 	</li>
 </ol>
 ';

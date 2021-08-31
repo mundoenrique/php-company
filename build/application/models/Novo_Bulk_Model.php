@@ -143,7 +143,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$typesLot[] = (object) [
 				'format' => '',
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 		}
 
@@ -519,7 +519,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -38:
 				$this->response->code = 3;
 				$this->response->title = lang('BULK_AUTHORIZE');
-				$this->response->msg = lang('RESP_NO_LIST');
+				$this->response->msg = lang('GEN_NO_LIST');
 			break;
 		}
 
@@ -874,7 +874,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -59:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('RESP_AUTH_ORDER_SERV');
+				$this->response->msg = lang('GEN_AUTH_ORDER_SERV');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case 100:
@@ -903,13 +903,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -440:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('FILE_NOT_EXIST_ICBS');
+				$this->response->msg = lang('BULK_FILE_NOT_EXIST_ICBS');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -441:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('AUTH_ALREADY_PERFORMED_BY_USER');
+				$this->response->msg = lang('BULK_AUTH_ALREADY_PERFORMED_BY_USER');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -983,7 +983,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				
+
 				if (!$this->verify_access->verifyAuthorization('TEBORS')) {
 					$this->response->title = lang('BULK_SO_CREATE_TITLE');
 					$this->response->msg = lang('GEN_SO_SUCCESSFULL');

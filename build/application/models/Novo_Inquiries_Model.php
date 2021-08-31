@@ -51,7 +51,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		if($this->isResponseRc != 0) {
 			$orderStatus[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 		}
 
@@ -159,7 +159,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
-				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
+				$this->response->msg = novoLang(lang('GEN_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -584,7 +584,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -52:
 				$this->response->title = lang('GEN_ORDER_TITLE');
-				$this->response->msg = lang('RESP_NO_BULK_AUTHORIZATION');
+				$this->response->msg = lang('GEN_NO_BULK_AUTHORIZATION');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;

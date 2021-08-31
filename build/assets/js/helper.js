@@ -78,8 +78,8 @@ $(function () {
 		"oPaginate": {
 			"sFirst": lang.GEN_TABLE_SFIRST,
 			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sNext": lang.CONF_TABLE_SNEXT,
+			"sPrevious": lang.CONF_TABLE_SPREVIOUS
 		},
 		"oAria": {
 			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
@@ -107,13 +107,13 @@ $(function () {
 		dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
 		weekHeader: lang.GEN_PICKER_WEEKHEADER,
 		dateFormat: lang.GEN_PICKER_DATEFORMAT,
-		firstDay: lang.GEN_PICKER_FIRSTDATE,
-		isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
+		firstDay: lang.CONF_PICKER_FIRSTDATE,
+		isRTL: lang.CONF_PICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-		changeYear: lang.GEN_PICKER_CHANGEYEAR,
+		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
+		changeYear: lang.CONF_PICKER_CHANGEYEAR,
 		showAnim: lang.SHOWANIM,
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
@@ -463,7 +463,7 @@ function getResponse(Exitoso, MensajeError) {
 }
 
 function normalizeAmount(amount) {
-	var valueAttr = amount.split(lang.GEN_DECIMAL);
+	var valueAttr = amount.split(lang.CONF_DECIMAL);
 	amount = valueAttr[0].replace(/[,.]/g, '') + '.' + valueAttr[1];
 	amount = parseFloat(amount);
 

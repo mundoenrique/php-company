@@ -51,7 +51,7 @@ $lang["TERMS_CONTENT"] = "
 	<p> Thus, in the event of any violation of the security and privacy conditions, of the systems that use information technology, of the privacy of people and communications and of the intellectual property that are linked to The Platform, you will be will apply the provisions of the Criminal Code on Computer Crimes and other current and applicable regulations of the Peruvian legal system. </p> ";
 //PASS-RECOVER
 $lang['RECOVER_PASS_FORGOTTEN']= "If you forgot or blocked your password to access <strong>%s</strong>, please enter the information requested below.";
-$lang['RECOVER_PASS_FISCAL_REGISTRY']= 'Company %s';
+$lang['USER_RECOVER_PASS_FISCAL_REGISTRY']= 'Company %s';
 $lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'For security reasons it is necessary that you change your password the first time you enter our system "<strong>%s</strong>".';

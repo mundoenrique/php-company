@@ -10,8 +10,8 @@ $(function () {
 		$("input[name=transferType]").click(function() {
 			 checkType = $("input:radio[name=transferType]:checked").val();
 		})
-		
-		$('#transferAmount').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });
+
+		$('#transferAmount').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
 		$('#transferAmount').on('keyup', function() {
 			$(this).val(function(_index, value) {
 
@@ -20,18 +20,18 @@ $(function () {
 				}
 
 				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-					value = '00' + lang.GEN_DECIMAL + value
+					value = '00' + lang.CONF_DECIMAL + value
 				}
 
 				return value
 			})
 		});
-		
+
 		$('#system-info').on('click', '.send-otp', function() {
 			form = $('#formVerificationOTP');
 			formInputTrim(form);
 			validateForms(form);
-	
+
 			if (form.valid()) {
 				$(this)
 					.html(loader)

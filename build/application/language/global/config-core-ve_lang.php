@@ -2,4 +2,4 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //VALIDATE FORMS
-$lang['VALIDATE_EXAMPLE_ID_FISCAL'] = '. Ejm: 0000000000000';
+$lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)';

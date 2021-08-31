@@ -1,9 +1,9 @@
 'use strict'
 function getRecaptchaToken(module, _function_) {
-	if (lang.GEN_ACTIVE_RECAPTCHA) {
+	if (lang.CONF_ACTIVE_RECAPTCHA) {
 		grecaptcha.ready(function () {
 			grecaptcha
-				.execute(lang.GEN_KEY_RECAPTCHA, { action: module })
+				.execute(lang.CONF_KEY_RECAPTCHA, { action: module })
 				.then(function (token) {
 					if (token) {
 						token

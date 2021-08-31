@@ -19,8 +19,8 @@ $lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
 $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud, por favor intenta mas tarde.';
 $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
-$lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
+$lang['GEN_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
+$lang['GEN_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
 //CONTACT
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';

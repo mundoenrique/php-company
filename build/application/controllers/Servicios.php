@@ -2083,7 +2083,7 @@ public function consultaTarjetas($urlCountry)
 			if ( !in_array($opcion, $listErrorDefault) ){
 				switch ($responseService->rc) {
 					case 28:
-						$msgError = lang('RESP_TIMEOUT_RESPONSE');
+						$msgError = lang('GEN_TIMEOUT_RESPONSE');
 						break;
 
 					default:
@@ -2250,7 +2250,7 @@ public function consultaTarjetas($urlCountry)
 			$responseService = json_decode($originalResponse);
 			switch ($responseService->rc) {
 				case 28:
-					$msgError = lang('RESP_TIMEOUT_RESPONSE');
+					$msgError = lang('GEN_TIMEOUT_RESPONSE');
 					break;
 
 				default:

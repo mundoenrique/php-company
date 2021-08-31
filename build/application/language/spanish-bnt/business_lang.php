@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //PRODUCTS
-$lang['PRODUCTS_LOTS_TOTAL']= 'Lotes por autorizar: %s';
+$lang['BUSINESS_LOTS_TOTAL']= 'Lotes por autorizar: %s';
 //ENTERPRISE
-$lang['ENTERPRISE_TOTAL'] = 'Total de registros';
+$lang['BUSINESS_ENTERPRISE_TOTAL'] = 'Total de registros';

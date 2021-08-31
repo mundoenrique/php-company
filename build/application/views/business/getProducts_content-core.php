@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular"><?= lang('PRODUCTS_LIST'); ?></h1>
+<h1 class="primary h3 regular"><?= lang('BUSINESS_PRODUCTS_LIST'); ?></h1>
 <div class="flex mb-2 items-center light">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -15,12 +15,12 @@
 	<div class="flex h6 flex-auto justify-end">
 		<?php if(count($brands) > 1): ?>
 		<div id="resetBtn">
-			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('PRODUCTS_ALL') ?></button>
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_PRODUCTS_ALL') ?></button>
 		</div>
 		<?php endif; ?>
 		<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 		<select class="select-box custom-select mr-0 h6">
-			<option selected disabled><?= lang('PRODUCTS_SEARCH_CATEGORY'); ?></option>
+			<option selected disabled><?= lang('BUSINESS_SEARCH_CATEGORY'); ?></option>
 			<?php foreach($categories AS $categorie): ?>
 			<option value="<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
 			<?php endforeach; ?>
@@ -28,7 +28,7 @@
 		<?php endif; ?>
 		<?php if(count($brands) > 1): ?>
 		<select class="select-box custom-select h6" data-jplist-control="select-filter" data-group="group-filter-pagination" data-name="brand">
-			<option selected disabled data-path="default"><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
+			<option selected disabled data-path="default"><?= lang('BUSINESS_SEARCH_BRAND'); ?></option>
 			<?php foreach($brands AS $brand): ?>
 			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= strtolower($brand->nombre); ?>"><?= $brand->nombre; ?></option>
 			<?php endforeach; ?>
