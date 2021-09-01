@@ -46,6 +46,7 @@ $lang['GEN_MENU_WAY_TRAVELS'] = 'Cuentas';//CMBVJE
 $lang['GEN_MENU_REP_KIDGARDEN_PAY'] = 'Pagos de guardería';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Comisión por recarga';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Lotes por facturar';//LOTFAC
+$lang['GEN_MENU_REP_STATUS_MASTER_ACCOUNT'] = 'Estado de cuenta maestra';//REPECT
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';

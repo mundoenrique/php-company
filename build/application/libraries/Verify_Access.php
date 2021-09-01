@@ -253,6 +253,9 @@ class Verify_Access {
 				case 'getReport':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
 				break;
+				case 'statusMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
+				break;
 				case 'exportToExcelMasterAccount':
 				case 'exportToPDFMasterAccount':
 				case 'exportToExcelMasterAccountConsolid':
@@ -270,6 +273,9 @@ class Verify_Access {
 				break;
 				case 'accountStatus':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				break;
+				case 'statusMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));// POR DEFINIR
 				break;
 				case 'replacement':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));

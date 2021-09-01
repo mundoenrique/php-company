@@ -363,6 +363,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		]
 	],
+	'statusMasterAccount' => [
+		[
+			'field' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',
