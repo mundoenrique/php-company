@@ -9,15 +9,23 @@ $lang['GEN_SEND_ACCESS'] = 'Tu transacción ha sido procesada exitosamente. Envi
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Produbanco - ';
 //DATATABLES
+$lang['GEN_ORDER_TITLE'] = 'Nro. de Orden de Servicio';
+$lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Nro. de documento';
+$lang['GEN_CARD_NUMBER'] = 'Nro. de Tarjeta';
+$lang['GEN_TABLE_ORDER_NRO'] = 'Orden asociada';
+$lang['GEN_TABLE_PLASTIC_STATUS'] = 'Estatus Plástico';
+$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Nro. de lote';
 $lang['GEN_START_DAY']= 'Fecha inicio';
 $lang['GEN_END_DAY']= 'Fecha fin';
-$lang['GEN_TABLE_BULK_NUMBER'] = 'Num. lote';
+$lang['GEN_TABLE_BULK_NUMBER'] = 'Lote asociado';
+$lang['GEN_TABLE_FULL_NAME'] = 'Tarjeta-habiente';
 $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 $lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
 $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud, por favor intenta mas tarde.';
 $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
+$lang['GEN_TABLE_CARD_NUMBER'] = 'Nro. de Tarjeta';
 //RESPONSES
 $lang['GEN_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
 $lang['GEN_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';

@@ -38,7 +38,7 @@
                 <div class="help-block mb-1"></div>
               </div>
               <div class="form-group col-4 col-xl-3">
-                <label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
+                <label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER_RESULT'); ?></label>
                 <input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
                 <div class="help-block mb-1"></div>
               </div>
@@ -54,7 +54,7 @@
               </div>
               <?php endif;?>
               <div class="form-group col-4 col-xl-3">
-                <label for="idNumberP">Nro. documento</label>
+                <label for="idNumberP"><?= lang('GEN_TABLE_DOCUMENT_NUMBER'); ?></label>
                 <input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
                 <div class="help-block mb-1"></div>
               </div>

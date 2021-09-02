@@ -214,6 +214,8 @@ $lang['GEN_TABLE_NAME']='Nombre';
 $lang['GEN_TABLE_LASTNAME']='Apellido';
 $lang['GEN_TABLE_ID_PERSON']= "Cédula nro.";
 $lang['GEN_TABLE_BALANCE'] = 'Saldo';
+$lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Nro. documento';
+$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Nro. de lote';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';

@@ -213,6 +213,8 @@ $lang['GEN_TABLE_NAME']='Name';
 $lang['GEN_TABLE_LASTNAME']='Last name';
 $lang['GEN_TABLE_ID_PERSON']= "ID no.";
 $lang['GEN_TABLE_BALANCE'] = 'Balance';
+$lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Document number';
+$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Bulk number';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Show _MENU_ records';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No results found';
