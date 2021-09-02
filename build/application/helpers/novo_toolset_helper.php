@@ -287,8 +287,8 @@ if (! function_exists('languageCookie')) {
 //eliminar despues de la certificación
 if (! function_exists('checkTemporalTenant')) {
 	function checkTemporalTenant($customer) {
-		$pattern = ['/bog/', '/bpi/', '/col/', '/per/', '/usd/', '/ven/'];
-		$replace = ['bdb', 'bp', 'co', 'pe', 'us', 've'];
+		$pattern = ['/bog/', '/col/', '/per/', '/usd/', '/ven/'];
+		$replace = ['bdb', 'co', 'pe', 'us', 've'];
 		$customer = preg_replace($pattern, $replace, $customer);
 
 		return $customer;

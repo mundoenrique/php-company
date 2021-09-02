@@ -160,7 +160,7 @@ class NOVO_Controller extends CI_Controller {
 					"$this->customerUri/"."$this->customerUri-base"
 				];
 			} else {
-				$file = $this->customerUri == 'bp' ? 'pichincha' : 'novo';
+				$file = $this->customerUri == 'bpi' ? 'pichincha' : 'novo';
 				$this->includeAssets->cssFiles = [
 					"$file-validate",
 					"third_party/jquery-ui",
