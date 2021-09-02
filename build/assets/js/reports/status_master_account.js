@@ -7,13 +7,58 @@ $(function () {
 
 	datePicker.datepicker({
 		minDate: new Date(2021, 7, 1),
-		onSelect: function (selectedDate) {
-			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[0] + '/' + dateSelected[2];
-		},
+		maxDate: '-1M',
 		changeMonth: true,
 		changeYear: true,
 		dateFormat: 'mm/yy',
+		showButtonPanel: true,
+		closeText: 'Aceptar',
+		onSelect: function (selectedDate) {
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[0] + '/' + dateSelected[2];
+			$(this)
+			.focus()
+			.blur();
+		},
+		onClose: function (dateText, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		}
+	});
+
+	luis.datepicker({
+		dateFormat: 'mm/yy',
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		maxDate: "+0D",
+		closeText: 'Aceptar',
+		yearRange: '-12:' + currentDate.getFullYear(),
+
+		onSelect: function (selectDate) {
+			$(this)
+				.focus()
+				.blur();
+		},
+
+		onClose: function (dateText, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		}
 	});
 
 	$("#searchButton").on("click", function (e){
