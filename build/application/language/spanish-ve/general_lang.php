@@ -8,3 +8,5 @@ $lang['GEN_CONTACTS'] = [
 	'E-mail' => 'soporteempresas@tebca.com'
 ];
 $lang['GEN_FISCAL_REGISTRY'] = 'RIF.';
+//DATATABLES
+$lang['GEN_TABLE_DNI'] = 'Cédula';
