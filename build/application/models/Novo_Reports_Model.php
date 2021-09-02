@@ -914,7 +914,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			default:
-			$this->response->title = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		  break;
