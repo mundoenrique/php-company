@@ -145,6 +145,7 @@ class Verify_Access {
 					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
 				break;
 				case 'benefits':
+				case 'benefitsInf':
 					$auth = lang('CONF_BENEFITS') == 'ON';
 				break;
 				case 'changeEmail':

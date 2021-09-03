@@ -60,4 +60,20 @@ class Novo_Information extends NOVO_Controller {
 		$this->views = ['information/rates'];
 		$this->loadView('rates');
 	}
+
+	public function benefitsInf()
+	{
+		$view = 'benefits_info';
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"user/benefitsInf",
+		);
+
+		log_message('INFO', 'NOVO Information: benefits Method Initialized');
+		$this->render->titlePage =lang('GEN_FOTTER_BENEFITS');
+		$this->render->activeHeader = TRUE;
+		$this->views = ['information/'.$view];
+		$this->loadView($view);
+	}
 }

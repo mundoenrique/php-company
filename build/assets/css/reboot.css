@@ -2180,6 +2180,8 @@ i[class*=" icon-"]:before {
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
 .icon-graph:before           { content: "\e054"; }
+.icon-integration:before     { content: "\e067"; }
+.icon-plus:before            { content: "\e08d"; }
 .icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
@@ -2188,14 +2190,18 @@ i[class*=" icon-"]:before {
 .icon-find:before            { content: "\e0b8"; }
 .icon-download:before        { content: "\e0bb"; }
 .icon-upload:before          { content: "\e0bc"; }
+.icon-card-canceled:before   { content: "\e014"; }
 .icon-deliver-card:before    { content: "\e015"; }
 .icon-warning:before    		 { content: "\e0c6"; }
 .icon-user:before            { content: "\e0c8"; }
 .icon-envelope-open:before   { content: "\e026"; }
+.icon-reload:before   			 { content: "\e027"; }
+.icon-help-me:before   			 { content: "\e075"; }
 .icon-lock:before 			     { content: "\e0ce"; }
 .icon-notification:before    { content: "\e0d8"; }
 .icon-card:before            { content: "\e0dc"; }
 .icon-credit-card:before	   { content: "\e035"; }
+.icon-clock:before   			 	 { content: "\e053"; }
 .icon-thumbs-up:before       { content: "\e0e5"; }
 .icon-chevron-down:before    { content: "\e0f3"; }
 .icon-chevron-left:before    { content: "\e0f4"; }
@@ -2239,7 +2245,6 @@ i[class*=" icon-"]:before {
 .icon-email:before           { content: "\e0ba"; }
 .icon-500:before           	 { content: "\e901"; }
 .icon-404:before           	 { content: "\e902"; }
-.icon-card-canceled:before   { content: "\e014"; }
 
 .icon-user{
 	padding-right: 0 !important;
