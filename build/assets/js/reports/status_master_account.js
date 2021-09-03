@@ -2,7 +2,6 @@
 var reportsResults;
 $(function () {
 	var datePicker = $('.date-picker');
-	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
 	datePicker.datepicker({
@@ -51,7 +50,7 @@ $(function () {
 		verb = 'POST'; who = 'Reports'; where = 'statusMasterAccount';
 		var downloadFile = $('#download-file');
 		callNovoCore(verb, who, where, data, function (response) {
-			console.log(data);
+			$('#spinnerBlock').addClass('hide');
 			if (response.code == 0) {
 				downloadFile.attr('href', response.data.file)
 				document.getElementById('download-file').click()
@@ -61,7 +60,6 @@ $(function () {
 			}
 			insertFormInput(false);
 			$('#statusAccountForm').validate().resetForm();
-			$('#pre-loader').remove();
 		})
 	}
 });
