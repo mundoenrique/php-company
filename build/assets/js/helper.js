@@ -118,6 +118,12 @@ $(function () {
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
+
+	$(".widget-menu").click(function (e) {
+		e.stopPropagation();
+		$('#widget-menu').removeClass('none');
+		$("#widget-menu").toggleClass("show");
+	});
 });
 
 function callNovoCore(verb, who, where, request, _response_) {
@@ -262,7 +268,7 @@ function appMessages(title, message, icon, modalBtn) {
 		}
 	});
 
-	$('.ui-dialog-titlebar-close').on('click', function(e) {
+	$('.ui-dialog-titlebar-close').on('click', function (e) {
 		$('#system-msg').removeClass('w-100 vh-100');
 		$('#system-info').dialog('destroy');
 	});
@@ -284,11 +290,11 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-			break;
+				break;
 			case 'close':
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-			break;
+				break;
 		}
 
 		$(this).off('click');
@@ -324,7 +330,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null) {
+		if (thisValInput == null) {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -361,9 +367,9 @@ function getDataForm(form) {
 	return dataForm
 }
 
-function downLoadfiles (data) {
+function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
-	var blob = new Blob([File], {type: "application/"+data.ext});
+	var blob = new Blob([File], { type: "application/" + data.ext });
 	if (window.navigator.msSaveOrOpenBlob) {
 		window.navigator.msSaveBlob(blob, data.name)
 	} else {
@@ -434,25 +440,25 @@ function getResponse(Exitoso, MensajeError) {
 		switch (remoteFunction) {
 			case 'sendRequest':
 				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote, remoteAuthArgs.selectBlockCard);
-			break;
+				break;
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
-			break;
+				break;
 			case 'updateLimits':
 				updateLimits();
-			break;
+				break;
 			case 'updateTwirlsCard':
 				updateTwirlsCard();
-			break;
+				break;
 			case 'applyActions':
 				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
-			break;
+				break;
 		}
 
 		$('.cover-spin').show(0);
 	} else {
 		data = {
-			 btn1: {
+			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			},

@@ -253,6 +253,7 @@ $lang['CONF_LINK_SETTING'] = 'setting';
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
+$lang['CONF_MENU_CIRCLE'] = 'OFF';
 //FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
 //DOWNLOAD TIME FOR FILES
