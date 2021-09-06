@@ -228,6 +228,10 @@ class Create_Menu {
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');
 				$subMenuLang->link = 'javascript:';
 			break;
+			case 'REPECT':
+				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('CONF_LINK_STATUS_MASTER_ACCOUNT');
+			break;
 			default:
 				$subMenuLang->text = '---';
 				$subMenuLang->link = 'javascript:';
