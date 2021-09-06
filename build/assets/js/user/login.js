@@ -158,7 +158,7 @@ function getSignIn(forWhere) {
 
 function windowsStyle() {
 	$('#system-msg').css("width", "auto");
-	if (customerUri == 'bp') {
+	if (customerUri == 'bpi') {
 		var styles = {
 			float: "none",
 			margin: "auto"

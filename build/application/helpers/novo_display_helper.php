@@ -205,12 +205,12 @@ if ( ! function_exists('verifyFooter'))
 			case lang('GEN_FOTTER_BENEFITS'):
 				$show = ['novo', 'pichincha'];
 				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
-				$display = (in_array($client, $show) && $display && $customerUri != 'bp');
+				$display = (in_array($client, $show) && $display && $customerUri != 'bpi');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
 				$show = ['novo', 'pichincha'];
 				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
-				$display = (in_array($client, $show) && $display && $customerUri != 'bp');
+				$display = (in_array($client, $show) && $display && $customerUri != 'bpi');
 				break;
 			case lang('GEN_FOTTER_RATES'):
 				$display = ($module !== 'rates' && $logged && $customerUri == 've');
