@@ -869,6 +869,59 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+
+	/**
+	 * @info Método para obtener reporte de estatus cuenta maestra
+	 * @author Luis Molina
+	 * @date August 31, 2021
+	 */
+	public function callWs_statusMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: statusMasterAccount Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'edoCuentaMaestra';
+		$this->dataAccessLog->operation = 'edoCuentaMaestra';
+
+		$this->dataRequest->opcion = 'getReporte';
+		$this->dataRequest->nombreReporte = 'edoCuentaMaestra';
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.business.parametros.bos.Opciones';
+
+		$this->dataRequest->idEmpresa = $dataRequest->enterpriseCode;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+		$response = $this->sendToService('callWs_statusMasterAccount');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('GEN_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+			break;
+			default:
+			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		  break;
+		}
+
+		return $this->response;
+	}
 	/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García

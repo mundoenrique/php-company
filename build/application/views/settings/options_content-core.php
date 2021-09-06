@@ -591,7 +591,7 @@
                           <img src=<?= $this->asset->insertFile(lang('CONF_RAR_ICON'), 'images/icons');?> />
                         <?php break; case 'zip': ?>
                           <img src=<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?> />
-                        <?php break; endswitch; ?>   
+                        <?php break; endswitch; ?>
                         </div>
                         <span class="ml-2 flex justify-center"><?= $value[2]  ?></span>
                       </div>
