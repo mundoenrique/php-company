@@ -28,7 +28,7 @@ $pais= $this->uri->segment(1, 0);
       </fieldset>
       <div class="form-actions">
 
-        <?php	if($pais!='bp'): ?>
+        <?php	if($pais!='bpi'): ?>
         <table style="float:right;">
           <?php else: ?>
           <center>
@@ -36,18 +36,18 @@ $pais= $this->uri->segment(1, 0);
               <?php endif; ?>
               <tr>
                 <td valign="top">
-                  <?php	if($pais=='bp'): ?>
+                  <?php	if($pais=='bpi'): ?>
                   <center>
                     <?php	endif; ?>
                     <a class="cancel-anchor novo-btn-secondary novo-cancel-pass-recovery"
                       href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-                    <?php	if($pais=='bp'): ?>
+                    <?php	if($pais=='bpi'): ?>
                     <?php else: ?>
                     <button id="btn-pass-recover" class="novo-btn-primary"><?= lang('GEN_BTN_CONTINUE'); ?></button>
                     <?php	endif; ?>
                 </td>
                 <td valign="top">
-                  <?php	if($pais=='bp'): ?>
+                  <?php	if($pais=='bpi'): ?>
                   <button id="btn-pass-recover" class="novo-btn-primary">
                     <a class="cancel-anchor" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CONTINUE'); ?></a>
                   </button>
@@ -56,7 +56,7 @@ $pais= $this->uri->segment(1, 0);
           </td>
           </tr>
         </table>
-        <?php	if($pais=='bp'): ?>
+        <?php	if($pais=='bpi'): ?>
         <center>
           <?php endif; ?>
           <div class="content-t">
