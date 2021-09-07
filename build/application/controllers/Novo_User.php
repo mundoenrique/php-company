@@ -403,7 +403,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'login';
 		$views = ['user/login', 'user/signin'];
 
-		if($this->customerUri == 'bp') {
+		if($this->customerUri == 'bpi') {
 			$views = ['user/signin'];
 		}
 
@@ -416,7 +416,7 @@ class Novo_User extends NOVO_Controller {
 			"user/login"
 		);
 
-		if($this->customerUri !== 'bp') {
+		if($this->customerUri !== 'bpi') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",
@@ -424,7 +424,7 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
-		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bpi' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"

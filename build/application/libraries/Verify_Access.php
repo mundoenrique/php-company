@@ -272,6 +272,9 @@ class Verify_Access {
 				case 'accountStatus':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
+				case 'statusMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
+				break;
 				case 'replacement':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
 				break;

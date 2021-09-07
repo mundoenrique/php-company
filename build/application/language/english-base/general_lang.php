@@ -46,6 +46,7 @@ $lang['GEN_MENU_WAY_TRAVELS'] = 'Travels';//CMBVJE
 $lang['GEN_MENU_REP_KIDGARDEN_PAY'] = 'Daycare payments';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Recharge fee';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Billed lots';//LOTFAC
+$lang['GEN_MENU_REP_STATUS_MASTER_ACCOUNT'] = 'Status master account';//REPECT
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
 $lang['GEN_BTN_CANCEL'] = 'Cancel';

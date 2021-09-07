@@ -249,6 +249,7 @@ $lang['CONF_LINK_REPORTS'] = 'reports';//permiso asociado REPALL
 $lang['CONF_LINK_MASTER_ACCOUNT'] = 'master-account';//permiso asociado REPCON
 $lang['CONF_LINK_USER_ACTIVITY'] = 'user-activity';//permiso asociado REPUSU
 $lang['CONF_LINK_SETTING'] = 'setting';
+$lang['CONF_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account';//permiso asociado REPECT
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

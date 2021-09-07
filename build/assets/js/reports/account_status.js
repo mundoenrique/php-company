@@ -11,6 +11,9 @@ $(function () {
 		onSelect: function (selectedDate) {
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[0] + '/' + dateSelected[2];
+			$(this)
+			.focus()
+			.blur();
 		},
 		changeMonth: true,
 		changeYear: true,

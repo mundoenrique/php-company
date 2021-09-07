@@ -426,5 +426,38 @@ class Novo_Reports extends NOVO_Controller {
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para accder al repor de estado de cuenta maestra
+	 * @author Luis Molina
+	 * @date August 30, 2021
+	 */
+	public function statusMasterAccount()
+	{
+		log_message('INFO', 'Novo_Reports: statusMasterAccount Method Initialized');
+
+		$view = 'statusMasterAccount';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"reports/status_master_account"
+		);
+		$this->request->select = TRUE;
+		$logo = $this->session->enterpriseInf;
+		$this->request->idFiscal = $logo->idFiscal;
+		$this->request->enterpriseCode = $logo->enterpriseCode;
+		$this->load->model('Novo_Business_Model', 'getProducts');
+		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
+		$this->responseAttr($response);
+		$this->render->titlePage = lang('GEN_MENU_REP_STATUS_MASTER_ACCOUNT');
+		$this->views = ['reports/'.$view];
+		$this->loadView($view);
+	}
 }
 
