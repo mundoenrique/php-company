@@ -337,6 +337,8 @@ $lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
 $lang['GEN_SO_SUCCESSFULL'] = 'La orden de servicio fue generada de forma exitosa.';
 $lang['GEN_ACCEPT_TERMS'] = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma.';
 $lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
+$lang['GEN_BONUS_CARD'] = 'Bonus Alimentación Tebca';
+$lang['GEN_SILVER_CARD'] = 'Plata Servitebca';
 $lang['GEN_TIMEOUT_HTTP'] = 'Tu solicitud continua procesandose, por favor espera.';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [

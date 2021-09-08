@@ -252,6 +252,7 @@ $lang['CONF_LINK_SETTING'] = 'setting';
 $lang['CONF_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account';//permiso asociado REPECT
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
+$lang['CONF_LINK_RATES'] = 'rates';
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'OFF';

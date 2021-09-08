@@ -2194,6 +2194,7 @@ i[class*=" icon-"]:before {
 .icon-deliver-card:before    { content: "\e015"; }
 .icon-warning:before    		 { content: "\e0c6"; }
 .icon-user:before            { content: "\e0c8"; }
+.icon-rates:before   				 { content: "\e023"; }
 .icon-envelope-open:before   { content: "\e026"; }
 .icon-reload:before   			 { content: "\e027"; }
 .icon-help-me:before   			 { content: "\e075"; }
@@ -3535,6 +3536,27 @@ a.ui-button:active,
   overflow: hidden;
 }
 
+.bg-card-icon {
+	background-image: linear-gradient(rgba(6, 0, 96, 0.9), rgba(6, 0, 96, 0.9)), url("../../assets/images/icons/icon-description.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100px;
+}
+.bg-card-bonus {
+	background-image: linear-gradient(rgba(0, 0, 0,.2), rgba(0,0,0,.2)), url("../../assets/images/programs/ve/bonus_alimentacion.svg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: 150%;
+	height: 10rem;
+}
+.bg-card-plata {
+	background-image: linear-gradient(rgba(0, 0, 0,.2), rgba(0,0,0,.2)), url("../../assets/images/programs/ve/plata_clasica.svg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: 150%;
+	height: 10rem;
+}
+
 /* clases para el primer producto  */
 .prod-first:hover .mask {
   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -3828,7 +3850,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: fixed;
 	left: 5px;
 	bottom: 90px;
-	z-index: 1004;
+	z-index: 999;
 }
 .widget-menu .help .content-help,
 .widget-menu .help .content-help .icon-help{
@@ -3849,7 +3871,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	color: var(--color-sixth);
 }
 .menu-help{
-  z-index: 1000;
+  z-index: 998;
   transform-origin: center;
   border-radius: 50%;
   position: fixed;
@@ -3964,3 +3986,24 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
     opacity: 0;
   }
 }
+
+.rates {
+	border-spacing: 10px 0px !important;
+}
+
+.rates .text-section {
+	background: var(--color-fifth);
+}
+
+.rates.dataTable tbody tr td {
+	padding: 10px 14px !important;
+}
+
+.rates.dataTable tbody .subsection td{
+background-color:  rgba(210, 211, 212, .5);
+}
+.rates.dataTable thead, .thead {
+	color: var(--color-secondary) !important;
+	background-color: var(--color-seventh) !important;
+}
+

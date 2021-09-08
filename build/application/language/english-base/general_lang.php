@@ -334,6 +334,8 @@ $lang['GEN_SO_CREATE_INCORRECT'] = 'The security code is wrong, please check it 
 $lang['GEN_SO_CREATE_EXPIRED'] = 'The security code expired or was used.';
 $lang['GEN_ACCEPT_TERMS'] = 'By pressing "Accept" you declare that you have read and accepted the terms of use of our platform.';
 $lang['GEN_OTP_NO_SENT'] = 'It was not possible to send the email with the verification code, please try again later.';
+$lang['GEN_BONUS_CARD'] = 'Tebca Food Bonus';
+$lang['GEN_SILVER_CARD'] = 'Servitebca payment';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Select',

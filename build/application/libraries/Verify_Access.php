@@ -173,7 +173,8 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
 				break;
 				case 'rates':
-					$auth = ($this->CI->session->has_userdata('logged') && $customerUri === 've');
+				case 'ratesInf':
+					$auth = ($this->CI->session->has_userdata('logged') && ($customerUri === 've' || $customerUri === 'ven'));
 				break;
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
