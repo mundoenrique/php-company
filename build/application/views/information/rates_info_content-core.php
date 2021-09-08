@@ -62,7 +62,7 @@
 			return $rate_converted;
 		}
 
-		if (!$json_data) :
+		if ($json_data) :
 		?>
 			<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap">
 			<div class="flex flex-auto flex-column">
