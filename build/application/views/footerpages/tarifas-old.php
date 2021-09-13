@@ -151,9 +151,6 @@
 					font-size: 14px !important;
 					font-weight: 400 !important;
 				}
-				.text-section.center {
-					text-align: center;
-				}
 
 				.text-subsection {
 					background-color: #e6e6e6 !important;
@@ -180,24 +177,6 @@
 					margin-right: 5px;
 					text-align: right;
 					width: 15px;
-				}
-
-				.text-section .row,
-				.text-currency .row {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-				}
-
-				.text-section .col-6,
-				.text-currency .col-6 {
-					float: left;
-  				width: 50%;
-					text-align: center;
-				}
-				.icon-info-rates {
-					font-size: 13px;
-					color: #0b5ea9;
 				}
 			</style>
 			<table cellpadding="0" cellspacing="0" class="table-rates">
@@ -233,12 +212,8 @@
 						<td class="text-section">
 							<?php echo $parent->name; ?>
 						</td>
-						<td class="text-section center">
-							<span>Bs. / Bs. (Nueva expresión monetaria)</span>
-						</td>
-						<td class="text-section center">
-							<span>Bs. / Bs. (Nueva expresión monetaria)</span>
-						</td>
+						<td class="text-section"></td>
+						<td class="text-section"></td>
 					</tr>
 						<?php if ($parent->items):
 							foreach ($parent->items as $child):
