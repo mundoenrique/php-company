@@ -93,4 +93,6 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'provis_plaza_vea' => 'provis_alimentacion',
 	'provis_regalo_visa' => 'provis_alimentacion',
 	'regalo_provis' => 'provis_alimentacion',
+	'provis_credscot_vrt' => 'provis_credscot_vrt',
+	'provis_scotia_vrt' => 'provis_scotia_vrt',
 ];
