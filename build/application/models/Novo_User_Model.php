@@ -55,7 +55,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = ACTIVE_RECAPTCHA && !isset($dataRequest->skipCaptcha) ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 			if ($this->isResponseRc === 0) {
-				$response = $this->sendToService('callWs_Login');
+				$response = $this->sendToService('callWs_SignIn');
 			}
 		}
 
@@ -211,7 +211,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('callWs_Login');
+		return $this->responseToTheView('callWs_SignIn');
 	}
 	/**
 	 * @info Método para el inicio de sesión único
