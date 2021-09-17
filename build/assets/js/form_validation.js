@@ -15,7 +15,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z ']{3,40}$/i;
+	var alphabeticalspace = /^['a-z-ñáéíóú ']{3,40}$/i;
 	var floatAmount = /^[0-9,.]+$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
