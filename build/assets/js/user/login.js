@@ -99,7 +99,7 @@ function getSignIn(forWhere) {
 
 					$(location).attr('href', link);
 				}
-				break;
+			break;
 			case 1:
 				$('#userName').showBalloon({
 					html: true,
@@ -107,7 +107,7 @@ function getSignIn(forWhere) {
 					position: response.position,
 					contents: response.msg
 				});
-				break;
+			break;
 			case 2:
 				$('#accept').addClass('send-otp');
 				response.modalBtn.minWidth = 480;
@@ -132,24 +132,16 @@ function getSignIn(forWhere) {
 
 				windowsStyle();
 				appMessages(response.title, inputModal, '', response.modalBtn);
-				break;
+			break;
 			case 3:
 				response.modalBtn.minWidth = 480;
 				response.modalBtn.maxHeight = 'none';
 				response.modalBtn.posAt = 'center top';
 				response.modalBtn.posMy = 'center top+160';
-
-				inputModal = 		'<div>'
-				inputModal += 		'	<h1>Aviso importante</h1>'
-				inputModal += 		'	<div>'
-				inputModal += 		'		<p>Estimados clientes y usuarios:</p>'
-				inputModal += 		'		<p  class="justify"><b>Tebca y Servitebca</b> están adecuando su plataforma a los nuevos esquemas planteados con motivo de <b>Reconversión  Monetaria</b>. Por  esta razón, <b>desde las 11:00pm del día jueves 30-09-2021 y hasta las 8:00am del día viernes 01-10-2021</b>, estarán suspendidos los servicios de consultas y transacciones disponibles para las tarjetas <b>Bonus Alimentación y Plata Servitebca</b>.</p>'
-				inputModal += 		'		<p>Agradecemos su máxima comprensión.</p>'
-				inputModal += 		'	</div>'
-				inputModal += 		'</div>'
+				inputModal = response.msg
 				windowsStyle();
-				appMessages(response.title, inputModal, '', response.modalBtn);
-				break;
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
 			default:
 				if (response.data == 'session-close') {
 					$('#accept').addClass(response.data);

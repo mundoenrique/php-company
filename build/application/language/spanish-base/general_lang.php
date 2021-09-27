@@ -539,3 +539,5 @@ $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
+$lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
+$lang["GEN_MSG_RECONVERSION"] = '<p>Estimados clientes y usuarios:</p><p  class="justify"><b>Tebca y Servitebca</b> están adecuando su plataforma a los nuevos esquemas planteados con motivo de <b>Reconversión  Monetaria</b>. Por  esta razón, <b>desde las 11:00pm del día jueves 30-09-2021 y hasta las 8:00am del día viernes 01-10-2021</b>, estarán suspendidos los servicios de consultas y transacciones disponibles para las tarjetas <b>Bonus Alimentación y Plata Servitebca</b>.</p><p>Agradecemos su máxima comprensión.</p>';

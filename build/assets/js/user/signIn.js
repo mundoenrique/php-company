@@ -3,7 +3,7 @@ $(function () {
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
-	$('#userPass').on('keyup', function() {
+	$('#userPass').on('keyup', function () {
 		$(this).attr('type', 'password');
 
 		if ($(this).val() == '') {
@@ -11,7 +11,7 @@ $(function () {
 		}
 	});
 
-	$('#signInBtn').on('click', function(e) {
+	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#signInForm');
 		formInputTrim(form);
@@ -33,7 +33,7 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.session-close', function() {
+	$('#system-info').on('click', '.session-close', function () {
 		$(this)
 			.html(loader)
 			.prop('disabled', true)
@@ -42,7 +42,7 @@ $(function () {
 		getSignIn('FinishSession');
 	});
 
-	$('#system-info').on('click', '.send-otp', function() {
+	$('#system-info').on('click', '.send-otp', function () {
 		form = $('#formVerificationOTP');
 		formInputTrim(form);
 		validateForms(form);
@@ -103,6 +103,14 @@ function getSignIn(forWhere) {
 				inputModal+=		'</div">'
 				inputModal+= '</form>';
 
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
+			case 3:
+				response.modalBtn.minWidth = 480;
+				response.modalBtn.maxHeight = 'none';
+				response.modalBtn.posAt = 'center top';
+				response.modalBtn.posMy = 'center top+160';
+				inputModal = response.msg
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 			break;
 			default:

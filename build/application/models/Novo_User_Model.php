@@ -48,7 +48,7 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		if (lang('CONFIG_MAINTENANCE') == 'ON') {
-			$this->isResponseRc = 9996;
+			$this->isResponseRc = lang('CONFIG_MAINTENANCE_RC');
 		}	elseif (isset($dataRequest->otpCode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
@@ -197,7 +197,8 @@ class Novo_User_Model extends NOVO_Model {
 			case 9996:
 				$this->response->code = 3;
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_MSG_IMPORTANT');
+				$this->response->msg = lang('GEN_MSG_RECONVERSION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 			break;
