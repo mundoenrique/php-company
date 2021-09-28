@@ -16,6 +16,7 @@ $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
+$lang['CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE'] = 'ON';
 //TEXT CONF
 $lang['CONF_APPLICATIONS'] = 'Archivos de gestión';
 //DATEPICKER
@@ -28,3 +29,5 @@ $lang['CONF_USERS_ACTIVITY'] = 'ON';
 //EXTERNAL LINKS
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_ACTIVITY'] = 'users-activity';//permiso asociado REPUSU
+//INTERNAL LINKS
+$lang['CONF_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeDataEnterprice';

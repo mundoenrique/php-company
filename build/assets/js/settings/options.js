@@ -4,6 +4,11 @@ var tableContact;
 var geo;
 
 $(function () {
+
+	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#enterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
+		enablePhone();
+	};
+
 	var ulOptions = $('.nav-item-config');
 	$('#existingContactButton').addClass('hidden');
 	$('#partedSection').hide();
@@ -77,10 +82,8 @@ $(function () {
 			$('#'+ key).val(optionSelect.attr(key));
 		});
 
-		if ( lang.CONF_SETTINGS_TELEPHONES == 'ON' ) {
-			for ( let i = 1; i < 4; i++ ) {
-				$('#phone'+ i).val(optionSelect.attr('phone'+ i));
-			}
+		if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' ) {
+			enablePhone();
 		};
 
 		if ($('#existingContacts')[0] != undefined) {
@@ -108,6 +111,40 @@ $(function () {
 				dataResponse = response.data
 				insertFormInput(false);
 				$('#userDataBtn').html(btnText)
+			})
+		}
+	})
+
+	$('#updateEnterpriceBtn').on('click', function (e) {
+		e.preventDefault();
+		form = $('#enterpriseDataForm');
+		btnText = $(this).text().trim();
+
+		switch (lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE) {
+			case 'changeTelephones':
+				$("#address").addClass("ignore");
+				$("#billingAddress").addClass("ignore");
+				$("#phone2").addClass("ignore");
+				$("#phone3").addClass("ignore");
+				break;
+			case 'changeDataEnterprice':
+				$("#phone1").addClass("ignore");
+				$("#phone2").addClass("ignore");
+				$("#phone3").addClass("ignore");
+				break;
+		}
+
+		validateForms(form);
+
+		if (form.valid()) {
+			insertFormInput(true);
+			data = getDataForm(form);
+			$(this).html(loader);
+			verb = "POST"; who = 'Settings'; where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
+			callNovoCore(verb, who, where, data, function (response) {
+				dataResponse = response.data
+				insertFormInput(false);
+				$('#updateEnterpriceBtn').html(btnText)
 			})
 		}
 	})
@@ -239,6 +276,16 @@ $(function () {
 		}
 	});
 });
+
+function enablePhone(){
+	for ( let i = 1; i < 4; i++ ) {
+		if($('#phone'+ i).val()==''){
+			$('#divPhone'+ i).addClass('hide');
+		}else{
+			$('#divPhone'+ i).removeClass('hide');
+		}
+	}
+}
 
 function getContacts (data) {
 	verb = 'POST'; who = 'Settings'; where = 'getContacts';
