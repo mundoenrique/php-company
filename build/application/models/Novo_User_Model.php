@@ -196,9 +196,9 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 9996:
 				$this->response->code = 3;
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->title = lang('GEN_MSG_IMPORTANT');
-				$this->response->msg = lang('GEN_MSG_RECONVERSION');
+				$this->response->icon = '';
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = novolang(lang('GEN_MSG_RECONVERSION'), assetUrl('images/nueva-expresion-monetaria.png'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 			break;
