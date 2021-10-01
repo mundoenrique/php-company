@@ -166,42 +166,62 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Settings Model: ChangeTelephones Method Initialized');
 
-
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'cambiar-telefono';
 		$this->dataAccessLog->operation = 'getActualizarTLFEmpresa';
 
 		$this->dataRequest->idOperation = 'getActualizarTLFEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.EmpresaTO';
-		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->actel = $dataRequest->tlf1;
-		$this->dataRequest->actel2 = $dataRequest->tlf2;
-		$this->dataRequest->actel3 = $dataRequest->tlf3;
+		$this->dataRequest->acrif  = $dataRequest->idFiscal;
+		$this->dataRequest->actel  = $dataRequest->phone1 ?? '';
+		$this->dataRequest->actel2 = $dataRequest->phone2 ?? '';
+		$this->dataRequest->actel3 = $dataRequest->phone3 ?? '';
 
-		$this->sendToService('CallWs_ChangeTelephones');
+		$response = $this->sendToService('CallWs_ChangeTelephones');
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->msg = lang('GEN_EMAIL_CHANGED');
+				$this->response->code = 4;
+				$this->response->msg = lang('GEN_PHONE_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_ENTERPRISES');
 			break;
-			case -4:
-				$this->response->code = 1;
-				$this->response->msg = lang('GEN_EMAIL_USED');
-			break;
-			case -22:
-				$this->response->code = 1;
-				$this->response->msg = lang('GEN_EMAIL_INCORRECT');
-			break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
-			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		return $this->responseToTheView('CallWs_ChangeTelephones');
+	}
+
+	/**
+	 * @info Método para el cambio de dirección de las empresas
+	 * @author Luis Molina
+	 * @date sept 23, 2021
+	 */
+	public function CallWs_ChangeDataEnterprice_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: ChangeDataEnterprice Method Initialized');
+
+		$this->dataAccessLog->modulo = 'reportes';
+		$this->dataAccessLog->function = 'updateDataEmpresaPBO';
+		$this->dataAccessLog->operation = 'updateDataEmpresaPBO';
+
+		$this->dataRequest->opcion = 'updateDataEmpresa';
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.business.parametros.bos.Opciones';
+		$this->dataRequest->ruc  = $dataRequest->idFiscal;
+		$this->dataRequest->direccion  = $dataRequest->address ?? '';
+		$this->dataRequest->direccionFact = $dataRequest->billingAddress ?? '';
+
+		$response = $this->sendToService('CallWs_ChangeDataEnterprice');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 4;
+				$this->response->msg = lang('GEN_ADDRESS_ENTERPRICE_CHANGED');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_ENTERPRISES');
+			break;
 		}
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');

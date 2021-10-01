@@ -1,8 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONF_MAINTENANCE'] = 'OFF';
-$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['CONF_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
+$lang['CONFIG_MAINTENANCE'] = 'OFF';
+$lang['CONFIG_MAINTENANCE_RC'] = 9997;
+$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_RC_DEFAULT'] = -9999;
@@ -135,6 +136,7 @@ $lang['CONF_SETTINGS_BRANCHES'] = 'ON';
 $lang['CONF_SETTINGS_DOWNLOADS'] = 'ON';
 $lang['CONF_SETTINGS_TELEPHONES'] = 'ON';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
+$lang['CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'ON';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';
 //FILES CONF
@@ -253,6 +255,7 @@ $lang['CONF_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account';//permiso aso
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 $lang['CONF_LINK_RATES'] = 'rates';
+$lang['CONF_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeTelephones';
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'OFF';

@@ -81,6 +81,7 @@ class Novo_Settings extends NOVO_Controller {
 		$this->render->userType = $userType;
 		$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
 		$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
+		$this->render->addressCompanyUpdate = lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
 
 		foreach ((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
 			lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';

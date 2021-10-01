@@ -375,20 +375,32 @@ $config = [
 	],
 	'changeTelephones' => [
 		[
-			'field' => 'tlf1',
-			'label' => 'phone',
+			'field' => 'phone1',
+			'label' => 'phone1',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
-			'field' => 'tlf2',
-			'label' => 'phone',
+			'field' => 'phone2',
+			'label' => 'phone2',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 		[
-			'field' => 'tlf3',
-			'label' => 'phone',
+			'field' => 'phone3',
+			'label' => 'phone3',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
+	],
+	'changeDataEnterprice' => [
+		[
+			'field' => 'address',
+			'label' => 'address',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-\/]+$/]|required'
 		],
+		[
+			'field' => 'billingAddress',
+			'label' => 'billingAddress',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-\/]+$/]'
+		]
 	],
 	'deleteContact' => [
 		[

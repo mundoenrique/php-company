@@ -336,6 +336,10 @@ $lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verif
 $lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
 $lang['GEN_SO_SUCCESSFULL'] = 'La orden de servicio fue generada de forma exitosa.';
 $lang['GEN_ACCEPT_TERMS'] = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma.';
+$lang['GEN_PHONE_CHANGED'] = 'Los teléfonos fueron modificados correctamente';
+$lang['GEN_ADDRESS_ENTERPRICE_CHANGED'] = 'La dirección fue modificada correctamente';
+$lang['MIN_WIDTH_OTP'] = '480';
+$lang['POSTMY_OTP'] = 'center top+160';
 $lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
 $lang['GEN_BONUS_CARD'] = 'Bonus Alimentación Tebca';
 $lang['GEN_SILVER_CARD'] = 'Plata Servitebca';
@@ -431,3 +435,5 @@ $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
+$lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
+$lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';

@@ -74,3 +74,5 @@ $lang['VALIDATE_ADDRESS_BRANCHES'] = 'Indica una dirección válida';
 $lang['VALIDATE_INPUT_REQUIRED'] = 'Este campo es requerido';
 $lang['VALIDATE_INPUT_POSITION'] = 'Indica un puesto válido';
 $lang['VALIDATE_INPUT_SURNAME'] = 'Indica un apellido válido';
+$lang['VALIDATE_ADDRESS_ENTERPRICE'] = 'Indica la dirección';
+$lang['VALIDATE_BILLING_ADDRESS_ENTERPRICE'] = 'Indica la dirección de facturación';

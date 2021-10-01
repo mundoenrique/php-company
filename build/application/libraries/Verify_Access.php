@@ -150,6 +150,7 @@ class Verify_Access {
 				break;
 				case 'changeEmail':
 				case 'changeTelephones':
+				case 'changeDataEnterprice':
 				case 'addContact':
 				case 'deleteContact':
 				case 'getEnterprises':

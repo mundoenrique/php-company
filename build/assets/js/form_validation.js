@@ -6,7 +6,7 @@ function validateForms(form) {
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-])+$/i;
+	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
@@ -15,7 +15,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z ']{3,40}$/i;
+	var alphabeticalspace = /^['a-z-ñáéíóú ']{3,40}$/i;
 	var floatAmount = /^[0-9,.]+$/;
 	var fiscalReg = lang.CONF_VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.CONF_VALIDATE_REG_ID_NUMBER, 'i');
@@ -229,12 +229,16 @@ function validateForms(form) {
 			"address": { required: true, pattern: longPhraseUpper },
 			"address2": { pattern: longPhraseUpper },
 			"address3": { pattern: longPhraseUpper },
+			"billingAddress": { required: true, pattern: longPhraseUpper },
 			"countryCode": { required: true, pattern: numeric },
 			"stateCodeBranch": { required: true, pattern: numeric },
 			"cityCodeBranch": { required: true, pattern: numeric },
 			"districtCodeBranch": { required: true, pattern: numeric },
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
+			"phone1": { required: true, pattern: numeric },
+			"phone2": { required: true, pattern: numeric },
+			"phone3": { required: true, pattern: numeric },
 			"person": { required: true, pattern: alphanumspace },
 			"branchCode": { required: true, pattern: numeric },
 			"surnameModifyContact":{ required: true, pattern: alphanumspace },
@@ -494,7 +498,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT
 			},
 			"address": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"address2": {
@@ -503,6 +507,10 @@ function validateForms(form) {
 			},
 			"address3": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"billingAddress": {
+				required: lang.VALIDATE_BILLING_ADDRESS_ENTERPRICE,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"countryCode": {
@@ -526,6 +534,18 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT
 			},
 			"phone": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone1": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone2": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone3": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},
