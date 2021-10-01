@@ -307,8 +307,8 @@ $(function () {
 				}
 
 				value = value.replace(/\D/g, "")
-					.replace(/([0-9])([0-9]{2})$/, '$1' + lang.GEN_DECIMAL + '$2')
-					.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.GEN_THOUSANDS);
+					.replace(/([0-9])([0-9]{2})$/, '$1' + lang.CONF_DECIMAL + '$2')
+					.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.CONF_THOUSANDS);
 
 				return value
 			}, 'input');
@@ -399,7 +399,7 @@ function amountValidate(getAmount, currentTitle) {
 		for (var i = 0; i < cardsData.length; i++) {
 			$('#tableServicesMaster').find('tbody > tr.selected').each(function (index, element) {
 				currentamount = $(element).find('td.amount-cc input').val();
-				var amountArr = currentamount.split(lang.GEN_DECIMAL);
+				var amountArr = currentamount.split(lang.CONF_DECIMAL);
 				amountArr[0] = amountArr[0].replace(/[,.]/g, '');
 				currentamount = amountArr[0] + '.' + amountArr[1];
 				currentamount = parseFloat(currentamount).toFixed(2)

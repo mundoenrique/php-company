@@ -27,8 +27,8 @@ $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud,
 $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Nro. de Tarjeta';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
-$lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
+$lang['GEN_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
+$lang['GEN_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
 //CONTACT
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';

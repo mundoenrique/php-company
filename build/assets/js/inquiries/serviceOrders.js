@@ -136,7 +136,7 @@ $(function () {
 				form.submit()
 				setTimeout(function () {
 					$('.cover-spin').hide();
-				}, lang.GEN_TIME_DOWNLOAD_FILE);
+				}, lang.CONF_TIME_DOWNLOAD_FILE);
 				insertFormInput(false);
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:

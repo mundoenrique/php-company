@@ -78,8 +78,8 @@ $(function () {
 		"oPaginate": {
 			"sFirst": lang.GEN_TABLE_SFIRST,
 			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sNext": lang.CONF_TABLE_SNEXT,
+			"sPrevious": lang.CONF_TABLE_SPREVIOUS
 		},
 		"oAria": {
 			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
@@ -107,17 +107,23 @@ $(function () {
 		dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
 		weekHeader: lang.GEN_PICKER_WEEKHEADER,
 		dateFormat: lang.GEN_PICKER_DATEFORMAT,
-		firstDay: lang.GEN_PICKER_FIRSTDATE,
-		isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
+		firstDay: lang.CONF_PICKER_FIRSTDATE,
+		isRTL: lang.CONF_PICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-		changeYear: lang.GEN_PICKER_CHANGEYEAR,
+		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
+		changeYear: lang.CONF_PICKER_CHANGEYEAR,
 		showAnim: lang.SHOWANIM,
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
+
+	$(".widget-menu").click(function (e) {
+		e.stopPropagation();
+		$('#widget-menu').removeClass('none');
+		$("#widget-menu").toggleClass("show");
+	});
 });
 
 function callNovoCore(verb, who, where, request, _response_) {
@@ -262,7 +268,7 @@ function appMessages(title, message, icon, modalBtn) {
 		}
 	});
 
-	$('.ui-dialog-titlebar-close').on('click', function(e) {
+	$('.ui-dialog-titlebar-close').on('click', function (e) {
 		$('#system-msg').removeClass('w-100 vh-100');
 		$('#system-info').dialog('destroy');
 	});
@@ -284,11 +290,11 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-			break;
+				break;
 			case 'close':
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-			break;
+				break;
 		}
 
 		$(this).off('click');
@@ -324,7 +330,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null) {
+		if (thisValInput == null) {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -361,9 +367,9 @@ function getDataForm(form) {
 	return dataForm
 }
 
-function downLoadfiles (data) {
+function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
-	var blob = new Blob([File], {type: "application/"+data.ext});
+	var blob = new Blob([File], { type: "application/" + data.ext });
 	if (window.navigator.msSaveOrOpenBlob) {
 		window.navigator.msSaveBlob(blob, data.name)
 	} else {
@@ -434,25 +440,25 @@ function getResponse(Exitoso, MensajeError) {
 		switch (remoteFunction) {
 			case 'sendRequest':
 				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote, remoteAuthArgs.selectBlockCard);
-			break;
+				break;
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
-			break;
+				break;
 			case 'updateLimits':
 				updateLimits();
-			break;
+				break;
 			case 'updateTwirlsCard':
 				updateTwirlsCard();
-			break;
+				break;
 			case 'applyActions':
 				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
-			break;
+				break;
 		}
 
 		$('.cover-spin').show(0);
 	} else {
 		data = {
-			 btn1: {
+			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			},
@@ -463,7 +469,7 @@ function getResponse(Exitoso, MensajeError) {
 }
 
 function normalizeAmount(amount) {
-	var valueAttr = amount.split(lang.GEN_DECIMAL);
+	var valueAttr = amount.split(lang.CONF_DECIMAL);
 	amount = valueAttr[0].replace(/[,.]/g, '') + '.' + valueAttr[1];
 	amount = parseFloat(amount);
 

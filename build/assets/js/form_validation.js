@@ -17,9 +17,9 @@ function validateForms(form) {
 	var alphabetical = /^[a-z]+$/i;
 	var alphabeticalspace = /^['a-z-ñáéíóú ']{3,40}$/i;
 	var floatAmount = /^[0-9,.]+$/;
-	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
-	var rechargeDesc = new RegExp(lang.VALIDATE_RECHAR_REGEX_DESC, 'i');
+	var fiscalReg = lang.CONF_VALIDATE_FISCAL_REGISTRY;
+	var idNumberReg = new RegExp(lang.CONF_VALIDATE_REG_ID_NUMBER, 'i');
+	var rechargeDesc = new RegExp(lang.CONF_VALIDATE_RECHAR_REGEX_DESC, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -51,7 +51,7 @@ function validateForms(form) {
 			"confirm-pass": { required: true, equalTo: "#newPass" },
 			"branch-office": { requiredBranchOffice: true },
 			"type-bulk": { requiredTypeBulk: true },
-			"file-bulk": { required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true },
+			"file-bulk": { required: true, extension: lang.CONF_VALIDATE_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {
@@ -174,7 +174,7 @@ function validateForms(form) {
 				},
 				pattern: alphabetical
 			},
-			"cardNumberP": { pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
+			"cardNumberP": { pattern: numeric, minlength: lang.CONF_VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
 			"masiveOptions": { requiredSelect: true },
 			"documentId": { required: true, pattern: alphanum },
 			"radioDni": {

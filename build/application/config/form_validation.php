@@ -1625,6 +1625,12 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'changeLanguage' => [
+		[
+			'field' => 'lang',
+			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
+		]
+	],
 	// Old Arquitectures
 	'login' => [
 		[

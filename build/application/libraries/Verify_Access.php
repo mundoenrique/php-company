@@ -95,7 +95,7 @@ class Verify_Access {
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
+		$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
 		$this->responseDefect->modalBtn = [
 			'btn1'=> [
@@ -106,7 +106,7 @@ class Verify_Access {
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
-			$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT_LOGGED');
+			$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
@@ -145,6 +145,7 @@ class Verify_Access {
 					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
 				break;
 				case 'benefits':
+				case 'benefitsInf':
 					$auth = lang('CONF_BENEFITS') == 'ON';
 				break;
 				case 'changeEmail':
@@ -173,7 +174,8 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
 				break;
 				case 'rates':
-					$auth = ($this->CI->session->has_userdata('logged') && $customerUri === 've');
+				case 'ratesInf':
+					$auth = ($this->CI->session->has_userdata('logged') && ($customerUri === 've' || $customerUri === 'ven'));
 				break;
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));

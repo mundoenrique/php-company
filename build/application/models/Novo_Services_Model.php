@@ -74,7 +74,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->name = $cards->NombreCliente;
 					$record->idNumber = $cards->id_ext_per;
 					$record->status = isset($cards->codBloqueo) ? mb_strtolower($cards->codBloqueo) : '';
-					$record->amount = '0'.lang('GEN_DECIMAL').'00';
+					$record->amount = '0'.lang('CONF_DECIMAL').'00';
 					array_push(
 						$cardsList,
 						$record
@@ -83,20 +83,20 @@ class Novo_Services_Model extends NOVO_Model {
 
 				$this->response->code = 0;
 				$this->response->params = $response->maestroParametros;
-				$this->response->params->costoComisionTrans = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
-				$this->response->params->costoComisionCons = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
+				$this->response->params->costoComisionTrans = lang('CONF_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
+				$this->response->params->costoComisionCons = lang('CONF_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
 
 				if ( (float)$response->maestroDeposito->saldo < 0 ){
 					$this->response->cssNegativeBalance = "danger";
 				}
 
-				$this->response->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
+				$this->response->balance = lang('CONF_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 
 				if (array_key_exists('saldoCtaConcentradora', $response->maestroDeposito)) {
 					if ($response->maestroDeposito->saldoCtaConcentradora == 'No disponible') {
 						$this->response->balanceConcentratingAccount = $response->maestroDeposito->saldoCtaConcentradora;
 					} else {
-						$this->response->balanceConcentratingAccount = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoCtaConcentradora;
+						$this->response->balanceConcentratingAccount = lang('CONF_CURRENCY').' '.$response->maestroDeposito->saldoCtaConcentradora;
 					}
 				} else {
 					$this->response->balanceConcentratingAccount = '';
@@ -121,7 +121,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->cssNegativeBalance = "danger";
 				}
 
-				$this->response->balance = lang('GEN_CURRENCY').' '. 				   $response->bean->maestroDeposito->saldoDisponible;
+				$this->response->balance = lang('CONF_CURRENCY').' '. 				   $response->bean->maestroDeposito->saldoDisponible;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:
@@ -262,7 +262,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$record = new stdClass();
 						$record->usersId = $cards->id_ext_per;
 						$record->cardNumber = $cards->noTarjetaConMascara;
-						$record->balance = isset($cards->saldos) ? lang('GEN_CURRENCY').' '.$cards->saldos->disponible : '--';
+						$record->balance = isset($cards->saldos) ? lang('CONF_CURRENCY').' '.$cards->saldos->disponible : '--';
 						$listResopnse[] = $record;
 
 						if ($record->balance == '--') {
@@ -282,7 +282,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$record = new stdClass();
 						$record->usersId = $cards->id_ext_per;
 						$record->cardNumber = $cards->noTarjetaConMascara;
-						$record->amount = isset($cards->montoTransaccion) ?  lang('GEN_CURRENCY').' '.$cards->montoTransaccion : '--';
+						$record->amount = isset($cards->montoTransaccion) ?  lang('CONF_CURRENCY').' '.$cards->montoTransaccion : '--';
 						$listResopnse[] = $record;
 					}
 
@@ -294,7 +294,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data->listFail = $listFail;
 
 				if (isset($response->maestroDeposito)) {
-					$this->response->data->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
+					$this->response->data->balance = lang('CONF_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 				}
 			break;
 			case -1:
@@ -633,7 +633,7 @@ class Novo_Services_Model extends NOVO_Model {
 					foreach ($responseList AS $cards) {
 						$record = new stdClass();
 						$record->cardNumber = substr($cards->numeroTarjeta, -6);
-						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.currencyformat($cards->saldo) : '--';
+						$record->balance = isset($cards->saldo) ?  lang('CONF_CURRENCY').' '.currencyformat($cards->saldo) : '--';
 						$balanceList[] = $record;
 
 						if ($cards->rcNovoTrans != '0') {
@@ -811,7 +811,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
 				$this->response->success = TRUE;
-        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
+        $this->response->msg = 	lang('GEN_SUCCESSFULL_UPDATE_TWIRLS');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
@@ -823,13 +823,13 @@ class Novo_Services_Model extends NOVO_Model {
 			case -146:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
+				$this->response->msg = lang('GEN_NO_UPDATE_REGISTRY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -438:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('RESP_REJECTED_REGISTRY');
+				$this->response->msg = lang('GEN_REJECTED_REGISTRY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -65:
@@ -1002,7 +1002,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
+        $this->response->msg = 	lang('GEN_SUCCESSFULL_UPDATE_LIMITS');
         $this->response->success = TRUE;
         $this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -1067,7 +1067,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
-				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
+				$this->response->data->info['balance'] = lang('CONF_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
 				$this->response->data->params['balance'] = (float)$response->maestroDeposito->saldoDisponible;
 				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
@@ -1104,7 +1104,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -402:
 				$this->response->code = 1;
 				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
-				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->bean->saldoDisponible);
+				$this->response->data->info['balance'] = lang('CONF_CURRENCY').' '.currencyFormat($response->bean->saldoDisponible);
 				$this->response->data->info['fundingAccount'] = 'Empresa sin cuenta asociada';
 			break;
 			default:

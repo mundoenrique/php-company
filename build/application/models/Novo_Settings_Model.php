@@ -49,11 +49,11 @@ class Novo_Settings_Model extends NOVO_Model {
 			break;
 			case -4:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_USER_INCORRECT');
+				$this->response->msg = lang('GEN_USER_INCORRECT');
 			break;
 			case -22:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_USER_INCORRECT');
+				$this->response->msg = lang('GEN_USER_INCORRECT');
 			break;
 		}
 
@@ -95,7 +95,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 4;
-				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->msg = lang('GEN_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -106,7 +106,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			$this->response->code = 1;
 			$branchOffice[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 		}
 
@@ -134,18 +134,18 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->msg = lang('GEN_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
 			break;
 			case -4:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_USER_INCORRECT');
+				$this->response->msg = lang('GEN_USER_INCORRECT');
 			break;
 			case -22:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_USER_INCORRECT');
+				$this->response->msg = lang('GEN_USER_INCORRECT');
 			break;
 		}
 
@@ -261,7 +261,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->msg = lang('GEN_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';

@@ -106,11 +106,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		if($this->isResponseRc != 0) {
 			$reportsList[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 			$IdTypeList[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 			$mindateGmfReport = '';
 		}

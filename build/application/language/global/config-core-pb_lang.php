@@ -29,5 +29,7 @@ $lang['CONF_USERS_ACTIVITY'] = 'ON';
 //EXTERNAL LINKS
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_ACTIVITY'] = 'users-activity';//permiso asociado REPUSU
+//VALIDATE FORMS
+$lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 //INTERNAL LINKS
 $lang['CONF_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeDataEnterprice';

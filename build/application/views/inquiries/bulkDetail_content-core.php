@@ -7,7 +7,7 @@
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="javascript:"><?= lang('GEN_MENU_CONSULTATIONS') ?></a></li>
 			</ul>
 		</nav>
@@ -33,12 +33,12 @@
 					</div>
 
 					<div class="form-group mb-3 col-4">
-						<label for="typeLot" id="typeLot"><?= lang('GEN_BULT_TYPE') ?></label>
+						<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE') ?></label>
 						<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $bulkTypeText; ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
-						<label for="lot" id="lot"><?= lang('GEN_BULK_NUMBER') ?></label>
+						<label for="lot" id="lot"><?= lang('BULK_NUMBER') ?></label>
 						<span id="numLot" class="form-control px-1" readonly="readonly"><?= $bulkNumber; ?></span>
 					</div>
 
