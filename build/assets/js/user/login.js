@@ -99,7 +99,7 @@ function getSignIn(forWhere) {
 
 					$(location).attr('href', link);
 				}
-				break;
+			break;
 			case 1:
 				$('#userName').showBalloon({
 					html: true,
@@ -107,7 +107,7 @@ function getSignIn(forWhere) {
 					position: response.position,
 					contents: response.msg
 				});
-				break;
+			break;
 			case 2:
 				$('#accept').addClass('send-otp');
 				response.modalBtn.minWidth = 480;
@@ -132,7 +132,16 @@ function getSignIn(forWhere) {
 
 				windowsStyle();
 				appMessages(response.title, inputModal, '', response.modalBtn);
-				break;
+			break;
+			case 3:
+				response.modalBtn.minWidth = 480;
+				response.modalBtn.maxHeight = 'none';
+				response.modalBtn.posAt = 'center top';
+				response.modalBtn.posMy = 'center top+160';
+				inputModal = response.msg
+				windowsStyle();
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
 			default:
 				if (response.data == 'session-close') {
 					$('#accept').addClass(response.data);

@@ -541,3 +541,5 @@ $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
+$lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
+$lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
