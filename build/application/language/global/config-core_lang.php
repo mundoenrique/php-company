@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONFIG_MAINTENANCE'] = 'OFF';
-$lang['CONFIG_MAINTENANCE_RC'] = 9997;
-$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['GEN_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
+$lang['CONF_MAINTENANCE'] = 'OFF';
+$lang['CONF_MAINTENANCE_RC'] = 9997;
+$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['CONF_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_RC_DEFAULT'] = -9999;
