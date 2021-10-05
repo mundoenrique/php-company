@@ -91,7 +91,7 @@ class Novo_Business extends NOVO_Controller {
 
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
-			$this->render->widget->widgetBtnTitle = lang('BUSINESS_WIDGET_BTN');
+			$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
 			$this->render->widget->countProducts = FALSE;
 			$this->render->widget->actionForm = lang('CONF_LINK_PRODUCTS');
 		}

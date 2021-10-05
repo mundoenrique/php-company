@@ -51,7 +51,7 @@ function validateForms(form) {
 			"confirm-pass": { required: true, equalTo: "#newPass" },
 			"branch-office": { requiredBranchOffice: true },
 			"type-bulk": { requiredTypeBulk: true },
-			"file-bulk": { required: true, extension: lang.CONF_VALIDATE_FILES_EXTENSION, sizeFile: true },
+			"file-bulk": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {

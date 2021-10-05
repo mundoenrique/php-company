@@ -75,7 +75,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->request->enterpriseCode = $logo->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $response->code === 0 ? lang('BUSINESS_SELECT_PRODUCTS') : lang('GEN_TRY_AGAIN');
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
 		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 		$this->render->currentProd = $this->session->productInf->productPrefix;
 		$this->responseAttr($response);
@@ -146,7 +146,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->request->select = TRUE;
 			$this->load->model('Novo_Business_Model', 'getProducts');
 			$response = $this->getProducts->callWs_GetProducts_Business($this->request);
-			$this->render->selectProducts = $response->code === 0 ? lang('BUSINESS_SELECT_PRODUCTS') : lang('GEN_TRY_AGAIN');
+			$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
 			$this->responseAttr($response);
 			$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 			$this->render->prod = lang('GEN_NO_PRODUCT');
@@ -240,7 +240,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $response->code === 0 ? lang('BUSINESS_SELECT_PRODUCTS') : lang('GEN_TRY_AGAIN');
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
 		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 
 		if ($this->session->flashdata('download')) {
@@ -372,7 +372,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $response->code === 0 ? lang('BUSINESS_SELECT_PRODUCTS') : lang('GEN_TRY_AGAIN');
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
 		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 
 		if ($this->session->flashdata('download')) {
@@ -414,7 +414,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $response->code === 0 ? lang('BUSINESS_SELECT_PRODUCTS') : lang('GEN_TRY_AGAIN');
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
 		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 
 		if ($this->session->flashdata('download')) {

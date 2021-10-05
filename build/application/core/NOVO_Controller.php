@@ -265,7 +265,7 @@ class NOVO_Controller extends CI_Controller {
 				);
 
 				$this->render->widget =  new stdClass();
-				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
+				$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
 				$this->render->widget->countProducts = $this->session->has_userdata('products');
 				$this->render->widget->actionForm = lang('CONF_LINK_PRODUCT_DETAIL');
 			}

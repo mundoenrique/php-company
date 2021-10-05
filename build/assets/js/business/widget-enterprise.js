@@ -33,13 +33,13 @@ $(function() {
 		} else {
 			WidgetSelcetP
 			.prop('disabled', true)
-			.find('option:selected').text(lang.BUSINESS_WAIT_PRODUCTS);
+			.find('option:selected').text(lang.GEN_WAIT_PRODUCTS);
 			WidgetSelcetP.children()
 			.not('option:selected')
 			.remove()
 			enterpriseWidgetBtn
 			.prop('disabled', true);
-			enterpriseWidgetBtn.attr('title', lang.BUSINESS_SELECT_PRODUCTS);
+			enterpriseWidgetBtn.attr('title', lang.GEN_SELECT_PRODUCT);
 
 			verb = 'POST'; who = 'Business'; where = 'getProducts';
 			data = {
@@ -59,7 +59,7 @@ $(function() {
 
 	const respProctList = {
 		0: function(response) {
-			WidgetSelcetP.find('option:selected').text(lang.BUSINESS_SELECT_PRODUCTS);
+			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCT);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {
