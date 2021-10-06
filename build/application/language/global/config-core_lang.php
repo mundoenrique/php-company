@@ -364,6 +364,6 @@ $lang['CONF_POSTMY_OTP'] = 'center top+160';
 $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 $lang['CONF_VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú,.:()]+$';
 $lang['CONF_FILES_EXTENSION'] = 'xls|xlsx|txt';
-$lang['CONF_MAX_FILE_SIZE'] = '0';
+$lang['CONF_MAX_FILE_SIZE'] = '2048';
 $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_MINLENGTH'] = 1;
