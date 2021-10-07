@@ -118,13 +118,19 @@ label {
 }
 
 .custom-control-input:hover ~ .custom-control-label::before {
-	background: var(--color-tenth);
-	border: 1px solid var(--color-primary);
-	transition: all .45s ease-out 0s;
+	background: var(--color-seventh);
+}
+.custom-option-input:hover ~ .custom-option-label::before {
+	background: var(--color-seventh);
 }
 
 .custom-option-input:disabled ~ .custom-option-label {
 	color: var(--color-eighth)
+}
+
+.custom-option-label::before {
+  background: var(--color-eighth);
+  color: var(--color-eighth);
 }
 
 /* Switch */
@@ -407,6 +413,7 @@ label {
 }
 
 .spinner-border {
+	display: inline-flex;
 	background-image: url("../../images/bp/spinner.svg");
 	background-size: 30%;
 	background-size: contain;
