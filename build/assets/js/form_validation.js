@@ -133,6 +133,7 @@ function validateForms(form) {
 			"initialDatemy": { required: true, pattern: date.my },
 			"finalDatemy": { required: true, pattern: date.my },
 			"monthYear": { required: true, pattern: date.my },
+			"selection": { required: true },
 			"idNumber": { pattern: idNumberReg },
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
 			"cardNumber": {
@@ -306,6 +307,7 @@ function validateForms(form) {
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"initialDatemy": lang.VALIDATE_DATE_MY,
 			"monthYear": lang.VALIDATE_DATE_MY,
+			"selection": lang.VALIDATE_OPTION,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"lockType": lang.VALIDATE_OPTION,

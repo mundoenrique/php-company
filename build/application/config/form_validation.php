@@ -1127,18 +1127,27 @@ $config = [
 	'issuedCards' => [
 		[
 			'field' => 'enterpriseCode',
-			'label' => 'enterpriseCode',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		],
 		[
 			'field' => 'acrif',
-			'label' => 'acrif',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		],
 		[
 			'field' => 'monthYear',
-			'label' => 'monthYear',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'queryType',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
 		]
 	],
 	'userActivity' => [

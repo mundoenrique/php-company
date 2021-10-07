@@ -1254,30 +1254,27 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmisionesMO';
-		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
-		$this->dataRequest->fechaMes = $dataRequest->monthYear;
 		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
-		$this->dataRequest->fechaIni = '';
-		$this->dataRequest->fechaFin = '';
+		$this->dataRequest->fechaMes = $dataRequest->monthYear ?? '';
+		$this->dataRequest->fechaIni = $dataRequest->initDate ?? '';
+		$this->dataRequest->fechaFin = $dataRequest->finalDate ?? '';
+		$this->dataRequest->tipoConsulta = $dataRequest->queryType;
+
 		$response = $this->sendToService('callWs_IssuedCardsReport');
-		$issuedCardsList = [];
+		$record = [''];
 
     switch($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-				$record = new stdClass();
-				$record->lista = isset($response->lista) ? $response->lista : '';
-				array_push(
-					$issuedCardsList,
-					$record
-				);
+				$record = $response->lista ?? $record;
+
       break;
       case -150:
         $this->response->code = 0;
       break;
     }
-		$this->response->data->issuedCardsList = $issuedCardsList;
-		$this->response->data->tipoConsulta = $this->dataRequest->tipoConsulta;
+		$this->response->data->issuedCardsList = $record;
+		$this->response->data->queryType = $dataRequest->queryType;
 
     return $this->responseToTheView('callWS_IssuedCardsReport');
 	}

@@ -3,12 +3,8 @@ var reportsResults;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	var datePicker = $('.date-picker');
-	var resultStatusBulk = $('#resultStatusBulk');
-	var statusBulkBtn = $('#status-bulk-btn');
-	var downLoad = $('.download');
 
-	datePicker.datepicker({
+	$('.date-picker').datepicker({
 		minDate: lang.CONF_MIN_CONSULT_YEAR,
 		onSelect: function (selectedDate) {
 			$(this)
@@ -21,10 +17,9 @@ $(function () {
 
 			if (inputDate == 'initialDate') {
 				var maxMonth = lang.CONF_MAX_CONSULT_MONTH;
-
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
 				maxTime.setMonth(maxTime.getMonth() + maxMonth);
-				
+
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
 				} else {
@@ -34,21 +29,24 @@ $(function () {
 		}
 	});
 
-	statusBulkBtn.on('click', function (e) {
+	$('#status-bulk-btn').on('click', function (e) {
 		form = $('#status-bulk-form');
 		btnText = $(this).text().trim()
 		validateForms(form);
 
 		if (form.valid()) {
+			verb = "POST";
+			who = 'Reports';
+			where = 'StatusBulk';
 			data = getDataForm(form);
 			insertFormInput(true);
 			$('.statusbulk-result').addClass('hide');
 			$('#pre-loade-result').removeClass('hide')
-			resultStatusBulk.dataTable().fnClearTable();
-			resultStatusBulk.dataTable().fnDestroy();
-			verb = "POST"; who = 'Reports'; where = 'StatusBulk';
+			$('#resultStatusBulk').dataTable().fnClearTable();
+			$('#resultStatusBulk').dataTable().fnDestroy();
+
 			callNovoCore(verb, who, where, data, function (response) {
-				var table = resultStatusBulk.DataTable({
+				var table = $('#resultStatusBulk').DataTable({
 					"ordering": false,
 					"responsive": true,
 					"pagingType": "full_numbers",
@@ -73,7 +71,8 @@ $(function () {
 					]).draw()
 				});
 				form = $('#download-status');
-				form.html('')
+				form.html('');
+
 				$.each(data, function(index, value) {
 					if(index != 'screenSize') {
 						form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
@@ -81,14 +80,14 @@ $(function () {
 				});
 
 				insertFormInput(false);
-				statusBulkBtn.html(btnText);
+				$('#status-bulk-btn').html(btnText);
 				$('#pre-loade-result').addClass('hide')
 				$('.statusbulk-result').removeClass('hide');
 			})
 		}
 	});
 
-	downLoad.on('click', 'button', function(e) {
+	$('.download').on('click', 'button', function(e) {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');

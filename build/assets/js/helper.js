@@ -111,6 +111,7 @@ $(function () {
 		isRTL: lang.CONF_PICKER_ISRLT,
 		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
 		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_PICKER_MINDATE,
 		maxDate: currentDate,
 		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
 		changeYear: lang.CONF_PICKER_CHANGEYEAR,

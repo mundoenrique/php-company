@@ -1,5 +1,4 @@
 'use strict'
-var reportsResults;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -34,16 +33,138 @@ $(function () {
 		}
 	});
 
-	$("#monthYear").focus(function () {
-		$(".ui-datepicker-calendar").hide();
-		$("#ui-datepicker-div").position({
-			my: "center top",
-			at: "center bottom",
-			of: $(this)
-		});
+	$('.date-picker').datepicker({
+		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
+			var inputDate = $(this).attr('id');
+
+			if (inputDate == 'initDate') {
+				$('#finalDate').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + 3, dateSelected.getDate() - 1);
+
+				if (currentDate > maxTime) {
+					$('#finalDate').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDate').datepicker('option', 'maxDate', currentDate);
+				}
+			}
+		}
 	});
 
-	issuedCardsBtn.on('click', function (e) {
+	$('#issued-cards-btn').on('click', function(e) {
+		e.preventDefault();
+		$('.issued-cards-result').addClass('hide');
+		$('#downloads').addClass('hide');
+		form = $('#issued-cards-form');
+		validateForms(form);
+
+		if (form.valid()) {
+			$('#pre-loader-table').removeClass('hide');
+			verb = "POST";
+			who = 'reports';
+			where = 'issuedCards';
+			data = getDataForm(form);
+			data.queryType = $('input:radio[name=selection]:checked').val();
+			delete data.all
+			delete data.products
+			insertFormInput(true);
+
+			callNovoCore(verb, who, where, data, function (response) {
+				var table = '';
+				var totalRecords = response.data.issuedCardsList.length -1;
+				$('#issued-cards-table').empty();
+
+				if (response.data.issuedCardsList != '') {
+					$('#downloads').removeClass('hide');
+				}
+				totalRecords
+				$.each(response.data.issuedCardsList, function (index, value) {
+					if ((index == 0 && response.data.queryType == '0') || response.data.queryType == '1') {
+						table += '<table class="resut-issued-card cell-border h6 display responsive w-100">';
+						table += '<thead class="bg-primary secondary regular">';
+						table += '<tr>'
+
+						if (!value || response.data.queryType == '0') {
+							table += '<th>' + lang.GEN_PRODUCT +'</th>';
+						} else if (value || response.data.queryType == '1') {
+							table += '<th>' + value.nomProducto + '</th>';
+						}
+
+						table += '<th>' + lang.GEN_TABLE_EMISSION +'</th>';
+						table += '<th>' + lang.GEN_TABLE_REP_TARJETA +'</th>';
+						table += '<th>' + lang.GEN_TABLE_REP_CLAVE +'</th>';
+						table += '<th>' + lang.GEN_TABLE_TOTAL +'</th>';
+						table += '</tr>'
+						table += '</thead>';
+						table += '<tbody>';
+					}
+
+					if (value) {
+						if (response.data.queryType == '0') {
+							table += '<tr>'
+							table += '<td>' + value.nomProducto + '</td>'
+							table += '<td>' + value.totalEmision + '</td>'
+							table += '<td>' + value.totalReposicionTarjeta + '</td>'
+							table += '<td>' + value.totalReposicionClave + '</td>'
+							table += '<td>' + value.totalProducto + '</td>'
+							table += '</tr>'
+						}
+
+						if (response.data.queryType == '1') {
+							table += '<tr>'
+							table += '<td>' + lang.GEN_TABLE_PRINCIPAL + '</td>'
+							table += '<td>' + value.totalEmision + '</td>'
+							table += '<td>' + value.totalReposicionTarjeta + '</td>'
+							table += '<td>' + value.totalReposicionClave + '</td>'
+							table += '<td>' + value.totalProducto + '</td>'
+							table += '</tr>'
+							table += '<tr>'
+							table += '<td>' + lang.GEN_TABLE_SUPLEMENTARIA+ '</td>'
+							table += '<td>' + value.emisionSuplementaria.totalEmision+ '</td>'
+							table += '<td>' + value.emisionSuplementaria.totalReposicionTarjeta+ '</td>'
+							table += '<td>' + value.emisionSuplementaria.totalReposicionClave+ '</td>'
+							table += '<td>' + value.emisionSuplementaria.totalProducto + '</td>'
+							table += '</tr>'
+							table += '<tr>'
+							table += '<td>' + lang.GEN_TABLE_TOTAL + '</td>'
+							table += '<td>' + value.totalEmision + '</td>'
+							table += '<td>' + value.totalReposicionTarjeta + '</td>'
+							table += '<td>' + value.totalReposicionClave + '</td>'
+							table += '<td>' + value.totalProducto + '</td>'
+							table += '</tr>'
+						}
+					}
+
+					if ((index == totalRecords && response.data.queryType == '0') || response.data.queryType == '1') {
+						table += '</tbody>';
+						table += '</table>';
+					}
+				});
+
+				$('#issued-cards-table').append(table);
+				$('.resut-issued-card').DataTable({
+					ordering: false,
+					responsive: true,
+					searching: false,
+					paging: false,
+					pagingType: "full_numbers",
+					language: dataTableLang
+				});
+
+				$('#pre-loader-table').addClass('hide');
+				$('.issued-cards-result').removeClass('hide');
+				insertFormInput(false);
+			});
+		}
+
+	});
+
+	/* issuedCardsBtn.on('click', function (e) {
 		form = $('#issued-cards-form');
 		var radioB = $('input:radio[name=results]:checked').val();
 		form.append('<input type="hidden" id="radioButton" name="radioButton" value="' + radioB + '"></input>');
@@ -212,11 +333,11 @@ $(function () {
 						(!response.data.issuedCardsList[0].lista) ? $('.icon-graph').hide() : $('.icon-graph').show();
 						$.each(response.data.issuedCardsList[0].lista, function (index, value) {
 							table.row.add([
-									value.nomProducto,
-									value.totalEmision,
-									value.totalReposicionTarjeta,
-									value.totalReposicionClave,
-									value.totalProducto
+								value.nomProducto,
+								value.totalEmision,
+								value.totalReposicionTarjeta,
+								value.totalReposicionClave,
+								value.totalProducto
 							]).draw();
 						});
 					}
@@ -235,7 +356,7 @@ $(function () {
         	$('.issuedCards-result').removeClass('hide');
 			});
 		}
-	});
+	}); */
 
 	downLoad.on('click', 'button', function (e) {
 		e.preventDefault();
