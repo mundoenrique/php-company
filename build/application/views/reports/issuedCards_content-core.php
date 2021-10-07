@@ -66,7 +66,7 @@
               </div>
               <?php endif; ?>
               <div class="form-group col-6 col-lg-4 col-xl-4">
-                <label class="block">Resultados</label>
+                <label class="block"><?= lang('GEN_QUERY_TYPE') ?></label>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input type="radio" id="all" name="selection" class="form-control custom-control-input" value="0">
                   <label class="custom-control-label mr-1" for="all"><?= lang('GEN_BTN_ALL') ?></label>
@@ -97,17 +97,17 @@
 
       <div class="w-100 issued-cards-result hide">
         <div class="flex pb-5 flex-column">
-          <span class="line-text mb-2 h4 semibold primary">Resultados</span>
-          <form id="download-issuedcards" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>"></form>
+          <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_TABLE_RESULTS') ?></span>
+          <form id="download-issuedcards"></form>
 
           <div id="downloads" class="center mx-1">
             <div class="flex">
               <div class="flex mr-2 py-3 flex-auto justify-end items-center">
                 <div class="download-icons">
-                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
+                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip" format="excel">
                     <i class="icon icon-file-excel" aria-hidden="true"></i>
                   </button>
-                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip" format="pdf">
                     <i class="icon icon-file-pdf" aria-hidden="true"></i>
                   </button>
                   <?php if (FALSE): ?>
