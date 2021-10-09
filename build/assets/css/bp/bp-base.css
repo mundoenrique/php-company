@@ -446,7 +446,7 @@ label {
 	right:0;
 	top:0;
 	width:100%;
-	z-index:10010;
+	z-index:1010;
 }
 
 .cover-spin::after {
