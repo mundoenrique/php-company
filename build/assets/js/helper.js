@@ -234,6 +234,7 @@ function appMessages(title, message, icon, modalBtn) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
+		focus: false,
 		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
 		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: modalBtn.minHeight || 100,
@@ -271,6 +272,7 @@ function appMessages(title, message, icon, modalBtn) {
 
 	$('.ui-dialog-titlebar-close').on('click', function (e) {
 		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-msg').html('');
 		$('#system-info').dialog('destroy');
 	});
 }
@@ -371,17 +373,19 @@ function getDataForm(form) {
 function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
 	var blob = new Blob([File], { type: "application/" + data.ext });
+
 	if (window.navigator.msSaveOrOpenBlob) {
 		window.navigator.msSaveBlob(blob, data.name)
 	} else {
 		var url = window.URL.createObjectURL(blob);
-		$('#download-file').attr('href', url)
-		$('#download-file').attr('download', data.name)
-		document.getElementById('download-file').click()
+		$('#download-file').attr('href', url);
+		$('#download-file').attr('download', data.name);
+		document.getElementById('download-file').click();
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.CONF_NO_LINK)
-		$('#download-file').attr('download', '')
+		$('#download-file').attr('href', lang.CONF_NO_LINK);
+		$('#download-file').attr('download', '');
 	}
+
 	$('.cover-spin').hide();
 }
 

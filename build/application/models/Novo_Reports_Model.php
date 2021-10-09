@@ -1271,8 +1271,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			$this->dataRequest->opcion = 'CARD_EMI';
 			$this->dataRequest->idExtEmp = $dataRequest->fiscalId;
 			$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
-			$this->dataRequest->tipoDetalle = $dataRequest->detailType ?? '';
 			$this->dataRequest->posicionDetalle = $dataRequest->detailIndex ?? '';
+			$this->dataRequest->tipoDetalle = $dataRequest->detailType ?? '';
 		}
 
 		$response = $this->sendToService('callWs_IssuedCardsReport');
@@ -1290,6 +1290,10 @@ class Novo_Reports_Model extends NOVO_Model {
 					$this->response->data->file = $response->archivo;
 					$this->response->data->name = trim($response->nombre) . '.' . $dataRequest->format;
 					$this->response->data->ext = $dataRequest->format;
+
+					if ($dataRequest->detailType != '') {
+						$this->response->modal = TRUE;
+					}
 				}
       break;
       case -150:
