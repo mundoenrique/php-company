@@ -7,7 +7,6 @@ $(function () {
 			.siblings()
 			.remove()
 
-		verb = 'POST';
 		who = 'Business';
 		where = 'GetProducts';
 		data = {
@@ -17,7 +16,7 @@ $(function () {
 		}
 		insertFormInput(true);
 
-		callNovoCore(verb, who, where, data, function(response) {
+		callNovoCore(who, where, data, function(response) {
 			$.each(response.data, function(index, prod) {
 				$('#productCode').append("<option value=" + prod.id + ">" + prod.desc + "</option>");
 			});

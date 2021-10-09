@@ -99,9 +99,9 @@ function getCardList(request) {
 	$('.hide-table').addClass('hide');
 	$('#tableCardInquiry').dataTable().fnClearTable();
 	$('#tableCardInquiry').dataTable().fnDestroy();
-	verb = 'POST'; who = 'services', where = 'CardsInquiry';
+	who = 'services', where = 'CardsInquiry';
 
-	callNovoCore(verb, who, where, request, function (response) {
+	callNovoCore(who, where, request, function (response) {
 		dataRquest = request;
 		insertFormInput(false);
 
@@ -368,9 +368,10 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			.html(loader)
 			.prop('disabled', true)
 		insertFormInput(true)
-		verb = 'POST'; who = 'Services'; where = 'InquiriesActions'
+		who = 'Services';
+		where = 'InquiriesActions'
 
-		callNovoCore(verb, who, where, data, function(response) {
+		callNovoCore(who, where, data, function(response) {
 			if (response.success) {
 				$('#accept').addClass('reload-req');
 			}
@@ -413,11 +414,13 @@ function InqValidateActions(currentAction, currentForm) {
 }
 
 function fileDownload(currentAction) {
-	verb = 'POST'; who = 'Services'; where = 'CardsInquiry'
+	who = 'Services';
+	where = 'CardsInquiry'
 	data = dataRquest;
 	data.action = currentAction
 	$('.cover-spin').show(0);
-	callNovoCore(verb, who, where, data, function(response) {
+
+	callNovoCore(who, where, data, function(response) {
 		delete (data.action);
 
 		if (response.code == 0) {

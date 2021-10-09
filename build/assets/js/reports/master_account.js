@@ -255,8 +255,11 @@ function exportFile(e){
 };
 
 function exportToExcel(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToExcelMasterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToExcelMasterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
@@ -276,8 +279,11 @@ function exportToExcel(passData) {
 }
 
 function exportToExcelConsolid(passData, textBtn) {
-	verb = "POST"; who = 'Reports'; where = 'exportToExcelMasterAccountConsolid'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToExcelMasterAccountConsolid';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false, form);
 		dataResponse = response.data;
 		code = response.code
@@ -304,8 +310,11 @@ function exportToExcelConsolid(passData, textBtn) {
 }
 
 function exportToPDF(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToPDFMasterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToPDFMasterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
@@ -325,8 +334,11 @@ function exportToPDF(passData) {
 }
 
 function exportToPDFConsolid(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToPDFMasterAccountConsolid'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToPDFMasterAccountConsolid';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false, form);
 	  dataResponse = response.data;
 		code = response.code
@@ -410,8 +422,11 @@ function info(){
 }
 
 function masterAccount(passData) {
-	verb = "POST"; who = 'Reports'; where = 'masterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'masterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);
 		$('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');

@@ -107,8 +107,10 @@ $(function () {
 			}
 
 			insertFormInput(true);
-			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Inquiries';
+			where = 'GetServiceOrders';
+
+			callNovoCore(who, where, data, function (response) {
 				if (response.code == 0) {
 					$(location).attr('href', response.data);
 				} else {
@@ -240,10 +242,10 @@ function deleteBulk(oldID, inputSelected) {
 		if (formDeleteBulk.valid()) {
 			insertFormInput(true);
 			$(this)
-			.off('click')
-			.html(loader)
-			.prop('disabled', true)
-			.attr('id', oldID);
+				.off('click')
+				.html(loader)
+				.prop('disabled', true)
+				.attr('id', oldID);
 
 			data = {
 				OrderNumber: inputSelected
@@ -253,9 +255,10 @@ function deleteBulk(oldID, inputSelected) {
 				data.pass = cryptoPass($('.pwd').val());
 			}
 
-			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Inquiries';
+			where = 'ClearServiceOrders';
 
+			callNovoCore(who, where, data, function (response) {
 				if (response.cod == 0) {
 					resultServiceOrders.row('.select').remove().draw(false);
 				}

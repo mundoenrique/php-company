@@ -54,10 +54,11 @@ $(function () {
 });
 
 function getSwitchTwirls(passData) {
+	who = 'Services';
+	where = 'commercialTwirls';
 	data = getDataForm(form);
-	verb = 'POST'; who = 'Services'; where = 'commercialTwirls';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 
@@ -91,9 +92,10 @@ function updateTwirlsCard() {
 		passData.passwordAuth = cryptoPass(passData.passwordAuth);
 	}
 
-	verb = 'POST'; who = 'Services'; where = 'updateCommercialTwirls';
+	who = 'Services';
+	where = 'updateCommercialTwirls';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code;
 		msg = response.msg;

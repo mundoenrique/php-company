@@ -66,7 +66,6 @@ $(function () {
 			$('#pre-loader-table').removeClass('hide');
 			$('#issued-cards-table').empty();
 			$('#download-issuedcards').empty();
-			verb = "POST";
 			who = 'reports';
 			where = 'issuedCards';
 			data = getDataForm(form);
@@ -76,7 +75,7 @@ $(function () {
 			delete data.products
 			insertFormInput(true);
 
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				issuedData = response.data.issuedCardsList
 				var table = '';
 				var totalRecords = issuedData.length - 1;
@@ -204,12 +203,11 @@ $(function () {
 		$('#download-issuedcards input:hidden[id=detailIndex]').val('');
 		$('#download-issuedcards input:hidden[id=detailType]').val('');
 		form = $('#download-issuedcards');
-		verb = "POST";
 		who = 'reports';
 		where = 'issuedCards';
 		data = getDataForm(form);
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 
 			if (response.code == 0) {
 				downLoadfiles(response.data);
@@ -298,13 +296,12 @@ $(function () {
 		$('.cover-spin').show(0);
 		$('#download-issuedcards input:hidden[id=format]').val($(e.currentTarget).attr('format'));
 		form = $('#download-issuedcards');
-		verb = "POST";
 		who = 'reports';
 		where = 'issuedCards';
 		data = getDataForm(form);
 		insertFormInput(true);
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 
 			if (response.code == 0) {
 				downLoadfiles(response.data);

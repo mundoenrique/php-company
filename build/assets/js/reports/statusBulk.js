@@ -34,17 +34,16 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			verb = "POST";
-			who = 'Reports';
-			where = 'StatusBulk';
-			data = getDataForm(form);
-			insertFormInput(true);
 			$('.statusbulk-result').addClass('hide');
 			$('#pre-loade-result').removeClass('hide')
 			$('#resultStatusBulk').dataTable().fnClearTable();
 			$('#resultStatusBulk').dataTable().fnDestroy();
+			who = 'Reports';
+			where = 'StatusBulk';
+			data = getDataForm(form);
+			insertFormInput(true);
 
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				var table = $('#resultStatusBulk').DataTable({
 					"ordering": false,
 					"responsive": true,

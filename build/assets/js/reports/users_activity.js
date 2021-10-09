@@ -62,10 +62,10 @@ $(function () {
 			$('#blockResultsUser').addClass("hide");
 			usersActivityTable.dataTable().fnClearTable();
 			usersActivityTable.dataTable().fnDestroy();
-			verb = "POST"; who = 'Reports'; where = 'usersActivity'; data;
+			who = 'Reports';
+			where = 'usersActivity';
 
-			callNovoCore(verb, who, where, data, function(response) {
-
+			callNovoCore(who, where, data, function(response) {
 				if (response.code == 0) {
 					$('#spinnerBlock').addClass("hide");
 					$('#titleResults').removeClass("hide");
@@ -157,14 +157,16 @@ $(function () {
 
 		if (form.valid()) {
 			$('.cover-spin').show();
+			who = 'Reports';
+			where = 'exportExcelUsersActivity';
 			data = getDataForm(form);
 			data.userToDownload = userToDownload;
-			verb = "POST"; who = 'Reports'; where = 'exportExcelUsersActivity'; data;
-			callNovoCore(verb, who, where, data, function(response) {
 
+			callNovoCore(who, where, data, function(response) {
 				if (response.code == 0) {
 					downLoadfiles (response.data);
 				}
+
 				$('.cover-spin').hide();
 			});
 		}

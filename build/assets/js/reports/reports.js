@@ -285,9 +285,11 @@ function getReport(data, btn) {
 	var disabledNot = false;
 	btn = btn == undefined ? false : btn
 	insertFormInput(true);
-	verb = 'POST'; who = 'Reports'; where = 'getReport';
+	who = 'Reports';
+	where = 'getReport';
 	var downloadFile = $('#download-file');
-	callNovoCore(verb, who, where, data, function (response) {
+
+	callNovoCore(who, where, data, function (response) {
 		if (response.code == 0) {
 			switch (data.operation) {
 				case 'repMovimientoPorTarjeta':
@@ -303,9 +305,11 @@ function getReport(data, btn) {
 				case 'repCertificadoGmf':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
-					who = 'DownloadFiles'; where = 'DeleteFile';
+					who = 'DownloadFiles';
+					where = 'DeleteFile';
 					data.fileName = response.data.name
-					callNovoCore(verb, who, where, data, function (response) { })
+
+					callNovoCore(who, where, data, function (response) { })
 					break;
 				case 'repTarjetasPorPersona':
 					var option;

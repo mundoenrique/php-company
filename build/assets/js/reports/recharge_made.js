@@ -48,8 +48,10 @@ $(function () {
 			$('#pre-loade-result').removeClass('hide');
 			resultsRecharge.dataTable().fnClearTable();
 			resultsRecharge.dataTable().fnDestroy();
-			verb = "POST"; who = 'Reports'; where = 'RechargeMade';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Reports';
+			where = 'RechargeMade';
+
+			callNovoCore(who, where, data, function (response) {
 				var table = resultsRecharge.DataTable({
 					"ordering": false,
 					"responsive": true,

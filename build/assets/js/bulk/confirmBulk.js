@@ -21,8 +21,10 @@ $(function () {
 				data.pass = cryptoPass(inputPass.val());
 			}
 
-			verb = 'POST'; who = 'Bulk'; where = 'ConfirmBulk';
-			callNovoCore(verb, who, where, data, function(response) {
+			who = 'Bulk';
+			where = 'ConfirmBulk';
+
+			callNovoCore(who, where, data, function(response) {
 				$('#confirm-bulk').html(btnText);
 				insertFormInput(false);
 				inputPass.val('');

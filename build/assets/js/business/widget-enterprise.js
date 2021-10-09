@@ -40,8 +40,8 @@ $(function() {
 			enterpriseWidgetBtn
 			.prop('disabled', true);
 			enterpriseWidgetBtn.attr('title', lang.GEN_SELECT_PRODUCT);
-
-			verb = 'POST'; who = 'Business'; where = 'getProducts';
+			who = 'Business';
+			where = 'getProducts';
 			data = {
 				enterpriseCode: enterpriseCode,
 				enterpriseGroup: enterpriseGroup,
@@ -51,9 +51,10 @@ $(function() {
 				thirdApp: thirdApp,
 				select: true
 			}
-			callNovoCore(verb, who, where, data, function(response) {
+
+			callNovoCore(who, where, data, function(response) {
 				respProctList[response.code](response);
-			})
+			});
 		}
 	});
 

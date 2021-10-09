@@ -468,9 +468,10 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 			data.pass = cardHolderInf.password ? cryptoPass(cardHolderInf.password) : cryptoPass(cardHolderInf.passAction);
 		}
 
-		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
+		who = 'Services';
+		where = 'ActionMasterAccount';
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 			$('#tableServicesMaster').find('thead > tr').removeClass("selected");
 			table.rows().deselect();
 

@@ -246,9 +246,9 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 				break;
 		}
 
-		verb = 'POST'; who = 'Bulk';
-		callNovoCore(verb, who, where, data, function(response) {
+		who = 'Bulk';
 
+		callNovoCore(who, where, data, function(response) {
 			if(response.code == 0 && where == 'AuthorizeBulk') {
 				$(location).attr('href', response.data);
 			} else {

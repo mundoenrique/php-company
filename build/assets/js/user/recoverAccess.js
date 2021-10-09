@@ -47,9 +47,10 @@ $(function() {
 	});
 
 	function getRecoverAccess(){
-		verb = 'POST'; who = 'User'; where = 'RecoverAccess';
-		callNovoCore(verb, who, where, data, function(response) {
+		who = 'User';
+		where = 'RecoverAccess';
 
+		callNovoCore(who, where, data, function(response) {
 			if (response.code == 0) {
 				$('#accept').addClass('send-otp');
 				inputModal = response.msg;
@@ -71,8 +72,10 @@ $(function() {
 	}
 
 	function getSendOTP(){
-		verb = 'POST'; who = 'User'; where = 'ValidateOtp';
-		callNovoCore(verb, who, where, data, function(response) {
+		who = 'User';
+		where = 'ValidateOtp';
+
+		callNovoCore(who, where, data, function(response) {
 			response.code == 0 ? $('form')[0].reset() : '';
 			insertFormInput(false)
 		})

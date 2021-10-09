@@ -2,7 +2,14 @@
 var currenTime;
 var screenSize;
 var inputModal;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass, data;
+var who;
+var where;
+var dataResponse;
+var ceo_cook;
+var btnText;
+var form;
+var cypherPass;
+var data;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
@@ -32,12 +39,13 @@ $(function () {
 	});
 
 	$('#change-lang').on('click', function () {
-		verb = 'POST'; who = 'User'; where = 'changeLanguage';
+		who = 'User';
+		where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
 				var currentCodLan = url[url.length - 1];
@@ -127,7 +135,7 @@ $(function () {
 	});
 });
 
-function callNovoCore(verb, who, where, request, _response_) {
+function callNovoCore(who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -159,7 +167,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var uri = data.route || 'async-call'
 
 	$.ajax({
-		method: verb,
+		method: 'POST',
 		url: baseURL + uri,
 		data: formData,
 		context: document.body,
@@ -408,9 +416,10 @@ function getauhtKey() {
 		.html(loader)
 		.prop('disabled', true);
 	insertFormInput(true);
-	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+	who = 'Services';
+	where = 'AuthorizationKey';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
 			data = {

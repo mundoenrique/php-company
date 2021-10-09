@@ -64,9 +64,10 @@ $(function () {
 });
 
 function getTokenRecharge() {
-	verb = 'POST'; who = 'Services'; where = 'RechargeAuthorization';
+	who = 'Services';
+	where = 'RechargeAuthorization';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		$('#masterAccountRechargeBtn').html(btnText);
 		response.modalBtn.posAt = 'center top';
 		response.modalBtn.posMy = 'center top+260';
@@ -92,15 +93,16 @@ function getTokenRecharge() {
 }
 
 function rechargeAccount() {
+	who = 'Services';
+	where = 'masterAccountTransfer';
+
 	if (lang.CONF_INPUT_PASS == 'OFF') {
 		data.passwordTranfer = $('#otpCode').val();
 	} else {
 		data.passwordTranfer = cryptoPass(data.passwordTranfer);
 	}
 
-	verb = 'POST'; who = 'Services'; where = 'masterAccountTransfer';
-
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		$('#masterAccountRechargeBtn').html(btnText);
 		insertFormInput(false);
 	});
