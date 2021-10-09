@@ -1249,10 +1249,17 @@ class Novo_Reports_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
-		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
+		$this->dataAccessLog->function = 'Buscar tarjetas emitidas';
+		$this->dataAccessLog->operation = $dataRequest->type === 'info' ? 'Información de tarjetas' : 'Descarga de archivo';
 
-		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$operationId = $dataRequest->format ?? $dataRequest->type;
+		$operationIdTem = [
+			'info' => '',
+			'xls' => 'Excel',
+			'pdf' => 'PDF',
+		];
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas' . $operationIdTem[$operationId];
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmisionesMO';
 		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
 		$this->dataRequest->fechaMes = $dataRequest->monthYear ?? '';
@@ -1260,19 +1267,36 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin = $dataRequest->finalDate ?? '';
 		$this->dataRequest->tipoConsulta = $dataRequest->queryType;
 
+		if ($dataRequest->type === 'download') {
+			$this->dataRequest->opcion = 'CARD_EMI';
+			$this->dataRequest->idExtEmp = $dataRequest->fiscalId;
+			$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+			$this->dataRequest->tipoDetalle = $dataRequest->detailType ?? '';
+			$this->dataRequest->posicionDetalle = $dataRequest->detailIndex ?? '';
+		}
+
 		$response = $this->sendToService('callWs_IssuedCardsReport');
 		$record = [''];
 
     switch($this->isResponseRc) {
       case 0:
-        $this->response->code = 0;
-				$record = $response->lista ?? $record;
+				$this->response->code = 0;
 
+				if ($dataRequest->type === 'info') {
+					$record = $response->lista ?? $record;
+				}
+
+				if ($dataRequest->type === 'download') {
+					$this->response->data->file = $response->archivo;
+					$this->response->data->name = trim($response->nombre) . '.' . $dataRequest->format;
+					$this->response->data->ext = $dataRequest->format;
+				}
       break;
       case -150:
         $this->response->code = 0;
       break;
     }
+
 		$this->response->data->issuedCardsList = $record;
 		$this->response->data->queryType = $dataRequest->queryType;
 

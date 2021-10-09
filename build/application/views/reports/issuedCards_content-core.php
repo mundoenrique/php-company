@@ -104,7 +104,7 @@
             <div class="flex">
               <div class="flex mr-2 py-3 flex-auto justify-end items-center">
                 <div class="download-icons">
-                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip" format="excel">
+                  <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip" format="xls">
                     <i class="icon icon-file-excel" aria-hidden="true"></i>
                   </button>
                   <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip" format="pdf">
@@ -120,8 +120,6 @@
             </div>
           </div>
           <div id="issued-cards-table"></div>
-
-          <div id="div_tablaDetalle" class="download "></div>
           <div class="line my-2"></div>
         </div>
       </div>

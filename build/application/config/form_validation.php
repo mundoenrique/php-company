@@ -1130,10 +1130,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		],
 		[
-			'field' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
-		],
-		[
 			'field' => 'monthYear',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		],
@@ -1148,6 +1144,22 @@ $config = [
 		[
 			'field' => 'queryType',
 			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'type',
+			'rules' => 'trim|regex_match[/^(info|download)/]|required'
+		],
+		[
+			'field' => 'fiscalId',
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'format',
+			'rules' => 'trim|regex_match[/^(xls|pdf)/]'
 		]
 	],
 	'userActivity' => [
