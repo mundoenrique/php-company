@@ -216,7 +216,7 @@ $lang['GEN_TABLE_LOCATION'] = 'Location';
 $lang['GEN_TABLE_ID_PERSON'] = "ID no.";
 $lang['GEN_TABLE_BALANCE'] = 'Balance';
 $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Document number';
-$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Bulk number';
+$lang['GEN_BULK_NUMBER'] = 'Bulk number';
 $lang['GEN_QUERY_TYPE'] = 'Query type';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Show _MENU_ records';
@@ -339,6 +339,7 @@ $lang['GEN_ACCEPT_TERMS'] = 'By pressing "Accept" you declare that you have read
 $lang['GEN_OTP_NO_SENT'] = 'It was not possible to send the email with the verification code, please try again later.';
 $lang['GEN_BONUS_CARD'] = 'Tebca Food Bonus';
 $lang['GEN_SILVER_CARD'] = 'Servitebca payment';
+$lang['GEN_BULK_TYPE'] = 'Bulk type';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Select',

@@ -217,7 +217,7 @@ $lang['GEN_TABLE_LOCATION'] = 'Ubicación';
 $lang['GEN_TABLE_ID_PERSON'] = "Cédula nro.";
 $lang['GEN_TABLE_BALANCE'] = 'Saldo';
 $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Nro. documento';
-$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Nro. de lote';
+$lang['GEN_BULK_NUMBER'] = 'Nro. de lote';
 $lang['GEN_QUERY_TYPE'] = 'Tipo de consulta';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
@@ -346,6 +346,7 @@ $lang['POSTMY_OTP'] = 'center top+160';
 $lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
 $lang['GEN_BONUS_CARD'] = 'Bonus Alimentación Tebca';
 $lang['GEN_SILVER_CARD'] = 'Plata Servitebca';
+$lang['GEN_BULK_TYPE'] = 'Tipo de lote';
 $lang['GEN_TIMEOUT_HTTP'] = 'Tu solicitud continua procesandose, por favor espera.';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [

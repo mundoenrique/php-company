@@ -38,7 +38,7 @@
 					</div>
 
 					<div class="form-group mb-3 col-4">
-						<label for="lot" id="lot"><?= lang('BULK_NUMBER') ?></label>
+						<label for="lot" id="lot"><?= lang('GEN_BULK_NUMBER') ?></label>
 						<span id="numLot" class="form-control px-1" readonly="readonly"><?= $bulkNumber; ?></span>
 					</div>
 
