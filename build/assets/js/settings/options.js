@@ -160,6 +160,7 @@ $(function () {
 							if (response.code == 0) {
 								downLoadfiles(response.data);
 							}
+
 							$('.cover-spin').hide();
 						})
 					}

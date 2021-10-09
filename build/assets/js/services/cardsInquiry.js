@@ -419,11 +419,14 @@ function fileDownload(currentAction) {
 	$('.cover-spin').show(0);
 	callNovoCore(verb, who, where, data, function(response) {
 		delete (data.action);
+
 		if (response.code == 0) {
-			delete (response.data.btn1)
-			downLoadfiles(response.data)
+			delete (response.data.btn1);
+			downLoadfiles(response.data);
 		}
-	})
+
+		$('.cover-spin').hide();
+	});
 }
 
 function evalResult(response, currentAction) {
@@ -439,8 +442,8 @@ function evalResult(response, currentAction) {
 						$(element).find('td.balance').addClass('text-right')
 					}
 				}
-			})
-		})
+			});
+		});
 	}
 
 	if (response.data.failList.length > 0) {

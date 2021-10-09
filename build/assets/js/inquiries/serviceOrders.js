@@ -51,13 +51,12 @@ $(function () {
 				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
 			var inputDate = $(this).attr('id');
-			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'datepicker_start') {
-				$('#datepicker_end').datepicker('option', 'minDate', selectedDate);
-				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + 3);
+				$('#datepicker_end').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);

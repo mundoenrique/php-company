@@ -11,14 +11,13 @@ $(function () {
 				.focus()
 				.blur();
 			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
 			var inputDate = $(this).attr('id');
-			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'initialDate') {
-				var maxMonth = lang.CONF_MAX_CONSULT_MONTH;
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				maxTime.setMonth(maxTime.getMonth() + maxMonth);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
