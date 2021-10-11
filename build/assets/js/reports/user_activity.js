@@ -29,14 +29,13 @@ $(function () {
 				.focus()
 				.blur();
 			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
 			var inputDate = $(this).attr('id');
-			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'initialDate') {
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + 3);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
@@ -54,16 +53,17 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			data = getDataForm(form);
-			insertFormInput(true);
 			$('#spinnerBlock').removeClass("hide");
 			$('#titleResults').addClass("hide");
 			$('#blockResultsUser').addClass("hide");
 			usersActivityTable.dataTable().fnClearTable();
 			usersActivityTable.dataTable().fnDestroy();
-			verb = "POST"; who = 'Reports'; where = 'userActivity'; data;
+			who = 'Reports';
+			where = 'userActivity';
+			data = getDataForm(form);
+			insertFormInput(true);
 
-			callNovoCore(verb, who, where, data, function(response) {
+			callNovoCore(who, where, data, function(response) {
 
 				if (response.code == 0) {
 					$('#spinnerBlock').addClass("hide");
@@ -156,12 +156,13 @@ $(function () {
 
 		if (form.valid()) {
 			$('.cover-spin').show();
+			who = 'Reports';
+			where = 'exportReportUserActivity';
 			data = getDataForm(form);
 			data.rifEnterprise = $('#enterpriseCode').find('option:selected').attr('acrif');
 			data.downloadFormat = $(this).attr('format');
-			verb = "POST"; who = 'Reports'; where = 'exportReportUserActivity'; data;
 
-			callNovoCore(verb, who, where, data, function(response) {
+			callNovoCore(who, where, data, function(response) {
 
 				if (response.code == 0) {
 					downLoadfiles (response.data);

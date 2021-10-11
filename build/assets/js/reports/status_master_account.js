@@ -2,6 +2,7 @@
 var reportsResults;
 $(function () {
 	var datePicker = $('.date-picker');
+	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
 	datePicker.datepicker({
@@ -47,17 +48,22 @@ $(function () {
 
 	function getReport(data) {
 		insertFormInput(true);
-		verb = 'POST'; who = 'Reports'; where = 'statusMasterAccount';
+		who = 'Reports';
+		where = 'statusMasterAccount';
 		var downloadFile = $('#download-file');
-		callNovoCore(verb, who, where, data, function (response) {
+
+		callNovoCore(who, where, data, function (response) {
 			$('#spinnerBlock').addClass('hide');
+
 			if (response.code == 0) {
 				downloadFile.attr('href', response.data.file)
 				document.getElementById('download-file').click()
 				who = 'DownloadFiles'; where = 'DeleteFile';
 				data.fileName = response.data.name
-				callNovoCore(verb, who, where, data, function (response) { })
+
+				callNovoCore(who, where, data, function (response) { })
 			}
+
 			insertFormInput(false);
 			$('#statusAccountForm').validate().resetForm();
 		})

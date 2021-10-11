@@ -96,16 +96,18 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 $uriSegments  =  explode( "/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $proxyIps = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
 $timeZone = [
-	'bdb' => 	'America/Bogota',
-	'bg' => 	'America/Guayaquil',
-	'bnt' => 	'America/Mexico_City',
-	'bp' => 	'America/Guayaquil',
-	'co' => 	'America/Bogota',
-	'pb' => 	'America/Guayaquil',
-	'pe' => 	'America/Lima',
-	'us' => 	'America/Lima',
-	've' => 	'America/Caracas',
+	'bdb'	=>	'America/Bogota',
+	'bg' 	=>	'America/Guayaquil',
+	'bnt'	=>	'America/Mexico_City',
+	'bp'	=>	'America/Guayaquil',
+	'col'	=>	'America/Bogota',
+	'pb'	=>	'America/Guayaquil',
+	'per'	=>	'America/Lima',
+	'usd'	=>	'America/Lima',
+	'ven'	=>	'America/Caracas',
+	'vg'	=>	'America/Lima',
 ];
+$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_erros/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';
@@ -164,6 +166,7 @@ defined('UPLOAD_PATH')			OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 | SERVICE ENVIROMENT VARIABLES
 |--------------------------------------------------------------------------
 */
+defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('WS_KEY')			 						OR define('WS_KEY', $_SERVER['WS_KEY']);
 defined('DOWNLOAD_ROUTE')					OR define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
 defined('BULK_FTP_USERNAME')			OR define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
@@ -174,4 +177,4 @@ defined('SERVICE_URL')						OR define('SERVICE_URL', $_SERVER['SERVICE_URL']);
 defined('SERVICE_CLIENT_ID')			OR define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')	OR define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($uriSegments, $proxyIps, $timeZone);
+unset($uriSegments, $proxyIps, $timeZone, $baseLanguage, $errorController);

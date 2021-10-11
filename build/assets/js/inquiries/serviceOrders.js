@@ -51,13 +51,12 @@ $(function () {
 				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
 			var inputDate = $(this).attr('id');
-			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'datepicker_start') {
-				$('#datepicker_end').datepicker('option', 'minDate', selectedDate);
-				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + 3);
+				$('#datepicker_end').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);
@@ -108,8 +107,10 @@ $(function () {
 			}
 
 			insertFormInput(true);
-			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Inquiries';
+			where = 'GetServiceOrders';
+
+			callNovoCore(who, where, data, function (response) {
 				if (response.code == 0) {
 					$(location).attr('href', response.data);
 				} else {
@@ -241,10 +242,10 @@ function deleteBulk(oldID, inputSelected) {
 		if (formDeleteBulk.valid()) {
 			insertFormInput(true);
 			$(this)
-			.off('click')
-			.html(loader)
-			.prop('disabled', true)
-			.attr('id', oldID);
+				.off('click')
+				.html(loader)
+				.prop('disabled', true)
+				.attr('id', oldID);
 
 			data = {
 				OrderNumber: inputSelected
@@ -254,9 +255,10 @@ function deleteBulk(oldID, inputSelected) {
 				data.pass = cryptoPass($('.pwd').val());
 			}
 
-			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Inquiries';
+			where = 'ClearServiceOrders';
 
+			callNovoCore(who, where, data, function (response) {
 				if (response.cod == 0) {
 					resultServiceOrders.row('.select').remove().draw(false);
 				}

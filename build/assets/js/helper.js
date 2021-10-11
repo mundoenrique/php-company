@@ -2,7 +2,14 @@
 var currenTime;
 var screenSize;
 var inputModal;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass, data;
+var who;
+var where;
+var dataResponse;
+var ceo_cook;
+var btnText;
+var form;
+var cypherPass;
+var data;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
@@ -32,12 +39,13 @@ $(function () {
 	});
 
 	$('#change-lang').on('click', function () {
-		verb = 'POST'; who = 'User'; where = 'changeLanguage';
+		who = 'User';
+		where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
 				var currentCodLan = url[url.length - 1];
@@ -111,6 +119,7 @@ $(function () {
 		isRTL: lang.CONF_PICKER_ISRLT,
 		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
 		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_PICKER_MINDATE,
 		maxDate: currentDate,
 		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
 		changeYear: lang.CONF_PICKER_CHANGEYEAR,
@@ -126,7 +135,7 @@ $(function () {
 	});
 });
 
-function callNovoCore(verb, who, where, request, _response_) {
+function callNovoCore(who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -158,7 +167,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var uri = data.route || 'async-call'
 
 	$.ajax({
-		method: verb,
+		method: 'POST',
 		url: baseURL + uri,
 		data: formData,
 		context: document.body,
@@ -233,6 +242,7 @@ function appMessages(title, message, icon, modalBtn) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
+		focus: false,
 		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
 		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: modalBtn.minHeight || 100,
@@ -270,6 +280,7 @@ function appMessages(title, message, icon, modalBtn) {
 
 	$('.ui-dialog-titlebar-close').on('click', function (e) {
 		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-msg').html('');
 		$('#system-info').dialog('destroy');
 	});
 }
@@ -370,17 +381,19 @@ function getDataForm(form) {
 function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
 	var blob = new Blob([File], { type: "application/" + data.ext });
+
 	if (window.navigator.msSaveOrOpenBlob) {
 		window.navigator.msSaveBlob(blob, data.name)
 	} else {
 		var url = window.URL.createObjectURL(blob);
-		$('#download-file').attr('href', url)
-		$('#download-file').attr('download', data.name)
-		document.getElementById('download-file').click()
+		$('#download-file').attr('href', url);
+		$('#download-file').attr('download', data.name);
+		document.getElementById('download-file').click();
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.CONF_NO_LINK)
-		$('#download-file').attr('download', '')
+		$('#download-file').attr('href', lang.CONF_NO_LINK);
+		$('#download-file').attr('download', '');
 	}
+
 	$('.cover-spin').hide();
 }
 
@@ -403,9 +416,10 @@ function getauhtKey() {
 		.html(loader)
 		.prop('disabled', true);
 	insertFormInput(true);
-	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+	who = 'Services';
+	where = 'AuthorizationKey';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
 			data = {

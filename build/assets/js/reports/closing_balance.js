@@ -62,9 +62,12 @@ $(function () {
 });
 
 function selectionBussine(passData) {
-	verb = "POST"; who = 'Business'; where = 'getProducts'; data = passData;
+	who = 'Business';
+	where = 'getProducts';
+	data = passData;
 	$("#productCode").html("");
-	callNovoCore(verb, who, where, data, function(response) {
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data
 		code = response.code
 		var info = dataResponse;
@@ -82,8 +85,11 @@ function selectionBussine(passData) {
 };
 
 function exportToExcel(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToExcel'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToExcel';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;

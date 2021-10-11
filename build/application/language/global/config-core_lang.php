@@ -63,7 +63,6 @@ $lang['CONF_BENEFITS'] = 'ON';
 $lang['CONF_BULK_LOAD'] = 'ON';
 $lang['CONF_BULK_BRANCHOFFICE'] = 'OFF';
 $lang['CONF_BULK_AUTH'] = 'ON';
-//LOAD BULK
 $lang['CONF_BULK_REPROCESS'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_STARTING_LINE1'] = 'ON';
@@ -78,6 +77,8 @@ $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'ON';
 //CALCULATE SERVICE ORDER
 $lang['CONF_SERVICE_ORDER_CANCEL'] = 'ON';
 $lang['CONF_SERVICE_ORDER_OTP'] = 'OFF';
+//REPORT iSSUED CARDS
+$lang['CONF_ISSUED_MONTHLY'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_SUPERINTENDENCY_LOGO'] = 'OFF';
@@ -162,6 +163,7 @@ $lang['CONF_PICKER_FIRSTDATE'] = 1;
 $lang['CONF_PICKER_ISRLT'] = FALSE;
 $lang['CONF_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
 $lang['CONF_PICKER_YEARRANGE'] = '-20:';
+$lang['CONF_PICKER_MINDATE'] = '-4Y';
 $lang['CONF_PICKER_CHANGEMONTH'] = TRUE;
 $lang['CONF_PICKER_CHANGEYEAR'] = TRUE;
 $lang['CONF_PICKER_SHOWANIM'] = 'slideDown';
@@ -238,7 +240,6 @@ $lang['CONF_LINK_TRANSF_MASTER_ACCOUNT'] = 'transf-master-account';//permiso aso
 $lang['CONF_LINK_CARDS_INQUIRY'] = 'cards-inquiry';//permiso asociado COPELO
 $lang['CONF_LINK_TRANSACTIONAL_LIMITS'] = 'transactional-limits';//permiso asociado LIMTRX
 $lang['CONF_LINK_COMMERCIAL_TWIRLS'] = 'commercial-twirls';//permiso asociado GIRCOM
-$lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';//permiso asociado TEBORS
 $lang['CONF_LINK_ACCOUNT_STATUS'] = 'account-status';//permiso asociado REPEDO
 $lang['CONF_LINK_REPLACEMENT'] = 'replacement';//permiso asociado REPREP
 $lang['CONF_LINK_CLOSING_BALANCE'] = 'closing-balance';//permiso asociado REPSAL
@@ -250,6 +251,7 @@ $lang['CONF_LINK_CARD_HOLDERS'] = 'card-holders';//permiso asociado TEBTHA
 $lang['CONF_LINK_REPORTS'] = 'reports';//permiso asociado REPALL
 $lang['CONF_LINK_MASTER_ACCOUNT'] = 'master-account';//permiso asociado REPCON
 $lang['CONF_LINK_USER_ACTIVITY'] = 'user-activity';//permiso asociado REPUSU
+$lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';
 $lang['CONF_LINK_SETTING'] = 'setting';
 $lang['CONF_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account';//permiso asociado REPECT
 //INTERNAL LINKS

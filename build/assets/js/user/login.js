@@ -85,8 +85,10 @@ $(function () {
 });
 
 function getSignIn(forWhere) {
-	verb = 'POST'; who = 'User'; where = forWhere;
-	callNovoCore(verb, who, where, data, function (response) {
+	who = 'User';
+	where = forWhere;
+
+	callNovoCore(who, where, data, function (response) {
 		console.log(response)
 		switch (response.code) {
 			case 0:

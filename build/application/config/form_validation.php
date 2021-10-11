@@ -1127,18 +1127,39 @@ $config = [
 	'issuedCards' => [
 		[
 			'field' => 'enterpriseCode',
-			'label' => 'enterpriseCode',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'acrif',
-			'label' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		],
 		[
 			'field' => 'monthYear',
-			'label' => 'monthYear',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'queryType',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'type',
+			'rules' => 'trim|regex_match[/^(info|download)/]|required'
+		],
+		[
+			'field' => 'fiscalId',
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'format',
+			'rules' => 'trim|regex_match[/^(xls|pdf)/]'
 		]
 	],
 	'userActivity' => [

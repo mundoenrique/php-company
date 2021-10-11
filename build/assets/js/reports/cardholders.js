@@ -17,8 +17,10 @@ $(function () {
 			$('#pre-loade-result').removeClass('hide');
 			resultscardHolders.dataTable().fnClearTable();
 			resultscardHolders.dataTable().fnDestroy();
-			verb = "POST"; who = 'Reports'; where = 'CardHolders';
-			callNovoCore(verb, who, where, data, function (response) {
+			who = 'Reports';
+			where = 'CardHolders';
+
+			callNovoCore(who, where, data, function (response) {
 				var cardHolders = response.data.cardHoldersList;
 				createTable(cardHolders);
 				if (cardHolders.length == 0) {
@@ -64,14 +66,14 @@ $(function () {
 
 		if (form.valid()) {
 			$('.cover-spin').show();
+			who = 'Reports';
+			where = 'exportReportCardHolders';
 			data = getDataForm(form);
 			data.enterpriseName = $('option:selected', "#enterpriseCode").text().trim();
 			data.productName = $('option:selected', "#productCode").text().trim();
 			data.downloadFormat = $(this).attr('format');
 
-			verb = "POST"; who = 'Reports'; where = 'exportReportCardHolders'; data;
-
-			callNovoCore(verb, who, where, data, function(response) {
+			callNovoCore(who, where, data, function(response) {
 
 				if (response.code == 0) {
 					downLoadfiles (response.data);

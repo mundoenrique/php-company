@@ -4,7 +4,6 @@
 	<h3 class="mt-2">Ingresando ...
 	</h3>
 </div>
-<?php print_r($form); ?>
 <form id="single-signin-form" action="<?= base_url('ingresar') ?>" method="POST" send="<?= $send; ?>">
 	<?php foreach ($form AS $key => $value): ?>
 		<input type="hidden" id="<?= $key; ?>" name="<?= $key; ?>" value="<?= $value ?>">

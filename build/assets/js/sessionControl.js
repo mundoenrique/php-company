@@ -43,9 +43,11 @@ function finishSession() {
 
 	$('#system-info').on('click', '.keep-session', function() {
 		$(this).off('click');
-		verb = 'POST'; who= 'User'; where = 'KeepSession';
+		who = 'User';
+		where = 'KeepSession';
 		data = {}
-		callNovoCore(verb, who, where, data, function(response) {
+
+		callNovoCore(who, where, data, function(response) {
 			$('#accept')
 				.text(lang.GEN_BTN_ACCEPT)
 				.removeClass('keep-session')

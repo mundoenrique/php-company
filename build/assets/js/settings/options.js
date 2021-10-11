@@ -101,13 +101,14 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			insertFormInput(true);
+			who = 'Settings';
+			where = 'changeEmail';
 			data = getDataForm(form);
 			data.email = $('#currentEmail').val().toLowerCase();
 			$(this).html(loader);
+			insertFormInput(true);
 
-			verb = "POST"; who = 'Settings'; where = 'changeEmail';
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				dataResponse = response.data
 				insertFormInput(false);
 				$('#userDataBtn').html(btnText)
@@ -137,14 +138,16 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			insertFormInput(true);
+			who = 'Settings';
+			where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
 			data = getDataForm(form);
 			$(this).html(loader);
-			verb = "POST"; who = 'Settings'; where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
-			callNovoCore(verb, who, where, data, function (response) {
-				dataResponse = response.data
+			insertFormInput(true);
+
+			callNovoCore(who, where, data, function (response) {
+				dataResponse = response.data;
 				insertFormInput(false);
-				$('#updateEnterpriceBtn').html(btnText)
+				$('#updateEnterpriceBtn').html(btnText);
 			})
 		}
 	})
@@ -154,12 +157,14 @@ $(function () {
 			if (detail[3] == 'request') {
 				$('a.' + detail[0]).on('click', function () {
 					if ($(this).attr('title') == '') {
-						verb = 'POST'; who = 'Settings'; where = 'GetFileIni';
+						who = 'Settings';
+						where = 'GetFileIni';
 						data = {};
-						callNovoCore(verb, who, where, data, function (response) {
+						callNovoCore(who, where, data, function (response) {
 							if (response.code == 0) {
 								downLoadfiles(response.data);
 							}
+
 							$('.cover-spin').hide();
 						})
 					}
@@ -223,13 +228,14 @@ $(function () {
 		if (form.valid()) {
 			$(this).html(loader);
 
+			who = 'Settings';
+			where = 'uploadFileBranches';
 			data = {
 			file:	$('#file-branch')[0].files[0],
 			typeBulkText: $('#file-branch')[0].files[0].type
 			}
-			verb = 'POST'; who = 'Settings'; where = 'uploadFileBranches';
 
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				insertFormInput(false);
 				$('#file-branch').val('');
 				$('#file-branch').next('.js-label-file').html(inputFile);
@@ -288,9 +294,10 @@ function enablePhone(){
 }
 
 function getContacts (data) {
-	verb = 'POST'; who = 'Settings'; where = 'getContacts';
+	who = 'Settings';
+	where = 'getContacts';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);
 
 		if ( response.code == 0 ) {
@@ -407,9 +414,10 @@ function getContacts (data) {
 
 function getBranches (value) {
 	data = value;
-	verb = 'POST'; who = 'Settings'; where = 'getBranches';
+	who = 'Settings';
+	where = 'getBranches';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;
 		insertFormInput(false);
 
@@ -474,16 +482,17 @@ function validInputFile() {
 };
 
 function deleteContactM(data) {
-	verb = 'POST'; who = 'Settings'; where = 'deleteContact';
+	who = 'Settings';
+	where = 'deleteContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
-	});
+	callNovoCore(who, where, data, function (response) { });
 };
 
 function updateBranch(data) {
-	verb = 'POST'; who = 'Settings'; where = 'updateBranch';
+	who = 'Settings';
+	where = 'updateBranch';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		dataResponse = response;
 
 		if ( dataResponse.code ==  5) {
@@ -493,9 +502,10 @@ function updateBranch(data) {
 };
 
 function addContact(data) {
-	verb = 'POST'; who = 'Settings'; where = 'addContact';
+	who = 'Settings';
+	where = 'addContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		insertFormInput(false);
 
 		if ( response.code ==  0) {
@@ -505,9 +515,10 @@ function addContact(data) {
 };
 
 function updateContact(data) {
-	verb = 'POST'; who = 'Settings'; where = 'updateContact';
+	who = 'Settings';
+	where = 'updateContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		dataResponse = response;
 		insertFormInput(false);
 

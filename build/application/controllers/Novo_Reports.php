@@ -275,7 +275,6 @@ class Novo_Reports extends NOVO_Controller {
 			"reports/issued_cards"
 		);
 
-		$this->request->select = TRUE;
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
 		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 

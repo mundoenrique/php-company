@@ -62,9 +62,9 @@ $(function() {
 function getServiceREsponse(btn) {
 	data = getDataForm(form);
 	insertFormInput(true);
-	verb = 'POST'; who = 'Bulk';
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Bulk';
 
+	callNovoCore(who, where, data, function(response) {
 		if(response.code == 0) {
 			$(location).attr('href', response.data);
 		} else {

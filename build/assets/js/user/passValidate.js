@@ -54,11 +54,13 @@ function passStrength(pswd) {
 }
 
 function changePassword() {
-	verb = "POST"; who = 'User'; where = 'ChangePassword';
-	callNovoCore(verb, who, where, data, function (response) {
+	who = 'User';
+	where = 'ChangePassword';
+
+	callNovoCore(who, where, data, function (response) {
 
 		form[0].reset();
 		insertFormInput(false);
 		$('#passwordChangeBtn').html(btnText)
-	})
+	});
 }

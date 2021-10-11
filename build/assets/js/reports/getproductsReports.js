@@ -1,29 +1,27 @@
 'use strict'
 $(function () {
-	var enterpriseGetprod = $('.enterprise-getprod');
-	var productSelectCode = $('#productCode');
+	$('.enterprise-getprod').on('change', function() {
+		$('#productCode')
+			.find(':first')
+			.prop('selected', true)
+			.siblings()
+			.remove()
 
-	enterpriseGetprod.on('change', function() {
-		productSelectCode
-		.find(':first')
-		.prop('selected', true)
-		.siblings()
-		.remove()
+		who = 'Business';
+		where = 'GetProducts';
 		data = {
 			idFiscal: $('#enterpriseCode').find('option:selected').attr('id-fiscal'),
 			enterpriseCode: $('#enterpriseCode').val(),
 			select: true
 		}
 		insertFormInput(true);
-		verb = 'POST'; who = 'Business'; where = 'GetProducts';
 
-		callNovoCore(verb, who, where, data, function(response) {
-
+		callNovoCore(who, where, data, function(response) {
 			$.each(response.data, function(index, prod) {
-				productSelectCode.append("<option value=" + prod.id + ">" + prod.desc + "</option>");
+				$('#productCode').append("<option value=" + prod.id + ">" + prod.desc + "</option>");
 			});
-			insertFormInput(false);
-		})
 
-	})
+			insertFormInput(false);
+		});
+	});
 });

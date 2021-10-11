@@ -47,14 +47,13 @@ $(function () {
 				.focus()
 				.blur();
 			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
 			var inputDate = $(this).attr('id');
-			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'initialDate') {
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + 3);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
@@ -256,8 +255,11 @@ function exportFile(e){
 };
 
 function exportToExcel(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToExcelMasterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToExcelMasterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
@@ -277,8 +279,11 @@ function exportToExcel(passData) {
 }
 
 function exportToExcelConsolid(passData, textBtn) {
-	verb = "POST"; who = 'Reports'; where = 'exportToExcelMasterAccountConsolid'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToExcelMasterAccountConsolid';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false, form);
 		dataResponse = response.data;
 		code = response.code
@@ -305,8 +310,11 @@ function exportToExcelConsolid(passData, textBtn) {
 }
 
 function exportToPDF(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToPDFMasterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToPDFMasterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
@@ -326,8 +334,11 @@ function exportToPDF(passData) {
 }
 
 function exportToPDFConsolid(passData) {
-	verb = "POST"; who = 'Reports'; where = 'exportToPDFMasterAccountConsolid'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'exportToPDFMasterAccountConsolid';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false, form);
 	  dataResponse = response.data;
 		code = response.code
@@ -411,8 +422,11 @@ function info(){
 }
 
 function masterAccount(passData) {
-	verb = "POST"; who = 'Reports'; where = 'masterAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'masterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);
 		$('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
