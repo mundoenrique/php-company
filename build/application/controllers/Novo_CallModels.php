@@ -18,7 +18,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 		} else {
-			show_404();
+			redirect('page-no-found', 'Location', 301);
 		}
 	}
 	/**
