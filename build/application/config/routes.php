@@ -72,8 +72,8 @@ $route['(bpi|co|pe|us|ve)/inf-tarifas'] = "Novo_Information/rates";
 |--------------------------------------------------------------------------
 */
 //Asynchronous
-$route['(:any)/async-call'] = "novo_CallModels";
-$route['(:any)/single'] = "novo_CallModels";
+$route['(:any)/async-call'] = "Novo_CallModels";
+$route['(:any)/single'] = "Novo_CallModels";
 //User
 $route['(:any)/inicio'] = function ($customer) {
 	header('Location: '.BASE_URL.$customer.'/sign-in', 302);
