@@ -6,7 +6,7 @@ function validateForms(form) {
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-])+$/i;
+	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
@@ -17,9 +17,9 @@ function validateForms(form) {
 	var alphabetical = /^[a-z]+$/i;
 	var alphabeticalspace = /^['a-z-ñáéíóú ']{3,40}$/i;
 	var floatAmount = /^[0-9,.]+$/;
-	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
-	var rechargeDesc = new RegExp(lang.VALIDATE_RECHAR_REGEX_DESC, 'i');
+	var fiscalReg = lang.CONF_VALIDATE_FISCAL_REGISTRY;
+	var idNumberReg = new RegExp(lang.CONF_VALIDATE_REG_ID_NUMBER, 'i');
+	var rechargeDesc = new RegExp(lang.CONF_VALIDATE_RECHAR_REGEX_DESC, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -51,7 +51,7 @@ function validateForms(form) {
 			"confirm-pass": { required: true, equalTo: "#newPass" },
 			"branch-office": { requiredBranchOffice: true },
 			"type-bulk": { requiredTypeBulk: true },
-			"file-bulk": { required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true },
+			"file-bulk": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {
@@ -133,6 +133,7 @@ function validateForms(form) {
 			"initialDatemy": { required: true, pattern: date.my },
 			"finalDatemy": { required: true, pattern: date.my },
 			"monthYear": { required: true, pattern: date.my },
+			"selection": { required: true },
 			"idNumber": { pattern: idNumberReg },
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
 			"cardNumber": {
@@ -174,7 +175,7 @@ function validateForms(form) {
 				},
 				pattern: alphabetical
 			},
-			"cardNumberP": { pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
+			"cardNumberP": { pattern: numeric, minlength: lang.CONF_VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
 			"masiveOptions": { requiredSelect: true },
 			"documentId": { required: true, pattern: alphanum },
 			"radioDni": {
@@ -229,12 +230,16 @@ function validateForms(form) {
 			"address": { required: true, pattern: longPhraseUpper },
 			"address2": { pattern: longPhraseUpper },
 			"address3": { pattern: longPhraseUpper },
+			"billingAddress": { required: true, pattern: longPhraseUpper },
 			"countryCode": { required: true, pattern: numeric },
 			"stateCodeBranch": { required: true, pattern: numeric },
 			"cityCodeBranch": { required: true, pattern: numeric },
 			"districtCodeBranch": { required: true, pattern: numeric },
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
+			"phone1": { required: true, pattern: numeric },
+			"phone2": { required: true, pattern: numeric },
+			"phone3": { required: true, pattern: numeric },
 			"person": { required: true, pattern: alphanumspace },
 			"branchCode": { required: true, pattern: numeric },
 			"surnameModifyContact":{ required: true, pattern: alphanumspace },
@@ -302,6 +307,7 @@ function validateForms(form) {
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"initialDatemy": lang.VALIDATE_DATE_MY,
 			"monthYear": lang.VALIDATE_DATE_MY,
+			"selection": lang.VALIDATE_OPTION,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"lockType": lang.VALIDATE_OPTION,
@@ -494,7 +500,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT
 			},
 			"address": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"address2": {
@@ -503,6 +509,10 @@ function validateForms(form) {
 			},
 			"address3": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"billingAddress": {
+				required: lang.VALIDATE_BILLING_ADDRESS_ENTERPRICE,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"countryCode": {
@@ -526,6 +536,18 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT
 			},
 			"phone": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone1": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone2": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone3": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},

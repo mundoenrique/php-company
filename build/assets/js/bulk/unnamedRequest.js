@@ -46,8 +46,10 @@ $(function () {
 });
 
 function unnamedRequest(unnamedBtn) {
-	verb = 'POST'; who = 'Bulk'; where = 'UnnamedRequest'
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Bulk';
+	where = 'UnnamedRequest'
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false)
 		unnamedBtn.text(btnText);
 	});

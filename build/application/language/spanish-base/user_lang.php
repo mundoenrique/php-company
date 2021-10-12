@@ -51,7 +51,7 @@ $lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de 
 	<p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma , se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>";
 //PASS-RECOVER
 $lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
-$lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
+$lang['USER_RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
 $lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';

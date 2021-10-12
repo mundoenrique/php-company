@@ -14,7 +14,7 @@ $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Nro. de documento';
 $lang['GEN_CARD_NUMBER'] = 'Nro. de Tarjeta';
 $lang['GEN_TABLE_ORDER_NRO'] = 'Orden asociada';
 $lang['GEN_TABLE_PLASTIC_STATUS'] = 'Estatus Plástico';
-$lang['GEN_TABLE_BULK_NUMBER_RESULT'] = 'Nro. de lote';
+$lang['GEN_BULK_NUMBER'] = 'Nro. de lote';
 $lang['GEN_START_DAY']= 'Fecha inicio';
 $lang['GEN_END_DAY']= 'Fecha fin';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Lote asociado';
@@ -27,8 +27,8 @@ $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud,
 $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Nro. de Tarjeta';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
-$lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
+$lang['GEN_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
+$lang['GEN_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
 //CONTACT
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';

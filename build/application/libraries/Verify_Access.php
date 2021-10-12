@@ -95,7 +95,7 @@ class Verify_Access {
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
+		$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
 		$this->responseDefect->modalBtn = [
 			'btn1'=> [
@@ -106,7 +106,7 @@ class Verify_Access {
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
-			$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT_LOGGED');
+			$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
@@ -124,202 +124,208 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
-		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'terms', 'singleSignOn', 'changeLanguage'];
-		$auth = in_array($module, $freeAccess);
 
-		if(!$auth) {
-			if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
-				clearSessionsVars();
-				$module = 'noModule';
-			}
+		if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
+			clearSessionsVars();
+		}
 
-			switch($module) {
-				case 'recoverPass':
-				case 'passwordRecovery':
-					$auth = lang('CONF_RECOV_PASS') == 'ON';
+		switch($module) {
+			case 'recoverPass':
+			case 'passwordRecovery':
+				$auth = lang('CONF_RECOV_PASS') == 'ON';
+			break;
+			case 'recoverAccess':
+			case 'validateOtp':
+				$auth = lang('CONF_RECOV_ACCESS') == 'ON';
+			break;
+			case 'benefits':
+			case 'benefitsInf':
+				$auth = lang('CONF_BENEFITS') == 'ON';
+			break;
+			case 'changeEmail':
+			case 'changeTelephones':
+			case 'changeDataEnterprice':
+			case 'addContact':
+			case 'deleteContact':
+			case 'getEnterprises':
+			case 'getEnterprise':
+			case 'getUser':
+			case 'obtenerIdEmpresa':
+			case 'keepSession':
+			case 'options':
+			case 'getFileIni':
+			case 'getBranches':
+			case 'getContacts':
+			case 'uploadFileBranches':
+			case 'updateBranch':
+			case 'updateContact':
+			case 'deleteFile':
+			case 'getProducts':
+				$auth = ($this->CI->session->has_userdata('logged'));
+			break;
+			case 'changePassword':
+			case 'changePass':
+				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
+			break;
+			case 'rates':
+			case 'ratesInf':
+				$auth = ($this->CI->session->has_userdata('logged') && ($customerUri === 've' || $customerUri === 'ven'));
+			break;
+			case 'getProductDetail':
+				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
+			break;
+			case 'authorizationKey':
+				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
+			break;
+			case 'getPendingBulk':
+			case 'loadBulk':
+			case 'getDetailBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
+			break;
+			case 'unnamedRequest':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
+			break;
+			case 'unnamedAffiliate':
+			case 'unnmamedDetail':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
 				break;
-				case 'recoverAccess':
-				case 'validateOtp':
-					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
-				break;
-				case 'benefits':
-					$auth = lang('CONF_BENEFITS') == 'ON';
-				break;
-				case 'changeEmail':
-				case 'changeTelephones':
-				case 'addContact':
-				case 'deleteContact':
-				case 'getEnterprises':
-				case 'getEnterprise':
-				case 'getUser':
-				case 'obtenerIdEmpresa':
-				case 'keepSession':
-				case 'options':
-				case 'getFileIni':
-				case 'getBranches':
-				case 'getContacts':
-				case 'uploadFileBranches':
-				case 'updateBranch':
-				case 'updateContact':
-				case 'deleteFile':
-				case 'getProducts':
-					$auth = ($this->CI->session->has_userdata('logged'));
-				break;
-				case 'changePassword':
-				case 'changePass':
-					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
-				break;
-				case 'rates':
-					$auth = ($this->CI->session->has_userdata('logged') && $customerUri === 've');
-				break;
-				case 'getProductDetail':
-					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
-				break;
-				case 'authorizationKey':
-					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
-				break;
-				case 'getPendingBulk':
-				case 'loadBulk':
-				case 'getDetailBulk':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
-				break;
-				case 'unnamedRequest':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
-				break;
-				case 'unnamedAffiliate':
-				case 'unnmamedDetail':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
-					break;
-				case 'confirmBulk':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
-				break;
-				case 'deleteNoConfirmBulk':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
-				break;
-				case 'signBulkList':
-				case 'authorizeBulk':
-				case 'authorizeBulkList':
-				case 'calculateServiceOrder':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
-				break;
-				case 'bulkDetail':
-					$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
-				break;
-				case 'deleteConfirmBulk':
-				case 'disassConfirmBulk':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
-				break;
-				case 'serviceOrder':
-				case 'cancelServiceOrder':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
-				break;
-				case 'exportFiles':
-				case 'serviceOrders':
-				case 'getServiceOrders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
-				break;
-				case 'clearServiceOrders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
-				break;
-				case 'transfMasterAccount':
-				case 'actionMasterAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
-				break;
-				case 'masterAccountTransfer':
-				case 'rechargeAuthorization':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
-				break;
-				case 'cardsInquiry':
-				case 'inquiriesActions':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
-				break;
-				case 'transactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
-				break;
-				case 'updateTransactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
-				break;
-				case 'commercialTwirls':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
-				break;
-				case 'updateCommercialTwirls':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
-				break;
-				case 'getReportsList':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
-				break;
-				case 'getReport':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
-				break;
-				case 'exportToExcelMasterAccount':
-				case 'exportToPDFMasterAccount':
-				case 'exportToExcelMasterAccountConsolid':
-				case 'exportToPDFMasterAccountConsolid':
-				case 'masterAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-				break;
-				case 'userActivity':
-				case 'exportReportUserActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
-				break;
-				case 'usersActivity':
-				case 'exportExcelUsersActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
-				break;
-				case 'accountStatus':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
-				break;
-				case 'statusMasterAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
-				break;
-				case 'replacement':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
-				break;
-				case 'closingBalance':
-				case 'exportToExcel':
-				case 'closingBudgets':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
-				break;
-				case 'rechargeMade':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
-				break;
-				case 'issuedCards':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
-				break;
-				case 'categoryExpense':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
-				break;
-				case 'masterAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-				break;
-				case 'statusBulk':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
-				break;
-				case 'cardHolders':
-				case 'exportReportCardHolders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-				break;
-				case 'statusAccountExcelFile':
-				case 'statusAccountPdfFile':
-				case 'searchStatusAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
-				break;
-				case 'usersManagement':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
-				break;
-				case 'enableUser':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
-				break;
-				case 'userPermissions':
-				case 'updatePermissions':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
-				break;
-			}
+			case 'confirmBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
+			break;
+			case 'deleteNoConfirmBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
+			break;
+			case 'signBulkList':
+			case 'authorizeBulk':
+			case 'authorizeBulkList':
+			case 'calculateServiceOrder':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+			break;
+			case 'bulkDetail':
+				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
+			break;
+			case 'deleteConfirmBulk':
+			case 'disassConfirmBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
+			break;
+			case 'serviceOrder':
+			case 'cancelServiceOrder':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+			break;
+			case 'exportFiles':
+			case 'serviceOrders':
+			case 'getServiceOrders':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
+			break;
+			case 'clearServiceOrders':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
+			break;
+			case 'transfMasterAccount':
+			case 'actionMasterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+			break;
+			case 'masterAccountTransfer':
+			case 'rechargeAuthorization':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
+			break;
+			case 'cardsInquiry':
+			case 'inquiriesActions':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
+			break;
+			case 'transactionalLimits':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
+			break;
+			case 'updateTransactionalLimits':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
+			break;
+			case 'commercialTwirls':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
+			break;
+			case 'updateCommercialTwirls':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
+			break;
+			case 'getReportsList':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
+			break;
+			case 'getReport':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
+			break;
+			case 'exportToExcelMasterAccount':
+			case 'exportToPDFMasterAccount':
+			case 'exportToExcelMasterAccountConsolid':
+			case 'exportToPDFMasterAccountConsolid':
+			case 'masterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
+			break;
+			case 'userActivity':
+			case 'exportReportUserActivity':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
+			break;
+			case 'usersActivity':
+			case 'exportExcelUsersActivity':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
+			break;
+			case 'accountStatus':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+			break;
+			case 'statusMasterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
+			break;
+			case 'replacement':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
+			break;
+			case 'closingBalance':
+			case 'exportToExcel':
+			case 'closingBudgets':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
+			break;
+			case 'rechargeMade':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
+			break;
+			case 'issuedCards':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
+			break;
+			case 'categoryExpense':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
+			break;
+			case 'masterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
+			break;
+			case 'statusBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
+			break;
+			case 'cardHolders':
+			case 'exportReportCardHolders':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
+			break;
+			case 'statusAccountExcelFile':
+			case 'statusAccountPdfFile':
+			case 'searchStatusAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+			break;
+			case 'usersManagement':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
+			break;
+			case 'enableUser':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
+			break;
+			case 'userPermissions':
+			case 'updatePermissions':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
+			break;
+			default:
+				$freeAccess = [
+					'signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'terms', 'singleSignOn', 'changeLanguage'
+				];
+				$auth = in_array($module, $freeAccess);
 		}
 
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+
+		if (!$auth) {
+			$auth = !(preg_match('/Novo_/', $this->CI->router->fetch_class()) === 1);
+		}
 
 		return $auth;
 	}

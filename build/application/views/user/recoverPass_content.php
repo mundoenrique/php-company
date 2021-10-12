@@ -15,7 +15,7 @@ $pais= $this->uri->segment(1, 0);
         </div>
         <div class="field-wrapper">
           <label for="id-company" class="line-field">
-            <?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('GEN_FISCAL_REGISTRY')); ?>
+            <?= novoLang(lang('USER_RECOVER_PASS_FISCAL_REGISTRY'), lang('GEN_FISCAL_REGISTRY')); ?>
           </label>
           <input type="text" id="id-company" name="id-company" class="input-field field-large" maxlength="17"
             placeholder="<?= lang('USER_EXAMPLE_FISCAL_REGISTER'); ?>" required>

@@ -4,6 +4,11 @@ var tableContact;
 var geo;
 
 $(function () {
+
+	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#enterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
+		enablePhone();
+	};
+
 	var ulOptions = $('.nav-item-config');
 	$('#existingContactButton').addClass('hidden');
 	$('#partedSection').hide();
@@ -77,10 +82,8 @@ $(function () {
 			$('#'+ key).val(optionSelect.attr(key));
 		});
 
-		if ( lang.CONF_SETTINGS_TELEPHONES == 'ON' ) {
-			for ( let i = 1; i < 4; i++ ) {
-				$('#phone'+ i).val(optionSelect.attr('phone'+ i));
-			}
+		if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' ) {
+			enablePhone();
 		};
 
 		if ($('#existingContacts')[0] != undefined) {
@@ -98,16 +101,53 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			insertFormInput(true);
+			who = 'Settings';
+			where = 'changeEmail';
 			data = getDataForm(form);
 			data.email = $('#currentEmail').val().toLowerCase();
 			$(this).html(loader);
+			insertFormInput(true);
 
-			verb = "POST"; who = 'Settings'; where = 'changeEmail';
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				dataResponse = response.data
 				insertFormInput(false);
 				$('#userDataBtn').html(btnText)
+			})
+		}
+	})
+
+	$('#updateEnterpriceBtn').on('click', function (e) {
+		e.preventDefault();
+		form = $('#enterpriseDataForm');
+		btnText = $(this).text().trim();
+
+		switch (lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE) {
+			case 'changeTelephones':
+				$("#address").addClass("ignore");
+				$("#billingAddress").addClass("ignore");
+				$("#phone2").addClass("ignore");
+				$("#phone3").addClass("ignore");
+				break;
+			case 'changeDataEnterprice':
+				$("#phone1").addClass("ignore");
+				$("#phone2").addClass("ignore");
+				$("#phone3").addClass("ignore");
+				break;
+		}
+
+		validateForms(form);
+
+		if (form.valid()) {
+			who = 'Settings';
+			where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
+			data = getDataForm(form);
+			$(this).html(loader);
+			insertFormInput(true);
+
+			callNovoCore(who, where, data, function (response) {
+				dataResponse = response.data;
+				insertFormInput(false);
+				$('#updateEnterpriceBtn').html(btnText);
 			})
 		}
 	})
@@ -117,12 +157,14 @@ $(function () {
 			if (detail[3] == 'request') {
 				$('a.' + detail[0]).on('click', function () {
 					if ($(this).attr('title') == '') {
-						verb = 'POST'; who = 'Settings'; where = 'GetFileIni';
+						who = 'Settings';
+						where = 'GetFileIni';
 						data = {};
-						callNovoCore(verb, who, where, data, function (response) {
+						callNovoCore(who, where, data, function (response) {
 							if (response.code == 0) {
 								downLoadfiles(response.data);
 							}
+
 							$('.cover-spin').hide();
 						})
 					}
@@ -186,13 +228,14 @@ $(function () {
 		if (form.valid()) {
 			$(this).html(loader);
 
+			who = 'Settings';
+			where = 'uploadFileBranches';
 			data = {
 			file:	$('#file-branch')[0].files[0],
 			typeBulkText: $('#file-branch')[0].files[0].type
 			}
-			verb = 'POST'; who = 'Settings'; where = 'uploadFileBranches';
 
-			callNovoCore(verb, who, where, data, function (response) {
+			callNovoCore(who, where, data, function (response) {
 				insertFormInput(false);
 				$('#file-branch').val('');
 				$('#file-branch').next('.js-label-file').html(inputFile);
@@ -240,10 +283,21 @@ $(function () {
 	});
 });
 
-function getContacts (data) {
-	verb = 'POST'; who = 'Settings'; where = 'getContacts';
+function enablePhone(){
+	for ( let i = 1; i < 4; i++ ) {
+		if($('#phone'+ i).val()==''){
+			$('#divPhone'+ i).addClass('hide');
+		}else{
+			$('#divPhone'+ i).removeClass('hide');
+		}
+	}
+}
 
-	callNovoCore(verb, who, where, data, function(response) {
+function getContacts (data) {
+	who = 'Settings';
+	where = 'getContacts';
+
+	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);
 
 		if ( response.code == 0 ) {
@@ -360,9 +414,10 @@ function getContacts (data) {
 
 function getBranches (value) {
 	data = value;
-	verb = 'POST'; who = 'Settings'; where = 'getBranches';
+	who = 'Settings';
+	where = 'getBranches';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;
 		insertFormInput(false);
 
@@ -427,16 +482,17 @@ function validInputFile() {
 };
 
 function deleteContactM(data) {
-	verb = 'POST'; who = 'Settings'; where = 'deleteContact';
+	who = 'Settings';
+	where = 'deleteContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
-	});
+	callNovoCore(who, where, data, function (response) { });
 };
 
 function updateBranch(data) {
-	verb = 'POST'; who = 'Settings'; where = 'updateBranch';
+	who = 'Settings';
+	where = 'updateBranch';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		dataResponse = response;
 
 		if ( dataResponse.code ==  5) {
@@ -446,9 +502,10 @@ function updateBranch(data) {
 };
 
 function addContact(data) {
-	verb = 'POST'; who = 'Settings'; where = 'addContact';
+	who = 'Settings';
+	where = 'addContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		insertFormInput(false);
 
 		if ( response.code ==  0) {
@@ -458,9 +515,10 @@ function addContact(data) {
 };
 
 function updateContact(data) {
-	verb = 'POST'; who = 'Settings'; where = 'updateContact';
+	who = 'Settings';
+	where = 'updateContact';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		dataResponse = response;
 		insertFormInput(false);
 

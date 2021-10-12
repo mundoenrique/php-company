@@ -72,13 +72,17 @@ $(function () {
 
 
 function enableUser(passData) {
-	verb = 'POST'; who = 'User'; where = 'enableUser'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'User';
+	where = 'enableUser';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 
 		if (response.code == 4) {
 			location.reload();
 		}
+
 		$('.cover-spin').removeAttr("style");
 		insertFormInput(false);
 	});

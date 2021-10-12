@@ -52,10 +52,11 @@ $(function () {
 });
 
 function getForm() {
+	who = 'Services';
+	where = 'transactionalLimits';
 	data = getDataForm(form);
-	verb = "POST"; who = 'Services'; where = 'transactionalLimits';
 
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		cardnumber = data.cardNumber
@@ -81,6 +82,8 @@ function getForm() {
 };
 
 function updateLimits() {
+	who = 'Services';
+	where = 'updateTransactionalLimits';
 	data = getDataForm(form);
 	data.cardNumber = cardnumber;
 
@@ -88,9 +91,7 @@ function updateLimits() {
 		data.passwordAuth = cryptoPass(data.passwordAuth);
 	}
 
-	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits';
-
-	callNovoCore(verb, who, where, data, function(response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code;
 		insertFormInput(false);

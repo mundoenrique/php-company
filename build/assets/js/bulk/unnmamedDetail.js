@@ -19,6 +19,6 @@ $(function () {
 		setTimeout(function () {
 			insertFormInput(false);
 			$('.cover-spin').hide();
-		}, lang.GEN_TIME_DOWNLOAD_FILE);
+		}, lang.CONF_TIME_DOWNLOAD_FILE);
 	})
 });

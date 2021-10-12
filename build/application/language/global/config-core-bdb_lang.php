@@ -39,3 +39,8 @@ $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
 $lang['CONF_FILE'] = 'Archivos de Autogestión %s';
 //FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'OFF';
+//VALIDATE FORMS
+$lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^([0-9]{9,17})';
+$lang['CONF_FILES_EXTENSION'] = 'xls|xlsx|txt|pgp';
+//GENERAL
+$lang['CONF_POSTMY_OTP'] = 'center top+100';

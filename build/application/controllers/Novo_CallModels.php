@@ -18,7 +18,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 		} else {
-			show_404();
+			redirect('page-no-found', 'Location', 301);
 		}
 	}
 	/**
@@ -98,7 +98,8 @@ class Novo_CallModels extends Novo_Controller {
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = UPLOAD_PATH;
-		$config['allowed_types'] = lang('VALIDATE_FILES_EXTENSION');
+		$config['allowed_types'] = lang('CONF_FILES_EXTENSION');
+		$config['max_size'] = lang('CONF_MAX_FILE_SIZE');
 		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload('file')) {

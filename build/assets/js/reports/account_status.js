@@ -62,12 +62,16 @@ $(function () {
 });
 
 function searchStatusAccount(passData){
-	verb = 'POST'; who = 'Reports'; where = 'searchStatusAccount'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'searchStatusAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		insertFormInput(false);
 		$('#spinnerBlock').addClass('hide');
+
 		if (code == 0) {
 			$('#export_excel').removeClass('hidden');
 			$('#blockResults').removeClass('hidden');
@@ -225,8 +229,11 @@ function exportFile(e){
 };
 
 function exportToExcel(passData) {
-	verb = "POST"; who = 'Reports'; where = 'statusAccountExcelFile'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'statusAccountExcelFile';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
@@ -247,8 +254,11 @@ function exportToExcel(passData) {
 };
 
 function exportToPDF(passData) {
-	verb = "POST"; who = 'Reports'; where = 'statusAccountPdfFile'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
+	who = 'Reports';
+	where = 'statusAccountPdfFile';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;

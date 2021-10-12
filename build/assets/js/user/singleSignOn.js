@@ -7,10 +7,12 @@ $(function() {
 		insertFormInput(true, form);
 		form.submit()
 	} else {
+		who = 'User';
+		where = 'singleSignOn';
 		data = getDataForm(form)
 		data.currentTime = new Date().getHours();
-		verb = 'POST'; who = 'User'; where = 'singleSignOn';
-		callNovoCore(verb, who, where, data, function (response) {
+
+		callNovoCore(who, where, data, function (response) {
 			$(location).attr('href', response.data)
 		})
 	}

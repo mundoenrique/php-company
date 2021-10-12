@@ -27,14 +27,17 @@ $(function() {
 })
 
 function passRecover(recoverData, textBtn) {
-	verb = 'POST'; who = 'User'; where = 'RecoverPass'; data = recoverData;
-	callNovoCore(verb, who, where, data, function(response){
+	who = 'User';
+	where = 'RecoverPass';
+	data = recoverData;
+
+	callNovoCore(who, where, data, function(response){
 		dataResponse = response.data
 		switch(response.code) {
 			case 0:
 			case 1:
 				appMessages(response.title, response.msg, response.icon, response.modalBtn)
-				break;
+			break;
 		}
 		response.code == 0 ? $('form')[0].reset() : '';
 		$('form input, form button').attr('disabled', false);

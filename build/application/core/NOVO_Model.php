@@ -125,7 +125,7 @@ class NOVO_Model extends CI_Model {
 			case -29:
 			case -61:
 				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('RESP_DUPLICATED_SESSION');
+				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}

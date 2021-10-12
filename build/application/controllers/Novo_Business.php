@@ -40,7 +40,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->render->msgEnterprise = $responseList->data->text;
 		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
-		$this->render->titlePage = lang('ENTERPRISE_TITLE');
+		$this->render->titlePage = lang('BUSINESS_ENTERPRISE_TITLE');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
@@ -91,12 +91,12 @@ class Novo_Business extends NOVO_Controller {
 
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
-			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
+			$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
 			$this->render->widget->countProducts = FALSE;
 			$this->render->widget->actionForm = lang('CONF_LINK_PRODUCTS');
 		}
 
-		$this->render->titlePage = lang('PRODUCTS_TITLE');
+		$this->render->titlePage = lang('GEN_PRODUCTS');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
@@ -152,7 +152,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;
-		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
+		$this->render->titlePage = lang('GEN_PRODUCTS_DETAIL_TITLE');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}

@@ -2180,6 +2180,8 @@ i[class*=" icon-"]:before {
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
 .icon-graph:before           { content: "\e054"; }
+.icon-integration:before     { content: "\e067"; }
+.icon-plus:before            { content: "\e08d"; }
 .icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
@@ -2188,14 +2190,19 @@ i[class*=" icon-"]:before {
 .icon-find:before            { content: "\e0b8"; }
 .icon-download:before        { content: "\e0bb"; }
 .icon-upload:before          { content: "\e0bc"; }
+.icon-card-canceled:before   { content: "\e014"; }
 .icon-deliver-card:before    { content: "\e015"; }
 .icon-warning:before    		 { content: "\e0c6"; }
 .icon-user:before            { content: "\e0c8"; }
+.icon-rates:before   				 { content: "\e023"; }
 .icon-envelope-open:before   { content: "\e026"; }
+.icon-reload:before   			 { content: "\e027"; }
+.icon-help-me:before   			 { content: "\e075"; }
 .icon-lock:before 			     { content: "\e0ce"; }
 .icon-notification:before    { content: "\e0d8"; }
 .icon-card:before            { content: "\e0dc"; }
 .icon-credit-card:before	   { content: "\e035"; }
+.icon-clock:before   			 	 { content: "\e053"; }
 .icon-thumbs-up:before       { content: "\e0e5"; }
 .icon-chevron-down:before    { content: "\e0f3"; }
 .icon-chevron-left:before    { content: "\e0f4"; }
@@ -2230,6 +2237,7 @@ i[class*=" icon-"]:before {
 .icon-user-edit:before       { content: "\e031"; }
 .icon-arrow-left:before      { content: "\e0f0"; }
 .icon-card-fee:before			   { content: "\e091"; }
+.icon-home:before			  	   { content: "\e09b"; }
 .icon-arrow-right:before     { content: "\e0f1"; }
 .icon-car:before					   { content: "\e101"; }
 .icon-shipping:before		     { content: "\e062"; }
@@ -2239,7 +2247,6 @@ i[class*=" icon-"]:before {
 .icon-email:before           { content: "\e0ba"; }
 .icon-500:before           	 { content: "\e901"; }
 .icon-404:before           	 { content: "\e902"; }
-.icon-card-canceled:before   { content: "\e014"; }
 
 .icon-user{
 	padding-right: 0 !important;
@@ -3529,6 +3536,27 @@ a.ui-button:active,
   overflow: hidden;
 }
 
+.bg-card-icon {
+	background-image: linear-gradient(rgba(6, 0, 96, 0.9), rgba(6, 0, 96, 0.9)), url("../../assets/images/icons/icon-description.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100px;
+}
+.bg-card-bonus {
+	background-image: linear-gradient(rgba(0, 0, 0,.2), rgba(0,0,0,.2)), url("../../assets/images/programs/ve/bonus_alimentacion.svg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: 150%;
+	height: 10rem;
+}
+.bg-card-plata {
+	background-image: linear-gradient(rgba(0, 0, 0,.2), rgba(0,0,0,.2)), url("../../assets/images/programs/ve/plata_clasica.svg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: 150%;
+	height: 10rem;
+}
+
 /* clases para el primer producto  */
 .prod-first:hover .mask {
   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -3810,3 +3838,172 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	transition-property: all;
 	transition-duration: .2s;
 }
+
+/* Language switch button */
+.widget-menu{
+	transition: all ease 2s;
+}
+.widget-menu .help{
+	height: 61px;
+	width: 61px;
+	border-radius: 50%;
+	position: fixed;
+	left: 5px;
+	bottom: 90px;
+	z-index: 999;
+}
+.widget-menu .help .content-help,
+.widget-menu .help .content-help .icon-help{
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	background-color: var(--color-primary);
+	box-shadow: 0 2px 10px 0 rgb(193 193 193 / 50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.widget-menu .help .content-help .icon-help{
+	height: 40px;
+	width: 40px;
+	background-color: Var(--color-secondary);
+	color: var(--color-sixth);
+}
+.menu-help{
+  z-index: 998;
+  transform-origin: center;
+  border-radius: 50%;
+  position: fixed;
+  background: var(--color-secondary);
+  box-shadow: 0 3px 4px 0 rgb(94 94 94 / 70%);
+  overflow: hidden;
+  height: 27rem;
+	width: 28rem;
+	left: -9rem;
+	bottom: -6rem;
+	display:block;
+	opacity: 0;
+	-webkit-animation: hide-anim 1s ease-in-out;
+	animation: hide-anim 1s ease-in-out;
+}
+
+.menu-help.show{
+  display: block;
+  opacity: 1;
+  -webkit-animation: show-anim 1s ease-in-out;
+  animation: show-anim 1s ease-in-out;
+}
+
+.menu-help .menu-item{
+	position: fixed;
+	left: 22px;
+	bottom: 125px;
+	transition: all ease .4s;
+	opacity: 0;
+	z-index: 1002;
+	cursor: pointer;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	opacity: 1;
+	display: flex;
+}
+
+.menu-help .menu-item .text-icon{
+	font-size: var(--h4);
+	font-weight: var(--semibold-font-weight);
+	color: var(--color-sixth);
+}
+.menu-help .menu-item:hover .text-icon{
+	color: var(--color-primary);
+}
+.menu-help .menu-item:nth-child(1){
+	bottom: 220px;
+	left: 37px;
+}
+.menu-help .menu-item:nth-child(2){
+	bottom: 140px;
+	left: 89px;
+}
+.menu-help .menu-item:nth-child(3){
+	bottom: 60px;
+	left: 91px;
+}
+.menu-help .menu-item:nth-child(4){
+	bottom: -5px;
+	left: 48px;
+}
+
+.btn-lang-circle .btn-lang-img img {
+	height: 34px;
+	width: 34px;
+}
+
+.btn-lang-circle .btn-lang-img span {
+	height: 34px;
+	width: 34px;
+}
+
+.btn-lang-circle .btn-lang-img a span{
+	-webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
+.btn-lang-circle .btn-lang-img a:hover span{
+	background: rgb(255, 255, 255, .6);
+	font-size: var(--h3);
+	opacity: 1;
+}
+
+@keyframes show-anim {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
+@keyframes hide-anim {
+  0% {
+    display: block;
+    opacity: 1;
+  }
+    99% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.rates {
+	border-spacing: 10px 0px !important;
+}
+
+.rates .text-section {
+	background: var(--color-fifth);
+}
+
+.rates.dataTable tbody tr td {
+	padding: 10px 14px !important;
+}
+
+.rates.dataTable tbody .subsection td{
+background-color:  rgba(210, 211, 212, .5);
+}
+.rates.dataTable thead, .thead {
+	color: var(--color-secondary) !important;
+	background-color: var(--color-seventh) !important;
+}
+

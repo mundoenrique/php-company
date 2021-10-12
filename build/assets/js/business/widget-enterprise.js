@@ -39,9 +39,9 @@ $(function() {
 			.remove()
 			enterpriseWidgetBtn
 			.prop('disabled', true);
-			enterpriseWidgetBtn.attr('title', lang.GEN_SELECT_PRODUCTS);
-
-			verb = 'POST'; who = 'Business'; where = 'getProducts';
+			enterpriseWidgetBtn.attr('title', lang.GEN_SELECT_PRODUCT);
+			who = 'Business';
+			where = 'getProducts';
 			data = {
 				enterpriseCode: enterpriseCode,
 				enterpriseGroup: enterpriseGroup,
@@ -51,15 +51,16 @@ $(function() {
 				thirdApp: thirdApp,
 				select: true
 			}
-			callNovoCore(verb, who, where, data, function(response) {
+
+			callNovoCore(who, where, data, function(response) {
 				respProctList[response.code](response);
-			})
+			});
 		}
 	});
 
 	const respProctList = {
 		0: function(response) {
-			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCTS);
+			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCT);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {

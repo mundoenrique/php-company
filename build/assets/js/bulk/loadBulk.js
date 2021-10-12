@@ -51,8 +51,10 @@ $(function () {
 				typeBulkText: $('#type-bulk option:selected').text().trim()
 			}
 			insertFormInput(true);
-			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
-			callNovoCore(verb, who, where, data, function(response) {
+			who = 'Bulk';
+			where = 'LoadBulk';
+
+			callNovoCore(who, where, data, function(response) {
 				btnAction.html(btnText);
 				insertFormInput(false);
 				$('#file-bulk').val('');
@@ -207,9 +209,10 @@ $(function () {
 			}
 
 			insertFormInput(true, formDeleteBulk);
-			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
-			callNovoCore(verb, who, where, data, function(response) {
+			who = 'Bulk';
+			where = 'DeleteNoConfirmBulk';
 
+			callNovoCore(who, where, data, function (response) {
 				if(response.cod == 0) {
 					pendingBulk.row('.select').remove().draw(false);
 				}

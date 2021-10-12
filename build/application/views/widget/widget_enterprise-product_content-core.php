@@ -21,7 +21,7 @@
 				</select>
 				<?php if(!isset($products)): ?>
 				<select id="product-select" class="select-box custom-select mt-1 mb-4 h6 w-100" disabled>
-					<option selected disabled><?= lang('GEN_SELECT_PRODUCTS'); ?></option>
+					<option selected disabled><?= lang('GEN_SELECT_PRODUCT'); ?></option>
 				</select>
 				<?php endif; ?>
 				<div>

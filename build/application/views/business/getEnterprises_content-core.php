@@ -9,17 +9,17 @@
 		</nav>
 	</div>
 	<div class="flex h6 flex-auto justify-end">
-		<span><?= lang('ENTERPRISE_LAST_ACCESS') ?>: <?= $lastSession ?></span>
+		<span><?= lang('BUSINESS_ENTERPRISE_LAST_ACCESS') ?>: <?= $lastSession ?></span>
 	</div>
 </div>
 
 <div class="flex mt-3 light items-center">
 	<div class="flex col-3">
-		<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
+		<span><?= lang('BUSINESS_ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
 	</div>
 	<div id="alphabetical" class="flex h6 flex-auto justify-end">
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1" <?= $disabled ?>>
-			<?= lang('ENTERPRISE_FILTER_ALL'); ?>
+			<?= lang('BUSINESS_ENTERPRISE_FILTER_ALL'); ?>
 		</button>
 		<?php foreach($filters AS $filtersAttr): ?>
 		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
@@ -75,7 +75,7 @@
 <div id="enterprise-pages" class="visible">
 	<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
 		<nav class="h4">
-			<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
+			<a href="javascript:" position="first"><?= lang('BUSINESS_ENTERPRISE_FIRST_PAGE'); ?></a>
 			<a href="javascript:" position="prev">«</a>
 		</nav>
 		<div id="show-page" class="h4 flex justify-center ">
@@ -87,7 +87,7 @@
 		</div>
 		<nav class="h4">
 			<a href="javascript:" position="next">»</a>
-			<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
+			<a href="javascript:" position="last"><?= lang('BUSINESS_ENTERPRISE_LAST_PAGE'); ?></a>
 		</nav>
 	</div>
 </div>

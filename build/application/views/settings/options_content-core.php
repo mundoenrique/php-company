@@ -201,16 +201,16 @@
                   <div class="form-group col-12 col-lg-8 col-xl-6">
                     <label class="mt-1">Empresa</label>
                     <form id="enterpriseSettListForm" method="POST">
-                      <select id="enterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100">
+                      <select id="enterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100" >
                         <?php if ($countEnterpriseList == 1): ?>
-                        <option selected disabled><?= $enterpriseSettList[0]->acnomcia; ?></option>
+                        <option countEnterpriseList="<?= $countEnterpriseList ?>" selected disabled ><?= $enterpriseSettList[0]->acnomcia; ?></option>
                         <?php else: ?>
                         <option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
                         <?php foreach ($enterpriseSettList AS $enterprise): ?>
                         <option idFiscal="<?= $enterprise->acrif; ?>" name="<?= $enterprise->acnomcia; ?>"
                           businessName="<?= $enterprise->acrazonsocial; ?>" contact="<?= $enterprise->acpercontac; ?>"
                           address="<?= $enterprise->acdirubica; ?>" billingAddress="<?= $enterprise->acdirenvio; ?>"
-                          phone1="<?= $enterprise->actel; ?>" phone2="<?= $enterprise->actel2; ?>" phone3="<?= $enterprise->actel3; ?>">
+                          phone1="<?= $enterprise->actel; ?>" phone2="<?= $enterprise->actel2; ?>" phone3="<?= $enterprise->actel3; ?>" countEnterpriseList="<?= $countEnterpriseList ?>">
                           <?= $enterprise->enterpriseName; ?>
                         </option>
                         <?php endforeach; ?>
@@ -246,44 +246,52 @@
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="address">Dirección</label>
-                        <input type="text" id="address" name="address" class="form-control px-1" value="<?= $address; ?>" readonly disabled>
+                        <input type="text" id="address" name="address" class="form-control px-1" value="<?= $address; ?>" 
+                        <?= $addressCompanyUpdate; ?>>
+                        <div class="help-block"></div>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="billingAddress">Dirección de facturación</label>
                         <input type="text" id="billingAddress" name="billingAddress" class="form-control px-1" value="<?= $billingAddress; ?>"
-                          readonly disabled>
+                        <?= $addressCompanyUpdate; ?>>
+                        <div class="help-block"></div>
                       </div>
                     </div>
                     <?php if (lang('CONF_SETTINGS_TELEPHONES') == 'ON'): ?>
                     <div class="row">
-                      <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
+                      <div id='divPhone1' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone1">Teléfono 1</label>
                         <input type="text" id="phone1" name="phone1" class="form-control" value="<?= $phone1; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-                      <?php if ($phone2 != ''): ?>
-                      <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
+
+                      <div  id='divPhone2' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone2">Teléfono 2</label>
                         <input id="phone2" name="phone2" class="form-control" value="<?= $phone2; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-                      <?php endif; ?>
-                      <?php if ($phone3 != ''): ?>
-                      <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
+  
+                      <div  id='divPhone3' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone3">Teléfono 3</label>
                         <input id="phone3" name="phone3" class="form-control" value="<?= $phone3; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-                      <?php endif; ?>
                     </div>
-                    <?php if (lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
-                    <div class="row">
+                    <?php if (lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'ON' || lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
+                   <!-- <div class="row">
                       <div class="flex mb-2 justify-end col-12">
                         <button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">
                           Guardar cambios
                         </button>
 												<button id="showContacts" type="button" class="btn btn-primary btn-small ">
                           Mostrar contactos
+                        </button>
+                      </div>
+                    </div>-->
+                    <div class="row">
+                      <div class="col-6 flex justify-end">
+                        <button id="updateEnterpriceBtn" class="btn btn-primary btn-small btn-loading">
+                          <?= lang('GEN_BTN_ACCEPT') ?>
                         </button>
                       </div>
                     </div>

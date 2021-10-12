@@ -107,3 +107,7 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'youtube' => 'https://www.youtube.com/user/banortemovil',
 	'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
+//VALIDATE FORMS
+$lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^["a-z0-9"]{8,9}';
+$lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
+$lang['CONF_VALIDATE_MINLENGTH'] = 16;

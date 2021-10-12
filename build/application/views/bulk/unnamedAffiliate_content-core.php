@@ -7,7 +7,7 @@
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_BULK_UNNAMED'); ?></a></li>
 			</ul>
 		</nav>
@@ -32,7 +32,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-2">
-								<label for="bulkNumber"><?= lang('BULK_NUMBER'); ?></label>
+								<label for="bulkNumber"><?= lang('GEN_BULK_NUMBER'); ?></label>
 								<input type="text" id="bulkNumber" name="bulk-number" class="form-control h5">
 								<div class="help-block"></div>
 							</div>

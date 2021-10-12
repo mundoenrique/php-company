@@ -106,11 +106,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		if($this->isResponseRc != 0) {
 			$reportsList[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 			$IdTypeList[] = (object) [
 				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
+				'text' => lang('GEN_TRY_AGAIN')
 			];
 			$mindateGmfReport = '';
 		}
@@ -1249,35 +1249,60 @@ class Novo_Reports_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
-		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
+		$this->dataAccessLog->function = 'Buscar tarjetas emitidas';
+		$this->dataAccessLog->operation = $dataRequest->type === 'info' ? 'Información de tarjetas' : 'Descarga de archivo';
 
-		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$operationId = $dataRequest->format ?? $dataRequest->type;
+		$operationIdTem = [
+			'info' => '',
+			'xls' => 'Excel',
+			'pdf' => 'PDF',
+		];
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas' . $operationIdTem[$operationId];
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmisionesMO';
-		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
-		$this->dataRequest->fechaMes = $dataRequest->monthYear;
 		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
-		$this->dataRequest->fechaIni = '';
-		$this->dataRequest->fechaFin = '';
+		$this->dataRequest->fechaMes = $dataRequest->monthYear ?? '';
+		$this->dataRequest->fechaIni = $dataRequest->initDate ?? '';
+		$this->dataRequest->fechaFin = $dataRequest->finalDate ?? '';
+		$this->dataRequest->tipoConsulta = $dataRequest->queryType;
+
+		if ($dataRequest->type === 'download') {
+			$this->dataRequest->opcion = 'CARD_EMI';
+			$this->dataRequest->idExtEmp = $dataRequest->fiscalId;
+			$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+			$this->dataRequest->posicionDetalle = $dataRequest->detailIndex ?? '';
+			$this->dataRequest->tipoDetalle = $dataRequest->detailType ?? '';
+		}
+
 		$response = $this->sendToService('callWs_IssuedCardsReport');
-		$issuedCardsList = [];
+		$record = [''];
 
     switch($this->isResponseRc) {
       case 0:
-        $this->response->code = 0;
-				$record = new stdClass();
-				$record->lista = isset($response->lista) ? $response->lista : '';
-				array_push(
-					$issuedCardsList,
-					$record
-				);
+				$this->response->code = 0;
+
+				if ($dataRequest->type === 'info') {
+					$record = $response->lista ?? $record;
+				}
+
+				if ($dataRequest->type === 'download') {
+					$this->response->data->file = $response->archivo;
+					$this->response->data->name = trim($response->nombre) . '.' . $dataRequest->format;
+					$this->response->data->ext = $dataRequest->format;
+
+					if ($dataRequest->detailType != '') {
+						$this->response->modal = TRUE;
+					}
+				}
       break;
       case -150:
         $this->response->code = 0;
       break;
     }
-		$this->response->data->issuedCardsList = $issuedCardsList;
-		$this->response->data->tipoConsulta = $this->dataRequest->tipoConsulta;
+
+		$this->response->data->issuedCardsList = $record;
+		$this->response->data->queryType = $dataRequest->queryType;
 
     return $this->responseToTheView('callWS_IssuedCardsReport');
 	}

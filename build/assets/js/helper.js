@@ -2,7 +2,14 @@
 var currenTime;
 var screenSize;
 var inputModal;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass, data;
+var who;
+var where;
+var dataResponse;
+var ceo_cook;
+var btnText;
+var form;
+var cypherPass;
+var data;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
@@ -32,12 +39,13 @@ $(function () {
 	});
 
 	$('#change-lang').on('click', function () {
-		verb = 'POST'; who = 'User'; where = 'changeLanguage';
+		who = 'User';
+		where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(verb, who, where, data, function (response) {
+		callNovoCore(who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
 				var currentCodLan = url[url.length - 1];
@@ -78,8 +86,8 @@ $(function () {
 		"oPaginate": {
 			"sFirst": lang.GEN_TABLE_SFIRST,
 			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sNext": lang.CONF_TABLE_SNEXT,
+			"sPrevious": lang.CONF_TABLE_SPREVIOUS
 		},
 		"oAria": {
 			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
@@ -107,20 +115,27 @@ $(function () {
 		dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
 		weekHeader: lang.GEN_PICKER_WEEKHEADER,
 		dateFormat: lang.GEN_PICKER_DATEFORMAT,
-		firstDay: lang.GEN_PICKER_FIRSTDATE,
-		isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
+		firstDay: lang.CONF_PICKER_FIRSTDATE,
+		isRTL: lang.CONF_PICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_PICKER_MINDATE,
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-		changeYear: lang.GEN_PICKER_CHANGEYEAR,
+		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
+		changeYear: lang.CONF_PICKER_CHANGEYEAR,
 		showAnim: lang.SHOWANIM,
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
+
+	$(".widget-menu").click(function (e) {
+		e.stopPropagation();
+		$('#widget-menu').removeClass('none');
+		$("#widget-menu").toggleClass("show");
+	});
 });
 
-function callNovoCore(verb, who, where, request, _response_) {
+function callNovoCore(who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -152,7 +167,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var uri = data.route || 'async-call'
 
 	$.ajax({
-		method: verb,
+		method: 'POST',
 		url: baseURL + uri,
 		data: formData,
 		context: document.body,
@@ -227,6 +242,7 @@ function appMessages(title, message, icon, modalBtn) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
+		focus: false,
 		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
 		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: modalBtn.minHeight || 100,
@@ -262,8 +278,9 @@ function appMessages(title, message, icon, modalBtn) {
 		}
 	});
 
-	$('.ui-dialog-titlebar-close').on('click', function(e) {
+	$('.ui-dialog-titlebar-close').on('click', function (e) {
 		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-msg').html('');
 		$('#system-info').dialog('destroy');
 	});
 }
@@ -284,11 +301,11 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-			break;
+				break;
 			case 'close':
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-			break;
+				break;
 		}
 
 		$(this).off('click');
@@ -324,7 +341,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null) {
+		if (thisValInput == null) {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -361,20 +378,22 @@ function getDataForm(form) {
 	return dataForm
 }
 
-function downLoadfiles (data) {
+function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
-	var blob = new Blob([File], {type: "application/"+data.ext});
+	var blob = new Blob([File], { type: "application/" + data.ext });
+
 	if (window.navigator.msSaveOrOpenBlob) {
 		window.navigator.msSaveBlob(blob, data.name)
 	} else {
 		var url = window.URL.createObjectURL(blob);
-		$('#download-file').attr('href', url)
-		$('#download-file').attr('download', data.name)
-		document.getElementById('download-file').click()
+		$('#download-file').attr('href', url);
+		$('#download-file').attr('download', data.name);
+		document.getElementById('download-file').click();
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.CONF_NO_LINK)
-		$('#download-file').attr('download', '')
+		$('#download-file').attr('href', lang.CONF_NO_LINK);
+		$('#download-file').attr('download', '');
 	}
+
 	$('.cover-spin').hide();
 }
 
@@ -397,9 +416,10 @@ function getauhtKey() {
 		.html(loader)
 		.prop('disabled', true);
 	insertFormInput(true);
-	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+	who = 'Services';
+	where = 'AuthorizationKey';
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
 			data = {
@@ -434,25 +454,25 @@ function getResponse(Exitoso, MensajeError) {
 		switch (remoteFunction) {
 			case 'sendRequest':
 				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote, remoteAuthArgs.selectBlockCard);
-			break;
+				break;
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
-			break;
+				break;
 			case 'updateLimits':
 				updateLimits();
-			break;
+				break;
 			case 'updateTwirlsCard':
 				updateTwirlsCard();
-			break;
+				break;
 			case 'applyActions':
 				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
-			break;
+				break;
 		}
 
 		$('.cover-spin').show(0);
 	} else {
 		data = {
-			 btn1: {
+			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			},
@@ -463,7 +483,7 @@ function getResponse(Exitoso, MensajeError) {
 }
 
 function normalizeAmount(amount) {
-	var valueAttr = amount.split(lang.GEN_DECIMAL);
+	var valueAttr = amount.split(lang.CONF_DECIMAL);
 	amount = valueAttr[0].replace(/[,.]/g, '') + '.' + valueAttr[1];
 	amount = parseFloat(amount);
 

@@ -7,7 +7,7 @@
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_SERVICES'); ?></a></li>
       </ul>
     </nav>
@@ -48,7 +48,7 @@
               <?php endif; ?>
               <div class="form-group col-3">
                 <label for="transferAmount"><?= lang('GEN_TABLE_AMOUNT'); ?></label>
-                <input id="transferAmount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('GEN_DECIMAL').'00'; ?>"
+                <input id="transferAmount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('CONF_DECIMAL').'00'; ?>"
                   name="transferAmount" autocomplete="off" disabled>
                 <div class="help-block"></div>
               </div>
