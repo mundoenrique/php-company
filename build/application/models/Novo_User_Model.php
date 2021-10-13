@@ -307,7 +307,8 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'customerSess' => $this->config->item('customer')
+					'customerSess' => $this->config->item('customer'),
+					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('GEN_SESSION_DUPLICATE'));
