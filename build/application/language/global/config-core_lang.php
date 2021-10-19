@@ -213,6 +213,7 @@ $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_BENEFITS'] = 'benefits-inf';
 $lang['CONF_LINK_BENEFITS_INF'] = 'benefits';
 $lang['CONF_LINK_TERMS'] = 'terms-inf';
+$lang['CONF_LINK_TERMS_INF'] = 'terms';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_ENTERPRISES'] = 'enterprises';

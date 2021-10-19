@@ -10,10 +10,10 @@
 		<div class="pt-3">
 		<?= lang("TERMS_CONTENT") ?>
 		<section>
-			<hr class="separador-one">
 			<div class="pt-3">
 				<?php if($newUser): ?>
 				</div>
+				<hr class="separador-one">
 					<div class="flex flex-column mt-4 px-5 justify-center items-center">
 						<div class="flex flex-row">
 							<div class="mb-3 mr-3">

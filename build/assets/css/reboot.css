@@ -2218,6 +2218,7 @@ i[class*=" icon-"]:before {
 .icon-plane:before 				   { content: "\e107"; }
 .icon-medkit:before 		   	 { content: "\e108"; }
 .icon-asterisk:before 		   { content: "\e109"; }
+.icon-document:before 	     { content: "\e00d"; }
 .icon-file-blank:before 	   { content: "\e10f"; }
 .icon-file-graph:before 	   { content: "\e10b"; }
 .icon-file-pdf:before 		   { content: "\e10c"; }
