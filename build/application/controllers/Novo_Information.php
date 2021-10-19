@@ -70,7 +70,7 @@ class Novo_Information extends NOVO_Controller {
 			"user/benefitsInf",
 		);
 
-		log_message('INFO', 'NOVO Information: benefits Method Initialized');
+		log_message('INFO', 'NOVO Information: benefitsInf Method Initialized');
 		$this->render->titlePage =lang('GEN_FOTTER_BENEFITS');
 		$this->render->activeHeader = TRUE;
 		$this->views = ['information/'.$view];
@@ -90,7 +90,7 @@ class Novo_Information extends NOVO_Controller {
 			"user/ratesInf"
 		);
 
-		log_message('INFO', 'NOVO Information: rates Method Initialized');
+		log_message('INFO', 'NOVO Information: ratesInf Method Initialized');
 		$this->render->titlePage =lang('GEN_FOTTER_RATES');
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));

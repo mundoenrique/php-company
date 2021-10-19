@@ -57,6 +57,9 @@
 						</div>
 					</div>
 				</div>
+				<div class="flex items-center justify-center pt-3">
+					<a class="btn btn-link btn-small big-modal" href="javascript:history.back()"><?= lang('GEN_BTN_BACK'); ?></a>
+				</div>
 			</div>
 		</section>
 	</div>
