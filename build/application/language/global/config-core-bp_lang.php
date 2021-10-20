@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SELECT_TYPE'] = 'ON';
 $lang['CONF_INPUT_PASS'] = 'ON';
 $lang['CONF_VALIDATE_PARAMS'] = 'ON';
+//INPUT CARDS INQUIRY
+$lang['CONF_INQUIRY_DOCTYPE'] = 'ON';
 //SIGNIN
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
