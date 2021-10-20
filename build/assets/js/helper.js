@@ -134,9 +134,9 @@ $(function () {
 		$("#widget-menu").toggleClass("show");
 	});
 
-	$('body,html').click(function(e){
+	$('body,html').click(function (e) {
 		$('#widget-menu').removeClass('show');
-});
+	});
 });
 
 function callNovoCore(who, where, request, _response_) {
