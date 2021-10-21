@@ -59,7 +59,7 @@
 <div id="system-info" class="hidden">
 	<p class="system-content">
 		<span id="system-icon"></span>
-		<span id="system-msg" class="system-msg"><?= lang('GEN_MESSAGE_SYSTEM'); ?></span>
+		<span id="system-msg" class="system-msg"><?= lang('GEN_SYSTEM_MESSAGE'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset modal-buttonset">

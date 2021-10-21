@@ -20,7 +20,7 @@ function getRecaptchaToken(module, _function_) {
 							}
 						};
 
-						appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_MESSAGE_SYSTEM, icon, modalBtn);
+						appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, modalBtn);
 					}
 				});
 		});

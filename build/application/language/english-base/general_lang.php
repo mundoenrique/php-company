@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Enterprise Online';
+$lang['GEN_SYSTEM_MESSAGE'] = 'At this time we cannot accommodate your request, please try again later.';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Enterprise';
 $lang['GEN_MENU_LOTS'] = 'Lots';
@@ -363,7 +364,6 @@ $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'The code format is invalid.';
 $lang['GEN_WITHOUT_AUTHORIZATION'] = 'You are not authorized to perform this action.';
 $lang['GEN_RC_0'] = 'Process executed successfully.';
 $lang['GEN_FAILED_THIRD_PARTY'] = 'The response for this process was not successful. %s';
-$lang['GEN_MESSAGE_SYSTEM'] = 'At this time we cannot accommodate your request, please try again later.';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['PASSWORD_CHANGE']= "Change of password";
 $lang['PASSWORD_CURRENT'] = 'Current password';

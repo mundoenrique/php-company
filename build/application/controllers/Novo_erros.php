@@ -10,7 +10,7 @@ class Novo_erros extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO error404 Controller Class Initialized');
+		log_message('INFO', 'NOVO Novo_erros Controller Class Initialized');
 	}
 	/**
 	 * @info Método para la pagina no encontrda
