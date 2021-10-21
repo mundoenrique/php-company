@@ -5,7 +5,7 @@
 			<div class="flex flex-column items-center z1 h-100">
 				<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $customerUri); ?>"
 					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
-				<span class="mb-2 secondary center h3"><?= lang('USER_WELCOME_TITLE') ?></span>
+				<span class="mb-2 secondary center h3"><?= novoLang(lang('USER_WELCOME_TITLE'), lang('GEN_SYSTEM_NAME')) ?></span>
 				<div id="widget-signin" class="widget rounded h-100">
 					<form id="signInForm" name="signInForm">
 						<div class="form-group">

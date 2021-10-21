@@ -212,7 +212,7 @@ function callNovoCore(who, where, request, _response_) {
 		var response = {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
-			msg: lang.GEN_MESSAGE_SYSTEM,
+			msg: lang.GEN_SYSTEM_MESSAGE,
 			icon: lang.CONF_ICON_DANGER,
 			modalBtn: {
 				btn1: {
