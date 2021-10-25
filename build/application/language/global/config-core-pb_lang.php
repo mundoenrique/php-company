@@ -34,3 +34,5 @@ $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['CONF_MAX_FILE_SIZE'] = '2560';
 //INTERNAL LINKS
 $lang['CONF_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeDataEnterprice';
+//NAVBAR STYLES
+$lang['CONF_PADDING_LOGO'] = 'OFF';
