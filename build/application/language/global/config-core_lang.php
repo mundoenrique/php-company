@@ -36,7 +36,7 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
 //NAVBAR STYLES
 $lang['CONF_HEADER_BORDER'] = 'OFF';
-$lang['CONF_PADDING_LOGO'] = 'OFF';
+$lang['CONF_PADDING_LOGO'] = 'ON';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //ICONS MODALS
