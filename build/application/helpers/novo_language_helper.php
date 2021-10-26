@@ -29,6 +29,7 @@ if (!function_exists('BulkAttrEmissionA'))
 
 		switch ($CI->config->item('customer-uri')) {
 			case 'pb':
+			case 'bp':
 				$tableContent->header = [
 					lang('GEN_TABLE_ID_TYPE'), lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_BRANCH_COD'), lang('GEN_TABLE_STATUS')
 				];
