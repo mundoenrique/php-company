@@ -60,7 +60,10 @@ $(function () {
 			$('#MovimientoPorTarjeta input').prop('readonly', false)
 			$('#result-repMovimientoPorTarjeta').addClass('none')
 			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
+			$('#sectionByIdNumber').addClass('none')
+			$('#sectionByCard').addClass('none')
 		}
+
 		$('#cardNumberId').empty()
 		$('#repTarjeta-result').addClass('none');
 		reportsResults.row('tr').remove().draw(false);
@@ -77,8 +80,6 @@ $(function () {
 		}
 
 		$('.month-year').datepicker({
-			changeMonth: true,
-			changeYear: true,
 			showButtonPanel: true,
 			dateFormat: 'mm/yy',
 			closeText: 'Aceptar',
@@ -88,20 +89,16 @@ $(function () {
 				$(this).datepicker('setDate', new Date(year, month, 1));
 			},
 			beforeShow: function (input, inst) {
-				var minDate,maxDate,month,year;
+				var minDate, maxDate, month, year;
 
 				switch (reportSelected) {
 					case 'repComprobantesVisaVale':
 						minDate = '-12M';
-					break;
+						break;
 					case 'repExtractoCliente':
-						minDate = new Date(params['minYear'],params['minMonth']-1,params['minDay']);
-						maxDate = new Date(params['maxYear'],params['maxMonth']-1,params['maxDay']);
-					break;
-					default:
-						minDate = '';
-						maxDate = '-M';
-					break;
+						minDate = new Date(params['minYear'], params['minMonth'] - 1, params['minDay']);
+						maxDate = new Date(params['maxYear'], params['maxMonth'] - 1, params['maxDay']);
+						break;
 				}
 
 				$(this).datepicker('option', 'minDate', minDate);
@@ -121,44 +118,61 @@ $(function () {
 	});
 
 	$(".date-picker").datepicker({
-		changeMonth: true,
-		changeYear: true,
-		maxDate: currentDate,
-		yearRange: '-10:' + currentDate.getFullYear(),
-		showAnim: "slideDown",
 		beforeShow: function (input, inst) {
 			inst.dpDiv.removeClass("ui-datepicker-month-year");
 		},
-		onSelect: function (selectDate) {
+		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
 				.blur();
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
+			var inputDate = $(this).attr('id');
+
+			if (inputDate == 'enterpriseDateBegin') {
+				$('#enterpriseDateEnd').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
+
+				if (currentDate > maxTime) {
+					$('#enterpriseDateEnd').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#enterpriseDateEnd').datepicker('option', 'maxDate', currentDate);
+				}
+			}
 		}
 	});
 
 	$(".date-picker-card").datepicker({
-		changeMonth: true,
-		changeYear: true,
 		minDate: '-12m',
-		yearRange: currentDate.getFullYear() - 1 + ':' + currentDate.getFullYear(),
-		showAnim: "slideDown",
 		beforeShow: function (input, inst) {
 			inst.dpDiv.removeClass("ui-datepicker-month-year");
 		},
-		onSelect: function (selectDate) {
+		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
 				.blur();
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
+			var inputDate = $(this).attr('id');
+
+			if (inputDate == 'cardDateBegin') {
+				$('#cardDateEnd').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
+
+				if (currentDate > maxTime) {
+					$('#cardDateEnd').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#cardDateEnd').datepicker('option', 'maxDate', currentDate);
+				}
+			}
 		}
 	});
 
-
-
 	$('.year').datepicker({
 		changeMonth: false,
-		changeYear: true,
 		showButtonPanel: true,
-		yearRange: firsrYear + ':' + currentDate.getFullYear(),
 		dateFormat: 'yy',
 		closeText: 'Aceptar',
 		onClose: function (dateText, inst) {
@@ -172,11 +186,10 @@ $(function () {
 		}
 	});
 
-
 	$('#btn-download').on('click', function (e) {
 		e.preventDefault();
 		getReport(data)
-	})
+	});
 
 	$('.btn-report').on('click', function (e) {
 		e.preventDefault()
@@ -190,11 +203,9 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-
 			data.operation = cardsPeople || data.operation;
 			btnAction.html(loader);
 			insertFormInput(true);
-
 
 			$('#' + reportSelected + ' input, #' + reportSelected + ' select')
 				.not('[type=search], [type=radio], .ignore')
@@ -202,15 +213,16 @@ $(function () {
 					tempId = $(element).attr('id')
 					tempVal = $(element).val()
 					data[tempId] = tempVal;
-				})
+				});
 
 			if (data.operation == "repMovimientoPorTarjeta" && $(radioType + ':checked').val() == "ByCard") {
 				data.cardNumber = data.cardNumber2;
 				delete data.cardNumber2;
 			}
+
 			getReport(data, btnAction)
 		}
-	})
+	});
 
 	$("#idType").change(function () {
 

@@ -10,12 +10,8 @@ $(function () {
 
 	$("#initialDatemy").datepicker({
 		dateFormat: 'mm/yy',
-		changeMonth: true,
-		changeYear: true,
 		showButtonPanel: true,
-		maxDate: "+0D",
 		closeText: 'Aceptar',
-		yearRange: '-12:' + currentDate.getFullYear(),
 
 		onSelect: function(selectDate){
 			$(this)

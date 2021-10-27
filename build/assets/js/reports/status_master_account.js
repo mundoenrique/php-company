@@ -1,15 +1,11 @@
 'use strict'
-var reportsResults;
 $(function () {
-	var datePicker = $('.date-picker');
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	datePicker.datepicker({
-		minDate: new Date(2021, 7, 1),
+	$('.date-picker').datepicker({
+		minDate: new Date(2019, 8, 1),
 		maxDate: '-1M',
-		changeMonth: true,
-		changeYear: true,
 		dateFormat: 'mm/yy',
 		showButtonPanel: true,
 		closeText: 'Aceptar',
@@ -50,15 +46,15 @@ $(function () {
 		insertFormInput(true);
 		who = 'Reports';
 		where = 'statusMasterAccount';
-		var downloadFile = $('#download-file');
 
 		callNovoCore(who, where, data, function (response) {
 			$('#spinnerBlock').addClass('hide');
 
 			if (response.code == 0) {
-				downloadFile.attr('href', response.data.file)
-				document.getElementById('download-file').click()
-				who = 'DownloadFiles'; where = 'DeleteFile';
+				$('#download-file').attr('href', response.data.file);
+				document.getElementById('download-file').click();
+				who = 'DownloadFiles';
+				where = 'DeleteFile';
 				data.fileName = response.data.name
 
 				callNovoCore(who, where, data, function (response) { })
