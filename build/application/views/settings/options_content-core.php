@@ -246,7 +246,7 @@
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="address">Dirección</label>
-                        <input type="text" id="address" name="address" class="form-control px-1" value="<?= $address; ?>" 
+                        <input type="text" id="address" name="address" class="form-control px-1" value="<?= $address; ?>"
                         <?= $addressCompanyUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
@@ -270,7 +270,7 @@
                         <input id="phone2" name="phone2" class="form-control" value="<?= $phone2; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-  
+
                       <div  id='divPhone3' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone3">Teléfono 3</label>
                         <input id="phone3" name="phone3" class="form-control" value="<?= $phone3; ?>" maxlength="15" <?= $phoneUpdate; ?>>
@@ -579,8 +579,8 @@
             <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
             <div class="px-5">
               <div class="container">
-                <?php if (count(lang('CONF_FILES_GENERAL')) > 0): ?>
-                <?php foreach(lang('CONF_FILES_GENERAL') as $title => $detail): ?>
+                <?php if (count(lang('SETTINGS_FILES_DOWNLOAD')) > 0): ?>
+                <?php foreach(lang('SETTINGS_FILES_DOWNLOAD') as $title => $detail): ?>
                 <div class="my-2 tertiary h4 semibold">
                   <span><?= $title ?></span>
                 </div>

@@ -152,7 +152,7 @@ $(function () {
 		}
 	})
 
-	$.each(lang.CONF_FILES_GENERAL, function( index, header ) {
+	$.each(lang.SETTINGS_FILES_DOWNLOAD, function( index, header ) {
 		$.each(header, function( index2, detail ) {
 			if (detail[3] == 'request') {
 				$('a.' + detail[0]).on('click', function () {
