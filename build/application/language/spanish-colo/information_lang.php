@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//TERMS_CONTENT
+
 $lang["TERMS_CONTENT"] = '<p><strong>NovoPayment Colombia S.A.S.</strong>, sociedad legalmente constituida y registrada ante la Cámara de Comercio de Bogotá (en adelante  “La Empresa”); a continuación establece las Condiciones Generales y Términos de Uso y Confidencialidad que rigen la plataforma electrónica desarrollada por La Empresa y que ha sido habilitada para que los clientes de las instituciones financieras emisoras (en adelante los “Usuarios”), puedan hacer uso de las distintas funcionalidades que ofrece.</p>
 <p>En consecuencia, los Usuarios que deseen acceder a la referida plataforma, se obligan a leer las presentes Condiciones Generales y Términos de Uso y Confidencialidad cuidadosamente antes de continuar su recorrido, con lo cual se entenderá que están de acuerdo con las mismas y declaran que aceptan cumplir a cabalidad las instrucciones y obligaciones aquí contenidas.</p>
 <p>La plataforma de La Empresa le proporciona a los Usuarios, las herramientas necesarias para cumplir y hacer uso de las distintas soluciones de gestión de efectivo ofrecidas por las entidades emisoras, de manera rápida y con total seguridad. Sin embargo, La Empresa no garantiza, de forma alguna, el servicio ininterrumpido o libre de error de la misma.</p>
