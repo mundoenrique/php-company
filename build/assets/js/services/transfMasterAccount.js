@@ -605,7 +605,6 @@ function verifyOperations() {
 }
 
 function formValidateTrim(currentForm, currentTitle) {
-	formInputTrim(currentForm);
 	validateForms(currentForm);
 
 	if (cardsData.length == 0) {

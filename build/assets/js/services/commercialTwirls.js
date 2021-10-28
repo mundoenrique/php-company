@@ -8,7 +8,6 @@ $(function () {
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#formTwirls');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -35,12 +34,12 @@ $(function () {
 		form = $('#check-form');
 
 		$('#spinnerBlock').addClass('hide');
-		formInputTrim(form);
 		validateForms(form)
 
 		if (form.valid()) {
 			insertFormInput(true);
 			$(this).html(loader);
+
 			if (lang.CONF_REMOTE_AUTH == 'ON') {
 				remoteFunction = 'updateTwirlsCard';
 				btnRemote = $(this);

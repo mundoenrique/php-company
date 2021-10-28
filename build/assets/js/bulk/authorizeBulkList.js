@@ -264,7 +264,6 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 }
 
 function signAuthBulkValidate(currentForm, action, modalReq) {
-	formInputTrim(currentForm);
 	validateForms(currentForm);
 	var classSelect = '.selected:not(.no-select-checkbox)'
 	switch (currentForm.attr('id')) {

@@ -18,7 +18,6 @@ $(function () {
 		$('.money').removeClass("has-error");
 		$('#blockResults').addClass('hidden');
 		form = $('#limitsForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -32,7 +31,6 @@ $(function () {
 		e.preventDefault();
 		btnText = $(this).text().trim();
 		form = $('#limitsUpdateForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

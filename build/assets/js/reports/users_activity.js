@@ -51,7 +51,6 @@ $(function () {
 	$('#userActivityBtn').on('click', function(e) {
 		e.preventDefault();
 		form = $('#userActivityForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -151,7 +150,6 @@ $(function () {
 	//Descargar archivo Excel
 	$('#usersActivityOptions').delegate('.exportExcel', 'click', function () {
 		form = $('#userActivityForm');
-		formInputTrim(form);
 		validateForms(form);
 		var userToDownload = $(this).parents('tr').attr('username');
 

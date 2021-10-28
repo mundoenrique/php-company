@@ -21,7 +21,6 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
-			formInputTrim(form);
 			data = getDataForm(form);
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF') {
