@@ -82,11 +82,13 @@ $(function () {
 		$('.month-year').datepicker({
 			showButtonPanel: true,
 			dateFormat: 'mm/yy',
-			closeText: 'Aceptar',
 			onClose: function (dateText, inst) {
 				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 				$(this).datepicker('setDate', new Date(year, month, 1));
+				$(this)
+					.focus()
+					.blur();
 			},
 			beforeShow: function (input, inst) {
 				var minDate, maxDate, month, year;
@@ -108,11 +110,6 @@ $(function () {
 				year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 				inst.dpDiv.addClass("ui-datepicker-month-year");
 				$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
-			},
-			onSelect: function (selectDate) {
-				$(this)
-					.focus()
-					.blur();
 			}
 		});
 	});
@@ -132,7 +129,7 @@ $(function () {
 
 			if (inputDate == 'enterpriseDateBegin') {
 				$('#enterpriseDateEnd').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#enterpriseDateEnd').datepicker('option', 'maxDate', maxTime);
@@ -159,7 +156,7 @@ $(function () {
 
 			if (inputDate == 'cardDateBegin') {
 				$('#cardDateEnd').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#cardDateEnd').datepicker('option', 'maxDate', maxTime);
@@ -174,15 +171,12 @@ $(function () {
 		changeMonth: false,
 		showButtonPanel: true,
 		dateFormat: 'yy',
-		closeText: 'Aceptar',
 		onClose: function (dateText, inst) {
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			$(this).datepicker('setDate', new Date(year, 1));
 		},
 		beforeShow: function (input, inst) {
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			inst.dpDiv.addClass("ui-datepicker-month-year");
-			$(this).datepicker('option', 'defaultDate', new Date(year, 1));
 		}
 	});
 

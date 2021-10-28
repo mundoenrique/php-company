@@ -7,24 +7,16 @@ $(function () {
 	$("#monthYear").datepicker({
 		dateFormat: 'mm/yy',
 		showButtonPanel: true,
-		closeText: 'Aceptar',
-
-		onSelect: function (selectDate) {
-			$(this)
-				.focus()
-				.blur();
-		},
-
 		onClose: function (dateText, inst) {
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			$(this).datepicker('setDate', new Date(year, month, 1));
+			$(this)
+				.focus()
+				.blur();
 		},
 		beforeShow: function (input, inst) {
-			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			inst.dpDiv.addClass("ui-datepicker-month-year");
-			$(this).datepicker('setDate', new Date(year, month, 1));
 		}
 	});
 
@@ -40,7 +32,7 @@ $(function () {
 
 			if (inputDate == 'initDate') {
 				$('#finalDate').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_MAX_CONSULT_MONTH, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);

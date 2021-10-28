@@ -11,14 +11,11 @@ $(function () {
 	$("#initialDatemy").datepicker({
 		dateFormat: 'mm/yy',
 		showButtonPanel: true,
-		closeText: 'Aceptar',
-
 		onSelect: function(selectDate){
 			$(this)
 				.focus()
 				.blur();
 		},
-
 		onClose: function (dateText, inst) {
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();

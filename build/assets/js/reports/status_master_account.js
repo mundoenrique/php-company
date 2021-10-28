@@ -4,28 +4,22 @@ $(function () {
 	$('.hide-out').removeClass('hide');
 
 	$('.date-picker').datepicker({
-		minDate: new Date(2019, 8, 1),
-		maxDate: '-1M',
 		dateFormat: 'mm/yy',
+		minDate: new Date(2019, 7, 1),
+		maxDate: '-1M',
 		showButtonPanel: true,
-		closeText: 'Aceptar',
-		onSelect: function (selectedDate) {
-			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[0] + '/' + dateSelected[2];
-			$(this)
-			.focus()
-			.blur();
-		},
 		onClose: function (dateText, inst) {
+			console.log(dateText)
+			console.log(inst)
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			$(this).datepicker('setDate', new Date(year, month, 1));
+			$(this)
+				.focus()
+				.blur();
 		},
 		beforeShow: function (input, inst) {
-			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			inst.dpDiv.addClass("ui-datepicker-month-year");
-			$(this).datepicker('setDate', new Date(year, month, 1));
 		}
 	});
 

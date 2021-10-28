@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Enterprise Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'At this time we cannot accommodate your request, please try again later.';
-//MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Enterprise';
 $lang['GEN_MENU_LOTS'] = 'Lots';
 $lang['GEN_MENU_CONSULTATIONS'] = 'Consultations';
@@ -11,7 +10,6 @@ $lang['GEN_MENU_TRAJECTS'] = 'Trajects';
 $lang['GEN_MENU_REPORTS'] = 'Reports';
 $lang['GEN_MENU_USERS'] = 'Users';
 $lang['GEN_MENU_SIGN_OFF'] = 'Sign Off';
-//SUBMENU
 $lang['GEN_MENU_BULK_LOAD'] = 'Bulk load';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Authorization';//TEBAUT
 $lang['GEN_MENU_BULK_UNNAMED'] = 'Unnamed cards';
@@ -48,7 +46,6 @@ $lang['GEN_MENU_REP_KIDGARDEN_PAY'] = 'Daycare payments';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Recharge fee';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Billed lots';//LOTFAC
 $lang['GEN_MENU_REP_STATUS_MASTER_ACCOUNT'] = 'Status master account';//REPECT
-//BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
 $lang['GEN_BTN_CANCEL'] = 'Cancel';
 $lang['GEN_BTN_CONTINUE'] = 'Continue';
@@ -80,7 +77,6 @@ $lang['GEN_BTN_ALL'] = 'All';
 $lang['GEN_BTN_ENABLE'] = 'Enable';
 $lang['GEN_BTN_UPDATE'] = 'Update';
 $lang['GEN_BTN_TRANSFER'] = 'Transfer';
-//MODULES
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -137,7 +133,6 @@ $lang['GEN_USER_DATA'] = 'User data';
 $lang['GEN_LIST_PERMITS'] = 'List of permits';
 $lang['GEN_NOTE'] = 'Note:';
 $lang['GEN_CHECK_COLOR'] = 'If the check is in color';
-//FOOTER
 $lang['GEN_FOTTER_START'] = 'Start';
 $lang['GEN_FOTTER_BENEFITS'] = 'Benefits';
 $lang['GEN_FOTTER_TERMS'] = 'Terms';
@@ -146,23 +141,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Logout';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-//HTML TAG DISPLAY
-$lang['GEN_SHOW_HEADER'] = 'Show header';
-$lang['GEN_SHOW_HEADER_LOGO'] = 'Show header logo';
-$lang['GEN_SHOW_CONFIG'] = 'Show settings';
-$lang['GEN_SIGNIN_TOP'] = 'top widget';
-$lang['GEN_SIGNIN_HEADER'] = 'header widget';
-$lang['GEN_TAG_RECOVER_PASS'] = 'Recover password';
-$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Welcome message';
-$lang['GEN_TAG_GOUT_MENU'] = 'Logout button';
-$lang['GEN_TAG_REPORT_MENU'] = 'Reports menu';
-$lang['GEN_TAG_LINK_UNIC'] = 'Just one link';
-$lang['GEN_TAG_HELPER'] = 'help link Enterprise Online';
-$lang['GEN_TAG_BRANCHOFFICE'] = 'see select of branches';
-$lang['GEN_TAG_SEARCH_CAT'] = 'Search by category';
-$lang['GEN_TAG_ALL_BULK'] = 'Select all bulks';
-$lang['GEN_TAG_ORDER_TYPE'] = 'Service order type';
-$lang['GEN_TAG_CANCEL_BUTTON'] = 'Cancel button generate service order';
 //DATATABLES
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Bulk Number';
 $lang['GEN_TABLE_BULK_ID'] = 'Bulk ID';
@@ -243,20 +221,20 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activate to sort the column in descendin
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Selected records';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Selected record';
-//DATEPICKER
-$lang['GEN_PICKER_CLOSETEXT'] = 'Close';
-$lang['GEN_PICKER_PREVTEXT'] = '<Prev';
-$lang['GEN_PICKER_NEXTTEXT'] = 'Next>';
-$lang['GEN_PICKER_CURRENTTEXT'] = 'Today';
-$lang['GEN_PICKER_MONTHNAMES'] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-$lang['GEN_PICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-$lang['GEN_PICKER_DAYNAMESMIN'] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
-$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
-$lang['GEN_PICKER_YEARSUFFIX'] = '';
-//GENERAL LANGUAGE
+$lang['GEN_DATEPICKER_CLOSETEXT'] = 'Accept';
+$lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Today';
+$lang['GEN_DATEPICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+$lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+$lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+$lang['GEN_DATEPICKER_MONTHNAMES'] = [
+	'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+];
+$lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$lang['GEN_DATEPICKER_NEXTTEXT'] = 'Next';
+$lang['GEN_DATEPICKER_PREVTEXT'] = 'Prev';
+$lang['GEN_DATEPICKER_WEEKHEADER'] = 'W';
+$lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/YYYY';
+$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/YYYY';
 $lang['GEN_TRY_AGAIN']= 'Try again';
 $lang['GEN_WELCOME_TEXT'] = 'Welcome';
 $lang['GEN_ALT_LOADER'] = 'Verifying...';
@@ -431,3 +409,40 @@ $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//HTML TAG DISPLAY
+$lang['GEN_SHOW_HEADER'] = 'Show header';
+$lang['GEN_SHOW_HEADER_LOGO'] = 'Show header logo';
+$lang['GEN_SHOW_CONFIG'] = 'Show settings';
+$lang['GEN_SIGNIN_TOP'] = 'top widget';
+$lang['GEN_SIGNIN_HEADER'] = 'header widget';
+$lang['GEN_TAG_RECOVER_PASS'] = 'Recover password';
+$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Welcome message';
+$lang['GEN_TAG_GOUT_MENU'] = 'Logout button';
+$lang['GEN_TAG_REPORT_MENU'] = 'Reports menu';
+$lang['GEN_TAG_LINK_UNIC'] = 'Just one link';
+$lang['GEN_TAG_HELPER'] = 'help link Enterprise Online';
+$lang['GEN_TAG_BRANCHOFFICE'] = 'see select of branches';
+$lang['GEN_TAG_SEARCH_CAT'] = 'Search by category';
+$lang['GEN_TAG_ALL_BULK'] = 'Select all bulks';
+$lang['GEN_TAG_ORDER_TYPE'] = 'Service order type';
+$lang['GEN_TAG_CANCEL_BUTTON'] = 'Cancel button generate service order';
