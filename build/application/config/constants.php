@@ -107,7 +107,7 @@ $timeZone = [
 	'ven'	=>	'America/Caracas',
 	'vg'	=>	'America/Lima',
 ];
-$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_erros/pageNoFound' : '';
+$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';
@@ -150,6 +150,7 @@ defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
+defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
@@ -166,7 +167,6 @@ defined('UPLOAD_PATH')			OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 | SERVICE ENVIROMENT VARIABLES
 |--------------------------------------------------------------------------
 */
-defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('WS_KEY')			 						OR define('WS_KEY', $_SERVER['WS_KEY']);
 defined('DOWNLOAD_ROUTE')					OR define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
 defined('BULK_FTP_USERNAME')			OR define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);

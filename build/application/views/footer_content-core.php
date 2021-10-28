@@ -14,7 +14,7 @@
 					<div class="menu-item">
 						<div class="btn-lang-circle">
 							<div class="btn-lang-img">
-								<a id="change-lang" href="<?= lang('GEN_NO_LINK') ?>">
+								<a id="change-lang" class="big-modal"  href="<?= lang('GEN_NO_LINK') ?>">
 									<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
 									<span class="text bold"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 									<p class="text-icon text-btn-lang mb-0 inline-block">Cambiar idioma</p>
@@ -79,7 +79,7 @@
 <?php if (lang('CONF_BTN_LANG') == 'ON' && lang('CONF_MENU_CIRCLE') == 'OFF') : ?>
 	<div class="btn-lang">
 		<div class="btn-lang-img">
-			<a id="change-lang" href="<?= lang('GEN_NO_LINK') ?>">
+			<a id="change-lang" class="big-modal"  href="<?= lang('GEN_NO_LINK') ?>">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
