@@ -33,7 +33,7 @@
 				<?php endif; ?>
 				<?php if ($module !== 'terms') : ?>
 					<div class="menu-item">
-						<a class="text-icon" href="<?= base_url(lang('CONF_LINK_TERMS_INF')); ?>">
+						<a class="text-icon" href="<?= base_url(lang('CONF_LINK_TERMS')); ?>">
 							<i class="items-center m-auto icon-document h3">&nbsp;</i>
 							<?= lang('GEN_FOTTER_TERMS'); ?>
 						</a>

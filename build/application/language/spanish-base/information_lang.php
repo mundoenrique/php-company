@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//TERMS_CONTENT
+
 $lang['TERMS_MESSAGE'] = 'Estimado usuario debes leer y aceptar los términos de uso y confidencialidad para comenzar a usar nuestra plataforma.';
 $lang["TERMS_TITLE"]='Condiciones Generales, Términos de Uso y Confidencialidad';
 $lang['TERMS_ACCEPT'] = 'Acepto los términos y condiciones.';
@@ -18,7 +18,6 @@ $lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de 
 	<p>La Empresa se reserva a su total discreción, emplear todos los medios necesarios a su alcance para retirar de forma inmediata al usuario que infrinja cualquiera de las condiciones de seguridad  y privacidad de La Plataforma , lo cual incluye que los Usuarios hayan enviado información falsa que no sea susceptible de verificarla en cuanto a su autenticidad.</p>
 	<p>Igualmente, La Empresa, tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en La Plataforma  a los fines de notificar a sus Usuarios.</p>
 	<p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma , se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>";
-	//BENEFITS
 $lang['TITLE_BENEFITS'] = 'Beneficios';
 $lang['BENEFITS_TITULO_1'] = 'Operaciones seguras';
 $lang['BENEFITS_MSG_1'] = 'Resguardamos la integridad y la privacidad de la información cumpliendo los más altos estándares internacionales de seguridad.';

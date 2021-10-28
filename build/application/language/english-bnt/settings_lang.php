@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//FILES DOWNLOAD
-$lang['CONF_FILES_GENERAL'] = [
+$lang['SETTINGS_FILES_DOWNLOAD'] = [
   'Archivos de gestión'=>[
     ['ArchivosLotes','rar', 'Gestión de Lotes','download']
   ]

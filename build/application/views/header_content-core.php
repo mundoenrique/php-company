@@ -4,7 +4,7 @@
 	<?php if($this->session->logged): ?>
 	<nav class="navbar py-0 flex-auto">
 		<?php else: ?>
-		<nav class="navbar navbar-expand-lg flex-auto">
+		<nav class="navbar navbar-expand-lg flex-auto <?= lang('CONF_PADDING_LOGO') == 'ON' ? ' py-0' : '' ?>">
 		<?php endif; ?>
 		<a class="navbar-brand">
 			<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerUri); ?>"

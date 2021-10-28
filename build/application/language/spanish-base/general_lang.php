@@ -142,22 +142,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-$lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
-$lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
-$lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
-$lang['GEN_SIGNIN_TOP'] = 'widget superior';
-$lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
-$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
-$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
-$lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
-$lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';
-$lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
-$lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
-$lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
-$lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
-$lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
-$lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
-$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Nro. de lote';
 $lang['GEN_TABLE_BULK_ID'] = 'Id de lote';
 $lang['GEN_TABLE_BULK_DATE'] = 'Fecha de carga';
@@ -236,18 +220,20 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
-$lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
-$lang['GEN_PICKER_PREVTEXT'] = '<Ant';
-$lang['GEN_PICKER_NEXTTEXT'] = 'Sig>';
-$lang['GEN_PICKER_CURRENTTEXT'] = 'Hoy';
-$lang['GEN_PICKER_MONTHNAMES'] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-$lang['GEN_PICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
-$lang['GEN_PICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
-$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
-$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
-$lang['GEN_PICKER_YEARSUFFIX'] = '';
+$lang['GEN_DATEPICKER_CLOSETEXT'] = 'Aceptar';
+$lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
+$lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+$lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+$lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
+$lang['GEN_DATEPICKER_MONTHNAMES'] = [
+	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+$lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+$lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
+$lang['GEN_DATEPICKER_PREVTEXT'] = 'Ant';
+$lang['GEN_DATEPICKER_WEEKHEADER'] = 'Sem';
+$lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/AAAA';
+$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/AAAA';
 $lang['GEN_TRY_AGAIN']= 'Intenta de nuevo';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ALT_LOADER'] = 'Verificando...';
@@ -426,3 +412,37 @@ $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//HTML TAG DISPLAY
+$lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
+$lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
+$lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
+$lang['GEN_SIGNIN_TOP'] = 'widget superior';
+$lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
+$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
+$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
+$lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
+$lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';
+$lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
+$lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
+$lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
+$lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
+$lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
+$lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
+$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';

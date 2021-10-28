@@ -19,7 +19,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_SignIn_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: Login Method Initialized');
+		log_message('INFO', 'NOVO User Model: SignIn Method Initialized');
 
 		$userName = mb_strtoupper($dataRequest->userName);
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
@@ -653,43 +653,6 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_FinishSession');
 	}
 	/**
-	 * @info Método validación recaptcha
-	 * @author Yelsyns Lopez
-	 * @date May 16th, 2019
-	 * @modified J. Enrique Peñaloza Piñero
-	 * @date October 21st, 2019
-	 * @modified Luis Molina
-	 * @date January 18th, 2021
-	 */
-	public function callWs_ValidateCaptcha_User($dataRequest)
-	{
-		log_message('INFO', 'NOVO User Model: validateCaptcha Method Initialized');
-
-		$this->load->library('recaptcha');
-
-		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
-
-		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha Customer: "' .$this->config->item('customer');
-		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
-
-		log_message('DEBUG', $logMessage);
-
-		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
-
-		if ($resultRecaptcha == 9999) {
-			$this->response->code = 4;
-			$this->response->title = lang('GEN_SYSTEM_NAME');
-			$this->response->icon = lang('CONF_ICON_DANGER');
-			$this->response->msg = lang('GEN_RECAPTCHA_VALIDATION_FAILED');
-			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
-			$this->response->modalBtn['btn1']['action'] = 'redirect';
-		}
-
-		return $resultRecaptcha;
-	}
-
-		/**
 	 * @info Método para consulta de administración de usuarios.
 	 * @author Diego Acosta García
 	 * @date Oct 2st, 2020
@@ -794,7 +757,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_userPermissions');
 	}
-
 	/**
 	 * @info Método para actualizar permisos de usuarios.
 	 * @author Diego Acosta García
@@ -865,7 +827,6 @@ class Novo_User_Model extends NOVO_Model {
 		}
 		return $this->responseToTheView('callWs_updatePermissions');
 	}
-
 	/**
 	 * @info Método para habilitar usuario.
 	 * @author Diego Acosta García
@@ -910,6 +871,42 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_enableUser');
+	}
+	/**
+	 * @info Método validación recaptcha
+	 * @author Yelsyns Lopez
+	 * @date May 16th, 2019
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date October 21st, 2019
+	 * @modified Luis Molina
+	 * @date January 18th, 2021
+	 */
+	public function callWs_ValidateCaptcha_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: validateCaptcha Method Initialized');
+
+		$this->load->library('recaptcha');
+
+		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
+
+		$result = $this->recaptcha->verifyResponse($dataRequest->token);
+		$logMessage = 'NOVO [' . mb_strtoupper($userName) . '] RESPONSE: recaptcha Customer: "' . $this->config->item('customer');
+		$logMessage.= '", Score: "' . $result["score"] . '", Hostname: "'. $result["hostname"] . '"';
+
+		log_message('DEBUG', $logMessage);
+
+		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+
+		if ($resultRecaptcha == 9999) {
+			$this->response->code = 4;
+			$this->response->title = lang('GEN_SYSTEM_NAME');
+			$this->response->icon = lang('CONF_ICON_DANGER');
+			$this->response->msg = lang('GEN_RECAPTCHA_VALIDATION_FAILED');
+			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
+			$this->response->modalBtn['btn1']['action'] = 'redirect';
+		}
+
+		return $resultRecaptcha;
 	}
 }
 

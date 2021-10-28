@@ -15,8 +15,6 @@ $(function () {
 			.focus()
 			.blur();
 		},
-		changeMonth: true,
-		changeYear: true,
 		dateFormat: 'mm/yy',
 	});
 
