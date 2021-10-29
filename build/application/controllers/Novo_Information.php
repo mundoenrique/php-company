@@ -71,6 +71,29 @@ class Novo_Information extends NOVO_Controller {
 	public function ratesInf()
 	{
 		$view = 'rates_info';
+		$json_file = file_get_contents(ASSET_PATH . 'data/ve/rates-info.json');
+		$json_data = json_decode($json_file);
+
+		$rates_currency = $json_data->currency;
+		$rates_currency_symbol = $json_data->currency_symbol;
+		$rates_last_update = $json_data->last_update;
+		$rates_refs = $json_data->refs;
+		$rates_data = $json_data->data;
+
+		$format_decimals = 2;
+		$format_dec_point = '.';
+		$format_thousands_sep = ',';
+		if ($rates_currency === 'cop' || $rates_currency === 'ves') {
+			$format_dec_point = ',';
+			$format_thousands_sep = '.';
+		}
+		$format_params = (object)[
+			'currency_symbol' => $rates_currency_symbol,
+			'decimals' => $format_decimals,
+			'dec_point' => $format_dec_point,
+			'thousands_sep' => $format_thousands_sep
+		];
+
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -83,6 +106,10 @@ class Novo_Information extends NOVO_Controller {
 
 		log_message('INFO', 'NOVO Information: ratesInf Method Initialized');
 		$this->render->titlePage =lang('GEN_FOTTER_RATES');
+		$this->render->json_data = $json_data;
+		$this->render->rates_refs = $rates_refs;
+		$this->render->rates_data = $rates_data;
+		$this->render->format_params = $format_params;
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->goBack = $baseReferer === base_url();
