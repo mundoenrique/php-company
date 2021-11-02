@@ -3323,7 +3323,7 @@ a.ui-button:active,
   text-align: center;
 	color: var(--color-secondary);
 	border: 0;
-  background: transparent url("../../images/icons/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
+  background: transparent url("../images/icons/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;

@@ -104,27 +104,27 @@ $(function () {
 
 	currentDate = new Date();
 	$.datepicker.regional['es'] = {
-		closeText: lang.GEN_PICKER_CLOSETEXT,
-		prevText: lang.GEN_PICKER_PREVTEXT,
-		nextText: lang.GEN_PICKER_NEXTTEXT,
-		currentText: lang.GEN_PICKER_CURRENTTEXT,
-		monthNames: lang.GEN_PICKER_MONTHNAMES,
-		monthNamesShort: lang.GEN_PICKER_MONTHNAMESSHORT,
-		dayNames: lang.GEN_PICKER_DAYNAMES,
-		dayNamesShort: lang.GEN_PICKER_DAYNAMESSHORT,
-		dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
-		weekHeader: lang.GEN_PICKER_WEEKHEADER,
-		dateFormat: lang.GEN_PICKER_DATEFORMAT,
-		firstDay: lang.CONF_PICKER_FIRSTDATE,
-		isRTL: lang.CONF_PICKER_ISRLT,
-		showMonthAfterYear: lang.CONF_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.CONF_PICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: lang.CONF_PICKER_MINDATE,
+		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
+		changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
+		dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
+		firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
+		isRTL: lang.CONF_DATEPICKER_ISRLT,
 		maxDate: currentDate,
-		changeMonth: lang.CONF_PICKER_CHANGEMONTH,
-		changeYear: lang.CONF_PICKER_CHANGEYEAR,
-		showAnim: lang.SHOWANIM,
-		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
+		minDate: lang.CONF_DATEPICKER_MINDATE,
+		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
+		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
+		yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX,
+		closeText: lang.GEN_DATEPICKER_CLOSETEXT,
+		currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
+		dayNames: lang.GEN_DATEPICKER_DAYNAMES,
+		dayNamesMin: lang.GEN_DATEPICKER_DAYNAMESMIN,
+		dayNamesShort: lang.GEN_DATEPICKER_DAYNAMESSHORT,
+		monthNames: lang.GEN_DATEPICKER_MONTHNAMES,
+		monthNamesShort: lang.GEN_DATEPICKER_MONTHNAMESSHORT,
+		nextText: lang.GEN_DATEPICKER_NEXTTEXT,
+		prevText: lang.GEN_DATEPICKER_PREVTEXT,
+		weekHeader: lang.GEN_DATEPICKER_WEEKHEADER,
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
@@ -208,7 +208,7 @@ function callNovoCore(who, where, request, _response_) {
 		var response = {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
-			msg: lang.GEN_MESSAGE_SYSTEM,
+			msg: lang.GEN_SYSTEM_MESSAGE,
 			icon: lang.CONF_ICON_DANGER,
 			modalBtn: {
 				btn1: {

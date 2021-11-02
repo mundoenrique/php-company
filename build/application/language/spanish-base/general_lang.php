@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
-//MENU
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
 $lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
@@ -10,7 +10,6 @@ $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_USERS'] = 'Usuarios';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
-//SUBMENU
 $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Autorización';//TEBAUT
 $lang['GEN_MENU_BULK_UNNAMED'] = 'Tarjetas innominadas';
@@ -48,7 +47,6 @@ $lang['GEN_MENU_REP_KIDGARDEN_PAY'] = 'Pagos de guardería';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Comisión por recarga';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Lotes por facturar';//LOTFAC
 $lang['GEN_MENU_REP_STATUS_MASTER_ACCOUNT'] = 'Estado de cuenta maestra';//REPECT
-//BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
@@ -80,7 +78,6 @@ $lang['GEN_BTN_ALL'] = 'Todos';
 $lang['GEN_BTN_ENABLE'] = 'Habilitar';
 $lang['GEN_BTN_UPDATE'] = 'Actualizar';
 $lang['GEN_BTN_TRANSFER'] = 'Transferir';
-//MODULES
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -137,7 +134,6 @@ $lang['GEN_USER_DATA'] = 'Datos del usuario';
 $lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
 $lang['GEN_NOTE'] = 'Nota:';
 $lang['GEN_CHECK_COLOR'] = 'Si el check se encuentra en color';
-//FOOTER
 $lang['GEN_FOTTER_START'] = 'Inicio';
 $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';
 $lang['GEN_FOTTER_TERMS'] = 'Condiciones';
@@ -146,24 +142,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-//HTML TAG DISPLAY
-$lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
-$lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
-$lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
-$lang['GEN_SIGNIN_TOP'] = 'widget superior';
-$lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
-$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
-$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
-$lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
-$lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';
-$lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
-$lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
-$lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
-$lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
-$lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
-$lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
-$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
-//DATATABLES
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Nro. de lote';
 $lang['GEN_TABLE_BULK_ID'] = 'Id de lote';
 $lang['GEN_TABLE_BULK_DATE'] = 'Fecha de carga';
@@ -219,7 +197,6 @@ $lang['GEN_TABLE_BALANCE'] = 'Saldo';
 $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Nro. documento';
 $lang['GEN_BULK_NUMBER'] = 'Nro. de lote';
 $lang['GEN_QUERY_TYPE'] = 'Tipo de consulta';
-//DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
 $lang['GEN_TABLE_RESULTS'] = 'Resultados';
@@ -243,20 +220,20 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
-//DATEPICKER
-$lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
-$lang['GEN_PICKER_PREVTEXT'] = '<Ant';
-$lang['GEN_PICKER_NEXTTEXT'] = 'Sig>';
-$lang['GEN_PICKER_CURRENTTEXT'] = 'Hoy';
-$lang['GEN_PICKER_MONTHNAMES'] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-$lang['GEN_PICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
-$lang['GEN_PICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
-$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
-$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
-$lang['GEN_PICKER_YEARSUFFIX'] = '';
-//GENERAL LANGUAGE
+$lang['GEN_DATEPICKER_CLOSETEXT'] = 'Aceptar';
+$lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
+$lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+$lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+$lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
+$lang['GEN_DATEPICKER_MONTHNAMES'] = [
+	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+$lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+$lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
+$lang['GEN_DATEPICKER_PREVTEXT'] = 'Ant';
+$lang['GEN_DATEPICKER_WEEKHEADER'] = 'Sem';
+$lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/AAAA';
+$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/AAAA';
 $lang['GEN_TRY_AGAIN']= 'Intenta de nuevo';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ALT_LOADER'] = 'Verificando...';
@@ -348,18 +325,15 @@ $lang['GEN_BONUS_CARD'] = 'Bonus Alimentación Tebca';
 $lang['GEN_SILVER_CARD'] = 'Plata Servitebca';
 $lang['GEN_BULK_TYPE'] = 'Tipo de lote';
 $lang['GEN_TIMEOUT_HTTP'] = 'Tu solicitud continua procesandose, por favor espera.';
-// RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
 	'CC' => 'Cédula de ciudadania',
 	'PP' => 'Pasaporte',
 ];
-//DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
-//DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
@@ -371,7 +345,6 @@ $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'El formato de código es inválido.';
 $lang['GEN_WITHOUT_AUTHORIZATION'] = 'No tienes autorización para ejecutar esta acción.';
 $lang['GEN_RC_0'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_FAILED_THIRD_PARTY'] = 'La respuesta para este proceso no fue exitosa. %s';
-$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['PASSWORD_CHANGE']= "Cambio de contraseña";
 $lang['PASSWORD_CURRENT'] = 'Contraseña actual';
@@ -431,13 +404,45 @@ $lang['GEN_SERVICE_ORDES'] = 'No existen órdenes de servicio en estado "<strong
 $lang['GEN_GET_AUTH_USER_FAIL'] = 'No fue posible identificarte en la aplicación';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'No fue posible generar la llave de autorización';
 $lang['GEN_NO_BULK_AUTHORIZATION'] = 'No se puede autorizar el lote y generar la orden de servicio';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
-// LANG IMAGE
 $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//HTML TAG DISPLAY
+$lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
+$lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
+$lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
+$lang['GEN_SIGNIN_TOP'] = 'widget superior';
+$lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
+$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
+$lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
+$lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
+$lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';
+$lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
+$lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
+$lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
+$lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
+$lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
+$lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
+$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';

@@ -140,14 +140,14 @@ class NOVO_Model extends CI_Model {
 			break;
 			case 502:
 				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->session->sess_destroy();
 			break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
 			default:
-				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 			break;
 		}
 

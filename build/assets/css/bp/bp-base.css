@@ -85,7 +85,7 @@ footer.main-footer {
 }
 
 .select-box {
-	border: .85px solid var(--color-eighth);
+	border: .85px solid var(--color-tenth);
 	color: rgba(0,0,0,0);
 	height: calc(1.45em + .75rem + 4px);
 	line-height: 1.5;

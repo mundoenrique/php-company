@@ -134,15 +134,11 @@ class Verify_Access {
 			case 'recoverPass':
 			case 'passwordRecovery':
 				$auth = lang('CONF_RECOV_PASS') == 'ON';
-			break;
+				break;
 			case 'recoverAccess':
 			case 'validateOtp':
 				$auth = lang('CONF_RECOV_ACCESS') == 'ON';
-			break;
-			case 'benefits':
-			case 'benefitsInf':
-				$auth = lang('CONF_BENEFITS') == 'ON';
-			break;
+				break;
 			case 'changeEmail':
 			case 'changeTelephones':
 			case 'changeDataEnterprice':
@@ -163,160 +159,163 @@ class Verify_Access {
 			case 'deleteFile':
 			case 'getProducts':
 				$auth = ($this->CI->session->has_userdata('logged'));
-			break;
+				break;
 			case 'changePassword':
 			case 'changePass':
 				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
-			break;
-			case 'rates':
+				break;
+			case 'benefits':
+			case 'benefitsInf':
+				$auth = lang('CONF_BENEFITS') == 'ON';
+				break;
 			case 'ratesInf':
 				$auth = ($this->CI->session->has_userdata('logged') && ($customerUri === 've' || $customerUri === 'ven'));
-			break;
+				break;
 			case 'getProductDetail':
 				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
-			break;
+				break;
 			case 'authorizationKey':
 				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
-			break;
+				break;
 			case 'getPendingBulk':
 			case 'loadBulk':
 			case 'getDetailBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
-			break;
+				break;
 			case 'unnamedRequest':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
-			break;
+				break;
 			case 'unnamedAffiliate':
 			case 'unnmamedDetail':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
 				break;
 			case 'confirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
-			break;
+				break;
 			case 'deleteNoConfirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
-			break;
+				break;
 			case 'signBulkList':
 			case 'authorizeBulk':
 			case 'authorizeBulkList':
 			case 'calculateServiceOrder':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
-			break;
+				break;
 			case 'bulkDetail':
 				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
-			break;
+				break;
 			case 'deleteConfirmBulk':
 			case 'disassConfirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
-			break;
+				break;
 			case 'serviceOrder':
 			case 'cancelServiceOrder':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
-			break;
+				break;
 			case 'exportFiles':
 			case 'serviceOrders':
 			case 'getServiceOrders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
-			break;
+				break;
 			case 'clearServiceOrders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
-			break;
+				break;
 			case 'transfMasterAccount':
 			case 'actionMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
-			break;
+				break;
 			case 'masterAccountTransfer':
 			case 'rechargeAuthorization':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
-			break;
+				break;
 			case 'cardsInquiry':
 			case 'inquiriesActions':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
-			break;
+				break;
 			case 'transactionalLimits':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
-			break;
+				break;
 			case 'updateTransactionalLimits':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
-			break;
+				break;
 			case 'commercialTwirls':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
-			break;
+				break;
 			case 'updateCommercialTwirls':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
-			break;
+				break;
 			case 'getReportsList':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
-			break;
+				break;
 			case 'getReport':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
-			break;
+				break;
 			case 'exportToExcelMasterAccount':
 			case 'exportToPDFMasterAccount':
 			case 'exportToExcelMasterAccountConsolid':
 			case 'exportToPDFMasterAccountConsolid':
 			case 'masterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-			break;
+				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
-			break;
+				break;
 			case 'usersActivity':
 			case 'exportExcelUsersActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
-			break;
+				break;
 			case 'accountStatus':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
-			break;
+				break;
 			case 'statusMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
-			break;
+				break;
 			case 'replacement':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
-			break;
+				break;
 			case 'closingBalance':
 			case 'exportToExcel':
 			case 'closingBudgets':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
-			break;
+				break;
 			case 'rechargeMade':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
-			break;
+				break;
 			case 'issuedCards':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
-			break;
+				break;
 			case 'categoryExpense':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
-			break;
+				break;
 			case 'masterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-			break;
+				break;
 			case 'statusBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
-			break;
+				break;
 			case 'cardHolders':
 			case 'exportReportCardHolders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-			break;
+				break;
 			case 'statusAccountExcelFile':
 			case 'statusAccountPdfFile':
 			case 'searchStatusAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
-			break;
+				break;
 			case 'usersManagement':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
-			break;
+				break;
 			case 'enableUser':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
-			break;
+				break;
 			case 'userPermissions':
 			case 'updatePermissions':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
-			break;
+				break;
 			default:
 				$freeAccess = [
-					'signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'terms', 'singleSignOn', 'changeLanguage'
+					'signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
 				];
 				$auth = in_array($module, $freeAccess);
 		}

@@ -64,7 +64,7 @@ class Encrypt_Connect {
 			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
 			$response = new stdClass();
 			$response->rc = lang('CONF_RC_DEFAULT');
-			$response->msg = lang('GEN_MESSAGE_SYSTEM');
+			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
 		if(!isset($response->pais)) {
@@ -177,7 +177,7 @@ class Encrypt_Connect {
 			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
 
 			$failResponse = new stdClass();
-			$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
+			$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
 
 			switch ($CurlErrorNo) {
 				case 28:

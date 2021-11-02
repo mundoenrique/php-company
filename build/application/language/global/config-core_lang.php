@@ -15,17 +15,13 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'recoverPass',
 	'passwordRecovery'
 ];
-//SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
-//AGENT INFO
 $lang['CONF_AGENT_INFO'] = 'OFF';
-//SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
 	'testing' => 0.2,
 	'production' => 0.5
 ];
-//VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
 $lang['CONF_VALID_SUCCESS'] = ' ';
@@ -34,19 +30,15 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
-//NAVBAR STYLES
 $lang['CONF_HEADER_BORDER'] = 'OFF';
-//MODAL STYLES
+$lang['CONF_PADDING_LOGO'] = 'ON';
 $lang['CONF_MODAL_WIDTH'] = 370;
-//ICONS MODALS
 $lang['CONF_ICON'] = 'ui-icon mt-0';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
 $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
-//SINGLESIGNON
 $lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
-//SIGNIN
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
@@ -54,17 +46,13 @@ $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONF_PASS_EXPIRED'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['CONF_LONG_TEXT'] = '';
-//RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
-//BENEFITS
 $lang['CONF_BENEFITS'] = 'ON';
-//LOAD BULK
 $lang['CONF_BULK_LOAD'] = 'ON';
 $lang['CONF_BULK_BRANCHOFFICE'] = 'OFF';
 $lang['CONF_BULK_AUTH'] = 'ON';
 $lang['CONF_BULK_REPROCESS'] = 'OFF';
-//REQUEST UNNAMED
 $lang['CONF_UNNA_STARTING_LINE1'] = 'ON';
 $lang['CONF_UNNA_STARTING_LINE2'] = 'ON';
 $lang['CONF_STARTING_LINE1_REQUIRED'] = 'ON';
@@ -72,51 +60,36 @@ $lang['CONF_STARTING_LINE2_REQUIRED'] = 'ON';
 $lang['CONF_UNNA_PASSWORD'] = 'ON';
 $lang['CONF_UNNA_BRANCHOFFICE'] = 'ON';
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'ON';
-//DETAIL UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'ON';
-//CALCULATE SERVICE ORDER
 $lang['CONF_SERVICE_ORDER_CANCEL'] = 'ON';
 $lang['CONF_SERVICE_ORDER_OTP'] = 'OFF';
-//REPORT iSSUED CARDS
 $lang['CONF_ISSUED_MONTHLY'] = 'ON';
-//FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_SUPERINTENDENCY_LOGO'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
 $lang['CONF_FOOTER_INFO'] = 'ON';
-//CONFIRM BULK
 $lang['CONF_CONFIRM_MSG'] = 'OFF';
-//AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
 $lang['CONF_BULK_AUTH_MSG_SERV'] = 'OFF';
-//AUTHORIZE BULK CARD CREATION
 $lang['CONF_IMAGE_CLOCK'] = 'OFF';
-//HASH PASSWORD
 $lang['CONF_HASH_PASS'] = 'ON';
-//REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
-//SERVICES TRANSFER MASTER ACCOUNT RECHARGE
 $lang['CONF_SELECT_TYPE'] = 'OFF';
 $lang['CONF_INPUT_PASS'] = 'ON';
 $lang['CONF_VALIDATE_PARAMS'] = 'OFF';
-//SETTINGS
 $lang['CONF_SETT_CONFIG'] = 'ON';
 $lang['CONF_SETTINGS_DISCTRICT']= 'OFF';
-//INPUT CARDS INQUIRY
 $lang['CONF_INQUIRY_DOCTYPE'] = 'OFF';
 $lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'ON';
-//STYLE FORM
 $lang['CONF_SETT_STYLE_SKIN'] = 'col-3';
-//CLOSING BALANCE
 $lang['CONF_CLOSING_BALANCE_BOOL'] = 'ON';
 $lang['CONF_CARD_COLUMN']= 'ON';
 $lang['CONF_NAME_COLUMN']= 'ON';
 $lang['CONF_ID_COLUMN']= 'ON';
 $lang['CONF_BALANCE_COLUMN']= 'ON';
 $lang['CONF_LAST_UPDATE_COLUMN']= 'ON';
-//STATUS ACCOUNT
 $lang['CONF_CARD_COLUMN']= 'ON';
 $lang['CONF_DATE_COLUMN']= 'ON';
 $lang['CONF_DNI_COLUMN']= 'ON';
@@ -127,9 +100,7 @@ $lang['CONF_DESCRIPTION_COLUMN']= 'ON';
 $lang['CONF_DEBIT_COLUMN']= 'ON';
 $lang['CONF_CREDIT_COLUMN']= 'ON';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'ON';
-//CARDHOLDERS
 $lang['CONF_CARD_NUMBER_COLUMN']= 'OFF';
-//SETTINGS
 $lang['CONF_SETTINGS_USER'] = 'ON';
 $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_ENTERPRISE'] = 'ON';
@@ -140,9 +111,6 @@ $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'ON';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';
-//FILES CONF
-$lang['CONF_FILES_GENERAL'] = [];
-//DOWNLOAD ICONS
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
@@ -156,24 +124,20 @@ $lang['CONF_FILE'] = 'Archivos de gestión %s';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
-//DATEPICKER
-$lang['CONF_MAX_CONSULT_MONTH'] = 3;
-$lang['CONF_MIN_CONSULT_YEAR'] = 2000;
-$lang['CONF_PICKER_FIRSTDATE'] = 1;
-$lang['CONF_PICKER_ISRLT'] = FALSE;
-$lang['CONF_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
-$lang['CONF_PICKER_YEARRANGE'] = '-20:';
-$lang['CONF_PICKER_MINDATE'] = '-4Y';
-$lang['CONF_PICKER_CHANGEMONTH'] = TRUE;
-$lang['CONF_PICKER_CHANGEYEAR'] = TRUE;
-$lang['CONF_PICKER_SHOWANIM'] = 'slideDown';
-//DATATABLE
+$lang['CONF_DATEPICKER_CHANGEMONTH'] = TRUE;
+$lang['CONF_DATEPICKER_CHANGEYEAR'] = TRUE;
+$lang['CONF_DATEPICKER_DATEFORMAT'] = 'dd/mm/yy';
+$lang['CONF_DATEPICKER_FIRSTDATE'] = 1;
+$lang['CONF_DATEPICKER_ISRLT'] = FALSE;
+$lang['CONF_DATEPICKER_MINDATE'] = '-5Y';
+$lang['CONF_DATEPICKER_MONTHRANGE'] = 3;
+$lang['CONF_DATEPICKER_SHOWANIM'] = 'slideDown';
+$lang['CONF_DATEPICKER_SHOWMONTHAFTERYEAR'] = FALSE;
+$lang['CONF_DATEPICKER_YEARRANGE'] = '-20:';
+$lang['CONF_DATEPICKER_YEARSUFFIX'] = '';
 $lang['CONF_TABLE_SNEXT'] = '»';
 $lang['CONF_TABLE_SPREVIOUS'] = '«';
-$lang['CONF_MIN_CONSULT_YEAR'] = '-60m';
-//UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'OFF';
-//REMOTE AUTHORIZATIONS
 $lang['CONF_REMOTE_AUTH'] = 'OFF';
 $lang['CONF_AUTH_LIST'] = [];
 $lang['CONF_AUTH_VALIDATE'] = [];
@@ -193,26 +157,20 @@ $lang['CONF_AUTH_URL'] = [
 		'ANY' => ''
 	]
 ];
-//USER ACTIVITY
 $lang['CONF_USER_ACTIVITY'] = 'ON';
 $lang['CONF_USERS_ACTIVITY'] = 'OFF';
-//MASTER ACCOUNT
 $lang['CONF_SECTION_COMMISSION'] = 'ON';
 $lang['CONF_BALANCE_ACC_CONCENTRATOR'] = 'OFF';
-//BULK UNNAMED AFFILIATED CARDS
 $lang['CONF_TABLE_UNNAMED_CARDS'] = 'ON';
 $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
-//ICON WARNING SERVICE ORDERS
 $lang['CONF_SERVICEORDERS_ICON'] = 'OFF';
-//EXTERNAL LINKS
 $lang['CONF_NO_LINK'] = 'javascript:';
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
 $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
 $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';
-$lang['CONF_LINK_BENEFITS'] = 'benefits-inf';
 $lang['CONF_LINK_BENEFITS_INF'] = 'benefits';
-$lang['CONF_LINK_TERMS'] = 'terms-inf';
+$lang['CONF_LINK_TERMS'] = 'terms';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_ENTERPRISES'] = 'enterprises';
@@ -254,20 +212,14 @@ $lang['CONF_LINK_USER_ACTIVITY'] = 'user-activity';//permiso asociado REPUSU
 $lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';
 $lang['CONF_LINK_SETTING'] = 'setting';
 $lang['CONF_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account';//permiso asociado REPECT
-//INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 $lang['CONF_LINK_RATES'] = 'rates';
 $lang['CONF_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeTelephones';
-//LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'OFF';
-//FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
-//DOWNLOAD TIME FOR FILES
 $lang['CONF_TIME_DOWNLOAD_FILE'] = '7000';
-//STATUS REJECTED SERVICE ORDERS
 $lang['CONF_STATUS_REJECTED'] = '5';
-//UPLOAD FILE
 $lang['CONF_UPLOAD_SFTP(0)'] = 'CURLE_PROCESS_OK';
 $lang['CONF_UPLOAD_SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL';
 $lang['CONF_UPLOAD_SFTP(2)'] = 'CURLE_FAILED_INIT';
@@ -346,7 +298,6 @@ $lang['CONF_UPLOAD_SFTP(85)'] = 'CURLE_RTSP_CSEQ_ERROR';
 $lang['CONF_UPLOAD_SFTP(86)'] = 'CURLE_RTSP_SESSION_ERROR';
 $lang['CONF_UPLOAD_SFTP(87)'] = 'CURLE_FTP_BAD_FILE_LIST';
 $lang['CONF_UPLOAD_SFTP(88)'] = 'CURLE_CHUNK_FAILED';
-//GENERAL LANGUAGE
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
@@ -362,7 +313,6 @@ $lang['CONF_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['CONF_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 $lang['CONF_MIN_WIDTH_OTP'] = '480';
 $lang['CONF_POSTMY_OTP'] = 'center top+160';
-//VALIDATIONS
 $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 $lang['CONF_VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú,.:()]+$';
 $lang['CONF_FILES_EXTENSION'] = 'xls|xlsx|txt';

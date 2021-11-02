@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos procesar tu solicitud, por favor intenta mas tarde.';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_OTP'] = 'Te enviamos un correo con un código de seguridad, indícalo a continuación.';
@@ -23,7 +24,6 @@ $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 $lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
-$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos procesar tu solicitud, por favor intenta mas tarde.';
 $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Nro. de Tarjeta';
 //RESPONSES

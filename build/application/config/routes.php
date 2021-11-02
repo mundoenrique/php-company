@@ -57,37 +57,29 @@ $route['translate_uri_dashes'] = FALSE;
 | TEMPORAL ROUTES
 |--------------------------------------------------------------------------
 */
-//User
 $route['(bpi|co|pe|us|ve)/browsers'] = "Novo_User/browsers";
 $route['(bpi|co|pe|us|ve)/inicio'] = "Novo_User/login";
 $route['(bpi|co|pe|us|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
 $route['(bpi|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePass";
-//Information
 $route['(bpi|co|pe|us|ve)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(bpi|co|pe|us|ve)/inf-condiciones'] = "Novo_Information/terms";
-$route['(bpi|co|pe|us|ve)/inf-tarifas'] = "Novo_Information/rates";
 /*
 |--------------------------------------------------------------------------
 | CURRENT ROUTES
 |--------------------------------------------------------------------------
 */
-//Asynchronous
 $route['(:any)/async-call'] = "Novo_CallModels";
 $route['(:any)/single'] = "Novo_CallModels";
-//User
 $route['(:any)/inicio'] = function ($customer) {
 	header('Location: '.BASE_URL.$customer.'/sign-in', 302);
 	exit;
 };
-
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
 $route['(:any)/suggestion'] = "Novo_User/suggestion";
 $route['(:any)/sign-in'] = "Novo_User/signIn";
 $route['(:any)/sign-in/(:any)'] = "Novo_User/signIn";
 $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
-$route['(:any)/benefits-inf'] = "Novo_Information/benefits";
-$route['(:any)/terms-inf'] = "Novo_Information/terms";
 $route['(:any)/recover-password'] = "Novo_User/recoverPass";
 $route['(:any)/recover-password/(:any)'] = "Novo_User/recoverPass";
 $route['(:any)/recover-access'] = "Novo_User/recoverAccess";
@@ -95,15 +87,12 @@ $route['(:any)/recover-access/(:any)'] = "Novo_User/recoverAccess";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
 $route['(:any)/users-management'] = "Novo_User/usersManagement";
 $route['(:any)/user-permissions'] = "Novo_User/userPermissions";
-//Information
-$route['(:any)/benefits'] = "Novo_Information/benefitsInf";
 $route['(:any)/terms'] = "Novo_Information/termsInf";
+$route['(:any)/benefits'] = "Novo_Information/benefitsInf";
 $route['(:any)/rates'] = "Novo_Information/ratesInf";
-//Business
 $route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
 $route['(:any)/products'] = "Novo_Business/getProducts";
 $route['(:any)/product-detail'] = "Novo_Business/getProductDetail";
-//Bulk
 $route['(:any)/bulk-load'] = "Novo_Bulk/getPendingBulk";
 $route['(:any)/bulk-detail'] = "Novo_Bulk/getDetailBulk";
 $route['(:any)/bulk-confirm'] = "Novo_Bulk/confirmBulk";
@@ -112,17 +101,13 @@ $route['(:any)/unnamed-request'] = "Novo_Bulk/unnamedRequest";
 $route['(:any)/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
 $route['(:any)/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
 $route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
-//Inquiries
 $route['(:any)/service-orders'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/inquiry-bulk-detail'] = "Novo_Inquiries/bulkDetail";
-//services
 $route['(:any)/transf-master-account'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/cards-inquiry'] = "Novo_Services/cardsInquiry";
 $route['(:any)/transactional-limits'] = "Novo_Services/transactionalLimits";
 $route['(:any)/commercial-twirls'] = "Novo_Services/commercialTwirls";
-//DownloadFile
 $route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
-//Reports
 $route['(:any)/reports'] = "Novo_Reports/getReportsList";
 $route['(:any)/account-status'] = "Novo_Reports/accountStatus";
 $route['(:any)/replacement'] = "Novo_Reports/replacement";
@@ -136,10 +121,7 @@ $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/status-master-account'] = "Novo_Reports/statusMasterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
-//settings
 $route['(:any)/setting'] = "Novo_Settings/options";
-
-
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
 $route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";

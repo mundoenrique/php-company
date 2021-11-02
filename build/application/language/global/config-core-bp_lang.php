@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SELECT_TYPE'] = 'ON';
 $lang['CONF_INPUT_PASS'] = 'ON';
 $lang['CONF_VALIDATE_PARAMS'] = 'ON';
+//INPUT CARDS INQUIRY
+$lang['CONF_INQUIRY_DOCTYPE'] = 'OFF';
 //SIGNIN
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
@@ -25,3 +27,5 @@ $lang['CONF_SERVICE_ORDER_OTP'] = 'ON';
 $lang['CONF_FOOTER_INFO'] = 'OFF';
 //VALIDATE FORMS
 $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}';
+//NAVBAR STYLES
+$lang['CONF_PADDING_LOGO'] = 'OFF';
