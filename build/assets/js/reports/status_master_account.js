@@ -5,12 +5,10 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		dateFormat: 'mm/yy',
-		minDate: new Date(2019, 7, 1),
+		minDate: new Date(2019, 6, 1),
 		maxDate: '-1M',
 		showButtonPanel: true,
 		onClose: function (dateText, inst) {
-			console.log(dateText)
-			console.log(inst)
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			$(this).datepicker('setDate', new Date(year, month, 1));
