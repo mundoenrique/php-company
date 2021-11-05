@@ -343,7 +343,7 @@ function getPropertyOfElement(property, element) {
 }
 
 function formInputTrim(form) {
-	form.find('input, select, textarea').each(function () {
+	form.find('input:not([type=file]), select, textarea').each(function () {
 		var thisValInput = $(this).val();
 
 		if (thisValInput == null) {
