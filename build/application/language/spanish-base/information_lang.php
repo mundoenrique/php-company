@@ -31,3 +31,5 @@ $lang['BENEFITS_TITULO_5'] = 'Operaciones';
 $lang['BENEFITS_MSG_5'] = 'Consulte, autorice o anule Lotes de Emisión y Recarga de tarjetas con mayor facilidad y obtenga la Orden de Servicio para facilitar su pago.';
 $lang['BENEFITS_TITULO_6'] = 'Integración';
 $lang['BENEFITS_MSG_6'] = 'Conexión con el sistema administrativo de la empresa (ERP) para facilitar los procesos operativos y contables.';
+$lang['ERROR_MSG_RATES'] = "<p><strong>¡Ha ocurrido un problema inesperado!</strong></p>
+<p>Por favor, consultar nuevamente nuestras tarifas en unos minutos.</p>";

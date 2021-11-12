@@ -42,7 +42,6 @@ $(function() {
 		btnText = $(this).text();
 
 		form = $('#auth-bulk-form');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

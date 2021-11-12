@@ -126,7 +126,6 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			formInputTrim(form);
 			data = getDataForm(form)
 			form = $('#get-data')
 			$.each(data, function(index, value) {
