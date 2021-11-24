@@ -28,7 +28,6 @@ $(function () {
 		$('#tableCardInquiry').find('thead > tr').removeClass('selected');
 		$('#documentType').find('option:first').val('');
 		form = $('#searchCardsForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -391,7 +390,6 @@ function applyActions(currentAction, currentForm, currentBtn) {
 
 function InqValidateActions(currentAction, currentForm) {
 	cardsData = table.rows('.selected').data();
-	formInputTrim(currentForm);
 	validateForms(currentForm);
 
 	if (cardsData.length == 0) {

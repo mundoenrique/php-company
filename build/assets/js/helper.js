@@ -133,6 +133,10 @@ $(function () {
 		$('#widget-menu').removeClass('none');
 		$("#widget-menu").toggleClass("show");
 	});
+
+	$('body,html').click(function (e) {
+		$('#widget-menu').removeClass('show');
+	});
 });
 
 function callNovoCore(who, where, request, _response_) {
@@ -339,13 +343,15 @@ function getPropertyOfElement(property, element) {
 }
 
 function formInputTrim(form) {
-	form.find('input, select').each(function () {
+	form.find('input:not([type=file]), select, textarea').each(function () {
 		var thisValInput = $(this).val();
+
 		if (thisValInput == null) {
 			return;
 		}
-		var trimVal = thisValInput.trim()
-		$(this).val(trimVal)
+
+		var trimVal = thisValInput.trim();
+		$(this).val(trimVal);
 	});
 }
 
@@ -371,9 +377,9 @@ function cryptoPass(jsonObject, req) {
 
 function getDataForm(form) {
 	var dataForm = {};
-	form.find('input, select').each(function (index, element) {
-		dataForm[$(element).attr('id')] = $(element).val().trim()
-	})
+	form.find('input, select, textarea').each(function (index, element) {
+		dataForm[$(element).attr('id')] = $(element).val();
+	});
 
 	return dataForm
 }
@@ -383,7 +389,7 @@ function downLoadfiles(data) {
 	var blob = new Blob([File], { type: "application/" + data.ext });
 
 	if (window.navigator.msSaveOrOpenBlob) {
-		window.navigator.msSaveBlob(blob, data.name)
+		window.navigator.msSaveBlob(blob, data.name);
 	} else {
 		var url = window.URL.createObjectURL(blob);
 		$('#download-file').attr('href', url);

@@ -49,7 +49,6 @@ $(function () {
 	$('#userActivityBtn').on('click', function(e) {
 		e.preventDefault();
 		form = $('#userActivityForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -151,7 +150,6 @@ $(function () {
 	$('.downloadReport').on('click', function(e) {
 		e.preventDefault();
 		form = $('#userActivityForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

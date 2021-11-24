@@ -117,11 +117,11 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->balanceConcentratingAccount = $response->bean->maestroDeposito->saldoCtaConcentradora;
 				}
 
-				if ( (float)$response->bean->maestroDeposito->saldo < 0 ){
+				if ((float)$response->bean->maestroDeposito->saldo < 0 ) {
 					$this->response->cssNegativeBalance = "danger";
 				}
 
-				$this->response->balance = lang('CONF_CURRENCY').' '. 				   $response->bean->maestroDeposito->saldoDisponible;
+				$this->response->balance = lang('CONF_CURRENCY') . ' ' . $response->bean->maestroDeposito->saldoDisponible;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:

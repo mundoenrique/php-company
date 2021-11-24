@@ -7,7 +7,6 @@ $(function() {
 	$('#btn-pass-recover').on('click', function(e) {
 		e.preventDefault();
 		form = $('#form-access-recovery');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -26,7 +25,6 @@ $(function() {
 	$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
 		form = $('#otpModal');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

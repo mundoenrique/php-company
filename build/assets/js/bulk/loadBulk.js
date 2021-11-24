@@ -187,7 +187,6 @@ $(function () {
 	$('#system-info').on('click', '.delete-bulk-btn', function(e) {
 		e.preventDefault();
 		var formDeleteBulk = $('#delete-bulk-form');
-		formInputTrim(formDeleteBulk);
 		validateForms(formDeleteBulk);
 
 		if(formDeleteBulk.valid()) {
