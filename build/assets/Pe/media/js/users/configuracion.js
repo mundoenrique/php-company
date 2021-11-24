@@ -941,18 +941,24 @@ $(function () {
 				if (ext === "txt" || ext === "TXT") {
 					data.context = $('#btn-new-mas')
 						.click(function () {
-
 							if ($("option:selected", "#listaEmpresasSuc").attr("data-rif") != "") {
 								$("#form-new-suc").fadeOut("fast");
 								$("#btn-new-mas").replaceWith('<h3 id="cargando_masivo">Cargando...</h3>');
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
+
 								var dataRequest = JSON.stringify({ 'data_rif': $("option:selected", "#listaEmpresasSuc").attr("data-rif") });
 								dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
-								dat.formData = { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) };
+								dat.formData = {
+									request: dataRequest,
+									ceo_name: ceo_cook,
+									plot: btoa(ceo_cook)
+								};
+
 								dat.submit().done(function (response, textStatus, jqXHR) {
-									var result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
+									result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
+
 									if (result) {
 										if (!result.ERROR) {
 											mostrarError(result);
