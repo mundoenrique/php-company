@@ -23,13 +23,23 @@
 						</div>
 					</div>
 				<?php endif; ?>
-				<div class="menu-item">
-					<a class="text-icon" href="<?= base_url(lang('CONF_LINK_BENEFITS_INF')); ?>">
-						<i class="items-center m-auto icon-card-allocation h3">&nbsp;</i>
-						<?= lang('GEN_FOTTER_BENEFITS'); ?>
-					</a>
-				</div>
-				<?php if (verifyDisplay('footer', $module, lang('GEN_FOTTER_START'))) : ?>
+				<?php if ($module !== 'benefits_info') : ?>
+					<div class="menu-item">
+						<a class="text-icon" href="<?= base_url(lang('CONF_LINK_BENEFITS_INF')); ?>">
+							<i class="items-center m-auto icon-card-allocation h3">&nbsp;</i>
+							<?= lang('GEN_FOTTER_BENEFITS'); ?>
+						</a>
+					</div>
+				<?php endif; ?>
+				<?php if ($module !== 'terms') : ?>
+					<div class="menu-item">
+						<a class="text-icon" href="<?= base_url(lang('CONF_LINK_TERMS')); ?>">
+							<i class="items-center m-auto icon-document h3">&nbsp;</i>
+							<?= lang('GEN_FOTTER_TERMS'); ?>
+						</a>
+					</div>
+				<?php endif; ?>
+				<?php if ($module !== 'signIn' && !$this->session->has_userdata('logged')) : ?>
 					<div class="menu-item">
 						<a class="text-icon" href="<?= base_url($goOut); ?>" rel="section">
 							<i class="items-center m-auto icon-home h3">&nbsp;</i>

@@ -7,7 +7,6 @@ $(function () {
 	$('#confirm-bulk').on('click', function(e) {
 		e.preventDefault()
 		btnText = $(this).text();
-		formInputTrim(form);
 		validateForms(form);
 
 		if(form.valid()) {

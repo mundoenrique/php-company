@@ -29,7 +29,6 @@ $(function () {
 
 		$('#system-info').on('click', '.send-otp', function() {
 			form = $('#formVerificationOTP');
-			formInputTrim(form);
 			validateForms(form);
 
 			if (form.valid()) {

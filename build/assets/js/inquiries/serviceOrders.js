@@ -94,7 +94,6 @@ $(function () {
 		var statusOrder = $('#status-order');
 		btnText = btnAction.text().trim();
 		form = $('#service-orders-form');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -236,7 +235,6 @@ function deleteBulk(oldID, inputSelected) {
 	var deleteBulkBtn = $('#delete-bulk-btn')
 	var formDeleteBulk = $('#delete-bulk-form');
 	deleteBulkBtn.on('click', function () {
-		formInputTrim(formDeleteBulk);
 		validateForms(formDeleteBulk);
 
 		if (formDeleteBulk.valid()) {

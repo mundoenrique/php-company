@@ -61,7 +61,6 @@ $(function () {
 	$('.downloadReport').on('click', function(e) {
 		e.preventDefault();
 		form = $('#cardholder-form');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

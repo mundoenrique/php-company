@@ -676,7 +676,6 @@ function branchesTable( dataResponse ) {
 	$('#btn-update-branch').on('click', function (e) {
 		e.preventDefault;
 		form = $('#branchInfoForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

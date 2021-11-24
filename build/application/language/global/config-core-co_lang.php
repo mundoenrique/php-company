@@ -10,3 +10,4 @@ $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
 //VALIDATE FORMS
 $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^([0-9]{9,17})';
 $lang['CONF_VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú ]+$';
+$lang['CONF_MENU_CIRCLE'] = 'ON';
