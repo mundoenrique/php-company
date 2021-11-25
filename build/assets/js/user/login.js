@@ -87,7 +87,6 @@ function getSignIn(forWhere) {
 	where = forWhere;
 
 	callNovoCore(who, where, data, function (response) {
-		console.log(response)
 		switch (response.code) {
 			case 0:
 				if (forWhere == 'SignIn') {
