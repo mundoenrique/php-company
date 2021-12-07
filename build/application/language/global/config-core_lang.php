@@ -69,6 +69,7 @@ $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_SUPERINTENDENCY_LOGO'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
 $lang['CONF_FOOTER_INFO'] = 'ON';
+$lang['CONF_FOOTER_RATES'] = 'OFF';
 $lang['CONF_CONFIRM_MSG'] = 'OFF';
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';

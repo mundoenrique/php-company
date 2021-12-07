@@ -47,7 +47,7 @@
 						</a>
 					</div>
 				<?php endif; ?>
-				<?php if ($this->session->has_userdata('logged') && !isset($skipmenu)) : ?>
+				<?php if (($this->session->has_userdata('logged') && !isset($skipmenu)) && lang('CONF_FOOTER_RATES') == 'ON') : ?>
 					<div class="menu-item">
 						<a class="text-icon" href="<?= base_url(lang('CONF_LINK_RATES')); ?>" rel="section">
 							<i class="items-center m-auto icon-rates h3">&nbsp;</i>
