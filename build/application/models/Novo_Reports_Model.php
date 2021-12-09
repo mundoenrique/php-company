@@ -1614,11 +1614,14 @@ class Novo_Reports_Model extends NOVO_Model {
 						$dataAccount = [];
 						$debit = '';
 						$credit = '';
+						$secuencia = $usersTables->secuencia ?? '';
+						$terminal = $usersTables->terminalTransaccion ?? '';
+						$fid = $usersTables->fid ?? '';
 
-						if(lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON') {
-							$usersTables->secuencia = $usersTables->secuence;
-							$usersTables->terminal = $usersTables->terminal;
-							$usersTables->fid = $usersTables->fid;
+
+						if(lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'OFF') {
+							$secuencia = $usersTables->secuence ?? '';
+							$terminal = $usersTables->terminal ?? '';
 						}
 
 						if ($usersTables->tipoTransaccion == '+') {
@@ -1630,9 +1633,9 @@ class Novo_Reports_Model extends NOVO_Model {
 						}
 
 						$objUserData[$key] = [
-							'secuence' => "",
-							'terminal' => "",
-							'fid' => "",
+							'secuence' => $secuencia,
+							'terminal' => $terminal,
+							'fid' => $fid,
 							'reference' => $usersTables->referencia,
 							'description' => $usersTables->descripcion,
 							'date' => $usersTables->fecha,

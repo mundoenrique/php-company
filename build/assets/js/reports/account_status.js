@@ -8,14 +8,24 @@ $(function () {
 	$('#blockResults').addClass('hidden');
 
 	datePicker.datepicker({
-		onSelect: function (selectedDate) {
-			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[0] + '/' + dateSelected[2];
-			$(this)
-			.focus()
-			.blur();
-		},
 		dateFormat: 'mm/yy',
+		showButtonPanel: true,
+		onSelect: function(selectDate){
+			$(this)
+				.focus()
+				.blur();
+		},
+		onClose: function (dateText, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		}
 	});
 
 	$(":radio").on("change", function (e) {
