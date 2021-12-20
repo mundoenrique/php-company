@@ -1592,69 +1592,41 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$table =[];
 				$this->response->code = 0;
+				$listStatesAccounts = [];
+				$listadoCuentas = $response->listadoEstadosCuentas;
 
-				foreach ((array)$response->listadoEstadosCuentas as $key => $val) {
-					$table[$key] = $val;
-					$valAccountStatus[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
-				}
+				foreach ($listadoCuentas as $key => $val) {
+					$listStatesAccounts[$key]['account'] = $listadoCuentas[$key]->cuenta;
+					$listStatesAccounts[$key]['client'] = $listadoCuentas[$key]->cliente;
+					$listStatesAccounts[$key]['id'] = $listadoCuentas[$key]->idExtPer;
 
-				$usersData = $valAccountStatus;
-				$usersTables = [];
-				$data = [];
+					foreach ($listadoCuentas[$key]->listaMovimientos as $key1 => $val) {
 
-				foreach ($usersData as $key1 => $val) {
-					$data[$key1] = $usersData[$key1];
-				}
+						$fid = $listadoCuentas[$key]->listaMovimientos[$key1]->fid ?? '';
+						$secuencia = $listadoCuentas[$key]->listaMovimientos[$key1]->secuencia ?? '';
+						$terminal = $listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion ?? '';
 
-				foreach ($data as $key => $val) {
-					foreach ($data[$key] as $key1 => $val) {
-						$usersTables =(($data[$key])[$key1]);
-						$dataAccount = [];
-						$debit = '';
-						$credit = '';
-						$secuencia = $usersTables->secuencia ?? '';
-						$terminal = $usersTables->terminalTransaccion ?? '';
-						$fid = $usersTables->fid ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = $fid;
+						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = $secuencia;
+						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = $terminal;
+						$listStatesAccounts[$key]['listMovements'][$key1]['reference'] = $listadoCuentas[$key]->listaMovimientos[$key1]->referencia;
+						$listStatesAccounts[$key]['listMovements'][$key1]['description'] = $listadoCuentas[$key]->listaMovimientos[$key1]->descripcion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['date'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fecha;
+						$listStatesAccounts[$key]['listMovements'][$key1]['client'] = $listadoCuentas[$key]->listaMovimientos[$key1]->cliente;
 
-
-						if(lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'OFF') {
-							$secuencia = $usersTables->secuence ?? '';
-							$terminal = $usersTables->terminal ?? '';
-						}
-
-						if ($usersTables->tipoTransaccion == '+') {
-							$debit = $usersTables->monto;
+						if ($listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion == '+') {
+							$debit = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
 							$credit = '0';
 						} else {
-							$credit = $usersTables->monto;
+							$credit = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
 							$debit = '0';
 						}
 
-						$objUserData[$key] = [
-							'secuence' => $secuencia,
-							'terminal' => $terminal,
-							'fid' => $fid,
-							'reference' => $usersTables->referencia,
-							'description' => $usersTables->descripcion,
-							'date' => $usersTables->fecha,
-							'credit' => $credit,
-							'debit' => $debit,
-							'client' => $usersTables->cliente
-						];
-						($data[$key])[$key1]= $objUserData[$key];
+						$listStatesAccounts[$key]['listMovements'][$key1]['credit'] = $credit;
+						$listStatesAccounts[$key]['listMovements'][$key1]['debit'] = $debit;
 					}
 				}
-
-				foreach($response->listadoEstadosCuentas as $key => $value){
-					($dataAccount[$key])['account'] = $response->listadoEstadosCuentas[$key]->cuenta;
-					($dataAccount[$key])['client'] = $response->listadoEstadosCuentas[$key]->cliente;
-					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
-				}
-
-				$this->response->data->users = $data;
-				$this->response->data->accounts = $dataAccount;
 			break;
 			case -444:
 				$this->response->icon = lang('CONF_ICON_DANGER');
@@ -1663,11 +1635,12 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -150:
-				$this->response->code = 1;
-				$this->response->data->users = '';
+				$listStatesAccounts = [''];
+				$this->response->code = 0;
 			break;
 		}
 
+		$this->response->data->listStatesAccounts = $listStatesAccounts;
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
 	/**

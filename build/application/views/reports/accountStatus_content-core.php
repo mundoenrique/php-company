@@ -106,16 +106,7 @@
 						</button>
 						<?php endif; ?>
 						</div>
-					<table id="globalTable" class="cell-border h6 display responsive w-100">
-						<thead>
-        			<tr>
-            		<th>
-								</th>
-       				</tr>
-    				</thead>
-						<tbody>
-						</tbody>
-					</table>
+					<div id="account-status-table"></div>
 					<div class="line my-2"></div>
 				</div>
 			</div>

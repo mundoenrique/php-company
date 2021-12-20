@@ -1,6 +1,7 @@
 'use strict'
 var reportsResults;
 $(function () {
+
 	var datePicker = $('.date-picker');
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -39,6 +40,7 @@ $(function () {
 	});
 
 	$("#searchButton").on("click", function (e){
+		e.preventDefault();
 		var form = $('#statusAccountForm');
 		var data = getDataForm(form);
 		$('#spinnerBlock').addClass('hide');
@@ -70,141 +72,124 @@ $(function () {
 });
 
 function searchStatusAccount(passData){
+	$('#account-status-table').empty();
+	$('#export_excel').addClass('hidden');
+	$('#blockResults').removeClass('hidden');
 	who = 'Reports';
 	where = 'searchStatusAccount';
 	data = passData;
+	insertFormInput(true);
 
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data;
-		code = response.code
-		insertFormInput(false);
+	callNovoCore(who, where, data, function (response) {
+		dataResponse = response.data.listStatesAccounts;
 		$('#spinnerBlock').addClass('hide');
+		var table = '';
 
-		if (code == 0) {
+		if (dataResponse != '') {
 			$('#export_excel').removeClass('hidden');
-			$('#blockResults').removeClass('hidden');
-			var table= $("#globalTable").DataTable();
-			var personalizeRowsInfo = []
-			table.destroy();
-			$.each(dataResponse.accounts, function (key, value, index) {
-				var table, body = '';
-				table= '<div class=""><div class="flex ml-4 py-3 flex-auto">'
-				table+=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ': <span class="light text">'+ dataResponse.accounts[key].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p></div>'
-				table+= 	'<table id="resultsAccount'+  key + '" class="cell-border h6 display responsive w-100">';
-				table+= 	'<thead class="bg-primary secondary regular">';
-				table+= 		'<tr class="" style="margin-left: 0px;">';
-				table+= 			'<td>Fecha</td>';
-				table+= 			'<td>Fid</td>';
-				table+= 			'<td>Terminal</td>';
-				table+= 			'<td>Secuencia</td>';
-				table+= 			'<td>Referencia</td>';
-				table+= 			'<td>Descripción</td>';
-				table+= 			'<td>Abono</td>';
-				table+= 			'<td>Cargo</td>';
-				table+= 		'</tr>';
-				table+= 	'</thead>';
-				table+= 		'<tbody></tbody>'
-				table+= '</table>';
-
-				personalizeRowsInfo[key] = table;
-			})
-
-			$("#globalTable").html(personalizeRowsInfo);
-			$.each(dataResponse.users, function (key, value, index) {
-				var name = '#resultsAccount';
-				createTable(name, dataResponse.users, key);
-			})
-		}else if(code == 1){
-			$('#blockResults').removeClass('hidden');
-			$('#export_excel').addClass('hidden');
-			var principalTable= $("#globalTable").DataTable();
-			principalTable.destroy();
-			var data = [];
-			var name = '#globalTable';
-			var table, key = '';
-			table= '<div class="">'
-			table+= 	'<table id="resultsAccount" class="cell-border h6 display responsive w-100">';
-			table+= 	'<thead class="bg-primary secondary regular">';
-			table+= 		'<tr class="" style="margin-left: 0px;">';
-			table+= 			'<td>Fecha</td>';
-			table+= 			'<td>Fid</td>';
-			table+= 			'<td>Terminal</td>';
-			table+= 			'<td>Secuencia</td>';
-			table+= 			'<td>Referencia</td>';
-			table+= 			'<td>Descripción</td>';
-			table+= 			'<td>Abono</td>';
-			table+= 			'<td>Cargo</td>';
-			table+= 		'</tr>';
-			table+= 	'</thead>';
-			table+= 		'<tbody></tbody>'
-			table+= '</table>';
-			$("#globalTable").html(table);
-			createTable(name, data, key);
 		}
 
-	});
-};
-
-function createTable(name, data, index){
-	$(name + index).DataTable({
-		"ordering": false,
-		"responsive": true,
-		"lengthChange": false,
-		"pagingType": "full_numbers",
-		"data": data[index],
-		"columns": [
-			{ data: 'date' },
-			{ data: 'fid' },
-			{ data: 'terminal' },
-			{ data: 'secuence' },
-			{ data: 'reference' },
-			{ data: 'description' },
-			{ data: 'debit' },
-			{ data: 'credit' },
-		],
-		"columnDefs": [
-			{
-				"targets": 0,
-				"className": "date",
-				"visible": lang.CONF_DATE_COLUMN == "ON"
-			},
-			{
-				"targets": 1,
-				"className": "fid",
-				"visible": lang.CONF_DNI_COLUMN == "ON"
-			},
-			{
-				"targets": 2,
-				"className": "terminal",
-				"visible": lang.CONF_TERMINAL_COLUMN == "ON"
-			},
-			{
-				"targets": 3,
-				"className": "secuence",
-				"visible": lang.CONF_SECUENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 4,
-				"className": "reference",
-				"visible": lang.CONF_REFERENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 5,
-				"className": "description",
-				"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
-			},
-			{
-				"targets": 6,
-				"className": "debit",
-				"visible": lang.CONF_DEBIT_COLUMN == "ON"
-			},
-			{
-				"targets": 7,
-				"className": "credit",
-				"visible": lang.CONF_CREDIT_COLUMN == "ON"
+		$.each(dataResponse, function (index, value) {
+			if (value) {
+			  table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
+				table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ': <span class="light text">'+ dataResponse[index].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse[index].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse[index].client +'</span></p></div>';
 			}
-		],
-		"language": dataTableLang
+				table += '<table class="result-account-status cell-border h6 display responsive w-100">';
+				table += '<thead class="bg-primary secondary regular">';
+				table += '<tr>';
+				table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_DEBIT +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_CREDIT +'</th>';
+				table += '</tr>';
+				table += '</thead>';
+				table += '<tbody>';
+
+			if (value) {
+				$.each(dataResponse[index].listMovements, function (index2, value2) {
+					table += '<tr>';
+					table += '<td>' + value2.date + '</td>';
+					table += '<td>' + value2.fid + '</td>';
+					table += '<td>' + value2.terminal + '</td>';
+					table += '<td>' + value2.secuence + '</td>';
+					table += '<td>' + value2.reference + '</td>';
+					table += '<td>' + value2.description + '</td>';
+					table += '<td>' + value2.debit + '</td>';
+					table += '<td>' + value2.credit + '</td>';
+					table += '</tr>';
+				});
+			}
+				table += '</tbody>';
+				table += '</table>';
+		});
+
+		$('#account-status-table').append(table);
+		$('.result-account-status').DataTable({
+			"ordering": false,
+			"responsive": true,
+			"lengthChange": false,
+			"pagingType": "full_numbers",
+			"columns": [
+				{ data: 'date' },
+				{ data: 'fid' },
+				{ data: 'terminal' },
+				{ data: 'secuence' },
+				{ data: 'reference' },
+				{ data: 'description' },
+				{ data: 'debit' },
+				{ data: 'credit' },
+			],
+			"columnDefs": [
+				{
+					"targets": 0,
+					"className": "date",
+					"visible": lang.CONF_DATE_COLUMN == "ON"
+				},
+				{
+					"targets": 1,
+					"className": "fid",
+					"visible": lang.CONF_DNI_COLUMN == "ON"
+				},
+				{
+					"targets": 2,
+					"className": "terminal",
+					"visible": lang.CONF_TERMINAL_COLUMN == "ON"
+				},
+				{
+					"targets": 3,
+					"className": "secuence",
+					"visible": lang.CONF_SECUENCE_COLUMN == "ON"
+				},
+				{
+					"targets": 4,
+					"className": "reference",
+					"visible": lang.CONF_REFERENCE_COLUMN == "ON"
+				},
+				{
+					"targets": 5,
+					"className": "description",
+					"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
+				},
+				{
+					"targets": 6,
+					"className": "debit",
+					"visible": lang.CONF_DEBIT_COLUMN == "ON"
+				},
+				{
+					"targets": 7,
+					"className": "credit",
+					"visible": lang.CONF_CREDIT_COLUMN == "ON"
+				}
+			],
+			"language": dataTableLang,
+		});
+
+		$('.result-account-status').removeClass('hidden');
+		insertFormInput(false);
 	});
 };
 
