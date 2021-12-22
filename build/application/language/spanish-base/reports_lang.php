@@ -43,13 +43,14 @@ $lang['REPORTS_DATE_RANGE_NOT_ALLOWED'] = 'El rango de fecha permitido es de má
 $lang['REPORTS_BY_INDENTIFICATION_NUMBER'] = 'Por número de identificación';
 $lang['REPORTS_BY_CARD_NUMBER'] = 'Por número de tarjeta';
 //ACCOUNT STATUS
+$lang['REPORTS_ACCOUNT_CARD']="Tarjeta";
 $lang['REPORTS_ACCOUNT_FID']="Fid";
 $lang['REPORTS_ACCOUNT_TERMINAL']="Terminal";
 $lang['REPORTS_ACCOUNT_SECUENCE']="Secuencia";
 $lang['REPORTS_ACCOUNT_REFERENCE']="Referencia";
 $lang['REPORTS_ACCOUNT_DESCRIPTION']="Descripción";
-$lang['REPORTS_ACCOUNT_DEBIT']="Debito";
-$lang['REPORTS_ACCOUNT_CREDIT']="Cargo";
+$lang['REPORTS_ACCOUNT_OPERATION']="Operación(+/-)";
+$lang['REPORTS_ACCOUNT_AMOUNT']="Monto";
 
 
 

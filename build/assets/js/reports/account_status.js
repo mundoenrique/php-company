@@ -92,19 +92,20 @@ function searchStatusAccount(passData){
 		$.each(dataResponse, function (index, value) {
 			if (value) {
 			  table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
-				table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ': <span class="light text">'+ dataResponse[index].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse[index].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse[index].client +'</span></p></div>';
+				table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +': <span class="light text">'+ dataResponse[index].id +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +': <span class="light text">'+ dataResponse[index].account +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':<span class="light text">'+ dataResponse[index].client +'</span></p></div>';
 			}
 				table += '<table class="result-account-status cell-border h6 display responsive w-100">';
 				table += '<thead class="bg-primary secondary regular">';
 				table += '<tr>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
 				table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
 				table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
 				table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
 				table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
 				table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
 				table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_DEBIT +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_CREDIT +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
 				table += '</tr>';
 				table += '</thead>';
 				table += '<tbody>';
@@ -112,14 +113,15 @@ function searchStatusAccount(passData){
 			if (value) {
 				$.each(dataResponse[index].listMovements, function (index2, value2) {
 					table += '<tr>';
+					table += '<td>' + value2.card + '</td>';
 					table += '<td>' + value2.date + '</td>';
 					table += '<td>' + value2.fid + '</td>';
 					table += '<td>' + value2.terminal + '</td>';
 					table += '<td>' + value2.secuence + '</td>';
 					table += '<td>' + value2.reference + '</td>';
 					table += '<td>' + value2.description + '</td>';
-					table += '<td>' + value2.debit + '</td>';
-					table += '<td>' + value2.credit + '</td>';
+					table += '<td>' + value2.typeTransaction + '</td>';
+					table += '<td>' + value2.amount + '</td>';
 					table += '</tr>';
 				});
 			}
@@ -134,55 +136,66 @@ function searchStatusAccount(passData){
 			"lengthChange": false,
 			"pagingType": "full_numbers",
 			"columns": [
+				{ data: 'Tarjeta' },
 				{ data: 'date' },
 				{ data: 'fid' },
 				{ data: 'terminal' },
 				{ data: 'secuence' },
 				{ data: 'reference' },
 				{ data: 'description' },
-				{ data: 'debit' },
-				{ data: 'credit' },
+				{ data: 'typeTransaction' },
+				{ data: 'amount' },
 			],
 			"columnDefs": [
 				{
 					"targets": 0,
+					"className": "Tarjeta",
+					"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
+				},
+				{
+					"targets": 1,
 					"className": "date",
 					"visible": lang.CONF_DATE_COLUMN == "ON"
 				},
 				{
 					"targets": 1,
+					"className": "date",
+					"visible": lang.CONF_DATE_COLUMN == "ON"
+				},
+				{
+					"targets": 2,
 					"className": "fid",
 					"visible": lang.CONF_DNI_COLUMN == "ON"
 				},
 				{
-					"targets": 2,
+					"targets": 3,
 					"className": "terminal",
 					"visible": lang.CONF_TERMINAL_COLUMN == "ON"
 				},
 				{
-					"targets": 3,
+					"targets": 4,
 					"className": "secuence",
 					"visible": lang.CONF_SECUENCE_COLUMN == "ON"
 				},
 				{
-					"targets": 4,
+					"targets": 5,
 					"className": "reference",
 					"visible": lang.CONF_REFERENCE_COLUMN == "ON"
 				},
 				{
-					"targets": 5,
+					"targets": 6,
 					"className": "description",
 					"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
 				},
 				{
-					"targets": 6,
-					"className": "debit",
-					"visible": lang.CONF_DEBIT_COLUMN == "ON"
+					"targets": 7,
+					"className": "typeTransaction",
+					"visible": lang.CONF_OPERATION_COLUMN == "ON"
 				},
 				{
-					"targets": 7,
-					"className": "credit",
-					"visible": lang.CONF_CREDIT_COLUMN == "ON"
+					"targets": 8,
+					"className": "amount",
+					"visible": lang.CONF_AMOUNT_COLUMN == "ON"
 				}
 			],
 			"language": dataTableLang,

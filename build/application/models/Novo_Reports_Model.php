@@ -1602,29 +1602,15 @@ class Novo_Reports_Model extends NOVO_Model {
 					$listStatesAccounts[$key]['id'] = $listadoCuentas[$key]->idExtPer;
 
 					foreach ($listadoCuentas[$key]->listaMovimientos as $key1 => $val) {
-
-						$fid = $listadoCuentas[$key]->listaMovimientos[$key1]->fid ?? '';
-						$secuencia = $listadoCuentas[$key]->listaMovimientos[$key1]->secuencia ?? '';
-						$terminal = $listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion ?? '';
-
-						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = $fid;
-						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = $secuencia;
-						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = $terminal;
+						$listStatesAccounts[$key]['listMovements'][$key1]['card'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tarjeta ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fid ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = $listadoCuentas[$key]->listaMovimientos[$key1]->secuencia ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = $listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion ?? '';
 						$listStatesAccounts[$key]['listMovements'][$key1]['reference'] = $listadoCuentas[$key]->listaMovimientos[$key1]->referencia;
 						$listStatesAccounts[$key]['listMovements'][$key1]['description'] = $listadoCuentas[$key]->listaMovimientos[$key1]->descripcion;
 						$listStatesAccounts[$key]['listMovements'][$key1]['date'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fecha;
-						$listStatesAccounts[$key]['listMovements'][$key1]['client'] = $listadoCuentas[$key]->listaMovimientos[$key1]->cliente;
-
-						if ($listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion == '+') {
-							$debit = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
-							$credit = '0';
-						} else {
-							$credit = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
-							$debit = '0';
-						}
-
-						$listStatesAccounts[$key]['listMovements'][$key1]['credit'] = $credit;
-						$listStatesAccounts[$key]['listMovements'][$key1]['debit'] = $debit;
+						$listStatesAccounts[$key]['listMovements'][$key1]['typeTransaction'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['amount'] = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
 					}
 				}
 			break;
