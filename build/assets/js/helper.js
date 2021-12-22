@@ -20,6 +20,7 @@ var currentDate;
 var btnRemote = $('#btn-auth');
 var remoteFunction;
 var remoteAuthArgs = {}
+var classWidget;
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
@@ -130,12 +131,17 @@ $(function () {
 
 	$(".widget-menu").click(function (e) {
 		e.stopPropagation();
-		$('#widget-menu').removeClass('none');
-		$("#widget-menu").toggleClass("show");
+		classWidget = $("#widget-menu").hasClass("none")
+		if (classWidget) {
+			$('#widget-menu').removeClass('none');
+			$("#widget-menu").addClass("show");
+		} else {
+			removeWidgetMenu()
+		}
 	});
 
 	$('body,html').click(function (e) {
-		$('#widget-menu').removeClass('show');
+		removeWidgetMenu()
 	});
 });
 
@@ -494,4 +500,11 @@ function normalizeAmount(amount) {
 	amount = parseFloat(amount);
 
 	return amount;
+}
+
+function removeWidgetMenu () {
+	$('#widget-menu').removeClass('show');
+	setTimeout(function(){
+		$("#widget-menu").addClass("none");
+	}, 1000);
 }
