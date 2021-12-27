@@ -1565,17 +1565,12 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
 		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
 
-		if ($dataRequest->resultByNIT === 'all') {
-			$dataRequest->resultByNIT = '';
-			$typeSearch = '0';
-		} else {
-			$typeSearch = '1';
-		}
-
-		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNIT);
+		$typeSearch = $dataRequest->resultSearch;
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput);
+		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput);
 
 		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
-			$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+			$this->dataRequest->idExtPer = $dataRequest->resultInput;
 		}
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;

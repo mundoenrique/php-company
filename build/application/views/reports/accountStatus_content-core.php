@@ -59,7 +59,7 @@
 							<div class="form-group col-9">
 								<label class="block">Resultados</label>
 								<div class="custom-control custom-radio custom-control-inline align-top">
-									<input type="radio" id="allResults" name="results" class="custom-control-input" value="all">
+									<input type="radio" id="allResults" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="allResults">Todos</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
@@ -70,6 +70,16 @@
 										<div id="blockMessage" class="help-block"></div>
 									</div>
 								</div>
+								<?php if (lang('CONF_ACCOUNT_STATUS_CARD') == 'ON'): ?>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="resultByCard" name="results" class="custom-control-input">
+									<label class="custom-control-label mr-1" for="resultByCard">Tarjeta</label>
+									<div class="form-group">
+										<input id="resultByCardInput" name="radioCard" type="text" class="form-control visible" />
+										<div id="blockMessage2" class="help-block"></div>
+									</div>
+								</div>
+								<?php endif; ?>
 							</div>
 							<div class="flex items-center justify-end col-3">
 								<button id="searchButton" type="button" class="btn btn-primary btn-small">

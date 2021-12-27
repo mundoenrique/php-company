@@ -1459,6 +1459,10 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 		[
+			'field' => 'resultByCardInput',
+			'rules' => 'trim|numeric',
+		],
+		[
 			'field' => 'initialDateAct',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]

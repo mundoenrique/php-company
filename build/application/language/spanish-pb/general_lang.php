@@ -28,6 +28,7 @@ $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Nro. de Tarjeta';
 $lang['GEN_TABLE_EMISSION'] = 'Emisiones';
 $lang['GEN_TABLE_REP_TARJETA'] = 'Reposiciones y Renovaciones';
+$lang['GEN_TABLE_COMMISSION'] = 'Monto Neto';
 //RESPONSES
 $lang['GEN_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
 $lang['GEN_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';

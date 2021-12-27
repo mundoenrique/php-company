@@ -74,6 +74,7 @@ $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
 $lang['CONF_BULK_AUTH_MSG_SERV'] = 'OFF';
+$lang['CONF_ACCOUNT_STATUS_CARD'] = 'OFF';
 $lang['CONF_IMAGE_CLOCK'] = 'OFF';
 $lang['CONF_HASH_PASS'] = 'ON';
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';

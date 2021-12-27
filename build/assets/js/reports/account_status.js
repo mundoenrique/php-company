@@ -30,12 +30,29 @@ $(function () {
 	});
 
 	$(":radio").on("change", function (e) {
-		$('#blockMessage').val('');
 		$('#resultByNITInput').val('');
-		if ($("input[name='results']:checked").val() == 'all') {
+		$('#resultByCardInput').val('');
+		if (($('#allResults:checked').val() == 'on')) {
 			$('#resultByNITInput').addClass('visible');
-		} else {
+			$('#resultByCardInput').addClass('visible');
+			$('#resultByNITInput').removeClass('has-error');
+			$('#resultByCardInput').removeClass('has-error');
+		  $('#blockMessage').text('');
+			$('#blockMessage2').text('');
+		}
+		else if (($('#resultByNIT:checked').val() == 'on')) {
 			$('#resultByNITInput').removeClass('visible');
+			$('#resultByCardInput').addClass('visible');
+			$('#resultByCardInput').removeClass('has-error');
+			$('#blockMessage').text('');
+			$('#blockMessage2').text('');
+		}
+		else if (($('#resultByCard:checked').val() == 'on')) {
+			$('#resultByNITInput').addClass('visible');
+			$('#resultByCardInput').removeClass('visible');
+			$('#resultByNITInput').removeClass('has-error');
+		  $('#blockMessage').text('');
+			$('#blockMessage2').text('');
 		}
 	});
 
@@ -45,13 +62,19 @@ $(function () {
 		var data = getDataForm(form);
 		$('#spinnerBlock').addClass('hide');
 		$('#blockResults').addClass('hidden');
-		if($('#resultByNITInput').val() != ''){
-			data.resultByNIT = data.resultByNITInput;
-		}else {
-			data.resultByNIT = data.allResults;
+
+		if(($('#allResults:checked').val() == 'on')){
+			data.resultSearch = 0;
+		}
+		else if(($('#resultByNIT:checked').val() == 'on')){
+			data.resultSearch = 1;
+		}
+		else if(($('#resultByCard:checked').val() == 'on')){
+			data.resultSearch = 2;
 		}
 		delete data.allResults;
-		delete data.resultByNITInput;
+		delete data.resultByNIT;
+		delete data.resultByCard;
 
 		validateForms(form);
 
