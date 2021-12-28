@@ -65,21 +65,17 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
-									<div class="form-group">
-										<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
-										<div id="blockMessage" class="help-block"></div>
-									</div>
 								</div>
 								<?php if (lang('CONF_ACCOUNT_STATUS_CARD') == 'ON'): ?>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByCard" name="results" class="custom-control-input">
-									<label class="custom-control-label mr-1" for="resultByCard">Tarjeta</label>
-									<div class="form-group">
-										<input id="resultByCardInput" name="radioCard" type="text" class="form-control visible" />
-										<div id="blockMessage2" class="help-block"></div>
-									</div>
+									<label class="custom-control-label mr-1" for="resultByCard"><?= lang('REPORTS_ACCOUNT_CARD'); ?></label>
 								</div>
 								<?php endif; ?>
+								<div class="form-group col-5 mt-2 pl-0">
+  								<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
+  								<div id="blockMessage" class="help-block"></div>
+									</div>
 							</div>
 							<div class="flex items-center justify-end col-3">
 								<button id="searchButton" type="button" class="btn btn-primary btn-small">

@@ -7,6 +7,8 @@ $(function () {
 	$('.hide-out').removeClass('hide');
 	$("#allResults").prop( "checked", true );
 	$('#blockResults').addClass('hidden');
+	$('#resultByNITInput').addClass('ignore');
+	$('#resultByCardInput').addClass('ignore');
 
 	datePicker.datepicker({
 		dateFormat: 'mm/yy',
@@ -33,26 +35,21 @@ $(function () {
 		$('#resultByNITInput').val('');
 		$('#resultByCardInput').val('');
 		if (($('#allResults:checked').val() == 'on')) {
-			$('#resultByNITInput').addClass('visible');
-			$('#resultByCardInput').addClass('visible');
-			$('#resultByNITInput').removeClass('has-error');
-			$('#resultByCardInput').removeClass('has-error');
+			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
+			$('#resultByCardInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
 		  $('#blockMessage').text('');
 			$('#blockMessage2').text('');
 		}
 		else if (($('#resultByNIT:checked').val() == 'on')) {
-			$('#resultByNITInput').removeClass('visible');
-			$('#resultByCardInput').addClass('visible');
-			$('#resultByCardInput').removeClass('has-error');
-			$('#blockMessage').text('');
-			$('#blockMessage2').text('');
+			$('#resultByNITInput').removeClass('visible').removeAttr('aria-describedby').removeClass('ignore');
+			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
+   		$("#blockMessage2").text('').attr("id","blockMessage");
 		}
 		else if (($('#resultByCard:checked').val() == 'on')) {
-			$('#resultByNITInput').addClass('visible');
-			$('#resultByCardInput').removeClass('visible');
-			$('#resultByNITInput').removeClass('has-error');
-		  $('#blockMessage').text('');
-			$('#blockMessage2').text('');
+			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+			$("#resultByNITInput").attr("id","resultByCardInput").attr("name","radioCard");
+   		$("#blockMessage").text('').attr("id","blockMessage2");
 		}
 	});
 

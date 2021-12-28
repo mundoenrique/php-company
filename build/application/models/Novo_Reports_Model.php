@@ -1566,8 +1566,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
 
 		$typeSearch = $dataRequest->resultSearch;
-		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput);
-		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput);
+
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
+		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput ?? '');
 
 		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
 			$this->dataRequest->idExtPer = $dataRequest->resultInput;
