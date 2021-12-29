@@ -1456,7 +1456,7 @@ $config = [
 	'searchStatusAccount' => [
 		[
 			'field' => 'resultByNITInput',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
 		],
 		[
 			'field' => 'resultByCardInput',
@@ -1470,7 +1470,7 @@ $config = [
 	'statusAccountExcelFile' => [
 		[
 			'field' => 'resultByNITInput',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
 		],
 		[
 			'field' => 'initialDateAct',
@@ -1480,7 +1480,7 @@ $config = [
 	'statusAccountPdfFile' => [
 		[
 			'field' => 'resultByNITInput',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
 		],
 		[
 			'field' => 'initialDateAct',

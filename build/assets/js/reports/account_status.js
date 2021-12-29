@@ -35,21 +35,22 @@ $(function () {
 		$('#resultByNITInput').val('');
 		$('#resultByCardInput').val('');
 		if (($('#allResults:checked').val() == 'on')) {
+			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
 			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
-			$('#resultByCardInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
-		  $('#blockMessage').text('');
-			$('#blockMessage2').text('');
+			$("#blockMessage2").attr("id","blockMessage");
+			$("#blockMessage").text('');
 		}
 		else if (($('#resultByNIT:checked').val() == 'on')) {
-			$('#resultByNITInput').removeClass('visible').removeAttr('aria-describedby').removeClass('ignore');
-			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
 			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
-   		$("#blockMessage2").text('').attr("id","blockMessage");
+			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+			$("#blockMessage2").attr("id","blockMessage");
+			$("#blockMessage").text('');
 		}
 		else if (($('#resultByCard:checked').val() == 'on')) {
-			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
 			$("#resultByNITInput").attr("id","resultByCardInput").attr("name","radioCard");
-   		$("#blockMessage").text('').attr("id","blockMessage2");
+			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+   		$("#blockMessage").attr("id","blockMessage2");
+			$("#blockMessage2").text('');
 		}
 	});
 
