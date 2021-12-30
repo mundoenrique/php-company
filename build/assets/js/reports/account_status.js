@@ -151,7 +151,7 @@ function searchStatusAccount(passData){
 		});
 
 		$('#account-status-table').append(table);
-		/*$('.result-account-status').DataTable({
+		$('.result-account-status').DataTable({
 			"ordering": false,
 			"responsive": true,
 			"lengthChange": false,
@@ -221,7 +221,7 @@ function searchStatusAccount(passData){
 				}
 			],
 			"language": dataTableLang,
-		});*/
+		});
 
 		$('.result-account-status').removeClass('hidden');
 		insertFormInput(false);
