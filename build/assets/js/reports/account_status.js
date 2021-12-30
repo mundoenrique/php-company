@@ -35,20 +35,20 @@ $(function () {
 		$('#resultByNITInput').val('');
 		$('#resultByCardInput').val('');
 		if (($('#allResults:checked').val() == 'on')) {
-			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
+			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni").attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
 			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
 			$("#blockMessage2").attr("id","blockMessage");
 			$("#blockMessage").text('');
 		}
 		else if (($('#resultByNIT:checked').val() == 'on')) {
 			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
-			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
 			$("#blockMessage2").attr("id","blockMessage");
 			$("#blockMessage").text('');
 		}
 		else if (($('#resultByCard:checked').val() == 'on')) {
 			$("#resultByNITInput").attr("id","resultByCardInput").attr("name","radioCard");
-			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore');
+			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').attr("maxlength",lang.VALIDATE_MAXLENGTH_CARD);;
    		$("#blockMessage").attr("id","blockMessage2");
 			$("#blockMessage2").text('');
 		}
@@ -151,7 +151,7 @@ function searchStatusAccount(passData){
 		});
 
 		$('#account-status-table').append(table);
-		$('.result-account-status').DataTable({
+		/*$('.result-account-status').DataTable({
 			"ordering": false,
 			"responsive": true,
 			"lengthChange": false,
@@ -211,7 +211,8 @@ function searchStatusAccount(passData){
 				{
 					"targets": 7,
 					"className": "typeTransaction",
-					"visible": lang.CONF_OPERATION_COLUMN == "ON"
+					"visible": lang.CONF_OPERATION_COLUMN == "ON",
+					"width": "15%",
 				},
 				{
 					"targets": 8,
@@ -220,7 +221,7 @@ function searchStatusAccount(passData){
 				}
 			],
 			"language": dataTableLang,
-		});
+		});*/
 
 		$('.result-account-status').removeClass('hidden');
 		insertFormInput(false);

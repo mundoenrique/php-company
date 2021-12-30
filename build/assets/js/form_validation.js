@@ -189,7 +189,7 @@ function validateForms(form) {
 						}
 						return check
 					}
-				}, pattern: alphanum
+				}, pattern: alphanum, maxlength: lang.VALIDATE_MAXLENGTH_IDEXTPER,
 			},
 			"radioCard": {
 				required: {
@@ -200,7 +200,7 @@ function validateForms(form) {
 						}
 						return check
 					}
-				}, pattern: numeric,maxlength: 16, minlength: 16
+				}, pattern: numeric, maxlength: lang.VALIDATE_MAXLENGTH_CARD, minlength: lang.VALIDATE_MINLENGTH_CARD
 			},
 			"documentType": { requiredSelect: true },
 			"optCode": { required: true, pattern: alphanum },
