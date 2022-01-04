@@ -87,11 +87,11 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="spinnerBlock" class="hide">
-				<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+			<div  class="flex">
+				<div id="spinnerBlock" class="mt-2 mx-auto hide">
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
-			</div>
+		  </div>
 			<div id="blockResults" class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
