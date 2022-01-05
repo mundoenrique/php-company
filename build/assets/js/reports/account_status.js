@@ -112,7 +112,8 @@ function searchStatusAccount(passData){
 			$('#blockResults').removeClass('hidden');
 
 			paintTable(dataResponse);
-			$('#spinnerResults').removeClass('hide');
+			if (!dataResponse[0].includes(""))
+				$('#spinnerResults').removeClass('hide');
 
 		};
 		insertFormInput(false);
