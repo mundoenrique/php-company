@@ -101,7 +101,7 @@ function searchStatusAccount(passData){
 	insertFormInput(true);
 
 	callNovoCore(who, where, data, function (response) {
-		dataResponse = response.data.listStatesAccounts;
+		dataResponse = response.data.listStatesAccountsNew;
 		$('#spinnerBlock').addClass('hide');
 
 		if (dataResponse != '') {
@@ -111,130 +111,8 @@ function searchStatusAccount(passData){
 		if (response.code == 0){
 			$('#blockResults').removeClass('hidden');
 
-			$.each(dataResponse, function (index, value) {
-				console.log(index);
+			paintTable(dataResponse);
 
-			var table = '';
-					table = '<div class="hide-table'+ index +' hide">';
-				if (value) {
-					table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
-					table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +': <span class="light text">'+ dataResponse[index].id +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +': <span class="light text">'+ dataResponse[index].account +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':<span class="light text">'+ dataResponse[index].client +'</span></p></div>';
-				}
-					table += '<table class="result-account-status'+ index +' cell-border h6 display responsive w-100">';
-					table += '<thead class="bg-primary secondary regular">';
-					table += '<tr>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
-					table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
-					table += '<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
-					table += '</tr>';
-					table += '</thead>';
-					table += '<tbody>';
-
-				if (value) {
-					$.each(dataResponse[index].listMovements, function (index2, value2) {
-					table += '<tr>';
-					table += '<td>' + value2.card + '</td>';
-					table += '<td>' + value2.date + '</td>';
-					table += '<td>' + value2.fid + '</td>';
-					table += '<td>' + value2.terminal + '</td>';
-					table += '<td>' + value2.secuence + '</td>';
-					table += '<td>' + value2.reference + '</td>';
-					table += '<td>' + value2.description + '</td>';
-					table += '<td>' + value2.typeTransaction + '</td>';
-					table += '<td>' + value2.amount + '</td>';
-					table += '</tr>';
-					});
-				}
-					table += '</tbody>';
-					table += '</table>';
-					table += '</div>';
-
-
-					window.setTimeout(function(){
-						console.log('prueba-->'+index)
-						 }, 60000);
-
-				$('#account-status-table').append(table);
-				$('.result-account-status'+ index).DataTable({
-					drawCallback: function (d) {
-						$('.hide-table'+index).removeClass('hide');
-					},
-					"ordering": false,
-					"lengthChange": false,
-					"pagingType": "full_numbers",
-					"columns": [
-						{ data: 'Tarjeta' },
-						{ data: 'date' },
-						{ data: 'fid' },
-						{ data: 'terminal' },
-						{ data: 'secuence' },
-						{ data: 'reference' },
-						{ data: 'description' },
-						{ data: 'typeTransaction' },
-						{ data: 'amount' },
-					],
-					"columnDefs": [
-						{
-							"targets": 0,
-							"className": "Tarjeta",
-							"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
-						},
-						{
-							"targets": 1,
-							"className": "date",
-							"visible": lang.CONF_DATE_COLUMN == "ON"
-						},
-						{
-							"targets": 1,
-							"className": "date",
-							"visible": lang.CONF_DATE_COLUMN == "ON"
-						},
-						{
-							"targets": 2,
-							"className": "fid",
-							"visible": lang.CONF_DNI_COLUMN == "ON"
-						},
-						{
-							"targets": 3,
-							"className": "terminal",
-							"visible": lang.CONF_TERMINAL_COLUMN == "ON"
-						},
-						{
-							"targets": 4,
-							"className": "secuence",
-							"visible": lang.CONF_SECUENCE_COLUMN == "ON"
-						},
-						{
-							"targets": 5,
-							"className": "reference",
-							"visible": lang.CONF_REFERENCE_COLUMN == "ON"
-						},
-						{
-							"targets": 6,
-							"className": "description",
-							"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
-						},
-						{
-							"targets": 7,
-							"className": "typeTransaction",
-							"visible": lang.CONF_OPERATION_COLUMN == "ON",
-							"width": "15%",
-						},
-						{
-							"targets": 8,
-							"className": "amount",
-							"visible": lang.CONF_AMOUNT_COLUMN == "ON"
-						}
-					],
-					"language": dataTableLang,
-				});
-			});
 		};
 		insertFormInput(false);
 	});
@@ -319,121 +197,130 @@ function exportToPDF(passData) {
   })
 };
 
-/*function paintTable(i,dataResponse){
-	var table = '';
-		table = '<div class="hide-table'+ i +' hide">';
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-	if (dataResponse[i] != '') {
-		table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
-		table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +': <span class="light text">'+ dataResponse[i].id +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +': <span class="light text">'+ dataResponse[i].account +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':<span class="light text">'+ dataResponse[i].client +'</span></p></div>';
-	}
-		table += '<table class="result-account-status'+ i +' cell-border h6 display responsive w-100">';
-		table += '<thead class="bg-primary secondary regular">';
-		table += '<tr>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
-		table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
-		table += '<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
-		table += '</tr>';
-		table += '</thead>';
-		table += '<tbody>';
-
-	if (dataResponse[i] != '') {
-		$.each(dataResponse[i].listMovements, function (index2, value2) {
-		table += '<tr>';
-		table += '<td>' + value2.card + '</td>';
-		table += '<td>' + value2.date + '</td>';
-		table += '<td>' + value2.fid + '</td>';
-		table += '<td>' + value2.terminal + '</td>';
-		table += '<td>' + value2.secuence + '</td>';
-		table += '<td>' + value2.reference + '</td>';
-		table += '<td>' + value2.description + '</td>';
-		table += '<td>' + value2.typeTransaction + '</td>';
-		table += '<td>' + value2.amount + '</td>';
-		table += '</tr>';
-		});
-	}
-		table += '</tbody>';
-		table += '</table>';
-		table += '</div>';
-
-	$('#account-status-table').append(table);
-	$('.result-account-status'+ i).DataTable({
-		drawCallback: function (d) {
-			$('.hide-table'+i).removeClass('hide');
-		},
-		"ordering": false,
-		"lengthChange": false,
-		"pagingType": "full_numbers",
-		"columns": [
-			{ data: 'Tarjeta' },
-			{ data: 'date' },
-			{ data: 'fid' },
-			{ data: 'terminal' },
-			{ data: 'secuence' },
-			{ data: 'reference' },
-			{ data: 'description' },
-			{ data: 'typeTransaction' },
-			{ data: 'amount' },
-		],
-		"columnDefs": [
-			{
-				"targets": 0,
-				"className": "Tarjeta",
-				"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
-			},
-			{
-				"targets": 1,
-				"className": "date",
-				"visible": lang.CONF_DATE_COLUMN == "ON"
-			},
-			{
-				"targets": 1,
-				"className": "date",
-				"visible": lang.CONF_DATE_COLUMN == "ON"
-			},
-			{
-				"targets": 2,
-				"className": "fid",
-				"visible": lang.CONF_DNI_COLUMN == "ON"
-			},
-			{
-				"targets": 3,
-				"className": "terminal",
-				"visible": lang.CONF_TERMINAL_COLUMN == "ON"
-			},
-			{
-				"targets": 4,
-				"className": "secuence",
-				"visible": lang.CONF_SECUENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 5,
-				"className": "reference",
-				"visible": lang.CONF_REFERENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 6,
-				"className": "description",
-				"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
-			},
-			{
-				"targets": 7,
-				"className": "typeTransaction",
-				"visible": lang.CONF_OPERATION_COLUMN == "ON",
-				"width": "15%",
-			},
-			{
-				"targets": 8,
-				"className": "amount",
-				"visible": lang.CONF_AMOUNT_COLUMN == "ON"
+async function paintTable(dataResponse) {
+	for (let i = 0; i < dataResponse.length; i++) {
+		$.each(dataResponse[i], function (index, value) {
+			console.log(index);
+		var table = '';
+				table = '<div class="hide-table'+ index +' hide">';
+			if (value) {
+				table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
+				table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +': <span class="light text">'+ dataResponse[i][index].id +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +': <span class="light text">'+ dataResponse[i][index].account +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':<span class="light text">'+ dataResponse[i][index].client +'</span></p></div>';
 			}
-		],
-		"language": dataTableLang,
+				table += '<table class="result-account-status'+ index +' cell-border h6 display responsive w-100">';
+				table += '<thead class="bg-primary secondary regular">';
+				table += '<tr>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
+				table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
+				table += '<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
+				table += '</tr>';
+				table += '</thead>';
+				table += '<tbody>';
+
+			if (value) {
+				$.each(dataResponse[i][index].listMovements, function (index2, value2) {
+				table += '<tr>';
+				table += '<td>' + value2.card + '</td>';
+				table += '<td>' + value2.date + '</td>';
+				table += '<td>' + value2.fid + '</td>';
+				table += '<td>' + value2.terminal + '</td>';
+				table += '<td>' + value2.secuence + '</td>';
+				table += '<td>' + value2.reference + '</td>';
+				table += '<td>' + value2.description + '</td>';
+				table += '<td>' + value2.typeTransaction + '</td>';
+				table += '<td>' + value2.amount + '</td>';
+				table += '</tr>';
+				});
+			}
+				table += '</tbody>';
+				table += '</table>';
+				table += '</div>';
+
+			$('#account-status-table').append(table);
+			$('.result-account-status'+ index).DataTable({
+				drawCallback: function (d) {
+					$('.hide-table'+index).removeClass('hide');
+				},
+				"ordering": false,
+				"lengthChange": false,
+				"pagingType": "full_numbers",
+				"columns": [
+					{ data: 'Tarjeta' },
+					{ data: 'date' },
+					{ data: 'fid' },
+					{ data: 'terminal' },
+					{ data: 'secuence' },
+					{ data: 'reference' },
+					{ data: 'description' },
+					{ data: 'typeTransaction' },
+					{ data: 'amount' },
+				],
+				"columnDefs": [
+					{
+						"targets": 0,
+						"className": "Tarjeta",
+						"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
+					},
+					{
+						"targets": 1,
+						"className": "date",
+						"visible": lang.CONF_DATE_COLUMN == "ON"
+					},
+					{
+						"targets": 1,
+						"className": "date",
+						"visible": lang.CONF_DATE_COLUMN == "ON"
+					},
+					{
+						"targets": 2,
+						"className": "fid",
+						"visible": lang.CONF_DNI_COLUMN == "ON"
+					},
+					{
+						"targets": 3,
+						"className": "terminal",
+						"visible": lang.CONF_TERMINAL_COLUMN == "ON"
+					},
+					{
+						"targets": 4,
+						"className": "secuence",
+						"visible": lang.CONF_SECUENCE_COLUMN == "ON"
+					},
+					{
+						"targets": 5,
+						"className": "reference",
+						"visible": lang.CONF_REFERENCE_COLUMN == "ON"
+					},
+					{
+						"targets": 6,
+						"className": "description",
+						"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
+					},
+					{
+						"targets": 7,
+						"className": "typeTransaction",
+						"visible": lang.CONF_OPERATION_COLUMN == "ON",
+						"width": "15%",
+					},
+					{
+						"targets": 8,
+						"className": "amount",
+						"visible": lang.CONF_AMOUNT_COLUMN == "ON"
+					}
+				],
+				"language": dataTableLang,
+			});
 		});
-	};*/
+		await sleep(10000);
+	};
+};

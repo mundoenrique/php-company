@@ -1626,7 +1626,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->response->data->listStatesAccounts = $listStatesAccounts;
+		//$this->response->data->listStatesAccounts = $listStatesAccounts;
+		$this->response->data->listStatesAccountsNew = $listStatesAccounts != '' ? array_chunk($listStatesAccounts, 100, true) : '';
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
 	/**
