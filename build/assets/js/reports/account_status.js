@@ -112,6 +112,7 @@ function searchStatusAccount(passData){
 			$('#blockResults').removeClass('hidden');
 
 			paintTable(dataResponse);
+			$('#spinnerResults').removeClass('hide');
 
 		};
 		insertFormInput(false);
@@ -204,7 +205,6 @@ function sleep(ms) {
 async function paintTable(dataResponse) {
 	for (let i = 0; i < dataResponse.length; i++) {
 		$.each(dataResponse[i], function (index, value) {
-			console.log(index);
 		var table = '';
 				table = '<div class="hide-table'+ index +' hide">';
 			if (value) {
@@ -323,4 +323,5 @@ async function paintTable(dataResponse) {
 		});
 		await sleep(lang.CONF_DATATABLE_SLEEP);
 	};
+	$('#spinnerResults').addClass('hide');
 };

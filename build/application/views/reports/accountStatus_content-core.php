@@ -113,6 +113,9 @@
 						<?php endif; ?>
 						</div>
 					<div id="account-status-table"></div>
+					<div id="spinnerResults" class="mt-2 mx-auto hide">
+						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+					</div>
 					<div class="line my-2"></div>
 				</div>
 			</div>
