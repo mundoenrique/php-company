@@ -321,3 +321,6 @@ $lang['CONF_FILES_EXTENSION'] = 'xls|xlsx|txt';
 $lang['CONF_MAX_FILE_SIZE'] = '2048';
 $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_MINLENGTH'] = 1;
+$lang['CONF_DATATABLE_SLEEP'] = '10000';
+$lang['CONF_DATATABLE_ARRAY_CHUNK'] = '50';
+

@@ -321,6 +321,6 @@ async function paintTable(dataResponse) {
 				"language": dataTableLang,
 			});
 		});
-		await sleep(10000);
+		await sleep(lang.CONF_DATATABLE_SLEEP);
 	};
 };
