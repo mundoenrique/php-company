@@ -112,7 +112,7 @@ function searchStatusAccount(passData){
 			$('#blockResults').removeClass('hidden');
 
 			paintTable(dataResponse);
-			if (!dataResponse[0].includes("") && dataResponse[0].length > lang.CONF_DATATABLE_ARRAY_CHUNK)
+			if (dataResponse[0].length >= lang.CONF_DATATABLE_ARRAY_CHUNK)
 				$('#spinnerResults').removeClass('hide');
 
 		};
