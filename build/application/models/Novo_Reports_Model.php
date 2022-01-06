@@ -1570,10 +1570,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
 		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput ?? '');
 
-		// if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
-		// 	$this->dataRequest->idExtPer = $dataRequest->resultInput;
-		// }
-
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
@@ -1627,6 +1623,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		}
 
 		$this->response->data->listStatesAccountsNew = $listStatesAccounts != '' ? array_chunk($listStatesAccounts, lang('CONF_DATATABLE_ARRAY_CHUNK'), true) : '';
+
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
 	/**

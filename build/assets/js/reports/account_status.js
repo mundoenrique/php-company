@@ -258,6 +258,7 @@ async function paintTable(dataResponse) {
 				table += '</div>';
 
 			$('#account-status-table').append(table);
+			$('.result-account-status'+ index).DataTable().destroy();
 			$('.result-account-status'+ index).DataTable({
 				drawCallback: function (d) {
 					$('.hide-table'+index).removeClass('hide');
