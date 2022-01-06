@@ -112,7 +112,7 @@ function searchStatusAccount(passData){
 			$('#blockResults').removeClass('hidden');
 
 			paintTable(dataResponse);
-			if (!dataResponse[0].includes(""))
+			if (!dataResponse[0].includes("") && dataResponse[0].length > lang.CONF_DATATABLE_ARRAY_CHUNK)
 				$('#spinnerResults').removeClass('hide');
 
 		};
@@ -209,42 +209,52 @@ async function paintTable(dataResponse) {
 		var table = '';
 				table = '<div class="hide-table'+ index +' hide">';
 			if (value) {
-				table += '<div class=""><div class="flex ml-4 py-3 flex-auto">';
-				table +=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +': <span class="light text">'+ dataResponse[i][index].id +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +': <span class="light text">'+ dataResponse[i][index].account +'</span></p><p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':<span class="light text">'+ dataResponse[i][index].client +'</span></p></div>';
+				table += '<div class="">';
+				table +=		'<div class="flex ml-4 py-3 flex-auto">';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].id +'</span>';
+				table +=			'</p>';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].account +'</span>';
+				table +=			'</p>';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].client +'</span>';
+				table +=			'</p>';
+				table +=		'</div>';
 			}
-				table += '<table class="result-account-status'+ index +' cell-border h6 display responsive w-100">';
-				table += '<thead class="bg-primary secondary regular">';
-				table += '<tr>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
-				table += '<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
-				table += '<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
-				table += '</tr>';
-				table += '</thead>';
-				table += '<tbody>';
+				table += 		'<table class="result-account-status'+ index +' cell-border h6 display responsive w-100">';
+				table += 			'<thead class="bg-primary secondary regular">';
+				table += 				'<tr>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
+				table += 					'<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
+				table += 				'</tr>';
+				table += 			'</thead>';
+				table += 		'<tbody>';
 
 			if (value) {
 				$.each(dataResponse[i][index].listMovements, function (index2, value2) {
-				table += '<tr>';
-				table += '<td>' + value2.card + '</td>';
-				table += '<td>' + value2.date + '</td>';
-				table += '<td>' + value2.fid + '</td>';
-				table += '<td>' + value2.terminal + '</td>';
-				table += '<td>' + value2.secuence + '</td>';
-				table += '<td>' + value2.reference + '</td>';
-				table += '<td>' + value2.description + '</td>';
-				table += '<td>' + value2.typeTransaction + '</td>';
-				table += '<td>' + value2.amount + '</td>';
-				table += '</tr>';
+				table += 			'<tr>';
+				table += 				'<td>' + value2.card + '</td>';
+				table += 				'<td>' + value2.date + '</td>';
+				table += 				'<td>' + value2.fid + '</td>';
+				table += 				'<td>' + value2.terminal + '</td>';
+				table += 				'<td>' + value2.secuence + '</td>';
+				table += 				'<td>' + value2.reference + '</td>';
+				table += 				'<td>' + value2.description + '</td>';
+				table += 				'<td>' + value2.typeTransaction + '</td>';
+				table += 				'<td>' + value2.amount + '</td>';
+				table += 			'</tr>';
 				});
 			}
-				table += '</tbody>';
-				table += '</table>';
+				table += 		'</tbody>';
+				table += 	'</table>';
 				table += '</div>';
 
 			$('#account-status-table').append(table);

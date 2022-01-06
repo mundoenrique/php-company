@@ -1570,9 +1570,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
 		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput ?? '');
 
-		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
-			$this->dataRequest->idExtPer = $dataRequest->resultInput;
-		}
+		// if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
+		// 	$this->dataRequest->idExtPer = $dataRequest->resultInput;
+		// }
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -1594,20 +1594,20 @@ class Novo_Reports_Model extends NOVO_Model {
 				$listadoCuentas = $response->listadoEstadosCuentas;
 
 				foreach ($listadoCuentas as $key => $val) {
-					$listStatesAccounts[$key]['account'] = trim($listadoCuentas[$key]->cuenta);
-					$listStatesAccounts[$key]['client'] = trim($listadoCuentas[$key]->cliente);
-					$listStatesAccounts[$key]['id'] = trim($listadoCuentas[$key]->idExtPer);
+					$listStatesAccounts[$key]['account'] = $listadoCuentas[$key]->cuenta;
+					$listStatesAccounts[$key]['client'] = $listadoCuentas[$key]->cliente;
+					$listStatesAccounts[$key]['id'] = $listadoCuentas[$key]->idExtPer;
 
 					foreach ($listadoCuentas[$key]->listaMovimientos as $key1 => $val) {
-						$listStatesAccounts[$key]['listMovements'][$key1]['card'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->tarjeta) ?? '';
-						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->fid) ?? '';
-						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->secuencia) ?? '';
-						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion) ?? '';
-						$listStatesAccounts[$key]['listMovements'][$key1]['reference'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->referencia);
-						$listStatesAccounts[$key]['listMovements'][$key1]['description'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->descripcion);
-						$listStatesAccounts[$key]['listMovements'][$key1]['date'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->fecha);
-						$listStatesAccounts[$key]['listMovements'][$key1]['typeTransaction'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion);
-						$listStatesAccounts[$key]['listMovements'][$key1]['amount'] = trim($listadoCuentas[$key]->listaMovimientos[$key1]->monto);
+						$listStatesAccounts[$key]['listMovements'][$key1]['card'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tarjeta ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fid ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = $listadoCuentas[$key]->listaMovimientos[$key1]->secuencia ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = $listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['reference'] = $listadoCuentas[$key]->listaMovimientos[$key1]->referencia;
+						$listStatesAccounts[$key]['listMovements'][$key1]['description'] = $listadoCuentas[$key]->listaMovimientos[$key1]->descripcion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['date'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fecha;
+						$listStatesAccounts[$key]['listMovements'][$key1]['typeTransaction'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['amount'] = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
 					}
 				}
 			break;
