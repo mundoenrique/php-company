@@ -59,17 +59,23 @@
 							<div class="form-group col-9">
 								<label class="block">Resultados</label>
 								<div class="custom-control custom-radio custom-control-inline align-top">
-									<input type="radio" id="allResults" name="results" class="custom-control-input" value="all">
+									<input type="radio" id="allResults" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="allResults">Todos</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
-									<div class="form-group">
-										<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
-										<div id="blockMessage" class="help-block"></div>
-									</div>
 								</div>
+								<?php if (lang('CONF_ACCOUNT_STATUS_CARD') == 'ON'): ?>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="resultByCard" name="results" class="custom-control-input">
+									<label class="custom-control-label mr-1" for="resultByCard"><?= lang('REPORTS_ACCOUNT_CARD'); ?></label>
+								</div>
+								<?php endif; ?>
+								<div class="form-group col-5 mt-2 pl-0">
+  								<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
+  								<div id="blockMessage" class="help-block"></div>
+									</div>
 							</div>
 							<div class="flex items-center justify-end col-3">
 								<button id="searchButton" type="button" class="btn btn-primary btn-small">
@@ -81,11 +87,11 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="spinnerBlock" class="hide">
-				<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+			<div  class="flex">
+				<div id="spinnerBlock" class="mt-2 mx-auto hide">
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
-			</div>
+		  </div>
 			<div id="blockResults" class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
@@ -106,16 +112,10 @@
 						</button>
 						<?php endif; ?>
 						</div>
-					<table id="globalTable" class="cell-border h6 display responsive w-100">
-						<thead>
-        			<tr>
-            		<th>
-								</th>
-       				</tr>
-    				</thead>
-						<tbody>
-						</tbody>
-					</table>
+					<div id="account-status-table"></div>
+					<div id="spinnerResults" class="mt-2 mx-auto hide">
+						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+					</div>
 					<div class="line my-2"></div>
 				</div>
 			</div>

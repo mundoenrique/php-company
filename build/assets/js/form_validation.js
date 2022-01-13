@@ -189,7 +189,18 @@ function validateForms(form) {
 						}
 						return check
 					}
-				}, pattern: alphanum
+				}, pattern: alphanum, maxlength: lang.VALIDATE_MAXLENGTH_IDEXTPER,
+			},
+			"radioCard": {
+				required: {
+					depends: function () {
+						var check = false;
+						if ($('#resultByCard:checked').val() == 'on') {
+							check = true;
+						}
+						return check
+					}
+				}, pattern: numeric, maxlength: lang.VALIDATE_MAXLENGTH_CARD, minlength: lang.VALIDATE_MINLENGTH_CARD
 			},
 			"documentType": { requiredSelect: true },
 			"optCode": { required: true, pattern: alphanum },
@@ -342,6 +353,7 @@ function validateForms(form) {
 			"masiveOptions": lang.VALIDATE_OPTION,
 			"documentId": lang.VALIDATE_DOCUMENT_ID,
 			"radioDni": lang.VALIDATE_DOCUMENT_ID,
+			"radioCard": lang.VALIDATE_CARD_NUMBER_MIN,
 			"documentType": lang.VALIDATE_SELECT_DOCTYPE,
 			"optCode": lang.VALIDATE_OTP_CODE,
 			"firstName": lang.VALIDATE_NAME_LASTNAME,
