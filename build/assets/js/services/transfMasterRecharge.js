@@ -51,6 +51,7 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.transferAmount = normalizeAmount(data.transferAmount);
+			data.transferType = checkType;
 			$(this).html(loader);
 			insertFormInput(true);
 			if (lang.CONF_INPUT_PASS == 'OFF') {
