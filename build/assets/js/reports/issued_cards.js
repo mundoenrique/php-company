@@ -161,7 +161,13 @@ $(function () {
 					searching: false,
 					paging: false,
 					pagingType: "full_numbers",
-					language: dataTableLang
+					language: dataTableLang,
+					"columnDefs": [
+						{
+							"targets": 3,
+							"visible": lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == "ON",
+						},
+					],
 				});
 
 				$('#pre-loader-table').addClass('hide');

@@ -169,7 +169,7 @@ class Verify_Access {
 				$auth = lang('CONF_BENEFITS') == 'ON';
 				break;
 			case 'ratesInf':
-				$auth = ($this->CI->session->has_userdata('logged') && ($customerUri === 've' || $customerUri === 'ven'));
+				$auth = ($this->CI->session->has_userdata('logged') && lang('CONF_FOOTER_RATES') == 'ON');
 				break;
 			case 'getProductDetail':
 				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));

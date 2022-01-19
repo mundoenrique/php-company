@@ -1,50 +1,82 @@
 'use strict'
 var reportsResults;
 $(function () {
+
 	var datePicker = $('.date-picker');
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$("#allResults").prop( "checked", true );
 	$('#blockResults').addClass('hidden');
+	$('#resultByNITInput').addClass('ignore');
+	$('#resultByCardInput').addClass('ignore');
 
 	datePicker.datepicker({
-		onSelect: function (selectedDate) {
-			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[0] + '/' + dateSelected[2];
-			$(this)
-			.focus()
-			.blur();
-		},
 		dateFormat: 'mm/yy',
+		showButtonPanel: true,
+		onSelect: function(selectDate){
+			$(this)
+				.focus()
+				.blur();
+		},
+		onClose: function (dateText, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		}
 	});
 
 	$(":radio").on("change", function (e) {
-		$('#blockMessage').val('');
 		$('#resultByNITInput').val('');
-		if ($("input[name='results']:checked").val() == 'all') {
-			$('#resultByNITInput').addClass('visible');
-		} else {
-			$('#resultByNITInput').removeClass('visible');
+		$('#resultByCardInput').val('');
+		if (($('#allResults:checked').val() == 'on')) {
+			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni").attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
+			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
+			$("#blockMessage2").attr("id","blockMessage");
+			$("#blockMessage").text('');
+		}
+		else if (($('#resultByNIT:checked').val() == 'on')) {
+			$("#resultByCardInput").attr("id","resultByNITInput").attr("name","radioDni");
+			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
+			$("#blockMessage2").attr("id","blockMessage");
+			$("#blockMessage").text('');
+		}
+		else if (($('#resultByCard:checked').val() == 'on')) {
+			$("#resultByNITInput").attr("id","resultByCardInput").attr("name","radioCard");
+			$('#resultByCardInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').attr("maxlength",lang.VALIDATE_MAXLENGTH_CARD);;
+   		$("#blockMessage").attr("id","blockMessage2");
+			$("#blockMessage2").text('');
 		}
 	});
 
 	$("#searchButton").on("click", function (e){
+		e.preventDefault();
 		var form = $('#statusAccountForm');
 		var data = getDataForm(form);
 		$('#spinnerBlock').addClass('hide');
 		$('#blockResults').addClass('hidden');
-		if($('#resultByNITInput').val() != ''){
-			data.resultByNIT = data.resultByNITInput;
-		}else {
-			data.resultByNIT = data.allResults;
+
+		if(($('#allResults:checked').val() == 'on')){
+			data.resultSearch = 0;
+		}
+		else if(($('#resultByNIT:checked').val() == 'on')){
+			data.resultSearch = 1;
+		}
+		else if(($('#resultByCard:checked').val() == 'on')){
+			data.resultSearch = 2;
 		}
 		delete data.allResults;
-		delete data.resultByNITInput;
+		delete data.resultByNIT;
+		delete data.resultByCard;
 
 		validateForms(form);
 
 		if (form.valid()) {
-			$('#spinnerBlock').removeClass('hide');
 			insertFormInput(true, form);
 			searchStatusAccount(data);
 		}
@@ -60,141 +92,31 @@ $(function () {
 });
 
 function searchStatusAccount(passData){
+	$('#spinnerBlock').removeClass('hide');
+	$('#account-status-table').empty();
+	$('#export_excel').addClass('hidden');
 	who = 'Reports';
 	where = 'searchStatusAccount';
 	data = passData;
+	insertFormInput(true);
 
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data;
-		code = response.code
-		insertFormInput(false);
+	callNovoCore(who, where, data, function (response) {
+		dataResponse = response.data.listStatesAccountsNew;
 		$('#spinnerBlock').addClass('hide');
 
-		if (code == 0) {
+		if (dataResponse != '') {
 			$('#export_excel').removeClass('hidden');
-			$('#blockResults').removeClass('hidden');
-			var table= $("#globalTable").DataTable();
-			var personalizeRowsInfo = []
-			table.destroy();
-			$.each(dataResponse.accounts, function (key, value, index) {
-				var table, body = '';
-				table= '<div class=""><div class="flex ml-4 py-3 flex-auto">'
-				table+=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ': <span class="light text">'+ dataResponse.accounts[key].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p></div>'
-				table+= 	'<table id="resultsAccount'+  key + '" class="cell-border h6 display responsive w-100">';
-				table+= 	'<thead class="bg-primary secondary regular">';
-				table+= 		'<tr class="" style="margin-left: 0px;">';
-				table+= 			'<td>Fecha</td>';
-				table+= 			'<td>Fid</td>';
-				table+= 			'<td>Terminal</td>';
-				table+= 			'<td>Secuencia</td>';
-				table+= 			'<td>Referencia</td>';
-				table+= 			'<td>Descripción</td>';
-				table+= 			'<td>Abono</td>';
-				table+= 			'<td>Cargo</td>';
-				table+= 		'</tr>';
-				table+= 	'</thead>';
-				table+= 		'<tbody></tbody>'
-				table+= '</table>';
-
-				personalizeRowsInfo[key] = table;
-			})
-
-			$("#globalTable").html(personalizeRowsInfo);
-			$.each(dataResponse.users, function (key, value, index) {
-				var name = '#resultsAccount';
-				createTable(name, dataResponse.users, key);
-			})
-		}else if(code == 1){
-			$('#blockResults').removeClass('hidden');
-			$('#export_excel').addClass('hidden');
-			var principalTable= $("#globalTable").DataTable();
-			principalTable.destroy();
-			var data = [];
-			var name = '#globalTable';
-			var table, key = '';
-			table= '<div class="">'
-			table+= 	'<table id="resultsAccount" class="cell-border h6 display responsive w-100">';
-			table+= 	'<thead class="bg-primary secondary regular">';
-			table+= 		'<tr class="" style="margin-left: 0px;">';
-			table+= 			'<td>Fecha</td>';
-			table+= 			'<td>Fid</td>';
-			table+= 			'<td>Terminal</td>';
-			table+= 			'<td>Secuencia</td>';
-			table+= 			'<td>Referencia</td>';
-			table+= 			'<td>Descripción</td>';
-			table+= 			'<td>Abono</td>';
-			table+= 			'<td>Cargo</td>';
-			table+= 		'</tr>';
-			table+= 	'</thead>';
-			table+= 		'<tbody></tbody>'
-			table+= '</table>';
-			$("#globalTable").html(table);
-			createTable(name, data, key);
 		}
 
-	});
-};
+		if (response.code == 0){
+			$('#blockResults').removeClass('hidden');
 
-function createTable(name, data, index){
-	$(name + index).DataTable({
-		"ordering": false,
-		"responsive": true,
-		"lengthChange": false,
-		"pagingType": "full_numbers",
-		"data": data[index],
-		"columns": [
-			{ data: 'date' },
-			{ data: 'fid' },
-			{ data: 'terminal' },
-			{ data: 'secuence' },
-			{ data: 'reference' },
-			{ data: 'description' },
-			{ data: 'debit' },
-			{ data: 'credit' },
-		],
-		"columnDefs": [
-			{
-				"targets": 0,
-				"className": "date",
-				"visible": lang.CONF_DATE_COLUMN == "ON"
-			},
-			{
-				"targets": 1,
-				"className": "fid",
-				"visible": lang.CONF_DNI_COLUMN == "ON"
-			},
-			{
-				"targets": 2,
-				"className": "terminal",
-				"visible": lang.CONF_TERMINAL_COLUMN == "ON"
-			},
-			{
-				"targets": 3,
-				"className": "secuence",
-				"visible": lang.CONF_SECUENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 4,
-				"className": "reference",
-				"visible": lang.CONF_REFERENCE_COLUMN == "ON"
-			},
-			{
-				"targets": 5,
-				"className": "description",
-				"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
-			},
-			{
-				"targets": 6,
-				"className": "debit",
-				"visible": lang.CONF_DEBIT_COLUMN == "ON"
-			},
-			{
-				"targets": 7,
-				"className": "credit",
-				"visible": lang.CONF_CREDIT_COLUMN == "ON"
-			}
-		],
-		"language": dataTableLang
+			paintTable(dataResponse);
+			if (dataResponse[0].length >= lang.CONF_DATATABLE_ARRAY_CHUNK)
+				$('#spinnerResults').removeClass('hide');
+
+		};
+		insertFormInput(false);
 	});
 };
 
@@ -248,6 +170,7 @@ function exportToExcel(passData) {
 			downLoadfiles (data);
 		  $('.cover-spin').removeAttr("style");
 	  }
+		$('.cover-spin').hide();
   })
 };
 
@@ -274,4 +197,143 @@ function exportToPDF(passData) {
 			$('.cover-spin').removeAttr("style");
 		}
   })
+};
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function paintTable(dataResponse) {
+	for (let i = 0; i < dataResponse.length; i++) {
+		$.each(dataResponse[i], function (index, value) {
+		var table = '';
+				table = '<div class="hide-table'+ index +' hide">';
+			if (value) {
+				table += '<div class="">';
+				table +=		'<div class="flex ml-4 py-3 flex-auto">';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].id +'</span>';
+				table +=			'</p>';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_COUNT +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].account +'</span>';
+				table +=			'</p>';
+				table +=			'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_NAME_CLIENT +':';
+				table +=				'<span class="light text">'+ dataResponse[i][index].client +'</span>';
+				table +=			'</p>';
+				table +=		'</div>';
+			}
+				table += 		'<table class="result-account-status'+ index +' cell-border h6 display responsive w-100">';
+				table += 			'<thead class="bg-primary secondary regular">';
+				table += 				'<tr>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_CARD +'</th>';
+				table += 					'<th>'+ lang.REPORTS_TABLE_DATE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_FID +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_TERMINAL +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_SECUENCE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_REFERENCE +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_DESCRIPTION +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_OPERATION +'</th>';
+				table += 					'<th>'+ lang.REPORTS_ACCOUNT_AMOUNT +'</th>';
+				table += 				'</tr>';
+				table += 			'</thead>';
+				table += 		'<tbody>';
+
+			if (value) {
+				$.each(dataResponse[i][index].listMovements, function (index2, value2) {
+				table += 			'<tr>';
+				table += 				'<td>' + value2.card + '</td>';
+				table += 				'<td>' + value2.date + '</td>';
+				table += 				'<td>' + value2.fid + '</td>';
+				table += 				'<td>' + value2.terminal + '</td>';
+				table += 				'<td>' + value2.secuence + '</td>';
+				table += 				'<td>' + value2.reference + '</td>';
+				table += 				'<td>' + value2.description + '</td>';
+				table += 				'<td>' + value2.typeTransaction + '</td>';
+				table += 				'<td>' + value2.amount + '</td>';
+				table += 			'</tr>';
+				});
+			}
+				table += 		'</tbody>';
+				table += 	'</table>';
+				table += '</div>';
+
+			$('#account-status-table').append(table);
+			$('.result-account-status'+ index).DataTable().destroy();
+			$('.result-account-status'+ index).DataTable({
+				drawCallback: function (d) {
+					$('.hide-table'+index).removeClass('hide');
+				},
+				"ordering": false,
+				"lengthChange": false,
+				"pagingType": "full_numbers",
+				"columns": [
+					{ data: 'Tarjeta' },
+					{ data: 'date' },
+					{ data: 'fid' },
+					{ data: 'terminal' },
+					{ data: 'secuence' },
+					{ data: 'reference' },
+					{ data: 'description' },
+					{ data: 'typeTransaction' },
+					{ data: 'amount' },
+				],
+				"columnDefs": [
+					{
+						"targets": 0,
+						"className": "Tarjeta",
+						"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
+					},
+					{
+						"targets": 1,
+						"className": "date",
+						"visible": lang.CONF_DATE_COLUMN == "ON"
+					},
+					{
+						"targets": 1,
+						"className": "date",
+						"visible": lang.CONF_DATE_COLUMN == "ON"
+					},
+					{
+						"targets": 2,
+						"className": "fid",
+						"visible": lang.CONF_DNI_COLUMN == "ON"
+					},
+					{
+						"targets": 3,
+						"className": "terminal",
+						"visible": lang.CONF_TERMINAL_COLUMN == "ON"
+					},
+					{
+						"targets": 4,
+						"className": "secuence",
+						"visible": lang.CONF_SECUENCE_COLUMN == "ON"
+					},
+					{
+						"targets": 5,
+						"className": "reference",
+						"visible": lang.CONF_REFERENCE_COLUMN == "ON"
+					},
+					{
+						"targets": 6,
+						"className": "description",
+						"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
+					},
+					{
+						"targets": 7,
+						"className": "typeTransaction",
+						"visible": lang.CONF_OPERATION_COLUMN == "ON",
+						"width": "15%",
+					},
+					{
+						"targets": 8,
+						"className": "amount",
+						"visible": lang.CONF_AMOUNT_COLUMN == "ON"
+					}
+				],
+				"language": dataTableLang,
+			});
+		});
+		await sleep(lang.CONF_DATATABLE_SLEEP);
+	};
+	$('#spinnerResults').addClass('hide');
 };

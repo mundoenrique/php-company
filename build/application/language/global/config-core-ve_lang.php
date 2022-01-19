@@ -8,3 +8,5 @@ $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'ON';
 //REPORT iSSUED CARDS
 $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
+//FOOTER
+$lang['CONF_FOOTER_RATES'] = 'ON';

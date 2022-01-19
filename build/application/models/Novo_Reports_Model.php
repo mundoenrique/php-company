@@ -1565,18 +1565,10 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
 		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
 
-		if ($dataRequest->resultByNIT === 'all') {
-			$dataRequest->resultByNIT = '';
-			$typeSearch = '0';
-		} else {
-			$typeSearch = '1';
-		}
+		$typeSearch = $dataRequest->resultSearch;
 
-		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNIT);
-
-		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
-			$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
-		}
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
+		$this->dataRequest->card = strtoupper($dataRequest->resultByCardInput ?? '');
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -1589,69 +1581,31 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = false;
 
 		$response = $this->sendToService('callWs_searchStatusAccount');
+		$listStatesAccounts = '';
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$table =[];
 				$this->response->code = 0;
+				$listStatesAccounts = [];
+				$listadoCuentas = $response->listadoEstadosCuentas;
 
-				foreach ((array)$response->listadoEstadosCuentas as $key => $val) {
-					$table[$key] = $val;
-					$valAccountStatus[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
-				}
+				foreach ($listadoCuentas as $key => $val) {
+					$listStatesAccounts[$key]['account'] = $listadoCuentas[$key]->cuenta;
+					$listStatesAccounts[$key]['client'] = $listadoCuentas[$key]->cliente;
+					$listStatesAccounts[$key]['id'] = $listadoCuentas[$key]->idExtPer;
 
-				$usersData = $valAccountStatus;
-				$usersTables = [];
-				$data = [];
-
-				foreach ($usersData as $key1 => $val) {
-					$data[$key1] = $usersData[$key1];
-				}
-
-				foreach ($data as $key => $val) {
-					foreach ($data[$key] as $key1 => $val) {
-						$usersTables =(($data[$key])[$key1]);
-						$dataAccount = [];
-						$debit = '';
-						$credit = '';
-
-						if(lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON') {
-							$usersTables->secuencia = $usersTables->secuence;
-							$usersTables->terminal = $usersTables->terminal;
-							$usersTables->fid = $usersTables->fid;
-						}
-
-						if ($usersTables->tipoTransaccion == '+') {
-							$debit = $usersTables->monto;
-							$credit = '0';
-						} else {
-							$credit = $usersTables->monto;
-							$debit = '0';
-						}
-
-						$objUserData[$key] = [
-							'secuence' => "",
-							'terminal' => "",
-							'fid' => "",
-							'reference' => $usersTables->referencia,
-							'description' => $usersTables->descripcion,
-							'date' => $usersTables->fecha,
-							'credit' => $credit,
-							'debit' => $debit,
-							'client' => $usersTables->cliente
-						];
-						($data[$key])[$key1]= $objUserData[$key];
+					foreach ($listadoCuentas[$key]->listaMovimientos as $key1 => $val) {
+						$listStatesAccounts[$key]['listMovements'][$key1]['card'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tarjeta ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['fid'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fid ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['secuence'] = $listadoCuentas[$key]->listaMovimientos[$key1]->secuencia ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['terminal'] = $listadoCuentas[$key]->listaMovimientos[$key1]->terminalTransaccion ?? '';
+						$listStatesAccounts[$key]['listMovements'][$key1]['reference'] = $listadoCuentas[$key]->listaMovimientos[$key1]->referencia;
+						$listStatesAccounts[$key]['listMovements'][$key1]['description'] = $listadoCuentas[$key]->listaMovimientos[$key1]->descripcion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['date'] = $listadoCuentas[$key]->listaMovimientos[$key1]->fecha;
+						$listStatesAccounts[$key]['listMovements'][$key1]['typeTransaction'] = $listadoCuentas[$key]->listaMovimientos[$key1]->tipoTransaccion;
+						$listStatesAccounts[$key]['listMovements'][$key1]['amount'] = $listadoCuentas[$key]->listaMovimientos[$key1]->monto;
 					}
 				}
-
-				foreach($response->listadoEstadosCuentas as $key => $value){
-					($dataAccount[$key])['account'] = $response->listadoEstadosCuentas[$key]->cuenta;
-					($dataAccount[$key])['client'] = $response->listadoEstadosCuentas[$key]->cliente;
-					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
-				}
-
-				$this->response->data->users = $data;
-				$this->response->data->accounts = $dataAccount;
 			break;
 			case -444:
 				$this->response->icon = lang('CONF_ICON_DANGER');
@@ -1660,10 +1614,15 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -150:
-				$this->response->code = 1;
-				$this->response->data->users = '';
+				$listStatesAccounts = [''];
+				$this->response->code = 0;
+			break;
+			case 504:
+				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
 		}
+
+		$this->response->data->listStatesAccountsNew = $listStatesAccounts != '' ? array_chunk($listStatesAccounts, lang('CONF_DATATABLE_ARRAY_CHUNK'), true) : '';
 
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
@@ -1709,6 +1668,9 @@ class Novo_Reports_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
+			break;
+			case 504:
+				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
 			default:
 				$this->response->title = lang('REPORTS_TITLE');
