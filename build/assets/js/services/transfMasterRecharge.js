@@ -11,6 +11,8 @@ $(function () {
 			 checkType = $("input:radio[name=transferType]:checked").val();
 		})
 
+
+
 		$('#transferAmount').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
 		$('#transferAmount').on('keyup', function() {
 			$(this).val(function(_index, value) {
@@ -51,6 +53,7 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.transferAmount = normalizeAmount(data.transferAmount);
+			data.transferType = checkType;
 			$(this).html(loader);
 			insertFormInput(true);
 			if (lang.CONF_INPUT_PASS == 'OFF') {
