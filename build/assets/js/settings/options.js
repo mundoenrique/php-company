@@ -247,6 +247,9 @@ $(function () {
 		$('#branchInfoForm')[0].reset();
 		$(".completeSection").removeClass('hidden');
 		$(".secondSection").show();
+		$('html, body').animate({
+			scrollTop: $("#secondarySectionBranch").offset().top
+			}, 1000);
 	});
 
 	$('#showContacts').on('click', function (e) {
@@ -427,7 +430,7 @@ function getBranches (value) {
 			branchesTable( dataResponse );
 
 			$('.edit').on('click', function (e) {
-
+				$('.section').show();
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});

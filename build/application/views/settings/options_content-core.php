@@ -429,11 +429,11 @@
           	</div>
 						<div id="partedSection" class="figure">
 							<div class="col-auto m-5 right">
-								<button id="newBranchBtn" class="btn btn-primary bnt-small">
-									Nueva sucursal
+								<button id="newBranchBtn" class="btn btn-primary btn-small">
+									<?= lang('GEN_ADD_BRANCH') ?>
 								</button>
 							</div>
-								<table id="tableBranches" class="cell-border h6 display w-100">
+								<table id="tableBranches" class="cell-border h6 display w-100 center">
 									<thead class="bg-primary secondary regular">
 										<tr>
 											<th><?= 'Nombre' ?></th>
@@ -448,126 +448,127 @@
             		</table>
 								<div class="secondarySectionBranch" id="secondarySectionBranch">
 									<form id="txtBranchesForm" method="post">
-										<div class="row mb-2">
-												<div class="col-7 mt-1 ml-5 bg-color">
-													<input type="file" name="file-branch" id="file-branch" class="input-file">
-													<label for="file-branch" class="form-control label-file js-label-file mb-0">
-														<i class="icon icon-upload mr-1 pr-3 right"></i>
-														<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
-													</label>
-												</div>
-												<div class="col-auto mt-5">
-													<button id="btnTxtSend" type="button" class="btn btn-primary bnt-small disabled" >
-														Seleccionar
-													</button>
-												</div>
+										<div class="row justify-between items-center mb-2 mx-2">
+											<div class="form-group col-7">
+												<input type="file" name="file-branch" id="file-branch" class="input-file">
+												<label for="file-branch" class="form-control label-file js-label-file mb-0">
+													<i class="icon icon-upload mr-1 pr-3 right"></i>
+													<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
+												</label>
+												<div class="help-block"></div>
 											</div>
+											<div class="col-auto mt-2">
+												<button id="btnTxtSend" type="button" class="btn btn-primary bnt-small disabled" >
+													Seleccionar
+												</button>
+											</div>
+										</div>
 									</form>
 									<div class="flex flex-auto flex-column mt-5 completeSection hidden">
 								</div>
-            			<div class="flex flex-column mx-4 mb-5">
-										<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('SETTINGS_EDIT_ADD_BRANCH') ?>
-											<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
-										</span>
-              				<div class="section secondSection my-2 px-5">
-												<form id="branchInfoForm" method="post">
-													<div class="container">
-														<div class="row">
-															<input id="rifB" name="rifB"type="text" class="form-control hidden" />
-															<input id="codB" name="codB"type="text" class="form-control hidden" />
-															<input id="userNameB" name="userNameB"type="text" class="form-control hidden" />
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="branchName">Nombre</label>
-																<input id="branchName" name="branchName" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="zoneName">Zona</label>
-																<input id="zoneName" name="zoneName" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="address1">Dirección 1</label>
-																<input id="address1" name="address" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="address2">Dirección 2</label>
-																<input id="address2" name="address2" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="address3">Dirección 3</label>
-																<input id="address3" name="address3" type="text" class="form-control"  />
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4 hidden">
-																<label or="countryCodeBranch">País</label>
-																<select id="countryCodeBranch" name="countryCodeBranch" class="select-box custom-select mb-3 h6 w-100">
-																</select>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label or="stateCodeBranch">Provincia</label>
-																<select id="stateCodeBranch" name="stateCodeBranch" class="select-box custom-select mb-3 h6 w-100">
-																<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
-																</select>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label or="cityCodeBranch">Departamento</label>
-																<select id="cityCodeBranch" name="cityCodeBranch" class="select-box custom-select mb-3 h6 w-100" disabled>
-																<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
-																</select>
-																<div class="help-block"></div>
-															</div>
-															<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON'): ?>
-															<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4 col-xl-4 ">
-																<label or="districtCodeBranch">Distrito</label>
-																<select id="districtCodeBranch" name="districtCodeBranch" class="select-box custom-select mb-3 h6 w-100">
-																<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
-																</select>
-																<div class="help-block"></div>
-															</div>
-															<?php endif; ?>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="areaCode">Código de área</label>
-																<input id="areaCode" name="areaCode" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="phone">Teléfono</label>
-																<input id="phone" name="phone" type="text" class="form-control" maxlength="15">
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="person">Nombre del contacto</label>
-																<input id="person" name="person" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
-															<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-																<label for="branchCode">Código de sucursal</label>
-																<input id="branchCode" name="branchCode" type="text" class="form-control"/>
-																<div class="help-block"></div>
-															</div>
+								<div class="flex flex-column mx-4 mb-5">
+									<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('SETTINGS_EDIT_ADD_BRANCH') ?>
+										<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+									</span>
+										<div class="section secondSection my-2 px-5">
+											<form id="branchInfoForm" method="post">
+												<div class="container">
+													<div class="row">
+														<input id="rifB" name="rifB"type="text" class="form-control hidden" />
+														<input id="codB" name="codB"type="text" class="form-control hidden" />
+														<input id="userNameB" name="userNameB"type="text" class="form-control hidden" />
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="branchName">Nombre</label>
+															<input id="branchName" name="branchName" type="text" class="form-control"/>
+															<div class="help-block"></div>
 														</div>
-														<div class="row flex mb-4 mt-2 pl-5 justify-end items-center form-group">
-															<div class="col-7 col-lg-4 col-xl-3 input-group">
-																<input id="password1" class="form-control pwd-input" type="password" autocomplete="off" name="password"
-																	placeholder="Ingresa tu contraseña">
-
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="zoneName">Zona</label>
+															<input id="zoneName" name="zoneName" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="address1">Dirección 1</label>
+															<input id="address1" name="address" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="address2">Dirección 2</label>
+															<input id="address2" name="address2" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="address3">Dirección 3</label>
+															<input id="address3" name="address3" type="text" class="form-control"  />
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4 hidden">
+															<label or="countryCodeBranch">País</label>
+															<select id="countryCodeBranch" name="countryCodeBranch" class="form-control select-box custom-select h6 w-100">
+															</select>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label or="stateCodeBranch">Provincia</label>
+															<select id="stateCodeBranch" name="stateCodeBranch" class="form-control select-box custom-select h6 w-100">
+															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
+															</select>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label or="cityCodeBranch">Departamento</label>
+															<select id="cityCodeBranch" name="cityCodeBranch" class="form-control select-box custom-select h6 w-100" disabled>
+															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
+															</select>
+															<div class="help-block"></div>
+														</div>
+														<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON'): ?>
+														<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
+															<label or="districtCodeBranch">Distrito</label>
+															<select id="districtCodeBranch" name="districtCodeBranch" class="form-control select-box custom-select h6 w-100">
+															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
+															</select>
+															<div class="help-block"></div>
+														</div>
+														<?php endif; ?>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="areaCode">Código de área</label>
+															<input id="areaCode" name="areaCode" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="phone">Teléfono</label>
+															<input id="phone" name="phone" type="text" class="form-control" maxlength="15">
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="person">Nombre del contacto</label>
+															<input id="person" name="person" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+														<div class="form-group mb-1 col-6 col-lg-4">
+															<label for="branchCode">Código de sucursal</label>
+															<input id="branchCode" name="branchCode" type="text" class="form-control"/>
+															<div class="help-block"></div>
+														</div>
+													</div>
+													<div class="row flex mb-4 mt-2 pl-5 justify-end form-group">
+														<div class="col-4 form-group">
+															<div class="input-group">
+																<input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Ingresa tu contraseña">
 																<div class="input-group-append">
 																	<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 																</div>
-															<div class="help-block"></div>
+															</div>
+															<div class="help-block text-left"></div>
 														</div>
 														<div class="col-auto">
-																<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
-															</div>
+															<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
 														</div>
 													</div>
-												</form>
-              				</div>
-									</div>
+												</div>
+											</form>
+										</div>
+								</div>
             	</div>
         		</div>
       		</div>
