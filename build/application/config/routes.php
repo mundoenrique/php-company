@@ -79,6 +79,7 @@ $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
 $route['(:any)/suggestion'] = "Novo_User/suggestion";
 $route['(:any)/sign-in'] = "Novo_User/signIn";
 $route['(:any)/sign-in/(:any)'] = "Novo_User/signIn";
+$route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
 $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recover-password'] = "Novo_User/recoverPass";
 $route['(:any)/recover-password/(:any)'] = "Novo_User/recoverPass";

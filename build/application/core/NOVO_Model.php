@@ -27,7 +27,7 @@ class NOVO_Model extends CI_Model {
 		$this->token = $this->session->token ?? '';
 		$this->autoLogin = $this->session->autoLogin ?? '';
 		$this->userName = $this->session->userName;
-		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
+		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
 	}
 	/**
 	 * @info Método para comunicación con el servicio

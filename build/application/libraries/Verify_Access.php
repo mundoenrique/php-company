@@ -90,7 +90,7 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
+		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : lang('CONF_LINK_SIGNIN');
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
@@ -131,6 +131,19 @@ class Verify_Access {
 		}
 
 		switch($module) {
+			case 'signIn':
+				$auth = TRUE;
+				$uriSegmwnts = $this->CI->uri->segment(2).'/'.$this->CI->uri->segment(3);
+
+				if (SINGLE_SIGN_ON && $uriSegmwnts !== 'internal/novopayment' && ENVIRONMENT === 'production') {
+					redirect('page-no-found', 'Location', 301);
+					// show_404();
+					exit();
+				} elseif ($uriSegmwnts === 'internal/novopayment' && ENVIRONMENT !== 'production') {
+					redirect('page-no-found', 'Location', 301);
+					exit();
+				}
+				break;
 			case 'recoverPass':
 			case 'passwordRecovery':
 				$auth = lang('CONF_RECOV_PASS') == 'ON';
@@ -315,7 +328,7 @@ class Verify_Access {
 				break;
 			default:
 				$freeAccess = [
-					'signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
+					'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
 				];
 				$auth = in_array($module, $freeAccess);
 		}
