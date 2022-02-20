@@ -32,7 +32,6 @@ class Novo_User extends NOVO_Controller {
 			clearSessionsVars();
 		}
 
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",

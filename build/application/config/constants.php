@@ -120,7 +120,7 @@ switch(end($uriSegments)) {
 		$baseLanguage = 'english';
 	break;
 	default:
-		if (isset($_COOKIE['ceo_baseLanguage'])) {
+		if (isset($_COOKIE['ceo_baseLanguage']) && ($_COOKIE['ceo_baseLanguage'] === 'spanish' || $_COOKIE['ceo_baseLanguage'] === 'english')) {
 			$baseLanguage = $_COOKIE['ceo_baseLanguage'];
 		}
 }
