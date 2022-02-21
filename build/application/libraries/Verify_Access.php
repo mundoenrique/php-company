@@ -134,12 +134,13 @@ class Verify_Access {
 			case 'signIn':
 				$auth = TRUE;
 				$uriSegmwnts = $this->CI->uri->segment(2).'/'.$this->CI->uri->segment(3);
+				$ajaxRequest = $this->CI->input->is_ajax_request();
 
-				if (SINGLE_SIGN_ON && $uriSegmwnts !== 'internal/novopayment' && ENVIRONMENT === 'production') {
+				if (SINGLE_SIGN_ON && $uriSegmwnts !== 'internal/novopayment' && ENVIRONMENT === 'production' && !$ajaxRequest) {
 					redirect('page-no-found', 'Location', 301);
 					// show_404();
 					exit();
-				} elseif ($uriSegmwnts === 'internal/novopayment' && ENVIRONMENT !== 'production') {
+				} elseif ($uriSegmwnts === 'internal/novopayment' && ENVIRONMENT !== 'production' && !$ajaxRequest) {
 					redirect('page-no-found', 'Location', 301);
 					exit();
 				}
