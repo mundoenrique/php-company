@@ -2,24 +2,24 @@
 	"source_type": "rates",
 	"currency": "ves",
 	"currency_symbol": "Bs.",
-	"last_update": "2022-01-19",
+	"last_update": "2022-02-21",
 	"data": [{
 			"name": "Servicios",
 			"description": null,
 			"items": [{
 					"name": "Servicio administrativo mínimo",
-					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 40.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 40,00",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 45.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 45,00",
 					"rates": [
-						"Bs. 40.000.000,00 <br> Bs. 40,00",
-						"Bs. 40.000.000,00 <br> Bs. 40,00"
+						"Bs. 45.000.000,00 <br> Bs. 45,00",
+						"Bs. 45.000.000,00 <br> Bs. 45,00"
 					]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo",
 					"rates": [
-						"Bs. 40.000.000,00 <br>  Bs. 40,00",
-						"Bs. 40.000.000,00 <br> Bs. 40,00"
+						"Bs. 45.000.000,00 <br>  Bs. 45,00",
+						"Bs. 45.000.000,00 <br> Bs. 45,00"
 					]
 				}
 			]
