@@ -34,10 +34,12 @@ class Verify_Access {
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO [' . $user . '] VALIDATION FORM ' . $rule . ': ' .
+			json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			log_message('DEBUG', 'NOVO  [' . $user . '] VALIDATION ' . $rule . ' ERRORS: ' .
+				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		if ($class) {
@@ -77,7 +79,8 @@ class Verify_Access {
 		}
 
 		unset($_POST);
-		log_message('DEBUG', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ' . $rule .' REQUEST CREATED '.
+			json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
@@ -91,7 +94,8 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
 		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
-		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : lang('CONF_LINK_SIGNIN');
+		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END')
+			: lang('CONF_LINK_SIGNIN');
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
@@ -111,7 +115,8 @@ class Verify_Access {
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
+			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
 	}

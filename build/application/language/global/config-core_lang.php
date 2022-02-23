@@ -168,7 +168,7 @@ $lang['CONF_TABLE_UNNAMED_CARDS'] = 'ON';
 $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 $lang['CONF_SERVICEORDERS_ICON'] = 'OFF';
 $lang['CONF_NO_LINK'] = 'javascript:';
-$lang['CONF_LINK_SIGNIN'] = 'sign-in';
+$lang['CONF_LINK_SIGNIN'] = SINGLE_SIGN_ON && ENVIRONMENT === 'production' ? 'internal/novopayment/signin' : 'sign-in';
 $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
 $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';

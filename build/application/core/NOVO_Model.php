@@ -112,7 +112,7 @@ class NOVO_Model extends CI_Model {
 
 		$linkredirect = $this->session->has_userdata('productInf') ? lang('CONF_LINK_PRODUCT_DETAIL') : $linkredirect;
 		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61)
-			? 'ingresar/fin' : $linkredirect;
+			? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END') : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -173,7 +173,8 @@ class NOVO_Model extends CI_Model {
 			$responsetoView->$pos = $response;
 		}
 
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO ['.$this->userName.'] IP ' . $this->input->ip_address() . ' RESULT ' .$model .
+			' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
 
 		unset($responsetoView);
 

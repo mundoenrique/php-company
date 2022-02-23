@@ -120,7 +120,7 @@ class NOVO_Controller extends CI_Controller {
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+				log_message('DEBUG', 'NOVO [' . $this->appUserName . '] IP ' . $this->input->ip_address() . ' REQUEST FROM THE VIEW ' . json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
 				$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
 
