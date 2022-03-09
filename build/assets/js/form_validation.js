@@ -11,6 +11,7 @@ function validateForms(form) {
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
+	var alphanumspecial = /^[^#]+[\w.\-\/#%ñÑ ]+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var alphanumspace = /^['a-z0-9 ']{4,25}$/i;
 	var userPassword = validatePass;
@@ -138,6 +139,7 @@ function validateForms(form) {
 			"selection": { required: true },
 			"idNumber": { pattern: idNumberReg },
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
+			"reference": { pattern: alphanumspecial, maxlength: 40 },
 			"cardNumber": {
 				required: {
 					depends: function (element) {
@@ -323,6 +325,7 @@ function validateForms(form) {
 			"monthYear": lang.VALIDATE_DATE_MY,
 			"selection": lang.VALIDATE_OPTION,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"reference": lang.VALIDATE_REFERENCE,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"lockType": lang.VALIDATE_OPTION,
 			"otpCode": lang.VALIDATE_OTP_CODE,

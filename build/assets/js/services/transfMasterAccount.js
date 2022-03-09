@@ -278,12 +278,20 @@ $(function () {
 			btnText = $(this).text().trim();
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
-				sendRequest(action, title, $(this));
+				if (formValidateTrim(form, title) && lang.CONF_REFERENCE == 'ON') {
+					modalReference(action, title, $(this))
+				} else {
+					sendRequest(action, title, $(this));
+				}
 			} else if (formValidateTrim(form, title)) {
-				btnRemote = $(this);
-				remoteAuthArgs.action = action;
-				remoteAuthArgs.title = title;
-				getauhtKey();
+				if (lang.CONF_REFERENCE == 'ON') {
+					modalReference(action, title, $(this))
+				} else {
+					btnRemote = $(this);
+					remoteAuthArgs.action = action;
+					remoteAuthArgs.title = title;
+					getauhtKey();
+				}
 			}
 		}
 	});
@@ -328,6 +336,16 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		}
 	}
 	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+
+	if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+		inputModal += '<div class="input-group">';
+		inputModal += '<input class="form-control" type="text" id="reference" name="reference" autocomplete="off"';
+		inputModal += 'placeholder="' + lang.SERVICES_REFERENCE + '">';
+		inputModal += '</div>';
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
+	}
 
 	if (currentAction == 'CARD_ASSIGNMENT') {
 		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
@@ -446,6 +464,10 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 
 			if (currentAction == 'CARD_ASSIGNMENT') {
 				info['cardNumberAs'] = cardHolderInf.cardNumber;
+			}
+
+			if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
+				info['reference'] = cardHolderInf.reference;
 			}
 
 			if (currentAction == 'LOCK_TYPES') {
@@ -624,4 +646,40 @@ function formValidateTrim(currentForm, currentTitle) {
 	}
 
 	return cardsData.length > 0 && form.valid();
+}
+
+
+function modalReference(currentAction, currentTitle, currentBtn) {
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		}
+	}
+	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+	inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+	inputModal += '<div class="input-group">';
+	inputModal += '<input class="form-control" type="text" id="reference" name="reference" autocomplete="off"';
+	inputModal += 'placeholder="' + lang.SERVICES_REFERENCE + '">';
+	inputModal += '</div>';
+	inputModal += '<div class="help-block"></div>';
+	inputModal += '</div>';
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		$('#accept').addClass('send-request');
+	} else {
+		$('#accept').addClass('get-auth-key');
+		currentBtn = btnRemote;
+		form = $('#nonForm');
+
+		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
+			$('.cover-spin').show(0);
+		}
+	}
+	inputModal += '</form>';
+	appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }

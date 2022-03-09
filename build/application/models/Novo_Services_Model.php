@@ -161,7 +161,8 @@ class Novo_Services_Model extends NOVO_Model {
 			$card  = [
 				'noTarjeta' => $cardsInfo->Cardnumber,
 				'id_ext_per' => $cardsInfo->idNumber,
-				'montoTransaccion' => $cardsInfo->amount
+				'montoTransaccion' => $cardsInfo->amount,
+				'ref_externa' => $cardsInfo->reference ?? ''
 			];
 
 			switch ($dataRequest->action) {
@@ -1232,6 +1233,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
 
+		// NO BORRAR
 		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
 		$this->isResponseRc = 0; */
 

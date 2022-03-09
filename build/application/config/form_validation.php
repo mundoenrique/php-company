@@ -995,6 +995,11 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		],
 		[
+			'field' => 'reference',
+			'label' => 'reference',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
 			'rules' => 'trim|integer'
