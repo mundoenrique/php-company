@@ -161,8 +161,7 @@ class Novo_Services_Model extends NOVO_Model {
 			$card  = [
 				'noTarjeta' => $cardsInfo->Cardnumber,
 				'id_ext_per' => $cardsInfo->idNumber,
-				'montoTransaccion' => $cardsInfo->amount,
-				'ref_externa' => $cardsInfo->reference ?? ''
+				'montoTransaccion' => $cardsInfo->amount
 			];
 
 			switch ($dataRequest->action) {
@@ -213,6 +212,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->ref_externa = $dataRequest->reference ?? '';
 		$this->dataRequest->listaTarjetas = [
 			[
 				'paginaActual' => 1,
@@ -284,6 +284,26 @@ class Novo_Services_Model extends NOVO_Model {
 						$record->usersId = $cards->id_ext_per;
 						$record->cardNumber = $cards->noTarjetaConMascara;
 						$record->amount = isset($cards->montoTransaccion) ?  lang('CONF_CURRENCY').' '.$cards->montoTransaccion : '--';
+						$record->codelist = $cards->rc;
+
+						switch ($cards->rc) {
+							case 0:
+								$record->msglist = lang("SERVICES_SUCCESFUL_TRANSACTION");
+							break;
+							case -155:
+								$record->msglist = lang("SERVICES_INSUFFICIENT_BALANCE");
+							break;
+							case -242:
+								$record->msglist = lang('SERVICES_LIMIT_EXCEEDED');
+							break;
+							case -266:
+								$record->msglist = lang("SERVICES_LOCKED_CARD");
+							break;
+							default:
+							$record->msglist = lang("SERVICES_FAILED_TRANSACTION");
+							break;
+						}
+
 						$listResopnse[] = $record;
 					}
 

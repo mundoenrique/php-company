@@ -278,13 +278,13 @@ $(function () {
 			btnText = $(this).text().trim();
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
-				if (formValidateTrim(form, title) && lang.CONF_REFERENCE == 'ON') {
+				if (formValidateTrim(form, title) && lang.CONF_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
 					modalReference(action, title, $(this))
 				} else {
 					sendRequest(action, title, $(this));
 				}
 			} else if (formValidateTrim(form, title)) {
-				if (lang.CONF_REFERENCE == 'ON') {
+				if (lang.CONF_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
 					modalReference(action, title, $(this))
 				} else {
 					btnRemote = $(this);
@@ -466,10 +466,6 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				info['cardNumberAs'] = cardHolderInf.cardNumber;
 			}
 
-			if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
-				info['reference'] = cardHolderInf.reference;
-			}
-
 			if (currentAction == 'LOCK_TYPES') {
 				info['lockType'] = cardHolderInf.lockType;
 			}
@@ -484,6 +480,10 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 		data = {
 			cards: cardsInfo,
 			action: currentAction
+		}
+
+		if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
+			data.reference = cardHolderInf.reference;
 		}
 
 		if (lang.CONF_REMOTE_AUTH == 'OFF') {
@@ -588,9 +588,13 @@ function buildList(response, currentTitle) {
 				action: 'destroy'
 			}
 		}
+
 		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
 		$.each(response.data.listResponse, function (index, value) {
-			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+			inputModal += '<div class= "mb-1">';
+			inputModal += '<h6 class="light mr-1 mb-0">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+			inputModal += '<span class='+(value.codelist != 0 ? 'danger' : '')+'>('+value.msglist+')</span>';
+			inputModal += '</div>';
 		})
 
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
@@ -650,6 +654,11 @@ function formValidateTrim(currentForm, currentTitle) {
 
 
 function modalReference(currentAction, currentTitle, currentBtn) {
+
+	var formPassAction = $('#password-table');
+	var dataPassAction = getDataForm(formPassAction);
+	var password = dataPassAction.passAction != undefined && dataPassAction.passAction != null ? dataPassAction.passAction : '';
+
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -666,6 +675,12 @@ function modalReference(currentAction, currentTitle, currentBtn) {
 	inputModal += '<input class="form-control" type="text" id="reference" name="reference" autocomplete="off"';
 	inputModal += 'placeholder="' + lang.SERVICES_REFERENCE + '">';
 	inputModal += '</div>';
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+	inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+	inputModal += '<div class="input-group">';
+	inputModal += '<input class="form-control pwd-input pwd" type="hidden" id="password" name="password" value = '+ password +'>';
+	inputModal += '</div>';
+	}
 	inputModal += '<div class="help-block"></div>';
 	inputModal += '</div>';
 
@@ -675,11 +690,8 @@ function modalReference(currentAction, currentTitle, currentBtn) {
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
-
-		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
-			$('.cover-spin').show(0);
-		}
 	}
+
 	inputModal += '</form>';
 	appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }
