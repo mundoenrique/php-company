@@ -200,7 +200,8 @@ class Create_Menu {
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
 				$subMenuLang->link = lang('CONF_LINK_CATEGORY_EXPENSE');
 			break;
-			case 'REPCON':
+			//case 'REPCON':
+			case 'REPCMT':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 				$subMenuLang->link = lang('CONF_LINK_MASTER_ACCOUNT');
 			break;
