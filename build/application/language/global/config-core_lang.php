@@ -211,6 +211,7 @@ $lang['CONF_LINK_STATUS_BULK'] = 'status-bulk';//permiso asociado REPLOT
 $lang['CONF_LINK_CARD_HOLDERS'] = 'card-holders';//permiso asociado TEBTHA
 $lang['CONF_LINK_REPORTS'] = 'reports';//permiso asociado REPALL
 $lang['CONF_LINK_MASTER_ACCOUNT'] = 'master-account';//permiso asociado REPCON
+$lang['CONF_LINK_EXTENDED_MASTER_ACCOUNT'] = 'extended-master-account';//permiso asociado REPCMT
 $lang['CONF_LINK_USER_ACTIVITY'] = 'user-activity';//permiso asociado REPUSU
 $lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';
 $lang['CONF_LINK_SETTING'] = 'setting';
