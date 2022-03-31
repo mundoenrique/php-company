@@ -34,7 +34,7 @@ $(function () {
 	$('.hide-out').removeClass('hide');
 	$('#finalDate').removeClass('has-error');
 	$('#initialDate').removeClass('has-error');
-	$('#concenAccount').DataTable({
+	$('#extMasterAccount').DataTable({
 		"ordering": false,
 		"responsive": true,
 		"pagingType": "full_numbers",
@@ -226,7 +226,7 @@ function exportFile(e){
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		var form = $('#masterAcForm');
+		var form = $('#extMasterAcForm');
 
   	var passData = {
 			idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
@@ -366,7 +366,7 @@ function exportToPDFConsolid(passData) {
 
 $("#btnMasterAccount").on('click', function(e){
 	e.preventDefault();
-	form = $('#masterAcForm');
+	form = $('#extMasterAcForm');
 	validateForms(form)
 	if (form.valid()) {
 		insertFormInput(true, form);
@@ -404,7 +404,7 @@ function info(){
 			resultadoCheck = '';
 		}
 	}
-	var form= $('#masterAcForm');
+	var form= $('#extMasterAcForm');
 	insertFormInput(true, form);
 
 	var passData = {
@@ -417,13 +417,13 @@ function info(){
 		pageSize: $("#tamP").val()
 	};
 
-	masterAccount(passData);
+	extendedMasterAccount(passData);
 
 }
 
-function masterAccount(passData) {
+function extendedMasterAccount(passData) {
 	who = 'Reports';
-	where = 'masterAccount';
+	where = 'extendedMasterAccount';
 	data = passData;
 
 	callNovoCore(who, where, data, function(response) {
@@ -431,7 +431,7 @@ function masterAccount(passData) {
 		$('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
 		$('#titleResults').removeClass('hide');
-		var table = $('#concenAccount').DataTable();
+		var table = $('#extMasterAccount').DataTable();
 		table.destroy();
 			dataResponse = response.data
 			code = response.code
@@ -447,7 +447,7 @@ function masterAccount(passData) {
 					itemLista.montoDeposito = ''
 				}
 			});
-			table = $('#concenAccount').DataTable({
+			table = $('#extMasterAccount').DataTable({
 				"responsive": true,
 				"ordering": false,
 				"pagingType": "full_numbers",
@@ -455,6 +455,8 @@ function masterAccount(passData) {
 				"data": info,
 				"columns": [
 						{ data: 'fechaRegDep' },
+						{ data: 'curp' },
+						{ data: 'nombre' },
 						{ data: 'descripcion' },
 						{ data: 'referencia' },
 						{ data: 'montoDeposito' },
@@ -463,7 +465,7 @@ function masterAccount(passData) {
 				]
 			})} else {
 				$('#files-btn').addClass('hide');
-				$('#concenAccount').DataTable({
+				$('#extMasterAccount').DataTable({
 					"responsive": true,
 					"ordering": false,
 					"pagingType": "full_numbers",

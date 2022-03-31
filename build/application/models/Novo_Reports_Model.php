@@ -869,6 +869,44 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+		/**
+	 * @info Método para obtener resultados de cuenta maestra
+	 * @author Jennifer Cádiz / Luis Molina
+	 * @date May 26, 2020
+	 */
+	public function callWs_extendedMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: extendedMasterAccount Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
+		$this->dataAccessLog->operation = 'Cuenta maestra extendido';
+
+		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni = $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->tamanoPagina = $dataRequest->pageSize;
+		$this->dataRequest->paginaActual = 1;
+
+		$response = $this->sendToService('callWs_extendedMasterAccount');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+			break;
+			case -150:
+				$this->response->code = 1;
+			break;
+		}
+
+		return $this->response;
+	}
 
 	/**
 	 * @info Método para obtener reporte de estatus cuenta maestra

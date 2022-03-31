@@ -363,6 +363,36 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		]
 	],
+	'extendedMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tipoNota',
+			'rules' => 'trim|regex_match[/^[D|C]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'filtroFecha',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
+	],
 	'statusMasterAccount' => [
 		[
 			'field' => 'enterpriseCode',

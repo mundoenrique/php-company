@@ -274,7 +274,10 @@ class Verify_Access {
 			case 'exportToExcelMasterAccountConsolid':
 			case 'exportToPDFMasterAccountConsolid':
 			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));//REPCON //REPCMT
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));//REPCON
+				break;
+			case 'extendedMasterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));//REPCMT
 				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':

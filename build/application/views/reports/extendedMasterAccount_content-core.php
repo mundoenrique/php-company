@@ -19,7 +19,7 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-			<?php $data['name']='masterAcForm' ?>
+			<?php $data['name']='extMasterAcForm' ?>
 			<?php $this->load->view('reports/filterMasterAccount', $data)  ?>
 			<div class="flex pb-5 flex-column">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
@@ -47,10 +47,12 @@
 						</div>
 						</div>
 					</div>
-					<table id="concenAccount" class="cell-border h6 display responsive w-100">
+					<table id="extMasterAccount" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th><?= lang('REPORTS_TABLE_DATE'); ?></th>
+								<th><?= lang('REPORTS_TABLE_DNI'); ?></th>
+								<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
 								<th><?= lang('GEN_DESCRIPTION'); ?></th>
 								<th><?= lang('REPORTS_TABLE_REFERENCE'); ?></th>
 								<th><?= lang('REPORTS_TABLE_DEBIT'); ?></th>
@@ -69,9 +71,6 @@
 			</div>
 		</div>
 	</div>
-	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
-	<?php endif; ?>
 </div>
 
 
