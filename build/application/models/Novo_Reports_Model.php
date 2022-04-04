@@ -889,23 +889,47 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
 		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
 		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
-		$this->dataRequest->tamanoPagina = $dataRequest->pageSize;
-		$this->dataRequest->paginaActual = 1;
+
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = TRUE;
+		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
 		$response = $this->sendToService('callWs_extendedMasterAccount');
 
+		$listMasterAccount = [];
+
 		switch ($this->isResponseRc) {
 			case 0:
+
 				$this->response->code = 0;
-				$user = $response;
-				$this->response->data =  (array)$user;
+
+				foreach ($response->depositoGMO->lista as $list) {
+						$record = new stdClass();
+						$record->fechaRegDep = $list->fechaRegDep;
+						$record->idPersona = $list->idPersona;
+						$record->nombrePersona = $list->nombrePersona;
+						$record->descripcion = $list->descripcion;
+						$record->referencia = $list->referencia;
+						$record->montoDeposito = $list->montoDeposito;
+						$record->tipoNota = $list->tipoNota;
+						$record->saldoDisponible = $list->saldoDisponible;
+						array_push(
+							$listMasterAccount,
+							$record
+						);
+				}
 			break;
 			case -150:
 				$this->response->code = 1;
 			break;
 		}
 
-		return $this->response;
+		$this->response->draw = (int)$dataRequest->draw;
+		$this->response->recordsTotal = $response->totalRegistros ?? '0';
+		$this->response->recordsFiltered = $response->totalRegistros ?? '0';
+		$this->response->data = $listMasterAccount;
+
+		return $this->responseToTheView('callWs_searchExtendedAccountStatus');
 	}
 
 	/**

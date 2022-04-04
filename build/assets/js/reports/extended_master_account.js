@@ -421,66 +421,80 @@ function info(){
 
 }
 
-function extendedMasterAccount(passData) {
-	who = 'Reports';
-	where = 'extendedMasterAccount';
-	data = passData;
+function extendedMasterAccount(dataForm) {
+	$('#spinnerBlock').addClass("hide");
+	$('#tbody-datos-general').removeClass('hide');
+	$('#titleResults').removeClass('hide');
 
-	callNovoCore(who, where, data, function(response) {
-		insertFormInput(false);
-		$('#spinnerBlock').addClass("hide");
-		$('#tbody-datos-general').removeClass('hide');
-		$('#titleResults').removeClass('hide');
-		var table = $('#extMasterAccount').DataTable();
-		table.destroy();
-			dataResponse = response.data
-			code = response.code
-			if ( code == 0) {
-				$('#files-btn').removeClass("hide");
-			var info = dataResponse.depositoGMO.lista;
-			$.each(info,function(posLista,itemLista){
-				if (itemLista.tipoNota == 'D') {
-					itemLista.montoDeposito = '-' + itemLista.montoDeposito;
-					itemLista.tipoNota = '';
-				} else if (itemLista.tipoNota == 'C') {
-					itemLista.tipoNota = '+' + itemLista.montoDeposito;
-					itemLista.montoDeposito = ''
+	$('#extMasterAccount').DataTable().destroy();
+
+	$('#extMasterAccount').DataTable({
+		drawCallback: function (d) {
+			insertFormInput(false)
+		},
+		"autoWidth": false,
+		"ordering": false,
+		"searching": false,
+		"lengthChange": false,
+		"pagelength": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+		"language": dataTableLang,
+		"processing": true,
+		"serverSide": true,
+		"columns": [
+			{ "data": 'fechaRegDep' },
+			{ "data": 'idPersona' },
+			{ "data": 'nombrePersona' },
+			{ "data": 'descripcion' },
+			{ "data": 'referencia' },
+			{ "data": 'montoDeposito' },
+			{ "data": 'tipoNota' },
+			{ "data": 'saldoDisponible' }
+		],
+		"columnDefs": [
+			{"targets": 0, "className": "fechaRegDep"},
+			{"targets": 1, "className": "idPersona"},
+			{"targets": 2, "className": "nombrePersona"},
+			{"targets": 3, "className": "descripcion"},
+			{"targets": 4, "className": "referencia"},
+			{"targets": 5, "className": "montoDeposito"},
+			{"targets": 6, "className": "tipoNota"},
+			{"targets": 7, "className": "saldoDisponible"}
+		],
+		"ajax": {
+			url: baseURL + 'async-call',
+			method: 'POST',
+			dataType: 'json',
+			cache: false,
+			data: function (req) {
+				data = req,
+				data.idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif'),
+				data.dateStart= $("#initialDate").val(),
+				data.dateEnd = $("#finalDate").val(),
+				data.typeNote= "",
+				data.dateFilter=$("input[name='results']:checked").val()
+				var dataRequest = JSON.stringify({
+					who: 'Reports',
+					where: 'extendedMasterAccount',
+					data: data
+				});
+				dataRequest = cryptoPass(dataRequest, true);
+				var request = {
+					request: dataRequest,
+					ceo_name: ceo_cook,
+					plot: btoa(ceo_cook)
 				}
-			});
-			table = $('#extMasterAccount').DataTable({
-				"responsive": true,
-				"ordering": false,
-				"pagingType": "full_numbers",
-				"language": dataTableLang,
-				"data": info,
-				"columns": [
-						{ data: 'fechaRegDep' },
-						{ data: 'curp' },
-						{ data: 'nombre' },
-						{ data: 'descripcion' },
-						{ data: 'referencia' },
-						{ data: 'montoDeposito' },
-						{ data: 'tipoNota' },
-						{ data: 'saldoDisponible' }
-				]
-			})} else {
-				$('#files-btn').addClass('hide');
-				$('#extMasterAccount').DataTable({
-					"responsive": true,
-					"ordering": false,
-					"pagingType": "full_numbers",
-					"language": dataTableLang,
-				}).clear().draw();
+				return request
+			},
+			dataFilter: function (resp) {
+				var responseTable = jQuery.parseJSON(resp);
+				responseTable = JSON.parse(
+					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
+				);
+				$('#blockMasterAccountResults').removeClass("hide");
+				return JSON.stringify(responseTable);
 			}
-			if ($("input[name='results']:checked").val() != 0){
-				$("#initialDate ").attr('disabled', 'disabled');
-				$("#finalDate ").attr('disabled', 'disabled');
-			} else if($("input[name='results']:checked").val() == 0){
-
-				$("#initialDate ").removeAttr('disabled');
-				$("#finalDate ").removeAttr('disabled');
-			}
-			$('#blockMasterAccountResults').removeClass("hide");
-
-  })
+		}
+	});
 }
