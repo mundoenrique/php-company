@@ -372,6 +372,7 @@ $("#btnMasterAccount").on('click', function(e){
 		insertFormInput(true, form);
 	  $('#blockMasterAccountResults').addClass("hide");
 	  $('#spinnerBlock').removeClass("hide");
+		$('#titleResults').addClass('hide');
 		info();
 
 	}
@@ -422,15 +423,14 @@ function info(){
 }
 
 function extendedMasterAccount(dataForm) {
-	$('#spinnerBlock').addClass("hide");
-	$('#tbody-datos-general').removeClass('hide');
-	$('#titleResults').removeClass('hide');
-
 	$('#extMasterAccount').DataTable().destroy();
-
 	$('#extMasterAccount').DataTable({
 		drawCallback: function (d) {
 			insertFormInput(false)
+			$('#spinnerBlock').addClass("hide");
+			$('#tbody-datos-general').removeClass('hide');
+			$('#titleResults').removeClass('hide');
+			$('#files-btn').removeClass("hide");
 		},
 		"autoWidth": false,
 		"ordering": false,
@@ -453,10 +453,10 @@ function extendedMasterAccount(dataForm) {
 			{ "data": 'saldoDisponible' }
 		],
 		"columnDefs": [
-			{"targets": 0, "className": "fechaRegDep"},
-			{"targets": 1, "className": "idPersona"},
-			{"targets": 2, "className": "nombrePersona"},
-			{"targets": 3, "className": "descripcion"},
+			{"targets": 0, "className": "fechaRegDep", "width": "100px"},
+			{"targets": 1, "className": "idPersona",  "width": "150px"},
+			{"targets": 2, "className": "nombrePersona", "width": "100px"},
+			{"targets": 3, "className": "descripcion", "width": "150px"},
 			{"targets": 4, "className": "referencia"},
 			{"targets": 5, "className": "montoDeposito"},
 			{"targets": 6, "className": "tipoNota"},

@@ -372,6 +372,7 @@ $("#btnMasterAccount").on('click', function(e){
 		insertFormInput(true, form);
 	  $('#blockMasterAccountResults').addClass("hide");
 	  $('#spinnerBlock').removeClass("hide");
+		$('#titleResults').addClass('hide');
 		info();
 
 	}
