@@ -242,7 +242,8 @@ function exportFile(e){
 			case 'Exportar a EXCEL':
 				validateForms(form);
 				if (form.valid()) {
-					exportToExcel(passData);
+					//exportToExcel(passData);
+					extendedDownloadFiles(passData);
 				}
 				break;
 			case 'Exportar a PDF':
@@ -276,6 +277,26 @@ function exportToExcel(passData) {
 		  $('.cover-spin').removeAttr("style");
 	  }
   })
+}
+
+function extendedDownloadFiles(data) {
+	insertFormInput(true);
+	who = 'Reports';
+	where = 'exportToExcelExtendedMasterAccount';
+	callNovoCore(who, where, data, function (response) {
+
+		if (response.code == 0) {
+			$('#download-file').attr('href', response.data.file);
+			document.getElementById('download-file').click();
+			who = 'DownloadFiles';
+			where = 'DeleteFile';
+			data.fileName = response.data.name
+			callNovoCore(who, where, data, function (response) { })
+		}
+
+		insertFormInput(false);
+		$('.cover-spin').hide();
+	})
 }
 
 function exportToExcelConsolid(passData, textBtn) {

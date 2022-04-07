@@ -277,6 +277,7 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));//REPCON
 				break;
 			case 'extendedMasterAccount':
+			case 'exportToExcelExtendedMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));//REPCMT
 				break;
 			case 'userActivity':

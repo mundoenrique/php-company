@@ -1025,6 +1025,60 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+
+	/**
+	 * @info Método para obtener excel de tabla cuenta maestra extendido
+	 * @author Jennifer Cadiz / Luis Molina
+	 * @date April 07, 2022
+	 */
+	public function callWs_exportToExcelExtendedMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedMasterAccount Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra extendido';
+
+		$this->dataRequest->idOperation = 'generarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+		$response = $this->sendToService('callWs_exportToExcelExtendedMasterAccount');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('GEN_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+			break;
+			default:
+			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		  break;
+		}
+
+		return $this->response;
+	}
 	/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García
