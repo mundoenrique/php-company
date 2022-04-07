@@ -241,7 +241,7 @@ function exportFile(e){
 		switch(action) {
 			case 'Exportar a EXCEL':
 				validateForms(form);
-				if (form.valid()) {
+				if (true/*form.valid()*/) {
 					//exportToExcel(passData);
 					extendedDownloadFiles(passData);
 				}
