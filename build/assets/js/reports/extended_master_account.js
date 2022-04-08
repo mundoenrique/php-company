@@ -444,10 +444,10 @@ function info(){
 }
 
 function extendedMasterAccount(dataForm) {
+	insertFormInput(false);
 	$('#extMasterAccount').DataTable().destroy();
 	$('#extMasterAccount').DataTable({
 		drawCallback: function (d) {
-			insertFormInput(false)
 			$('#spinnerBlock').addClass("hide");
 			$('#tbody-datos-general').removeClass('hide');
 			$('#titleResults').removeClass('hide');
@@ -513,6 +513,14 @@ function extendedMasterAccount(dataForm) {
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
+				if ($("input[name='results']:checked").val() != 0){
+					$("#initialDate ").attr('disabled', 'disabled');
+					$("#finalDate ").attr('disabled', 'disabled');
+				} else if($("input[name='results']:checked").val() == 0){
+
+					$("#initialDate ").removeAttr('disabled');
+					$("#finalDate ").removeAttr('disabled');
+				}
 				$('#blockMasterAccountResults').removeClass("hide");
 				return JSON.stringify(responseTable);
 			}
