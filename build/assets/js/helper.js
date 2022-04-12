@@ -357,7 +357,12 @@ function formInputTrim(form) {
 		}
 
 		var trimVal = thisValInput.trim();
-		$(this).val(trimVal);
+
+		if ($(this).prop('tagName') === 'SELECT') {
+			$(this).find('option:selected').val(trimVal);
+		} else {
+			$(this).val(trimVal);
+		}
 	});
 }
 
@@ -376,7 +381,6 @@ function cryptoPass(jsonObject, req) {
 			}));
 		}
 	}
-
 
 	return cipherObject;
 }
