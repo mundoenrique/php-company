@@ -1046,9 +1046,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
 		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
-		$this->dataRequest->paginaActual = $dataRequest->actualPage;
+		//$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
+		//$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 

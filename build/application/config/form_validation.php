@@ -233,35 +233,31 @@ $config = [
 	'exportToExcelExtendedMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
-			'field' => 'filtroFecha',
-			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
+			'field' => 'dateFilter',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
 		],
 		[
-			'field' => 'fechaIni',
+			'field' => 'dateStart',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
 		[
-			'field' => 'fechaFin',
+			'field' => 'dateEnd',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
-		[
+		/*[
 			'field' => 'tamanoPagina',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 		[
 			'field' => 'paginaActual',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
+		],*/
 		[
-			'field' => 'producto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-		[
-			'field' => 'nombreEmpresa',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]'
+			'field' => 'nameEnterprise',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
 	'exportToPDFMasterAccount' => [

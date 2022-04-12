@@ -21,6 +21,13 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<?php $data['name']='extMasterAcForm' ?>
 			<?php $this->load->view('reports/filterMasterAccount', $data)  ?>
+			<form id="extMasterAccountFormXls" class="hide">
+					<input id="idExtEmp" name="idExtEmp"  type="text" value="">
+					<input id="dateStart" name="dateStart"  type="text" value="">
+					<input id="dateEnd" name="dateEnd"  type="text" value="">
+					<input id="typeNote" name="typeNote"  type="text" value="">
+					<input id="dateFilter" name="dateFilter"  type="text" value="">
+			</form>
 			<div class="flex pb-5 flex-column">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div id="blockMasterAccountResults" class="center mx-1">

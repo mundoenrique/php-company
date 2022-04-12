@@ -41,7 +41,7 @@ $(function () {
 		"language": dataTableLang
 	});
 
-		datePicker.datepicker({
+	datePicker.datepicker({
 		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
@@ -77,7 +77,7 @@ $(function () {
 			$("#initialDate ").removeAttr('disabled');
 			$("#finalDate ").removeAttr('disabled');
 		}
-});
+	});
 
 	$("#export_excel").click(function(e){
 		exportFile(e);
@@ -103,7 +103,6 @@ function dialog(e){
 	switch (action) {
 
 		case 'Exportar a EXCEL consolidado':
-			lang.CONF_MODAL_WIDTH = 200;
 			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
 			modalReq['table'] = $(this).closest('table');
@@ -241,8 +240,7 @@ function exportFile(e){
 		switch(action) {
 			case 'Exportar a EXCEL':
 				validateForms(form);
-				if (true/*form.valid()*/) {
-					//exportToExcel(passData);
+				if (form.valid()) {
 					extendedDownloadFiles(passData);
 				}
 				break;
@@ -394,8 +392,8 @@ $("#btnMasterAccount").on('click', function(e){
 	  $('#blockMasterAccountResults').addClass("hide");
 	  $('#spinnerBlock').removeClass("hide");
 		$('#titleResults').addClass('hide');
+		$('#files-btn').addClass("hide");
 		info();
-
 	}
 })
 
@@ -451,7 +449,6 @@ function extendedMasterAccount(dataForm) {
 			$('#spinnerBlock').addClass("hide");
 			$('#tbody-datos-general').removeClass('hide');
 			$('#titleResults').removeClass('hide');
-			$('#files-btn').removeClass("hide");
 		},
 		"autoWidth": false,
 		"ordering": false,
@@ -490,11 +487,11 @@ function extendedMasterAccount(dataForm) {
 			cache: false,
 			data: function (req) {
 				data = req,
-				data.idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif'),
-				data.dateStart= $("#initialDate").val(),
-				data.dateEnd = $("#finalDate").val(),
-				data.typeNote= "",
-				data.dateFilter=$("input[name='results']:checked").val()
+				data.idExtEmp = dataForm.idExtEmp,
+				data.dateStart= dataForm.dateStart,
+				data.dateEnd = dataForm.dateEnd,
+				data.typeNote= dataForm.typeNote,
+				data.dateFilter= dataForm.dateFilter
 				var dataRequest = JSON.stringify({
 					who: 'Reports',
 					where: 'extendedMasterAccount',
@@ -520,6 +517,9 @@ function extendedMasterAccount(dataForm) {
 
 					$("#initialDate ").removeAttr('disabled');
 					$("#finalDate ").removeAttr('disabled');
+				}
+				if (responseTable.data.length > 0) {
+					$('#files-btn').removeClass("hide");
 				}
 				$('#blockMasterAccountResults').removeClass("hide");
 				return JSON.stringify(responseTable);
