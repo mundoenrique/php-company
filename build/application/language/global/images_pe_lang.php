@@ -95,4 +95,5 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'regalo_provis' => 'provis_alimentacion',
 	'provis_credscot_vrt' => 'provis_credscot_vrt',
 	'provis_scotia_vrt' => 'provis_scotia_vrt',
+	'provis_chip' => 'provis_chip',
 ];
