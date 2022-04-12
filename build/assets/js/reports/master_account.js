@@ -103,7 +103,6 @@ function dialog(e){
 	switch (action) {
 
 		case 'Exportar a EXCEL consolidado':
-			lang.CONF_MODAL_WIDTH = 200;
 			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
 			modalReq['table'] = $(this).closest('table');
