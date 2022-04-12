@@ -513,6 +513,16 @@ function extendedMasterAccount(dataForm) {
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
+				$.each(responseTable.data,function(posLista,itemLista){
+					if (itemLista.tipoNota == 'D') {
+						itemLista.montoDeposito = '$ ' + itemLista.montoDeposito;
+						itemLista.tipoNota = '';
+					} else if (itemLista.tipoNota == 'C') {
+						itemLista.tipoNota = '$ ' + itemLista.montoDeposito;
+						itemLista.montoDeposito = ''
+					}
+					itemLista.saldoDisponible = '$ ' +itemLista.saldoDisponible;
+				});
 				if ($("input[name='results']:checked").val() != 0){
 					$("#initialDate ").attr('disabled', 'disabled');
 					$("#finalDate ").attr('disabled', 'disabled');
