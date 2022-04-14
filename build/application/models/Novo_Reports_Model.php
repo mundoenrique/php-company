@@ -869,7 +869,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
-		/**
+	/**
 	 * @info Método para obtener resultados de cuenta maestra
 	 * @author Jennifer Cádiz / Luis Molina
 	 * @date May 26, 2020
@@ -885,10 +885,10 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
 		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni = $dataRequest->dateStart;
-		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->fechaIni = $dataRequest->initialDate;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
-		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDate;
 
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = TRUE;
@@ -902,6 +902,12 @@ class Novo_Reports_Model extends NOVO_Model {
 			case 0:
 
 				$this->response->code = 0;
+
+				$this->response->idExtEmp = $response->idExtEmp;
+				$this->response->initialDate = $response->fechaIni;
+				$this->response->finalDate = $response->fechaFin;
+				$this->response->filterDate = $response->filtroFecha;
+				$this->response->nameEnterprise = $response->depositoGMO->lista[0]->nombreCliente;
 
 				foreach ($response->depositoGMO->lista as $list) {
 						$record = new stdClass();
@@ -1041,14 +1047,12 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'generarDepositoGarantia';
 		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
-		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
-		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
-		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
-		//$this->dataRequest->paginaActual = $dataRequest->actualPage;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDateXls;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDateXls;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterpriseXls;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		//$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
@@ -1099,9 +1103,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
 		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
-		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
 

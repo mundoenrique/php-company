@@ -152,28 +152,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
 		],
 	],
-	'exportToExcel' => [
-		[
-			'field' => 'idExtEmp',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'producto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-		[
-			'field' => 'tamanoPagina',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'paginaActual',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'descProd',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-	],
 	'exportToExcelMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
@@ -232,31 +210,23 @@ $config = [
 	],
 	'exportToExcelExtendedMasterAccount' => [
 		[
-			'field' => 'idExtEmp',
+			'field' => 'idExtEmpXls',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
-			'field' => 'dateFilter',
+			'field' => 'filterDateXls',
 			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
 		],
 		[
-			'field' => 'dateStart',
+			'field' => 'initialDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
 		[
-			'field' => 'dateEnd',
+			'field' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
-		/*[
-			'field' => 'tamanoPagina',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
 		[
-			'field' => 'paginaActual',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],*/
-		[
-			'field' => 'nameEnterprise',
+			'field' => 'nameEnterpriseXls',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
@@ -396,31 +366,23 @@ $config = [
 	'extendedMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
-			'field' => 'tipoNota',
+			'field' => 'typeNote',
 			'rules' => 'trim|regex_match[/^[D|C]*$/i]'
 		],
 		[
-			'field' => 'fechaIni',
+			'field' => 'initialDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
 		[
-			'field' => 'fechaFin',
+			'field' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
 		[
-			'field' => 'filtroFecha',
-			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
-		],
-		[
-			'field' => 'paginaActual',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'tamanoPagina',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'field' => 'filterDate',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
 		]
 	],
 	'statusMasterAccount' => [

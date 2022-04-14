@@ -4,43 +4,21 @@ var modalReq = {};
 
 $(function () {
 	$('#blockMasterAccountResults').addClass("hide");
+	$('#range').prop("checked",true);
 	$('#titleResults').addClass('hide');
 	$('#files-btn').addClass('hide');
-	$('.btn').removeAttr('disabled');
-	$("#credit").val('');
-	$("#debit").val('');
-	$("#debit").val('');
-
-	if ($("input[name='results']:checked").val() != 0) {
-		$("#initialDate ").attr('required', 'required');
-		$("#finalDate ").attr('required', 'required');
-	}
-
-	table = $('#balancesClosing').DataTable({
-	"ordering": false,
-	"pagingType": "full_numbers",
-	"language": dataTableLang
-}
-);
-
-	$('#range').attr('checked', true);
-	var datePicker = $('.date-picker');
+	$('#finalDate').val('');
+	$('#initialDate').val('');
 	$("#credit").val('C');
 	$("#debit").val('D');
 	$("#trimester").val('3');
 	$("#semester").val('6');
 	$("#range").val('0');
+	$('#extMasterAccountFormXls')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$('#finalDate').removeClass('has-error');
-	$('#initialDate').removeClass('has-error');
-	$('#extMasterAccount').DataTable({
-		"ordering": false,
-		"responsive": true,
-		"pagingType": "full_numbers",
-		"language": dataTableLang
-	});
 
+	var datePicker = $('.date-picker');
 	datePicker.datepicker({
 		onSelect: function (selectedDate) {
 			$(this)
@@ -65,12 +43,10 @@ $(function () {
 	});
 
 	$("#radio-form").on('change', function(){
-		$('#finalDate').removeClass('has-error');
-		$('#initialDate').removeClass('has-error');
+		$('#finalDate').datepicker('setDate', null).removeClass('has-error');
+		$('#initialDate').datepicker('setDate', null).removeClass('has-error');
 		$(".help-block").text("");
 		if ($("input[name='results']:checked").val() != 0) {
-			$("#initialDate ").datepicker('setDate', null);
-			$("#finalDate").datepicker('setDate', null);
 			$("#initialDate ").attr('disabled', 'disabled');
 			$("#finalDate").attr('disabled', 'disabled');
 		} else if ($("input[name='results']:checked").val() == 0 ){
@@ -79,25 +55,191 @@ $(function () {
 		}
 	});
 
-	$("#export_excel").click(function(e){
-		exportFile(e);
+	$("#btnMasterAccount").on('click', function(e){
+		e.preventDefault();
+		form = $('#extMasterAcForm');
+		validateForms(form)
+		if (form.valid()) {
+			insertFormInput(true, form);
+			$('#blockMasterAccountResults').addClass("hide");
+			$('#spinnerBlock').removeClass("hide");
+			$('#titleResults').addClass('hide');
+			$('#files-btn').addClass("hide");
+			detailData();
+		}
 	});
-	$("#export_pdf").click(function(e){
-		exportFile(e);
-	});
-	$("#export_pdfCons").click(function(e){
-		dialog(e);
-	});
-	$("#export_excelCons").click(function(e){
-		dialog(e);
+
+	function detailData(){
+		var resultadoCheck = '';
+
+		if ($("#debit").is(":checked") == true && $("#credit").is(":checked") == true) {
+			resultadoCheck = '';
+		}else if ($("#debit").is(":checked") == false && $("#credit").is(":checked") == false) {
+			resultadoCheck = '';
+		}else if ($("#debit").is(":checked") == true && $("#credit").is(":checked") == false) {
+			resultadoCheck = $("#debit").val();
+		}else if ($("#debit").is(":checked") == false && $("#credit").is(":checked") == true) {
+			resultadoCheck = $("#credit").val();
+		}
+
+		var passData = {
+			idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
+			initialDate: $("#initialDate").val(),
+			finalDate:  $("#finalDate").val(),
+			typeNote: resultadoCheck,
+			filterDate: $("input[name='results']:checked").val()
+		};
+		extendedMasterAccount(passData);
+}
+
+	function extendedMasterAccount(dataForm) {
+		$('#extMasterAccount').DataTable().destroy();
+		$('#extMasterAccount').DataTable({
+			drawCallback: function (d) {
+				$('#spinnerBlock').addClass("hide");
+				$('#tbody-datos-general').removeClass('hide');
+				$('#titleResults').removeClass('hide');
+			},
+			"autoWidth": false,
+			"ordering": false,
+			"searching": false,
+			"lengthChange": false,
+			"pagelength": 10,
+			"pagingType": "full_numbers",
+			"table-layout": "fixed",
+			"language": dataTableLang,
+			"processing": true,
+			"serverSide": true,
+			"columns": [
+				{ "data": 'fechaRegDep' },
+				{ "data": 'idPersona' },
+				{ "data": 'nombrePersona' },
+				{ "data": 'descripcion' },
+				{ "data": 'referencia' },
+				{ "data": 'montoDeposito' },
+				{ "data": 'tipoNota' },
+				{ "data": 'saldoDisponible' }
+			],
+			"columnDefs": [
+				{"targets": 0, "className": "fechaRegDep", "width": "100px"},
+				{"targets": 1, "className": "idPersona",  "width": "150px"},
+				{"targets": 2, "className": "nombrePersona", "width": "100px"},
+				{"targets": 3, "className": "descripcion", "width": "150px"},
+				{"targets": 4, "className": "referencia"},
+				{"targets": 5, "className": "montoDeposito"},
+				{"targets": 6, "className": "tipoNota"},
+				{"targets": 7, "className": "saldoDisponible"}
+			],
+			"ajax": {
+				url: baseURL + 'async-call',
+				method: 'POST',
+				dataType: 'json',
+				cache: false,
+				data: function (req) {
+					data = req,
+					data.idExtEmp = dataForm.idExtEmp,
+					data.initialDate= dataForm.initialDate,
+					data.finalDate = dataForm.finalDate,
+					data.typeNote= dataForm.typeNote,
+					data.filterDate= dataForm.filterDate
+					var dataRequest = JSON.stringify({
+						who: 'Reports',
+						where: 'extendedMasterAccount',
+						data: data
+					});
+					dataRequest = cryptoPass(dataRequest, true);
+					var request = {
+						request: dataRequest,
+						ceo_name: ceo_cook,
+						plot: btoa(ceo_cook)
+					}
+					return request
+				},
+				dataFilter: function (resp) {
+					var responseTable = jQuery.parseJSON(resp);
+					var responseTableEnd = JSON.parse(
+						CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
+					);
+
+					$('#extMasterAccountFormXls')[0].reset();
+
+					if (responseTableEnd.code == 0) {
+						$.each(responseTableEnd.data,function(posLista,itemLista){
+							if (itemLista.tipoNota == 'D') {
+								itemLista.montoDeposito = '$ ' + itemLista.montoDeposito;
+								itemLista.tipoNota = '';
+							} else if (itemLista.tipoNota == 'C') {
+								itemLista.tipoNota = '$ ' + itemLista.montoDeposito;
+								itemLista.montoDeposito = ''
+							}
+							itemLista.saldoDisponible = '$ ' +itemLista.saldoDisponible;
+						});
+
+						$('#idExtEmpXls').val(responseTableEnd.idExtEmp);
+						$('#initialDateXls').val(responseTableEnd.initialDate);
+						$('#finalDateXls').val(responseTableEnd.finalDate);
+						$('#filterDateXls').val(responseTableEnd.filterDate);
+						$('#nameEnterpriseXls').val(responseTableEnd.nameEnterprise);
+
+						$('#files-btn').removeClass("hide");
+					}
+
+					insertFormInput(false, form)
+					if ($("input[name='results']:checked").val() != 0){
+						$("#initialDate ").attr('disabled', 'disabled');
+						$("#finalDate ").attr('disabled', 'disabled');
+					} else if($("input[name='results']:checked").val() == 0){
+						$("#initialDate ").removeAttr('disabled');
+						$("#finalDate ").removeAttr('disabled');
+					}
+
+					$('#blockMasterAccountResults').removeClass("hide");
+					return JSON.stringify(responseTableEnd);
+				}
+			}
+		});
+	}
+
+	$(".btn-file").on('click', function(e) {
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		var action = event.attr('id');
+		var form = $('#extMasterAccountFormXls');
+		var dataForm = getDataForm(form)
+
+		var passData = {
+			idExtEmp: dataForm.idExtEmpXls,
+			dateStart: dataForm.initialDateXls,
+			dateEnd: dataForm.finalDateXls,
+			dateFilter: dataForm.filterDateXls,
+			nameEnterprise: dataForm.nameEnterpriseXls,
+		};
+
+		validateForms(form);
+		if (form.valid()) {
+			switch(action) {
+				case 'export_excel':
+						extendedDownloadFiles(dataForm);
+				break;
+				case 'export_pdf':
+						exportToPDF(passData);
+				break;
+				case 'export_excelCons':
+					dialog(e);
+				break;
+				case 'export_pdfCons':
+					dialog(e);
+				break;
+			}
+		}
 	});
 });
+
 
 function dialog(e){
 	e.preventDefault();
 	var event = $(e.currentTarget);
 	var action = event.attr('title');
-	var submitForm = false;
 	$(this).closest('tr').addClass('select');
 
 	switch (action) {
@@ -172,6 +314,7 @@ function dialog(e){
 				}while(i!=20);
 				break;
 	}
+
 	if(action == titleModalPdf ){
 		var type = 'pdf';
 		downloadConsolid(type, oldID);
@@ -218,67 +361,10 @@ function downloadConsolid(type, oldID){
 			}
 		}
 	})
-};
-
-
-function exportFile(e){
-		e.preventDefault();
-		var event = $(e.currentTarget);
-		var action = event.attr('title');
-		var form = $('#extMasterAcForm');
-
-  	var passData = {
-			idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
-			dateStart: $("#initialDate").val(),
-			dateEnd: $("#finalDate").val(),
-			dateFilter: $("input[name='results']:checked").val(),
-			nameEnterprise: $('#enterprise-report').find('option:selected').attr('nomOf'),
-			actualPage: "1",
-			pageSize: $("#tamP").val()
-		};
-
-		switch(action) {
-			case 'Exportar a EXCEL':
-				validateForms(form);
-				if (form.valid()) {
-					extendedDownloadFiles(passData);
-				}
-				break;
-			case 'Exportar a PDF':
-				validateForms(form);
-				if (form.valid()) {
-					exportToPDF(passData);
-				}
-				break;
-		}
-};
-
-function exportToExcel(passData) {
-	who = 'Reports';
-	where = 'exportToExcelMasterAccount';
-	data = passData;
-
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
-		if (info.formatoArchivo == 'excel') {
-			info.formatoArchivo = '.xls'
-		}
-		if (code == 0) {
-			data = {
-				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
-				"ext": info.formatoArchivo,
-				"file": info.archivo
-			}
-			downLoadfiles (data);
-		  $('.cover-spin').removeAttr("style");
-	  }
-  })
 }
 
+
 function extendedDownloadFiles(data) {
-	insertFormInput(true);
 	who = 'Reports';
 	where = 'exportToExcelExtendedMasterAccount';
 	callNovoCore(who, where, data, function (response) {
@@ -291,10 +377,32 @@ function extendedDownloadFiles(data) {
 			data.fileName = response.data.name
 			callNovoCore(who, where, data, function (response) { })
 		}
-
-		insertFormInput(false);
 		$('.cover-spin').hide();
 	})
+}
+
+function exportToPDF(passData) {
+	who = 'Reports';
+	where = 'exportToPDFMasterAccount';
+	data = passData;
+
+	callNovoCore(who, where, data, function(response) {
+		dataResponse = response.data;
+		code = response.code
+		var info = dataResponse;
+		if (info.formatoArchivo == 'PDF') {
+			info.formatoArchivo = '.pdf'
+		}
+		if (code == 0) {
+			data = {
+				"name": 'cuentaMaestra'+info.formatoArchivo,
+				"ext": info.formatoArchivo,
+				"file": info.archivo
+			}
+			downLoadfiles (data);
+			$('.cover-spin').removeAttr("style");
+		}
+  })
 }
 
 function exportToExcelConsolid(passData, textBtn) {
@@ -328,29 +436,6 @@ function exportToExcelConsolid(passData, textBtn) {
   })
 }
 
-function exportToPDF(passData) {
-	who = 'Reports';
-	where = 'exportToPDFMasterAccount';
-	data = passData;
-
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
-		if (info.formatoArchivo == 'PDF') {
-			info.formatoArchivo = '.pdf'
-		}
-		if (code == 0) {
-			data = {
-				"name": 'cuentaMaestra'+info.formatoArchivo,
-				"ext": info.formatoArchivo,
-				"file": info.archivo
-			}
-			downLoadfiles (data);
-			$('.cover-spin').removeAttr("style");
-		}
-  })
-}
 
 function exportToPDFConsolid(passData) {
 	who = 'Reports';
@@ -381,159 +466,4 @@ function exportToPDFConsolid(passData) {
 			$('.cover-spin').removeAttr("style");
 		}
 	})
-}
-
-$("#btnMasterAccount").on('click', function(e){
-	e.preventDefault();
-	form = $('#extMasterAcForm');
-	validateForms(form)
-	if (form.valid()) {
-		insertFormInput(true, form);
-	  $('#blockMasterAccountResults').addClass("hide");
-	  $('#spinnerBlock').removeClass("hide");
-		$('#titleResults').addClass('hide');
-		$('#files-btn').addClass("hide");
-		info();
-	}
-})
-
-function info(){
-	var resultadoCheck;
-	var checkDebit;
-	var checkCredit;
-	if ($("#debit").is(":checked")) {
-		resultadoCheck = $("#debit").val();
-		if ($("#credit").is(":checked")) {
-			resultadoCheck = $("#credit").val();
-			} else {
-				checkCredit = false;
-			}
-	} else {
-		checkDebit = false;
-			if ($("#credit").is(":checked")) {
-				resultadoCheck = $("#credit").val();
-				} else {
-				checkCredit = false;
-				}
-		}
-		if (checkDebit == false && checkCredit == false) {
-			resultadoCheck = '';
-	}
-	if (checkDebit != false) {
-		if (checkCredit != false) {
-			resultadoCheck = '';
-		}
-	}
-	var form= $('#extMasterAcForm');
-	insertFormInput(true, form);
-
-	var passData = {
-		idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
-		dateStart: $("#initialDate").val(),
-		dateEnd:  $("#finalDate").val(),
-		typeNote: resultadoCheck,
-		dateFilter: $("input[name='results']:checked").val(),
-		actualPage: 1,
-		pageSize: $("#tamP").val()
-	};
-
-	extendedMasterAccount(passData);
-
-}
-
-function extendedMasterAccount(dataForm) {
-	insertFormInput(false);
-	$('#extMasterAccount').DataTable().destroy();
-	$('#extMasterAccount').DataTable({
-		drawCallback: function (d) {
-			$('#spinnerBlock').addClass("hide");
-			$('#tbody-datos-general').removeClass('hide');
-			$('#titleResults').removeClass('hide');
-		},
-		"autoWidth": false,
-		"ordering": false,
-		"searching": false,
-		"lengthChange": false,
-		"pagelength": 10,
-		"pagingType": "full_numbers",
-		"table-layout": "fixed",
-		"language": dataTableLang,
-		"processing": true,
-		"serverSide": true,
-		"columns": [
-			{ "data": 'fechaRegDep' },
-			{ "data": 'idPersona' },
-			{ "data": 'nombrePersona' },
-			{ "data": 'descripcion' },
-			{ "data": 'referencia' },
-			{ "data": 'montoDeposito' },
-			{ "data": 'tipoNota' },
-			{ "data": 'saldoDisponible' }
-		],
-		"columnDefs": [
-			{"targets": 0, "className": "fechaRegDep", "width": "100px"},
-			{"targets": 1, "className": "idPersona",  "width": "150px"},
-			{"targets": 2, "className": "nombrePersona", "width": "100px"},
-			{"targets": 3, "className": "descripcion", "width": "150px"},
-			{"targets": 4, "className": "referencia"},
-			{"targets": 5, "className": "montoDeposito"},
-			{"targets": 6, "className": "tipoNota"},
-			{"targets": 7, "className": "saldoDisponible"}
-		],
-		"ajax": {
-			url: baseURL + 'async-call',
-			method: 'POST',
-			dataType: 'json',
-			cache: false,
-			data: function (req) {
-				data = req,
-				data.idExtEmp = dataForm.idExtEmp,
-				data.dateStart= dataForm.dateStart,
-				data.dateEnd = dataForm.dateEnd,
-				data.typeNote= dataForm.typeNote,
-				data.dateFilter= dataForm.dateFilter
-				var dataRequest = JSON.stringify({
-					who: 'Reports',
-					where: 'extendedMasterAccount',
-					data: data
-				});
-				dataRequest = cryptoPass(dataRequest, true);
-				var request = {
-					request: dataRequest,
-					ceo_name: ceo_cook,
-					plot: btoa(ceo_cook)
-				}
-				return request
-			},
-			dataFilter: function (resp) {
-				var responseTable = jQuery.parseJSON(resp);
-				responseTable = JSON.parse(
-					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
-				);
-				$.each(responseTable.data,function(posLista,itemLista){
-					if (itemLista.tipoNota == 'D') {
-						itemLista.montoDeposito = '$ ' + itemLista.montoDeposito;
-						itemLista.tipoNota = '';
-					} else if (itemLista.tipoNota == 'C') {
-						itemLista.tipoNota = '$ ' + itemLista.montoDeposito;
-						itemLista.montoDeposito = ''
-					}
-					itemLista.saldoDisponible = '$ ' +itemLista.saldoDisponible;
-				});
-				if ($("input[name='results']:checked").val() != 0){
-					$("#initialDate ").attr('disabled', 'disabled');
-					$("#finalDate ").attr('disabled', 'disabled');
-				} else if($("input[name='results']:checked").val() == 0){
-
-					$("#initialDate ").removeAttr('disabled');
-					$("#finalDate ").removeAttr('disabled');
-				}
-				if (responseTable.data.length > 0) {
-					$('#files-btn').removeClass("hide");
-				}
-				$('#blockMasterAccountResults').removeClass("hide");
-				return JSON.stringify(responseTable);
-			}
-		}
-	});
 }
