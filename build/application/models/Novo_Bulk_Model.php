@@ -377,6 +377,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
+			case -468:
+				$this->response->title = lang('BULK_DETAIL');
+				$this->response->msg = lang('BULK_CONFIRM_INACTIVE_ACCOUNT');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
+			break;
 		}
 
 		$this->response->data->detailBulk = (object) $detailBulk;
