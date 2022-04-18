@@ -24,6 +24,7 @@ $(function () {
 );
 
 	$('#range').attr('checked', true);
+	$('#allProcedures').prop("checked",true);
 	var datePicker = $('.date-picker');
 	$("#credit").val('C');
 	$("#debit").val('D');

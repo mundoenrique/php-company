@@ -16,21 +16,25 @@
 					</select>
 					<div class="help-block"></div>
 				</div>
-				<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-4">
+				<div id="checked-form" class="form-group col-4">
 					<label class="block">Procedimiento</label>
-					<div class="custom-control custom-switch custom-control-inline">
-						<input id="debit" class="custom-control-input" type="checkbox" name="debit">
-						<label class="custom-control-label" for="debit">Cargo
-						</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="debit" name="procedure" class="custom-control-input" value="all">
+						<label class="custom-control-label mr-1" for="debit">Cargo</label>
 					</div>
-					<div class="custom-control custom-switch custom-control-inline">
-						<input id="credit" class="custom-control-input" type="checkbox" name="credit">
-						<label class="custom-control-label" for="credit">Abono
-						</label>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="credit" name="procedure" class="custom-control-input" value="all">
+						<label class="custom-control-label mr-1" for="credit">Abono</label>
 					</div>
+
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="allProcedures" name="procedure" class="custom-control-input" value="all">
+						<label class="custom-control-label mr-1" for="allProcedures">Todos</label>
+					</div>
+					<div class="help-block"></div>
 				</div>
 				<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
-				<div id="radio-form" class="form-group col-4 col-lg-4 col-xl-5">
+				<div id="radio-form" class="form-group col-4">
 					<label class="block">Resultados</label>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" id="trimester" name="results" class="custom-control-input" value="all">

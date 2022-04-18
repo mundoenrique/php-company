@@ -5,6 +5,7 @@ var modalReq = {};
 $(function () {
 	$('#blockMasterAccountResults').addClass("hide");
 	$('#range').prop("checked",true);
+	$('#allProcedures').prop("checked",true);
 	$('#titleResults').addClass('hide');
 	$('#files-btn').addClass('hide');
 	$('#finalDate').val('');
