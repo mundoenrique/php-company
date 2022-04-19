@@ -1209,6 +1209,62 @@ class Novo_Reports_Model extends NOVO_Model {
 	}
 
 	/**
+	 * Método para descargar reporte excel y pdf cuenta maestra extendido
+	 * @author Jennifer Cadiz / Luis Molina
+	 * @date April 18, 2022
+	 */
+	public function callWs_extendedDownloadMasterAccountCon_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: extendedDownloadMasterAccountCon Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Cuenta maestra extendida';
+
+		if ($dataRequest->downloadFormat == 'Excel') {
+			$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+			$this->dataRequest->idOperation = 'generaArchivoXlsConcil';
+			$ext =  '.xls';
+		} else {
+			$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra consolidado';
+			$this->dataRequest->idOperation = 'generaArchivoConcilPdf';
+			$ext =  '.pdf';
+		}
+
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataRequest->anio = $dataRequest->year;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDateXls;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDateXls;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterpriseXls;
+		//$this->dataRequest->paginaActual = $dataRequest->actualPage;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		//$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
+
+		$response = $this->sendToService('callWs_extendedDownloadMasterAccountCon');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = $response->nombre ?? 'cuentaMaestraConsolidado';
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name.$ext;
+				$this->response->data->ext = $ext;
+			break;
+			default:
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_exportReportUserActivity');
+	}
+
+	/**
   * @info Método para renderizar tabla de Tarjetahabiente
   * @author Jhonnatan Vega
   * @date September 24th, 2020
@@ -1497,7 +1553,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_userActivity');
 	}
 
-		/**
+	/**
 	 * Método para descargar reporte de actividad por usuario (Global)
 	 * @author Diego Acosta García
 	 * @date May 27, 2020

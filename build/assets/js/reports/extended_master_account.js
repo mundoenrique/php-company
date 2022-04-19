@@ -43,6 +43,27 @@ $(function () {
 		}
 	});
 
+	datePicker.datepicker({
+		dateFormat: 'mm/yy',
+		showButtonPanel: true,
+		onSelect: function(selectDate){
+				$(this)
+						.focus()
+						.blur();
+		},
+		onClose: function (dateText, inst) {
+				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+				$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+				inst.dpDiv.addClass("ui-datepicker-month-year");
+				$(this).datepicker('setDate', new Date(year, month, 1));
+		}
+});
+
 	$("#radio-form").on('change', function(){
 		$('#finalDate').datepicker('setDate', null).removeClass('has-error');
 		$('#initialDate').datepicker('setDate', null).removeClass('has-error');
@@ -220,16 +241,14 @@ $(function () {
 		if (form.valid()) {
 			switch(action) {
 				case 'export_excel':
-						extendedDownloadFiles(dataForm);
+					extendedDownloadFiles(dataForm);
 				break;
 				case 'export_pdf':
-						exportToPDF(passData);
+					exportToPDF(passData);
 				break;
 				case 'export_excelCons':
-					dialog(e);
-				break;
 				case 'export_pdfCons':
-					dialog(e);
+					ModalConsolid(action);
 				break;
 			}
 		}
@@ -237,7 +256,7 @@ $(function () {
 });
 
 
-function dialog(e){
+/*function dialog(e){
 	e.preventDefault();
 	var event = $(e.currentTarget);
 	var action = event.attr('title');
@@ -328,9 +347,9 @@ function dialog(e){
 	$('.cover-spin').removeAttr("style");
 	modalReq['active'] = false;
 	})
-}
+}*/
 
-function downloadConsolid(type, oldID){
+/*function downloadConsolid(type, oldID){
 	if ( type == "excel" ) {
 		var button = $('#download-consolid');
 		var form = $('#excel-user-form');
@@ -362,7 +381,7 @@ function downloadConsolid(type, oldID){
 			}
 		}
 	})
-}
+}*/
 
 
 function extendedDownloadFiles(data) {
@@ -406,7 +425,70 @@ function exportToPDF(passData) {
   })
 }
 
-function exportToExcelConsolid(passData, textBtn) {
+	function extendedDownloadFilesConsolid(data){
+		$('.cover-spin').show();
+		who = 'Reports';
+		where = 'extendedDownloadMasterAccountCon';
+
+		callNovoCore(who, where, data, function(response) {
+			if (response.code == 0) {
+				downLoadfiles (response.data);
+			}
+			$('.cover-spin').hide();
+		});
+	}
+
+	function ModalConsolid(param) {
+		var titleModalPdf = 'Exportar a PDF consolidado';
+
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'none'
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: 'destroy'
+			}
+		}
+
+		inputModal = '<form id="reportYearModal" name="reportYearModal" class="row col-auto" onsubmit="return false;">';
+		inputModal += '<div class="form-group col-4 col-xl-3">';
+		inputModal += '<label for="yearReport">Inicio</label>';
+		inputModal += '<input id="yearReport" name="selected-year-modal" class="form-control " type="text" placeholder="MM/AAAA" readonly="" autocomplete="off">';
+		inputModal += '<input id="formatReport" type="hidden">';
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
+		inputModal += '</form>';
+
+		appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, modalBtn);
+
+		$("#formatReport").val('');
+		$('#accept').addClass('extended');
+
+		if(param == 'export_excelCons'){
+			$("#formatReport").val('Excel');
+		}else{
+			$("#formatReport").val('Pdf');
+		}
+	}
+
+	$('#system-info').on('click', '.extended', function () {
+		var formXls = $('#extMasterAccountFormXls');
+	  var form = $('#reportYearModal');
+		var dataFormXls = getDataForm(formXls);
+		var dataFormModal = getDataForm(form);
+
+		data = dataFormXls;
+		data.year = '2022';
+		data.downloadFormat = dataFormModal.formatReport;
+
+		console.log(data);
+
+		extendedDownloadFilesConsolid(data);
+	});
+
+/*function exportToExcelConsolid(passData, textBtn) {
 	who = 'Reports';
 	where = 'exportToExcelMasterAccountConsolid';
 	data = passData;
@@ -467,4 +549,4 @@ function exportToPDFConsolid(passData) {
 			$('.cover-spin').removeAttr("style");
 		}
 	})
-}
+}*/
