@@ -188,13 +188,13 @@ $(function () {
 					if (responseTableEnd.code == 0) {
 						$.each(responseTableEnd.data,function(posLista,itemLista){
 							if (itemLista.tipoNota == 'D') {
-								itemLista.montoDeposito = '$ ' + itemLista.montoDeposito;
+								itemLista.montoDeposito = lang.CONF_CURRENCY + ' ' + itemLista.montoDeposito;
 								itemLista.tipoNota = '';
 							} else if (itemLista.tipoNota == 'C') {
-								itemLista.tipoNota = '$ ' + itemLista.montoDeposito;
+								itemLista.tipoNota = lang.CONF_CURRENCY + ' ' + itemLista.montoDeposito;
 								itemLista.montoDeposito = ''
 							}
-							itemLista.saldoDisponible = '$ ' +itemLista.saldoDisponible;
+							itemLista.saldoDisponible = lang.CONF_CURRENCY + ' ' +itemLista.saldoDisponible;
 						});
 
 						$('#idExtEmpXls').val(responseTableEnd.idExtEmp);
@@ -255,135 +255,6 @@ $(function () {
 	});
 });
 
-
-/*function dialog(e){
-	e.preventDefault();
-	var event = $(e.currentTarget);
-	var action = event.attr('title');
-	$(this).closest('tr').addClass('select');
-
-	switch (action) {
-
-		case 'Exportar a EXCEL consolidado':
-			var titleModalExcel = 'Exportar a EXCEL de consolidado';
-			var oldID = $('#accept').attr('id');
-			modalReq['table'] = $(this).closest('table');
-			$('#accept').attr('id', 'download-consolid');
-			modalBtn = {
-				btn1: {
-					text: lang.GEN_BTN_DOWNLOAD,
-					action: 'close'
-				},
-				btn2: {
-					text: lang.GEN_BTN_CANCEL,
-					action: 'close'
-				}
-			}
-
-			inputModal = 	'<form id="excel-user-form" class="form-group">';
-			inputModal+= 		'<div class="input-group">';
-			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid"><option selected value="0">Seleccione año</option></select>';
-			inputModal+= 		'</div>';
-			inputModal+= 		'<div class="help-block"></div>';
-			inputModal+=	'</form>';
-			appMessages(titleModalExcel, inputModal, lang.CONF_ICON_INFO, modalBtn);
-
-			var i=0;
-			var anioB;
-			do {
-				var dateGetYear = new Date();
-				var date = dateGetYear.getFullYear();
-				anioB= parseInt(date)-i;
-				$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
-				i=i+1;
-			} while (i!=20);
-			downloadConsolid(oldID);
-			break;
-
-			case 'Exportar a PDF consolidado':
-				var titleModalPdf = 'Exportar a PDF consolidado';
-				var oldID = $('#accept').attr('id');
-				modalReq['table'] = $(this).closest('table');
-				$('#accept').attr('id', 'download-consolidpdf');
-				modalBtn = {
-					btn1: {
-						text: lang.GEN_BTN_DOWNLOAD,
-						action: 'close'
-						},
-					btn2: {
-						text: lang.GEN_BTN_CANCEL,
-						action: 'close'
-						}
-					}
-				inputModal = 	'<form id="pdf-user-form" class="form-group">';
-				inputModal+= 		'<div class="input-group">';
-				inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid"><option selected value="0">Seleccione año</option></select>';
-				inputModal+= 		'</div>';
-				inputModal+= 		'<div class="help-block"></div>';
-				inputModal+=	'</form>';
-				appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, modalBtn);
-
-				var i=0;
-				var anioB;
-				do {
-					var dateGetYear = new Date();
-					var date = dateGetYear.getFullYear();
-					anioB= parseInt(date)-i;
-					$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
-					i=i+1;
-				}while(i!=20);
-				break;
-	}
-
-	if(action == titleModalPdf ){
-		var type = 'pdf';
-		downloadConsolid(type, oldID);
-	}else{
-		var type = 'excel';
-		downloadConsolid(type, oldID);
-	}
-
-	$('#cancel').on('click', function(){
-	$('.cover-spin').removeAttr("style");
-	modalReq['active'] = false;
-	})
-}*/
-
-/*function downloadConsolid(type, oldID){
-	if ( type == "excel" ) {
-		var button = $('#download-consolid');
-		var form = $('#excel-user-form');
-	} else {
-		var button = $('#download-consolidpdf');
-		var form = $('#pdf-user-form');
-	}
-	button.on('click', function() {
-		validateForms(form);
-		if (form.valid()) {
-			button.off('click').html(loader).attr('id', oldID);
-			button.attr('disabled', 'disabled');
-			insertFormInput(true, form);
-			var passData = {
-				modalReq: true,
-				year: $('#anio-consolid').find('option:selected').val(),
-				idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
-				dateStart: $("#initialDate").val(),
-				dateEnd: $("#finalDate").val(),
-				dateFilter: $("input[name='results']:checked").val(),
-				nameEnterprise: $('#enterprise-report').find('option:selected').attr('nomOf'),
-				actualPage: "1",
-				pageSize: $("#tamP").val()
-			};
-			if (type == "excel") {
-				exportToExcelConsolid(passData);
-			} else {
-				exportToPDFConsolid(passData);
-			}
-		}
-	})
-}*/
-
-
 function extendedDownloadFiles(data) {
 	who = 'Reports';
 	where = 'exportToExcelExtendedMasterAccount';
@@ -425,8 +296,9 @@ function exportToPDF(passData) {
   })
 }
 
-	function extendedDownloadFilesConsolid(data){
-		$('.cover-spin').show();
+	function extendedDownloadFilesConsolid(data, currentBtn){
+		currentBtn.html(loader).prop('disabled', true);
+		insertFormInput(true);
 		who = 'Reports';
 		where = 'extendedDownloadMasterAccountCon';
 
@@ -434,12 +306,15 @@ function exportToPDF(passData) {
 			if (response.code == 0) {
 				downLoadfiles (response.data);
 			}
-			$('.cover-spin').hide();
+			currentBtn.prop('disabled', false);
+				insertFormInput(false);
+				$('.cover-spin').hide();
 		});
 	}
 
 	function ModalConsolid(param) {
-		var titleModalPdf = 'Exportar a PDF consolidado';
+		var titleModal = '';
+		var year;
 
 		modalBtn = {
 			btn1: {
@@ -452,101 +327,46 @@ function exportToPDF(passData) {
 			}
 		}
 
-		inputModal = '<form id="reportYearModal" name="reportYearModal" class="row col-auto" onsubmit="return false;">';
-		inputModal += '<div class="form-group col-4 col-xl-3">';
-		inputModal += '<label for="yearReport">Inicio</label>';
-		inputModal += '<input id="yearReport" name="selected-year-modal" class="form-control " type="text" placeholder="MM/AAAA" readonly="" autocomplete="off">';
-		inputModal += '<input id="formatReport" type="hidden">';
-		inputModal += '<div class="help-block"></div>';
+		inputModal = '<form id="reportYearModal" name="reportYearModal" onsubmit="return false;">';
+		inputModal += '<div class="form-group">';
+		inputModal += 	'<select id="yearReport" name="yearReport" class="select-box custom-select form-control date-picker-year">';
+		inputModal += 		'<option selected disabled>Seleccione año</option>';
+		for (var i = 0; i < lang.CONF_YEAR; i++) {
+			var dateGetYear = new Date();
+			var date = dateGetYear.getFullYear();
+			year = (parseInt(date)-i).toString();
+			inputModal += '<option value="'+year+'">'+year+'</option>'
+		}
+		inputModal += 	'</select>';
+		inputModal += 	'<input id="formatReport" type="hidden" name="formatReport">';
+		inputModal += 	'<div class="help-block"></div>';
 		inputModal += '</div>';
 		inputModal += '</form>';
-
-		appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, modalBtn);
 
 		$("#formatReport").val('');
 		$('#accept').addClass('extended');
 
 		if(param == 'export_excelCons'){
 			$("#formatReport").val('Excel');
+			titleModal = lang.GEN_TITLE_EXPORT_XLS_CON;
 		}else{
 			$("#formatReport").val('Pdf');
+			titleModal = lang.GEN_TITLE_EXPORT_PDF_CON;
 		}
+		appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 
-	$('#system-info').on('click', '.extended', function () {
+	$('#system-info').on('click', '.extended', function (e) {
+		e.preventDefault();
 		var formXls = $('#extMasterAccountFormXls');
 	  var form = $('#reportYearModal');
 		var dataFormXls = getDataForm(formXls);
 		var dataFormModal = getDataForm(form);
-
 		data = dataFormXls;
-		data.year = '2022';
+		data.year = dataFormModal.yearReport;
 		data.downloadFormat = dataFormModal.formatReport;
-
-		console.log(data);
-
-		extendedDownloadFilesConsolid(data);
+		validateForms(form)
+		if (form.valid()) {
+			extendedDownloadFilesConsolid(data, $(this));
+		}
 	});
-
-/*function exportToExcelConsolid(passData, textBtn) {
-	who = 'Reports';
-	where = 'exportToExcelMasterAccountConsolid';
-	data = passData;
-
-	callNovoCore(who, where, data, function(response) {
-		insertFormInput(false, form);
-		dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
-		if (info.formatoArchivo == 'excel') {
-			info.formatoArchivo = '.xls'
-		}
-		if (code == 0) {
-			data = {
-				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
-				"ext": info.formatoArchivo,
-				"file": info.archivo
-			}
-			downLoadfiles (data);
-			if ($("input[name='results']:checked").val() != 0) {
-				$("#initialDate").attr("disabled", "disabled");
-				$("#finalDate").attr("disabled", "disabled");
-			}
-			$('.cover-spin').removeAttr("style");
-		} else if (code == 4) {
-			$('.cover-spin').removeAttr("style");
-		}
-  })
-}
-
-
-function exportToPDFConsolid(passData) {
-	who = 'Reports';
-	where = 'exportToPDFMasterAccountConsolid';
-	data = passData;
-
-	callNovoCore(who, where, data, function(response) {
-		insertFormInput(false, form);
-	  dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
-		if (info.formatoArchivo == 'PDF') {
-			info.formatoArchivo = '.pdf'
-		}
-		if (code == 0) {
-			data = {
-				"name": 'cuentaMaestraConsolidado'+info.formatoArchivo,
-				"ext": info.formatoArchivo,
-				"file": info.archivo
-			}
-		downLoadfiles (data);
-		if ($("input[name='results']:checked").val() != 0) {
-			$("#initialDate").attr("disabled", "disabled");
-			$("#finalDate").attr("disabled", "disabled");
-		}
-		$('.cover-spin').removeAttr("style");
-		}  else if (code == 4) {
-			$('.cover-spin').removeAttr("style");
-		}
-	})
-}*/

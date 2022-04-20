@@ -305,6 +305,7 @@ $lang['CONF_UPLOAD_SFTP(88)'] = 'CURLE_CHUNK_FAILED';
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
+$lang['CONF_YEAR'] = '8';
 $lang['CONF_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
 $lang['CONF_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
 $lang['CONF_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';

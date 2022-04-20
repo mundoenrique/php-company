@@ -138,6 +138,7 @@ function validateForms(form) {
 			"selection": { required: true },
 			"idNumber": { pattern: idNumberReg },
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
+			"yearReport": { required: true, pattern: date.y },
 			"cardNumber": {
 				required: {
 					depends: function (element) {
@@ -274,6 +275,7 @@ function validateForms(form) {
 			"nit": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY + lang.VALIDATE_EXAMPLE_ID_FISCAL,
 			"anio-consolid": lang.VALIDATE_SELECTED_YEAR,
+			"yearReport": lang.VALIDATE_SELECTED_YEAR,
 			"email": lang.VALIDATE_EMAIL,
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {
