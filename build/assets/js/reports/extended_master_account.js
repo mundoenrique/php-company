@@ -43,27 +43,6 @@ $(function () {
 		}
 	});
 
-	datePicker.datepicker({
-		dateFormat: 'mm/yy',
-		showButtonPanel: true,
-		onSelect: function(selectDate){
-				$(this)
-						.focus()
-						.blur();
-		},
-		onClose: function (dateText, inst) {
-				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-				$(this).datepicker('setDate', new Date(year, month, 1));
-		},
-		beforeShow: function (input, inst) {
-				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-				inst.dpDiv.addClass("ui-datepicker-month-year");
-				$(this).datepicker('setDate', new Date(year, month, 1));
-		}
-});
-
 	$("#radio-form").on('change', function(){
 		$('#finalDate').datepicker('setDate', null).removeClass('has-error');
 		$('#initialDate').datepicker('setDate', null).removeClass('has-error');
@@ -112,7 +91,7 @@ $(function () {
 			filterDate: $("input[name='results']:checked").val()
 		};
 		extendedMasterAccount(passData);
-}
+	}
 
 	function extendedMasterAccount(dataForm) {
 		$('#extMasterAccount').DataTable().destroy();
@@ -296,77 +275,84 @@ function exportToPDF(passData) {
   })
 }
 
-	function extendedDownloadFilesConsolid(data, currentBtn){
-		currentBtn.html(loader).prop('disabled', true);
-		insertFormInput(true);
-		who = 'Reports';
-		where = 'extendedDownloadMasterAccountCon';
-
-		callNovoCore(who, where, data, function(response) {
-			if (response.code == 0) {
-				downLoadfiles (response.data);
-			}
-			currentBtn.prop('disabled', false);
-				insertFormInput(false);
-				$('.cover-spin').hide();
-		});
+function ModalConsolid(param) {
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		}
 	}
 
-	function ModalConsolid(param) {
-		var titleModal = '';
-		var year;
+	var titleModal = '';
+	var year;
 
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'none'
-			},
-			btn2: {
-				text: lang.GEN_BTN_CANCEL,
-				action: 'destroy'
-			}
-		}
+	if(param == 'export_excelCons'){
+		titleModal = lang.GEN_TITLE_EXPORT_XLS_CON;
+	}else{
+		titleModal = lang.GEN_TITLE_EXPORT_PDF_CON;
+	}
 
-		inputModal = '<form id="reportYearModal" name="reportYearModal" onsubmit="return false;">';
-		inputModal += '<div class="form-group">';
-		inputModal += 	'<select id="yearReport" name="yearReport" class="select-box custom-select form-control date-picker-year">';
-		inputModal += 		'<option selected disabled>Seleccione año</option>';
+	inputModal = '<form id="reportYearModal" name="reportYearModal" onsubmit="return false;">';
+	inputModal += '<div class="form-group">';
+	inputModal += 	'<select id="yearReport" name="yearReport" class="select-box custom-select form-control date-picker-year">';
+	inputModal += 		'<option selected disabled>Seleccione año</option>';
 		for (var i = 0; i < lang.CONF_YEAR; i++) {
 			var dateGetYear = new Date();
 			var date = dateGetYear.getFullYear();
 			year = (parseInt(date)-i).toString();
 			inputModal += '<option value="'+year+'">'+year+'</option>'
 		}
-		inputModal += 	'</select>';
-		inputModal += 	'<input id="formatReport" type="hidden" name="formatReport">';
-		inputModal += 	'<div class="help-block"></div>';
-		inputModal += '</div>';
-		inputModal += '</form>';
+	inputModal += 	'</select>';
+	inputModal += 	'<input id="formatReport" type="hidden" name="formatReport">';
+	inputModal += 	'<div class="help-block"></div>';
+	inputModal += '</div>';
+	inputModal += '</form>';
 
-		$("#formatReport").val('');
-		$('#accept').addClass('extended');
+	$("#formatReport").val('');
+	$('#accept').addClass('extended');
 
-		if(param == 'export_excelCons'){
-			$("#formatReport").val('Excel');
-			titleModal = lang.GEN_TITLE_EXPORT_XLS_CON;
-		}else{
-			$("#formatReport").val('Pdf');
-			titleModal = lang.GEN_TITLE_EXPORT_PDF_CON;
-		}
-		appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
+
+	if(param == 'export_excelCons'){
+		$("#formatReport").val('Excel');
+		titleModal = lang.GEN_TITLE_EXPORT_XLS_CON;
+	}else{
+		$("#formatReport").val('Pdf');
+		titleModal = lang.GEN_TITLE_EXPORT_PDF_CON;
 	}
+}
 
-	$('#system-info').on('click', '.extended', function (e) {
-		e.preventDefault();
-		var formXls = $('#extMasterAccountFormXls');
-	  var form = $('#reportYearModal');
-		var dataFormXls = getDataForm(formXls);
-		var dataFormModal = getDataForm(form);
-		data = dataFormXls;
-		data.year = dataFormModal.yearReport;
-		data.downloadFormat = dataFormModal.formatReport;
-		validateForms(form)
-		if (form.valid()) {
-			extendedDownloadFilesConsolid(data, $(this));
+$('#system-info').on('click', '.extended', function (e) {
+	e.preventDefault();
+	var formXls = $('#extMasterAccountFormXls');
+	var form = $('#reportYearModal');
+	var dataFormXls = getDataForm(formXls);
+	var dataFormModal = getDataForm(form);
+	data = dataFormXls;
+	data.year = dataFormModal.yearReport;
+	data.downloadFormat = dataFormModal.formatReport;
+	validateForms(form)
+	if (form.valid()) {
+		extendedDownloadFilesConsolid(data, $(this));
+	}
+});
+
+function extendedDownloadFilesConsolid(data, currentBtn){
+	currentBtn.html(loader).prop('disabled', true);
+	insertFormInput(true);
+	who = 'Reports';
+	where = 'extendedDownloadMasterAccountCon';
+
+	callNovoCore(who, where, data, function(response) {
+		if (response.code == 0) {
+			downLoadfiles (response.data);
 		}
+		currentBtn.prop('disabled', false);
+			insertFormInput(false);
+			$('.cover-spin').hide();
 	});
+}
