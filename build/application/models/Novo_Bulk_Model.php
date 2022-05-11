@@ -204,7 +204,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$respLoadBulk = TRUE;
 				break;
 				case -242:
-					$this->response->msg = 'El archivo supera el límite de filas permitidas';
+					$this->response->msg = lang('BULK_FILE_ROW_LIMIT_EXCEEDED');
 					$respLoadBulk = TRUE;
 				break;
 				case -280:
