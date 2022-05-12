@@ -187,6 +187,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			$response = $this->sendToService('callWs_LoadBulk');
 			$respLoadBulk = FALSE;
+			$this->response->rowsAllowed = '';
 
 			switch ($this->isResponseRc) {
 				case 0:
@@ -204,7 +205,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$respLoadBulk = TRUE;
 				break;
 				case -242:
-					$this->response->msg = lang('BULK_FILE_ROW_LIMIT_EXCEEDED');
+					$this->response->msg = 'El archivo supera el límite de filas permitidas (1 registro permitido)';//lang('BULK_FILE_ROW_LIMIT_EXCEEDED');
+					$this->response->rowsAllowed = $response->msg;
 					$respLoadBulk = TRUE;
 				break;
 				case -280:
