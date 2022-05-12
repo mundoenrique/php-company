@@ -204,13 +204,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 				break;
-				case -242:
-					$this->response->msg = 'El archivo supera el límite de filas permitidas (1 registro permitido)';//lang('BULK_FILE_ROW_LIMIT_EXCEEDED');
-					$this->response->rowsAllowed = $response->msg;
-					$respLoadBulk = TRUE;
-				break;
 				case -280:
 					$this->response->msg = lang('BULK_INCOMPATIBLE_FILE');
+					$respLoadBulk = TRUE;
+				break;
+				case -469:
+					$this->response->msg = novoLang(lang('BULK_FILE_ROW_LIMIT_EXCEEDED'),$response->msg);
 					$respLoadBulk = TRUE;
 				break;
 				case -128:
