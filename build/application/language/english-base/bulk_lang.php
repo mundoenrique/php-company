@@ -87,3 +87,4 @@ $lang['BULK_EXPIRED_TIME'] = 'The period for the bulk to be approved has expired
 $lang['BULK_IMPORTANT'] = 'Important!';
 $lang['BULK_REQUEST_500_CARDS'] = 'If your request is for issuance and exceeds 500 cards, it will be processed 20 minutes after the next card creation time.';
 $lang['BULK_CREATION_SCHEDULE'] = 'The hours for creating cards are as follows:';
+$lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'The file exceeds the limit of allowed rows.';
