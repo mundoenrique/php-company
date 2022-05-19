@@ -828,8 +828,28 @@ span.icon:before {
 	color: #b52525;
 }
 
-.text-der {
+.text-brand {
+	align-items: center;
+	display: flex;
 	float: left;
+	height: 198px;
+	margin: auto;
+	width: 360px;
+}
+
+.text-brand img{
+	padding-right: 10px;
+	width: 100%;
+}
+
+.text-brand p{
+	margin-bottom: 0;
+	padding-right: 10px;
+	width: 70rem;
+}
+
+.text-der {
+	float: right;
 	width: 320px;
 	margin: 10px;
 }
