@@ -46,7 +46,14 @@
 	</ul>
 
 	<div id="text-general">
-		<div class="text-der" style="padding-left: 380px;">
+	<?php if(lang('CONF_SIGNIN_IMG') === 'ON'): ?>
+		<div class="text-brand">
+			<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN')); ?>"
+			alt="Tebca" />
+			<p>Emitido por Servitebca Péru, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A.</p>
+		</div>
+		<?php endif;?>
+		<div class="text-der">
 			<p class="subtitulos-login"><?= lang('LOGIN_NEED_HELP_TITLE'); ?></p>
 			<p><?= lang('LOGIN_NEED_HELP_MSG'); ?></p>
 			<p class="subtitulos-login"><?= lang('LOGIN_INFO'); ?></p>
