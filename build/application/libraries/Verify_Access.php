@@ -292,6 +292,11 @@ class Verify_Access {
 			case 'exportToExcelExtendedAccountStatus':
 						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDC'));
 					break;
+			case 'extendedMasterAccount':
+			case 'exportToExcelExtendedMasterAccount':
+			case 'extendedDownloadMasterAccountCon':
+						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
+				break;
 			case 'statusMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
 				break;
