@@ -277,6 +277,9 @@ class Verify_Access {
 			case 'exportExcelUsersActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
 				break;
+			case 'statusAccountExcelFile':
+			case 'statusAccountPdfFile':
+			case 'searchStatusAccount':
 			case 'accountStatus':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
@@ -284,11 +287,6 @@ class Verify_Access {
 			case 'searchExtendedAccountStatus':
 			case 'exportToExcelExtendedAccountStatus':
 						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDC'));
-					break;
-			case 'extendedMasterAccount':
-			case 'exportToExcelExtendedMasterAccount':
-			case 'extendedDownloadMasterAccountCon':
-						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
 				break;
 			case 'statusMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
@@ -320,14 +318,14 @@ class Verify_Access {
 			case 'masterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 				break;
+			case 'extendedMasterAccount':
+			case 'exportToExcelExtendedMasterAccount':
+			case 'extendedDownloadMasterAccountCon':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
+				break;
 			case 'cardHolders':
 			case 'exportReportCardHolders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-				break;
-			case 'statusAccountExcelFile':
-			case 'statusAccountPdfFile':
-			case 'searchStatusAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
 			case 'usersManagement':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
