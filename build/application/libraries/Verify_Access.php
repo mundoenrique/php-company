@@ -316,7 +316,7 @@ class Verify_Access {
 			case 'exportToExcelMasterAccountConsolid':
 			case 'exportToPDFMasterAccountConsolid':
 			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
+				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
 				break;
 			case 'extendedMasterAccount':
 			case 'exportToExcelExtendedMasterAccount':
