@@ -21,7 +21,7 @@
           </a>
         </li>
       </ul>
-      <span></span>
+      <span class="line-nav"></span>
     </li>
   </ul>
 </nav>
