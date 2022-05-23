@@ -1573,6 +1573,14 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
 		[
+			'field' => 'REPEDC',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPCMT',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
 			'field' => 'TEBANU',
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
