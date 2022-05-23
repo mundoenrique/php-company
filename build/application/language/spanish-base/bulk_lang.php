@@ -87,3 +87,4 @@ $lang['BULK_EXPIRED_TIME'] = 'El periodo para ser aprobado el lote ha caducado.'
 $lang['BULK_IMPORTANT'] = '¡Importante!';
 $lang['BULK_REQUEST_500_CARDS'] = 'Si tu solicitud es de emisión y supera 500 tarjetas, ésta será procesada 20 minutos después del próximo horario de creación de tarjetas.';
 $lang['BULK_CREATION_SCHEDULE'] = 'Los horarios para creación de tarjetas son los siguientes:';
+$lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'El contenido del archivo supera el límite de filas permitidas. Debe contener un máximo de %s registro(s).';
