@@ -187,7 +187,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			$response = $this->sendToService('callWs_LoadBulk');
 			$respLoadBulk = FALSE;
-			$this->response->rowsAllowed = '';
 
 			switch ($this->isResponseRc) {
 				case 0:
