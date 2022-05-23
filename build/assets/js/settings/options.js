@@ -48,23 +48,29 @@ $(function () {
 			$('#passwordChangeForm')[0].reset();
 			$('#enterpriseData').addClass('hide');
 		}
-	})
-
-	$('#branch').on('click', function(){
-		if ($('#branchListBr > option').length == 1) {
+		// SUCURSALES
+		if ($('#branchListBr > option').length > 1) {
+			$('#branchListBr').prop('selectedIndex', 0);
+			$('#txtBranchesForm')[0].reset();
 			$('#branchInfoForm')[0].reset();
-			$(".completeSection").addClass('hidden');
-			$("#partedSection").hide();
-			$('.hide-out').removeClass('hide');
-
-			data = {
-				"branchListBr": $( "#branchListBr option:selected" ).val()
-			}
-
-			insertFormInput(true);
-			getBranches(data);
+			$('#partedSection').hide();
 		}
-	});
+	})
+	// SUCURSALES
+	// $('#branch').on('click', function(){
+	// 	if ($('#branchListBr > option').length == 1) {
+	// 		$('#branchInfoForm')[0].reset();
+	// 		$(".completeSection").addClass('hidden');
+	// 		$("#partedSection").hide();
+	// 		$('.hide-out').removeClass('hide');
+
+	// 		data = {
+	// 			"branchListBr": $( "#branchListBr option:selected" ).val()
+	// 		}
+	// 		insertFormInput(true);
+	// 		getBranches(data);
+	// 	}
+	// });
 
 
 	$('.nav-item-config:first-child').addClass('active');
@@ -172,17 +178,17 @@ $(function () {
 			}
 		});
 	});
-
+	// SUCURSALES
 	$('#branchListBr').on('change', function (e) {
-		e.preventDefault;
+		e.preventDefault();
 
 		if (table != undefined) {
 			table.destroy();
 		}
 
 		$('#branchInfoForm')[0].reset();
-		$(".completeSection").addClass('hidden');
-		$("#partedSection").hide();
+		// $(".completeSection").addClass('hidden');
+		// $("#partedSection").hide();
 		$('.hide-out').removeClass('hide');
 
 		form = $('#branchSettListForm');
@@ -194,8 +200,10 @@ $(function () {
 			getBranches(getDataForm(form));
 		}
 	});
-
+	// SUCURSALES
+	// var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
 	var inputFile =  $('#file-branch').next('.js-label-file').html();
+	// var inputFile = true ? $('#file-branch').next('.js-label-file').html().trim() : '';
 
 	$('.input-file').each(function () {
 		var label = $(this).next('.js-label-file');
@@ -211,46 +219,55 @@ $(function () {
 			});
 			validInputFile();
 	});
-
-	$('#file-branch').on('change', function(e){
-		e.preventDefault;
-		$('#btnTxtSend').removeAttr("disabled");
-	});
-
-	$('#btnTxtSend').on('click', function(e) {
-		e.preventDefault
+	// SUCURSALES
+	// $('#file-branch').on('change', function(e){
+	// 	e.preventDefault;
+	// 	$('#btnBranchUpload').removeAttr("disabled");
+	// });
+	// SUCURSALES
+	$('#btnBranchUpload').on('click', function(e) {
+		e.preventDefault();
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
 		form = $('#txtBranchesForm');
-
+		validInputFile();
 		validateForms(form);
 
 		if (form.valid()) {
 			$(this).html(loader);
-
+			data = {
+				file: $('#file-branch')[0].files[0]
+			}
+			insertFormInput(true);
 			who = 'Settings';
 			where = 'uploadFileBranches';
-			data = {
-			file:	$('#file-branch')[0].files[0],
-			typeBulkText: $('#file-branch')[0].files[0].type
-			}
 
-			callNovoCore(who, where, data, function (response) {
+			callNovoCore(who, where, data, function(response) {
+				btnAction.html(btnText);
 				insertFormInput(false);
 				$('#file-branch').val('');
 				$('#file-branch').next('.js-label-file').html(inputFile);
-			})
+			});
 		}
 	});
-
+	// SUCURSALES
 	$('#newBranchBtn').on('click', function () {
 		$('#branchInfoForm')[0].reset();
-		$(".completeSection").removeClass('hidden');
-		$(".secondSection").show();
-		$('html, body').animate({
-			scrollTop: $("#secondarySectionBranch").offset().top
-			}, 1000);
+		// $(".completeSection").removeClass('hidden');
+		// $(".secondSection").show();
+		// $('html, body').animate({
+		// 	scrollTop: $("#secondarySectionBranch").offset().top
+		// 	}, 1000);
+		$('#partedSection').hide();
+		// $(this).addClass('active');
+		$('#secondarySectionBranch').fadeIn(700, 'linear');
 	});
+	// SUCURSALES
+	$('#backBranchBtn').on('click', function (e) {
+		$('#secondarySectionBranch').hide();
+		// $(this).addClass('active');
+		$('#partedSection').fadeIn(700, 'linear');
+	})
 
 	$('#showContacts').on('click', function (e) {
 		e.preventDefault;
@@ -414,7 +431,7 @@ function getContacts (data) {
 			});
 	});
 };
-
+	// SUCURSALES
 function getBranches (value) {
 	data = value;
 	who = 'Settings';
@@ -430,7 +447,9 @@ function getBranches (value) {
 			branchesTable( dataResponse );
 
 			$('.edit').on('click', function (e) {
-				$('.section').show();
+				// $('.section').show();
+				$('#partedSection').hide();
+				$('#secondarySectionBranch').fadeIn(700, 'linear');
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
@@ -445,13 +464,13 @@ function getBranches (value) {
 					$('#'+ key + 'CodeBranch option[value="'+ val +'"]').attr("selected", "selected");
 				});
 
-				$("html, body").animate({ scrollTop: $(".edit").offset().top  }, 500);
+				// $("html, body").animate({ scrollTop: $(".edit").offset().top  }, 500);
 			})
 		} else if ( dataResponse.code == 7 ) {
 			branchesTable( dataResponse );
 			$("#secondarySectionBranch").hide()
 		} else if ( dataResponse.code == 2 ) {
-			$('#newBranchBtn').hide();
+			// $('#newBranchBtn').hide();
 			$('.hide-out').addClass('hide');
 
 			table = $('#tableBranches').DataTable({
@@ -468,7 +487,7 @@ function getBranches (value) {
 
 			$('#secondarySectionBranch').addClass('hidden');
 			$('#partedSection').show();
-			$(".completeSection").removeClass('hidden');
+			// $(".completeSection").removeClass('hidden');
 		};
 	});
 };
@@ -490,7 +509,7 @@ function deleteContactM(data) {
 
 	callNovoCore(who, where, data, function (response) { });
 };
-
+	// SUCURSALES
 function updateBranch(data) {
 	who = 'Settings';
 	where = 'updateBranch';
@@ -563,14 +582,14 @@ function getGeoData(data){
 			break;
 	}
 }
-
+	// SUCURSALES
 function branchesTable( dataResponse ) {
-	$('#btnTxtSend').attr("disabled", "true");
-	$('#newBranchBtn').show();
+	// $('#btnBranchUpload').attr("disabled", "true");
+	// $('#newBranchBtn').show();
 	$('.hide-out').addClass('hide');
 	$('#secondarySectionBranch').removeClass('hidden');
 	$('#partedSection').show();
-	$(".completeSection").removeClass('hidden');
+	// $(".completeSection").removeClass('hidden');
 
 	$.each(dataResponse.geoInfo.listaEstados, function(key, val){
 		$('#stateCodeBranch').append("<option value='"+ val[ 'codEstado'] +"' >"+ val['estados'] +"</option>");
@@ -661,7 +680,7 @@ function branchesTable( dataResponse ) {
 
 					options += '<button value="'+ data.id +'" class="edit btn mx-1 px-0"'
 					options += '>';
-					options += '<i value="'+ data.id +'" class="icon icon-find"></i>';
+					options += '<i value="'+ data.id +'" class="icon icon-edit"></i>';
 					options += '</button>';
 
 					return options;
@@ -691,7 +710,7 @@ function branchesTable( dataResponse ) {
 	});
 
 	$('#partedSection').show();
-	$(".completeSection").removeClass('hidden');
+	// $(".completeSection").removeClass('hidden');
 	$('#newBranch').show();
 	$('#cityCodeBranch').empty().prop('disabled', true).prepend('<option value="" selected>' + lang.GEN_BTN_SELECT + '</option>');
 
