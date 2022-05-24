@@ -30,6 +30,7 @@ $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_LENGHT_NUMBER'] = 'El número es demasiado largo';
 $lang['VALIDATE_PHONE_REQ'] = 'Este teléfono es requerido';
+$lang['VALIDATE_REFERENCE'] = 'Indica un número de referencia válido';
 $lang['VALIDATE_CARD_NUMBER'] = 'Indica un número de tarjeta válido (16 dígitos)';
 $lang['VALIDATE_CARD_NUMBER_MIN'] = 'Indica un número de tarjeta válido';
 $lang['VALIDATE_CARD_NUMBER_SEL'] = 'Selecciona una tarjeta';
