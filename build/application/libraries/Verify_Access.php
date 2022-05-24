@@ -269,19 +269,6 @@ class Verify_Access {
 			case 'getReport':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
 				break;
-			case 'exportToExcelMasterAccount':
-			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-				break;
-			case 'exportToPDFMasterAccount':
-			case 'exportToExcelMasterAccountConsolid':
-			case 'exportToPDFMasterAccountConsolid':
-				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
-			case 'extendedMasterAccount':
-			case 'exportToExcelExtendedMasterAccount':
-			case 'extendedDownloadMasterAccountCon':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
-				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
@@ -290,8 +277,16 @@ class Verify_Access {
 			case 'exportExcelUsersActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
 				break;
+			case 'statusAccountExcelFile':
+			case 'statusAccountPdfFile':
+			case 'searchStatusAccount':
 			case 'accountStatus':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				break;
+			case 'extendedAccountStatus':
+			case 'searchExtendedAccountStatus':
+			case 'exportToExcelExtendedAccountStatus':
+						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDC'));
 				break;
 			case 'statusMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
@@ -313,20 +308,24 @@ class Verify_Access {
 			case 'categoryExpense':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
 				break;
-			/*case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));//REPCON //REPCMT
-				break;*/
 			case 'statusBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
+				break;
+			case 'exportToExcelMasterAccount':
+			case 'exportToPDFMasterAccount':
+			case 'exportToExcelMasterAccountConsolid':
+			case 'exportToPDFMasterAccountConsolid':
+			case 'masterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
+				break;
+			case 'extendedMasterAccount':
+			case 'exportToExcelExtendedMasterAccount':
+			case 'extendedDownloadMasterAccountCon':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
 				break;
 			case 'cardHolders':
 			case 'exportReportCardHolders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-				break;
-			case 'statusAccountExcelFile':
-			case 'statusAccountPdfFile':
-			case 'searchStatusAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
 			case 'usersManagement':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));

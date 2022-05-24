@@ -112,6 +112,7 @@ $route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
 $route['(:any)/reports'] = "Novo_Reports/getReportsList";
 $route['(:any)/account-status'] = "Novo_Reports/accountStatus";
 $route['(:any)/replacement'] = "Novo_Reports/replacement";
+$route['(:any)/extended-account-status'] = "Novo_Reports/extendedAccountStatus";
 $route['(:any)/closing-balance'] = "Novo_Reports/closingBalance";
 $route['(:any)/user-activity'] = "Novo_Reports/userActivity";
 $route['(:any)/users-activity'] = "Novo_Reports/usersActivity";

@@ -173,8 +173,12 @@ class Create_Menu {
 				$subMenuLang->link = lang('CONF_LINK_REPLACEMENT');
 			break;
 			case 'REPEDO':
-				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
+				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
 				$subMenuLang->link = lang('CONF_LINK_ACCOUNT_STATUS');
+			break;
+			case 'REPEDC':
+				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
+				$subMenuLang->link = lang('CONF_LINK_EXTENDED_ACCOUNT_STATUS');
 			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');

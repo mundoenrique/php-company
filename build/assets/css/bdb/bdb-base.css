@@ -859,7 +859,7 @@ label {
 
 /* Dropdown */
 
-.main-nav ul li span {
+.main-nav ul li .line-nav {
   display: block;
   height: 4px;
   background: var(--color-fourteenth);

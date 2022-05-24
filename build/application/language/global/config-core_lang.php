@@ -203,6 +203,7 @@ $lang['CONF_LINK_CARDS_INQUIRY'] = 'cards-inquiry';//permiso asociado COPELO
 $lang['CONF_LINK_TRANSACTIONAL_LIMITS'] = 'transactional-limits';//permiso asociado LIMTRX
 $lang['CONF_LINK_COMMERCIAL_TWIRLS'] = 'commercial-twirls';//permiso asociado GIRCOM
 $lang['CONF_LINK_ACCOUNT_STATUS'] = 'account-status';//permiso asociado REPEDO
+$lang['CONF_LINK_EXTENDED_ACCOUNT_STATUS'] = 'extended-account-status';//permiso asociado REPEDC
 $lang['CONF_LINK_REPLACEMENT'] = 'replacement';//permiso asociado REPREP
 $lang['CONF_LINK_CLOSING_BALANCE'] = 'closing-balance';//permiso asociado REPSAL
 $lang['CONF_LINK_RECHARGE_MADE'] = 'recharge-made';//permiso asociado REPPRO

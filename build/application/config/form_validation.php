@@ -1516,6 +1516,20 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'searchExtendedAccountStatus' => [
+		[
+			'field' => 'resultByNITInput',
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+		],
+		[
+			'field' => 'resultByCardInput',
+			'rules' => 'trim|numeric',
+		],
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'statusAccountExcelFile' => [
 		[
 			'field' => 'resultByNITInput',
@@ -1524,6 +1538,28 @@ $config = [
 		[
 			'field' => 'initialDateAct',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'exportToExcelExtendedAccountStatus' => [
+		[
+			'field' => 'resultByNITInputXls',
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+		],
+		[
+			'field' => 'enterpriseCodeXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'productCodeXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'initialDateActXls',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'resultSearchXls',
+			'rules' => 'trim|numeric|required'
 		]
 	],
 	'statusAccountPdfFile' => [
