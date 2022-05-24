@@ -773,6 +773,11 @@ $config = [
 			'rules' => 'trim'
 		],
 		[
+			'field' => 'reference',
+			'label' => 'reference',
+			'rules' => 'regex_match[/^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i]'
+		],
+		[
 			'field' => 'cards[]',
 			'label' => 'cards',
 			'rules' => 'regex_match[/^([\w{}"*:.,]*)+$/i]|required'
@@ -992,11 +997,6 @@ $config = [
 		[
 			'field' => 'idNumber',
 			'label' => 'idNumber',
-			'rules' => 'trim|alpha_numeric'
-		],
-		[
-			'field' => 'reference',
-			'label' => 'reference',
 			'rules' => 'trim|alpha_numeric'
 		],
 		[
