@@ -154,6 +154,7 @@ $lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'The card number <strong>%s</strong
 $lang['SERVICES_TWIRLS_NO_UPDATE'] = 'It was not possible to update the twirls restriction for:';
 $lang['SERVICES_LIMITS_NO_REGISTRY'] = 'No available limits found.';
 $lang['SERVICES_LIMITS_NO_UPDATE'] = 'Limit restrictions could not be updated';
+$lang['SERVICES_REFERENCE'] = 'Reference';
 $lang['SERVICES_AVAILABLE_BALANCE'] = 'Master account balance:';
 $lang['SERVICES_COMMISSION_TRANS'] = 'Commission per transaction:';
 $lang['SERVICES_COMMISSION_CONSULTATION'] = 'Commission for checking balance:';

@@ -817,6 +817,11 @@ $config = [
 			'rules' => 'trim'
 		],
 		[
+			'field' => 'reference',
+			'label' => 'reference',
+			'rules' => 'regex_match[/^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i]'
+		],
+		[
 			'field' => 'cards[]',
 			'label' => 'cards',
 			'rules' => 'regex_match[/^([\w{}"*:.,]*)+$/i]|required'
@@ -1614,6 +1619,14 @@ $config = [
 		],
 		[
 			'field' => 'REPUSU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPEDC',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPCMT',
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
 		[

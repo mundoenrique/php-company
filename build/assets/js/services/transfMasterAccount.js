@@ -278,12 +278,20 @@ $(function () {
 			btnText = $(this).text().trim();
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
-				sendRequest(action, title, $(this));
+				if (formValidateTrim(form, title) && lang.CONF_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
+					modalReference(action, title, $(this))
+				} else {
+					sendRequest(action, title, $(this));
+				}
 			} else if (formValidateTrim(form, title)) {
-				btnRemote = $(this);
-				remoteAuthArgs.action = action;
-				remoteAuthArgs.title = title;
-				getauhtKey();
+				if (lang.CONF_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
+					modalReference(action, title, $(this))
+				} else {
+					btnRemote = $(this);
+					remoteAuthArgs.action = action;
+					remoteAuthArgs.title = title;
+					getauhtKey();
+				}
 			}
 		}
 	});
@@ -328,6 +336,16 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		}
 	}
 	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+
+	if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+		inputModal += '<div class="input-group">';
+		inputModal += '<input class="form-control" type="text" id="reference" name="reference" autocomplete="off"';
+		inputModal += 'placeholder="' + lang.SERVICES_REFERENCE + '">';
+		inputModal += '</div>';
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
+	}
 
 	if (currentAction == 'CARD_ASSIGNMENT') {
 		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
@@ -464,6 +482,10 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 			action: currentAction
 		}
 
+		if (currentAction == 'CREDIT_TO_CARD' && lang.CONF_REFERENCE == 'ON') {
+			data.reference = cardHolderInf.reference;
+		}
+
 		if (lang.CONF_REMOTE_AUTH == 'OFF') {
 			data.pass = cardHolderInf.password ? cryptoPass(cardHolderInf.password) : cryptoPass(cardHolderInf.passAction);
 		}
@@ -566,9 +588,13 @@ function buildList(response, currentTitle) {
 				action: 'destroy'
 			}
 		}
+
 		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
 		$.each(response.data.listResponse, function (index, value) {
-			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+			inputModal += '<div class= "mb-1">';
+			inputModal += '<h6 class="light mr-1 mb-0">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+			inputModal += '<span class='+(value.codelist != 0 ? 'danger' : '')+'>('+value.msglist+')</span>';
+			inputModal += '</div>';
 		})
 
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
@@ -624,4 +650,48 @@ function formValidateTrim(currentForm, currentTitle) {
 	}
 
 	return cardsData.length > 0 && form.valid();
+}
+
+
+function modalReference(currentAction, currentTitle, currentBtn) {
+
+	var formPassAction = $('#password-table');
+	var dataPassAction = getDataForm(formPassAction);
+	var password = dataPassAction.passAction != undefined && dataPassAction.passAction != null ? dataPassAction.passAction : '';
+
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		}
+	}
+	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+	inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+	inputModal += '<div class="input-group">';
+	inputModal += '<input class="form-control" type="text" id="reference" name="reference" autocomplete="off"';
+	inputModal += 'placeholder="' + lang.SERVICES_REFERENCE + '">';
+	inputModal += '</div>';
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+	inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+	inputModal += '<div class="input-group">';
+	inputModal += '<input class="form-control pwd-input pwd" type="hidden" id="password" name="password" value = '+ password +'>';
+	inputModal += '</div>';
+	}
+	inputModal += '<div class="help-block"></div>';
+	inputModal += '</div>';
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		$('#accept').addClass('send-request');
+	} else {
+		$('#accept').addClass('get-auth-key');
+		currentBtn = btnRemote;
+		form = $('#nonForm');
+	}
+
+	inputModal += '</form>';
+	appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }

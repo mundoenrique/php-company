@@ -141,6 +141,7 @@ $lang['CONF_DATEPICKER_YEARSUFFIX'] = '';
 $lang['CONF_TABLE_SNEXT'] = '»';
 $lang['CONF_TABLE_SPREVIOUS'] = '«';
 $lang['CONF_INPUT_UPPERCASE']= 'OFF';
+$lang['CONF_REFERENCE']= 'OFF';
 $lang['CONF_REMOTE_AUTH'] = 'OFF';
 $lang['CONF_AUTH_LIST'] = [];
 $lang['CONF_AUTH_VALIDATE'] = [];
