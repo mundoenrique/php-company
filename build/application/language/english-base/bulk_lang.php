@@ -39,6 +39,7 @@ $lang['BULK_CONFIRM_EXCEED_LIMIT'] = 'The amount exceeds the payment limit for n
 $lang['BULK_CONFIRM_DUPLICATE'] = 'It was not possible to confirm the batch, there are confirmed records in another bulk.';
 $lang['BULK_CONFIRM_EXCEEDED_LIMIT'] = 'The bulk amount exceeds the allowed limit.';
 $lang['BULK_CONFIRM_FAIL_BANK_RESPONSE'] = 'The bulk could not be confirmed, no authorization was obtained.';
+$lang['BULK_CONFIRM_INACTIVE_ACCOUNT'] = 'The bulk could not be confirmed, please contact your account executive.';
 $lang['BULK_AUTH_SUCCESS'] = '%s, your authorization was included successfully.';
 $lang['BULK_CONFIRM'] = 'Confirmation';
 $lang['BULK_SIGN_TITLE'] = 'Bulk signature';

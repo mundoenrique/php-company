@@ -21,8 +21,8 @@ $lang['REPORTS_REQUEST_NO_RESULTS']= "No results were found with the company and
 //MASTER ACCOUNT
 $lang['REPORTS_TABLE_DATE']="Date";
 $lang['REPORTS_TABLE_REFERENCE']="Ref.";
-$lang['REPORTS_TABLE_DEBIT']="Credit";
-$lang['REPORTS_TABLE_CREDIT']="Debit";
+$lang['REPORTS_TABLE_DEBIT']="Debit";
+$lang['REPORTS_TABLE_CREDIT']="Credit";
 $lang['REPORTS_TABLE_BALANCE']="Balance";
 //CLOSING BALANCE
 $lang['REPORTS_TABLE_CARD']="Card";

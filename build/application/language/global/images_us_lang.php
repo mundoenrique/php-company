@@ -21,4 +21,5 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_mapfre_dolares' => 'plata_dorada',
 	'plata_viaticos_internacional' => 'plata_dorada',
 	'procesos_varios' => 'plata_dorada',
+	'plata_clasica_chip' => 'plata_clasica_chip',
 ];

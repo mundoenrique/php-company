@@ -10,10 +10,10 @@ $lang['SETTINGS_FILES_DOWNLOAD'] = [
   ],
   'Archivos de autogestión Conexión Empresas Online'=>[
 		['ACTUALIZACION','xlsx','Actualización','download'],
-    ['BLOQUEO TARJETAS','xls','Bloqueo de Tarjetas','download'],
-		['DESBLOQUEO TARJETAS','xls','Desbloqueo de Tarjetas','download'],
+    ['BLOQUEO TARJETAS','xlsx','Bloqueo de Tarjetas','download'],
+		['DESBLOQUEO TARJETAS','xlsx','Desbloqueo de Tarjetas','download'],
     ['REEXPEDICION','xlsx','Reexpedición','download'],
-		['TRASLADO SALDOS','xls','Traslado de Saldos','download']
+		['TRASLADO SALDOS','xlsx','Traslado de Saldos','download']
   ],
   'Video'=>[
     ['video','mp4','video.mp4','video']
