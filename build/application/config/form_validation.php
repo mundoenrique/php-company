@@ -152,28 +152,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
 		],
 	],
-	'exportToExcel' => [
-		[
-			'field' => 'idExtEmp',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'producto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-		[
-			'field' => 'tamanoPagina',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'paginaActual',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'descProd',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-	],
 	'exportToExcelMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
@@ -228,6 +206,50 @@ $config = [
 		[
 			'field' => 'nombreEmpresa',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]'
+		]
+	],
+	'exportToExcelExtendedMasterAccount' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
+		]
+	],
+	'extendedDownloadMasterAccountCon' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
 	'exportToPDFMasterAccount' => [
@@ -361,6 +383,28 @@ $config = [
 		[
 			'field' => 'tamanoPagina',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
+	],
+	'extendedMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'typeNote',
+			'rules' => 'trim|regex_match[/^[D|C]*$/i]'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'filterDate',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
 		]
 	],
 	'statusMasterAccount' => [

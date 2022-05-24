@@ -139,6 +139,7 @@ function validateForms(form) {
 			"selection": { required: true },
 			"idNumber": { pattern: idNumberReg },
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
+			"yearReport": { required: true, pattern: date.y },
 			"reference": { pattern: alphanumspecial, maxlength: 40 },
 			"cardNumber": {
 				required: {
@@ -260,6 +261,11 @@ function validateForms(form) {
 			"surnameModifyContact":{ required: true, pattern: alphanumspace },
 			"positionModifyContact":{ required: true, pattern: alphanumspace },
 			"typeModifyContact":{ required: true },
+			"idExtEmpXls":{ required: true,pattern: numeric},
+			"initialDateXls":{ pattern: date.dmy},
+			"finalDateXls":{ pattern: date.dmy},
+			"filterDateXls":{ required: true,pattern: numeric},
+			"nameEnterpriseXls":{ required: true,pattern: alphanumunder},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -271,6 +277,7 @@ function validateForms(form) {
 			"nit": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY + lang.VALIDATE_EXAMPLE_ID_FISCAL,
 			"anio-consolid": lang.VALIDATE_SELECTED_YEAR,
+			"yearReport": lang.VALIDATE_SELECTED_YEAR,
 			"email": lang.VALIDATE_EMAIL,
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {
