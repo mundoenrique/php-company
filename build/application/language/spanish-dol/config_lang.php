@@ -21,4 +21,5 @@ $lang['CONF_LINK_ENTERPRISES'] = 'dashboard';
 $lang['CONF_LINK_TERMS'] = 'inf-condiciones';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'browsers';
+//IMAGEN SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
