@@ -414,6 +414,8 @@ $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Exportar a Excel consolidado';
+$lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Exportar a PDF consolidado';
 
 
 

@@ -120,6 +120,7 @@ $route['(:any)/recharge-made'] = "Novo_Reports/rechargeMade";
 $route['(:any)/issued-cards'] = "Novo_Reports/issuedCards";
 $route['(:any)/category-expense'] = "Novo_Reports/categoryExpense";
 $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
+$route['(:any)/extended-master-account'] = "Novo_Reports/extendedMasterAccount";
 $route['(:any)/status-master-account'] = "Novo_Reports/statusMasterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";

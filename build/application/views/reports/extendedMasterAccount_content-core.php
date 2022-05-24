@@ -19,38 +19,42 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-			<?php $data['name']='masterAcForm' ?>
+			<?php $data['name']='extMasterAcForm' ?>
 			<?php $this->load->view('reports/filterMasterAccount', $data)  ?>
+			<form id="extMasterAccountFormXls" class="hide">
+					<input id="idExtEmpXls" name="idExtEmpXls"  type="text" value="">
+					<input id="initialDateXls" name="initialDateXls"  type="text" value="">
+					<input id="finalDateXls" name="finalDateXls"  type="text" value="">
+					<input id="filterDateXls" name="filterDateXls"  type="text" value="">
+					<input id="nameEnterpriseXls" name="nameEnterpriseXls"  type="text" value="">
+			</form>
 			<div class="flex pb-5 flex-column">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div id="blockMasterAccountResults" class="center mx-1">
 					<div class="flex">
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center ">
 						<div id="files-btn" class="hide">
-							<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
+							<button id="export_excel" class="btn btn-file px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button id="export_pdf" class="btn px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
+							<button id="export_pdf" class="btn btn-file px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
-							<?php if(FALSE): ?>
-							<button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
-								<i class="icon icon-chart-pie" aria-hidden="true"></i>
-							</button>
-							<?php endif; ?>
-							<button id="export_excelCons" class="btn px-1 " title="Exportar a EXCEL consolidado" data-toggle="tooltip">
+							<button id="export_excelCons" class="btn btn-file px-1 " title="Exportar a EXCEL consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button id="export_pdfCons" class="btn px-1 " title="Exportar a PDF consolidado" data-toggle="tooltip">
+							<button id="export_pdfCons" class="btn btn-file px-1 " title="Exportar a PDF consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
 						</div>
 						</div>
 					</div>
-					<table id="concenAccount" class="cell-border h6 display responsive w-100">
+					<table id="extMasterAccount" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th><?= lang('REPORTS_TABLE_DATE'); ?></th>
+								<th><?= lang('REPORTS_TABLE_DNI'); ?></th>
+								<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
 								<th><?= lang('GEN_DESCRIPTION'); ?></th>
 								<th><?= lang('REPORTS_TABLE_REFERENCE'); ?></th>
 								<th><?= lang('REPORTS_TABLE_DEBIT'); ?></th>

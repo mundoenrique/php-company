@@ -208,6 +208,10 @@ class Create_Menu {
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 				$subMenuLang->link = lang('CONF_LINK_MASTER_ACCOUNT');
 			break;
+			case 'REPCMT':
+				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('CONF_LINK_EXTENDED_MASTER_ACCOUNT');
+			break;
 			case 'REPPGE':
 				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');
 				$subMenuLang->link = 'javascript:';

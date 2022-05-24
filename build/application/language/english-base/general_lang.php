@@ -409,7 +409,8 @@ $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
-
+$lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Export to consolidated Excel';
+$lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Export to consolidated PDF';
 
 
 
