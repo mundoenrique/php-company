@@ -18,8 +18,20 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-			<?php $data['name']='statusAccountForm' ?>
+			<?php $data['name']='extStatusAccountForm' ?>
 			<?php $this->load->view('reports/filterAccountStatus', $data)  ?>
+			<div class="flex my-2 px-5">
+				<form id="extStatusAccountFormXls" class="w-100 hide">
+					<input id="enterpriseNameXls" name="enterpriseNameXls"  type="text" value="">
+					<input id="descProductXls" name="descProductXls"  type="text" value="">
+					<input id="resultByNITXls" name="resultByNITXls"  type="text" value="">
+					<input id="enterpriseCodeXls" name="enterpriseCodeXls"  type="text" value="">
+					<input id="productCodeXls" name="productCodeXls"  type="text" value="">
+					<input id="initialDateActXls" name="initialDateActXls"  type="text" value="">
+					<input id="resultSearchXls" name="resultSearchXls"  type="text" value="">
+				</form>
+			</div>
+
 			<div id="blockResults" class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
@@ -39,8 +51,23 @@
 							<i class="icon icon-file-blank" aria-hidden="true"></i>
 						</button>
 						<?php endif; ?>
-						</div>
-					<div id="account-status-table"></div>
+					</div>
+					<table id="extAccountStatusTable" class="cell-border h6 display w-100">
+						<thead class="bg-primary secondary regular">
+							<tr>
+								<th><?= lang('REPORTS_TABLE_DATE') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_CARD') ?></th>
+								<th><?= lang('GEN_TABLE_NAME_CLIENT') ?></th>
+								<th><?= lang('GEN_TABLE_DNI') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_REFERENCE') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_DESCRIPTION') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_OPERATION') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_AMOUNT') ?></th>
+							</tr>
+						</thead>
+						<tbody id="tbody-datos-general" class = "tbody-reportes">
+						</tbody>
+					</table>
 					<div id="spinnerResults" class="mt-2 mx-auto hide">
 						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 					</div>
@@ -49,7 +76,4 @@
 			</div>
 		</div>
 	</div>
-	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
-	<?php endif; ?>
 </div>

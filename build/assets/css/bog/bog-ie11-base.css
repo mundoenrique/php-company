@@ -838,7 +838,7 @@ i[class*=" icon-"] {
 
 /* Dropdown */
 
-.main-nav ul li span {
+.main-nav ul li .line-nav {
   background: #ffb400;
 }
 

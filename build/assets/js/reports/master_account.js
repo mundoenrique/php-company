@@ -24,6 +24,7 @@ $(function () {
 );
 
 	$('#range').attr('checked', true);
+	$('#allProcedures').prop("checked",true);
 	var datePicker = $('.date-picker');
 	$("#credit").val('C');
 	$("#debit").val('D');
@@ -103,7 +104,6 @@ function dialog(e){
 	switch (action) {
 
 		case 'Exportar a EXCEL consolidado':
-			lang.CONF_MODAL_WIDTH = 200;
 			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
 			modalReq['table'] = $(this).closest('table');
@@ -364,7 +364,7 @@ function exportToPDFConsolid(passData) {
 	})
 }
 
-$("#masterAc-btn").on('click', function(e){
+$("#btnMasterAccount").on('click', function(e){
 	e.preventDefault();
 	form = $('#masterAcForm');
 	validateForms(form)
@@ -372,6 +372,7 @@ $("#masterAc-btn").on('click', function(e){
 		insertFormInput(true, form);
 	  $('#blockMasterAccountResults').addClass("hide");
 	  $('#spinnerBlock').removeClass("hide");
+		$('#titleResults').addClass('hide');
 		info();
 
 	}

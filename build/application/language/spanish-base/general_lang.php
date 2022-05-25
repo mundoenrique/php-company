@@ -24,7 +24,7 @@ $lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por categoría';//REPCAT
 $lang['GEN_MENU_REP_ALL'] = 'Todos los reportes';//REPALL
 $lang['GEN_MENU_REP_CARD_REPLACE'] = 'Reposiciones';//REPREP
 $lang['GEN_MENU_REP_CLOSING_BAKANCE'] = 'Saldo al cierre';//REPSAL
-$lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO
+$lang['GEN_MENU_REP_ACCOUNT_STATUS'] = 'Estado de cuenta';//REPEDC
 $lang['GEN_MENU_REP_USER_ACT'] = 'Actividad por usuario';//REPUSU
 $lang['GEN_MENU_REP_MASTER_ACCOUNT'] = 'Cuenta maestra';//REPCON
 $lang['GEN_MENU_REP_RECHARGE_MADE'] = 'Recargas realizadas';//REPPRO
@@ -414,6 +414,8 @@ $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Exportar a Excel consolidado';
+$lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Exportar a PDF consolidado';
 
 
 

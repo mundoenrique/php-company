@@ -212,6 +212,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->ref_externa = $dataRequest->reference ?? '';
 		$this->dataRequest->listaTarjetas = [
 			[
 				'paginaActual' => 1,
@@ -283,6 +284,26 @@ class Novo_Services_Model extends NOVO_Model {
 						$record->usersId = $cards->id_ext_per;
 						$record->cardNumber = $cards->noTarjetaConMascara;
 						$record->amount = isset($cards->montoTransaccion) ?  lang('CONF_CURRENCY').' '.$cards->montoTransaccion : '--';
+						$record->codelist = $cards->rc;
+
+						switch ($cards->rc) {
+							case 0:
+								$record->msglist = lang("SERVICES_SUCCESFUL_TRANSACTION");
+							break;
+							case -155:
+								$record->msglist = lang("SERVICES_INSUFFICIENT_BALANCE");
+							break;
+							case -242:
+								$record->msglist = lang('SERVICES_LIMIT_EXCEEDED');
+							break;
+							case -266:
+								$record->msglist = lang("SERVICES_LOCKED_CARD");
+							break;
+							default:
+							$record->msglist = lang("SERVICES_FAILED_TRANSACTION");
+							break;
+						}
+
 						$listResopnse[] = $record;
 					}
 
@@ -1232,6 +1253,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
 
+		// NO BORRAR
 		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
 		$this->isResponseRc = 0; */
 
