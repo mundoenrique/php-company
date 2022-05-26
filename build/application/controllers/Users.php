@@ -63,9 +63,9 @@ class Users extends CI_Controller {
             $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage,'is_login'=>true),TRUE);
 						//JAVASCRIPTS A CARGAR
 						if($urlCountry == 'Ec-bp') {
-							$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
+							$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
 						} else {
-							$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
+							$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
 						}
             //INSTANCIA DE CÓDIGO JS A AGREGAR
             $FooterCustomJS = "";
@@ -420,7 +420,7 @@ class Users extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
         //JAVASCRIPTS A CARGAR
-        $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/pass-recovery.js","routes.js"];
+        $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/pass-recovery.js","routes.js"];
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
         //INSTANCIA DE PARTE DE CUERPO
@@ -599,7 +599,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/terminos.js","routes.js"];
+            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/terminos.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-condiciones',array(),TRUE);
             $sidebarlogin= $this->parser->parse('users/widget-signin',array('sidebarActive'=>FALSE),TRUE);
@@ -662,7 +662,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","aes.min.js","aes-json-format.min.js","users/clave.js","header.js","routes.js"];
+            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","jquery-md5.js","aes.min.js","aes-json-format.min.js","users/clave.js","header.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-changePassNewUser',array(
                 'titulo'=>$nombreCompleto,
@@ -864,7 +864,7 @@ class Users extends CI_Controller {
             $lastSessionD = $this->session->userdata('lastSession');
 						$jsRte = '../../../js/';
 						$thirdsJsRte = '../../../js/third_party/';
-            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js",
+            $FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js",
 							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js",
 							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","routes.js",
 							$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
