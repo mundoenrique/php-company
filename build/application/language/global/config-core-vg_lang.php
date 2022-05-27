@@ -5,4 +5,6 @@ $lang['CONF_HEADER_BORDER'] = 'ON';
 $lang['CONF_BTN_LANG'] = 'ON';
 //NAVBAR STYLES
 $lang['CONF_PADDING_LOGO'] = 'OFF';
+//IMAGEN SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
 
