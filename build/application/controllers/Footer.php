@@ -36,7 +36,7 @@ class Footer extends CI_Controller {
        	$username = $this->session->userdata('userName');
        	$token = $this->session->userdata('token');
 
-		$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
+		$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
 	  $FooterCustomJS="";
 	  $titlePage="Conexión Empresas Online - Beneficios";
 
@@ -92,7 +92,7 @@ class Footer extends CI_Controller {
        	$token = $this->session->userdata('token');
 
 
-			$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
 	    $FooterCustomJS="";
 	    $titlePage="Conexión Empresas Online - Condiciones";
 
@@ -142,7 +142,7 @@ class Footer extends CI_Controller {
        	$username = $this->session->userdata('userName');
        	$token = $this->session->userdata('token');
 				 $cssTarifas=["tarifas.css"];
-		$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
+		$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","header.js","routes.js"];
 	    $FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Tarifas";
 

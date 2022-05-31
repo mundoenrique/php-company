@@ -893,7 +893,7 @@ class Novo_User_Model extends NOVO_Model {
 		$logMessage = 'NOVO [' . mb_strtoupper($userName) . '] RESPONSE: recaptcha Customer: "' . $this->config->item('customer');
 		$logMessage.= '", Score: "' . $result["score"] . '", Hostname: "'. $result["hostname"] . '"';
 
-		log_message('DEBUG', $logMessage);
+		log_message('DEBUG', ' IP '. $this->input->ip_address() . $logMessage);
 
 		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 

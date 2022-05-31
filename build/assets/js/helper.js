@@ -357,7 +357,12 @@ function formInputTrim(form) {
 		}
 
 		var trimVal = thisValInput.trim();
-		$(this).val(trimVal);
+
+		if ($(this).prop('tagName') === 'SELECT') {
+			$(this).find('option:selected').val(trimVal);
+		} else {
+			$(this).val(trimVal);
+		}
 	});
 }
 
@@ -376,7 +381,6 @@ function cryptoPass(jsonObject, req) {
 			}));
 		}
 	}
-
 
 	return cipherObject;
 }
@@ -410,15 +414,17 @@ function downLoadfiles(data) {
 }
 
 function getauhtKey() {
-	/* if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
+	// NO BORRAR DEJAR PARA PRUEBAS INTERNAS
+	 /*if (lang.CONF_REMOTE_AUTH == 'ON') {
 		$('#accept').addClass('sender');
 		$('#system-info').on('click', '.sender', function () {
 			$('#accept')
 				.prop('disabled', false)
 				.removeClass('sender');
-			getResponse('false', 'Hola mundo')
+			getResponse('true', 'EXITOSO')
 		});
-	} */
+	}*/
+	//HASTA AQUI
 	$('#accept').removeClass('get-auth-key');
 	$('#accept').removeClass('send-request');
 	data = {
@@ -435,10 +441,12 @@ function getauhtKey() {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
 			data = {
+			// NO BORRAR DEJAR PARA PRUEBAS INTERNAS
 				/* btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					action: 'none'
-				},//quitar btn1 */
+				},*/
+				// HASTA AQUI
 				minHeight: 650,
 				width: 1000,
 				posMy: 'top',

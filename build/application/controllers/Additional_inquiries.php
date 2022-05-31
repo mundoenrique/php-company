@@ -34,7 +34,7 @@ class Additional_inquiries extends CI_Controller {
 		];
 		$this->addJs = [
 			'jquery-3.6.0.min.js',
-			'jquery-ui-1.10.3.custom.min.js',
+			'jquery-ui-1.13.1.min.js',
 			'jquery.balloon.min.js',
 			'header.js',
 			'dashboard/widget-empresa.js',

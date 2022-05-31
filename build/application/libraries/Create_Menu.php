@@ -173,8 +173,12 @@ class Create_Menu {
 				$subMenuLang->link = lang('CONF_LINK_REPLACEMENT');
 			break;
 			case 'REPEDO':
-				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
+				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
 				$subMenuLang->link = lang('CONF_LINK_ACCOUNT_STATUS');
+			break;
+			case 'REPEDC':
+				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
+				$subMenuLang->link = lang('CONF_LINK_EXTENDED_ACCOUNT_STATUS');
 			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
@@ -203,6 +207,10 @@ class Create_Menu {
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 				$subMenuLang->link = lang('CONF_LINK_MASTER_ACCOUNT');
+			break;
+			case 'REPCMT':
+				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('CONF_LINK_EXTENDED_MASTER_ACCOUNT');
 			break;
 			case 'REPPGE':
 				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');

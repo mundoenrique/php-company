@@ -32,7 +32,6 @@ class Novo_User extends NOVO_Controller {
 			clearSessionsVars();
 		}
 
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
@@ -56,7 +55,7 @@ class Novo_User extends NOVO_Controller {
 			'httponly' => TRUE
 		];
 
-		$this->input->set_cookie($singleSession);
+		set_cookie($singleSession);
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
@@ -106,7 +105,7 @@ class Novo_User extends NOVO_Controller {
 			'httponly' => TRUE
 		];
 
-		$this->input->set_cookie($singleSession);
+		set_cookie($singleSession);
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;

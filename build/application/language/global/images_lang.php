@@ -15,7 +15,7 @@ $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_IMG_CLOCK'] = 'img-clock.svg';
 $lang['GEN_DETAIL_BRAND_COLOR'] = '_card-white.svg';
-$lang['GEN_IMAGE_LOGIN'] = '';
+$lang['GEN_IMAGE_LOGIN'] = 'img-tebca-signin.jpg';
 //LOADER
 $lang['IMG_LOADER'] = '';
 // PROGRAM IMAGES

@@ -45,7 +45,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -833,7 +833,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","jquery.mtz.monthpicker.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","jquery.mtz.monthpicker.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 					$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
@@ -1244,7 +1244,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -1549,7 +1549,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/estatusdelotes.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/estatusdelotes.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -2274,7 +2274,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js","jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/reposiciones.js","header.js","jquery.balloon.min.js","jquery.paginate.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js","jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/reposiciones.js","header.js","jquery.balloon.min.js","jquery.paginate.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -2566,7 +2566,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/recargasrealizadas.js","kendo.dataviz.min.js","header.js","highcharts.js","exporting.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/recargasrealizadas.js","kendo.dataviz.min.js","header.js","highcharts.js","exporting.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -2961,7 +2961,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/actividadporusuario.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/actividadporusuario.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -3359,7 +3359,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/gastosporcategorias.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/gastosporcategorias.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -3779,7 +3779,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -4564,7 +4564,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/tarjetasHabientes.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/tarjetasHabientes.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -4623,7 +4623,7 @@ class Reportes extends CI_Controller {
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
 
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js",
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js",
 						"header.js","jquery.balloon.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js",
 						"reportes/guarderia.js", "routes.js"];
 

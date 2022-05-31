@@ -869,6 +869,74 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+	/**
+	 * @info Método para obtener resultados de cuenta maestra
+	 * @author Jennifer Cádiz / Luis Molina
+	 * @date May 26, 2020
+	 */
+	public function callWs_extendedMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: extendedMasterAccount Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
+		$this->dataAccessLog->operation = 'Cuenta maestra extendido';
+
+		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni = $dataRequest->initialDate;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDate;
+
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = TRUE;
+		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
+
+		$response = $this->sendToService('callWs_extendedMasterAccount');
+
+		$listMasterAccount = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+
+				$this->response->code = 0;
+
+				$this->response->idExtEmp = $response->idExtEmp;
+				$this->response->initialDate = $response->fechaIni;
+				$this->response->finalDate = $response->fechaFin;
+				$this->response->filterDate = $response->filtroFecha;
+				$this->response->nameEnterprise = $response->depositoGMO->lista[0]->nombreCliente;
+
+				foreach ($response->depositoGMO->lista as $list) {
+						$record = new stdClass();
+						$record->fechaRegDep = $list->fechaRegDep;
+						$record->idPersona = $list->idPersona;
+						$record->nombrePersona = $list->nombrePersona;
+						$record->descripcion = $list->descripcion;
+						$record->referencia = $list->referencia;
+						$record->montoDeposito = $list->montoDeposito;
+						$record->tipoNota = $list->tipoNota;
+						$record->saldoDisponible = $list->saldoDisponible;
+						array_push(
+							$listMasterAccount,
+							$record
+						);
+				}
+			break;
+			case -150:
+				$this->response->code = 1;
+			break;
+		}
+
+		$this->response->draw = (int)$dataRequest->draw;
+		$this->response->recordsTotal = $response->totalRegistros ?? '0';
+		$this->response->recordsFiltered = $response->totalRegistros ?? '0';
+		$this->response->data = $listMasterAccount;
+
+		return $this->responseToTheView('callWs_searchExtendedAccountStatus');
+	}
 
 	/**
 	 * @info Método para obtener reporte de estatus cuenta maestra
@@ -963,6 +1031,58 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+
+	/**
+	 * @info Método para obtener excel de tabla cuenta maestra extendido
+	 * @author Jennifer Cadiz / Luis Molina
+	 * @date April 07, 2022
+	 */
+	public function callWs_exportToExcelExtendedMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedMasterAccount Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra extendido';
+
+		$this->dataRequest->idOperation = 'generarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDateXls;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDateXls;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterpriseXls;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+		$response = $this->sendToService('callWs_exportToExcelExtendedMasterAccount');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('GEN_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+			break;
+			default:
+			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		  break;
+		}
+
+		return $this->response;
+	}
 	/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García
@@ -983,9 +1103,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
 		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
-		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
 
@@ -1088,6 +1206,62 @@ class Novo_Reports_Model extends NOVO_Model {
 		}
 
 		return $this->response;
+	}
+
+	/**
+	 * Método para descargar reporte excel y pdf cuenta maestra extendido
+	 * @author Jennifer Cadiz / Luis Molina
+	 * @date April 18, 2022
+	 */
+	public function callWs_extendedDownloadMasterAccountCon_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: extendedDownloadMasterAccountCon Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Cuenta maestra extendida';
+
+		if ($dataRequest->downloadFormat == 'Excel') {
+			$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+			$this->dataRequest->idOperation = 'generaArchivoXlsConcil';
+			$ext =  '.xls';
+		} else {
+			$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra consolidado';
+			$this->dataRequest->idOperation = 'generaArchivoConcilPdf';
+			$ext =  '.pdf';
+		}
+
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataRequest->anio = $dataRequest->year;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDateXls;
+		$this->dataRequest->filtroFecha = $dataRequest->filterDateXls;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterpriseXls;
+		//$this->dataRequest->paginaActual = $dataRequest->actualPage;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		//$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
+
+		$response = $this->sendToService('callWs_extendedDownloadMasterAccountCon');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = $response->nombre ?? 'cuentaMaestraConsolidado';
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name.$ext;
+				$this->response->data->ext = $ext;
+			break;
+			default:
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_exportReportUserActivity');
 	}
 
 	/**
@@ -1379,7 +1553,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_userActivity');
 	}
 
-		/**
+	/**
 	 * Método para descargar reporte de actividad por usuario (Global)
 	 * @author Diego Acosta García
 	 * @date May 27, 2020
@@ -1626,6 +1800,87 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
+
+	/**
+	 * @info Método para obtener busqueda de estado de cuenta extendido
+	 * @author Luis Molina / Jennifer Cádiz
+	 * @date Feb 16th, 2022
+	 */
+	public function callWs_searchExtendedAccountStatus_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: searchExtendedAccountStatus Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
+		$this->dataAccessLog->operation = 'movimientoEstadoCuentaDetalle';
+
+		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
+		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$typeSearch = $dataRequest->resultSearch;
+
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
+
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = TRUE;
+		$this->dataRequest->pagActual = (int) ($dataRequest->start / 10) + 1;
+
+		$response = $this->sendToService('callWs_searchExtendedAccountStatus');
+
+		$listStatesAccounts = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				foreach ($response->listadoEstadosCuentas as $listStatesAcc) {
+					foreach($listStatesAcc->listaMovimientos as $listMov){
+						$record = new stdClass();
+						$record->fecha = $listMov->fecha;
+						$record->cuenta = $listMov->cuenta;
+						$record->tarjeta = $listMov->tarjeta;
+						$record->cliente = $listMov->cliente;
+						$record->idExtPer = $listMov->idExtPer;
+						$record->referencia = $listMov->referencia;
+						$record->descripcion = $listMov->descripcion;
+						$record->codigo = $listMov->codigo;
+						$record->tipoTransaccion = $listMov->tipoTransaccion;
+						$record->monto = $listMov->monto;
+						array_push(
+							$listStatesAccounts,
+							$record
+						);
+					}
+				}
+			break;
+			case -444:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -150:
+				$this->response->code = 0;
+			break;
+			case 504:
+				$this->response->msg = lang('GEN_TIMEOUT');
+			break;
+		}
+
+		$this->response->draw = (int)$dataRequest->draw;
+		$this->response->recordsTotal = $response->totalRegistros ?? '0';
+		$this->response->recordsFiltered = $response->totalRegistros ?? '0';
+		$this->response->data = $listStatesAccounts;
+
+		return $this->responseToTheView('callWs_searchExtendedAccountStatus');
+	}
+
 	/**
 	 * @info Método para obtener EXCEL de estado de cuenta
 	 * @author Diego Acosta García
@@ -1732,5 +1987,70 @@ class Novo_Reports_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_statusAccountpdfFile');
+	}
+
+	/**
+	 * @info Método para descargar nuevo reporte excel de Estado de Cuenta Extendido
+	 * @author Luis Molina
+	 * @date Mar 02, 2022
+	 */
+	public function callWs_exportToExcelExtendedAccountStatus_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedAccountStatus Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
+		$this->dataAccessLog->operation = 'generaArchivoXlsEdoCta';
+
+		$this->dataRequest->idOperation = 'generaArchivoXlsEdoCta';
+		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		if ($dataRequest->resultByNITXls === 'all') {
+			$dataRequest->resultByNITXls = '';
+			$typeSearch = '0';
+		} else {
+			$typeSearch = '1';
+		}
+
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCodeXls;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNITXls;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateActXls)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateActXls;
+		$this->dataRequest->tamanoPagina = '5';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '1';
+		$this->dataRequest->prefix = $dataRequest->productCodeXls;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseNameXls;
+		$this->dataRequest->descProducto = $dataRequest->descProductXls;
+		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+		$response = $this->sendToService('callWs_exportToExcelExtendedAccountStatus');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('GEN_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+			break;
+			default:
+			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
+		  break;
+		}
+
+		return $this->response;
 	}
 }

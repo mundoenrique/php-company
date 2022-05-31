@@ -614,7 +614,7 @@
                     <a href="<?= $this->asset->insertFile($value[0].'.'.$value[1], 'statics', $customerUri) ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
-                        <?php switch ($value[1]): case 'xls': case 'xlsm': ?>
+                        <?php switch ($value[1]): case 'xls': case 'xlsm': case 'xlsx':?>
                           <img src=<?= $this->asset->insertFile(lang('CONF_XLS_ICON'), 'images/icons');?> />
                         <?php break; case 'pdf': ?>
                           <img src=<?= $this->asset->insertFile(lang('CONF_PDF_ICON'), 'images/icons');?> />

@@ -207,6 +207,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->msg = lang('BULK_INCOMPATIBLE_FILE');
 					$respLoadBulk = TRUE;
 				break;
+				case -469:
+					$this->response->msg = novoLang(lang('BULK_FILE_ROW_LIMIT_EXCEEDED'),$response->msg);
+					$respLoadBulk = TRUE;
+				break;
 				case -128:
 					$code = 3;
 					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;
@@ -375,6 +379,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -443:
 				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
+			break;
+			case -468:
+				$this->response->title = lang('BULK_DETAIL');
+				$this->response->msg = lang('BULK_CONFIRM_INACTIVE_ACCOUNT');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 		}

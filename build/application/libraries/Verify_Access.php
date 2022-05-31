@@ -34,10 +34,12 @@ class Verify_Access {
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO [' . $user . '] VALIDATION FORM ' . $rule . ': ' .
+			json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			log_message('DEBUG', 'NOVO  [' . $user . '] VALIDATION ' . $rule . ' ERRORS: ' .
+				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		if ($class) {
@@ -77,7 +79,8 @@ class Verify_Access {
 		}
 
 		unset($_POST);
-		log_message('DEBUG', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ' . $rule .' REQUEST CREATED '.
+			json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
@@ -90,8 +93,9 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
-		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : lang('CONF_LINK_SIGNIN');
+		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
+		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END')
+			: lang('CONF_LINK_SIGNIN');
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
@@ -111,7 +115,8 @@ class Verify_Access {
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
+			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
 	}
@@ -131,6 +136,20 @@ class Verify_Access {
 		}
 
 		switch($module) {
+			case 'signIn':
+				$auth = TRUE;
+				$uriSegmwnts = $this->CI->uri->segment(2).'/'.$this->CI->uri->segment(3);
+				$ajaxRequest = $this->CI->input->is_ajax_request();
+
+				if (SINGLE_SIGN_ON && $uriSegmwnts !== 'internal/novopayment' && ENVIRONMENT === 'production' && !$ajaxRequest) {
+					redirect('page-no-found', 'Location', 301);
+					// show_404();
+					exit();
+				} elseif ($uriSegmwnts === 'internal/novopayment' && ENVIRONMENT !== 'production' && !$ajaxRequest) {
+					redirect('page-no-found', 'Location', 301);
+					exit();
+				}
+				break;
 			case 'recoverPass':
 			case 'passwordRecovery':
 				$auth = lang('CONF_RECOV_PASS') == 'ON';
@@ -250,13 +269,6 @@ class Verify_Access {
 			case 'getReport':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
 				break;
-			case 'exportToExcelMasterAccount':
-			case 'exportToPDFMasterAccount':
-			case 'exportToExcelMasterAccountConsolid':
-			case 'exportToPDFMasterAccountConsolid':
-			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
@@ -265,8 +277,16 @@ class Verify_Access {
 			case 'exportExcelUsersActivity':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
 				break;
+			case 'statusAccountExcelFile':
+			case 'statusAccountPdfFile':
+			case 'searchStatusAccount':
 			case 'accountStatus':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				break;
+			case 'extendedAccountStatus':
+			case 'searchExtendedAccountStatus':
+			case 'exportToExcelExtendedAccountStatus':
+						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDC'));
 				break;
 			case 'statusMasterAccount':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
@@ -288,20 +308,24 @@ class Verify_Access {
 			case 'categoryExpense':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
 				break;
-			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
-				break;
 			case 'statusBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
+				break;
+			case 'exportToExcelMasterAccount':
+			case 'exportToPDFMasterAccount':
+			case 'exportToExcelMasterAccountConsolid':
+			case 'exportToPDFMasterAccountConsolid':
+			case 'masterAccount':
+				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
+				break;
+			case 'extendedMasterAccount':
+			case 'exportToExcelExtendedMasterAccount':
+			case 'extendedDownloadMasterAccountCon':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
 				break;
 			case 'cardHolders':
 			case 'exportReportCardHolders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-				break;
-			case 'statusAccountExcelFile':
-			case 'statusAccountPdfFile':
-			case 'searchStatusAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
 			case 'usersManagement':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
@@ -315,7 +339,7 @@ class Verify_Access {
 				break;
 			default:
 				$freeAccess = [
-					'signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
+					'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
 				];
 				$auth = in_array($module, $freeAccess);
 		}

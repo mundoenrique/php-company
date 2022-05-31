@@ -2,24 +2,24 @@
 	"source_type": "rates",
 	"currency": "ves",
 	"currency_symbol": "Bs.",
-	"last_update": "2021-10-13",
+	"last_update": "2022-05-26",
 	"data": [{
 			"name": "Servicios",
 			"description": null,
 			"items": [{
 					"name": "Servicio administrativo mínimo",
-					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 35.000.000,00 / <i class='icon-info mr-0 info'></i> Bs. 35,00",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 50.000.000,00 / <i class='icon-info mr-0 info'></i> Bs. 50,00",
 					"rates": [
-						"Bs. 35.000.000,00 <br> Bs. 35,00",
-						"Bs. 35.000.000,00 <br> Bs. 35,00"
+						"Bs. 50.000.000,00 <br> Bs. 50,00",
+						"Bs. 50.000.000,00 <br> Bs. 50,00"
 					]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo",
 					"rates": [
-						"Bs. 35.000.000,00 <br>  Bs. 35,00",
-						"Bs. 35.000.000,00 <br> Bs. 35,00"
+						"Bs. 50.000.000,00 <br>  Bs. 50,00",
+						"Bs. 50.000.000,00 <br> Bs. 50,00"
 					]
 				}
 			]
@@ -31,16 +31,16 @@
 					"name": "Emisión (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 7.000.000,00 <br> Bs. 7,00",
-						"Bs. 7.000.000,00 <br> Bs. 7,00"
+						"Bs. 9.000.000,00 <br> Bs. 9,00",
+						"Bs. 9.000.000,00 <br> Bs. 9,00"
 					]
 				},
 				{
 					"name": "Reposición / Renovación (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 7.000.000,00 <br> Bs. 7,00",
-						"Bs. 7.000.000,00 <br> Bs. 7,00"
+						"Bs. 9.000.000,00 <br> Bs. 9,00",
+						"Bs. 9.000.000,00 <br> Bs. 9,00"
 					]
 				}
 			]
@@ -52,8 +52,8 @@
 				"name": "Reposición",
 				"description": null,
 				"rates": [
-					"Bs. 5.500.000,00 <br> Bs. 5,50",
-					"Bs. 5.500.000,00 <br> Bs. 5,50"
+					"Bs. 6.500.000,00 <br> Bs. 6,50",
+					"Bs. 6.500.000,00 <br> Bs. 6,50"
 				]
 			}]
 		},
@@ -108,15 +108,15 @@
 			"name": "Transferencias**",
 			"description": null,
 			"items": [{
-					"name": "A cuentas bancarias, montos menores a Bs. 166.670.000,00 / <i class='icon-info mr-0 info'></i> Bs. 166,67",
+					"name": "A cuentas bancarias, montos menores a Bs. 233.330.000,00 / <i class='icon-info mr-0 info'></i> Bs. 233,33",
 					"description": null,
 					"rates": [
 						null,
-						"Bs. 1.250.000,00 <br> Bs. 1,25"
+						"Bs. 1.750.000,00 <br> Bs. 1,75"
 					]
 				},
 				{
-					"name": "A cuentas bancarias, montos mayores a Bs. 166.670.000,00 / <i class='icon-info mr-0 info'></i> Bs. 166,67",
+					"name": "A cuentas bancarias, montos mayores a Bs. 233.330.000,00 / <i class='icon-info mr-0 info'></i> Bs. 233,33",
 					"description": null,
 					"rates": [
 						null,
@@ -129,15 +129,15 @@
 			"name": "Pagos**",
 			"description": null,
 			"items": [{
-					"name": "De tarjetas de crédito, montos menores a Bs. 166.670.000,00 / <i class='icon-info mr-0 info'></i> Bs. 166,67",
+					"name": "De tarjetas de crédito, montos menores a Bs. 233.330.000,00 / <i class='icon-info mr-0 info'></i> Bs. 233,33",
 					"description": null,
 					"rates": [
 						null,
-						"Bs. 1.250.000,00 <br> Bs. 1,25"
+						"Bs. 1.750.000,00 <br> Bs. 1,75"
 					]
 				},
 				{
-					"name": "De tarjetas de crédito, montos mayores a Bs. 166.670.000,00 / <i class='icon-info mr-0 info'></i> Bs. 166,67",
+					"name": "De tarjetas de crédito, montos mayores a Bs. 233.330.000,00 / <i class='icon-info mr-0 info'></i> Bs. 233,33",
 					"description": null,
 					"rates": [
 						null,

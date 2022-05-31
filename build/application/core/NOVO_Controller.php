@@ -44,7 +44,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
-		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
+		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$this->optionsCheck();
 	}
 	/**
@@ -120,7 +120,7 @@ class NOVO_Controller extends CI_Controller {
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+				log_message('DEBUG', 'NOVO [' . $this->appUserName . '] IP ' . $this->input->ip_address() . ' REQUEST FROM THE VIEW ' . json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
 				$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
 
@@ -178,7 +178,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.6.0",
-				"third_party/jquery-ui-1.13.0",
+				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
 				"aes-json-format",
 				"helper"

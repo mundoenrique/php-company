@@ -19,7 +19,7 @@ class Encrypt_Connect {
 		$this->logMessage = new stdClass();
 
 		if (ENVIRONMENT == 'development') {
-			error_reporting(E_ALL & ~E_DEPRECATED);
+			error_reporting(~E_DEPRECATED);
 		}
 	}
 	/**
@@ -32,7 +32,8 @@ class Encrypt_Connect {
 		if($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.': '.$data);
+
+		log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' REQUEST ' . $model . ': ' . $data);
 
 		$dataB = base64_encode($data);
 		while((strlen($dataB)%8) != 0) {
@@ -138,7 +139,8 @@ class Encrypt_Connect {
 			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY CUSTOMER: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
+		log_message('DEBUG', 'NOVO [' . $userName . '] IP ' . $this->CI->input->ip_address() . ' REQUEST BY CUSTOMER: ' .
+			$request['pais'] . ', AND WEBSERVICE URL: '	. $wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$start = microtime(true);
@@ -162,7 +164,7 @@ class Encrypt_Connect {
 		$final = microtime(true);
 		$executionTime = round($final - $start, 2, PHP_ROUND_HALF_UP) ;
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $httpCode);
+		log_message('DEBUG','NOVO [' . $userName . '] RESPONSE IN ' . $executionTime . ' sec CURL HTTP CODE: ' . $httpCode);
 
 		$failResponse = json_decode($response);
 
@@ -235,7 +237,8 @@ class Encrypt_Connect {
 		curl_exec ($ch);
 		$result = curl_errno($ch);
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('CONF_UPLOAD_SFTP('.$result.')'));
+		log_message('DEBUG', 'NOVO [' . $userName . '] UPLOAD FILE BULK SFTP ' . $model .': ' . $result . ' ' .
+			lang('CONF_UPLOAD_SFTP(' . $result . ')'));
 
 		if($result != 0) {
 			$respUpload->rc = -105;
@@ -257,10 +260,12 @@ class Encrypt_Connect {
 		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$logMessage->model, $logMessage->rc, $logMessage->msg, $logMessage->pais]);
 		$inBean = $logMessage->inBean ?? '';
 
-		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] RESPONSE '.$writeLog);
+		log_message('DEBUG', 'NOVO [' . $logMessage->userName . '] IP ' . $this->CI->input->ip_address() . ' RESPONSE ' .
+			$writeLog);
 
 		$writeLog = novoLang('%s %s: %s', [$inBean, $logMessage->model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
 
-		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] COMPLETE RESPONSE '.$writeLog);
+		log_message('DEBUG', 'NOVO [' . $logMessage->userName . '] IP ' . $this->CI->input->ip_address() .
+			' COMPLETE RESPONSE ' . $writeLog);
 	}
 }

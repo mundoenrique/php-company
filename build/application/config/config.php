@@ -405,7 +405,7 @@ $config['sess_regenerate_destroy'] = TRUE;
 $config['cookie_prefix']	= COOKIE_PREFIX;
 $config['cookie_domain']	= COOKIE_DOMAIN;
 $config['cookie_path']		= '/';
-$config['cookie_secure']	= COOKIE_SECURE == 'ON' ? TRUE : FALSE;;
+$config['cookie_secure']	= COOKIE_SECURE == 'ON' ? TRUE : FALSE;
 $config['cookie_httponly'] 	= FALSE;
 
 /*

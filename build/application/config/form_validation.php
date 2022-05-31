@@ -152,28 +152,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
 		],
 	],
-	'exportToExcel' => [
-		[
-			'field' => 'idExtEmp',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'producto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-		[
-			'field' => 'tamanoPagina',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'paginaActual',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'descProd',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-		],
-	],
 	'exportToExcelMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
@@ -228,6 +206,50 @@ $config = [
 		[
 			'field' => 'nombreEmpresa',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]'
+		]
+	],
+	'exportToExcelExtendedMasterAccount' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
+		]
+	],
+	'extendedDownloadMasterAccountCon' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
 	'exportToPDFMasterAccount' => [
@@ -361,6 +383,28 @@ $config = [
 		[
 			'field' => 'tamanoPagina',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
+	],
+	'extendedMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'typeNote',
+			'rules' => 'trim|regex_match[/^[D|C]*$/i]'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'filterDate',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
 		]
 	],
 	'statusMasterAccount' => [
@@ -771,6 +815,11 @@ $config = [
 			'field' => 'pass',
 			'label' => 'pass',
 			'rules' => 'trim'
+		],
+		[
+			'field' => 'reference',
+			'label' => 'reference',
+			'rules' => 'regex_match[/^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i]'
 		],
 		[
 			'field' => 'cards[]',
@@ -1467,6 +1516,20 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'searchExtendedAccountStatus' => [
+		[
+			'field' => 'resultByNITInput',
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+		],
+		[
+			'field' => 'resultByCardInput',
+			'rules' => 'trim|numeric',
+		],
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'statusAccountExcelFile' => [
 		[
 			'field' => 'resultByNITInput',
@@ -1475,6 +1538,28 @@ $config = [
 		[
 			'field' => 'initialDateAct',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'exportToExcelExtendedAccountStatus' => [
+		[
+			'field' => 'resultByNITInputXls',
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+		],
+		[
+			'field' => 'enterpriseCodeXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'productCodeXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'initialDateActXls',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'resultSearchXls',
+			'rules' => 'trim|numeric|required'
 		]
 	],
 	'statusAccountPdfFile' => [
@@ -1570,6 +1655,14 @@ $config = [
 		],
 		[
 			'field' => 'REPUSU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPEDC',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPCMT',
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
 		[

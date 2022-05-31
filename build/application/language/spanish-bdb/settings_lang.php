@@ -9,7 +9,11 @@ $lang['SETTINGS_FILES_DOWNLOAD'] = [
     ['download-ini','ini','Archivo.ini','request']
   ],
   'Archivos de autogestión Conexión Empresas Online'=>[
-    ['archivo_autogestion_ceo','rar','Archivos de autogestión','download']
+		['ACTUALIZACION','xlsx','Actualización','download'],
+    ['BLOQUEO TARJETAS','xlsx','Bloqueo de Tarjetas','download'],
+		['DESBLOQUEO TARJETAS','xlsx','Desbloqueo de Tarjetas','download'],
+    ['REEXPEDICION','xlsx','Reexpedición','download'],
+		['TRASLADO SALDOS','xlsx','Traslado de Saldos','download']
   ],
   'Video'=>[
     ['video','mp4','video.mp4','video']
