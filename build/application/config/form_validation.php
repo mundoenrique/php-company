@@ -976,6 +976,63 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]'
 		]
 	],
+	'addBranch' => [
+		[
+			'field' => 'rif',
+			'label' => 'rif',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'branchCode',
+			'label' => 'branchCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'branchName',
+			'label' => 'branchName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address1',
+			'label' => 'address1',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'stateCodeBranch',
+			'label' => 'stateCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'cityCodeBranch',
+			'label' => 'cityCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'person',
+			'label' => 'person',
+			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]|required'
+		],
+		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'unnamedRequest' => [
 		[
 			'field' => 'expiredDate',

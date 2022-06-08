@@ -162,6 +162,7 @@ class Verify_Access {
 			case 'changeTelephones':
 			case 'changeDataEnterprice':
 			case 'addContact':
+			case 'addBranch':
 			case 'deleteContact':
 			case 'getEnterprises':
 			case 'getEnterprise':

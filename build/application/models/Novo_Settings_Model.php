@@ -453,7 +453,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date May 20th, 2021
 	 */
-	public function CallWs_getBranches_Settings($dataRequest)
+	public function CallWs_getBranches_Settings_old($dataRequest)
 	{
 		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
 
@@ -553,6 +553,125 @@ class Novo_Settings_Model extends NOVO_Model {
 		};
 
 		return $this->responseToTheView('CallWs_getBranches');
+	}
+
+	/**
+	 * @info Método para búsqueda de sucursales refactorizado
+	 * @author Luis Molina
+	 * @date Jun 01th, 2022
+	 */
+	public function CallWs_getBranches_Settings($dataRequest){
+
+		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getConsultarSucursales';
+		$this->dataAccessLog->function = 'getConsultarSucursales';
+		$this->dataAccessLog->operation = 'getConsultarSucursales';
+
+		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->lista = [
+			[
+				"rif" => $dataRequest->branchListBr
+			]
+		];
+		$profile = 'S';
+		$country = $this->customerUri;
+
+		$response = $this->sendToService('CallWs_getBranches');
+		$listBranches = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				foreach ($response->lista as $detailBranches) {
+					$record = new stdClass();
+					$record->rifB = $detailBranches->rif;
+					$record->codB = $detailBranches->cod;
+					$record->person = $detailBranches->persona;
+					$record->userNameB = $detailBranches->usuario;
+					$record->branchName = $detailBranches->nomb_cia;
+					$record->branchCode = $detailBranches->codigo;
+					$record->contact = $detailBranches->persona;
+					$record->phone = $detailBranches->telefono;
+					$record->zoneName = $detailBranches->zona;
+					$record->address1 = $detailBranches->direccion_1;
+					$record->address2 = $detailBranches->direccion_2;
+					$record->address3 = $detailBranches->direccion_3;
+					$record->areaCode = $detailBranches->cod_area;
+					$record->countryCod = $detailBranches->codPais;
+					$record->stateCod = $detailBranches->estado;
+					$record->cityCod = $detailBranches->ciudad;
+
+					array_push(
+						$listBranches,
+						$record
+					);
+				};
+
+				$this->response->data = $listBranches;
+				$this->response->paisTo = $response->paisTo;
+
+				break;
+		};
+
+		return $this->responseToTheView('CallWs_getBranches');
+
+	}
+
+	/**
+	 * @info Método para guardar sucursal refactorizado
+	 * @author Luis Molina
+	 * @date JUn 06th, 2022
+	 */
+	public function CallWs_addBranch_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: addBranch Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getAgregarSucursales';
+		$this->dataAccessLog->function = 'getAgregarSucursales';
+		$this->dataAccessLog->operation = 'getAgregarSucursales';
+
+		$this->dataRequest->idOperation = 'getAgregarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
+
+		$this->dataRequest->rif = $dataRequest->rif;
+		$this->dataRequest->codigo = $dataRequest->branchCode;
+		$this->dataRequest->nomb_cia = $dataRequest->branchName;
+		$this->dataRequest->direccion_1 = $dataRequest->address1;
+		$this->dataRequest->direccion_2 = $dataRequest->address2;
+		$this->dataRequest->direccion_3 = $dataRequest->address3;
+		$this->dataRequest->zona = $dataRequest->zoneName;
+		$this->dataRequest->codPais = $dataRequest->countryCodeBranch;
+		$this->dataRequest->estado = $dataRequest->stateCodeBranch;
+		$this->dataRequest->ciudad = $dataRequest->cityCodeBranch;
+		$this->dataRequest->persona = $dataRequest->person;
+		$this->dataRequest->cod_area = $dataRequest->areaCode;
+		$this->dataRequest->telefono = $dataRequest->phone;
+		$this->dataRequest->costoDistribucion = '0';
+		$this->dataRequest->costoUnitDistribucion = '0';
+		$this->dataRequest->costoMinimo = '0';
+		$this->dataRequest->costoDistribRep= '0';
+
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+		$this->dataRequest->password = $password;
+
+		$response = $this->sendToService('CallWs_addBranch');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = 'Sucursal cargada con exito';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_addBranch');
 	}
 
 	/**

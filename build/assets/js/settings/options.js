@@ -56,21 +56,22 @@ $(function () {
 			$('#partedSection').hide();
 		}
 	})
-	// SUCURSALES
-	// $('#branch').on('click', function(){
-	// 	if ($('#branchListBr > option').length == 1) {
-	// 		$('#branchInfoForm')[0].reset();
-	// 		$(".completeSection").addClass('hidden');
-	// 		$("#partedSection").hide();
-	// 		$('.hide-out').removeClass('hide');
 
-	// 		data = {
-	// 			"branchListBr": $( "#branchListBr option:selected" ).val()
-	// 		}
-	// 		insertFormInput(true);
-	// 		getBranches(data);
-	// 	}
-	// });
+	// SUCURSALES
+	/* $('#branch').on('click', function(){
+	 	if ($('#branchListBr > option').length == 1) {
+	 		$('#branchInfoForm')[0].reset();
+	 		$(".completeSection").addClass('hidden');
+	 		$("#partedSection").hide();
+	 		$('.hide-out').removeClass('hide');
+
+	 		data = {
+	 			"branchListBr": $( "#branchListBr option:selected" ).val()
+	 		}
+	 		insertFormInput(true);
+	 		getBranches(data);
+	 	}
+	 });*/
 
 
 	$('.nav-item-config:first-child').addClass('active');
@@ -178,6 +179,7 @@ $(function () {
 			}
 		});
 	});
+
 	// SUCURSALES
 	$('#branchListBr').on('change', function (e) {
 		e.preventDefault();
@@ -201,11 +203,11 @@ $(function () {
 		}
 	});
 	// SUCURSALES
-	// var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
-	var inputFile =  $('#file-branch').next('.js-label-file').html();
-	// var inputFile = true ? $('#file-branch').next('.js-label-file').html().trim() : '';
+	/* var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
+	 var inputFile =  $('#file-branch').next('.js-label-file').html();
+	 var inputFile = true ? $('#file-branch').next('.js-label-file').html().trim() : '';*/
 
-	$('.input-file').each(function () {
+/*	$('.input-file').each(function () {
 		var label = $(this).next('.js-label-file');
 		var labelVal = label.html();
 
@@ -218,12 +220,14 @@ $(function () {
 				fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
 			});
 			validInputFile();
-	});
+	});*/
+
 	// SUCURSALES
-	// $('#file-branch').on('change', function(e){
-	// 	e.preventDefault;
-	// 	$('#btnBranchUpload').removeAttr("disabled");
-	// });
+	 /*$('#file-branch').on('change', function(e){
+	 	e.preventDefault;
+	 	$('#btnBranchUpload').removeAttr("disabled");
+	 });*/
+
 	// SUCURSALES
 	$('#btnBranchUpload').on('click', function(e) {
 		e.preventDefault();
@@ -250,6 +254,7 @@ $(function () {
 			});
 		}
 	});
+
 	// SUCURSALES
 	$('#newBranchBtn').on('click', function () {
 		$('#branchInfoForm')[0].reset();
@@ -262,6 +267,7 @@ $(function () {
 		// $(this).addClass('active');
 		$('#secondarySectionBranch').fadeIn(700, 'linear');
 	});
+
 	// SUCURSALES
 	$('#backBranchBtn').on('click', function (e) {
 		$('#secondarySectionBranch').hide();
@@ -431,7 +437,8 @@ function getContacts (data) {
 			});
 	});
 };
-	// SUCURSALES
+
+// SUCURSALES
 function getBranches (value) {
 	data = value;
 	who = 'Settings';
@@ -442,11 +449,21 @@ function getBranches (value) {
 		insertFormInput(false);
 
 		if ( dataResponse.code == 0 ) {
-			geo = response.geoInfo;
 
 			branchesTable( dataResponse );
+			$('#secondarySectionBranch').fadeIn(700, 'linear');
+			loadCuntry(dataResponse);
 
-			$('.edit').on('click', function (e) {
+			$('#stateCodeBranch').on('change', function () {
+
+				var ciudades = dataResponse.paisTo.listaEstados.filter(function (dat) { return dat.codEstado == $("option:selected", '#stateCodeBranch').val() });
+				$('#cityCodeBranch').empty();
+				$.each(ciudades[0].listaCiudad, function (pos, val) {
+					$('#cityCodeBranch').append('<option value="' + val.codCiudad + '">' + val.ciudad + '</option>');
+				});
+
+			});
+			/*$('.edit').on('click', function (e) {
 				// $('.section').show();
 				$('#partedSection').hide();
 				$('#secondarySectionBranch').fadeIn(700, 'linear');
@@ -465,7 +482,7 @@ function getBranches (value) {
 				});
 
 				// $("html, body").animate({ scrollTop: $(".edit").offset().top  }, 500);
-			})
+			})*/
 		} else if ( dataResponse.code == 7 ) {
 			branchesTable( dataResponse );
 			$("#secondarySectionBranch").hide()
@@ -491,6 +508,24 @@ function getBranches (value) {
 		};
 	});
 };
+
+
+function loadCuntry(data) {
+	$('#countryCodeBranch').empty();
+	$('#countryCodeBranch').append('<option value="' + data.paisTo.codPais + '">' + data.paisTo.pais + '</option>');
+
+	$('#stateCodeBranch').empty();
+	$.each(data.paisTo.listaEstados, function (listaPos, listaItem) {
+		$('#stateCodeBranch').append('<option value="' + listaItem.codEstado + '">' + listaItem.estados + '</option>');
+	});
+
+	var ciudades = data.paisTo.listaEstados.filter(function (dat) { return dat.codEstado == $("option:selected", "#stateCodeBranch").val() });
+
+	$('#cityCodeBranch').empty();
+	$.each(ciudades[0].listaCiudad, function (pos, val) {
+		$('#cityCodeBranch').append('<option value="' + val.codCiudad + '">' + val.ciudad + '</option>');
+	});
+}
 
 function validInputFile() {
 	form = $('#txtBranchesForm');
@@ -551,37 +586,6 @@ function updateContact(data) {
 	});
 };
 
-function getGeoData(data){
-	switch (data[0]) {
-		case 'city':
-			$('#cityCodeBranch').children().remove();
-			geo.listaEstados.forEach(element => {
-				if (element.codEstado == data[1]) {
-					$.each(element.listaCiudad, function(key, val) {
-						$('#cityCodeBranch').append("<option value='"+ val['codCiudad'] +"' >"+ val['ciudad'] +"</option>");
-					});
-				}
-			});
-			break;
-		case 'state':
-				if (geo.codPais == data[1]) {
-					$.each(geo.listaEstados, function(key, val) {
-						$('#stateCodeBranch').append("<option value='"+ val['codEstado'] +"' >"+ val['estados'] +"</option>");
-					});
-				}
-			break;
-		case 'district':
-			geo.listaDistrict.forEach(element => {
-				if (element.codDistrict == data[1]) {
-					$.each(element.listaDistrict, function(key, val) {
-						$('#districtCodeBranch').children().remove();
-						$('#districtCodeBranch').append("<option value='"+ val['codDistrict'] +"' >"+ val['disctrict'] +"</option>");
-					});
-				}
-			});
-			break;
-	}
-}
 	// SUCURSALES
 function branchesTable( dataResponse ) {
 	// $('#btnBranchUpload').attr("disabled", "true");
@@ -590,43 +594,6 @@ function branchesTable( dataResponse ) {
 	$('#secondarySectionBranch').removeClass('hidden');
 	$('#partedSection').show();
 	// $(".completeSection").removeClass('hidden');
-
-	$.each(dataResponse.geoInfo.listaEstados, function(key, val){
-		$('#stateCodeBranch').append("<option value='"+ val[ 'codEstado'] +"' >"+ val['estados'] +"</option>");
-	});
-
-	$('#stateCodeBranch').on('change', function () {
-		$('#cityCodeBranch').prop('disabled', false);
-
-		if ($(this).find('option:first').val() == '') {
-			$(this).find('option').get(0).remove();
-		};
-		getGeoData(['city', $(this).val()]);
-	});
-
-	if (lang.CONF_SETTINGS_DISCTRICT) {
-		$('#cityCodeBranch').on('change', function () {
-			$('#districtCodeBranch').prop('disabled', false);
-
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove();
-			};
-
-			if (dataResponse.longProfile == 'L') {
-				$('#districtBlock').removeClass('none');
-				$('#districtCodeBranch').children().remove();
-				$('#districtCodeBranch').prepend('<option value="" selected>' + lang.GEN_BTN_SELECT + '</option>');
-
-				getGeoData(['district', $(this).val()]);
-			};
-		});
-	};
-
-	$('#district').on('change', function () {
-		if ($(this).find('option:first').val() == '') {
-			$(this).find('option').get(0).remove();
-		};
-	});
 
 	table = $('#tableBranches').DataTable({
 		drawCallback: function () {
@@ -649,7 +616,7 @@ function branchesTable( dataResponse ) {
 				"className": "branchName",
 				"width": "200px"
 			},
-			{
+		  {
 				"targets": 1,
 				"className": "branchCode",
 				"width": "200px"
@@ -677,25 +644,16 @@ function branchesTable( dataResponse ) {
 			{
 				data: function (data) {
 					var options = '';
-
-					options += '<button value="'+ data.id +'" class="edit btn mx-1 px-0"'
-					options += '>';
-					options += '<i value="'+ data.id +'" class="icon icon-edit"></i>';
+				  options += '<button value="'+ data.branchCode +'" class="edit btn mx-1 px-0">';
+					options += '<i class="icon icon-edit"></i>';
 					options += '</button>';
-
 					return options;
 				}
 			}
 		],
 	});
 
-	$('#countryCodeBranch').append("<option selected value='"+ dataResponse.country[ 'countryCodeBranch'] +"' >"+ dataResponse.country[ 'countryNameBranch'] +"</option>");
-
-	if ($('#stateCodeBRanch').length > 0) {
-		getGeoData(['city', $('#stateCodeBranch option:selected').val()]);
-	}
-
-	$('#btn-update-branch').on('click', function (e) {
+	/*$('#btn-update-branch').on('click', function (e) {
 		e.preventDefault;
 		form = $('#branchInfoForm');
 		validateForms(form);
@@ -707,12 +665,12 @@ function branchesTable( dataResponse ) {
 			data.user = $('#userNameB').val();
 			updateBranch(getDataForm(form));
 		}
-	});
+	});*/
 
 	$('#partedSection').show();
 	// $(".completeSection").removeClass('hidden');
 	$('#newBranch').show();
-	$('#cityCodeBranch').empty().prop('disabled', true).prepend('<option value="" selected>' + lang.GEN_BTN_SELECT + '</option>');
+	//$('#cityCodeBranch').empty().prop('disabled', true).prepend('<option value="" selected>' + lang.GEN_BTN_SELECT + '</option>');
 
 	return table;
 };
@@ -730,4 +688,31 @@ function deleteContact(){
 
 	deleteContactM(data);
 }
+
+	// SUCURSALES
+$('#btn-add-branch').on('click', function (e) {
+	e.preventDefault;
+	form = $('#branchInfoForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		data = getDataForm(form);
+		data.rif = $("option:selected", '#branchListBr').val();
+		data.pass = cryptoPass(data.password1);
+		delete data.codB;
+		delete data.rifB;
+		delete data.userNameB;
+		addBranch(data);
+	}
+});
+
+	// SUCURSALES
+	function addBranch(data) {
+		who = 'Settings';
+		where = 'addBranch';
+
+		callNovoCore(who, where, data, function (response) {
+			dataResponse = response;
+		});
+	};
 

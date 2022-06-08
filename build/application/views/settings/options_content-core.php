@@ -523,6 +523,7 @@
 												<div class="form-group mb-1 col-6 col-lg-4 hidden">
 													<label or="countryCodeBranch">País</label>
 													<select id="countryCodeBranch" name="countryCodeBranch" class="form-control select-box custom-select h6 w-100">
+													<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 													</select>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
@@ -580,7 +581,8 @@
 													<div class="help-block text-left"></div>
 												</div>
 												<div class="col-auto">
-													<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
+													<!--<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>-->
+													<button id="btn-add-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
 												</div>
 											</div>
 										</div>
