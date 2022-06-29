@@ -89,4 +89,4 @@ $lang['BULK_REQUEST_500_CARDS'] = 'Si tu solicitud es de emisión y supera 500 t
 $lang['BULK_CREATION_SCHEDULE'] = 'Los horarios para creación de tarjetas son los siguientes:';
 $lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'El contenido del archivo supera el límite de filas permitidas. Debe contener un máximo de %s registro(s).';
 $lang["BULK_LIMIT_EXCEEDED"] = 'Límite Excedido.';
-$lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Tu lote supera el limite diario de emisiones, solo quedan %s y estas cargando %s.';
+$lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Tu lote supera el límite diario de emisiones, solo quedan %s y estas cargando %s.';
