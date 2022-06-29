@@ -211,6 +211,14 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->msg = novoLang(lang('BULK_FILE_ROW_LIMIT_EXCEEDED'),$response->msg);
 					$respLoadBulk = TRUE;
 				break;
+				case -478:
+					$cardsToAuthorize = isset($response->bean->data->numTarjetasPorAutorizar) ? $response->bean->data->numTarjetasPorAutorizar : '';
+					$remainingEmissions = isset($response->bean->data->numTarjetasRestantes) ? $response->bean->data->numTarjetasRestantes : '';
+
+					$this->response->msg = novoLang(lang('BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS'),[$remainingEmissions,$cardsToAuthorize]);
+					$this->response->icon = lang('CONF_ICON_WARNING');
+					$respLoadBulk = TRUE;
+				break;
 				case -128:
 					$code = 3;
 					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;

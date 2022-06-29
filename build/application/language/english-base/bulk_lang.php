@@ -88,4 +88,4 @@ $lang['BULK_IMPORTANT'] = 'Important!';
 $lang['BULK_REQUEST_500_CARDS'] = 'If your request is for issuance and exceeds 500 cards, it will be processed 20 minutes after the next card creation time.';
 $lang['BULK_CREATION_SCHEDULE'] = 'The hours for creating cards are as follows:';
 $lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'The content of the file exceeds the limit of allowed rows. Must contain a maximum of %s records';
-$lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Daily emissions limit exceeded or to be exceeded. Remaining emissions %s, you want to authorize %s .';
+$lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Your batch exceeds the daily emission limit, there are only %s left and you are loading %s.';
