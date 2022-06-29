@@ -936,12 +936,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -478:
 				$cardsToAuthorize = isset($response->bean->data->numTarjetasPorAutorizar) ? $response->bean->data->numTarjetasPorAutorizar : '';
-				$cardsAuthorized = isset($response->bean->data->numTarjetasAutorizadas) ? $response->bean->data->numTarjetasAutorizadas : '';
-				$limitDailyEmissions = isset($response->bean->data->limiteEmisionesDiarias) ? $response->bean->data->limiteEmisionesDiarias : '';
-				$remainingEmissions = $limitDailyEmissions - $cardsAuthorized;
+				$remainingEmissions = isset($response->bean->data->numTarjetasRestantes) ? $response->bean->data->numTarjetasRestantes : '';
 
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = novoLang(lang('BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS'),[$cardsAuthorized,$cardsToAuthorize]);
+				$this->response->msg = novoLang(lang('BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS'),[$remainingEmissions,$cardsToAuthorize]);
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
