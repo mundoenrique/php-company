@@ -6,3 +6,4 @@ $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [
 	'XXXXX' => 'XXXXXXX',
 ];
+$lang['GEN_FOTTER_RIGHTS'] = '© Banco Cooperativo Coopcentral - ';
