@@ -185,6 +185,7 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'twitter' => $lang['CONF_NO_LINK'],
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
+	'linkedin' => $lang['CONF_NO_LINK'],
 ];
 $lang['CONF_LINK_USERS_MANAGEMENT'] = 'users-management';//permiso asociado USEREM
 $lang['CONF_LINK_USERS_PERMISSIONS'] = 'user-permissions';//permiso asociado USEREM-->CREUSU y USEREM-->ASGPER
