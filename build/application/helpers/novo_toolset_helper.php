@@ -271,8 +271,6 @@ if (! function_exists('currencyFormat')) {
 
 if (! function_exists('languageCookie')) {
 	function languageCookie($language) {
-
-		$CI =& get_instance();
 		$baseLanguage = [
 			'name' => 'baseLanguage',
 			'value' => $language,
@@ -280,7 +278,7 @@ if (! function_exists('languageCookie')) {
 			'httponly' => TRUE
 		];
 
-		$CI->input->set_cookie($baseLanguage);
+		set_cookie($baseLanguage);
 
 	}
 }

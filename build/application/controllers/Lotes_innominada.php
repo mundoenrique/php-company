@@ -37,7 +37,7 @@ class Lotes_innominada extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Solicitud Innominadas";
 					$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -119,7 +119,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_inventario.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_inventario.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Lotes";
 					$idProductoS = $this->session->userdata('idProductoS');
@@ -197,7 +197,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_detalle.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.6.0.min.js", "jquery-ui-1.13.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_detalle.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Lotes";
 					$idProductoS = $this->session->userdata('idProductoS');
