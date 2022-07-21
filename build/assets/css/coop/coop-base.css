@@ -312,7 +312,7 @@ label {
 
 .bg-widget  { background-color: var(--color-secondary) !important }
 
-.bg-color  { background-color: var(--color-eighth) !important }
+.bg-color  { background-color: var(--color-secondary) !important }
 
 .bg-option-active { background-color: var(--option-active) !important }
 .bg-option-not-active { background-color: var(--option-not-active) !important }
