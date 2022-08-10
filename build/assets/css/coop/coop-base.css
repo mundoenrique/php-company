@@ -245,18 +245,19 @@ label {
 /* secondary */
 
 .btn-secondary {
-	color: var(--color-sixth);
-	background-color: var(--color-room);
+	color: var(--color-fourteenth);
+	background-color: var(--color-primary);
 	border-radius: var(--border-radius);
-	border: 1px solid var(--color-eighth);
+	border-top-right-radius: var(--border-radius-top-rigth);
 }
 
 .btn-secondary:hover {
-	background-color: var(--color-room);
+	background-color: var(--color-fourteenth);
+	color: var(--color-primary);
 }
 
 .btn-secondary:active {
-	background-color: var(--color-room);
+	background-color: var(--color-fourteenth);
 }
 
 .btn-secondary:disabled {
@@ -441,7 +442,7 @@ label {
 /* Table */
 
 td > button > i{
-	color: var(--color-fifth);
+	color: var(--color-room);
   transition: .5s;
 }
 
