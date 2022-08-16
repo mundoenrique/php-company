@@ -1,8 +1,4 @@
-.env
-.vscode
-.DS_Store
-Thumbs.db
-
+#codeigniter 3
 **/cache/*
 !**/cache/index.html
 !**/cache/.htaccess
@@ -14,15 +10,27 @@ Thumbs.db
 **/vendor/
 **/sessions/
 
-# IDE Files
-#-------------------------
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+### IDE Files ###
 /nbproject/
 .idea/*
+.DS_Store
+Thumbs.db
 
-## Sublime Text cache files
+### SublimeText ###
+# Cache files for Sublime Text
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
+
+# Workspace files are user-specific
 *.sublime-workspace
 *.sublime-project
 /tests/tests/
