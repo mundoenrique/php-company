@@ -91,7 +91,7 @@
               </thead>
               <tbody>
                 <?php foreach($orderList AS $list): ?>
-                <tr bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
+                <tr pagoOS="<?= htmlspecialchars(json_encode($list->pagoOS), ENT_QUOTES, 'UTF-8');?>" bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
                   <td><?= $list->OrderNumber; ?></td>
                   <td><?= $list->Orderdate; ?></td>
                   <td><?= $list->OrderCommission; ?></td>
@@ -116,9 +116,14 @@
                     <button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
                       <i class="icon icon-remove" aria-hidden="true"></i>
                     </button>
+										<?php endif; ?>
+										<?php if($this->verify_access->verifyAuthorization('TEBORS', 'TEBPGO') && $list->OrderVoidable): ?>
+										<button class="btn mx-1 px-0" title="<?= lang('PAG_OS_TITLE')?>" data-toggle="tooltip">
+                      <i class="icon icon-credit-card" aria-hidden="true"></i>
+                    </button>
                     <?php endif; ?>
                     <form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
-                      <input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
+											<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
                       <input type="hidden" name="who" value="Inquiries">
                       <input type="hidden" name="where" value="ExportFiles">
                     </form>
@@ -127,6 +132,11 @@
                 <?php endforeach; ?>
               </tbody>
             </table>
+						<form id="pagoOrden" name="pagoOrden">
+							<input type="hidden" id="idOS" name="idOS" value="">
+							<input type="hidden" id="totalAmount" name="totalAmount" value="">
+							<input type="hidden" id="noFactura" name="noFactura" value="">
+            </form>
             <div class="line my-2"></div>
           </div>
 
