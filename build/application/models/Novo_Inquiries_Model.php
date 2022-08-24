@@ -105,6 +105,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
 								}
 							break;
+							case 'nofactura':
+								$serviceOrders['noFactura'] = $value;
+								$serviceOrders['pagoOS']['factura'] = $value;
+							break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
 							break;
@@ -119,6 +123,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							break;
 							case 'montoDeposito':
 								$serviceOrders['OrderDeposit'] = currencyFormat($value);
+								$serviceOrders['pagoOS']['total'] = $value;
 							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
