@@ -272,6 +272,12 @@ label {
 	height: 45px;
 }
 
+/* Btn-modal */
+
+.btn-modal-large {
+	width: 8.5rem !important;
+}
+
 /* Border Rounded */
 
 .btn-rounded-right  { border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0 }
