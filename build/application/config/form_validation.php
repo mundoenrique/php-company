@@ -855,6 +855,18 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'pagoOs' => [
+		[
+			'field' => 'idOS',
+			'rules' => 'trim'
+		]
+	],
+	'pagarOS' => [
+		[
+			'field' => 'idOS',
+			'rules' => 'trim'
+		]
+	],
 	'getReport' => [
 		[
 			'field' => 'operation',
@@ -1667,6 +1679,10 @@ $config = [
 		],
 		[
 			'field' => 'TEBANU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBPGO',
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
 		[
