@@ -180,7 +180,7 @@ $(function () {
 					$('#delete-bulk-btn').attr('id', oldID);
 				});
 				break;
-			case lang.GEN_BTN_PAY_SERVICE_ORDER:
+			case lang.PAG_OS_TITLE:
 				var idOS = form.find('input[name="OrderNumber"]').val();
 				var ordenService = $(this).closest('tr').attr('pagoOS');
 				ordenService = JSON.parse(ordenService);
