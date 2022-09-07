@@ -86,6 +86,19 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
+| DATABASE CONNECTION VARIABLES
+|--------------------------------------------------------------------------
+*/
+defined('DB_HOSTNAME')	OR define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME']);
+defined('DB_PORT')			OR define('DB_PORT', intval($_SERVER['DB_PORT']));
+defined('DB_USERNAME')	OR define('DB_USERNAME', $_SERVER['DB_USERNAME']);
+defined('DB_PASSWORD')	OR define('DB_PASSWORD', $_SERVER['DB_PASSWORD']);
+defined('DB_DRIVER')		OR define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
+defined('DB_CHARSET')		OR define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
+defined('DB_COLLATION')	OR define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
+
+/*
+|--------------------------------------------------------------------------
 | Environment variables
 |--------------------------------------------------------------------------
 |
@@ -144,6 +157,7 @@ defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
 defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
+defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
 
 /*
 |--------------------------------------------------------------------------
