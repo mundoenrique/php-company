@@ -72,21 +72,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+$dbName = DB_VERIFY == 'ON' ? dbSearch(explode('/',$_SERVER['REQUEST_URI'])[1]) : 'ceo_alpha';
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
-	'dbdriver' => 'mysqli',
+	'hostname' => DB_HOSTNAME,
+	'port' => DB_PORT,
+	'username' => DB_USERNAME,
+	'password' => DB_PASSWORD,
+	'database' => $dbName,
+	'dbdriver' => DB_DRIVER,
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
+	'char_set' => DB_CHARSET,
+	'dbcollat' => DB_COLLATION,
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
