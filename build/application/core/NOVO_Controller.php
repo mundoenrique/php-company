@@ -56,6 +56,12 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
+		if ($this->session->has_userdata('userName') && SESS_DRIVER == 'database') {
+			$data = ['username' => $this->session->userName];
+			$this->db->where('id', $this->session->session_id)
+			->update('ceo_sessions', $data);
+		}
+
 		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->customerUri);
 		languageLoad('specific', $this->router->fetch_class());
