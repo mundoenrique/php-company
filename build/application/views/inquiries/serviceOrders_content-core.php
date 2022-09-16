@@ -124,8 +124,6 @@
                     <?php endif; ?>
                     <form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
 											<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
-                      <input type="hidden" name="who" value="Inquiries">
-                      <input type="hidden" name="where" value="ExportFiles">
                     </form>
                   </td>
                 </tr>
