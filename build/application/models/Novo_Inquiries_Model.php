@@ -571,6 +571,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Descargar pdf orden de servicio';
+		$ext = '.pdf';
 
 		$this->dataRequest->idOperation = 'visualizarOS';
 		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
@@ -583,11 +584,16 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$nameFile = ltrim($response->nombre, 'OS');
-				$nameFile = rtrim($nameFile, '.pdf');
-				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = str_replace("OS","Orden_de_Servicio",$response->nombre);
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name;
+				$this->response->data->ext = $ext;
 			break;
 			case -52:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_ORDER_TITLE');
 				$this->response->msg = lang('GEN_NO_BULK_AUTHORIZATION');
 				$this->response->icon = lang('CONF_ICON_WARNING');
@@ -605,9 +611,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_SERVICE_ORDERS')), 'Location', 302);
-				exit;
+			break;
 		}
+
+		return $this->responseToTheView('callWs_ExportFiles');
 	}
 
 	public function CallWs_PagoOs_Inquiries($dataRequest)

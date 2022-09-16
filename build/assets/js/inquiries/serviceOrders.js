@@ -134,12 +134,29 @@ $(function () {
 
 		switch (action) {
 			case lang.GEN_BTN_DOWN_PDF:
-				insertFormInput(true, form);
-				form.submit()
-				setTimeout(function () {
-					$('.cover-spin').hide();
-				}, lang.CONF_TIME_DOWNLOAD_FILE);
-				insertFormInput(false);
+				$('.cover-spin').show();
+
+				who = 'Inquiries';
+				where = 'ExportFiles';
+				data = {
+					OrderNumber: form.find('input[name="OrderNumber"]').val()
+				}
+
+				callNovoCore(who, where, data, function (response) {
+
+					switch (response.code) {
+						case 0:
+							downLoadfiles(response.data);
+							break;
+						case 1:
+							appMessages(response.title, response.msg, response.icon, response.modalBtn);
+							$('.cover-spin').hide();
+							break;
+						default:
+							location.reload(true);
+							break;
+					}
+				});
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
