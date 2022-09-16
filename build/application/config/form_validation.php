@@ -776,16 +776,6 @@ $config = [
 			'field' => 'bulkNumber',
 			'label' => 'bulkNumber',
 			'rules' => 'trim|integer'
-		],
-		[
-			'field' => 'who',
-			'label' => 'who',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
-		],
-		[
-			'field' => 'where',
-			'label' => 'where',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
 	],
 	'getServiceOrders' => [
