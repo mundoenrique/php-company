@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Myriad Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/coop/Myriad-Pro-Light.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/coop/Myriad-Pro-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../fonts/coop/Myriad-Pro-Semibold.woff') format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/coop/Myriad-Pro-Bold.ttf') format('truetype');
+}
+
+:root {
+
+	/* Brand colors */
+	--color-primary: #004a7d;
+	--color-secondary: #ffffff;
+	--color-tertiary: #ececec;
+	--color-room: #435168;
+	--color-fifth: #D2D3D4;
+	--color-sixth: #4d4d4d;
+	--color-seventh: #1daee5;
+	--color-eighth: #DDDDDD;
+
+	/* Others */
+	--color-nineth: #f6f3f1;
+	--color-thirteenth: #f4f4f4;
+	--color-fourteenth: #fc0;
+	--option-active: #012c71;
+	--black: #111111;
+
+	/* Typography */
+	--font-family-base-first: 'Myriad Pro', sans-serif;
+	--font-family-base: 'Myriad Pro', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+
+  /* Border radius */
+  --border-radius: 0;
+	--border-radius-top-rigth: 60px
+}
