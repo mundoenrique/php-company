@@ -337,6 +337,10 @@ class Verify_Access {
 			case 'updatePermissions':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
 				break;
+			case 'pagoOs':
+			case 'pagarOS':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBPGO'));
+				break;
 			default:
 				$freeAccess = [
 					'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'

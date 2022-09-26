@@ -26,6 +26,7 @@ class Asset {
 	public function initialize($params = [])
 	{
 		log_message('INFO', 'NOVO Asset: initialize method initialized');
+
 		foreach($params as $arrayFiles => $file) {
 			isset($this->$arrayFiles) ? $this->$arrayFiles = $file : '';
 		}
@@ -38,17 +39,13 @@ class Asset {
 	{
 		log_message('INFO', 'NOVO Asset: insertCss method initialized');
 		$file_url = NULL;
+
+
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				$customerUri = $this->CI->config->item('customer-uri').'/';
-				$rootCss = 't-'.$this->CI->config->item('customer-uri');
-				$baseCss = $this->CI->config->item('customer-uri').'-';
-				$search = [$customerUri, $rootCss, $baseCss];
-				$replace = ['default/', 't-default', 'default-'];
-				$file = str_replace($search, $replace, $file);
-				$fileName = str_replace($search, $replace, $fileName);
+				log_message('ERROR', 'Archivo requerido '.$fileName.'.css');
 			}
 
 			$file = $this->versionFiles($file, $fileName, '.css');
