@@ -776,16 +776,6 @@ $config = [
 			'field' => 'bulkNumber',
 			'label' => 'bulkNumber',
 			'rules' => 'trim|integer'
-		],
-		[
-			'field' => 'who',
-			'label' => 'who',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
-		],
-		[
-			'field' => 'where',
-			'label' => 'where',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
 	],
 	'getServiceOrders' => [
@@ -852,6 +842,18 @@ $config = [
 	'rechargeAuthorization' => [
 		[
 			'field' => 'passwordTranfer',
+			'rules' => 'trim'
+		]
+	],
+	'pagoOs' => [
+		[
+			'field' => 'idOS',
+			'rules' => 'trim'
+		]
+	],
+	'pagarOS' => [
+		[
+			'field' => 'idOS',
 			'rules' => 'trim'
 		]
 	],
@@ -1667,6 +1669,10 @@ $config = [
 		],
 		[
 			'field' => 'TEBANU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBPGO',
 			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 		],
 		[

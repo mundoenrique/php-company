@@ -105,6 +105,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
 								}
 							break;
+							case 'nofactura':
+								$serviceOrders['noFactura'] = $value;
+								$serviceOrders['pagoOS']['factura'] = $value;
+							break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
 							break;
@@ -119,6 +123,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							break;
 							case 'montoDeposito':
 								$serviceOrders['OrderDeposit'] = currencyFormat($value);
+								$serviceOrders['pagoOS']['total'] = $value;
 							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
@@ -149,7 +154,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-				$this->session->set_flashdata('requestOrdersList', $dataRequest);
+				$this->session->set_userdata('requestOrdersList', $dataRequest);
 			break;
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
@@ -566,6 +571,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Descargar pdf orden de servicio';
+		$ext = '.pdf';
 
 		$this->dataRequest->idOperation = 'visualizarOS';
 		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
@@ -578,18 +584,23 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$nameFile = ltrim($response->nombre, 'OS');
-				$nameFile = rtrim($nameFile, '.pdf');
-				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = str_replace("OS","Orden_de_Servicio",$response->nombre);
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name;
+				$this->response->data->ext = $ext;
 			break;
 			case -52:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_ORDER_TITLE');
 				$this->response->msg = lang('GEN_NO_BULK_AUTHORIZATION');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
-				$requestOrdersList = $this->session->flashdata('requestOrdersList');
+				$requestOrdersList = $this->session->userdata('requestOrdersList');
 				$this->load->model('Novo_inquiries_Model', 'getOrders');
 				$response = $this->getOrders->callWs_GetServiceOrders_Inquiries($requestOrdersList);
 				$this->response->code =  $response->code != 0 ? $response->code : 3;
@@ -600,8 +611,159 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_SERVICE_ORDERS')), 'Location', 302);
-				exit;
+			break;
 		}
+
+		return $this->responseToTheView('callWs_ExportFiles');
+	}
+
+	public function CallWs_PagoOs_Inquiries($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: PagoOS Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Pagos';
+		$this->dataAccessLog->function = 'Doble Autenticacion';
+		$this->dataAccessLog->operation = 'Generar Token Pago Orden de Servicio';
+
+		$this->dataRequest->idOperation = 'dobleAutenticacion';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
+
+		$response = $this->sendToService('CallWs_pagoOs');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = lang('PAG_OS_TITLE');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_OTP');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'close';
+				$this->session->set_userdata('authToken', $response->bean);
+			break;
+			default:
+				$this->response->title = lang('PAG_OS_TITLE');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_OTP_NO_SENT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+		return $this->responseToTheView('CallWs_pagoOs');
+	}
+
+	public function CallWs_PagarOS_Inquiries($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: PagarOS Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Pagos';
+		$this->dataAccessLog->function = 'Pagar Orden de servicio';
+		$this->dataAccessLog->operation = 'Realizar Pago';
+
+		$this->dataRequest->idOperation = 'pagarOS';
+		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
+
+		$this->dataRequest->authToken = $this->session->userdata('authToken');
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->idOrden = $dataRequest->idOS;
+		$this->dataRequest->tokenCliente = $dataRequest->codeToken;
+		$this->dataRequest->montoTotal = $dataRequest->totalAmount;
+		$this->dataRequest->nofactura = $dataRequest->noFactura;
+		$this->dataRequest->acUsuario = $this->userName;
+
+		$response = $this->sendToService('CallWs_PagarOS');
+		$this->response->title = lang('PAG_OS_TITLE');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->dataFormListOS = $this->session->userdata('requestOrdersList');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('PAG_OS_OK');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->session->unset_userdata('requestOrdersList');
+				$this->session->unset_userdata('authToken');
+			break;
+			case -21:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_CONECTION_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -155:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_UNAVAILABLE_BALANCE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -230:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_GENERAL_MSG');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -241:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_PARAMS_INVALID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -281:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_ACCOUNT_INVALID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -285:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_ACCOUNT_INACTIV');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -286:
+				$this->response->code = 1;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_INVALID_CODE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			break;
+			case -287:
+				$this->response->code = 2;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_USED_CODE');
+				$this->response->modalBtn['btn1']['text'] = 'Reenviar código';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			break;
+			case -288:
+				$this->response->code = 2;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_EXPIRED_CODE');
+				$this->response->modalBtn['btn1']['text'] = 'Reenviar código';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			break;
+			case -296:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_NOT_REGISTERED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -297:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_UNREGISTERED_ACCOUNT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -298:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_INVALID_CONCEPT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -299:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('PAGO_OS_CONCEPT_NOT_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -300:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+		return $this->responseToTheView('CallWs_PagarOS');
 	}
 }

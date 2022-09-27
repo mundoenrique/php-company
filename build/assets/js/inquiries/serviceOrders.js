@@ -1,5 +1,7 @@
 'use strict'
 var resultServiceOrders;
+var dataFormOS;
+
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -116,7 +118,7 @@ $(function () {
 					btnAction.html(btnText);
 					insertFormInput(false);
 					$('#resultServiceOrders').dataTable().fnClearTable();
-    			$('#resultServiceOrders').dataTable().fnDestroy();
+					$('#resultServiceOrders').dataTable().fnDestroy();
 					$('.hide-table').addClass('hide');
 				}
 			});
@@ -132,12 +134,29 @@ $(function () {
 
 		switch (action) {
 			case lang.GEN_BTN_DOWN_PDF:
-				insertFormInput(true, form);
-				form.submit()
-				setTimeout(function () {
-					$('.cover-spin').hide();
-				}, lang.CONF_TIME_DOWNLOAD_FILE);
-				insertFormInput(false);
+				$('.cover-spin').show();
+
+				who = 'Inquiries';
+				where = 'ExportFiles';
+				data = {
+					OrderNumber: form.find('input[name="OrderNumber"]').val()
+				}
+
+				callNovoCore(who, where, data, function (response) {
+
+					switch (response.code) {
+						case 0:
+							downLoadfiles(response.data);
+							break;
+						case 1:
+							appMessages(response.title, response.msg, response.icon, response.modalBtn);
+							$('.cover-spin').hide();
+							break;
+						default:
+							location.reload(true);
+							break;
+					}
+				});
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
@@ -178,8 +197,67 @@ $(function () {
 					$('#delete-bulk-btn').attr('id', oldID);
 				});
 				break;
+			case lang.PAG_OS_TITLE:
+				var idOS = form.find('input[name="OrderNumber"]').val();
+				var ordenService = $(this).closest('tr').attr('pagoOS');
+				ordenService = JSON.parse(ordenService);
+				$('#idOS').val(idOS);
+				$('#totalAmount').val(ordenService.total);
+				$('#noFactura').val(ordenService.factura);
+				$('.cover-spin').show();
+				getOtpService();
+				break;
 		}
 	});
+
+	$('#system-info').on('click', '.pay-order', function() {
+		form = $('#formVerificationOTP');
+		validateForms(form);
+
+		if (form.valid()) {
+			$(this)
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('pay-order');
+			insertFormInput(true);
+			payOrderService();
+		}
+	});
+
+	$('#system-info').on('click', '.get-otp', function() {
+
+		$(this)
+			.html(loader)
+			.prop('disabled', true)
+			.removeClass('get-otp');
+		getOtpService()
+	});
+
+	$('#system-info').on('click', '.viewOS', function () {
+		form = $('#pagoOrden');
+		validateForms(form);
+
+		if (form.valid()) {
+			$(this)
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('viewOS');
+			insertFormInput(true);
+			$('.cover-spin').show();
+
+			who = 'Inquiries';
+			where = 'GetServiceOrders';
+
+			callNovoCore(who, where, dataFormOS, function (response) {
+				if (response.code == 0) {
+					$(location).attr('href', response.data);
+				} else {
+					insertFormInput(false);
+				}
+			});
+		}
+	});
+
 })
 
 function format(bulk) {
@@ -265,4 +343,79 @@ function deleteBulk(oldID, inputSelected) {
 			});
 		}
 	});
+}
+
+function getOtpService() {
+
+	var formGetOtp = $('#pagoOrden');
+	validateForms(formGetOtp);
+	if (formGetOtp.valid()) {
+
+		data = getDataForm(formGetOtp)
+		who = 'Inquiries';
+		where = 'pagoOs';
+
+		callNovoCore(who, where, data, function (response) {
+			$('.cover-spin').hide()
+			switch (response.code) {
+				case 0:
+					generateModalOS(response)
+					break;
+				default:
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					break;
+			}
+		});
+	}
+}
+
+function payOrderService() {
+
+	var formGetOtp = $('#pagoOrden');
+	validateForms(formGetOtp);
+	if (formGetOtp.valid()) {
+
+		insertFormInput(true);
+		data.codeToken = $('#otpCode').val();
+
+		who = 'Inquiries';
+		where = 'PagarOS';
+
+		callNovoCore(who, where, data, function (response) {
+
+			switch (response.code) {
+				case 0:
+					$('#accept').addClass('viewOS');
+					dataFormOS = response.dataFormListOS;
+					appMessages(lang.PAG_OS_TITLE, response.msg, response.icon, response.modalBtn);
+					break;
+				case 1:
+					generateModalOS(response);
+					break;
+				case 2:
+					$('#accept').addClass('get-otp');
+					$('#accept').addClass('btn-modal-large');
+					appMessages(lang.PAG_OS_TITLE, response.msg, response.icon, response.modalBtn);
+					break;
+			}
+			insertFormInput(false);
+		});
+	}
+}
+
+function generateModalOS(response){
+
+	$('#accept').addClass('pay-order');
+	$('#accept').removeClass('btn-modal-large');
+	inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" onsubmit="return false"';
+	inputModal += 	'<p class="pt-0 p-0">' + response.msg +'</p>';
+	inputModal += 	'<div class="row">';
+	inputModal +=		'<div class="form-group col-11">';
+	inputModal +=			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
+	inputModal +=      ' maxlength="10">';
+	inputModal +=			'<div class="help-block"></div>';
+	inputModal +=		'</div">';
+	inputModal += 	'</div>';
+	inputModal += '</form>';
+	appMessages(lang.PAG_OS_TITLE, inputModal, response.icon, response.modalBtn)
 }
