@@ -68,8 +68,6 @@ class Novo_User_Model extends NOVO_Model {
 			'serverTime' => (int) date("H")
 		];
 
-		$this->isResponseRc = -185;
-
 		switch($this->isResponseRc) {
 			case 0:
 				if ($this->validateUserLogged($userName)) {
