@@ -10,6 +10,7 @@ $lang['GEN_FOTTER_NETWORKS_IMG'] = [
 	'twitter' => 'twitter.png',
 	'youtube' => 'youtube.png',
 	'instagram' => 'instagram.png',
+	'linkedin' => 'linkedin.png'
 ];
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
