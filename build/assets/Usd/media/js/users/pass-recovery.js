@@ -115,7 +115,7 @@ $(function(){
 
         emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
         charRegex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
-        rifRegex = /^(10|15|16|17|20)[\d]{8}[\d]{1}$/;
+        rifRegex = /^([\w_\-]+)+$/i;
         alfanumericRegex = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
         validez=true;
 
