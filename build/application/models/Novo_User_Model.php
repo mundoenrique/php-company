@@ -312,7 +312,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$userName = mb_strtoupper($response->usuario->userName)
+				$userName = mb_strtoupper($response->usuario->userName);
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
