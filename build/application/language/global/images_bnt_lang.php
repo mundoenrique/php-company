@@ -9,3 +9,9 @@ $lang['GEN_DETAIL_BRAND_COLOR'] = '_card-blue.svg';
 $lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
 // PROGRAM IMAGES
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'bnt_default.svg';
+$lang['GEN_FOTTER_NETWORKS_IMG'] = [
+	'facebook' => 'facebook.png',
+	'twitter' => 'twitter.png',
+	'youtube' => 'youtube.png',
+	'instagram' => 'instagram.png',
+];
