@@ -329,4 +329,9 @@ $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_MINLENGTH'] = 1;
 $lang['CONF_DATATABLE_SLEEP'] = '10000';
 $lang['CONF_DATATABLE_ARRAY_CHUNK'] = '50';
-
+$lang['CONF_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{4,25}$';
+$lang['CONF_VALIDATE_ALPHA_NUM'] = '^[a-z0-9]+$';
+$lang['CONF_VALIDATE_NUMERIC'] = '^[0-9]+$';
+$lang['CONF_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
+$lang['CONF_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
+$lang['CONF_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';
