@@ -73,25 +73,25 @@
                 <form id="userDataForm">
                   <div class="row mb-2">
                     <div class="form-group col-3">
-                      <label for="firstName">Nombre</label>
+                      <label for="firstName"><?= lang('GEN_NAME') ?></label>
                       <input type="text" id="firstName" name="firstName" class="form-control px-1" value="<?= $firstName; ?>" readonly disabled>
                     </div>
                     <div class="form-group col-3">
-                      <label for="lastName">Apellido</label>
+                      <label for="lastName"><?= lang('GEN_LAST_NAME') ?></label>
                       <input type="text" id="lastName" name="lastName" class="form-control px-1" value="<?= $lastName; ?>" readonly disabled>
                     </div>
                     <div class="form-group col-3">
-                      <label for="position">Cargo</label>
+                      <label for="position"><?= lang('GEN_POSITION') ?></label>
                       <input type="text" id="position" name="position" class="form-control px-1" value="<?= $position; ?>" readonly disabled>
                     </div>
                     <div class="form-group col-3">
-                      <label for="area">Área</label>
+                      <label for="area"><?= lang('GEN_AREA') ?></label>
                       <input type="text" id="areaUser" name="areaUser" class="form-control px-1" value="<?= $area; ?>" readonly disabled>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-6 col-lg-5 col-xl-6">
-                      <label for="email">Correo</label>
+                      <label for="email"><?= lang('GEN_EMAIL') ?></label>
                       <input type="email" id="currentEmail" name="email" class="form-control" value="<?= $email; ?>" maxlength="40"
                         <?= $emailUpdate ?>>
                       <div class="help-block"></div>
@@ -199,7 +199,7 @@
               <div class="container">
                 <div class="row mb-2">
                   <div class="form-group col-12 col-lg-8 col-xl-6">
-                    <label class="mt-1">Empresa</label>
+                    <label class="mt-1"><?= lang('GEN_ENTERPRISE') ?></label>
                     <form id="enterpriseSettListForm" method="POST">
                       <select id="enterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100" >
                         <?php if ($countEnterpriseList == 1): ?>
@@ -232,26 +232,26 @@
                         <input type="text" id="idFiscal" name="idFiscal" class="form-control px-1" value="<?= $idFiscal; ?>" readonly disabled>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="name">Nombre</label>
+                        <label for="name"><?= lang('GEN_NAME') ?></label>
                         <input type="text" id="name" name="name" class="form-control px-1" value="<?= $name; ?>" readonly disabled>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="businessName" id="busiName">Razón social</label>
+                        <label for="businessName" id="busiName"><?= lang('GEN_BUSINESS_NAME') ?></label>
                         <input type="text" id="businessName" name="businessName" class="form-control px-1" value="<?= $businessName; ?>" readonly
                           disabled>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="contact">Contacto</label>
+                        <label for="contact"><?= lang('GEN_CONTAC_PERSON') ?></label>
                         <input type="text" id="contact" name="contact" class="form-control px-1" value="<?= $contact; ?>" readonly disabled>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="address">Dirección</label>
+                        <label for="address"><?= novoLang(lang('GEN_ADDRESS'), "") ?></label>
                         <input type="text" id="address" name="address" class="form-control px-1" value="<?= $address; ?>"
                         <?= $addressCompanyUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="billingAddress">Dirección de facturación</label>
+                        <label for="billingAddress"><?= lang('GEN_BILLING_ADDRESS') ?></label>
                         <input type="text" id="billingAddress" name="billingAddress" class="form-control px-1" value="<?= $billingAddress; ?>"
                         <?= $addressCompanyUpdate; ?>>
                         <div class="help-block"></div>
@@ -260,19 +260,19 @@
                     <?php if (lang('CONF_SETTINGS_TELEPHONES') == 'ON'): ?>
                     <div class="row">
                       <div id='divPhone1' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="phone1">Teléfono 1</label>
+                        <label for="phone1"><?= novoLang(lang('GEN_TELEPHONE'), "1") ?></label>
                         <input type="text" id="phone1" name="phone1" class="form-control" value="<?= $phone1; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
 
                       <div  id='divPhone2' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="phone2">Teléfono 2</label>
+                        <label for="phone2"><?= novoLang(lang('GEN_TELEPHONE'), "2") ?></label>
                         <input id="phone2" name="phone2" class="form-control" value="<?= $phone2; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
 
                       <div  id='divPhone3' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-                        <label for="phone3">Teléfono 3</label>
+                        <label for="phone3"><?= novoLang(lang('GEN_TELEPHONE'), "3") ?></label>
                         <input id="phone3" name="phone3" class="form-control" value="<?= $phone3; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
@@ -328,32 +328,32 @@
 										<div class="container">
 											<div class="row">
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="nameNewContact">Nombre</label>
+													<label for="nameNewContact"><?= lang('GEN_POSITION') ?></label>
 													<input id="nameNewContact" name="person" type="text" class="form-control" value=""/>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="surnameNewContact">Apellido</label>
+													<label for="surnameNewContact"><?= lang('GEN_LAST_NAME') ?></label>
 													<input id="surnameNewContact" name="surnameModifyContact" type="text" class="form-control" value="" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="positionNewContact">Cargo</label>
+													<label for="positionNewContact"><?= lang('GEN_POSITION') ?></label>
 													<input id="positionNewContact" name="positionModifyContact" type="text" class="form-control" value="" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="dniNewContact">NIT</label>
+													<label for="dniNewContact"><?= lang('GEN_NIT') ?></label>
 													<input id="dniNewContact" name="zoneName" type="text" class="form-control" value="" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="emailNewContact">Correo Electrónico</label>
+													<label for="emailNewContact"><?= lang('GEN_EMAIL') ?></label>
 													<input type="email" class="form-control" id="emailNewContact" name="email" value="">
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-													<label for="typeNewContact">Empresa</label>
+													<label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
 													<select class="select-box custom-select mb-3 h6 w-100" name="typeModifyContact" id="typeNewContact">
 														<option selected value="" disabled>Seleccionar</option>
 														<option value="F">Contacto Administracion y finanzas</option>
@@ -377,10 +377,10 @@
 												<div class="row">
                       		<div class="flex mb-2 justify-end col-12">
 														<div class="col-3 col-lg-2 col-xl-auto">
-															<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
+															<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button"><?= lang('GEN_BTN_CLEAN_UP'); ?></button>
 														</div>
 														<div class="col-3 col-lg-2 col-xl-auto">
-															<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
+															<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit"><?= lang('GEN_BTN_ADD'); ?></button>
 														</div>
 													</div>
 												</div>
@@ -404,7 +404,7 @@
 								<div class="row">
 									<div class="form-group col-7">
 										<form id="branchSettListForm">
-											<label class="mt-1">Empresa</label>
+											<label class="mt-1"><?= lang('GEN_ENTERPRISE') ?></label>
 											<select id="branchListBr" name="branchListBr" class="select-box custom-select mt-3 mb-4 h6 w-100" >
 													<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 													<?php foreach ($enterpriseSettList as $enterprise) : ?>
@@ -425,63 +425,63 @@
 						</div>
 						<div id="partedSection" class="figure">
 							<div class="my-3 px-2">
-								<span class="line-text mb-2 h4 semibold primary">Carga de sucursales</span>
-								<form id="txtBranchesForm" method="post">
-									<div class="row justify-between items-center mb-2 mx-2">
-										<!-- <div class="form-group col-7">
-											<input type="file" name="file-branch" id="fileBranch" class="input-file">
-											<label for="file-branch" class="form-control label-file js-label-file mb-0">
-												<i class="icon icon-upload mr-1 pr-3 right"></i>
-												<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
-											</label>
-											<div class="help-block"></div>
-										</div> -->
-
-										<div class="form-group col-7 bg-color">
-											<input type="file" name="file-branch" id="file-branch" class="input-file">
-											<label for="file-branch" class="form-control label-file js-label-file mb-0">
-												<i class="icon icon-upload mr-1 pr-3 right"></i>
-												<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
-											</label>
-											<div class="help-block"></div>
-										</div>
-										<div class="col-auto mt-1 ml-auto">
-											<button id="btnBranchUpload" type="button" class="btn btn-primary bnt-small btn-loading flex ml-auto">
-												<?= lang('GEN_BTN_SEND'); ?>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="my-3 px-2">
-								<span class="line-text mb-2 h4 semibold primary">Todas</span>
+								<div class="m-4 flex justify-end">
+									<button id="loadBranchBtn" class="btn btn-primary btn-small btn-branch mr-1">
+										<i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
+									</button>
+									<button id="newBranchBtn" class="btn btn-primary btn-small btn-branch">
+										<i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW_BRANCH') ?>
+									</button>
+								</div>
 								<table id="tableBranches" class="mt-4 cell-border h6 display w-100 center">
 									<thead class="bg-primary secondary regular">
 										<tr>
 											<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
-											<th><?= 'Código' ?></th>
+											<th><?= lang('GEN_TABLE_CODE'); ?></th>
 											<th><?= lang('GEN_CONTAC_PERSON'); ?></th>
-											<th><?= 'Teléfono' ?></th>
+											<th><?= lang('GEN_TABLE_TELEPHONE'); ?></th>
 											<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 										</tr>
 									</thead>
 									<tbody>
 									</tbody>
 								</table>
-								<div class="m-4 flex justify-end">
-									<!-- <button id="newBranchBtn" class="btn btn-primary btn-small">
-										<?= lang('GEN_ADD_BRANCH') ?>
-									</button> -->
-									<button id="newBranchBtn" class="btn btn-primary btn-small">
-										<?= lang('GEN_ADD_BRANCH') ?>
-									</button>
+							</div>
+						</div>
+						<div id="branchLoadSection" style="display:none">
+							<div class="flex flex-column mb-5">
+								<span class="line-text flex mb-2 h4 semibold primary"><?= lang('GEN_BRANCH_UPLOAD') ?>
+								</span>
+								<div class="my-2 px-5">
+									<form id="txtBranchesForm" method="post">
+										<div class="container">
+											<div class="row justify-between items-center mb-2">
+												<div class="form-group col-7">
+													<input type="file" name="file-branch" id="file-branch" class="input-file">
+													<label for="file-branch" class="form-control label-file js-label-file mb-0">
+														<i class="icon icon-upload mr-1 pr-3 right"></i>
+														<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
+													</label>
+													<div class="help-block"></div>
+												</div>
+												<div class="col-auto mt-1 ml-auto">
+													<button id="btnBranchUpload" type="button" class="btn btn-primary bnt-small btn-loading flex ml-auto">
+														<?= lang('GEN_BTN_SEND'); ?>
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
+									<div class="col-12 center">
+										<button id="backLoadBranchBtn" class="btn btn-link btn-small btn-back-branch">
+											<?= lang('GEN_BTN_BACK') ?>
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="secondarySectionBranch" id="secondarySectionBranch" style="display:none">
-							<!-- <div class="flex flex-auto flex-column mt-5 completeSection">
-							</div> -->
-							<div class="flex flex-column mx-4 mb-5">
+						<div id="editAddBranchSection" style="display:none">
+							<div class="flex flex-column mb-5">
 								<span class="line-text flex mb-2 h4 semibold primary"><?= lang('SETTINGS_EDIT_ADD_BRANCH') ?>
 								</span>
 								<div class="my-2 px-5">
@@ -492,45 +492,45 @@
 												<input id="codB" name="codB" type="text" class="form-control hidden" />
 												<input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchName">Nombre</label>
+													<label for="branchName"><?= lang('GEN_NAME') ?></label>
 													<input id="branchName" name="branchName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="zoneName">Zona</label>
+													<label for="zoneName"><?= lang('GEN_ZONE') ?></label>
 													<input id="zoneName" name="zoneName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address1">Dirección 1</label>
+													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?></label>
 													<input id="address1" name="address" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address2">Dirección 2</label>
+													<label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
 													<input id="address2" name="address2" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address3">Dirección 3</label>
+													<label for="address3"><?= novoLang(lang('GEN_ADDRESS'), "3") ?></label>
 													<input id="address3" name="address3" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 hidden">
-													<label or="countryCodeBranch">País</label>
+													<label or="countryCodeBranch"><?= lang('GEN_COUNTRY') ?></label>
 													<select id="countryCodeBranch" name="countryCodeBranch" class="form-control select-box custom-select h6 w-100">
 													<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 													</select>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="stateCodeBranch">Provincia</label>
+													<label or="stateCodeBranch"><?= lang('GEN_PROVINCE') ?></label>
 													<select id="stateCodeBranch" name="stateCodeBranch" class="form-control select-box custom-select h6 w-100">
 														<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="cityCodeBranch">Departamento</label>
+													<label or="cityCodeBranch"><?= lang('GEN_DEPARTMENT') ?></label>
 													<select id="cityCodeBranch" name="cityCodeBranch" class="form-control select-box custom-select h6 w-100" disabled>
 														<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 													</select>
@@ -538,7 +538,7 @@
 												</div>
 												<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
-														<label or="districtCodeBranch">Distrito</label>
+														<label or="districtCodeBranch"><?= lang('GEN_DISTRICT') ?></label>
 														<select id="districtCodeBranch" name="districtCodeBranch" class="form-control select-box custom-select h6 w-100">
 															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 														</select>
@@ -546,22 +546,22 @@
 													</div>
 												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="areaCode">Código de área</label>
+													<label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
 													<input id="areaCode" name="areaCode" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="phone">Teléfono</label>
+													<label for="phone"><?= novoLang(lang('GEN_TELEPHONE'), "") ?></label>
 													<input id="phone" name="phone" type="text" class="form-control" maxlength="15">
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="person">Nombre del contacto</label>
+													<label for="person"><?= lang('GEN_CONTACT_NAME') ?></label>
 													<input id="person" name="person" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchCode">Código de sucursal</label>
+													<label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?></label>
 													<input id="branchCode" name="branchCode" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
@@ -577,14 +577,13 @@
 													<div class="help-block text-left"></div>
 												</div>
 												<div class="col-auto">
-													<!--<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>-->
-													<button id="btn-add-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
+													<button id="btn-add-branch" type="button" class="btn btn-primary btn-small flex mx-auto"><?= lang('GEN_BTN_SAVE') ?></button>
 												</div>
 											</div>
 										</div>
 									</form>
 									<div class="col-12 center">
-										<button id="backBranchBtn" class="btn btn-link btn-small">
+										<button id="backBranchBtn" class="btn btn-link btn-small btn-back-branch">
 											<?= lang('GEN_BTN_BACK') ?>
 										</button>
 									</div>

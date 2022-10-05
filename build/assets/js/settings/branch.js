@@ -28,6 +28,26 @@ $('#partedSection').hide();
 		}
 	});
 
+	$('.btn-branch').on('click', function () {
+		var name = (this.id);
+		$('#partedSection').hide();
+		if (name == "newBranchBtn") {
+			$('#editAddBranchSection').fadeIn(700, 'linear');
+		} else {
+			$('#branchLoadSection').fadeIn(700, 'linear');
+		}
+	});
+
+	$('.btn-back-branch').on('click', function (e) {
+		var name = (this.id);
+		$('#partedSection').fadeIn(700, 'linear');
+		if (name == "backBranchBtn") {
+			$('#editAddBranchSection').hide();
+		} else {
+			$('#branchLoadSection').hide();
+		}
+	})
+
 });
 
 

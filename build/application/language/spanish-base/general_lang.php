@@ -57,6 +57,7 @@ $lang['GEN_BTN_AUTHORIZE'] = 'Autorizar';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
 $lang['GEN_BTN_BACK'] = 'Volver';
 $lang['GEN_BTN_SELECT'] = 'Seleccionar';
+$lang['GEN_BTN_SAVE'] = 'Guardar';
 $lang['GEN_BTN_SIGN'] = 'Firmar';
 $lang['GEN_BTN_DISASS_AUTH'] = 'Desasociar';
 $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
@@ -78,6 +79,11 @@ $lang['GEN_BTN_ALL'] = 'Todos';
 $lang['GEN_BTN_ENABLE'] = 'Habilitar';
 $lang['GEN_BTN_UPDATE'] = 'Actualizar';
 $lang['GEN_BTN_TRANSFER'] = 'Transferir';
+$lang['GEN_BTN_NEW_BRANCH'] = 'Nueva';
+$lang['GEN_BTN_LOAD_BRANCH'] = 'Cargar';
+$lang['GEN_BTN_MODIFY'] = 'Modificar';
+$lang['GEN_BTN_CLEAN_UP'] = 'Limpiar';
+$lang['GEN_BTN_ADD'] = 'Agregar';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -222,6 +228,8 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_TABLE_CODE'] = 'Código';
+$lang['GEN_TABLE_TELEPHONE'] = 'Teléfono';
 $lang['GEN_DATEPICKER_CLOSETEXT'] = 'Aceptar';
 $lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
 $lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -416,10 +424,25 @@ $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Exportar a Excel consolidado';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Exportar a PDF consolidado';
-
-
-
-
+// BRANCHES
+$lang["GEN_NAME"] = "Nombre";
+$lang["GEN_LAST_NAME"] = "Apellido";
+$lang["GEN_ZONE"] = "Zona";
+$lang["GEN_ADDRESS"] = "Dirección %s";
+$lang["GEN_COUNTRY"] = "País";
+$lang["GEN_PROVINCE"] = "Provincia";
+$lang["GEN_DEPARTMENT"] = "Departamento";
+$lang["GEN_DISTRICT"] = "Distrito";
+$lang["GEN_AREA_CODE"] = "Código de área";
+$lang["GEN_TELEPHONE"] = "Teléfono %s";
+$lang["GEN_CONTACT_NAME"] = "Nombre del contacto";
+$lang["GEN_BRANCH_CODE"] = "Código de sucursal";
+$lang["GEN_BRANCH_UPLOAD"] = "Carga de sucursales";
+$lang["GEN_POSITION"] = "Cargo";
+$lang["GEN_AREA"] = "Área";
+$lang["GEN_BUSINESS_NAME"] = "Razón social";
+$lang["GEN_BILLING_ADDRESS"] = "Dirección de facturación";
+$lang["GEN_NIT"] = "NIT";
 
 
 
