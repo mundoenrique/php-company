@@ -70,12 +70,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				if ($this->validateUserLogged($userName)) {
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->icon = lang('CONF_ICON_WARNING');
-					$this->response->msg = lang('GEN_INCORRECTLY_CLOSED');
-					$this->response->modalBtn['btn1']['action'] = 'destroy';
-				} else {
 				$this->response->code = 0;
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
@@ -109,16 +103,8 @@ class Novo_User_Model extends NOVO_Model {
 					'logged_in' => TRUE
 				];
 				$this->session->set_userdata($userData);
-
-				if (SESS_DRIVER == 'database') {
-					$data = ['username' => $userName];
-					$this->db->where('id', $this->session->session_id)
-					->update('ceo_sessions', $data);
-				}
-
 				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 				$this->response->modal = TRUE;
-			}
 			break;
 			case -2:
 			case -185:
@@ -138,13 +124,6 @@ class Novo_User_Model extends NOVO_Model {
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-
-				if (SESS_DRIVER == 'database') {
-					$data = ['username' => $userName];
-					$this->db->where('id', $this->session->session_id)
-					->update('ceo_sessions', $data);
-				}
-
 				$this->response->data = base_url(lang('CONF_LINK_TERMS'));
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
@@ -243,32 +222,6 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_SignIn');
 	}
 	/**
-	 * @info Método para validar si el usuario esta logueado
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2020
-	 */
-	private function validateUserLogged($userName)
-	{
-		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
-		$logged = FALSE;
-
-		if (SESS_DRIVER == 'database') {
-			$this->db->select(['id', 'username'])
-			->where('username',  $userName)
-			->get_compiled_select('ceo_sessions', FALSE);
-
-			$result = $this->db->get()->result_array();
-
-			if (count($result) > 0) {
-				$this->db->where('id', $result[0]['id'])
-				->delete('ceo_sessions');
-				$logged = TRUE;
-			}
-		}
-
-		return $logged;
-	}
-	/**
 	 * @info Método para el inicio de sesión único
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 14th, 2019
@@ -312,7 +265,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$userName = mb_strtoupper($response->usuario->userName);
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
@@ -347,13 +299,6 @@ class Novo_User_Model extends NOVO_Model {
           ]
 				];
 				$this->session->set_userdata($userData);
-
-				if (SESS_DRIVER == 'database') {
-					$data = ['username' => $userName];
-					$this->db->where('id', $this->session->session_id)
-					->update('ceo_sessions', $data);
-				}
-
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 			break;
@@ -964,4 +909,3 @@ class Novo_User_Model extends NOVO_Model {
 		return $resultRecaptcha;
 	}
 }
-
