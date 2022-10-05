@@ -162,7 +162,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$branch = [];
 
 					if($select) {
-						$text = ( lang('CONF_BULK_BRANCHOFFICE_VIEW') == 'ADDRESS')? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
+						$text = ( lang('CONF_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($text));
 						$branchOffice[] = (object) $branch;
