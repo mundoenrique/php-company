@@ -882,7 +882,7 @@ $config = [
 		[
 			'field' => 'branchListBr',
 			'label' => 'branchListBr',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		]
 	],
 	'getContacts' =>[

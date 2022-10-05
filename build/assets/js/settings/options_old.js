@@ -11,6 +11,8 @@ $(function () {
 
 	var ulOptions = $('.nav-item-config');
 	$('#existingContactButton').addClass('hidden');
+	$('#partedSection').hide();
+	$('#newBranch').hide();
 	$('#tableContacts').hide();
 	$('#sectionConctact').hide();
 
@@ -46,7 +48,30 @@ $(function () {
 			$('#passwordChangeForm')[0].reset();
 			$('#enterpriseData').addClass('hide');
 		}
+		// SUCURSALES
+		if ($('#branchListBr > option').length > 1) {
+			$('#branchListBr').prop('selectedIndex', 0);
+			$('#txtBranchesForm')[0].reset();
+			$('#branchInfoForm')[0].reset();
+			$('#partedSection').hide();
+		}
 	})
+
+	// SUCURSALES
+	/* $('#branch').on('click', function(){
+	 	if ($('#branchListBr > option').length == 1) {
+	 		$('#branchInfoForm')[0].reset();
+	 		$(".completeSection").addClass('hidden');
+	 		$("#partedSection").hide();
+	 		$('.hide-out').removeClass('hide');
+
+	 		data = {
+	 			"branchListBr": $( "#branchListBr option:selected" ).val()
+	 		}
+	 		insertFormInput(true);
+	 		getBranches(data);
+	 	}
+	 });*/
 
 
 	$('.nav-item-config:first-child').addClass('active');
@@ -155,6 +180,101 @@ $(function () {
 		});
 	});
 
+	// SUCURSALES
+	$('#branchListBr').on('change', function (e) {
+		e.preventDefault();
+
+		if (table != undefined) {
+			table.destroy();
+		}
+
+		$('#branchInfoForm')[0].reset();
+		// $(".completeSection").addClass('hidden');
+		// $("#partedSection").hide();
+		$('.hide-out').removeClass('hide');
+
+		form = $('#branchSettListForm');
+
+		insertFormInput(true);
+		validateForms(form);
+
+		if (form.valid()) {
+			getBranches(getDataForm(form));
+		}
+	});
+	// SUCURSALES
+	/* var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
+	 var inputFile =  $('#file-branch').next('.js-label-file').html();
+	 var inputFile = true ? $('#file-branch').next('.js-label-file').html().trim() : '';*/
+
+/*	$('.input-file').each(function () {
+		var label = $(this).next('.js-label-file');
+		var labelVal = label.html();
+
+		$(this).on('change', function (element) {
+			$(this)
+				.focus()
+				.blur();
+				var fileName = '';
+			if (element.target.value) fileName = element.target.value.split('\\').pop();
+				fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
+			});
+			validInputFile();
+	});*/
+
+	// SUCURSALES
+	 /*$('#file-branch').on('change', function(e){
+	 	e.preventDefault;
+	 	$('#btnBranchUpload').removeAttr("disabled");
+	 });*/
+
+	// SUCURSALES
+	$('#btnBranchUpload').on('click', function(e) {
+		e.preventDefault();
+		var btnAction = $(this);
+		btnText = btnAction.text().trim();
+		form = $('#txtBranchesForm');
+		validInputFile();
+		validateForms(form);
+
+		if (form.valid()) {
+			$(this).html(loader);
+			data = {
+				file: $('#file-branch')[0].files[0]
+			}
+			insertFormInput(true);
+			who = 'Settings';
+			where = 'uploadFileBranches';
+
+			callNovoCore(who, where, data, function(response) {
+				btnAction.html(btnText);
+				insertFormInput(false);
+				$('#file-branch').val('');
+				$('#file-branch').next('.js-label-file').html(inputFile);
+			});
+		}
+	});
+
+	// SUCURSALES
+	$('#newBranchBtn').on('click', function () {
+		$('#branchInfoForm')[0].reset();
+		// $(".completeSection").removeClass('hidden');
+		// $(".secondSection").show();
+		// $('html, body').animate({
+		// 	scrollTop: $("#secondarySectionBranch").offset().top
+		// 	}, 1000);
+		$('#partedSection').hide();
+		// $(this).addClass('active');
+		$('#secondarySectionBranch').fadeIn(700, 'linear');
+	});
+
+	// SUCURSALES
+	$('#backBranchBtn').on('click', function (e) {
+		$('#secondarySectionBranch').hide();
+		// $(this).addClass('active');
+		$('#partedSection').fadeIn(700, 'linear');
+	})
+
 	$('#showContacts').on('click', function (e) {
 		e.preventDefault;
 
@@ -187,7 +307,6 @@ $(function () {
 			addContact(data);
 		}
 	});
-
 });
 
 function enablePhone(){
@@ -319,6 +438,78 @@ function getContacts (data) {
 	});
 };
 
+// SUCURSALES
+function getBranches (value) {
+	data = value;
+	who = 'Settings';
+	where = 'getBranches';
+
+	callNovoCore(who, where, data, function(response) {
+		dataResponse = response;
+		insertFormInput(false);
+
+		if ( dataResponse.code == 0 ) {
+
+			branchesTable( dataResponse );
+
+			$('#secondarySectionBranch').fadeIn(700, 'linear');
+			loadCuntry(dataResponse);
+
+			$('#stateCodeBranch').on('change', function () {
+
+				var ciudades = dataResponse.paisTo.listaEstados.filter(function (dat) { return dat.codEstado == $("option:selected", '#stateCodeBranch').val() });
+				$('#cityCodeBranch').empty();
+				$.each(ciudades[0].listaCiudad, function (pos, val) {
+					$('#cityCodeBranch').append('<option value="' + val.codCiudad + '">' + val.ciudad + '</option>');
+				});
+
+			});
+			/*$('.edit').on('click', function (e) {
+				// $('.section').show();
+				$('#partedSection').hide();
+				$('#secondarySectionBranch').fadeIn(700, 'linear');
+				$.each(dataResponse.data[$(this).val()], function (key, val) {
+					$('#'+ key ).val(val);
+				});
+
+				$('#cityCodeBranch').empty().prop('disabled', false);
+				$('#stateCodeBranch').empty();
+
+				getGeoData(['city', dataResponse.geoUserData[e.currentTarget.value].state]);
+				getGeoData(['state', dataResponse.country.countryCodeBranch])
+
+				$.each(dataResponse.geoUserData[e.currentTarget.value], function(key, val) {
+					$('#'+ key + 'CodeBranch option[value="'+ val +'"]').attr("selected", "selected");
+				});
+
+				// $("html, body").animate({ scrollTop: $(".edit").offset().top  }, 500);
+			})*/
+		} else if ( dataResponse.code == 7 ) {
+			branchesTable( dataResponse );
+			$("#secondarySectionBranch").hide()
+		} else if ( dataResponse.code == 2 ) {
+			// $('#newBranchBtn').hide();
+			$('.hide-out').addClass('hide');
+
+			table = $('#tableBranches').DataTable({
+				"autoWidth": false,
+				"ordering": false,
+				"searching": false,
+				"lengthChange": false,
+				"pagelength": 10,
+				"pagingType": "full_numbers",
+				"table-layout": "fixed",
+				"data": [],
+				"language": dataTableLang,
+			});
+
+			$('#secondarySectionBranch').addClass('hidden');
+			$('#partedSection').show();
+			// $(".completeSection").removeClass('hidden');
+		};
+	});
+};
+
 
 function loadCuntry(data) {
 	$('#countryCodeBranch').empty();
@@ -354,6 +545,19 @@ function deleteContactM(data) {
 
 	callNovoCore(who, where, data, function (response) { });
 };
+	// SUCURSALES
+function updateBranch(data) {
+	who = 'Settings';
+	where = 'updateBranch';
+
+	callNovoCore(who, where, data, function (response) {
+		dataResponse = response;
+
+		if ( dataResponse.code ==  5) {
+			$('#branchInfoForm')[0].reset();
+		};
+	});
+};
 
 function addContact(data) {
 	who = 'Settings';
@@ -383,6 +587,95 @@ function updateContact(data) {
 	});
 };
 
+	// SUCURSALES
+function branchesTable( dataResponse ) {
+	// $('#btnBranchUpload').attr("disabled", "true");
+	// $('#newBranchBtn').show();
+	$('.hide-out').addClass('hide');
+	$('#secondarySectionBranch').removeClass('hidden');
+	$('#partedSection').show();
+	// $(".completeSection").removeClass('hidden');
+
+	table = $('#tableBranches').DataTable({
+		drawCallback: function () {
+			$('#partedSection').show();
+			$('.hide-out').addClass('hide');
+		},
+		"autoWidth": false,
+		"ordering": false,
+		"searching": false,
+		"lengthChange": false,
+		"pagelength": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+
+		"data": dataResponse.data,
+		"language": dataTableLang,
+		"columnDefs": [
+			{
+				"targets": 0,
+				"className": "branchName",
+				"width": "200px"
+			},
+		  {
+				"targets": 1,
+				"className": "branchCode",
+				"width": "200px"
+			},
+			{
+				"targets": 2,
+				"className": "contact",
+				"width": "200px",
+			},
+			{
+				"targets": 3,
+				"className": "phone",
+				"width": "auto"
+			},
+			{
+				"targets": 4,
+				"width": "auto"
+			}
+		],
+		"columns": [
+			{ data: 'branchName' },
+			{ data: 'branchCode' },
+			{ data: 'contact' },
+			{ data: 'phone' },
+			{
+				data: function (data) {
+					var options = '';
+				  options += '<button value="'+ data.branchCode +'" class="edit btn mx-1 px-0">';
+					options += '<i class="icon icon-edit"></i>';
+					options += '</button>';
+					return options;
+				}
+			}
+		],
+	});
+
+	/*$('#btn-update-branch').on('click', function (e) {
+		e.preventDefault;
+		form = $('#branchInfoForm');
+		validateForms(form);
+
+		if (form.valid()) {
+			data =getDataForm(form);
+			data.cod = $('#codB').val();
+			data.rif = $('#rifb').val();
+			data.user = $('#userNameB').val();
+			updateBranch(getDataForm(form));
+		}
+	});*/
+
+	$('#partedSection').show();
+	// $(".completeSection").removeClass('hidden');
+	$('#newBranch').show();
+	//$('#cityCodeBranch').empty().prop('disabled', true).prepend('<option value="" selected>' + lang.GEN_BTN_SELECT + '</option>');
+
+	return table;
+};
+
 function deleteContact(){
 	form = $('#existingContacts')
 	data = {
@@ -397,4 +690,30 @@ function deleteContact(){
 	deleteContactM(data);
 }
 
+	// SUCURSALES
+$('#btn-add-branch').on('click', function (e) {
+	e.preventDefault;
+	form = $('#branchInfoForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		data = getDataForm(form);
+		data.rif = $("option:selected", '#branchListBr').val();
+		data.pass = cryptoPass(data.password1);
+		delete data.codB;
+		delete data.rifB;
+		delete data.userNameB;
+		addBranch(data);
+	}
+});
+
+	// SUCURSALES
+	function addBranch(data) {
+		who = 'Settings';
+		where = 'addBranch';
+
+		callNovoCore(who, where, data, function (response) {
+			dataResponse = response;
+		});
+	};
 

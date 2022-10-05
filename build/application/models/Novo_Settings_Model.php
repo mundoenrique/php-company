@@ -612,15 +612,16 @@ class Novo_Settings_Model extends NOVO_Model {
 						$record
 					);
 				};
-
-				$this->response->data = $listBranches;
-				$this->response->paisTo = $response->paisTo;
-
+				break;
+				case -150:
+					$this->response->code = 0;
 				break;
 		};
 
-		return $this->responseToTheView('CallWs_getBranches');
+		$this->response->data = $listBranches;
+		$this->response->paisTo = $response->paisTo;
 
+		return $this->responseToTheView('CallWs_getBranches');
 	}
 
 	/**

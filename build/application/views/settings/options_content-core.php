@@ -405,17 +405,13 @@
 									<div class="form-group col-7">
 										<form id="branchSettListForm">
 											<label class="mt-1">Empresa</label>
-											<select id="branchListBr" class="select-box custom-select mt-3 mb-4 h6 w-100" name="branchListBr">
-												<?php if ($countEnterpriseList == 1) : ?>
-													<option selected disabled value="<?= $enterpriseSettList[0]->acrif; ?>"><?= $enterpriseSettList[0]->acnomcia; ?></option>
-												<?php else : ?>
+											<select id="branchListBr" name="branchListBr" class="select-box custom-select mt-3 mb-4 h6 w-100" >
 													<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 													<?php foreach ($enterpriseSettList as $enterprise) : ?>
 														<option value="<?= $enterprise->acrif; ?>">
 															<?= $enterprise->enterpriseName; ?>
 														</option>
 													<?php endforeach; ?>
-												<?php endif; ?>
 											</select>
 										</form>
 									</div>

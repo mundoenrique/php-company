@@ -267,6 +267,7 @@ function validateForms(form) {
 			"finalDateXls":{ pattern: date.dmy},
 			"filterDateXls":{ required: true,pattern: numeric},
 			"nameEnterpriseXls":{ required: true,pattern: alphanumunder},
+			"branchListBr":{ required: true, pattern: alphanumspecial},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
