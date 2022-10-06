@@ -47,7 +47,6 @@ $('#partedSection').hide();
 			$('#branchLoadSection').hide();
 		}
 	})
-
 });
 
 
@@ -62,6 +61,24 @@ function getBranches (value) {
 		if ( dataResponse.code == 0 ) {
 			branchesTable( dataResponse );
 			$('#partedSection').show();
+
+			$('.edit').on('click', function (e) {
+				$('#partedSection').hide();
+				$('#editAddBranchSection').fadeIn(700, 'linear');
+				$.each(dataResponse.data[$(this).val()], function (key, val) {
+					$('#'+ key ).val(val);
+				});
+
+				$('#cityCodeBranch').empty().prop('disabled', false);
+				$('#stateCodeBranch').empty();
+
+				getGeoData(['city', dataResponse.geoUserData[e.currentTarget.value].state]);
+				getGeoData(['state', dataResponse.country.countryCodeBranch])
+
+				$.each(dataResponse.geoUserData[e.currentTarget.value], function(key, val) {
+					$('#'+ key + 'CodeBranch option[value="'+ val +'"]').attr("selected", "selected");
+				});
+			})
 		}
 	});
 };
