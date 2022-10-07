@@ -689,5 +689,25 @@ $(function () {
 		}
 	}
 
+	var notice = sessionStorage.getItem('notice');
+
+	if ($("body").attr("data-country") === 'Ve' && notice === null) {
+		$("#dialog-monetary-reconversion").dialog({
+			title: 'Notificación',
+			modal: "true",
+			width: "450px",
+			draggable: false,
+			resizable: false,
+			closeOnEscape: false,
+			focus: false,
+			open: function (event, ui) {
+				$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			}
+		});
+		$("#dialog-monetary").click(function () {
+			sessionStorage.setItem('notice', true);
+			$("#dialog-monetary-reconversion").dialog("destroy");
+		});
+	}
 
 }); //--Fin document ready
