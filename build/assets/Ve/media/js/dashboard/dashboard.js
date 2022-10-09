@@ -689,7 +689,7 @@ $(function () {
 		}
 	}
 
-	var notice = sessionStorage.getItem('notice');
+	/* var notice = sessionStorage.getItem('notice');
 
 	if ($("body").attr("data-country") === 'Ve' && notice === null) {
 		$("#dialog-monetary-reconversion").dialog({
@@ -708,6 +708,6 @@ $(function () {
 			sessionStorage.setItem('notice', true);
 			$("#dialog-monetary-reconversion").dialog("destroy");
 		});
-	}
+	} */
 
 }); //--Fin document ready
