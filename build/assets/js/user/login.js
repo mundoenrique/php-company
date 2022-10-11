@@ -1,5 +1,6 @@
 'use strict'
 $(function () {
+	sessionStorage.clear();
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
