@@ -88,7 +88,7 @@ function updateTwirlsCard() {
 	data.cardNumber = cardnumber;
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
-		passData.passwordAuth = cryptoPass(passData.passwordAuth);
+		data.passwordAuth = cryptoPass(data.passwordAuth);
 	}
 
 	who = 'Services';
