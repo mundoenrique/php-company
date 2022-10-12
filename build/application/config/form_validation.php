@@ -57,7 +57,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/'.lang('CONF_VALIDATE_EMAIL').'/]|required'
 		]
 	],
 	'recoverAccess' => [
@@ -74,7 +74,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/'.lang('CONF_VALIDATE_EMAIL').'/]|required'
 		]
 	],
 	'validateOtp' => [
@@ -105,7 +105,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/'.lang('CONF_VALIDATE_EMAIL').'/]|required'
 		]
 	],
 	'closingBudgets' => [
@@ -477,7 +477,7 @@ $config = [
 		[
 			'field' => 'emailModifyContact',
 			'label' => 'emailModifyContact',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/'.lang('CONF_VALIDATE_EMAIL').'/]|required'
 		],
 		[
 			'field' => 'modifyContactPass',
@@ -514,7 +514,7 @@ $config = [
 		[
 			'field' => 'emailNewContact',
 			'label' => 'emailNewContact',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/'.lang('CONF_VALIDATE_EMAIL').'/]|required'
 		],
 		[
 			'field' => 'newContPass',

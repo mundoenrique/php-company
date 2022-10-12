@@ -9,7 +9,7 @@ function validateForms(form) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
-	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var emailValid = new RegExp(lang.CONF_VALIDATE_EMAIL, 'i');
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
 	var alphanum = /^[a-z0-9]+$/i;

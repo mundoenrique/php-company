@@ -31,6 +31,7 @@ $lang['CONF_USERS_ACTIVITY'] = 'ON';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_ACTIVITY'] = 'users-activity';//permiso asociado REPUSU
 //VALIDATE FORMS
+$lang['CONF_VALIDATE_EMAIL'] = '^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$';
 $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['CONF_MAX_FILE_SIZE'] = '2560';
 //INTERNAL LINKS
