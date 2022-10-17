@@ -15,11 +15,9 @@ $('#partedSection').hide();
 	$('#branchListBr').on('change', function (e) {
 		e.preventDefault();
 		$('#partedSection').hide();
+		$('#editAddBranchSection').hide();
+		$('#branchLoadSection').hide();
 		$('.hide-out').removeClass('hide');
-
-		if (table != undefined) {
-			table.destroy();
-		}
 
 		form = $('#branchSettListForm');
 		validateForms(form);
@@ -33,6 +31,8 @@ $('#partedSection').hide();
 		$('#partedSection').hide();
 		if (name == "newBranchBtn") {
 			$('#editAddBranchSection').fadeIn(700, 'linear');
+			$('#branchInfoForm')[0].reset();
+			$('#stateCodBranch').prop('selectedIndex',0);
 		} else {
 			$('#branchLoadSection').fadeIn(700, 'linear');
 		}
@@ -51,6 +51,10 @@ $('#partedSection').hide();
 
 
 function getBranches (value) {
+	if (table != undefined) {
+		table.destroy();
+	}
+
 	data = value;
 	who = 'Settings';
 	where = 'getBranches';
@@ -58,8 +62,11 @@ function getBranches (value) {
 	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;
 		insertFormInput(false);
+
 		if ( dataResponse.code == 0 ) {
-			branchesTable( dataResponse );
+			branchesTable(dataResponse);
+			getRegion(dataResponse,'');
+
 			$('#partedSection').show();
 
 			$('.edit').on('click', function (e) {
@@ -68,17 +75,11 @@ function getBranches (value) {
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
-
-				$('#cityCodeBranch').empty().prop('disabled', false);
-				$('#stateCodeBranch').empty();
-
-				getGeoData(['city', dataResponse.geoUserData[e.currentTarget.value].state]);
-				getGeoData(['state', dataResponse.country.countryCodeBranch])
-
-				$.each(dataResponse.geoUserData[e.currentTarget.value], function(key, val) {
-					$('#'+ key + 'CodeBranch option[value="'+ val +'"]').attr("selected", "selected");
-				});
+				getRegion(dataResponse,$(this).val());
 			})
+		}else if (dataResponse.code == 1){
+			branchesTable(dataResponse);
+			$('#partedSection').show();
 		}
 	});
 };
@@ -131,7 +132,7 @@ function branchesTable( dataResponse ) {
 			{
 				data: function (data) {
 					var options = '';
-					options += '<button value="'+ data.branchCode +'" class="edit btn mx-1 px-0">';
+					options += '<button value="'+ data.branchRow +'" class="edit btn mx-1 px-0">';
 					options += '<i class="icon icon-edit"></i>';
 					options += '</button>';
 					return options;
@@ -143,3 +144,122 @@ function branchesTable( dataResponse ) {
 	return table;
 };
 
+function getRegion(dataResponse,row){
+	var region = dataResponse.paisTo;
+	var selectedState = '';
+	var selectedCity = '';
+
+	$('#countryCodBranch').empty();
+	$('#countryCodBranch').append('<option value="' + region.codPais + '">' + region.pais + '</option>');
+
+	$('#stateCodBranch').empty();
+	$('#stateCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+
+	$('#cityCodBranch').empty();
+  $('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+
+	$.each(region.listaEstados, function(key, val){
+		if(row!=''){
+			selectedState = val['codEstado'] == dataResponse.data[row].stateCod ? 'selected' : '';
+			getCities(dataResponse.data[row].stateCod);
+		}
+		$('#stateCodBranch').append("<option value='"+ val[ 'codEstado'] +"' "+selectedState+">"+ val['estados'] +"</option>");
+	});
+
+	$('#stateCodBranch').on('change', function () {
+		$('#cityCodBranch').prop('disabled', false);
+		getCities($(this).val());
+	});
+
+	function getCities(stateCode){
+		$.each(region.listaEstados, function(key, val){
+			if (val['codEstado']== stateCode) {
+				$.each(val['listaCiudad'], function(key2, val2) {
+					if(row!=''){
+					selectedCity = val2['codCiudad'] == dataResponse.data[row].cityCod ? 'selected' : '';
+					}
+					$('#cityCodBranch').append("<option value='"+ val2['codCiudad'] +"' "+selectedCity+">"+ val2['ciudad'] +"</option>");
+				});
+			}
+		});
+	}
+}
+
+$('.btn-add-branch').on('click', function (e) {
+	e.preventDefault();
+	form = $('#branchInfoForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		var btnAction = $('#btn-add-branch');
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+		insertFormInput(true);
+
+		data = getDataForm(form);
+		data.rif = $("option:selected", '#branchListBr').val();
+		data.pass = cryptoPass(data.password1);
+
+		who = 'Settings';
+		where = 'addBranch';
+		callNovoCore(who, where, data, function (response) {
+			dataResponse = response;
+			if(dataResponse.code==0){
+				btnAction.html(btnText);
+				insertFormInput(false);
+
+				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+
+				$('#accept').on('click', function(e) {
+					e.preventDefault();
+					$('#partedSection').hide();
+					$('#editAddBranchSection').hide();
+					$('#branchLoadSection').hide();
+					$(this).html(loader);
+
+					var newData = {};
+					newData.branchListBr=data.rif;
+					getBranches (newData);
+				})
+			}
+		});
+	}
+});
+
+$('.btn-update-branch').on('click', function (e) {
+	e.preventDefault();
+	form = $('#branchInfoForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		var btnAction = $('#btn-update-branch');
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+		insertFormInput(true);
+
+		data =getDataForm(form);
+		who = 'Settings';
+		where = 'updateBranch';
+		callNovoCore(who, where, data, function (response) {
+			dataResponse = response;
+			if(dataResponse.code==0){
+				btnAction.html(btnText);
+				insertFormInput(false);
+
+				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+
+				$('#accept').on('click', function(e) {
+					e.preventDefault();
+					$('#partedSection').hide();
+					$('#editAddBranchSection').hide();
+					$('#branchLoadSection').hide();
+					$(this).html(loader);
+
+					var newData = {};
+					newData.branchListBr=data.rif;
+					getBranches (newData);
+				})
+			}
+		});
+	}
+});

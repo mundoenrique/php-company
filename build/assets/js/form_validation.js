@@ -245,13 +245,15 @@ function validateForms(form) {
 			"branchName": { required: true, pattern: longPhraseUpper },
 			"zoneName": { required: true, pattern: numeric },
 			"address": { required: true, pattern: longPhraseUpper },
+			"address1": { required: true, pattern: longPhraseUpper },
 			"address2": { pattern: longPhraseUpper },
 			"address3": { pattern: longPhraseUpper },
 			"billingAddress": { required: true, pattern: longPhraseUpper },
 			"countryCode": { required: true, pattern: numeric },
-			"stateCodeBranch": { required: true, pattern: numeric },
-			"cityCodeBranch": { required: true, pattern: numeric },
-			"districtCodeBranch": { required: true, pattern: numeric },
+			"countryCodBranch": { required: true, pattern: numeric },
+			"stateCodBranch": { required: true, pattern: numeric },
+			"cityCodBranch": { required: true, pattern: numeric },
+			"districtCodBranch": { required: true, pattern: numeric },
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
 			"phone1": { required: true, pattern: numeric },
@@ -535,6 +537,10 @@ function validateForms(form) {
 				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
+			"address1": {
+				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
 			"address2": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
@@ -551,11 +557,15 @@ function validateForms(form) {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},
-			"stateCodeBranch": {
+			"countryCodBranch": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},
-			"cityCodeBranch": {
+			"stateCodBranch": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"cityCodBranch": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},

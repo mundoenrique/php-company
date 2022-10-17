@@ -488,22 +488,22 @@
 									<form id="branchInfoForm" method="post">
 										<div class="container">
 											<div class="row">
-												<input id="rifB" name="rifB" type="text" class="form-control hidden" />
-												<input id="codB" name="codB" type="text" class="form-control hidden" />
-												<input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
+												<input id="rifB" name="rifB" type="text" class="form-control " />
+												<input id="codB" name="codB" type="text" class="form-control " />
+												<input id="userNameB" name="userNameB" type="text" class="form-control " />
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchName"><?= lang('GEN_NAME') ?></label>
+													<label for="branchName"><?= lang('GEN_NAME') ?> *</label>
 													<input id="branchName" name="branchName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="zoneName"><?= lang('GEN_ZONE') ?></label>
+													<label for="zoneName"><?= lang('GEN_ZONE') ?> *</label>
 													<input id="zoneName" name="zoneName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?></label>
-													<input id="address1" name="address" type="text" class="form-control" />
+													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?> *</label>
+													<input id="address1" name="address1" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
@@ -516,30 +516,28 @@
 													<input id="address3" name="address3" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
-												<div class="form-group mb-1 col-6 col-lg-4 hidden">
-													<label or="countryCodeBranch"><?= lang('GEN_COUNTRY') ?></label>
-													<select id="countryCodeBranch" name="countryCodeBranch" class="form-control select-box custom-select h6 w-100">
-													<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
-													</select>
-												</div>
-												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="stateCodeBranch"><?= lang('GEN_PROVINCE') ?></label>
-													<select id="stateCodeBranch" name="stateCodeBranch" class="form-control select-box custom-select h6 w-100">
-														<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
+												<div class="form-group mb-1 col-6 col-lg-4 ">
+													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?> *</label>
+													<select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="cityCodeBranch"><?= lang('GEN_DEPARTMENT') ?></label>
-													<select id="cityCodeBranch" name="cityCodeBranch" class="form-control select-box custom-select h6 w-100" disabled>
-														<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
+													<label or="stateCodBranch"><?= lang('GEN_PROVINCE') ?> *</label>
+													<select id="stateCodBranch" name="stateCodBranch" class="form-control select-box custom-select h6 w-100">
+													</select>
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4">
+													<label or="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?> *</label>
+													<select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
-														<label or="districtCodeBranch"><?= lang('GEN_DISTRICT') ?></label>
-														<select id="districtCodeBranch" name="districtCodeBranch" class="form-control select-box custom-select h6 w-100">
+														<label or="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
+														<select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100">
 															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 														</select>
 														<div class="help-block"></div>
@@ -547,21 +545,21 @@
 												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
-													<input id="areaCode" name="areaCode" type="text" class="form-control" />
+													<input id="areaCode" name="areaCode" type="text" class="form-control ignore"/>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="phone"><?= novoLang(lang('GEN_TELEPHONE'), "") ?></label>
-													<input id="phone" name="phone" type="text" class="form-control" maxlength="15">
+													<input id="phone" name="phone" type="text" class="form-control ignore" maxlength="15">
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="person"><?= lang('GEN_CONTACT_NAME') ?></label>
-													<input id="person" name="person" type="text" class="form-control" />
+													<input id="person" name="person" type="text" class="form-control ignore" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?></label>
+													<label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?> *</label>
 													<input id="branchCode" name="branchCode" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
@@ -569,7 +567,7 @@
 											<div class="row flex mb-4 mt-2 pl-5 justify-end form-group">
 												<div class="col-4 form-group">
 													<div class="input-group">
-														<input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Ingresa tu contraseña">
+														<input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
 														<div class="input-group-append">
 															<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 														</div>
@@ -577,7 +575,7 @@
 													<div class="help-block text-left"></div>
 												</div>
 												<div class="col-auto">
-													<button id="btn-add-branch" type="button" class="btn btn-primary btn-small flex mx-auto"><?= lang('GEN_BTN_SAVE') ?></button>
+													<button id="btn-save-branch" type="button" class="btn btn-primary btn-small flex mx-auto btn-add-branch"><?= lang('GEN_BTN_SAVE') ?></button>
 												</div>
 											</div>
 										</div>

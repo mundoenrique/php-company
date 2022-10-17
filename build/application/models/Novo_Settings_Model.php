@@ -588,7 +588,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 
-				foreach ($response->lista as $detailBranches) {
+				foreach ($response->lista as $key =>$detailBranches) {
 					$record = new stdClass();
 					$record->rifB = $detailBranches->rif;
 					$record->codB = $detailBranches->cod;
@@ -606,6 +606,7 @@ class Novo_Settings_Model extends NOVO_Model {
 					$record->countryCod = $detailBranches->codPais;
 					$record->stateCod = $detailBranches->estado;
 					$record->cityCod = $detailBranches->ciudad;
+					$record->branchRow = $key;
 
 					array_push(
 						$listBranches,
@@ -614,12 +615,12 @@ class Novo_Settings_Model extends NOVO_Model {
 				};
 				break;
 				case -150:
-					$this->response->code = 0;
+					$this->response->code = 1;
 				break;
 		};
 
 		$this->response->data = $listBranches;
-		$this->response->paisTo = $response->paisTo;
+		$this->response->paisTo = isset($response->paisTo) ? $response->paisTo : '';
 
 		return $this->responseToTheView('CallWs_getBranches');
 	}
@@ -636,7 +637,6 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'getAgregarSucursales';
 		$this->dataAccessLog->function = 'getAgregarSucursales';
 		$this->dataAccessLog->operation = 'getAgregarSucursales';
-
 		$this->dataRequest->idOperation = 'getAgregarSucursales';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
@@ -647,9 +647,9 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->direccion_2 = $dataRequest->address2;
 		$this->dataRequest->direccion_3 = $dataRequest->address3;
 		$this->dataRequest->zona = $dataRequest->zoneName;
-		$this->dataRequest->codPais = $dataRequest->countryCodeBranch;
-		$this->dataRequest->estado = $dataRequest->stateCodeBranch;
-		$this->dataRequest->ciudad = $dataRequest->cityCodeBranch;
+		$this->dataRequest->codPais = $dataRequest->countryCodBranch;
+		$this->dataRequest->estado = $dataRequest->stateCodBranch;
+		$this->dataRequest->ciudad = $dataRequest->cityCodBranch;
 		$this->dataRequest->persona = $dataRequest->person;
 		$this->dataRequest->cod_area = $dataRequest->areaCode;
 		$this->dataRequest->telefono = $dataRequest->phone;
@@ -662,17 +662,72 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToService('CallWs_addBranch');
-
+		//$response = $this->sendToService('CallWs_addBranch');
+		$this->isResponseRc=0;
 		switch($this->isResponseRc) {
 			case 0:
+				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
 				$this->response->msg = 'Sucursal cargada con exito';
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
 
 		return $this->responseToTheView('CallWs_addBranch');
+	}
+
+	/**
+	 * @info Método para actualizar sucursal
+	 * @author Diego Acosta García
+	 * @date May 29th, 2021
+	 * @info Actualizado por Luis Molina
+	 * @date Oct 17th, 2022
+	 */
+	public function CallWs_updateBranch_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getActualizarSucursal';
+		$this->dataAccessLog->function = 'getActualizarSucursal';
+		$this->dataAccessLog->operation = 'getActualizarSucursal';
+		$this->dataRequest->idOperation = 'getActualizarSucursal';
+		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
+
+		$this->dataRequest->rif = $dataRequest->rifB;
+		$this->dataRequest->cod = $dataRequest->codB;
+		$this->dataRequest->nom_cia = $dataRequest->branchName;
+		$this->dataRequest->direccion_1 = $dataRequest->address1;
+		$this->dataRequest->direccion_2 = $dataRequest->address2;
+		$this->dataRequest->direccion_3 = $dataRequest->address3;
+		$this->dataRequest->zona = $dataRequest->branchCode;
+		$this->dataRequest->codPais = $dataRequest->countryCodBranch;
+		$this->dataRequest->estado = $dataRequest->stateCodBranch;
+		$this->dataRequest->ciudad = $dataRequest->cityCodBranch;
+		$this->dataRequest->persona = $dataRequest->person;
+		$this->dataRequest->cod_area = $dataRequest->areaCode;
+		$this->dataRequest->telefono = $dataRequest->phone;
+		$this->dataRequest->usuario = $dataRequest->userNameB;
+
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+			$password = $this->session->pass ?: md5($password);
+		}
+
+		$this->dataRequest->password = $password;
+
+		//$response = $this->sendToService('CallWs_updateBranch');
+		$this->isResponseRc=0;
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = 'Sucursal Actualizada con exito';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_updateBranch');
 	}
 
 	/**
@@ -702,52 +757,4 @@ class Novo_Settings_Model extends NOVO_Model {
 		return $this->responseToTheView('CallWs_uploadFileBranches');
 	}
 
-	/**
-	 * @info Método para actualizar sucursal
-	 * @author Diego Acosta García
-	 * @date May 29th, 2021
-	 */
-	public function CallWs_updateBranch_Settings($dataRequest)
-	{
-		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
-
-		$this->dataAccessLog->modulo = 'getActualizarSucursal';
-		$this->dataAccessLog->function = 'getActualizarSucursal';
-		$this->dataAccessLog->operation = 'getActualizarSucursal';
-		$this->dataRequest->idOperation = 'getActualizarSucursal';
-		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
-
-		$this->dataRequest->rif = $dataRequest->rifB;
-		$this->dataRequest->cod = $dataRequest->codB;
-		$this->dataRequest->nom_cia = $dataRequest->branchName;
-		$this->dataRequest->direccion_1 = $dataRequest->address1;
-		$this->dataRequest->direccion_2 = $dataRequest->address2;
-		$this->dataRequest->direccion_3 = $dataRequest->address3;
-		$this->dataRequest->zona = $dataRequest->branchCode;
-		$this->dataRequest->codPais = $dataRequest->countryCodeBranch;
-		$this->dataRequest->estado = $dataRequest->stateCodeBranch;
-		$this->dataRequest->ciudad = $dataRequest->cityCodeBranch;
-		$this->dataRequest->persona = $dataRequest->person;
-		$this->dataRequest->cod_area = $dataRequest->areaCode;
-		$this->dataRequest->telefono = $dataRequest->phone;
-		$this->dataRequest->usuario = $dataRequest->userNameB;
-
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
-
-		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = $this->session->pass ?: md5($password);
-		}
-
-		$this->dataRequest->password = $password;
-
-		$response = $this->sendToService('CallWs_updateBranch');
-
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-			break;
-		}
-
-		return $this->responseToTheView('CallWs_updateBranch');
-	}
 }
