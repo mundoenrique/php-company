@@ -482,8 +482,7 @@
 						</div>
 						<div id="editAddBranchSection" style="display:none">
 							<div class="flex flex-column mb-5">
-								<span class="line-text flex mb-2 h4 semibold primary"><?= lang('SETTINGS_EDIT_ADD_BRANCH') ?>
-								</span>
+								<span id="editAddBranchText" class="line-text flex mb-2 h4 semibold primary"></span>
 								<div class="my-2 px-5">
 									<form id="branchInfoForm" method="post">
 										<div class="container">
@@ -575,7 +574,7 @@
 													<div class="help-block text-left"></div>
 												</div>
 												<div class="col-auto">
-													<button id="btn-save-branch" type="button" class="btn btn-primary btn-small flex mx-auto btn-add-branch"><?= lang('GEN_BTN_SAVE') ?></button>
+													<button id="btnSaveBranch" type="button" class="btn btn-primary btn-small flex mx-auto"><?= lang('GEN_BTN_SAVE') ?></button>
 												</div>
 											</div>
 										</div>

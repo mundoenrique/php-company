@@ -9,6 +9,8 @@ $('#partedSection').hide();
 		if ($('#branchListBr > option').length > 1) {
 			$('#branchListBr').prop('selectedIndex', 0);
 			$('#partedSection').hide();
+			$('#branchLoadSection').hide();
+			$('#editAddBranchSection').hide();
 		}
 	})
 
@@ -33,6 +35,10 @@ $('#partedSection').hide();
 			$('#editAddBranchSection').fadeIn(700, 'linear');
 			$('#branchInfoForm')[0].reset();
 			$('#stateCodBranch').prop('selectedIndex',0);
+			$('#btnSaveBranch').addClass('btn-new-brach');
+			$('#branchCode').attr("disabled", false);
+			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
+
 		} else {
 			$('#branchLoadSection').fadeIn(700, 'linear');
 		}
@@ -42,6 +48,7 @@ $('#partedSection').hide();
 		var name = (this.id);
 		$('#partedSection').fadeIn(700, 'linear');
 		if (name == "backBranchBtn") {
+			$('#btnSaveBranch').removeClass('btn-new-brach btn-edit-brach')
 			$('#editAddBranchSection').hide();
 		} else {
 			$('#branchLoadSection').hide();
@@ -71,7 +78,10 @@ function getBranches (value) {
 
 			$('.edit').on('click', function (e) {
 				$('#partedSection').hide();
+				$('#btnSaveBranch').addClass('btn-edit-brach');
+				$('#branchCode').attr("disabled", true);
 				$('#editAddBranchSection').fadeIn(700, 'linear');
+				$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE);
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
@@ -185,13 +195,13 @@ function getRegion(dataResponse,row){
 	}
 }
 
-$('.btn-add-branch').on('click', function (e) {
+$('#btnSaveBranch').on('click', function (e) {
 	e.preventDefault();
 	form = $('#branchInfoForm');
 	validateForms(form);
 
 	if (form.valid()) {
-		var btnAction = $('#btn-add-branch');
+		var btnAction = $('#btnSaveBranch');
 		btnText = btnAction.text().trim();
 		btnAction.html(loader);
 		insertFormInput(true);
