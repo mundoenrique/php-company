@@ -32,13 +32,13 @@ $('#partedSection').hide();
 		var name = (this.id);
 		$('#partedSection').hide();
 		if (name == "newBranchBtn") {
+			getRegion(dataResponse,'');
 			$('#editAddBranchSection').fadeIn(700, 'linear');
 			$('#branchInfoForm')[0].reset();
 			$('#stateCodBranch').prop('selectedIndex',0);
 			$('#btnSaveBranch').addClass('btn-new-brach');
 			$('#branchCode').attr("disabled", false);
 			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
-
 		} else {
 			$('#branchLoadSection').fadeIn(700, 'linear');
 		}
@@ -72,8 +72,6 @@ function getBranches (value) {
 
 		if ( dataResponse.code == 0 ) {
 			branchesTable(dataResponse);
-			getRegion(dataResponse,'');
-
 			$('#partedSection').show();
 
 			$('.edit').on('click', function (e) {
@@ -159,25 +157,26 @@ function getRegion(dataResponse,row){
 	var selectedState = '';
 	var selectedCity = '';
 
-	$('#countryCodBranch').empty();
 	$('#countryCodBranch').append('<option value="' + region.codPais + '">' + region.pais + '</option>');
-
 	$('#stateCodBranch').empty();
 	$('#stateCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
-
 	$('#cityCodBranch').empty();
   $('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
 
 	$.each(region.listaEstados, function(key, val){
 		if(row!=''){
 			selectedState = val['codEstado'] == dataResponse.data[row].stateCod ? 'selected' : '';
-			getCities(dataResponse.data[row].stateCod);
 		}
 		$('#stateCodBranch').append("<option value='"+ val[ 'codEstado'] +"' "+selectedState+">"+ val['estados'] +"</option>");
 	});
 
+	if(row!=''){
+		getCities(dataResponse.data[row].stateCod);
+	}
+
 	$('#stateCodBranch').on('change', function () {
-		$('#cityCodBranch').prop('disabled', false);
+		$('#cityCodBranch').empty();
+		$('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
 		getCities($(this).val());
 	});
 

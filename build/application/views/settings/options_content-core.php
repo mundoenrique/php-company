@@ -537,7 +537,6 @@
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
 														<label or="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
 														<select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100">
-															<option value="" selected><?= lang('GEN_BTN_SELECT') ?></option>
 														</select>
 														<div class="help-block"></div>
 													</div>
