@@ -320,7 +320,7 @@ function getContacts (data) {
 };
 
 
-function loadCuntry(data) {
+/*function loadCuntry(data) {
 	$('#countryCodeBranch').empty();
 	$('#countryCodeBranch').append('<option value="' + data.paisTo.codPais + '">' + data.paisTo.pais + '</option>');
 
@@ -335,7 +335,7 @@ function loadCuntry(data) {
 	$.each(ciudades[0].listaCiudad, function (pos, val) {
 		$('#cityCodeBranch').append('<option value="' + val.codCiudad + '">' + val.ciudad + '</option>');
 	});
-}
+}*/
 
 function validInputFile() {
 	form = $('#txtBranchesForm');

@@ -693,7 +693,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'getActualizarSucursal';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
-		$this->dataRequest->rif = $dataRequest->rifB;
+		$this->dataRequest->rif = $dataRequest->rif;
 		$this->dataRequest->cod = $dataRequest->codB;
 		$this->dataRequest->nom_cia = $dataRequest->branchName;
 		$this->dataRequest->direccion_1 = $dataRequest->address1;

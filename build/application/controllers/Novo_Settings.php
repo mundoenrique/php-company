@@ -38,6 +38,7 @@ class Novo_Settings extends NOVO_Controller {
 			"third_party/additional-methods",
 			"settings/options",
 			"settings/branch",
+			"settings/regions",
 			"user/changePassword-core",
 			"user/passValidate"
 		);

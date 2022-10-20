@@ -915,12 +915,12 @@ $config = [
 		[
 			'field' => 'rifB',
 			'label' => 'rifB',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'codB',
 			'label' => 'codB',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'branchName',
@@ -948,24 +948,24 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'stateCodeBranch',
-			'label' => 'stateCodeBranch',
+			'field' => 'stateCodBranch',
+			'label' => 'stateCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'cityCodeBranch',
-			'label' => 'cityCodeBranch',
+			'field' => 'cityCodBranch',
+			'label' => 'cityCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'person',
 			'label' => 'person',
-			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]'
 		],
 		[
 			'field' => 'areaCode',
 			'label' => 'areaCode',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		],
 		[
 			'field' => 'phone',
@@ -975,14 +975,19 @@ $config = [
 		[
 			'field' => 'userNameB',
 			'label' => 'userNameB',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]|required'
+		],
+		[
+			'field' => 'password1',
+			'label' => 'password1',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 	'addBranch' => [
 		[
 			'field' => 'rif',
 			'label' => 'rif',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'branchName',
@@ -1000,6 +1005,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
 		],
 		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
 			'field' => 'countryCodBranch',
 			'label' => 'countryCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
@@ -1015,14 +1030,24 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
 			'field' => 'branchCode',
 			'label' => 'branchCode',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'password',
-			'label' => 'password',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]'
+			'field' => 'password1',
+			'label' => 'password1',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 	'unnamedRequest' => [

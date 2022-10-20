@@ -16,10 +16,6 @@ $('#partedSection').hide();
 
 	$('#branchListBr').on('change', function (e) {
 		e.preventDefault();
-		$('#partedSection').hide();
-		$('#editAddBranchSection').hide();
-		$('#branchLoadSection').hide();
-		$('.hide-out').removeClass('hide');
 
 		form = $('#branchSettListForm');
 		validateForms(form);
@@ -36,6 +32,7 @@ $('#partedSection').hide();
 			$('#editAddBranchSection').fadeIn(700, 'linear');
 			$('#branchInfoForm')[0].reset();
 			$('#stateCodBranch').prop('selectedIndex',0);
+			$('#btnSaveBranch').removeClass('btn-edit-brach')
 			$('#btnSaveBranch').addClass('btn-new-brach');
 			$('#branchCode').attr("disabled", false);
 			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
@@ -53,15 +50,21 @@ $('#partedSection').hide();
 		} else {
 			$('#branchLoadSection').hide();
 		}
-	})
+	});
+
 });
 
 
 function getBranches (value) {
+
+	$('#partedSection').hide();
+	$('#editAddBranchSection').hide();
+	$('#branchLoadSection').hide();
+	$('.hide-out').removeClass('hide');
+
 	if (table != undefined) {
 		table.destroy();
 	}
-
 	data = value;
 	who = 'Settings';
 	where = 'getBranches';
@@ -76,6 +79,7 @@ function getBranches (value) {
 
 			$('.edit').on('click', function (e) {
 				$('#partedSection').hide();
+				$('#btnSaveBranch').removeClass('btn-new-brach');
 				$('#btnSaveBranch').addClass('btn-edit-brach');
 				$('#branchCode').attr("disabled", true);
 				$('#editAddBranchSection').fadeIn(700, 'linear');
@@ -83,8 +87,10 @@ function getBranches (value) {
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
+				$('#password1').val('');
 				getRegion(dataResponse,$(this).val());
-			})
+			});
+
 		}else if (dataResponse.code == 1){
 			branchesTable(dataResponse);
 			$('#partedSection').show();
@@ -152,123 +158,54 @@ function branchesTable( dataResponse ) {
 	return table;
 };
 
-function getRegion(dataResponse,row){
-	var region = dataResponse.paisTo;
-	var selectedState = '';
-	var selectedCity = '';
+$("#btnSaveBranch").on("click", function(e) {
+		form = $('#branchInfoForm');
+		validateForms(form);
 
-	$('#countryCodBranch').append('<option value="' + region.codPais + '">' + region.pais + '</option>');
-	$('#stateCodBranch').empty();
-	$('#stateCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
-	$('#cityCodBranch').empty();
-  $('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+		if (form.valid()) {
+			var btnAction = $('#btnSaveBranch');
+			btnText = btnAction.text().trim();
+			btnAction.html(loader);
 
-	$.each(region.listaEstados, function(key, val){
-		if(row!=''){
-			selectedState = val['codEstado'] == dataResponse.data[row].stateCod ? 'selected' : '';
+			var btn={};
+			btn.btnAction = btnAction;
+			btn.btnText =btnText;
+			insertFormInput(true);
+			data = getDataForm(form);
+			data.pass = cryptoPass(data.password1);
+
+			if ($(this).hasClass('btn-new-brach')) {
+				data.rif = $("option:selected", '#branchListBr').val();
+				data.branch = 'addBranch';
+				getCallNovoCore(data, btn);
+			}else{
+				data.rif = data.rifB;
+				data.branch = 'updateBranch';
+				getCallNovoCore(data, btn);
+			}
+
 		}
-		$('#stateCodBranch').append("<option value='"+ val[ 'codEstado'] +"' "+selectedState+">"+ val['estados'] +"</option>");
-	});
-
-	if(row!=''){
-		getCities(dataResponse.data[row].stateCod);
-	}
-
-	$('#stateCodBranch').on('change', function () {
-		$('#cityCodBranch').empty();
-		$('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
-		getCities($(this).val());
-	});
-
-	function getCities(stateCode){
-		$.each(region.listaEstados, function(key, val){
-			if (val['codEstado']== stateCode) {
-				$.each(val['listaCiudad'], function(key2, val2) {
-					if(row!=''){
-					selectedCity = val2['codCiudad'] == dataResponse.data[row].cityCod ? 'selected' : '';
-					}
-					$('#cityCodBranch').append("<option value='"+ val2['codCiudad'] +"' "+selectedCity+">"+ val2['ciudad'] +"</option>");
-				});
-			}
-		});
-	}
-}
-
-$('#btnSaveBranch').on('click', function (e) {
-	e.preventDefault();
-	form = $('#branchInfoForm');
-	validateForms(form);
-
-	if (form.valid()) {
-		var btnAction = $('#btnSaveBranch');
-		btnText = btnAction.text().trim();
-		btnAction.html(loader);
-		insertFormInput(true);
-
-		data = getDataForm(form);
-		data.rif = $("option:selected", '#branchListBr').val();
-		data.pass = cryptoPass(data.password1);
-
-		who = 'Settings';
-		where = 'addBranch';
-		callNovoCore(who, where, data, function (response) {
-			dataResponse = response;
-			if(dataResponse.code==0){
-				btnAction.html(btnText);
-				insertFormInput(false);
-
-				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-
-				$('#accept').on('click', function(e) {
-					e.preventDefault();
-					$('#partedSection').hide();
-					$('#editAddBranchSection').hide();
-					$('#branchLoadSection').hide();
-					$(this).html(loader);
-
-					var newData = {};
-					newData.branchListBr=data.rif;
-					getBranches (newData);
-				})
-			}
-		});
-	}
 });
 
-$('.btn-update-branch').on('click', function (e) {
-	e.preventDefault();
-	form = $('#branchInfoForm');
-	validateForms(form);
+function getCallNovoCore(data, btn){
+	who = 'Settings';
+	where = data.branch;
+	callNovoCore(who, where, data, function (response) {
+		dataResponse = response;
+		if(dataResponse.code==0){
+			btn.btnAction.html(btn.btnText);
+			insertFormInput(false);
 
-	if (form.valid()) {
-		var btnAction = $('#btn-update-branch');
-		btnText = btnAction.text().trim();
-		btnAction.html(loader);
-		insertFormInput(true);
+			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 
-		data =getDataForm(form);
-		who = 'Settings';
-		where = 'updateBranch';
-		callNovoCore(who, where, data, function (response) {
-			dataResponse = response;
-			if(dataResponse.code==0){
-				btnAction.html(btnText);
-				insertFormInput(false);
+			$('#accept').on('click', function(e) {
+				e.preventDefault();
+				$(this).html(loader);
 
-				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-
-				$('#accept').on('click', function(e) {
-					e.preventDefault();
-					$('#partedSection').hide();
-					$('#editAddBranchSection').hide();
-					$('#branchLoadSection').hide();
-					$(this).html(loader);
-
-					var newData = {};
-					newData.branchListBr=data.rif;
-					getBranches (newData);
-				})
-			}
-		});
-	}
-});
+				var newData = {};
+				newData.branchListBr=data.rif;
+				getBranches (newData);
+			})
+		}
+	});
+};
