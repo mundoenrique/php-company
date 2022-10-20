@@ -30,12 +30,13 @@ $('#partedSection').hide();
 		if (name == "newBranchBtn") {
 			getRegion(dataResponse,'');
 			$('#editAddBranchSection').fadeIn(700, 'linear');
-			$('#branchInfoForm')[0].reset();
-			$('#stateCodBranch').prop('selectedIndex',0);
 			$('#btnSaveBranch').removeClass('btn-edit-brach')
 			$('#btnSaveBranch').addClass('btn-new-brach');
 			$('#branchCode').attr("disabled", false);
 			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
+			$('#branchInfoForm')[0].reset();
+			$('.has-error').removeClass("has-error");
+			$('.help-block').text('');
 		} else {
 			$('#branchLoadSection').fadeIn(700, 'linear');
 		}
@@ -56,7 +57,6 @@ $('#partedSection').hide();
 
 
 function getBranches (value) {
-
 	$('#partedSection').hide();
 	$('#editAddBranchSection').hide();
 	$('#branchLoadSection').hide();
@@ -87,6 +87,8 @@ function getBranches (value) {
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
+				$('.has-error').removeClass("has-error");
+				$('.help-block').text('');
 				$('#password1').val('');
 				getRegion(dataResponse,$(this).val());
 			});
@@ -100,7 +102,6 @@ function getBranches (value) {
 
 function branchesTable( dataResponse ) {
 	$('.hide-out').addClass('hide');
-
 	table = $('#tableBranches').DataTable({
 		"autoWidth": false,
 		"ordering": false,
@@ -183,7 +184,6 @@ $("#btnSaveBranch").on("click", function(e) {
 				data.branch = 'updateBranch';
 				getCallNovoCore(data, btn);
 			}
-
 		}
 });
 

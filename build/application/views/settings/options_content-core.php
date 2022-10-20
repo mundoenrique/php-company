@@ -487,9 +487,9 @@
 									<form id="branchInfoForm" method="post">
 										<div class="container">
 											<div class="row">
-												<input id="rifB" name="rifB" type="text" class="form-control " />
-												<input id="codB" name="codB" type="text" class="form-control " />
-												<input id="userNameB" name="userNameB" type="text" class="form-control " />
+												<input id="rifB" name="rifB" type="text" class="form-control hidden" />
+												<input id="codB" name="codB" type="text" class="form-control hidden" />
+												<input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="branchName"><?= lang('GEN_NAME') ?> *</label>
 													<input id="branchName" name="branchName" type="text" class="form-control" />
@@ -515,7 +515,7 @@
 													<input id="address3" name="address3" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
-												<div class="form-group mb-1 col-6 col-lg-4 ">
+												<div class="form-group mb-1 col-6 col-lg-4 hidden">
 													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?> *</label>
 													<select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
