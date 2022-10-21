@@ -24,35 +24,51 @@ $('#partedSection').hide();
 		}
 	});
 
-	$('.btn-branch').on('click', function () {
-		var name = (this.id);
+	$('#loadBranchBtn').on('click', function () {
 		$('#partedSection').hide();
-		if (name == "newBranchBtn") {
-			getRegion(dataResponse,'');
-			$('#editAddBranchSection').fadeIn(700, 'linear');
-			$('#btnSaveBranch').removeClass('btn-edit-brach')
-			$('#btnSaveBranch').addClass('btn-new-brach');
-			$('#branchCode').attr("disabled", false);
-			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
-			$('#branchInfoForm')[0].reset();
-			$('.has-error').removeClass("has-error");
-			$('.help-block').text('');
-		} else {
-			$('#branchLoadSection').fadeIn(700, 'linear');
-		}
+		$('#branchLoadSection').fadeIn(700, 'linear');
 	});
 
-	$('.btn-back-branch').on('click', function (e) {
-		var name = (this.id);
+	$("#newBranchBtn").on("click", (e) => showManageBranchView("create"));
+
+	$('#backBranchBtn').on('click', function (e) {
 		$('#partedSection').fadeIn(700, 'linear');
-		if (name == "backBranchBtn") {
-			$('#btnSaveBranch').removeClass('btn-new-brach btn-edit-brach')
-			$('#editAddBranchSection').hide();
-		} else {
-			$('#branchLoadSection').hide();
-		}
+		$('#btnSaveBranch').removeAttr('data-action')
+		$('#editAddBranchSection').hide();
 	});
 
+	$('#backLoadBranchBtn').on('click', function (e) {
+		$('#partedSection').fadeIn(700, 'linear');
+		$('#branchLoadSection').hide();
+	});
+
+	$("#btnSaveBranch").on("click", function(e) {
+		form = $('#branchInfoForm');
+		validateForms(form);
+
+		if (form.valid()) {
+			var btnAction = $('#btnSaveBranch');
+			btnText = btnAction.text().trim();
+			btnAction.html(loader);
+
+			var btn={};
+			btn.btnAction = btnAction;
+			btn.btnText =btnText;
+			insertFormInput(true);
+			data = getDataForm(form);
+			data.pass = cryptoPass(data.password1);
+
+			if ($(this).attr('data-action') == 'saveCreate') {
+				data.rif = $("option:selected", '#branchListBr').val();
+				data.branch = 'addBranch';
+				getCallNovoCore(data, btn);
+			}else{
+				data.rif = data.rifB;
+				data.branch = 'updateBranch';
+				getCallNovoCore(data, btn);
+			}
+		}
+});
 });
 
 
@@ -77,20 +93,12 @@ function getBranches (value) {
 			branchesTable(dataResponse);
 			$('#partedSection').show();
 
-			$('.edit').on('click', function (e) {
-				$('#partedSection').hide();
-				$('#btnSaveBranch').removeClass('btn-new-brach');
-				$('#btnSaveBranch').addClass('btn-edit-brach');
-				$('#branchCode').attr("disabled", true);
-				$('#editAddBranchSection').fadeIn(700, 'linear');
-				$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE);
+			$('#tableBranches tbody tr').on('click', "button[data-action='update']", function (e) {
 				$.each(dataResponse.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
-				$('.has-error').removeClass("has-error");
-				$('.help-block').text('');
-				$('#password1').val('');
 				getRegion(dataResponse,$(this).val());
+				showManageBranchView("update")
 			});
 
 		}else if (dataResponse.code == 1){
@@ -147,7 +155,7 @@ function branchesTable( dataResponse ) {
 			{
 				data: function (data) {
 					var options = '';
-					options += '<button value="'+ data.branchRow +'" class="edit btn mx-1 px-0">';
+					options += '<button value="'+ data.branchRow +'" class="edit btn mx-1 px-0" data-action="update">';
 					options += '<i class="icon icon-edit"></i>';
 					options += '</button>';
 					return options;
@@ -159,33 +167,27 @@ function branchesTable( dataResponse ) {
 	return table;
 };
 
-$("#btnSaveBranch").on("click", function(e) {
-		form = $('#branchInfoForm');
-		validateForms(form);
-
-		if (form.valid()) {
-			var btnAction = $('#btnSaveBranch');
-			btnText = btnAction.text().trim();
-			btnAction.html(loader);
-
-			var btn={};
-			btn.btnAction = btnAction;
-			btn.btnText =btnText;
-			insertFormInput(true);
-			data = getDataForm(form);
-			data.pass = cryptoPass(data.password1);
-
-			if ($(this).hasClass('btn-new-brach')) {
-				data.rif = $("option:selected", '#branchListBr').val();
-				data.branch = 'addBranch';
-				getCallNovoCore(data, btn);
-			}else{
-				data.rif = data.rifB;
-				data.branch = 'updateBranch';
-				getCallNovoCore(data, btn);
-			}
-		}
-});
+function showManageBranchView(action) {
+	$('#partedSection').hide();
+	$('#editAddBranchSection').fadeIn(700, 'linear');
+	$('.has-error').removeClass("has-error");
+	$('.help-block').text('');
+	switch (action) {
+		case "create":
+			getRegion(dataResponse,'');
+			$('#btnSaveBranch').attr('data-action', 'saveCreate');
+			$('#branchCode').attr("disabled", false);
+			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
+			$('#branchInfoForm')[0].reset();
+			break;
+		case "update":
+			$('#btnSaveBranch').attr('data-action', 'saveUpdate');
+			$('#branchCode').attr("disabled", true);
+			$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE);
+			$('#password1').val('');
+			break;
+	}
+}
 
 function getCallNovoCore(data, btn){
 	who = 'Settings';
@@ -204,7 +206,12 @@ function getCallNovoCore(data, btn){
 
 				var newData = {};
 				newData.branchListBr=data.rif;
+				$('#partedSection').addClass('visible')
+				$('.hide-out').addClass('visible');
 				getBranches (newData);
+				// $('#partedSection').removeClass('visible')
+				// $('.hide-out').removeClass('visible');
+
 			})
 		}
 	});

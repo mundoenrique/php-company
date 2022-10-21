@@ -426,10 +426,10 @@
 						<div id="partedSection" class="figure">
 							<div class="my-3 px-2">
 								<div class="m-4 flex justify-end">
-									<button id="loadBranchBtn" class="btn btn-primary btn-small btn-branch mr-1">
+									<button id="loadBranchBtn" class="btn btn-primary btn-small mr-1">
 										<i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
 									</button>
-									<button id="newBranchBtn" class="btn btn-primary btn-small btn-branch">
+									<button id="newBranchBtn" class="btn btn-primary btn-small" data-action="create">
 										<i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW_BRANCH') ?>
 									</button>
 								</div>
@@ -473,7 +473,7 @@
 										</div>
 									</form>
 									<div class="col-12 center">
-										<button id="backLoadBranchBtn" class="btn btn-link btn-small btn-back-branch">
+										<button id="backLoadBranchBtn" class="btn btn-link btn-small">
 											<?= lang('GEN_BTN_BACK') ?>
 										</button>
 									</div>
@@ -579,7 +579,7 @@
 										</div>
 									</form>
 									<div class="col-12 center">
-										<button id="backBranchBtn" class="btn btn-link btn-small btn-back-branch">
+										<button id="backBranchBtn" class="btn btn-link btn-small">
 											<?= lang('GEN_BTN_BACK') ?>
 										</button>
 									</div>

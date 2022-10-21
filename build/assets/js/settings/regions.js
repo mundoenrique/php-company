@@ -5,7 +5,7 @@ function getRegion(dataResponse,row){
 	var region = dataResponse.paisTo;
 	var selectedState = '';
 	var selectedCity = '';
-	var country = region.codPais ? region.pais : 'Seleccionar';
+	var country = region.codPais ? region.pais : lang.GEN_BTN_SELECT;
 
 	$('#countryCodBranch').empty();
 	$('#countryCodBranch').append('<option value="' + region.codPais + '">' + country + '</option>');
