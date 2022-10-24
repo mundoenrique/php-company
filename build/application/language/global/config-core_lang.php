@@ -51,6 +51,7 @@ $lang['CONF_RECOV_ACCESS'] = 'OFF';
 $lang['CONF_BENEFITS'] = 'ON';
 $lang['CONF_BULK_LOAD'] = 'ON';
 $lang['CONF_BULK_BRANCHOFFICE'] = 'OFF';
+$lang['CONF_BULK_BRANCHOFFICE_VIEW'] = 'NAME';
 $lang['CONF_BULK_AUTH'] = 'ON';
 $lang['CONF_BULK_REPROCESS'] = 'OFF';
 $lang['CONF_UNNA_STARTING_LINE1'] = 'ON';
