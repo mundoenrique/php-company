@@ -732,29 +732,55 @@ class Novo_Settings_Model extends NOVO_Model {
 
 	/**
 	 * @info Método para subir archivo de sucursales
-	 * @author Diego Acosta García
-	 * @date May 28th, 2021
+	 * @author Luis Molina
+	 * @date Oct 26th, 2022
 	 */
-	public function CallWs_uploadFileBranches_Settings($dataRequest)
+	public function CallWs_UploadFileBranch_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: uploadFileBranches Method Initialized');
+		log_message('INFO', 'NOVO UploadFileBranch Model: UploadFileBranch Method Initialized');
 
-		$this->dataAccessLog->modulo = 'getSucursalTxt';
-		$this->dataAccessLog->function = 'getSucursalTxt';
-		$this->dataAccessLog->operation = 'getSucursalTxt';
-		$this->dataRequest->idOperation = 'getSucursalTxt';
-		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
-		$this->dataRequest->file = $dataRequest->file;
+		//$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
+
 		$this->isResponseRc = 0;
 
-		switch($this->isResponseRc ) {
-			case 0:
-				$this->response->code = 0;
-				$this->response->data = $dataRequest->file;
-			break;
+		if ($this->isResponseRc === 0) {
+			$this->dataAccessLog->modulo = 'getSucursalTxt';
+			$this->dataAccessLog->function = 'getSucursalTxt';
+			$this->dataAccessLog->operation = 'getSucursalTxt';
+
+			$this->dataRequest->idOperation = 'getSucursalTxt';
+			$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
+
+			$this->dataRequest->data = [
+				"pais" => $this->session->userdata('pais'),
+				"idOperation" => $this->dataRequest->idOperation,
+				"className" => $this->dataRequest->className,
+				"rif"=> $dataRequest->rif,
+				"url"=>$dataRequest->fileName,
+				"idTipoLote"=>"7",
+				"usuario"=> $this->session->userdata('userName'),
+				"logAccesoObject" => $this->dataAccessLog,
+				"token" => $this->session->userdata('token'),
+			];
+
+			$response = $this->sendToService('CallWs_UploadFileBranch');
+
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->icon =  lang('CONF_ICON_SUCCESS');
+					$this->response->msg = 'Sucursales Cargadas con exito';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+			}
+
+		} else {
+			$this->response->code = 2;
+			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->msg = lang('BULK_FILE_NO_MOVE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
-		return $this->responseToTheView('CallWs_uploadFileBranches');
+		return $this->responseToTheView('UploadFileBranches');
 	}
 
 }
