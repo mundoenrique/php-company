@@ -202,16 +202,10 @@ function getCallNovoCore(data, btn){
 
 			$('#accept').on('click', function(e) {
 				e.preventDefault();
-				$(this).html(loader);
-
+				$('#system-info').dialog('destroy');
 				var newData = {};
 				newData.branchListBr=data.rif;
-				$('#partedSection').addClass('visible')
-				$('.hide-out').addClass('visible');
 				getBranches (newData);
-				// $('#partedSection').removeClass('visible')
-				// $('.hide-out').removeClass('visible');
-
 			})
 		}
 	});
