@@ -14,6 +14,24 @@ $('#partedSection').hide();
 		}
 	})
 
+	// var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
+	// var inputFile = LoadBulk ? $('#fileBranch').next('.js-label-file').html().trim() : '';
+
+	$('.input-file').each(function () {
+		var label = $(this).next('.js-label-file');
+    var labelVal = label.html();
+
+		$(this).on('change', function (element) {
+			$(this)
+				.focus()
+				.blur();
+      var fileName = '';
+      if (element.target.value) fileName = element.target.value.split('\\').pop();
+			fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
+			validInputFile();
+    });
+	});
+
 	$('#branchListBr').on('change', function (e) {
 		e.preventDefault();
 
@@ -68,7 +86,34 @@ $('#partedSection').hide();
 				getCallNovoCore(data, btn);
 			}
 		}
-});
+	});
+
+	$('#btnBranchUpload').on('click', function(e) {
+		e.preventDefault();
+		var btnAction = $(this);
+		btnText = btnAction.text().trim();
+		form = $('#txtBranchesForm');
+		validInputFile();
+		validateForms(form);
+
+		if(form.valid()) {
+			$(this).html(loader);
+			data = {
+				file: $('#fileBranch')[0].files[0],
+			}
+			insertFormInput(true);
+			who = 'Settings';
+			where = 'UploadFileBranch';
+
+			callNovoCore(who, where, data, function(response) {
+				btnAction.html(btnText);
+				insertFormInput(false);
+				$('#fileBranch').val('');
+				$('#fileBranch').next('.js-label-file').html(inputFile);
+				// respLoadBulk[response.code](response);
+			});
+		}
+	});
 });
 
 
@@ -210,3 +255,14 @@ function getCallNovoCore(data, btn){
 		}
 	});
 };
+
+function validInputFile() {
+	form = $('#txtBranchesForm');
+	validateForms(form);
+
+	if ($('#fileBranch').valid()) {
+		$('.js-label-file').removeClass('has-error');
+	} else {
+		$('.js-label-file').addClass('has-error');
+	}
+}

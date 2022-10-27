@@ -457,8 +457,8 @@
 										<div class="container">
 											<div class="row justify-between items-center mb-2">
 												<div class="form-group col-7">
-													<input type="file" name="file-branch" id="file-branch" class="input-file">
-													<label for="file-branch" class="form-control label-file js-label-file mb-0">
+													<input type="file" name="fileBranch" id="fileBranch" class="input-file">
+													<label for="fileBranch" class="form-control label-file js-label-file mb-0">
 														<i class="icon icon-upload mr-1 pr-3 right"></i>
 														<span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
 													</label>
