@@ -14,8 +14,8 @@ $('#partedSection').hide();
 		}
 	})
 
-	// var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
-	// var inputFile = LoadBulk ? $('#fileBranch').next('.js-label-file').html().trim() : '';
+	 var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
+	 var inputFile = LoadBulk ? $('#fileBranch').next('.js-label-file').html().trim() : '';
 
 	$('.input-file').each(function () {
 		var label = $(this).next('.js-label-file');
@@ -85,33 +85,6 @@ $('#partedSection').hide();
 				data.branch = 'updateBranch';
 				getCallNovoCore(data, btn);
 			}
-		}
-	});
-
-	$('#btnBranchUpload').on('click', function(e) {
-		e.preventDefault();
-		var btnAction = $(this);
-		btnText = btnAction.text().trim();
-		form = $('#txtBranchesForm');
-		validInputFile();
-		validateForms(form);
-
-		if(form.valid()) {
-			$(this).html(loader);
-			data = {
-				file: $('#fileBranch')[0].files[0],
-			}
-			insertFormInput(true);
-			who = 'Settings';
-			where = 'UploadFileBranch';
-
-			callNovoCore(who, where, data, function(response) {
-				btnAction.html(btnText);
-				insertFormInput(false);
-				$('#fileBranch').val('');
-				$('#fileBranch').next('.js-label-file').html(inputFile);
-				// respLoadBulk[response.code](response);
-			});
 		}
 	});
 });
@@ -264,5 +237,62 @@ function validInputFile() {
 		$('.js-label-file').removeClass('has-error');
 	} else {
 		$('.js-label-file').addClass('has-error');
+	}
+}
+
+$('#btnBranchUpload').on('click', function(e) {
+	e.preventDefault();
+	var btnAction = $(this);
+	btnText = btnAction.text().trim();
+	form = $('#txtBranchesForm');
+	validInputFile();
+	validateForms(form);
+
+	if(form.valid()) {
+		$(this).html(loader);
+		data = {
+			rif : $("option:selected", '#branchListBr').val(),
+			file: $('#fileBranch')[0].files[0],
+			typeBulkText: 'archivo_prueba',
+		}
+		insertFormInput(true);
+		who = 'Settings';
+		where = 'UploadFileBranch';
+
+		callNovoCore(who, where, data, function(response) {
+			btnAction.html(btnText);
+			insertFormInput(false);
+			$('#fileBranch').val('');
+			$('#fileBranch').next('.js-label-file').html(inputFile);
+			//respLoadBulk[response.code](response);
+		});
+	}
+});
+
+const respLoadBulk = {
+	2: function(response) {
+		appMessages(response.title, response.msg, response.icon, response.modalBtn);
+	},
+	3: function(response) {
+		var msgModal = '';
+
+		$.each(response.msg, function(item, content) {
+			if(item == 'header') {
+				$.each(content, function(index, value) {
+					msgModal+= '<h5 class="regular mr-1">'+value+'</h5>';
+				});
+			}
+
+			if(item == 'fields') {
+				$.each(content, function(index, value) {
+					msgModal+= '<h5>'+index+'</h5>';
+					$.each(value, function(pos, val) {
+						msgModal+= '<h6 class="light mr-1">'+val+'</h6>';
+					})
+				});
+			}
+		});
+
+		appMessages(response.title, msgModal, response.icon, response.modalBtn);
 	}
 }

@@ -878,13 +878,6 @@ $config = [
 			'rules' => 'null'
 		]
 	],
-	'getBranches' => [
-		[
-			'field' => 'branchListBr',
-			'label' => 'branchListBr',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
-		]
-	],
 	'getContacts' =>[
 		[
 			'field' => 'acrif',
@@ -892,23 +885,85 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
-	'uploadFileBranches' => [
-		[
-			'field' => 'file',
-			'label' => 'file',
-			'rules' => 'trim|regex_match[/^[0-9a-zA-z.\/]+$/]|required'
-		],
-		[
-			'field' => 'typeBulkText',
-			'label' => 'typeBulkText',
-			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
-		]
-	],
 	'geoFilter' => [
 		[
 			'field' => 'data[]',
 			'label' => 'data',
 			'rules' => 'required'
+		]
+	],
+	'getBranches' => [
+		[
+			'field' => 'branchListBr',
+			'label' => 'branchListBr',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		]
+	],
+	'addBranch' => [
+		[
+			'field' => 'rif',
+			'label' => 'rif',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'branchName',
+			'label' => 'branchName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'zoneName',
+			'label' => 'zoneName',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'address1',
+			'label' => 'address1',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'countryCodBranch',
+			'label' => 'countryCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'stateCodBranch',
+			'label' => 'stateCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'cityCodBranch',
+			'label' => 'cityCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'branchCode',
+			'label' => 'branchCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'password1',
+			'label' => 'password1',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 	'updateBranch' => [
@@ -983,71 +1038,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
-	'addBranch' => [
+	'uploadFileBranch' => [
 		[
 			'field' => 'rif',
 			'label' => 'rif',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'branchName',
-			'label' => 'branchName',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
-		],
-		[
-			'field' => 'zoneName',
-			'label' => 'zoneName',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-		[
-			'field' => 'address1',
-			'label' => 'address1',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
-		],
-		[
-			'field' => 'address2',
-			'label' => 'address2',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
-		],
-		[
-			'field' => 'address3',
-			'label' => 'address3',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
-		],
-		[
-			'field' => 'countryCodBranch',
-			'label' => 'countryCodBranch',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-		[
-			'field' => 'stateCodBranch',
-			'label' => 'stateCodBranch',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-		[
-			'field' => 'cityCodBranch',
-			'label' => 'cityCodBranch',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-		[
-			'field' => 'areaCode',
-			'label' => 'areaCode',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
-		],
-		[
-			'field' => 'phone',
-			'label' => 'phone',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
-		],
-		[
-			'field' => 'branchCode',
-			'label' => 'branchCode',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-		[
-			'field' => 'password1',
-			'label' => 'password1',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
 		]
 	],
 	'unnamedRequest' => [

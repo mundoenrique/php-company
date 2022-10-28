@@ -173,7 +173,7 @@ class Verify_Access {
 			case 'getFileIni':
 			case 'getBranches':
 			case 'getContacts':
-			case 'uploadFileBranches':
+			case 'uploadFileBranch':
 			case 'updateBranch':
 			case 'updateContact':
 			case 'deleteFile':

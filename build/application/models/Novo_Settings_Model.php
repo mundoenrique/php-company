@@ -453,7 +453,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date May 20th, 2021
 	 */
-	public function CallWs_getBranches_Settings_old($dataRequest)
+	/*public function CallWs_getBranches_Settings_old($dataRequest)
 	{
 		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
 
@@ -553,7 +553,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		};
 
 		return $this->responseToTheView('CallWs_getBranches');
-	}
+	}*/
 
 	/**
 	 * @info Método para búsqueda de sucursales refactorizado
