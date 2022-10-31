@@ -739,7 +739,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO UploadFileBranch Model: UploadFileBranch Method Initialized');
 
-		//$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
+		$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
 
 		$this->isResponseRc = 0;
 
@@ -763,14 +763,14 @@ class Novo_Settings_Model extends NOVO_Model {
 				"token" => $this->session->userdata('token'),
 			];
 
-			$response = $this->sendToService('CallWs_UploadFileBranch');
-
+			//$response = $this->sendToService('CallWs_UploadFileBranch');
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
 					$this->response->msg = 'Sucursales Cargadas con exito';
-					$this->response->modalBtn['btn1']['action'] = 'destroy';
+					$this->response->modalBtn['btn1']['action'] = 'none';
 			}
 
 		} else {

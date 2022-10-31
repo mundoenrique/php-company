@@ -14,9 +14,6 @@ $('#partedSection').hide();
 		}
 	})
 
-	 var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
-	 var inputFile = LoadBulk ? $('#fileBranch').next('.js-label-file').html().trim() : '';
-
 	$('.input-file').each(function () {
 		var label = $(this).next('.js-label-file');
     var labelVal = label.html();
@@ -212,12 +209,11 @@ function getCallNovoCore(data, btn){
 	where = data.branch;
 	callNovoCore(who, where, data, function (response) {
 		dataResponse = response;
+		btn.btnAction.html(btn.btnText);
+		insertFormInput(false);
+
 		if(dataResponse.code==0){
-			btn.btnAction.html(btn.btnText);
-			insertFormInput(false);
-
 			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-
 			$('#accept').on('click', function(e) {
 				e.preventDefault();
 				$('#system-info').dialog('destroy');
@@ -242,57 +238,43 @@ function validInputFile() {
 
 $('#btnBranchUpload').on('click', function(e) {
 	e.preventDefault();
-	var btnAction = $(this);
-	btnText = btnAction.text().trim();
 	form = $('#txtBranchesForm');
 	validInputFile();
 	validateForms(form);
 
 	if(form.valid()) {
-		$(this).html(loader);
+		var btnAction =  $(this);
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+
+		var btn={};
+		btn.btnAction = btnAction;
+		btn.btnText =btnText;
+		insertFormInput(true);
 		data = {
 			rif : $("option:selected", '#branchListBr').val(),
 			file: $('#fileBranch')[0].files[0],
-			typeBulkText: 'archivo_prueba',
+			typeBulkText: 'archivo_lista_sucursales'
 		}
-		insertFormInput(true);
 		who = 'Settings';
 		where = 'UploadFileBranch';
-
-		callNovoCore(who, where, data, function(response) {
-			btnAction.html(btnText);
+		callNovoCore(who, where, data, function (response) {
+			dataResponse = response;
+			btn.btnAction.html(btn.btnText);
 			insertFormInput(false);
-			$('#fileBranch').val('');
-			$('#fileBranch').next('.js-label-file').html(inputFile);
-			//respLoadBulk[response.code](response);
+
+			if(dataResponse.code==0){
+				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+				$('#accept').on('click', function(e) {
+					e.preventDefault();
+					$('#system-info').dialog('destroy');
+					var newData = {};
+					newData.branchListBr=data.rif;
+					getBranches (newData);
+				})
+			}else{
+				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+			}
 		});
 	}
 });
-
-const respLoadBulk = {
-	2: function(response) {
-		appMessages(response.title, response.msg, response.icon, response.modalBtn);
-	},
-	3: function(response) {
-		var msgModal = '';
-
-		$.each(response.msg, function(item, content) {
-			if(item == 'header') {
-				$.each(content, function(index, value) {
-					msgModal+= '<h5 class="regular mr-1">'+value+'</h5>';
-				});
-			}
-
-			if(item == 'fields') {
-				$.each(content, function(index, value) {
-					msgModal+= '<h5>'+index+'</h5>';
-					$.each(value, function(pos, val) {
-						msgModal+= '<h6 class="light mr-1">'+val+'</h6>';
-					})
-				});
-			}
-		});
-
-		appMessages(response.title, msgModal, response.icon, response.modalBtn);
-	}
-}
