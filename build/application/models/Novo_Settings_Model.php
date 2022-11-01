@@ -741,8 +741,6 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
 
-		$this->isResponseRc = 0;
-
 		if ($this->isResponseRc === 0) {
 			$this->dataAccessLog->modulo = 'getSucursalTxt';
 			$this->dataAccessLog->function = 'getSucursalTxt';
@@ -771,6 +769,19 @@ class Novo_Settings_Model extends NOVO_Model {
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
 					$this->response->msg = 'Sucursales Cargadas con exito';
 					$this->response->modalBtn['btn1']['action'] = 'none';
+				break;
+				case -166:
+					$this->response->code = 2;
+					$this->response->icon =  lang('CONF_ICON_WARNING');
+					$this->response->msg = 'Error en la carga del archivo de las sucursales';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+				case -167:
+					$this->response->code = 2;
+					$this->response->icon =  lang('CONF_ICON_WARNING');
+					$this->response->msg = 'Proceso fallido, error con el archivo';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			}
 
 		} else {
