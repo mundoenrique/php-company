@@ -55,7 +55,6 @@ function validateForms(form) {
 			"type-bulk": { requiredTypeBulk: true },
 			"file-bulk": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
 			"fileBranch": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
-			"file-branch": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {
@@ -302,11 +301,6 @@ function validateForms(form) {
 				sizeFile: lang.VALIDATE_FILE_SIZE
 			},
 			"fileBranch": {
-				required: lang.VALIDATE_FILE_TYPE,
-				extension: lang.VALIDATE_FILE_TYPE,
-				sizeFile: lang.VALIDATE_FILE_SIZE
-			},
-			"file-branch": {
 				required: lang.VALIDATE_FILE_TYPE,
 				extension: lang.VALIDATE_FILE_TYPE,
 				sizeFile: lang.VALIDATE_FILE_SIZE

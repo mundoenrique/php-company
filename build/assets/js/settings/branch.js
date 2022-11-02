@@ -238,6 +238,8 @@ function getCallNovoCore(data, btn){
 		insertFormInput(false);
 
 		if(dataResponse.code==0){
+			$('#fileBranch').val('');
+			$('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE)
 			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 			$('#accept').on('click', function(e) {
 				e.preventDefault();
