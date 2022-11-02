@@ -182,6 +182,31 @@ function branchesTable( dataResponse ) {
 	return table;
 };
 
+$('#btnBranchUpload').on('click', function(e) {
+	e.preventDefault();
+	form = $('#txtBranchesForm');
+	validInputFile();
+	validateForms(form);
+
+	if(form.valid()) {
+		var btnAction =  $(this);
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+
+		var btn={};
+		btn.btnAction = btnAction;
+		btn.btnText =btnText;
+		insertFormInput(true);
+		data = {
+			rif : $("option:selected", '#branchListBr').val(),
+			file: $('#fileBranch')[0].files[0],
+			typeBulkText: 'archivo_lista_sucursales',
+			branch : 'UploadFileBranch',
+		}
+		getCallNovoCore(data, btn);
+	}
+});
+
 function showManageBranchView(action) {
 	$('#partedSection').hide();
 	$('#editAddBranchSection').fadeIn(700, 'linear');
@@ -221,6 +246,8 @@ function getCallNovoCore(data, btn){
 				newData.branchListBr=data.rif;
 				getBranches (newData);
 			})
+		}else{
+			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 		}
 	});
 };
@@ -234,47 +261,4 @@ function validInputFile() {
 	} else {
 		$('.js-label-file').addClass('has-error');
 	}
-}
-
-$('#btnBranchUpload').on('click', function(e) {
-	e.preventDefault();
-	form = $('#txtBranchesForm');
-	validInputFile();
-	validateForms(form);
-
-	if(form.valid()) {
-		var btnAction =  $(this);
-		btnText = btnAction.text().trim();
-		btnAction.html(loader);
-
-		var btn={};
-		btn.btnAction = btnAction;
-		btn.btnText =btnText;
-		insertFormInput(true);
-		data = {
-			rif : $("option:selected", '#branchListBr').val(),
-			file: $('#fileBranch')[0].files[0],
-			typeBulkText: 'archivo_lista_sucursales'
-		}
-		who = 'Settings';
-		where = 'UploadFileBranch';
-		callNovoCore(who, where, data, function (response) {
-			dataResponse = response;
-			btn.btnAction.html(btn.btnText);
-			insertFormInput(false);
-
-			if(dataResponse.code==0){
-				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-				$('#accept').on('click', function(e) {
-					e.preventDefault();
-					$('#system-info').dialog('destroy');
-					var newData = {};
-					newData.branchListBr=data.rif;
-					getBranches (newData);
-				})
-			}else{
-				appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-			}
-		});
-	}
-});
+};

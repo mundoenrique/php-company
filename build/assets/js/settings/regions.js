@@ -5,14 +5,24 @@ function getRegion(dataResponse,row){
 	var region = dataResponse.paisTo;
 	var selectedState = '';
 	var selectedCity = '';
-	var country = region.codPais ? region.pais : lang.GEN_BTN_SELECT;
+	var disabled = 'disabled';
+	var country = lang.GEN_BTN_SELECT;
+	var codCountry = '';
+	//var country = region.codPais ? region.pais : lang.GEN_BTN_SELECT;
+	//var codCountry = region.codPais ? region.codPais : '';
+
+	if (region){
+		disabled = '';
+		country = region.pais;
+		codCountry = region.codPais;
+	}
 
 	$('#countryCodBranch').empty();
-	$('#countryCodBranch').append('<option value="' + region.codPais + '">' + country + '</option>');
+	$('#countryCodBranch').append('<option value="' + codCountry + '" selected ' + disabled + '>' + country + '</option>');
 	$('#stateCodBranch').empty();
-	$('#stateCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+	$('#stateCodBranch').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 	$('#cityCodBranch').empty();
-  $('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+  $('#cityCodBranch').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 
 	$.each(region.listaEstados, function(key, val){
 		if(row!=''){
@@ -27,7 +37,7 @@ function getRegion(dataResponse,row){
 
 	$('#stateCodBranch').on('change', function () {
 		$('#cityCodBranch').empty();
-		$('#cityCodBranch').prepend('<option value="" selected disabled>' + lang.GEN_BTN_SELECT + '</option>');
+		$('#cityCodBranch').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 		getCities($(this).val());
 	});
 

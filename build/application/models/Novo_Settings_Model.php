@@ -767,19 +767,19 @@ class Novo_Settings_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
-					$this->response->msg = 'Sucursales Cargadas con exito';
+					$this->response->msg = 'Sucursales Cargadas con exito.';
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 				case -166:
 					$this->response->code = 2;
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = 'Error en la carga del archivo de las sucursales';
+					$this->response->msg = 'Error en la carga del archivo de las sucursales.';
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 				case -167:
 					$this->response->code = 2;
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = 'Proceso fallido, error con el archivo';
+					$this->response->msg = 'Proceso fallido, error con el archivo.';
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			}
@@ -787,7 +787,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		} else {
 			$this->response->code = 2;
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->msg = lang('BULK_FILE_NO_MOVE');
+			$this->response->msg = 'No fue posible mover el archivo al servidor, por favor intentalo de nuevo.';
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
