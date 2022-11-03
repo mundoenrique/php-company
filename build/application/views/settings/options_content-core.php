@@ -491,17 +491,17 @@
 												<input id="codB" name="codB" type="text" class="form-control hidden" />
 												<input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchName"><?= lang('GEN_NAME') ?> *</label>
+													<label for="branchName"><?= lang('GEN_NAME') ?></label>
 													<input id="branchName" name="branchName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="zoneName"><?= lang('GEN_ZONE') ?> *</label>
+													<label for="zoneName"><?= lang('GEN_ZONE') ?></label>
 													<input id="zoneName" name="zoneName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?> *</label>
+													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?></label>
 													<input id="address1" name="address1" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
@@ -516,19 +516,19 @@
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4 hidden">
-													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?> *</label>
+													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?></label>
 													<select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="stateCodBranch"><?= lang('GEN_PROVINCE') ?> *</label>
+													<label or="stateCodBranch"><?= lang('GEN_PROVINCE') ?></label>
 													<select id="stateCodBranch" name="stateCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?> *</label>
+													<label or="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?></label>
 													<select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
@@ -557,7 +557,7 @@
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?> *</label>
+													<label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?></label>
 													<input id="branchCode" name="branchCode" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
