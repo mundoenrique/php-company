@@ -55,6 +55,10 @@ $('#partedSection').hide();
 	$('#backLoadBranchBtn').on('click', function (e) {
 		$('#partedSection').fadeIn(700, 'linear');
 		$('#branchLoadSection').hide();
+		$('#fileBranch').val('');
+    $('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE);
+		$('.has-error').removeClass("has-error");
+		$('.help-block').text('');
 	});
 });
 
