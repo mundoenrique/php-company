@@ -439,6 +439,12 @@ $lang["GEN_AREA"] = "Area";
 $lang["GEN_BUSINESS_NAME"] = "Business name";
 $lang["GEN_BILLING_ADDRESS"] = "Billing Address";
 $lang["GEN_NIT"] = "NIT";
+$lang["GEN_BRANCH_ADD"] = "Branch added successfully";
+$lang["GEN_BRANCH_UPDATE"] = "Branch updated successfully";
+$lang["GEN_BRANCH_UPLOAD"] = "Branches loaded successfully";
+$lang["GEN_BRANCH_FILE_ERROR_UPLOAD"] = "Error uploading the file from the branches";
+$lang["GEN_BRANCH_FILE_ERROR"] = "Failed process, error with the file";
+$lang["GEN_BRANCH_FILE_NO_MOVE"] = "Could not move the file to the server, please try again";
 
 
 

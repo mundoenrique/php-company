@@ -449,113 +449,6 @@ class Novo_Settings_Model extends NOVO_Model {
 	}
 
 	/**
-	 * @info Método para busqueda de sucursales
-	 * @author Diego Acosta García
-	 * @date May 20th, 2021
-	 */
-	/*public function CallWs_getBranches_Settings_old($dataRequest)
-	{
-		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
-
-		$this->dataAccessLog->modulo = 'getConsultarSucursales';
-		$this->dataAccessLog->function = 'getConsultarSucursales';
-		$this->dataAccessLog->operation = 'getConsultarSucursales';
-		$this->dataRequest->lista = [
-			[
-				"rif" => $dataRequest->branchListBr
-			]
-		];
-		$this->dataRequest->paginaActual = 1;
-		$this->dataRequest->tamanoPagina = 10;
-		$this->dataRequest->paginar = false;
-		$this->dataRequest->idOperation = 'getConsultarSucursales';
-		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
-		$profile = 'S';
-		$country = $this->customerUri;
-
-		$response = $this->sendToService('CallWs_getBranches');
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$infoBranches = $response->lista;
-				$tableBranches = [];
-
-				foreach ($infoBranches as $key0 => $value0) {
-
-					$geographic[$key0] = [
-						"state" => $infoBranches[$key0]->estado,
-						"city"=> $infoBranches[$key0]->ciudad
-					];
-
-					$tableBranches[$key0] = [
-						"id" => $key0,
-						"rifB" => $infoBranches[$key0]->rif,
-						"codB" => $infoBranches[$key0]->cod,
-						"person" => $infoBranches[$key0]->persona,
-						"userNameB" => $infoBranches[$key0]->usuario,
-						"branchName" =>$infoBranches[$key0]->nomb_cia,
-						"branchCode" =>$infoBranches[$key0]->codigo,
-						"contact" =>$infoBranches[$key0]->persona,
-						"phone" =>$infoBranches[$key0]->telefono,
-						"zoneName" =>$infoBranches[$key0]->zona,
-						"address1" =>$infoBranches[$key0]->direccion_1,
-						"address2" =>$infoBranches[$key0]->direccion_2,
-						"address3" =>$infoBranches[$key0]->direccion_3,
-						"areaCode" =>$infoBranches[$key0]->cod_area
-					];
-
-					if (array_key_exists("paisTo", $response)) {
-						$country = $response->paisTo->pais;
-
-						foreach ($response->paisTo->listaEstados as $key1 => $value1) {
-							$stateName = $response->paisTo->listaEstados[$key1]->estados;
-
-								foreach ($response->paisTo->listaEstados[$key1]->listaCiudad as $key2 => $value2) {
-									$cities = [$response->paisTo->listaEstados[$key1]->listaCiudad, $response->paisTo->listaEstados[$key1]->listaCiudad[$key2]->ciudad];
-							};
-						};
-
-						foreach ($cities[0] as $key => $value) {
-							if (array_key_exists('listaDistrito', ($cities[0][$key]))) {
-								$profile = 'L';
-								$districts[$key] = $cities[0][$key]->ListaDistrito;
-							};
-						};
-					};
-
-					$this->response->country = [
-						"countryCodeBranch" =>  $infoBranches[0]->codPais,
-						"countryNameBranch" =>  $country,
-						"statesList" => $response->paisTo->listaEstados
-					];
-				};
-
-				$this->response->data = $tableBranches;
-				$this->response->geoUserData = $geographic;
-				$this->response->geoInfo = $response->paisTo;
-				$this->response->longProfile = $profile;
-				$this->response->infoBranches = $stateName;
-
-				break;
-			case -150:
-				$this->response->code = 7;
-				$this->response->geoInfo = $response->paisTo;
-				$this->response->longProfile = $profile;
-				$this->response->country = [
-					"countryCodeBranch" =>  $response->paisTo->codPais,
-					"countryNameBranch" =>  $country,
-				];
-				break;
-			default:
-				$this->response->code = 2;
-				break;
-		};
-
-		return $this->responseToTheView('CallWs_getBranches');
-	}*/
-
-	/**
 	 * @info Método para búsqueda de sucursales refactorizado
 	 * @author Luis Molina
 	 * @date Jun 01th, 2022
@@ -668,7 +561,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = 'Sucursal cargada con exito';
+				$this->response->msg = lang('GEN_BRANCH_ADD');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -722,7 +615,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = 'Sucursal Actualizada con exito';
+				$this->response->msg = lang('GEN_BRANCH_UPDATE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -767,19 +660,19 @@ class Novo_Settings_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
-					$this->response->msg = 'Sucursales Cargadas con exito.';
+					$this->response->msg = lang('GEN_BRANCH_UPLOAD');
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 				case -166:
 					$this->response->code = 2;
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = 'Error en la carga del archivo de las sucursales.';
+					$this->response->msg = lang('GEN_BRANCH_FILE_ERROR_UPLOAD');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 				case -167:
 					$this->response->code = 2;
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = 'Proceso fallido, error con el archivo.';
+					$this->response->msg = lang('GEN_BRANCH_FILE_ERROR');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			}
@@ -787,7 +680,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		} else {
 			$this->response->code = 2;
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->msg = 'No fue posible mover el archivo al servidor, por favor intentalo de nuevo.';
+			$this->response->msg = lang('GEN_BRANCH_FILE_NO_MOVE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 

@@ -444,6 +444,13 @@ $lang["GEN_AREA"] = "Área";
 $lang["GEN_BUSINESS_NAME"] = "Razón social";
 $lang["GEN_BILLING_ADDRESS"] = "Dirección de facturación";
 $lang["GEN_NIT"] = "NIT";
+$lang["GEN_BRANCH_ADD"] = "Sucursal agregada con exito";
+$lang["GEN_BRANCH_UPDATE"] = "Sucursal Actualizada con exito";
+$lang["GEN_BRANCH_UPLOAD"] = "Sucursales Cargadas con exito";
+$lang["GEN_BRANCH_FILE_ERROR_UPLOAD"] = "Error en la carga del archivo de las sucursales";
+$lang["GEN_BRANCH_FILE_ERROR"] = "Proceso fallido, error con el archivo";
+$lang["GEN_BRANCH_FILE_NO_MOVE"] = "No fue posible mover el archivo al servidor, por favor intentalo de nuevo";
+$lang["GEN_BRANCH_FILE_MASSIVE"] = "masivo_sucursales";
 
 
 

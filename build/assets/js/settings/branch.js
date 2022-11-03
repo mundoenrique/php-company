@@ -56,34 +56,6 @@ $('#partedSection').hide();
 		$('#partedSection').fadeIn(700, 'linear');
 		$('#branchLoadSection').hide();
 	});
-
-	$("#btnSaveBranch").on("click", function(e) {
-		form = $('#branchInfoForm');
-		validateForms(form);
-
-		if (form.valid()) {
-			var btnAction = $('#btnSaveBranch');
-			btnText = btnAction.text().trim();
-			btnAction.html(loader);
-
-			var btn={};
-			btn.btnAction = btnAction;
-			btn.btnText =btnText;
-			insertFormInput(true);
-			data = getDataForm(form);
-			data.pass = cryptoPass(data.password1);
-
-			if ($(this).attr('data-action') == 'saveCreate') {
-				data.rif = $("option:selected", '#branchListBr').val();
-				data.branch = 'addBranch';
-				getCallNovoCore(data, btn);
-			}else{
-				data.rif = data.rifB;
-				data.branch = 'updateBranch';
-				getCallNovoCore(data, btn);
-			}
-		}
-	});
 });
 
 
@@ -119,6 +91,84 @@ function getBranches (value) {
 		}else if (dataResponse.code == 1){
 			branchesTable(dataResponse);
 			$('#partedSection').show();
+		}
+	});
+};
+
+$("#btnSaveBranch").on("click", function(e) {
+	form = $('#branchInfoForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		var btnAction = $('#btnSaveBranch');
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+
+		var btn={};
+		btn.btnAction = btnAction;
+		btn.btnText =btnText;
+		insertFormInput(true);
+		data = getDataForm(form);
+		data.pass = cryptoPass(data.password1);
+
+		if ($(this).attr('data-action') == 'saveCreate') {
+			data.rif = $("option:selected", '#branchListBr').val();
+			data.branch = 'addBranch';
+			getCallNovoCore(data, btn);
+		}else{
+			data.rif = data.rifB;
+			data.branch = 'updateBranch';
+			getCallNovoCore(data, btn);
+		}
+	}
+});
+
+$('#btnBranchUpload').on('click', function(e) {
+	e.preventDefault();
+	form = $('#txtBranchesForm');
+	validInputFile();
+	validateForms(form);
+
+	if(form.valid()) {
+		var btnAction =  $(this);
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+
+		var btn={};
+		btn.btnAction = btnAction;
+		btn.btnText =btnText;
+		insertFormInput(true);
+		data = {
+			rif : $("option:selected", '#branchListBr').val(),
+			file: $('#fileBranch')[0].files[0],
+			typeBulkText: lang.GEN_BRANCH_FILE_MASSIVE,
+			branch : 'UploadFileBranch',
+		}
+		getCallNovoCore(data, btn);
+	}
+});
+
+function getCallNovoCore(data, btn){
+	who = 'Settings';
+	where = data.branch;
+	callNovoCore(who, where, data, function (response) {
+		dataResponse = response;
+		btn.btnAction.html(btn.btnText);
+		insertFormInput(false);
+
+		if(dataResponse.code==0){
+			$('#fileBranch').val('');
+			$('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE)
+			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+			$('#accept').on('click', function(e) {
+				e.preventDefault();
+				$('#system-info').dialog('destroy');
+				var newData = {};
+				newData.branchListBr=data.rif;
+				getBranches (newData);
+			})
+		}else{
+			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 		}
 	});
 };
@@ -182,31 +232,6 @@ function branchesTable( dataResponse ) {
 	return table;
 };
 
-$('#btnBranchUpload').on('click', function(e) {
-	e.preventDefault();
-	form = $('#txtBranchesForm');
-	validInputFile();
-	validateForms(form);
-
-	if(form.valid()) {
-		var btnAction =  $(this);
-		btnText = btnAction.text().trim();
-		btnAction.html(loader);
-
-		var btn={};
-		btn.btnAction = btnAction;
-		btn.btnText =btnText;
-		insertFormInput(true);
-		data = {
-			rif : $("option:selected", '#branchListBr').val(),
-			file: $('#fileBranch')[0].files[0],
-			typeBulkText: 'archivo_lista_sucursales',
-			branch : 'UploadFileBranch',
-		}
-		getCallNovoCore(data, btn);
-	}
-});
-
 function showManageBranchView(action) {
 	$('#partedSection').hide();
 	$('#editAddBranchSection').fadeIn(700, 'linear');
@@ -228,31 +253,6 @@ function showManageBranchView(action) {
 			break;
 	}
 }
-
-function getCallNovoCore(data, btn){
-	who = 'Settings';
-	where = data.branch;
-	callNovoCore(who, where, data, function (response) {
-		dataResponse = response;
-		btn.btnAction.html(btn.btnText);
-		insertFormInput(false);
-
-		if(dataResponse.code==0){
-			$('#fileBranch').val('');
-			$('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE)
-			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-			$('#accept').on('click', function(e) {
-				e.preventDefault();
-				$('#system-info').dialog('destroy');
-				var newData = {};
-				newData.branchListBr=data.rif;
-				getBranches (newData);
-			})
-		}else{
-			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
-		}
-	});
-};
 
 function validInputFile() {
 	form = $('#txtBranchesForm');
