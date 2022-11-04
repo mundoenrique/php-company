@@ -19,15 +19,15 @@
 						<fieldset>
 							<div class="field-input">
 								<label for="current-pass"><?= lang('PASSWORD_CURRENT'); ?></label>
-								<input type="password" id="current-pass" name="current-pass" class="input-middle" required>
+								<input type="password" id="current-pass" name="current-pass" class="input-middle" required disabled>
 							</div>
 							<div class="field-input">
 								<label for="new-pass"><?= lang('PASSWORD_NEW'); ?></label>
-								<input type="password" id="new-pass" name="new-pass" class="input-middle" required>
+								<input type="password" id="new-pass" name="new-pass" class="input-middle" required disabled>
 							</div>
 							<div class="field-input">
 								<label for="confirm-pass"><?= lang('PASSWORD_CONFIRM'); ?></label>
-								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required>
+								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required disabled>
 							</div>
 						</fieldset>
 						<button id="passwordChangeBtn" name="passwordChangeBtn" class="btn-middle btn-sidebar"><?= lang('GEN_BTN_ACCEPT') ?></button>
