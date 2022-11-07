@@ -145,7 +145,7 @@ $('#btnBranchUpload').on('click', function(e) {
 		data = {
 			rif : $("option:selected", '#branchListBr').val(),
 			file: $('#fileBranch')[0].files[0],
-			typeBulkText: lang.GEN_BRANCH_FILE_MASSIVE,
+			typeBulkText: lang.SETTINGS_BRANCH_FILE_MASSIVE,
 			branch : 'UploadFileBranch',
 		}
 		getCallNovoCore(data, btn);
@@ -171,8 +171,6 @@ function getCallNovoCore(data, btn){
 				newData.branchListBr=data.rif;
 				getBranches (newData);
 			})
-		}else{
-			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 		}
 	});
 };

@@ -527,13 +527,13 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Settings Model: addBranch Method Initialized');
 
-		$this->dataAccessLog->modulo = 'getAgregarSucursales';
-		$this->dataAccessLog->function = 'getAgregarSucursales';
-		$this->dataAccessLog->operation = 'getAgregarSucursales';
+		$this->dataAccessLog->modulo = 'Sucursales';
+		$this->dataAccessLog->function = 'Agregar Sucursales';
+		$this->dataAccessLog->operation = 'Agregar';
 		$this->dataRequest->idOperation = 'getAgregarSucursales';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
-		$this->dataRequest->rif = $dataRequest->rif;
+		$this->dataRequest->rif = $dataRequest->rif;//idFiscal
 		$this->dataRequest->codigo = $dataRequest->branchCode;
 		$this->dataRequest->nomb_cia = $dataRequest->branchName;
 		$this->dataRequest->direccion_1 = $dataRequest->address1;
@@ -561,7 +561,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = lang('GEN_BRANCH_ADD');
+				$this->response->msg = lang('SETTINGS_BRANCH_ADD');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -580,13 +580,13 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
 
-		$this->dataAccessLog->modulo = 'getActualizarSucursal';
-		$this->dataAccessLog->function = 'getActualizarSucursal';
-		$this->dataAccessLog->operation = 'getActualizarSucursal';
+		$this->dataAccessLog->modulo = 'Sucursales';
+		$this->dataAccessLog->function = 'Actualizar Sucursales';
+		$this->dataAccessLog->operation = 'Actualizar';
 		$this->dataRequest->idOperation = 'getActualizarSucursal';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
-		$this->dataRequest->rif = $dataRequest->rif;
+		$this->dataRequest->rif = $dataRequest->rif;//idFiscal
 		$this->dataRequest->cod = $dataRequest->codB;
 		$this->dataRequest->nom_cia = $dataRequest->branchName;
 		$this->dataRequest->direccion_1 = $dataRequest->address1;
@@ -615,7 +615,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = lang('GEN_BRANCH_UPDATE');
+				$this->response->msg = lang('SETTINGS_BRANCH_UPDATE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -635,10 +635,9 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
 
 		if ($this->isResponseRc === 0) {
-			$this->dataAccessLog->modulo = 'getSucursalTxt';
-			$this->dataAccessLog->function = 'getSucursalTxt';
-			$this->dataAccessLog->operation = 'getSucursalTxt';
-
+			$this->dataAccessLog->modulo = 'Sucursales';
+			$this->dataAccessLog->function = 'Carga masiva';
+			$this->dataAccessLog->operation = 'Registro masivo';
 			$this->dataRequest->idOperation = 'getSucursalTxt';
 			$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
@@ -646,7 +645,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				"pais" => $this->session->userdata('pais'),
 				"idOperation" => $this->dataRequest->idOperation,
 				"className" => $this->dataRequest->className,
-				"rif"=> $dataRequest->rif,
+				"rif"=> $dataRequest->rif,//idFiscal
 				"url"=>$dataRequest->fileName,
 				"idTipoLote"=>"7",
 				"usuario"=> $this->session->userdata('userName'),
@@ -660,27 +659,20 @@ class Novo_Settings_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
-					$this->response->msg = lang('GEN_BRANCH_UPLOAD');
+					$this->response->msg = lang('SETTINGS_BRANCH_UPLOAD_FILE');
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 				case -166:
-					$this->response->code = 2;
-					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = lang('GEN_BRANCH_FILE_ERROR_UPLOAD');
-					$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
 				case -167:
-					$this->response->code = 2;
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = lang('GEN_BRANCH_FILE_ERROR');
+					$this->response->msg = lang('SETTINGS_BRANCH_NO_LOAD');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			}
 
 		} else {
-			$this->response->code = 2;
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->msg = lang('GEN_BRANCH_FILE_NO_MOVE');
+			$this->response->msg = lang('SETTINGS_BRANCH_FILE_NO_MOVE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 

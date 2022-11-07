@@ -319,24 +319,6 @@ function getContacts (data) {
 	});
 };
 
-
-/*function loadCuntry(data) {
-	$('#countryCodeBranch').empty();
-	$('#countryCodeBranch').append('<option value="' + data.paisTo.codPais + '">' + data.paisTo.pais + '</option>');
-
-	$('#stateCodeBranch').empty();
-	$.each(data.paisTo.listaEstados, function (listaPos, listaItem) {
-		$('#stateCodeBranch').append('<option value="' + listaItem.codEstado + '">' + listaItem.estados + '</option>');
-	});
-
-	var ciudades = data.paisTo.listaEstados.filter(function (dat) { return dat.codEstado == $("option:selected", "#stateCodeBranch").val() });
-
-	$('#cityCodeBranch').empty();
-	$.each(ciudades[0].listaCiudad, function (pos, val) {
-		$('#cityCodeBranch').append('<option value="' + val.codCiudad + '">' + val.ciudad + '</option>');
-	});
-}*/
-
 function validInputFile() {
 	form = $('#txtBranchesForm');
 	validateForms(form);
