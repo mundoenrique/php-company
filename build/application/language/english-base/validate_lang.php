@@ -68,3 +68,7 @@ $lang['VALIDATE_MAX_AMOUNT'] = 'The amount to be transferred must not exceed the
 $lang['VALIDATE_MAX_AMOUNT_TRANSDAILY'] = 'The amount to be transferred must not exceed the maximum daily amount.';
 $lang['VALIDATE_MAX_AMOUNT_TRANSWEEKLY'] = 'The amount to be transferred must not exceed the maximum weekly amount.';
 $lang['VALIDATE_TRANSFERTYPE'] = 'payment';
+$lang['VALIDATE_NAME_BRANCHES'] = 'Indicate a valid name';
+$lang['VALIDATE_ZONE_BRANCHES'] = 'Indicates an area';
+$lang['VALIDATE_CODE_BRANCHES'] = 'Indicate a code';
+$lang['VALIDATE_ADDRESS_BRANCHES'] = 'Indicate a valid address';

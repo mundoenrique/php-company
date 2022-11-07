@@ -44,7 +44,9 @@ $('#partedSection').hide();
 		$('#branchLoadSection').fadeIn(700, 'linear');
 	});
 
-	$("#newBranchBtn").on("click", (e) => showManageBranchView("create"));
+	$('#newBranchBtn').on('click', function (e) {
+		showManageBranchView("create")
+	});
 
 	$('#backBranchBtn').on('click', function (e) {
 		$('#partedSection').fadeIn(700, 'linear');
@@ -180,7 +182,7 @@ function branchesTable( dataResponse ) {
 	table = $('#tableBranches').DataTable({
 		"autoWidth": false,
 		"ordering": false,
-		"searching": false,
+		"searching": true,
 		"lengthChange": false,
 		"pagelength": 10,
 		"pagingType": "full_numbers",
@@ -244,13 +246,13 @@ function showManageBranchView(action) {
 			getRegion(dataResponse,'');
 			$('#btnSaveBranch').attr('data-action', 'saveCreate');
 			$('#branchCode').attr("disabled", false);
-			$('#editAddBranchText').html(lang.GEN_ADD +' '+ lang.GEN_BRANC_OFFICE);
+			$('#editAddBranchText').html(lang.GEN_NEW +' '+ lang.GEN_BRANC_OFFICE.toLowerCase());
 			$('#branchInfoForm')[0].reset();
 			break;
 		case "update":
 			$('#btnSaveBranch').attr('data-action', 'saveUpdate');
 			$('#branchCode').attr("disabled", true);
-			$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE);
+			$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE.toLowerCase());
 			$('#password1').val('');
 			break;
 	}

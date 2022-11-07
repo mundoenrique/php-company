@@ -526,11 +526,11 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"branchName": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_NAME_BRANCHES,
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"zoneName": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_ZONE_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"address": {
@@ -598,7 +598,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"branchCode": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_CODE_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"surnameModifyContact":{
