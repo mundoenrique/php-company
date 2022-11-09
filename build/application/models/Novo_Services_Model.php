@@ -1186,10 +1186,35 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -14:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_MAX_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -24:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_DAILY_TRANSACTION_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -25:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_DAILY_AMOUNT_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -155:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('SERVICES_NO_BALANCE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -220:
+			case -275:
+			case -468:
+			case -470:
+			case -471:
+			case -474:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_ACCOUNT_NOT_AVAILABLE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:
@@ -1223,6 +1248,36 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = $response->msg;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -472:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_INVALID_DOCUMENT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -473:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -475:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_CONSIGNMENT_AMOUNT_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -476:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_DEBITS_AMOUNT_MAX_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -477:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -478:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}

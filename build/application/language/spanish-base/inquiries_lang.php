@@ -19,14 +19,3 @@ $lang['PAGO_OS_NOT_REGISTERED'] = "No fue posible realizar el registro,<br> por 
 $lang['PAGO_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada";
 $lang['PAGO_OS_INVALID_CONCEPT'] = "El concepto de la cuenta principal es inválido";
 $lang['PAGO_OS_CONCEPT_NOT_EXIST'] = "El concepto de la cuenta principal no existe";
-
-$lang['PAG_MONTHLY_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo mensual para la transacción.";
-$lang['PAG_DAILY_TRANSACTION_EXCEEDED']= "Se ha superado la cantidad diaria de transacciones.";
-$lang['PAG_DAILY_AMOUNT_EXCEEDED']= "Se ha superado el monto diario asignado para la transacción.";
-$lang['PAG_ACCOUNT_NOT_AVAILABLE']= "La cuenta no está disponible.";
-$lang['PAG_INVALID_DOCUMENT']= "Documento cliente no pertenece al titular de la cuenta.";
-$lang['PAG_MONTHLY_AMOUNT_EXCEEDED']= "Se ha superado la cantidad mensual de transacciones.";
-$lang['PAG_CONSIGNMENT_AMOUNT_EXCEEDED']= "Se ha superado el monto máximo para consignaciones.";
-$lang['PAG_DEBITS_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos.";
-$lang['PAG_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos y consignaciones.";
-$lang['PAG_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo de saldo permitido.";
