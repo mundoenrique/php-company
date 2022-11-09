@@ -1243,6 +1243,11 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -297:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_OS_UNREGISTERED_ACCOUNT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -208:
 			case -300:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');

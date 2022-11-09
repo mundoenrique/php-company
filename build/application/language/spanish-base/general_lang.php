@@ -461,3 +461,4 @@ $lang['GEN_CONSIGNMENT_AMOUNT_EXCEEDED']= "Se ha superado el monto máximo para 
 $lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos.";
 $lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos y consignaciones.";
 $lang['GEN_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo de saldo permitido.";
+$lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada.";

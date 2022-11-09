@@ -770,7 +770,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -297:
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('PAGO_OS_UNREGISTERED_ACCOUNT');
+				$this->response->msg = lang('GEN_OS_UNREGISTERED_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -298:

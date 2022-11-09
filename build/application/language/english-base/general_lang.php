@@ -458,3 +458,4 @@ $lang['GEN_CONSIGNMENT_AMOUNT_EXCEEDED']= "The maximum amount for appropriations
 $lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits has been exceeded.";
 $lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits and appropriations has been exceeded.";
 $lang['GEN_AMOUNT_MAX_EXCEEDED']= "The maximum allowed balance amount has been exceeded.";
+$lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "The account is not registered.";
