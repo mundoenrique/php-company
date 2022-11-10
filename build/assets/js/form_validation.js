@@ -538,7 +538,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"address1": {
-				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
+				required: lang.VALIDATE_ADDRESS_BRANCHES,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"address2": {
