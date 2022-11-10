@@ -913,7 +913,7 @@ $config = [
 		[
 			'field' => 'zoneName',
 			'label' => 'zoneName',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		],
 		[
 			'field' => 'address1',

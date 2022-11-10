@@ -562,11 +562,11 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT
 			},
 			"stateCodBranch": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_PROVINCE_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"cityCodBranch": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_DEPARTMENT_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"districtCodeBranch": {

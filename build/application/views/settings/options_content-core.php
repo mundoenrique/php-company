@@ -539,14 +539,14 @@
 													</select>
 													<div class="help-block"></div>
 												</div>
-												<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
+												<!-- <?php// if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
 														<label or="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
 														<select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100">
 														</select>
 														<div class="help-block"></div>
 													</div>
-												<?php endif; ?>
+												<?php //endif; ?> -->
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
 													<input id="areaCode" name="areaCode" type="text" class="form-control ignore"/>
