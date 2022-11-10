@@ -495,26 +495,32 @@
 													<input id="branchName" name="branchName" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
+												<?php if (lang('CONF_BRANCH_FIELD') == 'ON'): ?>
+													<div class="form-group mb-1 col-6 col-lg-4">
+														<label for="zoneName"><?= lang('GEN_ZONE') ?></label>
+														<input id="zoneName" name="zoneName" type="text" class="form-control" />
+														<div class="help-block"></div>
+													</div>
+												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="zoneName"><?= lang('GEN_ZONE') ?></label>
-													<input id="zoneName" name="zoneName" type="text" class="form-control" />
-													<div class="help-block"></div>
-												</div>
-												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address1"><?= novoLang(lang('GEN_ADDRESS'), "1") ?></label>
+													<label for="address1">
+														<?= lang('CONF_BRANCH_FIELD') == 'ON' ? novoLang(lang('GEN_ADDRESS'), "1") : novoLang(lang('GEN_ADDRESS'), "")  ?>
+													</label>
 													<input id="address1" name="address1" type="text" class="form-control" />
 													<div class="help-block"></div>
 												</div>
-												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
-													<input id="address2" name="address2" type="text" class="form-control" />
-													<div class="help-block"></div>
-												</div>
-												<div class="form-group mb-1 col-6 col-lg-4">
-													<label for="address3"><?= novoLang(lang('GEN_ADDRESS'), "3") ?></label>
-													<input id="address3" name="address3" type="text" class="form-control" />
-													<div class="help-block"></div>
-												</div>
+												<?php if (lang('CONF_BRANCH_FIELD') == 'ON'): ?>
+													<div class="form-group mb-1 col-6 col-lg-4">
+														<label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
+														<input id="address2" name="address2" type="text" class="form-control" />
+														<div class="help-block"></div>
+													</div>
+													<div class="form-group mb-1 col-6 col-lg-4">
+														<label for="address3"><?= novoLang(lang('GEN_ADDRESS'), "3") ?></label>
+														<input id="address3" name="address3" type="text" class="form-control" />
+														<div class="help-block"></div>
+													</div>
+												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4 hidden">
 													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?></label>
 													<select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100">
