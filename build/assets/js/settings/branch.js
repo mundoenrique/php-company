@@ -3,7 +3,14 @@ var table;
 
 $(function () {
 
-$('#partedSection').hide();
+	if ( $('#idFiscalList').attr("countEnterpriseList")==1 ) {
+		var data = {
+			idFiscalList : $("option:selected", '#idFiscalList').val()
+		};
+		getBranches (data);
+	};
+
+	$('#partedSection').hide();
 
 	$('ul.nav-config-box, .slide-slow').on('click', function (e) {
 		if ($('#idFiscalList > option').length > 1) {
@@ -141,9 +148,11 @@ $('#btnBranchUpload').on('click', function(e) {
 		btnText = btnAction.text().trim();
 		btnAction.html(loader);
 
-		var btn={};
-		btn.btnAction = btnAction;
-		btn.btnText =btnText;
+		var btn = {
+			btnAction : btnAction,
+			btnText : btnText
+		};
+
 		insertFormInput(true);
 		data = {
 			idFiscal : $("option:selected", '#idFiscalList').val(),
