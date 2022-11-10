@@ -405,7 +405,7 @@
 									<div class="form-group col-7">
 										<form id="branchSettListForm">
 											<label class="mt-1"><?= lang('GEN_ENTERPRISE') ?></label>
-											<select id="branchListBr" name="branchListBr" class="select-box custom-select mt-3 mb-4 h6 w-100" >
+											<select id="idFiscalList" name="idFiscalList" class="select-box custom-select mt-3 mb-4 h6 w-100" >
 													<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 													<?php foreach ($enterpriseSettList as $enterprise) : ?>
 														<option value="<?= $enterprise->acrif; ?>">
@@ -487,7 +487,6 @@
 									<form id="branchInfoForm" method="post">
 										<div class="container">
 											<div class="row">
-												<input id="rifB" name="rifB" type="text" class="form-control hidden" />
 												<input id="codB" name="codB" type="text" class="form-control hidden" />
 												<input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
 												<div class="form-group mb-1 col-6 col-lg-4">
@@ -539,14 +538,14 @@
 													</select>
 													<div class="help-block"></div>
 												</div>
-												<!-- <?php// if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
+												<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
 														<label or="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
 														<select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100">
 														</select>
 														<div class="help-block"></div>
 													</div>
-												<?php //endif; ?> -->
+												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4">
 													<label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
 													<input id="areaCode" name="areaCode" type="text" class="form-control ignore"/>

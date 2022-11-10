@@ -468,7 +468,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->lista = [
 			[
-				"rif" => $dataRequest->branchListBr
+				"rif" => $dataRequest->idFiscalList
 			]
 		];
 		$profile = 'S';
@@ -483,7 +483,6 @@ class Novo_Settings_Model extends NOVO_Model {
 
 				foreach ($response->lista as $key =>$detailBranches) {
 					$record = new stdClass();
-					$record->rifB = $detailBranches->rif;
 					$record->codB = $detailBranches->cod;
 					$record->person = $detailBranches->persona;
 					$record->userNameB = $detailBranches->usuario;
@@ -533,7 +532,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'getAgregarSucursales';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
-		$this->dataRequest->rif = $dataRequest->rif;//idFiscal
+		$this->dataRequest->rif = $dataRequest->idFiscal;
 		$this->dataRequest->codigo = $dataRequest->branchCode;
 		$this->dataRequest->nomb_cia = $dataRequest->branchName;
 		$this->dataRequest->direccion_1 = $dataRequest->address1 ?? '';
@@ -586,7 +585,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'getActualizarSucursal';
 		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
-		$this->dataRequest->rif = $dataRequest->rif;//idFiscal
+		$this->dataRequest->rif = $dataRequest->idFiscal;
 		$this->dataRequest->cod = $dataRequest->codB;
 		$this->dataRequest->nom_cia = $dataRequest->branchName;
 		$this->dataRequest->direccion_1 = $dataRequest->address1 ?? '';
@@ -645,7 +644,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				"pais" => $this->session->userdata('pais'),
 				"idOperation" => $this->dataRequest->idOperation,
 				"className" => $this->dataRequest->className,
-				"rif"=> $dataRequest->rif,//idFiscal
+				"rif"=> $dataRequest->idFiscal,
 				"url"=>$dataRequest->fileName,
 				"idTipoLote"=>"7",
 				"usuario"=> $this->session->userdata('userName'),

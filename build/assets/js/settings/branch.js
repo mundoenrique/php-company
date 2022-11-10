@@ -6,8 +6,8 @@ $(function () {
 $('#partedSection').hide();
 
 	$('ul.nav-config-box, .slide-slow').on('click', function (e) {
-		if ($('#branchListBr > option').length > 1) {
-			$('#branchListBr').prop('selectedIndex', 0);
+		if ($('#idFiscalList > option').length > 1) {
+			$('#idFiscalList').prop('selectedIndex', 0);
 			$('#partedSection').hide();
 			$('#branchLoadSection').hide();
 			$('#editAddBranchSection').hide();
@@ -29,7 +29,7 @@ $('#partedSection').hide();
     });
 	});
 
-	$('#branchListBr').on('change', function (e) {
+	$('#idFiscalList').on('change', function (e) {
 		e.preventDefault();
 
 		form = $('#branchSettListForm');
@@ -116,13 +116,14 @@ $("#btnSaveBranch").on("click", function(e) {
 		insertFormInput(true);
 		data = getDataForm(form);
 		data.pass = cryptoPass(data.password1);
+		data.idFiscal = $("option:selected", '#idFiscalList').val();
 
 		if ($(this).attr('data-action') == 'saveCreate') {
-			data.rif = $("option:selected", '#branchListBr').val();
 			data.branch = 'addBranch';
+			delete data.codB;
+			delete data.userNameB;
 			getCallNovoCore(data, btn);
 		}else{
-			data.rif = data.rifB;
 			data.branch = 'updateBranch';
 			getCallNovoCore(data, btn);
 		}
@@ -145,7 +146,7 @@ $('#btnBranchUpload').on('click', function(e) {
 		btn.btnText =btnText;
 		insertFormInput(true);
 		data = {
-			rif : $("option:selected", '#branchListBr').val(),
+			idFiscal : $("option:selected", '#idFiscalList').val(),
 			file: $('#fileBranch')[0].files[0],
 			typeBulkText: lang.SETTINGS_BRANCH_FILE_MASSIVE,
 			branch : 'UploadFileBranch',
@@ -170,7 +171,7 @@ function getCallNovoCore(data, btn){
 				e.preventDefault();
 				$('#system-info').dialog('destroy');
 				var newData = {};
-				newData.branchListBr=data.rif;
+				newData.idFiscalList=data.idFiscal;
 				getBranches (newData);
 			})
 		}
