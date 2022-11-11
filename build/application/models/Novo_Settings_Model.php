@@ -472,7 +472,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			]
 		];
 		$profile = 'S';
-		$country = $this->customerUri;
+		$country = $this->session->customerSess;
 
 		$response = $this->sendToService('CallWs_getBranches');
 		$listBranches = [];
@@ -554,8 +554,8 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		//$response = $this->sendToService('CallWs_addBranch');
-		$this->isResponseRc=0;
+		$response = $this->sendToService('CallWs_addBranch');
+
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -608,8 +608,8 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		//$response = $this->sendToService('CallWs_updateBranch');
-		$this->isResponseRc=0;
+		$response = $this->sendToService('CallWs_updateBranch');
+
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -652,8 +652,8 @@ class Novo_Settings_Model extends NOVO_Model {
 				"token" => $this->session->userdata('token'),
 			];
 
-			//$response = $this->sendToService('CallWs_UploadFileBranch');
-			$this->isResponseRc = 0;
+			$response = $this->sendToService('CallWs_UploadFileBranch');
+
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
