@@ -582,7 +582,7 @@
 													<div class="help-block text-left"></div>
 												</div>
 												<div class="col-auto">
-													<button id="btnSaveBranch" type="button" class="btn btn-primary btn-small flex mx-auto"><?= lang('GEN_BTN_SAVE') ?></button>
+													<button id="btnSaveBranch" type="button" class="btn btn-primary btn-small btn-loading flex mx-auto justify-center"><?= lang('GEN_BTN_SAVE') ?></button>
 												</div>
 											</div>
 										</div>
