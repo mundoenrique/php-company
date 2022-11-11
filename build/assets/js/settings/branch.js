@@ -255,13 +255,13 @@ function showManageBranchView(action) {
 		case "create":
 			getRegion(dataResponse,'');
 			$('#btnSaveBranch').attr('data-action', 'saveCreate');
-			$('#branchCode').attr("disabled", false);
+			$('#branchCode').attr("readonly", false).removeClass('bg-tertiary border');
 			$('#editAddBranchText').html(lang.GEN_NEW +' '+ lang.GEN_BRANC_OFFICE.toLowerCase());
 			$('#branchInfoForm')[0].reset();
 			break;
 		case "update":
 			$('#btnSaveBranch').attr('data-action', 'saveUpdate');
-			$('#branchCode').attr("disabled", true);
+			$('#branchCode').attr("readonly", true).addClass('bg-tertiary border');
 			$('#editAddBranchText').html(lang.GEN_EDIT +' '+ lang.GEN_BRANC_OFFICE.toLowerCase());
 			$('#password1').val('');
 			break;
