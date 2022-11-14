@@ -63,6 +63,7 @@ class Novo_Settings extends NOVO_Controller {
 		}
 
 		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
+			$this->render->enterpriseSettList = $enterpriseList;
 			$this->render->countEnterpriseList = count($enterpriseList);
 
 			if ($this->render->countEnterpriseList == 1) {
@@ -75,7 +76,6 @@ class Novo_Settings extends NOVO_Controller {
 				lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
 			}
 
-			$this->render->enterpriseSettList = $enterpriseList;
 			$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
 		}
 

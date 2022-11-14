@@ -641,7 +641,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
 
 			$this->dataRequest->data = [
-				"pais" => $this->session->userdata('pais'),
+				"pais" => $this->session->customerSess,
 				"idOperation" => $this->dataRequest->idOperation,
 				"className" => $this->dataRequest->className,
 				"rif"=> $dataRequest->idFiscal,
