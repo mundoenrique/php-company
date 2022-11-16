@@ -278,16 +278,6 @@
                       </div>
                     </div>
                     <?php if (lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'ON' || lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
-                   <!-- <div class="row">
-                      <div class="flex mb-2 justify-end col-12">
-                        <button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">
-                          Guardar cambios
-                        </button>
-												<button id="showContacts" type="button" class="btn btn-primary btn-small ">
-                          Mostrar contactos
-                        </button>
-                      </div>
-                    </div>-->
                     <div class="row">
                       <div class="col-6 flex justify-end">
                         <button id="updateEnterpriceBtn" class="btn btn-primary btn-small btn-loading">
@@ -525,26 +515,26 @@
 													</div>
 												<?php endif; ?>
 												<div class="form-group mb-1 col-6 col-lg-4 hidden">
-													<label or="countryCodBranch"><?= lang('GEN_COUNTRY') ?></label>
+													<label for="countryCodBranch"><?= lang('GEN_COUNTRY') ?></label>
 													<select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="stateCodBranch"><?= lang('GEN_PROVINCE') ?></label>
+													<label for="stateCodBranch"><?= lang('GEN_PROVINCE') ?></label>
 													<select id="stateCodBranch" name="stateCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group mb-1 col-6 col-lg-4">
-													<label or="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?></label>
+													<label for="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?></label>
 													<select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100">
 													</select>
 													<div class="help-block"></div>
 												</div>
 												<?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
 													<div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
-														<label or="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
+														<label for="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
 														<select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100">
 														</select>
 														<div class="help-block"></div>

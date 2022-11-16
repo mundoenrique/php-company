@@ -362,7 +362,6 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'updateContactoEmpresa';
 		$this->dataAccessLog->function = 'updateContactoEmpresa';
 		$this->dataAccessLog->operation = 'updateContactoEmpresa';
-
 		$this->dataRequest->idOperation = 'updateContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 
@@ -409,7 +408,6 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Listado de tarjetas';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 		$this->dataAccessLog->modulo = 'Reportes';
-
 		$this->dataRequest->idOperation = '216';
 		$this->dataRequest->className = 'ReporteCEOTO.class';
 		$idFiscal = $this->session->enterpriseSelect->list[0]->acrif;
@@ -457,10 +455,9 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
 
-		$this->dataAccessLog->modulo = 'getConsultarSucursales';
-		$this->dataAccessLog->function = 'getConsultarSucursales';
-		$this->dataAccessLog->operation = 'getConsultarSucursales';
-
+		$this->dataAccessLog->modulo = 'Sucursales';
+		$this->dataAccessLog->function = 'Búsqueda de sucursales';
+		$this->dataAccessLog->operation = 'Buscar sucursales';
 		$this->dataRequest->idOperation = 'getConsultarSucursales';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataRequest->paginaActual = 1;

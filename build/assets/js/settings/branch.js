@@ -2,12 +2,11 @@
 var table;
 
 $(function () {
-
 	if ( $('#idFiscalList').attr("countEnterpriseList")==1 ) {
 		var data = {
 			idFiscalList : $("option:selected", '#idFiscalList').val()
 		};
-		getBranches (data);
+		getBranches(data);
 	};
 
 	$('#partedSection').hide();
@@ -25,18 +24,18 @@ $(function () {
 		var label = $(this).next('.js-label-file');
     var labelVal = label.html();
 
-		$(this).on('change', function (element) {
+		$(this).on('change', function(e) {
 			$(this)
 				.focus()
 				.blur();
       var fileName = '';
-      if (element.target.value) fileName = element.target.value.split('\\').pop();
+      if (e.target.value) fileName = e.target.value.split('\\').pop();
 			fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
 			validInputFile();
     });
 	});
 
-	$('#idFiscalList').on('change', function (e) {
+	$('#idFiscalList').on('change', function(e) {
 		e.preventDefault();
 
 		form = $('#branchSettListForm');
@@ -46,22 +45,22 @@ $(function () {
 		}
 	});
 
-	$('#loadBranchBtn').on('click', function () {
+	$('#loadBranchBtn').on('click', function() {
 		$('#partedSection').hide();
 		$('#branchLoadSection').fadeIn(700, 'linear');
 	});
 
-	$('#newBranchBtn').on('click', function (e) {
+	$('#newBranchBtn').on('click', function(e) {
 		showManageBranchView("create")
 	});
 
-	$('#backBranchBtn').on('click', function (e) {
+	$('#backBranchBtn').on('click', function(e) {
 		$('#partedSection').fadeIn(700, 'linear');
 		$('#btnSaveBranch').removeAttr('data-action')
 		$('#editAddBranchSection').hide();
 	});
 
-	$('#backLoadBranchBtn').on('click', function (e) {
+	$('#backLoadBranchBtn').on('click', function(e) {
 		$('#partedSection').fadeIn(700, 'linear');
 		$('#branchLoadSection').hide();
 		$('#fileBranch').val('');
@@ -72,7 +71,7 @@ $(function () {
 });
 
 
-function getBranches (value) {
+function getBranches(value) {
 	$('#partedSection').hide();
 	$('#editAddBranchSection').hide();
 	$('#branchLoadSection').hide();
@@ -167,7 +166,7 @@ $('#btnBranchUpload').on('click', function(e) {
 function getCallNovoCore(data, btn){
 	who = 'Settings';
 	where = data.branch;
-	callNovoCore(who, where, data, function (response) {
+	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;
 		btn.btnAction.html(btn.btnText);
 		insertFormInput(false);
@@ -187,7 +186,7 @@ function getCallNovoCore(data, btn){
 	});
 };
 
-function branchesTable( dataResponse ) {
+function branchesTable(dataResponse) {
 	$('.hide-out').addClass('hide');
 	table = $('#tableBranches').DataTable({
 		"autoWidth": false,
@@ -197,7 +196,6 @@ function branchesTable( dataResponse ) {
 		"pagelength": 10,
 		"pagingType": "full_numbers",
 		"table-layout": "fixed",
-
 		"data": dataResponse.data,
 		"language": dataTableLang,
 		"columnDefs": [
@@ -242,7 +240,6 @@ function branchesTable( dataResponse ) {
 			}
 		],
 	});
-
 	return table;
 };
 
@@ -271,7 +268,6 @@ function showManageBranchView(action) {
 function validInputFile() {
 	form = $('#txtBranchesForm');
 	validateForms(form);
-
 	if ($('#fileBranch').valid()) {
 		$('.js-label-file').removeClass('has-error');
 	} else {

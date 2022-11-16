@@ -8,8 +8,6 @@ function getRegion(dataResponse,row){
 	var disabled = 'disabled';
 	var country = lang.GEN_BTN_SELECT;
 	var codCountry = '';
-	//var country = region.codPais ? region.pais : lang.GEN_BTN_SELECT;
-	//var codCountry = region.codPais ? region.codPais : '';
 
 	if (region){
 		disabled = '';
@@ -35,7 +33,7 @@ function getRegion(dataResponse,row){
 		getCities(dataResponse.data[row].stateCod);
 	}
 
-	$('#stateCodBranch').on('change', function () {
+	$('#stateCodBranch').on('change', function() {
 		$('#cityCodBranch').empty();
 		$('#cityCodBranch').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 		getCities($(this).val());
