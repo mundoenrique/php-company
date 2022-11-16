@@ -232,7 +232,7 @@ function branchesTable(dataResponse) {
 			{
 				data: function (data) {
 					var options = '';
-					options += '<button value="'+ data.branchRow +'" class="edit btn mx-1 px-0" data-action="update">';
+					options += '<button value="'+ data.branchRow +'" class="edit btn mx-1 px-0" title="'+lang.GEN_EDIT+'" data-action="update" data-toggle="tooltip">';
 					options += '<i class="icon icon-edit"></i>';
 					options += '</button>';
 					return options;
