@@ -16,9 +16,15 @@ $(function () {
 		}
 		insertFormInput(true);
 
+		var product = document.getElementById('productCode')
+
 		callNovoCore(who, where, data, function(response) {
 			$.each(response.data, function(index, prod) {
-				$('#productCode').append("<option value=" + prod.id + ">" + prod.desc + "</option>");
+				var opt = document.createElement('option');
+				opt.value = prod.id;
+				opt.text = prod.desc;
+				opt.setAttribute('doc', prod.desc);
+				product.options.add(opt);
 			});
 
 			insertFormInput(false);
