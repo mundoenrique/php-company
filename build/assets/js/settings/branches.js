@@ -125,12 +125,12 @@ $("#btnSaveBranch").on("click", function(e) {
 		data.idFiscal = $("option:selected", '#idFiscalList').val();
 
 		if ($(this).attr('data-action') == 'saveCreate') {
-			data.branch = 'addBranch';
+			data.branch = 'addBranches';
 			delete data.codB;
 			delete data.userNameB;
 			getCallNovoCore(data, btn);
 		}else{
-			data.branch = 'updateBranch';
+			data.branch = 'updateBranches';
 			getCallNovoCore(data, btn);
 		}
 	}
@@ -157,7 +157,7 @@ $('#btnBranchUpload').on('click', function(e) {
 			idFiscal : $("option:selected", '#idFiscalList').val(),
 			file: $('#fileBranch')[0].files[0],
 			typeBulkText: lang.SETTINGS_BRANCH_FILE_MASSIVE,
-			branch : 'UploadFileBranch',
+			branch : 'UploadFileBranches',
 		}
 		getCallNovoCore(data, btn);
 	}

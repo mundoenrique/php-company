@@ -899,7 +899,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
 		]
 	],
-	'addBranch' => [
+	'addBranches' => [
 		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',
@@ -966,7 +966,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
-	'updateBranch' => [
+	'updateBranches' => [
 		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',
@@ -1038,7 +1038,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
-	'uploadFileBranch' => [
+	'uploadFileBranches' => [
 		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',

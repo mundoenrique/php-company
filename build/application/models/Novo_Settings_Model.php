@@ -519,9 +519,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date JUn 06th, 2022
 	 */
-	public function CallWs_addBranch_Settings($dataRequest)
+	public function CallWs_addBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: addBranch Method Initialized');
+		log_message('INFO', 'NOVO Settings Model: addBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Agregar Sucursales';
@@ -551,7 +551,8 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToService('CallWs_addBranch');
+		//$response = $this->sendToService('CallWs_addBranches');
+		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -562,7 +563,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('CallWs_addBranch');
+		return $this->responseToTheView('CallWs_addBranches');
 	}
 
 	/**
@@ -572,9 +573,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @info Actualizado por Luis Molina
 	 * @date Oct 17th, 2022
 	 */
-	public function CallWs_updateBranch_Settings($dataRequest)
+	public function CallWs_updateBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
+		log_message('INFO', 'NOVO Settings Model: updateBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Actualizar Sucursales';
@@ -605,7 +606,8 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToService('CallWs_updateBranch');
+		//$response = $this->sendToService('CallWs_updateBranches');
+		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -616,7 +618,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('CallWs_updateBranch');
+		return $this->responseToTheView('CallWs_updateBranches');
 	}
 
 	/**
@@ -624,9 +626,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Oct 26th, 2022
 	 */
-	public function CallWs_UploadFileBranch_Settings($dataRequest)
+	public function CallWs_UploadFileBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO UploadFileBranch Model: UploadFileBranch Method Initialized');
+		log_message('INFO', 'NOVO UploadFileBranches Model: UploadFileBranches Method Initialized');
 
 		$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
 
@@ -649,7 +651,8 @@ class Novo_Settings_Model extends NOVO_Model {
 				"token" => $this->session->userdata('token'),
 			];
 
-			$response = $this->sendToService('CallWs_UploadFileBranch');
+			//$response = $this->sendToService('CallWs_UploadFileBranch');
+			$this->isResponseRc = 0;
 
 			switch ($this->isResponseRc) {
 				case 0:

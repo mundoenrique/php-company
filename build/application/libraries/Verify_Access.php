@@ -162,7 +162,7 @@ class Verify_Access {
 			case 'changeTelephones':
 			case 'changeDataEnterprice':
 			case 'addContact':
-			case 'addBranch':
+			case 'addBranches':
 			case 'deleteContact':
 			case 'getEnterprises':
 			case 'getEnterprise':
@@ -173,8 +173,8 @@ class Verify_Access {
 			case 'getFileIni':
 			case 'getBranches':
 			case 'getContacts':
-			case 'uploadFileBranch':
-			case 'updateBranch':
+			case 'uploadFileBranches':
+			case 'updateBranches':
 			case 'updateContact':
 			case 'deleteFile':
 			case 'getProducts':
