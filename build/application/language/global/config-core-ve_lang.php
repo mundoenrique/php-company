@@ -8,3 +8,5 @@ $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_TYPE_SERVICE_ORDER'] = '1';
 $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
 $lang['CONF_FOOTER_RATES'] = 'ON';
+//IMAGEN SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
