@@ -47,18 +47,13 @@ if (!function_exists('arrayTrim')) {
 
 if(!function_exists('dbSearch')) {
 	function dbSearch($uri) {
-		$clients = explode(',', ACCESS_URL);
-		array_walk($clients, 'arrayTrim');
+		$CI = &get_instance();
 
-		if (($pos = array_search('default', $clients)) !== FALSE) {
-			unset($clients[$pos]);
+		if (!isset($CI->config->item('client_db')[$uri])) {
+			$dbName = 'alpha';
+		} else {
+			$dbName = $CI->config->item('client_db')[$uri];
 		}
-
-		if (($pos = array_search('pichincha', $clients)) !== FALSE) {
-			unset($clients[$pos]);
-		}
-
-		$dbName = in_array($uri, $clients) ? $uri : 'alpha';
 
 		return 'ceo_' . $dbName;
 	}
@@ -112,7 +107,7 @@ if (!function_exists('languageLoad')) {
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');
 		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
+		$customerUri = $call == 'specific' ? $CI->config->item('customer_lang') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
 		$CI->config->set_item('language', 'global');
 
@@ -124,8 +119,6 @@ if (!function_exists('languageLoad')) {
 			break;
 			case 'specific':
 				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
-				//eliminar despues de la certificación
-				$customerUri = checkTemporalTenant($customerUri);
 
 				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
 					$CI->lang->load('config-core-'.$customerUri,);
