@@ -588,7 +588,7 @@
                 <?php foreach($detail as $index => $value): ?>
                   <?php if ($value[3] == 'download'): ?>
                   <div class="form-group col-auto mb-3 col-xl-5">
-                    <a href="<?= $this->asset->insertFile($value[0].'.'.$value[1], 'statics', $customerUri) ?>" download>
+                    <a href="<?= $this->asset->insertFile($value[0].'.'.$value[1], 'statics', $customerProgram) ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                         <?php switch ($value[1]): case 'xls': case 'xlsm': case 'xlsx':?>
@@ -620,7 +620,7 @@
                   <div class="col-sm-12 col-lg-11 col-xl-12 py-2">
                     <div class="manual-video">
                       <video controls preload>
-                        <source src="<?= $this->asset->insertFile($value[0].'.'.$value[1], 'statics', $customerUri);?>" type="video/mp4">
+                        <source src="<?= $this->asset->insertFile($value[0].'.'.$value[1], 'statics', $customerProgram);?>" type="video/mp4">
                       </video>
                     </div>
                   </div>

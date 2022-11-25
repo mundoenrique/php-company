@@ -61,7 +61,7 @@
 	<footer class="main-footer">
 		<?php if (lang('CONF_SUPERINTENDENCY_LOGO') == 'ON') : ?>
 			<div class="flex pr-2 pr-lg-0">
-				<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $clientStyle); ?> " alt="Logo Superintendencia">
+				<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $customerLang); ?> " alt="Logo Superintendencia">
 			</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
@@ -75,7 +75,7 @@
 				</div>
 			<?php endif; ?>
 			<?php if (lang('CONF_FOOTER_LOGO') == 'ON') : ?>
-				<img class="order-first" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_L'), 'images', $clientStyle); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
+				<img class="order-first" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_L'), 'images', $customerLang); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_R'), 'images'); ?>" alt="Logo PCI">
 			<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6"><?= lang('GEN_FOTTER_RIGHTS'); ?><?= date("Y") ?></span>
