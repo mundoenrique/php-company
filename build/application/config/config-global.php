@@ -13,4 +13,24 @@ $config['urlServ'] = SERVICE_URL;
 $config['client_id'] = SERVICE_CLIENT_ID;
 $config['client_secret'] = SERVICE_CLIENT_SECRET;
 //
-$config['client_style'] = 'default';
+$config['customer_style'] = 'default';
+//
+$config['client_db'] = [
+	'bg' => 'bg',
+	'bdb' => 'bdb',
+	'bog' => 'bdb',
+	'bnt' => 'bnt',
+	'bp' => 'bp',
+	'col' => 'co',
+	'co' => 'alpha',
+	'coop-central' => 'coop',
+	'coop' => 'coop',
+	'pb' => 'pb',
+	'pe' => 'alpha',
+	'per' => 'pe',
+	'usd' => 'us',
+	'us' => 'alpha',
+	'ven' => 've',
+	've' => 'alpha',
+	'vg' => 'vg'
+];
