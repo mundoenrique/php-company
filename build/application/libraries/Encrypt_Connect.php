@@ -132,7 +132,7 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
-		$subFix = '_' . strtoupper($this->CI->config->item('customer-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('customer_uri'));
 		$wsUrl = $_SERVER['WS_URL'];
 
 		if (isset($_SERVER['WS_URL' . $subFix])) {

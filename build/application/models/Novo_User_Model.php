@@ -94,7 +94,7 @@ class Novo_User_Model extends NOVO_Model {
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'customerSess' => $this->config->item('customer'),
-					'customerUri' => $this->config->item('customer-uri'),
+					'customerUri' => $this->config->item('customer_uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'false',
 					'idUsuario' => $response->usuario->idUsuario,
@@ -120,7 +120,7 @@ class Novo_User_Model extends NOVO_Model {
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'customerSess' => $this->config->item('customer'),
-					'customerUri' => $this->config->item('customer-uri'),
+					'customerUri' => $this->config->item('customer_uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
@@ -291,7 +291,7 @@ class Novo_User_Model extends NOVO_Model {
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->customer, 'REMOTE_ADDR'),
 					'customerSess' => $this->config->item('customer'),
-					'customerUri' => $this->config->item('customer-uri'),
+					'customerUri' => $this->config->item('customer_uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'true',
           'enterpriseInf' => [

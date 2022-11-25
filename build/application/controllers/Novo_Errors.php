@@ -14,7 +14,7 @@ class Novo_Errors extends NOVO_Controller {
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
 		$this->lang->load('errors');
-		$customerLang = BASE_LANGUAGE . '-' . $this->config->item('customer-uri');
+		$customerLang = BASE_LANGUAGE . '-' . $this->config->item('customer_uri');
 		$this->config->set_item('language', $customerLang);
 		$pathLang = APPPATH . 'language' . DIRECTORY_SEPARATOR . $customerLang . DIRECTORY_SEPARATOR;
 
