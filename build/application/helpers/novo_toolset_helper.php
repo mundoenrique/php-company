@@ -49,15 +49,11 @@ if(!function_exists('dbSearch')) {
 	function dbSearch($uri) {
 		$CI = &get_instance();
 
-		log_message('INFO', 'DATABASE URI '.$uri);
-
 		if (!isset($CI->config->item('client_db')[$uri])) {
 			$dbName = 'alpha';
 		} else {
 			$dbName = $CI->config->item('client_db')[$uri];
 		}
-
-		log_message('INFO', 'DATABASE SELECT '.$dbName);
 
 		return 'ceo_' . $dbName;
 	}
