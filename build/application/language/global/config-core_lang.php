@@ -74,6 +74,7 @@ $lang['CONF_FOOTER_INFO'] = 'ON';
 $lang['CONF_FOOTER_RATES'] = 'OFF';
 $lang['CONF_CONFIRM_MSG'] = 'OFF';
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
+$lang['CONF_BULK_TYPE_SERVICE_ORDER'] = '0';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
 $lang['CONF_BULK_AUTH_MSG_SERV'] = 'OFF';
