@@ -80,12 +80,14 @@ class Asset {
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
 		$customer = $customer ? $customer.'/' : '';
-		//eliminar despues de la certificación
-		$customer = checkTemporalTenant($customer);
 		$file = assetPath($folder.'/'.$customer.$fileName);
 
 		if (!file_exists($file)) {
 			$file = assetPath($folder.'/default'.'/'.$fileName);
+			if($folder == 'images/programs'){
+				$file = assetPath($folder.'/default/default.svg');
+				$fileName = 'default.svg';
+			}
 			$customer = 'default/';
 		}
 
