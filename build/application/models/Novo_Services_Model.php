@@ -1161,7 +1161,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'descrip' => $dataRequest->description,
 			'type' => $dataRequest->transferType ?? 'abono',
 			'tokenCliente' => $password,
-			'authToken' => $this->session->flashdata('authToken'),
+			'authToken' => $this->session->userdata('authToken'),
 			'idProducto' => $this->session->productInf->productPrefix,
 			'usuario' => [
 				'userName' => $this->session->userName,
@@ -1179,6 +1179,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('CONF_INPUT_PASS') == 'ON'
 				? lang('CONF_LINK_BULK_AUTH')	: lang('CONF_LINK_TRANSF_MASTER_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
+				$this->session->unset_userdata('authToken');
 			break;
 			case -1:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
@@ -1206,17 +1207,23 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -286:
 			case -301:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;
 			case -287:
 			case -288:
+				$this->response->code = 2;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;
 			case -208:
 			case -300:
@@ -1310,7 +1317,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-			  $this->session->set_flashdata('authToken', $response->bean);
+				$this->session->set_userdata('authToken', $response->bean);
 			break;
 			default:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
