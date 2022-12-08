@@ -226,57 +226,13 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');
 	}
+
 	/**
-	 * @info Método para agregar contacto
-	 * @author Diego Acosta García
-	 * @date April 29th, 2020
-	 */
-	public function CallWs_addContact_Settings($dataRequest)
-	{
-		log_message('INFO', 'NOVO Settings Model: AddContact Method Initialized');
-
-		$this->dataAccessLog->modulo = 'insertarContactoEmpresa';
-		$this->dataAccessLog->function = 'insertarContactoEmpresa';
-		$this->dataAccessLog->operation = 'insertarContactoEmpresa';
-
-		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
-		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
-		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->idExtPer = $dataRequest->nameNewContact;
-		$this->dataRequest->nombres = $dataRequest->nameNewContact;
-		$this->dataRequest->apellido = $dataRequest->surnameNewContact;
-		$this->dataRequest->cargo = $dataRequest->positionNewContact;
-		$this->dataRequest->email = $dataRequest->emailNewContact;
-		$this->dataRequest->tipoContacto = $dataRequest->typeNewContact;
-
-		$this->dataRequest->usuario = [
-			[
-				"userName" => $this->userName,
-				"password" => $dataRequest->newContPass,
-			]
-		];
-
-		$response = $this->sendToService('CallWs_addContact');
-
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$this->response->msg = lang('GEN_EMAIL_CHANGED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-		}
-
-		return $this->responseToTheView('CallWs_addContact');
-	}
-
-		/**
 	 * @info Método para buscar contactos
 	 * @author Diego Acosta García
 	 * @date April 20th, 2021
 	 */
-	public function CallWs_getContacts_Settings($dataRequest)
+	/*public function CallWs_getContacts_Settings_old($dataRequest)
 	{
 		log_message('INFO', 'NOVO Settings Model: getContacts Method Initialized');
 
@@ -308,62 +264,129 @@ class Novo_Settings_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_getContacts');
-	}
+	}*/
 
-			/**
-	 * @info Método para eliminar contacto
-	 * @author Diego Acosta García
-	 * @date April 20th, 2021
+	 /**
+	 * @info Método para buscar contactos de la empresa
+	 * @author Luis Molina
+	 * @date Dec 06th, 2022
 	 */
-	public function CallWs_deleteContact_Settings($dataRequest)
+	public function CallWs_getContacts_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: deleteContact Method Initialized');
+		log_message('INFO', 'NOVO Settings Model: getContacts Method Initialized');
 
-		$this->dataAccessLog->modulo = 'eliminarContactoEmpresa';
-		$this->dataAccessLog->function = 'eliminarContactoEmpresa';
-		$this->dataAccessLog->operation = 'eliminarContactoEmpresa';
+		$this->dataAccessLog->modulo = 'Buscar contactos empresa';
+		$this->dataAccessLog->function = 'Buscar contacto';
+		$this->dataAccessLog->operation = 'Buscar';
+		$this->dataRequest->idOperation = 'getContactosPorEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoContactosMO';
+		$this->dataRequest->lista = [["acrif" => $dataRequest->acrif]];
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->paginaActual = 0;
+		$this->dataRequest->tamanoPagina = 1;
 
-		$this->dataRequest->idOperation = 'eliminarContactoEmpresa';
-		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
-		$this->dataRequest->usuario = [
-			[
-				"userName" => $this->userName,
-				"password" => $dataRequest->pass,
-			]
-		];
-		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->idExtPer = $dataRequest->idExper;
-
-
-		$response = $this->sendToService('CallWs_deleteContact');
+		$response = $this->sendToService('CallWs_getContacts');
+		$contactsList = [];
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response->lista;
+				foreach ($response->lista AS $contacts) {
+					$record = new stdClass();
+					$record->acrif = $contacts->acrif;
+					$record->idExtPer = $contacts->idExtPer;
+					$record->names = $contacts->nombres;
+					$record->lastNames = $contacts->apellido;
+					$record->position = $contacts->cargo;
+					$record->email = $contacts->email;
+					$record->status = $contacts->estatus;
+					$record->typeContact = $contacts->tipoContacto;
+					array_push(
+						$contactsList,
+						$record
+					);
+				}
 			break;
-			default:
-			$this->response->code = 1;
-				break;
+			case -150:
+				$this->response->code = 1;
+			break;
 		}
 
-		return $this->responseToTheView('CallWs_deleteContact');
+		$this->response->data = $contactsList;
+		return $this->responseToTheView('CallWs_getContacts');
 	}
 
-			/**
+	/**
+	 * @info Método para agregar contacto a la empresa
+	 * @author Diego Acosta García
+	 * @date April 29th, 2020
+	 * @modified Luis Molina
+	 * @date Dec 07th, 2022
+	 */
+	public function CallWs_addContact_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: AddContact Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Agregar contacto empresa';
+		$this->dataAccessLog->function = 'Agregar contacto';
+		$this->dataAccessLog->operation = 'Agregar';
+		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
+
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
+		$this->dataRequest->nombres = $dataRequest->names;
+		$this->dataRequest->apellido = $dataRequest->lastNames;
+		$this->dataRequest->cargo = $dataRequest->position;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->tipoContacto = $dataRequest->typeContact;
+
+		$this->dataRequest->usuario = [
+			[
+				"userName" => $this->userName,
+				"password" => $dataRequest->newContPass,
+			]
+		];
+
+		$response = $this->sendToService('CallWs_addContact');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = 'Contacto agregado exitosamente.';
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_addContact');
+	}
+
+	/**
 	 * @info Método para actualizar contacto existente
 	 * @author Diego Acosta García
 	 * @date April 20th, 2021
+	 * @modified Luis Molina
+	 * @date Dec 07th, 2022
 	 */
 	public function CallWs_updateContact_Settings($dataRequest)
 	{
 		log_message('INFO', 'NOVO Settings Model: updateContact Method Initialized');
 
-		$this->dataAccessLog->modulo = 'updateContactoEmpresa';
-		$this->dataAccessLog->function = 'updateContactoEmpresa';
-		$this->dataAccessLog->operation = 'updateContactoEmpresa';
+		$this->dataAccessLog->modulo = 'Modificar contacto empresa';
+		$this->dataAccessLog->function = 'Modificar contacto';
+		$this->dataAccessLog->operation = 'Modificar';
 		$this->dataRequest->idOperation = 'updateContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
+
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
+		$this->dataRequest->nombres = $dataRequest->names;
+		$this->dataRequest->apellido = $dataRequest->lastNames;
+		$this->dataRequest->cargo = $dataRequest->position;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->tipoContacto = $dataRequest->typeContact;
 
 		$this->dataRequest->usuario = [
 			[
@@ -372,28 +395,60 @@ class Novo_Settings_Model extends NOVO_Model {
 			]
 		];
 
-		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->idExtPer = $dataRequest->dniModifyContact;
-		$this->dataRequest->nombres = $dataRequest->nameModifyContact;
-		$this->dataRequest->apellido = $dataRequest->surnameModifyContact;
-		$this->dataRequest->cargo = $dataRequest->positionModifyContact;
-		$this->dataRequest->email = $dataRequest->emailModifyContact;
-		$this->dataRequest->tipoContacto = $dataRequest->typeModifyContact;
-
-
 		$response = $this->sendToService('CallWs_updateContact');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response->lista;
+				$this->response->msg = lang('Contacto modificado exitosamente.');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			default:
-			$this->response->code = 1;
-				break;
 		}
 
 		return $this->responseToTheView('CallWs_updateContact');
+	}
+
+	/**
+	 * @info Método para eliminar contacto
+	 * @author Diego Acosta García
+	 * @date April 20th, 2021
+	 * @modified Luis Molina
+	 * @date Dec 08th, 2022
+	 */
+	public function CallWs_deleteContact_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: deleteContact Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Eliminar contacto empresa';
+		$this->dataAccessLog->function = 'Eliminar contacto';
+		$this->dataAccessLog->operation = 'Eliminar';
+		$this->dataRequest->idOperation = 'eliminarContactoEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
+
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->idExper;
+		$this->dataRequest->usuario = [
+			[
+				"userName" => $this->userName,
+				"password" => $dataRequest->pass,
+			]
+		];
+
+		$response = $this->sendToService('CallWs_deleteContact');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('Contacto eliminado exitosamente.');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_deleteContact');
 	}
 
 	/**
