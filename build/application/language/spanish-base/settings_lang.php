@@ -38,3 +38,5 @@ $lang["SETTINGS_BRANCH_UPLOAD_FILE"] = "Sucursales cargadas con éxito.";
 $lang["SETTINGS_BRANCH_NO_LOAD"] = "No fue posible cargar el archivo, por favor intentalo de nuevo.";
 $lang["SETTINGS_BRANCH_FILE_NO_MOVE"] = "No fue posible mover el archivo al servidor, por favor intentalo de nuevo.";
 $lang["SETTINGS_BRANCH_FILE_MASSIVE"] = "masivo_sucursales";
+$lang["SETTINGS_CONTACTS"] = "Contactos";
+$lang["SETTINGS_BTN_NEW"] = "Nuevo";

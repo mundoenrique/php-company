@@ -99,7 +99,7 @@
       </div>
     </div>
   </div>
-  <table id="tableContacts" class="cell-border h6 display w-100">
+  <!-- <table id="tableContacts" class="cell-border h6 display w-100">
     <thead>
     </thead>
     <tbody>
@@ -112,85 +112,106 @@
     <div class="col-3 col-lg-2 col-xl-auto">';
       <button id="deleteContact" type="button" class="btn btn-primary btn-small ">Eliminar</button>
     </div>
-  </div>
+  </div> -->
   <?php if (lang('CONF_SETTINGS_CONTACT') == 'ON'): ?>
   <div id="sectionConctact">
     <div class="flex flex-auto flex-column">
       <div class="flex flex-column mx-4 mb-5">
-        <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_CONTACT') ?>
-          <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+        <span class="line-text  flex mb-2 h4 semibold primary"><?= lang('SETTINGS_CONTACTS') ?>
         </span>
         <div class=" my-2 px-5">
-          <form id="formAddContact">
-            <div class="container">
-              <div class="row">
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="nameNewContact"><?= lang('GEN_POSITION') ?></label>
-                  <input id="nameNewContact" name="person" type="text" class="form-control" value="" />
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="surnameNewContact"><?= lang('GEN_LAST_NAME') ?></label>
-                  <input id="surnameNewContact" name="surnameModifyContact" type="text" class="form-control" value="" />
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="positionNewContact"><?= lang('GEN_POSITION') ?></label>
-                  <input id="positionNewContact" name="positionModifyContact" type="text" class="form-control" value="" />
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="dniNewContact"><?= lang('GEN_NIT') ?></label>
-                  <input id="dniNewContact" name="zoneName" type="text" class="form-control" value="" />
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="emailNewContact"><?= lang('GEN_EMAIL') ?></label>
-                  <input type="email" class="form-control" id="emailNewContact" name="email" value="">
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                  <label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
-                  <select class="select-box custom-select mb-3 h6 w-100" name="typeModifyContact" id="typeNewContact">
-                    <option selected value="" disabled>Seleccionar</option>
-                    <option value="F">Contacto Administracion y finanzas</option>
-                    <option value="H">Contacto RRHH</option>
-                    <option value="C">Contacto</option>
-                  </select>
-                  <div class="help-block"></div>
-                </div>
-              </div>
-              <div class="row flex mb-4 mt-2 justify-end items-center form-group">
-                <div class="col-6 col-lg-4 col-xl-3 input-group">
-                  <label for="newContPass"></label>
-                  <input id="newContPass" class="form-control pwd-input" autocomplete="new-password" name="password" placeholder="Ingresa tu contraseña">
-                  <div class="input-group-append">
-                    <span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
-											<i class="icon-view mr-0"></i>
-										</span>
-                  </div>
-                  <div class="help-block"></div>
-                </div>
-                <div class="row">
-                  <div class="flex mb-2 justify-end col-12">
-                    <div class="col-3 col-lg-2 col-xl-auto">
-                      <button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">
-												<?= lang('GEN_BTN_CLEAN_UP'); ?>
-											</button>
-                    </div>
-                    <div class="col-3 col-lg-2 col-xl-auto">
-                      <button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">
-												<?= lang('GEN_BTN_ADD'); ?>
-											</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+        <div class="m-4 flex justify-end">
+          <button id="newContactBtn" class="btn btn-primary btn-small" data-action="create">
+            <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('SETTINGS_BTN_NEW') ?>
+          </button>
+        </div>
+        <table id="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
+          <thead class="bg-primary secondary regular">
+            <tr>
+              <th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
+              <th><?= lang('GEN_TABLE_CODE'); ?></th>
+              <th><?= lang('GEN_CONTAC_PERSON'); ?></th>
+              <th><?= lang('GEN_TABLE_TELEPHONE'); ?></th>
+              <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
         </div>
       </div>
     </div>
   </div>
+	<div id="editAddContactSection" style="display:none">
+		<div class="flex flex-column mb-5">
+			<span id="editAddContactText" class="line-text flex mb-2 h4 semibold primary"></span>
+			<div class="my-2 px-5">
+				<form id="addContactForm" method="post">
+					<div class="container">
+						<div class="row">
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="nameNewContact"><?= lang('GEN_POSITION') ?></label>
+								<input id="nameNewContact" name="person" type="text" class="form-control" value="" />
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="surnameNewContact"><?= lang('GEN_LAST_NAME') ?></label>
+								<input id="surnameNewContact" name="surnameModifyContact" type="text" class="form-control" value="" />
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="positionNewContact"><?= lang('GEN_POSITION') ?></label>
+								<input id="positionNewContact" name="positionModifyContact" type="text" class="form-control" value="" />
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="dniNewContact"><?= lang('GEN_NIT') ?></label>
+								<input id="dniNewContact" name="zoneName" type="text" class="form-control" value="" />
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="emailNewContact"><?= lang('GEN_EMAIL') ?></label>
+								<input type="email" class="form-control" id="emailNewContact" name="email" value="">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+								<label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
+								<select class="select-box custom-select mb-3 h6 w-100" name="typeModifyContact" id="typeNewContact">
+									<option selected value="" disabled>Seleccionar</option>
+									<option value="F">Contacto Administracion y finanzas</option>
+									<option value="H">Contacto RRHH</option>
+									<option value="C">Contacto</option>
+								</select>
+								<div class="help-block"></div>
+							</div>
+						</div>
+						<div class="row flex mb-4 mt-2 pl-5 justify-end form-group">
+							<div class="col-4 form-group">
+								<div class="input-group">
+									<input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
+									<div class="input-group-append">
+										<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
+											<i class="icon-view mr-0"></i>
+										</span>
+									</div>
+								</div>
+								<div class="help-block text-left"></div>
+							</div>
+							<div class="col-auto">
+								<button id="btnSaveContact" type="button" class="btn btn-primary btn-small btn-loading flex mx-auto justify-center">
+									<?= lang('GEN_BTN_SAVE') ?>
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="col-12 center">
+					<button id="backContactBtn" class="btn btn-link btn-small">
+						<?= lang('GEN_BTN_BACK') ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
   <?php endif; ?>
 </div>

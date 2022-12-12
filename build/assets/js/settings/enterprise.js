@@ -84,7 +84,7 @@ $(function () {
 	$('#btnAddContact').on('click', function (e) {
 		e.preventDefault;
 
-		form = $('#formAddContact');
+		form = $('#addContactForm');
 
 		validateForms(form);
 
@@ -99,6 +99,52 @@ $(function () {
 
 			addContact(data);
 		}
+	});
+
+	$('#tableContacts1').DataTable({
+		"autoWidth": false,
+		"ordering": false,
+		"searching": true,
+		"lengthChange": false,
+		"pagelength": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+		"columnDefs": [
+			{
+				"targets": 0,
+				"className": "branchName",
+				"width": "200px"
+			},
+			{
+				"targets": 1,
+				"className": "branchCode",
+				"width": "200px"
+			},
+			{
+				"targets": 2,
+				"className": "contact",
+				"width": "200px",
+			},
+			{
+				"targets": 3,
+				"className": "phone",
+				"width": "auto"
+			},
+			{
+				"targets": 4,
+				"width": "auto"
+			}
+		],
+	});
+
+	$('#newContactBtn').on('click', function(e) {
+		showManageContactView("create")
+	});
+
+	$('#backContactBtn').on('click', function(e) {
+		$('#sectionConctact').fadeIn(700, 'linear');
+		$('#btnSaveContact').removeAttr('data-action')
+		$('#editAddContactSection').hide();
 	});
 
 });
@@ -198,7 +244,7 @@ function getContacts (data) {
 			});
 
 			$('#btnLimpiar').on('click', function (e) {
-				$('#formAddContact')[0].reset();
+				$('#addContactForm')[0].reset();
 			});
 		};
 
@@ -248,7 +294,7 @@ function addContact(data) {
 		insertFormInput(false);
 
 		if ( response.code ==  0) {
-			$('#formAddContact')[0].reset();
+			$('#addContactForm')[0].reset();
 		};
 	});
 };
@@ -280,4 +326,23 @@ function deleteContact(){
 	}
 
 	deleteContactM(data);
+}
+
+function showManageContactView(action) {
+	$('#sectionConctact').hide();
+	$('#editAddContactSection').fadeIn(700, 'linear');
+	$('.has-error').removeClass("has-error");
+	$('.help-block').text('');
+	switch (action) {
+		case "create":
+			$('#btnSaveContact').attr('data-action', 'saveCreate');
+			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#ContactInfoForm')[0].reset();
+			break;
+		case "update":
+			$('#btnSaveContact').attr('data-action', 'saveUpdate');
+			$('#editAddContactText').html(lang.GEN_EDIT +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#password1').val('');
+			break;
+	}
 }
