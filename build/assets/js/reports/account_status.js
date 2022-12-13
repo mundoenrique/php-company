@@ -128,7 +128,7 @@ function exportFile(e){
 	var data = getDataForm(form);
 	data.enterpriseName = $('#enterpriseCode').find('option:selected').attr('name');
 	data.descProduct= $('#productCode').find('option:selected').attr('doc');
-	data.resultByNIT = $('#resultByNITInput').val();
+	data.resultByNIT = ($('#resultByNITInput').val() === undefined) ? '' : $('#resultByNITInput').val()
 	delete data.allResults;
 	delete data.resultByNITInput;
 

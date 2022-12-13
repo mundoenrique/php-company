@@ -10,3 +10,5 @@ $lang['CONF_MENU_CIRCLE'] = 'ON';
 $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
 //FOOTER
 $lang['CONF_FOOTER_RATES'] = 'ON';
+//IMAGEN SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
