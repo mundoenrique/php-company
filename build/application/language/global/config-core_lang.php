@@ -326,8 +326,14 @@ $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 $lang['CONF_VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú,.:()]+$';
 $lang['CONF_FILES_EXTENSION'] = 'xls|xlsx|txt';
 $lang['CONF_MAX_FILE_SIZE'] = '2048';
+$lang['CONF_VALIDATE_EMAIL'] = '^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$';
 $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_MINLENGTH'] = 1;
 $lang['CONF_DATATABLE_SLEEP'] = '10000';
 $lang['CONF_DATATABLE_ARRAY_CHUNK'] = '50';
-
+$lang['CONF_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{4,25}$';
+$lang['CONF_VALIDATE_ALPHA_NUM'] = '^[a-z0-9]+$';
+$lang['CONF_VALIDATE_NUMERIC'] = '^[0-9]+$';
+$lang['CONF_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
+$lang['CONF_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
+$lang['CONF_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';

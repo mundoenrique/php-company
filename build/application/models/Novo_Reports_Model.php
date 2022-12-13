@@ -1904,6 +1904,10 @@ class Novo_Reports_Model extends NOVO_Model {
 			$typeSearch = '1';
 		}
 
+		if(isset($dataRequest->resultByCardInput)){
+			$this->dataRequest->card = $dataRequest->resultByCardInput;
+		}
+
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
 		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
