@@ -89,8 +89,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | DATABASE CONNECTION VARIABLES
 |--------------------------------------------------------------------------
 */
+$db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
 defined('DB_HOSTNAME')	OR define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME']);
-defined('DB_PORT')			OR define('DB_PORT', intval($_SERVER['DB_PORT']));
+defined('DB_PORT')			OR define('DB_PORT', $db_port);
 defined('DB_USERNAME')	OR define('DB_USERNAME', $_SERVER['DB_USERNAME']);
 defined('DB_PASSWORD')	OR define('DB_PASSWORD', $_SERVER['DB_PASSWORD']);
 defined('DB_DRIVER')		OR define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
