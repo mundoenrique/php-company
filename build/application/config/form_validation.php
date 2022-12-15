@@ -880,10 +880,10 @@ $config = [
 	],
 	'getContacts' =>[
 		[
-			'field' => 'acrif',
-			'label' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
+			'field' => 'idEnterpriseList',
+			'label' => 'idEnterpriseList',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+		]
 	],
 	'geoFilter' => [
 		[

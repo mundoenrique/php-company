@@ -8,24 +8,24 @@
           <div class="form-group col-12 col-lg-8 col-xl-6">
             <label class="mt-1"><?= lang('GEN_ENTERPRISE') ?></label>
             <form id="enterpriseSettListForm" method="POST">
-              <select id="enterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100">
-                <?php if ($countEnterpriseList == 1): ?>
-                <option countEnterpriseList="<?= $countEnterpriseList ?>" selected disabled>
-                  <?= $enterpriseSettList[0]->acnomcia; ?>
-								</option>
-                <?php else: ?>
-                <option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
-                <?php foreach ($enterpriseSettList AS $enterprise): ?>
-                <option idFiscal="<?= $enterprise->acrif; ?>" name="<?= $enterprise->acnomcia; ?>"
-                  businessName="<?= $enterprise->acrazonsocial; ?>" contact="<?= $enterprise->acpercontac; ?>"
-                  address="<?= $enterprise->acdirubica; ?>" billingAddress="<?= $enterprise->acdirenvio; ?>"
-                  phone1="<?= $enterprise->actel; ?>" phone2="<?= $enterprise->actel2; ?>"
-                  phone3="<?= $enterprise->actel3; ?>" countEnterpriseList="<?= $countEnterpriseList ?>">
-                  <?= $enterprise->enterpriseName; ?>
-                </option>
-                <?php endforeach; ?>
-                <?php endif; ?>
-              </select>
+						<select id="idEnterpriseList" name="idEnterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100" countEnterpriseList=<?= $countEnterpriseList ?>>
+							<?php if ($countEnterpriseList == 1): ?>
+							<option selected disabled value="<?= $enterpriseSettList[0]->acrif; ?>">
+								<?= $enterpriseSettList[0]->enterpriseName; ?></option>
+							<?php else: ?>
+							<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
+							<?php foreach ($enterpriseSettList AS $enterprise): ?>
+							<option value="<?= $enterprise->acrif; ?>" idFiscal="<?= $enterprise->acrif; ?>"
+							name="<?= $enterprise->acnomcia; ?>" businessName="<?= $enterprise->acrazonsocial; ?>"
+							contact="<?= $enterprise->acpercontac; ?>" address="<?= $enterprise->acdirubica; ?>"
+							billingAddress="<?= $enterprise->acdirenvio; ?>" phone1="<?= $enterprise->actel; ?>"
+							phone2="<?= $enterprise->actel2; ?>" phone3="<?= $enterprise->actel3; ?>"
+							countEnterpriseList="<?= $countEnterpriseList ?>">
+							<?= $enterprise->enterpriseName; ?>
+							</option>
+							<?php endforeach; ?>
+							<?php endif; ?>
+            </select>
             </form>
           </div>
         </div>
@@ -128,11 +128,13 @@
         <table id="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
           <thead class="bg-primary secondary regular">
             <tr>
-              <th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
-              <th><?= lang('GEN_TABLE_CODE'); ?></th>
-              <th><?= lang('GEN_CONTAC_PERSON'); ?></th>
-              <th><?= lang('GEN_TABLE_TELEPHONE'); ?></th>
-              <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
+              <th>NOMBRE</th>
+              <th>APELLIDO</th>
+              <th>CARGO</th>
+              <th>DNI</th>
+              <th>EMAIL</th>
+							<th>TIPO</th>
+							<th>OPCIONES</th>
             </tr>
           </thead>
           <tbody>

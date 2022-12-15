@@ -280,7 +280,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Buscar';
 		$this->dataRequest->idOperation = 'getContactosPorEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoContactosMO';
-		$this->dataRequest->lista = [["acrif" => $dataRequest->acrif]];
+		$this->dataRequest->lista = [["acrif" => $dataRequest->idEnterpriseList]];
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->paginaActual = 0;
 		$this->dataRequest->tamanoPagina = 1;
@@ -291,16 +291,27 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				foreach ($response->lista AS $contacts) {
+				foreach ($response->lista AS $key =>$contacts) {
 					$record = new stdClass();
+					$record->id = $key;
 					$record->acrif = $contacts->acrif;
 					$record->idExtPer = $contacts->idExtPer;
-					$record->names = $contacts->nombres;
-					$record->lastNames = $contacts->apellido;
-					$record->position = $contacts->cargo;
-					$record->email = $contacts->email;
-					$record->status = $contacts->estatus;
-					$record->typeContact = $contacts->tipoContacto;
+					$record->contactNames = $contacts->nombres;
+					$record->contactLastNames = $contacts->apellido;
+					$record->contactPosition = $contacts->cargo;
+					$record->contactEmail = $contacts->email;
+					$record->contactStatus = $contacts->estatus;
+					switch ($contacts->tipoContacto) {
+						case 'F':
+							$record->typeContact = 'Contacto Administracion y finanzas';
+						break;
+						case 'H':
+							$record->typeContact = 'Contacto RRHH';
+						break;
+						case 'C':
+							$record->typeContact = 'Contacto';
+						break;
+					}
 					array_push(
 						$contactsList,
 						$record

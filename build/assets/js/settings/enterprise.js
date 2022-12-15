@@ -1,38 +1,38 @@
 'use strict'
 var table;
 var tableContact;
-var geo;
 
 $(function () {
 
-	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#enterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
+	if ( $('#idEnterpriseList').attr("countEnterpriseList")==1 ) {
+		form = $('#enterpriseSettListForm');
+		validateForms(form);
+			if (form.valid()) {
+			getContacts(getDataForm(form));
+			}
+	};
+
+	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#idEnterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
 		enablePhone();
 	};
 
-	$('#enterpriseList').on('change', function () {
-		var optionSelect = $(this).find('option:selected');
-		$('#enterpriseData').addClass('hide');
-		$('.hide-out').removeClass('hide');
-		$('#sectionConctact').show();
-		$('#existingContactButton').show();
+	/*$('#enterpriseList').on('change', function(e) {
+		//e.preventDefault();
 
-		$.each( lang.SETTINGS_RENDER_CONTROLLER_VARIABLES, function( key ) {
-			$('#'+ key).val(optionSelect.attr(key));
-		});
-
-		if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' ) {
-			enablePhone();
+		//form = $('#enterpriseSettListForm');
+		//validateForms(form);
+		//if (form.valid()) {
+		//	getContacts(getDataForm(form));
+		//}
+		data = {
+			idFiscalList : $("option:selected", '#enterpriseList').val()
 		};
+		//console.log(data);
+		getContacts(data);
+	});*/
 
-		if ($('#existingContacts')[0] != undefined) {
-			$('#tableContacts_wrapper').hide();
-		}
 
-		$('.hide-out').addClass('hide');
-		$('#enterpriseData').removeClass('hide');
-	})
-
-	$('#updateEnterpriceBtn').on('click', function (e) {
+	/*$('#updateEnterpriceBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#enterpriseDataForm');
 		btnText = $(this).text().trim();
@@ -66,9 +66,9 @@ $(function () {
 				$('#updateEnterpriceBtn').html(btnText);
 			})
 		}
-	})
+	})*/
 
-	$('#showContacts').on('click', function (e) {
+	/*$('#showContacts').on('click', function (e) {
 		e.preventDefault;
 
 		if (table != undefined) {
@@ -79,9 +79,9 @@ $(function () {
 		insertFormInput(true);
 
 		getContacts(data);
-	});
+	});*/
 
-	$('#btnAddContact').on('click', function (e) {
+	/*$('#btnAddContact').on('click', function (e) {
 		e.preventDefault;
 
 		form = $('#addContactForm');
@@ -99,9 +99,9 @@ $(function () {
 
 			addContact(data);
 		}
-	});
+	});*/
 
-	$('#tableContacts1').DataTable({
+	/*$('#tableContacts1').DataTable({
 		"autoWidth": false,
 		"ordering": false,
 		"searching": true,
@@ -135,21 +135,50 @@ $(function () {
 				"width": "auto"
 			}
 		],
-	});
+	});*/
 
-	$('#newContactBtn').on('click', function(e) {
+	/*$('#newContactBtn').on('click', function(e) {
 		showManageContactView("create")
-	});
+	});*/
 
-	$('#backContactBtn').on('click', function(e) {
+	/*$('#backContactBtn').on('click', function(e) {
 		$('#sectionConctact').fadeIn(700, 'linear');
 		$('#btnSaveContact').removeAttr('data-action')
 		$('#editAddContactSection').hide();
-	});
+	});*/
 
+	$('#idEnterpriseList').on('change', function (e) {
+		e.preventDefault();
+		var optionSelect = $(this).find('option:selected');
+		$('#enterpriseData').addClass('hide');
+		$('.hide-out').removeClass('hide');
+		$('#sectionConctact').show();
+		$('#existingContactButton').show();
+
+		$.each( lang.SETTINGS_RENDER_CONTROLLER_VARIABLES, function( key ) {
+			$('#'+ key).val(optionSelect.attr(key));
+		});
+
+		if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' ) {
+			enablePhone();
+		};
+
+		/*if ($('#existingContacts')[0] != undefined) {
+			$('#tableContacts_wrapper').hide();
+		}*/
+
+		$('.hide-out').addClass('hide');
+		$('#enterpriseData').removeClass('hide');
+
+		form = $('#enterpriseSettListForm');
+		validateForms(form);
+			if (form.valid()) {
+			getContacts(getDataForm(form));
+			}
+	});
 });
 
-function enablePhone(){
+/*function enablePhone(){
 	for ( let i = 1; i < 4; i++ ) {
 		if($('#phone'+ i).val()==''){
 			$('#divPhone'+ i).addClass('hide');
@@ -157,9 +186,9 @@ function enablePhone(){
 			$('#divPhone'+ i).removeClass('hide');
 		}
 	}
-}
+}*/
 
-function getContacts (data) {
+/*function getContacts (data) {
 	who = 'Settings';
 	where = 'getContacts';
 
@@ -276,17 +305,16 @@ function getContacts (data) {
 				}
 			});
 	});
-};
+};*/
 
-
-function deleteContactM(data) {
+/*function deleteContactM(data) {
 	who = 'Settings';
 	where = 'deleteContact';
 
 	callNovoCore(who, where, data, function (response) { });
-};
+};*/
 
-function addContact(data) {
+/*function addContact(data) {
 	who = 'Settings';
 	where = 'addContact';
 
@@ -297,9 +325,9 @@ function addContact(data) {
 			$('#addContactForm')[0].reset();
 		};
 	});
-};
+};*/
 
-function updateContact(data) {
+/*function updateContact(data) {
 	who = 'Settings';
 	where = 'updateContact';
 
@@ -312,9 +340,9 @@ function updateContact(data) {
 			$('#branchInfoForm')[0].reset();
 		};
 	});
-};
+};*/
 
-function deleteContact(){
+/*function deleteContact(){
 	form = $('#existingContacts')
 	data = {
 		"acrif" : $('#enterpriseList').find('option:selected').attr('idFiscal'),
@@ -326,9 +354,9 @@ function deleteContact(){
 	}
 
 	deleteContactM(data);
-}
+}*/
 
-function showManageContactView(action) {
+/*function showManageContactView(action) {
 	$('#sectionConctact').hide();
 	$('#editAddContactSection').fadeIn(700, 'linear');
 	$('.has-error').removeClass("has-error");
@@ -345,4 +373,90 @@ function showManageContactView(action) {
 			$('#password1').val('');
 			break;
 	}
-}
+}*/
+
+function getContacts(value) {
+	if (table != undefined) {
+		table.destroy();
+	}
+	data = value;
+	who = 'Settings';
+	where = 'getContacts';
+
+	callNovoCore(who,where,data, function(response) {
+		insertFormInput(false);
+		if ( response.code == 0 ) {
+			contactsTable(response);
+		}else if (response.code == 1){
+			contactsTable(response);
+		}
+	});
+};
+
+function contactsTable(dataResponse) {
+	table = $('#tableContacts1').DataTable({
+		"autoWidth": false,
+		"ordering": false,
+		"searching": true,
+		"lengthChange": false,
+		"pagelength": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+		"data": dataResponse.data,
+		"language": dataTableLang,
+		"columnDefs": [
+			{
+				"targets": 0,
+				"className": "contactNames",
+				"width": "200px"
+			},
+			{
+				"targets": 1,
+				"className": "contactLastNames",
+				"width": "200px"
+			},
+			{
+				"targets": 2,
+				"className": "contactPosition",
+				"width": "200px",
+			},
+			{
+				"targets": 3,
+				"className": "idExtPer",
+				"width": "200px",
+			},
+			{
+				"targets": 4,
+				"className": "contactEmail",
+				"width": "200px",
+			},
+			{
+				"targets": 5,
+				"className": "typeContact",
+				"width": "200px",
+			},
+			{
+				"targets": 6,
+				"width": "auto"
+			}
+		],
+		"columns": [
+			{ data: 'contactNames' },
+			{ data: 'contactLastNames' },
+			{ data: 'contactPosition' },
+			{ data: 'idExtPer' },
+			{ data: 'contactEmail' },
+			{ data: 'typeContact' },
+			{
+				data: function (data) {
+					var options = '';
+					options += '<button value="'+ data.id +'" class="edit btn mx-1 px-0" title="'+lang.GEN_EDIT+'" data-action="update" data-toggle="tooltip">';
+					options += '<i class="icon icon-edit"></i>';
+					options += '</button>';
+					return options;
+				}
+			}
+		],
+	});
+	return table;
+};

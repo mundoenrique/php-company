@@ -254,6 +254,8 @@ function validateForms(form) {
 			"stateCodBranch": { required: true, pattern: numeric },
 			"cityCodBranch": { required: true, pattern: numeric },
 			"districtCodBranch": { required: true, pattern: numeric },
+			"idFiscalList" : { required: true},
+			"idEnterpriseList" : { required: true},
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
 			"phone1": { required: true, pattern: numeric },
@@ -572,6 +574,12 @@ function validateForms(form) {
 			"districtCodeBranch": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
+			},
+			"idFiscalList": {
+				required: lang.VALIDATE_SELECT
+			},
+			"idEnterpriseList": {
+				required: lang.VALIDATE_SELECT
 			},
 			"areaCode": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
