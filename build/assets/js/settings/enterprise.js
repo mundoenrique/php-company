@@ -12,9 +12,20 @@ $(function () {
 			}
 	};
 
+	$('#enterpriseData').hide();
+	$('#sectionConctact').hide();
+
 	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#idEnterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
 		enablePhone();
 	};
+
+	$('ul.nav-config-box, .slide-slow').on('click', function (e) {
+		if ($('#idEnterpriseList > option').length > 1) {
+			$('#idEnterpriseList').prop('selectedIndex', 0);
+			$('#enterpriseData').hide();
+			$('#sectionConctact').hide();
+		}
+	})
 
 	/*$('#enterpriseList').on('change', function(e) {
 		//e.preventDefault();
@@ -137,23 +148,22 @@ $(function () {
 		],
 	});*/
 
-	/*$('#newContactBtn').on('click', function(e) {
+	$('#newContactBtn').on('click', function(e) {
 		showManageContactView("create")
-	});*/
+	});
 
-	/*$('#backContactBtn').on('click', function(e) {
+	$('#backContactBtn').on('click', function(e) {
 		$('#sectionConctact').fadeIn(700, 'linear');
 		$('#btnSaveContact').removeAttr('data-action')
 		$('#editAddContactSection').hide();
-	});*/
+	});
 
 	$('#idEnterpriseList').on('change', function (e) {
 		e.preventDefault();
 		var optionSelect = $(this).find('option:selected');
-		$('#enterpriseData').addClass('hide');
 		$('.hide-out').removeClass('hide');
-		$('#sectionConctact').show();
-		$('#existingContactButton').show();
+		$('#enterpriseData').hide();
+		$('#sectionConctact').hide();
 
 		$.each( lang.SETTINGS_RENDER_CONTROLLER_VARIABLES, function( key ) {
 			$('#'+ key).val(optionSelect.attr(key));
@@ -166,9 +176,6 @@ $(function () {
 		/*if ($('#existingContacts')[0] != undefined) {
 			$('#tableContacts_wrapper').hide();
 		}*/
-
-		$('.hide-out').addClass('hide');
-		$('#enterpriseData').removeClass('hide');
 
 		form = $('#enterpriseSettListForm');
 		validateForms(form);
@@ -356,25 +363,6 @@ $(function () {
 	deleteContactM(data);
 }*/
 
-/*function showManageContactView(action) {
-	$('#sectionConctact').hide();
-	$('#editAddContactSection').fadeIn(700, 'linear');
-	$('.has-error').removeClass("has-error");
-	$('.help-block').text('');
-	switch (action) {
-		case "create":
-			$('#btnSaveContact').attr('data-action', 'saveCreate');
-			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
-			$('#ContactInfoForm')[0].reset();
-			break;
-		case "update":
-			$('#btnSaveContact').attr('data-action', 'saveUpdate');
-			$('#editAddContactText').html(lang.GEN_EDIT +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
-			$('#password1').val('');
-			break;
-	}
-}*/
-
 function getContacts(value) {
 	if (table != undefined) {
 		table.destroy();
@@ -385,15 +373,55 @@ function getContacts(value) {
 
 	callNovoCore(who,where,data, function(response) {
 		insertFormInput(false);
+		$('#enterpriseData').show();
+		$('#sectionConctact').show();
+		$('#existingContactButton').show();
 		if ( response.code == 0 ) {
 			contactsTable(response);
+
+			$('#tableContacts1 tbody tr').on('click', "button[data-action='update']", function (e) {
+				$.each(response.data[$(this).val()], function (key, val) {
+					$('#'+ key ).val(val);
+				});
+				showManageContactView("update")
+			});
 		}else if (response.code == 1){
 			contactsTable(response);
 		}
 	});
 };
 
+$("#btnSaveContact").on("click", function(e) {
+	form = $('#addContactForm');
+	validateForms(form);
+
+	if (form.valid()) {
+		var btnAction = $('#btnSaveContact');
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
+
+		var btn={};
+		btn.btnAction = btnAction;
+		btn.btnText =btnText;
+		insertFormInput(true);
+		// data = getDataForm(form);
+		// data.pass = cryptoPass(data.password1);
+		// data.idFiscal = $("option:selected", '#idFiscalList').val();
+
+		// if ($(this).attr('data-action') == 'saveCreate') {
+		// 	data.branch = 'addBranches';
+		// 	delete data.codB;
+		// 	delete data.userNameB;
+		// 	getCallNovoCore(data, btn);
+		// }else{
+		// 	data.branch = 'updateBranches';
+		// 	getCallNovoCore(data, btn);
+		// }
+	}
+});
+
 function contactsTable(dataResponse) {
+	$('.hide-out').addClass('hide');
 	table = $('#tableContacts1').DataTable({
 		"autoWidth": false,
 		"ordering": false,
@@ -460,3 +488,22 @@ function contactsTable(dataResponse) {
 	});
 	return table;
 };
+
+function showManageContactView(action) {
+	$('#sectionConctact').hide();
+	$('#editAddContactSection').fadeIn(700, 'linear');
+	$('.has-error').removeClass("has-error");
+	$('.help-block').text('');
+	switch (action) {
+		case "create":
+			$('#btnSaveContact').attr('data-action', 'saveCreate');
+			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#ContactInfoForm')[0].reset();
+			break;
+		case "update":
+			$('#btnSaveContact').attr('data-action', 'saveUpdate');
+			$('#editAddContactText').html(lang.GEN_EDIT +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#password1').val('');
+			break;
+	}
+}

@@ -128,13 +128,13 @@
         <table id="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
           <thead class="bg-primary secondary regular">
             <tr>
-              <th>NOMBRE</th>
-              <th>APELLIDO</th>
-              <th>CARGO</th>
-              <th>DNI</th>
-              <th>EMAIL</th>
-							<th>TIPO</th>
-							<th>OPCIONES</th>
+							<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
+              <th><?= lang('GEN_LAST_NAME'); ?></th>
+              <th><?= lang('GEN_POSITION'); ?></th>
+              <th><?= lang('GEN_TABLE_DNI'); ?></th>
+              <th><?= lang('GEN_EMAIL'); ?></th>
+              <th><?= lang('GEN_TABLE_TYPE'); ?></th>
+              <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -152,7 +152,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="nameNewContact"><?= lang('GEN_POSITION') ?></label>
+								<label for="nameNewContact"><?= lang('GEN_NAME') ?></label>
 								<input id="nameNewContact" name="person" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
