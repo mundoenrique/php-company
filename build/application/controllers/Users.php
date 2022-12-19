@@ -1711,13 +1711,23 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in){
 
-            $acrif = $this->input->post('rif');
-            $cedula = $this->input->post("cedula");
-            $pass = $this->input->post("pass");
+					$dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
+					$acrif = $dataRequest->rif;
+					$cedula = $dataRequest->cedula;
+					$pass = $dataRequest->pass;
 
             $lista = $this->callWSEliminarContactoEmpresa($urlCountry, $acrif, $cedula, $pass);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
@@ -1826,18 +1836,29 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in){
 
-            $acrif = $this->input->post('rif');
-            $cedula = $this->input->post("cedula");
-            $nombre = $this->input->post("nombre");
-            $apellido = $this->input->post("apellido");
-            $cargo = $this->input->post("cargo");
-            $email = $this->input->post("email");
-            $tipoContacto = $this->input->post("tipoContacto");
-            $pass = $this->input->post("pass");
+					$dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
 
-            $lista = $this->callWSActualizarContactoEmpresa($urlCountry, $acrif, $cedula, $nombre, $apellido, $cargo, $email, $tipoContacto, $pass);
+					$acrif = $dataRequest->rif;
+					$cedula = $dataRequest->cedula;
+					$nombre = $dataRequest->nombre;
+					$apellido = $dataRequest->apellido;
+					$cargo = $dataRequest->cargo;
+					$email = $dataRequest->email;
+					$tipoContacto = $dataRequest->tipoContacto;
+					$pass = $dataRequest->pass;
 
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+          $lista = $this->callWSActualizarContactoEmpresa($urlCountry, $acrif, $cedula, $nombre, $apellido, $cargo, $email, $tipoContacto, $pass);
+          $response = $this->cryptography->encrypt($lista);
+          $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
