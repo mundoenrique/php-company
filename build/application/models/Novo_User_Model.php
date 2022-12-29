@@ -206,7 +206,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = 'estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 			break;

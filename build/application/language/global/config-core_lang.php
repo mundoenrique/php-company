@@ -82,6 +82,7 @@ $lang['CONF_HASH_PASS'] = 'ON';
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
 $lang['CONF_SELECT_TYPE'] = 'OFF';
 $lang['CONF_INPUT_PASS'] = 'ON';
+$lang['CONF_REDIRECT_TRANSF_MASTER_ACCOUNT'] = 'OFF';
 $lang['CONF_VALIDATE_PARAMS'] = 'OFF';
 $lang['CONF_SETT_CONFIG'] = 'ON';
 $lang['CONF_SETTINGS_DISCTRICT']= 'OFF';

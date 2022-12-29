@@ -29,13 +29,14 @@
 					<div class="general-form-msg"></div>
 					<button id="signInBtn" name="signInBtn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
 				</form>
-
+				<?php if(lang('CONF_SIGIN_RECOVER_PASS') == 'ON'): ?>
 				<div class="align-center">
 					<p><?= lang('GEN_RECOVER_PASS_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
 						<?= lang('LOGIN_RECOVERY_PASS_LINK'); ?>
 					</a>
 				</div>
+				<?php endif; ?>
 			</div>
 
 		</div>

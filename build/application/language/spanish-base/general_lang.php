@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
+$lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
 $lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
@@ -52,6 +53,7 @@ $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
+$lang['GEN_BTN_RESEND'] = 'Reenviar código';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_AUTHORIZE'] = 'Autorizar';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
