@@ -1051,6 +1051,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 							break;
 							case 'montoDeposito':
 								$serviceOrders['OrderDeposit'] = currencyFormat($value);
+								$serviceOrders['pagoOS']['total'] = $value;
+							break;
+							case 'nofactura':
+									$serviceOrders['noFactura'] = $value;
+									$serviceOrders['pagoOS']['factura'] = $value;
 							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];

@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_VIEW_SUFFIX'] = '';
 //VALIDATE FORMS
+$lang['CONF_SIGIN_RECOVER_PASS'] = 'OFF';
+$lang['CONF_MAINTENANCE'] = 'ON';
 $lang['CONF_VALID_ERROR'] = 'validate-error';
 $lang['CONF_VALID_VALID'] = 'success';
 $lang['CONF_VALID_SUCCESS'] = ' ';
