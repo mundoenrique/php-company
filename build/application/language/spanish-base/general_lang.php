@@ -53,6 +53,7 @@ $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
+$lang['GEN_BTN_RESEND'] = 'Reenviar código';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_AUTHORIZE'] = 'Autorizar';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
