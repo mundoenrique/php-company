@@ -61,6 +61,14 @@ $(function () {
 			}
 		}
 	});
+
+	$('#system-info').on('click', '.get-otp', function() {
+		$(this)
+			.html(loader)
+			.prop('disabled', true)
+			.removeClass('get-otp');
+		getTokenRecharge();
+	});
 });
 
 function getTokenRecharge() {
@@ -73,19 +81,7 @@ function getTokenRecharge() {
 		response.modalBtn.posMy = 'center top+260';
 		switch (response.code) {
 			case 0:
-				$('#accept').addClass('send-otp');
-			  inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" ';
-				inputModal +=  'onsubmit="return false">';
-			  inputModal += 		'<p class="pt-0 p-0">' + response.msg +'</p>';
-				inputModal += 		'<div class="row">';
-				inputModal +=			'<div class="form-group col-11">';
-				inputModal +=				'<input  id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
-				inputModal +=       ' maxlength="10">';
-				inputModal +=				'<div class="help-block"></div>';
-				inputModal +=			'</div">';
-				inputModal += 		'</div>';
-				inputModal += '</form>';
-				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+				generateModalOTP(response)
 			break;
 		}
 		insertFormInput(false);
@@ -103,7 +99,21 @@ function rechargeAccount() {
 	}
 
 	callNovoCore(who, where, data, function (response) {
-		$('#masterAccountRechargeBtn').html(btnText);
-		insertFormInput(false);
+		if (lang.CONF_INPUT_PASS == 'OFF') {
+			switch (response.code) {
+				case 1:
+					generateModalOTP(response)
+					break;
+				case 2:
+					$('#accept').addClass('get-otp');
+					$('#accept').addClass('btn-modal-large');
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					break;
+			}
+			insertFormInput(false);
+		} else {
+			$('#masterAccountRechargeBtn').html(btnText);
+			insertFormInput(false);
+		}
 	});
 }

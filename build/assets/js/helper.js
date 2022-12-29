@@ -516,3 +516,20 @@ function removeWidgetMenu () {
 		$("#widget-menu").addClass("none");
 	}, 1000);
 }
+
+function generateModalOTP(response){
+
+	$('#accept').addClass('send-otp');
+	$('#accept').removeClass('btn-modal-large');
+	inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" onsubmit="return false"';
+	inputModal += 	'<p class="pt-0 p-0">' + response.msg +'</p>';
+	inputModal += 	'<div class="row">';
+	inputModal +=		'<div class="form-group col-11">';
+	inputModal +=			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
+	inputModal +=      ' maxlength="10">';
+	inputModal +=			'<div class="help-block"></div>';
+	inputModal +=		'</div">';
+	inputModal += 	'</div>';
+	inputModal += '</form>';
+	appMessages(response.title, inputModal, response.icon, response.modalBtn)
+}
