@@ -210,7 +210,7 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.pay-order', function() {
+	$('#system-info').on('click', '.send-otp', function() {
 		form = $('#formVerificationOTP');
 		validateForms(form);
 
@@ -218,7 +218,7 @@ $(function () {
 			$(this)
 				.html(loader)
 				.prop('disabled', true)
-				.removeClass('pay-order');
+				.removeClass('send-otp');
 			insertFormInput(true);
 			payOrderService();
 		}
@@ -359,7 +359,7 @@ function getOtpService() {
 			$('.cover-spin').hide()
 			switch (response.code) {
 				case 0:
-					generateModalOS(response)
+					generateModalOTP(response)
 					break;
 				default:
 					appMessages(response.title, response.msg, response.icon, response.modalBtn);
@@ -390,7 +390,7 @@ function payOrderService() {
 					appMessages(lang.PAG_OS_TITLE, response.msg, response.icon, response.modalBtn);
 					break;
 				case 1:
-					generateModalOS(response);
+					generateModalOTP(response);
 					break;
 				case 2:
 					$('#accept').addClass('get-otp');
@@ -401,21 +401,4 @@ function payOrderService() {
 			insertFormInput(false);
 		});
 	}
-}
-
-function generateModalOS(response){
-
-	$('#accept').addClass('pay-order');
-	$('#accept').removeClass('btn-modal-large');
-	inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" onsubmit="return false"';
-	inputModal += 	'<p class="pt-0 p-0">' + response.msg +'</p>';
-	inputModal += 	'<div class="row">';
-	inputModal +=		'<div class="form-group col-11">';
-	inputModal +=			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
-	inputModal +=      ' maxlength="10">';
-	inputModal +=			'<div class="help-block"></div>';
-	inputModal +=		'</div">';
-	inputModal += 	'</div>';
-	inputModal += '</form>';
-	appMessages(lang.PAG_OS_TITLE, inputModal, response.icon, response.modalBtn)
 }

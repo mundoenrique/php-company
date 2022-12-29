@@ -596,13 +596,12 @@ $(function () {
 
 		var json = {};
 		json.rif = rif;
-		json.cedula = $pgContact.find("#contact-id").val();
+		json.cedula = idcontacto;
 		json.nombre = $pgContact.find("#contact-nomb").val();
 		json.apellido = $pgContact.find("#contact-apell").val();
 		json.cargo = $pgContact.find("#contact-carg").val();
 		json.email = $pgContact.find("#contact-email").val();
 		json.tipoContacto = $pgContact.find("#tipo_contact").val();
-
 		json.pass = hex_md5($("#pass").val());
 
 		if (validar(json, $pgContact, "modificar")) {

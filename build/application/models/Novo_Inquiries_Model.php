@@ -629,11 +629,11 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
 		$response = $this->sendToService('CallWs_pagoOs');
+		$this->response->title = lang('PAG_OS_TITLE');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->title = lang('PAG_OS_TITLE');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->modalBtn['btn1']['action'] = 'none';
@@ -642,7 +642,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->session->set_userdata('authToken', $response->bean);
 			break;
 			default:
-				$this->response->title = lang('PAG_OS_TITLE');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_OTP_NO_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -751,7 +750,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->code = 2;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_USED_CODE');
-				$this->response->modalBtn['btn1']['text'] = 'Reenviar código';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;
@@ -759,7 +758,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->code = 2;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_EXPIRED_CODE');
-				$this->response->modalBtn['btn1']['text'] = 'Reenviar código';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;

@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Enterprise Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'At this time we cannot accommodate your request, please try again later.';
+$lang['GEN_MAINTENANCE_MSG'] = 'We are doing maintenance to the platform to better serve you.';
 $lang['GEN_MENU_ENTERPRISE'] = 'Enterprise';
 $lang['GEN_MENU_LOTS'] = 'Lots';
 $lang['GEN_MENU_CONSULTATIONS'] = 'Consultations';
