@@ -272,6 +272,9 @@ function validateForms(form) {
 			"filterDateXls":{ required: true,pattern: numeric},
 			"nameEnterpriseXls":{ required: true,pattern: alphanumunder},
 			"branchListBr":{ required: true, pattern: alphanumspecial},
+			"contactNames":{ required: true, pattern: longPhraseUpper},
+			"contactLastNames":{ required: true, pattern: longPhraseUpper},
+			"contactPosition":{ required: true, pattern: longPhraseUpper},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -619,7 +622,19 @@ function validateForms(form) {
 			},
 			"typeModifyContact":{
 				required: lang.VALIDATE_SELECT
-			}
+			},
+			"contactNames": {
+				required: 'Indica un nombre válido',
+				pattern: 'Indica un nombre válido'
+			},
+			"contactLastNames": {
+				required: 'Indica un apellido válido',
+				pattern: 'Indica un apellido válido'
+			},
+			"contactPosition": {
+				required: 'Indica un cargo válido',
+				pattern: 'Indica un cargo válido'
+			},
 		},
 		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

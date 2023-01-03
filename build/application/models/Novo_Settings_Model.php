@@ -301,16 +301,11 @@ class Novo_Settings_Model extends NOVO_Model {
 					$record->contactPosition = $contacts->cargo;
 					$record->contactEmail = $contacts->email;
 					$record->contactStatus = $contacts->estatus;
-					switch ($contacts->tipoContacto) {
-						case 'F':
-							$record->typeContact = 'Contacto Administracion y finanzas';
-						break;
-						case 'H':
-							$record->typeContact = 'Contacto RRHH';
-						break;
-						case 'C':
-							$record->typeContact = 'Contacto';
-						break;
+					$record->typeContactValue = $contacts->tipoContacto;
+					foreach(lang('SETTINGS_ENTERPRICE_TYPE_CONTACT') as $key => $value){
+						if($contacts->tipoContacto == $key){
+							$record->typeContact = $value;
+						}
 					}
 					array_push(
 						$contactsList,

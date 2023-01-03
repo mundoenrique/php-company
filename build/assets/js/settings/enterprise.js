@@ -1,6 +1,8 @@
 'use strict'
 var table;
 var tableContact;
+var disabled = 'disabled';
+var selected;
 
 $(function () {
 
@@ -383,8 +385,10 @@ function getContacts(value) {
 				$.each(response.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
+				getTypeContac(response.data[$(this).val()].typeContactValue);
 				showManageContactView("update")
 			});
+
 		}else if (response.code == 1){
 			contactsTable(response);
 		}
@@ -498,7 +502,7 @@ function showManageContactView(action) {
 		case "create":
 			$('#btnSaveContact').attr('data-action', 'saveCreate');
 			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
-			$('#ContactInfoForm')[0].reset();
+			//$('#ContactInfoForm')[0].reset();
 			break;
 		case "update":
 			$('#btnSaveContact').attr('data-action', 'saveUpdate');
@@ -506,4 +510,20 @@ function showManageContactView(action) {
 			$('#password1').val('');
 			break;
 	}
-}
+};
+
+function getTypeContac(data) {
+	$('#typeNewContact').empty();
+	$('#typeNewContact').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
+	$.each(lang.SETTINGS_ENTERPRICE_TYPE_CONTACT, function(key, val){
+		/*if(data == key){
+			console.log('entro--->'+data+'--'+key)
+			selected = 'selected';
+		}else{
+			selected = '';
+		}*/
+		selected = data == key ? 'selected' : '';
+		$('#typeNewContact').append("<option value='"+ key +"' "+selected+">"+ val +"</option>");
+	});
+};
+

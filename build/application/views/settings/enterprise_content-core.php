@@ -152,37 +152,34 @@
 					<div class="container">
 						<div class="row">
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="nameNewContact"><?= lang('GEN_NAME') ?></label>
-								<input id="nameNewContact" name="person" type="text" class="form-control" value="" />
+								<label for="contactNames"><?= lang('GEN_NAME') ?></label>
+								<input id="contactNames" name="contactNames" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="surnameNewContact"><?= lang('GEN_LAST_NAME') ?></label>
-								<input id="surnameNewContact" name="surnameModifyContact" type="text" class="form-control" value="" />
+								<label for="contactLastNames"><?= lang('GEN_LAST_NAME') ?></label>
+								<input id="contactLastNames" name="contactLastNames" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="positionNewContact"><?= lang('GEN_POSITION') ?></label>
-								<input id="positionNewContact" name="positionModifyContact" type="text" class="form-control" value="" />
+								<label for="contactPosition"><?= lang('GEN_POSITION') ?></label>
+								<input id="contactPosition" name="contactPosition" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="dniNewContact"><?= lang('GEN_NIT') ?></label>
-								<input id="dniNewContact" name="zoneName" type="text" class="form-control" value="" />
+								<label for="idExtPer"><?= lang('GEN_NIT') ?></label>
+								<input id="idExtPer" name="idExtPer" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="emailNewContact"><?= lang('GEN_EMAIL') ?></label>
-								<input type="email" class="form-control" id="emailNewContact" name="email" value="">
+								<label for="contactEmail"><?= lang('GEN_EMAIL') ?></label>
+								<input type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
 								<label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
-								<select class="select-box custom-select mb-3 h6 w-100" name="typeModifyContact" id="typeNewContact">
-									<option selected value="" disabled>Seleccionar</option>
-									<option value="F">Contacto Administracion y finanzas</option>
-									<option value="H">Contacto RRHH</option>
-									<option value="C">Contacto</option>
+								<select class="select-box custom-select mb-3 h6 w-100" id="typeNewContact" name="typeNewContact">
+								<!--<option selected='selected' disabled='true'><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>-->
 								</select>
 								<div class="help-block"></div>
 							</div>

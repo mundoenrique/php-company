@@ -40,3 +40,8 @@ $lang["SETTINGS_BRANCH_FILE_NO_MOVE"] = "No fue posible mover el archivo al serv
 $lang["SETTINGS_BRANCH_FILE_MASSIVE"] = "masivo_sucursales";
 $lang["SETTINGS_CONTACTS"] = "Contactos";
 $lang["SETTINGS_BTN_NEW"] = "Nuevo";
+$lang['SETTINGS_ENTERPRICE_TYPE_CONTACT'] = [
+	'F' => 'Contacto Administracion y finanzas',
+	'H' => 'Contacto RRHH',
+	'C' => 'Contacto'
+];
