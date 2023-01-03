@@ -1,5 +1,6 @@
 'use strict'
 $(function () {
+	insertFormInput(false);
 	$.balloon.defaults.css = null;
 	$('#new-pass')
 		.on('focus', function () {

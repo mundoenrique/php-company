@@ -502,8 +502,11 @@ $(function () {
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				json.ceo_name = ceo_cook;
-				$.post(baseURL + api + isoPais + '/usuario/config/ActualizarContacto', json).done(function (data) {
+				var dataRequest = JSON.stringify(json)
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+
+				$.post(baseURL + api + isoPais + '/usuario/config/ActualizarContacto', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done(function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 					$(".ui-dialog-content").dialog().dialog("destroy");
 					if (data.rc == "0") {
 						$("#pass.pass").css("border-color", "");

@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SELECT_TYPE'] = 'OFF';
 $lang['CONF_INPUT_PASS'] = 'OFF';
 $lang['CONF_VALIDATE_PARAMS'] = 'OFF';
+$lang['CONF_SIGIN_RECOVER_PASS'] = 'OFF';
+$lang['CONF_MAINTENANCE'] = 'ON';
 //REPORT iSSUED CARDS
 $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
 //VALIDATE FORMS

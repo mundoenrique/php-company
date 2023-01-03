@@ -7,3 +7,4 @@ $lang['CONF_ISSUED_MONTHLY'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'ON';
 //IMAGEN SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
+$lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '([\w_\-]+)$';
