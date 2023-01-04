@@ -488,6 +488,11 @@ $config = [
 			'field' => 'contactEmail',
 			'label' => 'contactEmail',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
 		]
 	],
 	'addContact' => [
@@ -525,6 +530,11 @@ $config = [
 			'field' => 'typeNewContact',
 			'label' => 'typeNewContact',
 			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
 		]
 	],
 	'getProducts' => [
@@ -953,7 +963,7 @@ $config = [
 		[
 			'field' => 'password1',
 			'label' => 'password1',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => 'trim|required'
 		]
 	],
 	'updateBranches' => [
@@ -1025,7 +1035,7 @@ $config = [
 		[
 			'field' => 'password1',
 			'label' => 'password1',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => 'trim|required'
 		]
 	],
 	'uploadFileBranches' => [

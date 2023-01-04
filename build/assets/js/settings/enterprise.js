@@ -349,8 +349,8 @@ $("#btnSaveContact").on("click", function(e) {
 		 data = getDataForm(form);
 		 dataEnterpriseList = getDataForm(formEnterpriseList);
 		 data.idFiscal = dataEnterpriseList.idEnterpriseList;
-		 data.pass = cryptoPass(data.password);
-		 delete data.password;
+		 data.pass = cryptoPass(data.password1);
+		 delete data.password1;
 
 		 if ($(this).attr('data-action') == 'saveCreate') {
 		 	data.action = 'addContact';
