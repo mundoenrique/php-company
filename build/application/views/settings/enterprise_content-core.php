@@ -186,7 +186,7 @@
 						<div class="row flex mb-4 mt-2 pl-5 justify-end form-group">
 							<div class="col-4 form-group">
 								<div class="input-group">
-									<input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
+									<input id="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
 									<div class="input-group-append">
 										<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 											<i class="icon-view mr-0"></i>
