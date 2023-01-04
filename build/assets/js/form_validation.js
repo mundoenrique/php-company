@@ -275,6 +275,8 @@ function validateForms(form) {
 			"contactNames":{ required: true, pattern: longPhraseUpper},
 			"contactLastNames":{ required: true, pattern: longPhraseUpper},
 			"contactPosition":{ required: true, pattern: longPhraseUpper},
+			"idExtPer":{ pattern: numeric },
+			"contactEmail":{ required: true, pattern: emailValid },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -634,6 +636,14 @@ function validateForms(form) {
 			"contactPosition": {
 				required: 'Indica un cargo válido',
 				pattern: 'Indica un cargo válido'
+			},
+			"idExtPer": {
+				required: 'Indica un NIT válido',
+				pattern: 'Indica un NIT válido'
+			},
+			"contactEmail": {
+				required: 'Indica un email válido',
+				pattern: 'Indica un email válido'
 			},
 		},
 		errorPlacement: function (error, element) {

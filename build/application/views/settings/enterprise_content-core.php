@@ -179,7 +179,6 @@
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
 								<label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
 								<select class="select-box custom-select mb-3 h6 w-100" id="typeNewContact" name="typeNewContact">
-								<!--<option selected='selected' disabled='true'><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>-->
 								</select>
 								<div class="help-block"></div>
 							</div>

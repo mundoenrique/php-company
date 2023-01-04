@@ -465,39 +465,29 @@ $config = [
 	],
 	'updateContact' => [
 		[
-			'field' => 'nameModifyContact',
-			'label' => 'nameModifyContact',
+			'field' => 'contactNames',
+			'label' => 'contactNames',
 			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
-			'field' => 'dniModifyContact',
-			'label' => 'dniModifyContact',
+			'field' => 'contactLastNames',
+			'label' => 'contactLastNames',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'contactPosition',
+			'label' => 'contactPosition',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
-			'field' => 'emailModifyContact',
-			'label' => 'emailModifyContact',
+			'field' => 'contactEmail',
+			'label' => 'contactEmail',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
-		],
-		[
-			'field' => 'modifyContactPass',
-			'label' => 'modifyContactPass',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'positionModifyContact',
-			'label' => 'positionModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'surnameModifyContact',
-			'label' => 'surnameModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'typeModifyContact',
-			'label' => 'typeModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		]
 	],
 	'addContact' => [

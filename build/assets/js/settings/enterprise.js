@@ -3,6 +3,8 @@ var table;
 var tableContact;
 var disabled = 'disabled';
 var selected;
+var formEnterpriseList = $('#enterpriseSettListForm');
+var dataEnterpriseList;
 
 $(function () {
 
@@ -28,22 +30,6 @@ $(function () {
 			$('#sectionConctact').hide();
 		}
 	})
-
-	/*$('#enterpriseList').on('change', function(e) {
-		//e.preventDefault();
-
-		//form = $('#enterpriseSettListForm');
-		//validateForms(form);
-		//if (form.valid()) {
-		//	getContacts(getDataForm(form));
-		//}
-		data = {
-			idFiscalList : $("option:selected", '#enterpriseList').val()
-		};
-		//console.log(data);
-		getContacts(data);
-	});*/
-
 
 	/*$('#updateEnterpriceBtn').on('click', function (e) {
 		e.preventDefault();
@@ -114,52 +100,6 @@ $(function () {
 		}
 	});*/
 
-	/*$('#tableContacts1').DataTable({
-		"autoWidth": false,
-		"ordering": false,
-		"searching": true,
-		"lengthChange": false,
-		"pagelength": 10,
-		"pagingType": "full_numbers",
-		"table-layout": "fixed",
-		"columnDefs": [
-			{
-				"targets": 0,
-				"className": "branchName",
-				"width": "200px"
-			},
-			{
-				"targets": 1,
-				"className": "branchCode",
-				"width": "200px"
-			},
-			{
-				"targets": 2,
-				"className": "contact",
-				"width": "200px",
-			},
-			{
-				"targets": 3,
-				"className": "phone",
-				"width": "auto"
-			},
-			{
-				"targets": 4,
-				"width": "auto"
-			}
-		],
-	});*/
-
-	$('#newContactBtn').on('click', function(e) {
-		showManageContactView("create")
-	});
-
-	$('#backContactBtn').on('click', function(e) {
-		$('#sectionConctact').fadeIn(700, 'linear');
-		$('#btnSaveContact').removeAttr('data-action')
-		$('#editAddContactSection').hide();
-	});
-
 	$('#idEnterpriseList').on('change', function (e) {
 		e.preventDefault();
 		var optionSelect = $(this).find('option:selected');
@@ -175,27 +115,25 @@ $(function () {
 			enablePhone();
 		};
 
-		/*if ($('#existingContacts')[0] != undefined) {
-			$('#tableContacts_wrapper').hide();
-		}*/
-
 		form = $('#enterpriseSettListForm');
 		validateForms(form);
 			if (form.valid()) {
 			getContacts(getDataForm(form));
 			}
 	});
-});
 
-/*function enablePhone(){
-	for ( let i = 1; i < 4; i++ ) {
-		if($('#phone'+ i).val()==''){
-			$('#divPhone'+ i).addClass('hide');
-		}else{
-			$('#divPhone'+ i).removeClass('hide');
-		}
-	}
-}*/
+	$('#newContactBtn').on('click', function(e) {
+		showManageContactView("create");
+		getTypeContac();
+	});
+
+	$('#backContactBtn').on('click', function(e) {
+		$('#sectionConctact').fadeIn(700, 'linear');
+		$('#btnSaveContact').removeAttr('data-action')
+		$('#editAddContactSection').hide();
+	});
+
+});
 
 /*function getContacts (data) {
 	who = 'Settings';
@@ -408,19 +346,19 @@ $("#btnSaveContact").on("click", function(e) {
 		btn.btnAction = btnAction;
 		btn.btnText =btnText;
 		insertFormInput(true);
-		// data = getDataForm(form);
-		// data.pass = cryptoPass(data.password1);
-		// data.idFiscal = $("option:selected", '#idFiscalList').val();
+		 data = getDataForm(form);
+		 dataEnterpriseList = getDataForm(formEnterpriseList);
+		 data.idFiscal = dataEnterpriseList.idEnterpriseList;
+		 data.pass = cryptoPass(data.password);
+		 delete data.password;
 
-		// if ($(this).attr('data-action') == 'saveCreate') {
-		// 	data.branch = 'addBranches';
-		// 	delete data.codB;
-		// 	delete data.userNameB;
-		// 	getCallNovoCore(data, btn);
-		// }else{
-		// 	data.branch = 'updateBranches';
-		// 	getCallNovoCore(data, btn);
-		// }
+		 if ($(this).attr('data-action') == 'saveCreate') {
+		 	data.action = 'addContact';
+		 	getCallNovoCoreContact(data, btn);
+		 }else{
+		 	data.action = 'updateContact';
+		 	getCallNovoCoreContact(data, btn);
+		 }
 	}
 });
 
@@ -502,7 +440,6 @@ function showManageContactView(action) {
 		case "create":
 			$('#btnSaveContact').attr('data-action', 'saveCreate');
 			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
-			//$('#ContactInfoForm')[0].reset();
 			break;
 		case "update":
 			$('#btnSaveContact').attr('data-action', 'saveUpdate');
@@ -516,14 +453,29 @@ function getTypeContac(data) {
 	$('#typeNewContact').empty();
 	$('#typeNewContact').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 	$.each(lang.SETTINGS_ENTERPRICE_TYPE_CONTACT, function(key, val){
-		/*if(data == key){
-			console.log('entro--->'+data+'--'+key)
-			selected = 'selected';
-		}else{
-			selected = '';
-		}*/
-		selected = data == key ? 'selected' : '';
+		selected = (data != '' && data == key) ? 'selected' : '';
 		$('#typeNewContact').append("<option value='"+ key +"' "+selected+">"+ val +"</option>");
+	});
+};
+
+function getCallNovoCoreContact(data, btn){
+	who = 'Settings';
+	where = data.action;
+	callNovoCore(who, where, data, function(response) {
+		dataResponse = response;
+		btn.btnAction.html(btn.btnText);
+		insertFormInput(false);
+
+		if(dataResponse.code==0){
+			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+			$('#accept').on('click', function(e) {
+				e.preventDefault();
+				$('#system-info').dialog('destroy');
+				var newData = {};
+				newData.idEnterpriseList=data.idFiscal;
+				getContacts (newData);
+			})
+		}
 	});
 };
 

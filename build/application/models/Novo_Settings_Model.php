@@ -344,7 +344,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->nombres = $dataRequest->names;
 		$this->dataRequest->apellido = $dataRequest->lastNames;
 		$this->dataRequest->cargo = $dataRequest->position;
-		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->email = $dataRequest->contactEmail;
 		$this->dataRequest->tipoContacto = $dataRequest->typeContact;
 
 		$this->dataRequest->usuario = [
@@ -386,19 +386,19 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'updateContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 
-		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->acrif = $dataRequest->idFiscal;
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
-		$this->dataRequest->nombres = $dataRequest->names;
-		$this->dataRequest->apellido = $dataRequest->lastNames;
-		$this->dataRequest->cargo = $dataRequest->position;
-		$this->dataRequest->email = $dataRequest->email;
-		$this->dataRequest->tipoContacto = $dataRequest->typeContact;
+		$this->dataRequest->nombres = $dataRequest->contactNames;
+		$this->dataRequest->apellido = $dataRequest->contactLastNames;
+		$this->dataRequest->cargo = $dataRequest->contactPosition;
+		$this->dataRequest->email = $dataRequest->contactEmail;
+		$this->dataRequest->tipoContacto = $dataRequest->typeNewContact;
+
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
 		$this->dataRequest->usuario = [
-			[
-				"userName" => $this->userName,
-				"password" => $dataRequest->modifyContactPass,
-			]
+			"userName" => $this->userName,
+			"password" => md5($password)
 		];
 
 		$response = $this->sendToService('CallWs_updateContact');
@@ -406,10 +406,9 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('Contacto modificado exitosamente.');
+				$this->response->msg = 'Contacto modificado exitosamente.';
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
 
