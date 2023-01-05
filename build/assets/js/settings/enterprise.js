@@ -444,10 +444,13 @@ function showManageContactView(action) {
 	switch (action) {
 		case "create":
 			$('#btnSaveContact').attr('data-action', 'saveCreate');
+			$('#idExtPer').attr("readonly", false).removeClass('bg-tertiary border');
 			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#addContactForm')[0].reset();
 			break;
 		case "update":
 			$('#btnSaveContact').attr('data-action', 'saveUpdate');
+			$('#idExtPer').attr("readonly", true).addClass('bg-tertiary border');
 			$('#editAddContactText').html(lang.GEN_EDIT +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
 			$('#password1').val('');
 			break;
