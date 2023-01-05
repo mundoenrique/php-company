@@ -392,7 +392,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->apellido = $dataRequest->contactLastNames;
 		$this->dataRequest->cargo = $dataRequest->contactPosition;
 		$this->dataRequest->email = $dataRequest->contactEmail;
-		$this->dataRequest->tipoContacto = $dataRequest->typeNewContact;
+		$this->dataRequest->tipoContacto = $dataRequest->contactType;
 
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 

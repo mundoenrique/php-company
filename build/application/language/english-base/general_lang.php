@@ -269,6 +269,7 @@ $lang['GEN_ENTERPRISE'] = 'Enterprise';
 $lang['GEN_BRANC_OFFICE'] = 'Branch office';
 $lang['GEN_BRANC_OFFICES'] = 'Branch offices';
 $lang['GEN_CONTAC_PERSON'] = 'Contact';
+$lang['GEN_CONTAC_TYPE'] = 'Type';
 $lang['GEN_MORNING'] = 'Morning';
 $lang['GEN_AFTERNOON'] = 'Afternoon';
 $lang['GEN_EVENING'] = 'Evening';

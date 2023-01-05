@@ -271,6 +271,7 @@ $lang['GEN_ENTERPRISE'] = 'Empresa';
 $lang['GEN_BRANC_OFFICE'] = 'Sucursal';
 $lang['GEN_BRANC_OFFICES'] = 'Sucursales';
 $lang['GEN_CONTAC_PERSON'] = 'Contacto';
+$lang['GEN_CONTAC_TYPE'] = 'Tipo';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';

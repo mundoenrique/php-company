@@ -176,9 +176,9 @@
 								<input type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="typeNewContact"><?= lang('GEN_ENTERPRISE') ?></label>
-								<select class="select-box custom-select mb-3 h6 w-100" id="typeNewContact" name="typeNewContact">
+							<div class="form-group mb-1 col-6 col-lg-4">
+								<label for="contactType"><?= lang('GEN_CONTAC_TYPE') ?></label>
+								<select id="contactType" name="contactType" class="form-control select-box custom-select h6 w-100">
 								</select>
 								<div class="help-block"></div>
 							</div>

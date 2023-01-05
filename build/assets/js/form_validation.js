@@ -28,6 +28,7 @@ function validateForms(form) {
 		y: /^[0-9]{4}$/,
 	};
 	var binary = /^[0-1]+$/;
+	var contactType = /^[F|H|C]*$/i;
 	var defaults = {
 		debug: true,
 		errorClass: lang.CONF_VALID_ERROR,
@@ -275,8 +276,10 @@ function validateForms(form) {
 			"contactNames":{ required: true, pattern: longPhraseUpper},
 			"contactLastNames":{ required: true, pattern: longPhraseUpper},
 			"contactPosition":{ required: true, pattern: longPhraseUpper},
-			"idExtPer":{ pattern: numeric },
+			"idExtPer":{ required: true, pattern: numeric },
 			"contactEmail":{ required: true, pattern: emailValid },
+			"contactType":{ required: true, pattern: contactType },
+
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -644,6 +647,10 @@ function validateForms(form) {
 			"contactEmail": {
 				required: 'Indica un email válido',
 				pattern: 'Indica un email válido'
+			},
+			"contactType": {
+				required: 'Selecciona un tipo contacto válido',
+				pattern: 'Selecciona un tipo contacto válido'
 			},
 		},
 		errorPlacement: function (error, element) {

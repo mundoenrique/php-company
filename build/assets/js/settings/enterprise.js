@@ -450,11 +450,11 @@ function showManageContactView(action) {
 };
 
 function getTypeContac(data) {
-	$('#typeNewContact').empty();
-	$('#typeNewContact').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
+	$('#contactType').empty();
+	$('#contactType').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 	$.each(lang.SETTINGS_ENTERPRICE_TYPE_CONTACT, function(key, val){
 		selected = (data != '' && data == key) ? 'selected' : '';
-		$('#typeNewContact').append("<option value='"+ key +"' "+selected+">"+ val +"</option>");
+		$('#contactType').append("<option value='"+ key +"' "+selected+">"+ val +"</option>");
 	});
 };
 

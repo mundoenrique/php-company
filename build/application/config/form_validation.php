@@ -490,6 +490,11 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
+			'field' => 'contactType',
+			'label' => 'contactType',
+			'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
+		],
+		[
 			'field' => 'pass',
 			'label' => 'pass',
 			'rules' => 'trim|required'
@@ -527,9 +532,9 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
-			'field' => 'typeNewContact',
-			'label' => 'typeNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'field' => 'contactType',
+			'label' => 'contactType',
+			'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
 		],
 		[
 			'field' => 'pass',
