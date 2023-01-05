@@ -62,6 +62,7 @@ $lang['VALIDATE_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['VALIDATE_RECHAR_DESC1'] = 'Indica la descripción';
 $lang['VALIDATE_RECHAR_DESC2'] = 'No admite caracteres especiales ni espacios';
 $lang['VALIDATE_LOCK_CARD_SELECT'] = 'Selecciona un tipo de bloqueo';
+$lang['VALIDATE_CONTACT_TYPE_SELECT'] = 'Selecciona un tipo contacto válido';
 $lang['VALIDATE_LESS_BALANCE'] = 'El saldo disponible no es suficiente para realizar la transacción.';
 $lang['VALIDATE_DAILY_QUANTITY'] = 'Has excedido la cantidad de transacciones por día.';
 $lang['VALIDATE_MIN_AMOUNT'] = 'El monto a transferir debe ser mayor al monto mínimo por transacción.';

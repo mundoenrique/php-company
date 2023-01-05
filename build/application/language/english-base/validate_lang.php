@@ -61,6 +61,7 @@ $lang['VALIDATE_VALID_AMOUNT'] = 'Indicate a valid amount';
 $lang['VALIDATE_RECHAR_DESC1'] = 'Indicate the description';
 $lang['VALIDATE_RECHAR_DESC2'] = 'Does not support special characters or spaces';
 $lang['VALIDATE_LOCK_CARD_SELECT'] = 'Select a lock type';
+$lang['VALIDATE_CONTACT_TYPE_SELECT'] = 'Select a valid contact type';
 $lang['VALIDATE_LESS_BALANCE'] = 'The available balance is not enough to carry out the transaction.';
 $lang['VALIDATE_DAILY_QUANTITY'] = 'You have exceeded the number of transactions per day.';
 $lang['VALIDATE_MIN_AMOUNT'] = 'The amount to be transferred must be greater than the minimum amount per transaction.';

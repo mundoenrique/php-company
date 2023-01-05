@@ -629,28 +629,28 @@ function validateForms(form) {
 				required: lang.VALIDATE_SELECT
 			},
 			"contactNames": {
-				required: 'Indica un nombre válido',
-				pattern: 'Indica un nombre válido'
+				required: lang.VALIDATE_NAME_BRANCHES,
+				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"contactLastNames": {
-				required: 'Indica un apellido válido',
-				pattern: 'Indica un apellido válido'
+				required: lang.VALIDATE_INPUT_SURNAME,
+				pattern: lang.VALIDATE_INPUT_SURNAME
 			},
 			"contactPosition": {
-				required: 'Indica un cargo válido',
-				pattern: 'Indica un cargo válido'
+				required: lang.VALIDATE_INPUT_POSITION,
+				pattern: lang.VALIDATE_INPUT_POSITION
 			},
 			"idExtPer": {
-				required: 'Indica un NIT válido',
-				pattern: 'Indica un NIT válido'
+				required: lang.VALIDATE_NIT,
+				pattern: lang.VALIDATE_NIT
 			},
 			"contactEmail": {
-				required: 'Indica un email válido',
-				pattern: 'Indica un email válido'
+				required: lang.VALIDATE_EMAIL,
+				pattern: lang.VALIDATE_EMAIL
 			},
 			"contactType": {
-				required: 'Selecciona un tipo contacto válido',
-				pattern: 'Selecciona un tipo contacto válido'
+				required: lang.VALIDATE_CONTACT_TYPE_SELECT,
+				pattern: lang.VALIDATE_CONTACT_TYPE_SELECT
 			},
 		},
 		errorPlacement: function (error, element) {

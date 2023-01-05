@@ -304,6 +304,11 @@ $(function () {
 }*/
 
 function getContacts(value) {
+	$('#enterpriseData').hide();
+	$('#sectionConctact').hide();
+	$('#editAddContactSection').hide();
+	$('.hide-out').removeClass('hide');
+
 	if (table != undefined) {
 		table.destroy();
 	}
