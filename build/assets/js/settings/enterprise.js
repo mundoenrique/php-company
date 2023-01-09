@@ -332,6 +332,14 @@ function getContacts(value) {
 				showManageContactView("update")
 			});
 
+			$('#tableContacts1 tbody tr').on('click', "button[data-action='delete']", function (e) {
+				e.preventDefault();
+				$.each(response.data[$(this).val()], function (key, val) {
+					$('#'+ key ).val(val);
+				});
+				modalDeleteContact(response.data[$(this).val()]);
+			});
+
 		}else if (response.code == 1){
 			contactsTable(response);
 		}
@@ -428,6 +436,9 @@ function contactsTable(dataResponse) {
 					options += '<button value="'+ data.id +'" class="edit btn mx-1 px-0" title="'+lang.GEN_EDIT+'" data-action="update" data-toggle="tooltip">';
 					options += '<i class="icon icon-edit"></i>';
 					options += '</button>';
+					options += '<button value="'+ data.id +'" class="delete btn mx-1 px-0" title="'+lang.GEN_BTN_DELETE+'" data-action="delete" data-toggle="tooltip">';
+					options += '<i class="icon icon-remove"></i>';
+					options += '</button>';
 					return options;
 				}
 			}
@@ -487,3 +498,33 @@ function getCallNovoCoreContact(data, btn){
 	});
 };
 
+function modalDeleteContact(response) {
+	var msgModal = '';
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		}
+	}
+	msgModal += '<div class="form-group">';
+	msgModal += '<span>';
+	msgModal += '¿Esta seguro que quieres eliminar el contacto:<b> '+response.contactNames +' '+ response.contactLastNames+'</b>?';
+	msgModal += '</span>';
+	msgModal += '</div>';
+
+	appMessages(response.title, msgModal, lang.CONF_ICON_WARNING, modalBtn);
+
+	$('#accept').on('click', function(e) {
+		e.preventDefault();
+		$('#system-info').dialog('destroy');
+		console.log('entro');
+		// var newData = {};
+		// newData.idEnterpriseList=data.idFiscal;
+		// getContacts (newData);
+	})
+
+}
