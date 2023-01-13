@@ -448,14 +448,14 @@ $config = [
 	],
 	'deleteContact' => [
 		[
-			'field' => 'acrif',
-			'label' => 'acrif',
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
-			'field' => 'idExper',
-			'label' => 'idExper',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
 			'field' => 'pass',
@@ -467,17 +467,17 @@ $config = [
 		[
 			'field' => 'contactNames',
 			'label' => 'contactNames',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
 			'field' => 'contactLastNames',
 			'label' => 'contactLastNames',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
 			'field' => 'contactPosition',
 			'label' => 'contactPosition',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
 			'field' => 'idExtPer',
@@ -502,34 +502,29 @@ $config = [
 	],
 	'addContact' => [
 		[
-			'field' => 'nameNewContact',
-			'label' => 'nameNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'field' => 'contactNames',
+			'label' => 'contactNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
-			'field' => 'dniNewContact',
-			'label' => 'dniNewContact',
+			'field' => 'contactLastNames',
+			'label' => 'contactLastNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'contactPosition',
+			'label' => 'contactPosition',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
-			'field' => 'emailNewContact',
-			'label' => 'emailNewContact',
+			'field' => 'contactEmail',
+			'label' => 'contactEmail',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
-		],
-		[
-			'field' => 'newContPass',
-			'label' => 'newContPass',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'positionNewContact',
-			'label' => 'positionNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'surnameNewContact',
-			'label' => 'surnameNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
 			'field' => 'contactType',

@@ -10,6 +10,7 @@ function validateForms(form) {
 	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = new RegExp(lang.CONF_VALIDATE_EMAIL, 'i');
+	var alphaName =  /^[a-zñáéíóú ]{1,50}$/i;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
 	var alphanum =  new RegExp(lang.CONF_VALIDATE_ALPHA_NUM, 'i');
@@ -273,9 +274,9 @@ function validateForms(form) {
 			"filterDateXls":{ required: true,pattern: numeric},
 			"nameEnterpriseXls":{ required: true,pattern: alphanumunder},
 			"branchListBr":{ required: true, pattern: alphanumspecial},
-			"contactNames":{ required: true, pattern: longPhraseUpper},
-			"contactLastNames":{ required: true, pattern: longPhraseUpper},
-			"contactPosition":{ required: true, pattern: longPhraseUpper},
+			"contactNames":{ required: true, pattern: alphaName},
+			"contactLastNames":{ required: true, pattern: alphaName},
+			"contactPosition":{ required: true, pattern: alphaName},
 			"idExtPer":{ required: true, pattern: numeric },
 			"contactEmail":{ required: true, pattern: emailValid },
 			"contactType":{ required: true, pattern: contactType },
@@ -388,6 +389,7 @@ function validateForms(form) {
 			"firstName": lang.VALIDATE_NAME_LASTNAME,
 			"lastName": lang.VALIDATE_NAME_LASTNAME,
 			"movil": lang.VALIDATE_PHONE,
+			"contactEmail": lang.VALIDATE_EMAIL,
 			"numberMonthlyPurchasesCtp": {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required: lang.VALIDATE_NUMBER_REQ
@@ -643,10 +645,6 @@ function validateForms(form) {
 			"idExtPer": {
 				required: lang.VALIDATE_NIT,
 				pattern: lang.VALIDATE_NIT
-			},
-			"contactEmail": {
-				required: lang.VALIDATE_EMAIL,
-				pattern: lang.VALIDATE_EMAIL
 			},
 			"contactType": {
 				required: lang.VALIDATE_CONTACT_TYPE_SELECT,

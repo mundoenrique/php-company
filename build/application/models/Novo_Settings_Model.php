@@ -228,45 +228,6 @@ class Novo_Settings_Model extends NOVO_Model {
 	}
 
 	/**
-	 * @info Método para buscar contactos
-	 * @author Diego Acosta García
-	 * @date April 20th, 2021
-	 */
-	/*public function CallWs_getContacts_Settings_old($dataRequest)
-	{
-		log_message('INFO', 'NOVO Settings Model: getContacts Method Initialized');
-
-		$this->dataAccessLog->modulo = 'getContactosPorEmpresa';
-		$this->dataAccessLog->function = 'getContactosPorEmpresa';
-		$this->dataAccessLog->operation = 'getContactosPorEmpresa';
-
-		$this->dataRequest->idOperation = 'getContactosPorEmpresa';
-		$this->dataRequest->className = 'com.novo.objects.MO.ListadoContactosMO';
-		$this->dataRequest->lista = [["acrif" => $dataRequest->acrif]];
-		$this->dataRequest->paginar = false;
-		$this->dataRequest->paginaActual = 0;
-		$this->dataRequest->tamanoPagina = 1;
-
-		$response = $this->sendToService('CallWs_getContacts');
-
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				foreach ($response->lista as $key => $value) {
-				  ($response->lista[$key])->id = $key + 1;
-				}
-				$this->response->data = $response->lista;
-				$this->response->diego = $this->session;
-			break;
-			default:
-			$this->response->code = 1;
-				break;
-		}
-
-		return $this->responseToTheView('CallWs_getContacts');
-	}*/
-
-	 /**
 	 * @info Método para buscar contactos de la empresa
 	 * @author Luis Molina
 	 * @date Dec 06th, 2022
@@ -327,7 +288,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
 	 * @modified Luis Molina
-	 * @date Dec 07th, 2022
+	 * @date Jan 05th, 2023
 	 */
 	public function CallWs_addContact_Settings($dataRequest)
 	{
@@ -339,19 +300,19 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 
-		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->acrif = $dataRequest->idFiscal;
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
-		$this->dataRequest->nombres = $dataRequest->names;
-		$this->dataRequest->apellido = $dataRequest->lastNames;
-		$this->dataRequest->cargo = $dataRequest->position;
+		$this->dataRequest->nombres = $dataRequest->contactNames;
+		$this->dataRequest->apellido = $dataRequest->contactLastNames;
+		$this->dataRequest->cargo = $dataRequest->contactPosition;
 		$this->dataRequest->email = $dataRequest->contactEmail;
-		$this->dataRequest->tipoContacto = $dataRequest->typeContact;
+		$this->dataRequest->tipoContacto = $dataRequest->contactType;
+
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
 		$this->dataRequest->usuario = [
-			[
-				"userName" => $this->userName,
-				"password" => $dataRequest->newContPass,
-			]
+			"userName" => $this->userName,
+			"password" => md5($password)
 		];
 
 		$response = $this->sendToService('CallWs_addContact');
@@ -361,7 +322,16 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = 'Contacto agregado exitosamente.';
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+			break;
+			case -1:
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -163:
+				$this->response->msg = 'El contacto ya existe.';
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -410,6 +380,11 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
+			case -1:
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->responseToTheView('CallWs_updateContact');
@@ -432,13 +407,14 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'eliminarContactoEmpresa';
 		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 
-		$this->dataRequest->acrif = $dataRequest->acrif;
-		$this->dataRequest->idExtPer = $dataRequest->idExper;
+		$this->dataRequest->acrif = $dataRequest->idFiscal;
+		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
+
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+
 		$this->dataRequest->usuario = [
-			[
-				"userName" => $this->userName,
-				"password" => $dataRequest->pass,
-			]
+			"userName" => $this->userName,
+			"password" => md5($password)
 		];
 
 		$response = $this->sendToService('CallWs_deleteContact');
@@ -446,9 +422,13 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('Contacto eliminado exitosamente.');
+				$this->response->msg = 'Contacto eliminado exitosamente.';
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+			break;
+			case -1:
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -611,7 +591,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		//$response = $this->sendToService('CallWs_addBranches');
+		$response = $this->sendToService('CallWs_addBranches');
 		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
@@ -666,7 +646,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		//$response = $this->sendToService('CallWs_updateBranches');
+		$response = $this->sendToService('CallWs_updateBranches');
 		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
