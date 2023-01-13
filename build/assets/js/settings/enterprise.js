@@ -1,6 +1,5 @@
 'use strict'
 var table;
-var tableContact;
 var disabled = 'disabled';
 var selected;
 var dataEnterpriseList;
@@ -122,20 +121,22 @@ function getContacts(value) {
 		if ( response.code == 0 ) {
 			contactsTable(response);
 
-			$('#tableContacts1 tbody tr').on('click', "button[data-action='update']", function (e) {
-				$.each(response.data[$(this).val()], function (key, val) {
-					$('#'+ key ).val(val);
-				});
-				getTypeContac(response.data[$(this).val()].typeContactValue);
-				showManageContactView("update")
-			});
-
-			$('#tableContacts1 tbody tr').on('click', "button[data-action='delete']", function (e) {
+		$('#tableContacts1 tbody tr').on('click', 'button', function (e) {
 				e.preventDefault();
 				$.each(response.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
-				modalDeleteContact(response.data[$(this).val()]);
+
+				var dataAction = $(this).attr('data-action');
+				switch (dataAction) {
+					case 'update':
+						getTypeContac(response.data[$(this).val()].typeContactValue);
+						showManageContactView("update")
+						break;
+					case 'delete':
+						modalDeleteContact(response.data[$(this).val()]);
+						break;
+				}
 			});
 
 		}else if (response.code == 1){
@@ -295,7 +296,6 @@ function getCallNovoCoreContact(data, btn){
 		}else{
 			insertFormInput(false);
 		}
-
 	});
 };
 

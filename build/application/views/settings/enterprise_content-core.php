@@ -99,20 +99,6 @@
       </div>
     </div>
   </div>
-  <!-- <table id="tableContacts" class="cell-border h6 display w-100">
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  <div id="existingContactButton">
-    <div class="col-3 col-lg-2 col-xl-auto">
-      <button id="modifyContact" class="modifyContact btn btn-primary btn-small " type="button">Modificar</button>
-    </div>
-    <div class="col-3 col-lg-2 col-xl-auto">';
-      <button id="deleteContact" type="button" class="btn btn-primary btn-small ">Eliminar</button>
-    </div>
-  </div> -->
   <?php if (lang('CONF_SETTINGS_CONTACT') == 'ON'): ?>
   <div id="sectionConctact">
     <div class="flex flex-auto flex-column">

@@ -320,7 +320,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = 'Contacto agregado exitosamente.';
+				$this->response->msg = lang('GEN_ADD_CONTACT_SUCCESS');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
@@ -330,7 +330,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -163:
-				$this->response->msg = 'El contacto ya existe.';
+				$this->response->msg = lang('GEN_EXIST_CONTACT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -376,7 +376,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = 'Contacto modificado exitosamente.';
+				$this->response->msg = lang('GEN_UPDATE_CONTACT_SUCCESS');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
@@ -422,7 +422,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = 'Contacto eliminado exitosamente.';
+				$this->response->msg = lang('GEN_DELETE_CONTACT_SUCCESS');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
