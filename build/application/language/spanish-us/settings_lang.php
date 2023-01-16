@@ -9,5 +9,3 @@ $lang['SETTINGS_FILES_DOWNLOAD'] = [
     ['JRE_6','zip','Java JRE 1.6','download']
   ]
 ];
-
-$lang['GEN_EMAIL'] = 'E-mail';

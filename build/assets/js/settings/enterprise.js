@@ -317,6 +317,7 @@ function modalDeleteContact(response) {
 	inputModal = '<form id="delete-contact-form" name="delete-contact-form" class="form-group">';
 	inputModal += '<span>';
 	inputModal += '¿Esta seguro que quieres eliminar el contacto:<b> '+response.contactNames +' '+ response.contactLastNames+'</b>?';
+	inputModal +=		'<br><br>';
 	inputModal +=		'<div class="input-group">';
 	inputModal += 		'<input class="form-control pwd-input pr-0 pwd" id="password1" name="password" type="password" ';
 	inputModal += 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
