@@ -21,6 +21,7 @@ $(function () {
 		enablePhone();
 	};
 
+
 	$('ul.nav-config-box, .slide-slow').on('click', function (e) {
 		if ($('#idEnterpriseList > option').length > 1) {
 			$('#idEnterpriseList').prop('selectedIndex', 0);
@@ -99,6 +100,16 @@ $(function () {
 	});
 
 });
+
+function enablePhone(){
+	for ( let i = 1; i < 4; i++ ) {
+		if($('#phone'+ i).val()==''){
+			$('#divPhone'+ i).addClass('hide');
+		}else{
+			$('#divPhone'+ i).removeClass('hide');
+		}
+	}
+};
 
 function getContacts(value) {
 	$('#enterpriseData').hide();
