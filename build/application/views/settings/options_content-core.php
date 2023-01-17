@@ -63,7 +63,7 @@
  			<?php endif; ?>
 
 			<?php if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON'): ?>
-				<?php $this->load->view('/settings/enterprise_content-core') ?>
+				<?php $this->load->view('/settings/company_content-core') ?>
 			<?php endif; ?>
 
 			<?php if (lang('CONF_SETTINGS_BRANCHES') == 'ON'): ?>

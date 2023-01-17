@@ -37,7 +37,7 @@ class Novo_Settings extends NOVO_Controller {
 			"form_validation",
 			"third_party/additional-methods",
 			"settings/options",
-			"settings/enterprise",
+			"settings/company",
 			"settings/branches",
 			"settings/regions",
 			"user/changePassword-core",
@@ -67,7 +67,7 @@ class Novo_Settings extends NOVO_Controller {
 			$this->render->enterpriseSettList = $enterpriseList;
 			$this->render->countEnterpriseList = count($enterpriseList);
 
-			if ($this->render->countEnterpriseList == 1) {
+			if ($this->render->countEnterpriseList == 2) {
 				foreach((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value){
 					 $valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
 				}

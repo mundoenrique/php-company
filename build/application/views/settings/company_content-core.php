@@ -99,16 +99,16 @@
       </div>
     </div>
   </div>
-  <?php if (lang('CONF_SETTINGS_CONTACT') == 'ON'): ?>
+  <?php if (lang('CONF_ENTERPRICE_CONTACT') == 'ON'): ?>
   <div id="sectionConctact">
     <div class="flex flex-auto flex-column">
       <div class="flex flex-column mx-4 mb-5">
-        <span class="line-text  flex mb-2 h4 semibold primary"><?= lang('SETTINGS_CONTACTS') ?>
+        <span class="line-text  flex mb-2 h4 semibold primary"><?= lang('PRUE_ENTERPRICE_CONTACTS') ?>
         </span>
         <div class=" my-2 px-5">
         <div class="m-4 flex justify-end">
           <button id="newContactBtn" class="btn btn-primary btn-small" data-action="create">
-            <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('SETTINGS_BTN_NEW') ?>
+            <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW') ?>
           </button>
         </div>
         <table id="tableContacts1" class="mt-4 cell-border h6 display w-100 center">

@@ -86,6 +86,7 @@ $lang['GEN_BTN_LOAD_BRANCH'] = 'Cargar';
 $lang['GEN_BTN_MODIFY'] = 'Modificar';
 $lang['GEN_BTN_CLEAN_UP'] = 'Limpiar';
 $lang['GEN_BTN_ADD'] = 'Agregar';
+$lang['GEN_BTN_NEW'] = 'Nuevo';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';

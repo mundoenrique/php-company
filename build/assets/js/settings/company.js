@@ -110,7 +110,7 @@ function getContacts(value) {
 		table.destroy();
 	}
 	data = value;
-	who = 'Settings';
+	who = 'Company';
 	where = 'getContacts';
 
 	callNovoCore(who,where,data, function(response) {
@@ -256,7 +256,7 @@ function showManageContactView(action) {
 		case "create":
 			$('#btnSaveContact').attr('data-action', 'saveCreate');
 			$('#idExtPer').attr("readonly", false).removeClass('bg-tertiary border');
-			$('#editAddContactText').html(lang.SETTINGS_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
+			$('#editAddContactText').html(lang.GEN_BTN_NEW +' '+ lang.GEN_CONTAC_PERSON.toLowerCase());
 			$('#addContactForm')[0].reset();
 			break;
 		case "update":
@@ -271,14 +271,14 @@ function showManageContactView(action) {
 function getTypeContac(data) {
 	$('#contactType').empty();
 	$('#contactType').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
-	$.each(lang.SETTINGS_ENTERPRICE_TYPE_CONTACT, function(key, val){
+	$.each(lang.PRUE_ENTERPRICE_TYPE_CONTACT, function(key, val){
 		selected = (data != '' && data == key) ? 'selected' : '';
 		$('#contactType').append("<option value='"+ key +"' "+selected+">"+ val +"</option>");
 	});
 };
 
 function getCallNovoCoreContact(data, btn){
-	who = 'Settings';
+	who = 'Company';
 	where = data.action;
 	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;

@@ -114,13 +114,13 @@ $lang['CONF_SETTINGS_DOWNLOADS'] = 'ON';
 $lang['CONF_SETTINGS_TELEPHONES'] = 'ON';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE'] = 'OFF';
-$lang['CONF_SETTINGS_CONTACT'] = 'ON';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
 $lang['CONF_SETT_ICON'] = 'icon-settings.svg';
 $lang['CONF_XLS_ICON'] = 'icon-xls.svg';
+$lang['CONF_ENTERPRICE_CONTACT'] = 'OFF';
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';
