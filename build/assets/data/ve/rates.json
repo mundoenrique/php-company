@@ -105,47 +105,10 @@
 			]
 		},
 		{
-			"name": "Transferencias**",
-			"description": null,
-			"items": [{
-					"name": "A cuentas bancarias, montos menores a Bs. 533.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 533,00",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 4.00.000,00 <br> Bs. 4,00"
-					]
-				},
-				{
-					"name": "A cuentas bancarias, montos mayores a Bs. 533.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 533,00",
-					"description": null,
-					"rates": [
-						null,
-						"0.75%"
-					]
-				}
-			]
-		},
-		{
 			"name": "Pagos**",
 			"description": null,
 			"items": [{
-					"name": "De tarjetas de crédito, montos menores a Bs. 533.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 533,00",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 4.000.000,00 <br> Bs. 4,00"
-					]
-				},
-				{
-					"name": "De tarjetas de crédito, montos mayores a Bs. 533.000.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 533,00",
-					"description": null,
-					"rates": [
-						null,
-						"0.75%"
-					]
-				},
-				{
-					"name": "Pago móvil, montos menores a Bs. 705.880.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 705,88",
+					"name": "Pago móvil, montos menores a Bs. 705.880.000,00 /<br>  <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 705,88",
 					"description": null,
 					"rates": [
 						null,
@@ -153,7 +116,7 @@
 					]
 				},
 				{
-					"name": "Pago móvil, montos mayores a Bs. 705.880.000,00 / <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 705,88",
+					"name": "Pago móvil, montos mayores a Bs. 705.880.000,00 / <br> <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 705,88",
 					"description": null,
 					"rates": [
 						null,
