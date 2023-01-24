@@ -10,7 +10,7 @@
             <form id="enterpriseSettListForm" method="POST">
 						<select id="idEnterpriseList" name="idEnterpriseList" class="select-box custom-select mt-3 mb-4 h6 w-100" countEnterpriseList=<?= $countEnterpriseList ?>>
 							<?php if ($countEnterpriseList == 1): ?>
-							<option selected disabled value="<?= $enterpriseSettList[0]->acrif; ?>">
+							<option value="<?= $enterpriseSettList[0]->acrif; ?>">
 								<?= $enterpriseSettList[0]->enterpriseName; ?></option>
 							<?php else: ?>
 							<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
@@ -111,7 +111,7 @@
             <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW') ?>
           </button>
         </div>
-        <table id="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
+        <table id="tableContacts1" name="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
           <thead class="bg-primary secondary regular">
             <tr>
 							<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
@@ -138,7 +138,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="contactNames"><?= lang('GEN_NAME') ?></label>
+								<label for="contactNames"><?= lang('GEN_TABLE_NAME_CLIENT') ?></label>
 								<input id="contactNames" name="contactNames" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
@@ -153,7 +153,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-								<label for="idExtPer"><?= lang('GEN_NIT') ?></label>
+								<label for="idExtPer"><?= lang('GEN_TABLE_DNI') ?></label>
 								<input id="idExtPer" name="idExtPer" type="text" class="form-control" value="" />
 								<div class="help-block"></div>
 							</div>
@@ -163,7 +163,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group mb-1 col-6 col-lg-4">
-								<label for="contactType"><?= lang('GEN_CONTAC_TYPE') ?></label>
+								<label for="contactType"><?= lang('GEN_TABLE_TYPE') ?></label>
 								<select id="contactType" name="contactType" class="form-control select-box custom-select h6 w-100">
 								</select>
 								<div class="help-block"></div>

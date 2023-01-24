@@ -1,5 +1,6 @@
 'use strict'
-var table;
+
+var tableBranches = $('#tableBranches');
 
 $(function () {
 	if ( $('#idFiscalList').attr("countEnterpriseList")==1 ) {
@@ -76,10 +77,8 @@ function getBranches(value) {
 	$('#editAddBranchSection').hide();
 	$('#branchLoadSection').hide();
 	$('.hide-out').removeClass('hide');
+	tableBranches.DataTable().destroy();
 
-	if (table != undefined) {
-		table.destroy();
-	}
 	data = value;
 	who = 'Settings';
 	where = 'getBranches';
@@ -115,7 +114,6 @@ $("#btnSaveBranch").on("click", function(e) {
 		var btnAction = $('#btnSaveBranch');
 		btnText = btnAction.text().trim();
 		btnAction.html(loader);
-
 		var btn={};
 		btn.btnAction = btnAction;
 		btn.btnText =btnText;
@@ -188,7 +186,7 @@ function getCallNovoCore(data, btn){
 
 function branchesTable(dataResponse) {
 	$('.hide-out').addClass('hide');
-	table = $('#tableBranches').DataTable({
+	tableBranches.DataTable({
 		"autoWidth": false,
 		"ordering": false,
 		"searching": true,
@@ -240,7 +238,7 @@ function branchesTable(dataResponse) {
 			}
 		],
 	});
-	return table;
+	return tableBranches;
 };
 
 function showManageBranchView(action) {

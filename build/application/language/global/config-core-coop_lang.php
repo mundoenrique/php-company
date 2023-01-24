@@ -16,3 +16,5 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'instagram' => 'https://www.instagram.com/bccoopcentral/?hl=es-la',
 	'linkedin' => 'https://www.linkedin.com/company/banco-cooperativo-coopcentral'
 ];
+//ENTERPRICE_CONTACT
+$lang['CONF_ENTERPRICE_CONTACT'] = 'OFF';

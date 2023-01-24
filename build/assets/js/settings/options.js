@@ -8,14 +8,12 @@ $(function () {
 	var ulOptions = $('.nav-item-config');
 	$('#existingContactButton').addClass('hidden');
 	$('#tableContacts').hide();
-	$('#sectionConctact').hide();
 
 	$.each(ulOptions, function (pos, liOption) {
 		$('#' + liOption.id).on('click', function (e) {
 			var liOptionId = e.currentTarget.id;
 			$(ulOptions).removeClass('active');
 			$('.option-service').hide();
-			$('#sectionConctact').hide();
 			$('#tableContacts_wrapper').hide();
 			$(this).addClass('active');
 			$('#' + liOptionId + 'View').fadeIn(700, 'linear');
