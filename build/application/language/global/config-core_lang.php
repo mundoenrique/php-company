@@ -120,7 +120,7 @@ $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
 $lang['CONF_SETT_ICON'] = 'icon-settings.svg';
 $lang['CONF_XLS_ICON'] = 'icon-xls.svg';
-$lang['CONF_ENTERPRICE_CONTACT'] = 'ON';
+$lang['CONF_ENTERPRICE_CONTACT'] = 'OFF';
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';
