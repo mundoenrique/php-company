@@ -598,7 +598,6 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->password = $password;
 
 		$response = $this->sendToService('CallWs_addBranches');
-		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -653,7 +652,6 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->password = $password;
 
 		$response = $this->sendToService('CallWs_updateBranches');
-		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -697,8 +695,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				"token" => $this->session->userdata('token'),
 			];
 
-			//$response = $this->sendToService('CallWs_UploadFileBranch');
-			$this->isResponseRc = 0;
+			$response = $this->sendToService('CallWs_UploadFileBranch');
 
 			switch ($this->isResponseRc) {
 				case 0:
