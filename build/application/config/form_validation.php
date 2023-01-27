@@ -487,7 +487,7 @@ $config = [
 		[
 			'field' => 'contactEmail',
 			'label' => 'contactEmail',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'contactType',
@@ -524,7 +524,7 @@ $config = [
 		[
 			'field' => 'contactEmail',
 			'label' => 'contactEmail',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'contactType',

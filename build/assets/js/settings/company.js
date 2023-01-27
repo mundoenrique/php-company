@@ -170,7 +170,7 @@ function getContacts(value) {
 		showSection();
 		if ( response.code == 0 ) {
 			contactsTable(response);
-		$('#tableContacts1 tbody tr').on('click', 'button', function (e) {
+		$('#tableContacts1').on('click', 'button', function (e) {
 				e.preventDefault();
 				$.each(response.data[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
