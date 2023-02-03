@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_MAINTENANCE'] = 'OFF';
+$lang['CONF_MAINT_NOTIF'] = 'OFF';
 $lang['CONF_MAINTENANCE_RC'] = 9997;
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
