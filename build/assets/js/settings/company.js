@@ -1,9 +1,10 @@
 'use strict'
 
-var table = $('#tableContacts1');
+var table = $('#tableContacts');
 var disabled = 'disabled';
 var selected;
 var dataEnterpriseList;
+var contactList;
 
 $(function () {
 
@@ -95,7 +96,7 @@ $(function () {
 
 	$('#newContactBtn').on('click', function(e) {
 		showManageContactView("create");
-		getTypeContac();
+		getTypeContact();
 	});
 
 	$('#backContactBtn').on('click', function(e) {
@@ -166,30 +167,31 @@ function getContacts(value) {
 	where = 'getContacts';
 
 	callNovoCore(who,where,data, function(response) {
+
 		insertFormInput(false);
 		showSection();
-		if ( response.code == 0 ) {
-			contactsTable(response);
-		$('#tableContacts1 tbody tr').on('click', 'button', function (e) {
-				e.preventDefault();
-				$.each(response.data[$(this).val()], function (key, val) {
+		if ( response.code === 0 ) {
+			contactList =  response.data;
+
+			contactsTable(contactList);
+			$('#tableContacts').on('click', 'button', function (e) {
+				$.each(contactList[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
-
 				var dataAction = $(this).attr('data-action');
 				switch (dataAction) {
 					case 'update':
-						getTypeContac(response.data[$(this).val()].typeContactValue);
+						getTypeContact(contactList[$(this).val()].typeContactValue);
 						showManageContactView("update")
 						break;
 					case 'delete':
-						modalDeleteContact(response.data[$(this).val()]);
+						modalDeleteContact(contactList[$(this).val()]);
 						break;
 				}
 			});
 
 		}else if (response.code == 1){
-			contactsTable(response);
+			contactsTable(response.data);
 		}
 	});
 };
@@ -204,7 +206,7 @@ function contactsTable(dataResponse) {
 		"pagelength": 10,
 		"pagingType": "full_numbers",
 		"table-layout": "fixed",
-		"data": dataResponse.data,
+		"data": dataResponse,
 		"language": dataTableLang,
 		"columnDefs": [
 			{
@@ -287,7 +289,7 @@ function showManageContactView(action) {
 	}
 };
 
-function getTypeContac(data) {
+function getTypeContact(data) {
 	$('#contactType').empty();
 	$('#contactType').prepend('<option value="" selected ' + disabled + '>' + lang.GEN_BTN_SELECT + '</option>');
 	$.each(lang.PRUE_ENTERPRICE_TYPE_CONTACT, function(key, val){

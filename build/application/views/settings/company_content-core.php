@@ -111,7 +111,7 @@
             <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW') ?>
           </button>
         </div>
-        <table id="tableContacts1" name="tableContacts1" class="mt-4 cell-border h6 display w-100 center">
+        <table id="tableContacts" name="tableContacts" class="mt-4 cell-border h6 display w-100 center">
           <thead class="bg-primary secondary regular">
             <tr>
 							<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>

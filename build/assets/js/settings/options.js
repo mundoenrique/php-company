@@ -7,7 +7,6 @@ $(function () {
 
 	var ulOptions = $('.nav-item-config');
 	$('#existingContactButton').addClass('hidden');
-	$('#tableContacts').hide();
 
 	$.each(ulOptions, function (pos, liOption) {
 		$('#' + liOption.id).on('click', function (e) {
