@@ -339,3 +339,7 @@ $lang['CONF_VALIDATE_NUMERIC'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
 $lang['CONF_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
 $lang['CONF_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';
+$lang['CONF_MODAL_BTN_CLASS'] = [
+	'cancel' => 'btn-modal btn btn-small btn-link',
+	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+];

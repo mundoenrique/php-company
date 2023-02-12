@@ -105,11 +105,12 @@ $(function () {
 		$('#editAddContactSection').hide();
 	});
 
+
 	$("#btnSaveContact").on("click", function(e) {
 		e.preventDefault();
 		form = $('#addContactForm');
-
 		validateForms(form);
+
 		if (form.valid()) {
 			var formEnterpriseList = $('#enterpriseSettListForm');
 			dataEnterpriseList = getDataForm(formEnterpriseList);
@@ -120,21 +121,20 @@ $(function () {
 			btn.btnAction = btnAction;
 			btn.btnText = btnText;
 			insertFormInput(true);
-			 data = getDataForm(form);
-			 data.idFiscal = dataEnterpriseList.idEnterpriseList;
-			 data.pass = cryptoPass(data.password1);
-			 delete data.password1;
+			data = getDataForm(form);
+			data.idFiscal = dataEnterpriseList.idEnterpriseList;
+			data.pass = cryptoPass(data.password1);
+			delete data.password1;
 
-			 if ($(this).attr('data-action') == 'saveCreate') {
-				 data.action = 'addContact';
-				 getCallNovoCoreContact(data, btn);
-			 }else{
-				 data.action = 'updateContact';
-				 getCallNovoCoreContact(data, btn);
-			 }
+			if ($(this).attr('data-action') == 'saveCreate') {
+				data.action = 'addContact';
+				getCallNovoCoreContact(data, btn);
+			}else{
+				data.action = 'updateContact';
+				getCallNovoCoreContact(data, btn);
+			}
 		}
 	});
-
 });
 
 function enablePhone(){
@@ -167,14 +167,13 @@ function getContacts(value) {
 	where = 'getContacts';
 
 	callNovoCore(who,where,data, function(response) {
-
 		insertFormInput(false);
 		showSection();
 		if ( response.code === 0 ) {
 			contactList =  response.data;
-
 			contactsTable(contactList);
-			$('#tableContacts').on('click', 'button', function (e) {
+
+			$('#tableContacts tbody').on('click', 'button', function (e) {
 				$.each(contactList[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
@@ -189,83 +188,10 @@ function getContacts(value) {
 						break;
 				}
 			});
-
 		}else if (response.code == 1){
 			contactsTable(response.data);
 		}
 	});
-};
-
-function contactsTable(dataResponse) {
-	$('.hide-out').addClass('hide');
-	table.DataTable({
-		"autoWidth": false,
-		"ordering": false,
-		"searching": true,
-		"lengthChange": false,
-		"pagelength": 10,
-		"pagingType": "full_numbers",
-		"table-layout": "fixed",
-		"data": dataResponse,
-		"language": dataTableLang,
-		"columnDefs": [
-			{
-				"targets": 0,
-				"className": "contactNames",
-				"width": "200px"
-			},
-			{
-				"targets": 1,
-				"className": "contactLastNames",
-				"width": "200px"
-			},
-			{
-				"targets": 2,
-				"className": "contactPosition",
-				"width": "200px",
-			},
-			{
-				"targets": 3,
-				"className": "idExtPer",
-				"width": "200px",
-			},
-			{
-				"targets": 4,
-				"className": "contactEmail",
-				"width": "200px",
-			},
-			{
-				"targets": 5,
-				"className": "typeContact",
-				"width": "200px",
-			},
-			{
-				"targets": 6,
-				"width": "auto"
-			}
-		],
-		"columns": [
-			{ data: 'contactNames' },
-			{ data: 'contactLastNames' },
-			{ data: 'contactPosition' },
-			{ data: 'idExtPer' },
-			{ data: 'contactEmail' },
-			{ data: 'typeContact' },
-			{
-				data: function (data) {
-					var options = '';
-					options += '<button value="'+ data.id +'" class="edit btn mx-1 px-0" title="'+lang.GEN_EDIT+'" data-action="update" data-toggle="tooltip">';
-					options += '<i class="icon icon-edit"></i>';
-					options += '</button>';
-					options += '<button value="'+ data.id +'" class="delete btn mx-1 px-0" title="'+lang.GEN_BTN_DELETE+'" data-action="delete" data-toggle="tooltip">';
-					options += '<i class="icon icon-remove"></i>';
-					options += '</button>';
-					return options;
-				}
-			}
-		],
-	});
-	return table;
 };
 
 function showManageContactView(action) {
@@ -302,14 +228,14 @@ function getCallNovoCoreContact(data, btn){
 	who = 'Settings';
 	where = data.action;
 	callNovoCore(who, where, data, function(response) {
-		dataResponse = response;
 		btn.btnAction.html(btn.btnText);
 
-		if(dataResponse.code==0){
-			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
+		if(response.code==0){
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 			$('#accept').on('click', function(e) {
 				e.preventDefault();
-				$('#system-info').dialog('destroy');
+				e.stopImmediatePropagation();
+				modalDestroy(true);
 				var newData = {};
 				newData.idEnterpriseList=data.idFiscal;
 				hideSection();
@@ -322,10 +248,8 @@ function getCallNovoCoreContact(data, btn){
 };
 
 function modalDeleteContact(response) {
-	var oldId = $('#accept').attr('id');
-	var currentIdBtn = 'delete-contact-button';
-	var cancelDelete = $('#cancel');
-	$('#accept').show().attr('id', currentIdBtn);
+	modalDestroy(true);
+	$('#accept').addClass('delete-contact-button');
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -333,7 +257,7 @@ function modalDeleteContact(response) {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'destroy'
+			action: 'none'
 		}
 	}
 	inputModal = '<form id="delete-contact-form" name="delete-contact-form" class="form-group">';
@@ -352,35 +276,127 @@ function modalDeleteContact(response) {
 
 	appMessages(response.title, inputModal, lang.CONF_ICON_WARNING, modalBtn);
 
-	$('#delete-contact-button').on('click', function(e) {
+	$('.delete-contact-button').on('click', function(e) {
 		e.preventDefault();
+		e.stopImmediatePropagation();
 		form = $('#delete-contact-form');
 		var dataPassword = getDataForm(form);
 		validateForms(form);
 		if (form.valid()) {
-			var btnAction = $('#delete-contact-button');
-			btnText = btnAction.text().trim();
-			btnAction.html(loader);
+			var btnAction = $('.delete-contact-button');
 			var btn={};
-			btn.btnAction = btnAction;
-			btn.btnText = btnText;
+			btn.btnText = btnAction.text().trim();;
+			btn.btnAction = btnAction.html(loader);
 			data = {};
 			data.idFiscal = response.acrif;
 			data.idExtPer = response.idExtPer;
 			data.pass = cryptoPass(dataPassword.password1);
 			data.action = 'deleteContact';
 			$(this)
-			.off('click')
-			.html(loader)
+			//.html(loader)
 			.prop('disabled', true)
-			.attr('id', oldId);
+			.removeClass('delete-contact-button');
 			insertFormInput(true);
 			getCallNovoCoreContact(data, btn);
 		}
 	});
-	cancelDelete.on('click', function(e) {
-		$('#'+currentIdBtn)
-		.off('click')
-		.attr('id', oldId);
+	$('#cancel').on('click', function(e) {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		$('#accept').removeClass('delete-contact-button');
+		modalDestroy(true);
 	});
 }
+
+function contactsTable(dataResponse) {
+	$('.hide-out').addClass('hide');
+	$('#contact-company-table').empty();
+		var tableCont = '';
+		tableCont +=  '<table id="tableContacts" name="tableContacts" class="mt-4 cell-border h6 display w-100 center">';
+		tableCont +=  	'<thead class="bg-primary secondary regular">';
+		tableCont +=     '<tr>';
+		tableCont += 			'<th>'+ lang.GEN_TABLE_NAME_CLIENT +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_LAST_NAME +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_POSITION +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_TABLE_DNI +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_EMAIL +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_TABLE_TYPE +'</th>';
+		tableCont +=      '<th>'+ lang.GEN_TABLE_OPTIONS +'</th>';
+		tableCont +=     '</tr>';
+		tableCont +=  '</thead>';
+		tableCont +=  '<tbody>';
+				$.each(dataResponse, function (index, value) {
+				if (value) {
+					tableCont += '<tr>';
+					tableCont += 		'<td>' + value.contactNames + '</td>';
+					tableCont += 		'<td>' + value.contactLastNames + '</td>';
+					tableCont += 		'<td>' + value.contactPosition + '</td>';
+					tableCont += 		'<td>' + value.idExtPer + '</td>';
+					tableCont += 		'<td>' + value.contactEmail + '</td>';
+					tableCont += 		'<td>' + value.typeContact + '</td>';
+					tableCont += 		'<td>';
+					tableCont += 		'<button value="'+ value.id +'" class="edit btn mx-1 px-0" title="'+lang.GEN_EDIT+'" data-action="update" data-toggle="tooltip">';
+					tableCont += 		'<i class="icon icon-edit"></i>';
+					tableCont += 		'</button>';
+					tableCont += 		'<button value="'+ value.id +'" class="delete btn mx-1 px-0" title="'+lang.GEN_BTN_DELETE+'" data-action="delete" data-toggle="tooltip">';
+					tableCont += 		'<i class="icon icon-remove"></i>';
+					tableCont += 		'</button>';
+					tableCont += 		'</td>';
+					tableCont += '</tr>';
+				}
+				});
+				tableCont += 	'</tbody>';
+				tableCont += 	'</table>';
+
+			$('#contact-company-table').append(tableCont);
+			$('#tableContacts').DataTable().destroy();
+			$('#tableContacts').DataTable({
+				"autoWidth": false,
+				"ordering": true,
+				"searching": true,
+				"lengthChange": false,
+				"pagelength": 10,
+				"pagingType": "full_numbers",
+				"table-layout": "fixed",
+				"language": dataTableLang,
+				"columnDefs": [
+					{
+						"targets": 0,
+						"className": "contactNames",
+						"width": "200px"
+					},
+					{
+						"targets": 1,
+						"className": "contactLastNames",
+						"width": "200px"
+					},
+					{
+						"targets": 2,
+						"className": "contactPosition",
+						"width": "200px",
+					},
+					{
+						"targets": 3,
+						"className": "idExtPer",
+						"width": "200px",
+					},
+					{
+						"targets": 4,
+						"className": "contactEmail",
+						"width": "200px",
+					},
+					{
+						"targets": 5,
+						"className": "typeContact",
+						"width": "200px",
+					},
+					{
+						"targets": 6,
+						"width": "auto"
+					}
+				]
+			});
+			return table;
+};
+
+

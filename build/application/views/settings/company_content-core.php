@@ -111,21 +111,7 @@
             <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW') ?>
           </button>
         </div>
-        <table id="tableContacts" name="tableContacts" class="mt-4 cell-border h6 display w-100 center">
-          <thead class="bg-primary secondary regular">
-            <tr>
-							<th><?= lang('GEN_TABLE_NAME_CLIENT'); ?></th>
-              <th><?= lang('GEN_LAST_NAME'); ?></th>
-              <th><?= lang('GEN_POSITION'); ?></th>
-              <th><?= lang('GEN_TABLE_DNI'); ?></th>
-              <th><?= lang('GEN_EMAIL'); ?></th>
-              <th><?= lang('GEN_TABLE_TYPE'); ?></th>
-              <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+				<div id="contact-company-table"></div>
         </div>
       </div>
     </div>
