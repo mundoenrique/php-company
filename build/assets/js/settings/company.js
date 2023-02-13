@@ -1,6 +1,6 @@
 'use strict'
 
-var table = $('#tableContacts');
+var table = $('#tableContactsCompany');
 var disabled = 'disabled';
 var selected;
 var dataEnterpriseList;
@@ -9,8 +9,8 @@ var contactList;
 $(function () {
 
 	if ((lang.CONF_ENTERPRICE_CONTACT == 'ON') && $('#idEnterpriseList').attr("countEnterpriseList")==1) {
-		form = $('#enterpriseSettListForm');
 		hideSection();
+		form = $('#enterpriseSettListForm');
 		getContacts(getDataForm(form));
 	}else if ($('#idEnterpriseList').attr("countEnterpriseList")>1){
 		$('#enterpriseData').hide();
@@ -173,7 +173,7 @@ function getContacts(value) {
 			contactList =  response.data;
 			contactsTable(contactList);
 
-			$('#tableContacts tbody').on('click', 'button', function (e) {
+			$('#tableContactsCompany tbody').on('click', 'button', function (e) {
 				$.each(contactList[$(this).val()], function (key, val) {
 					$('#'+ key ).val(val);
 				});
@@ -293,7 +293,6 @@ function modalDeleteContact(response) {
 			data.pass = cryptoPass(dataPassword.password1);
 			data.action = 'deleteContact';
 			$(this)
-			//.html(loader)
 			.prop('disabled', true)
 			.removeClass('delete-contact-button');
 			insertFormInput(true);
@@ -312,7 +311,7 @@ function contactsTable(dataResponse) {
 	$('.hide-out').addClass('hide');
 	$('#contact-company-table').empty();
 		var tableCont = '';
-		tableCont +=  '<table id="tableContacts" name="tableContacts" class="mt-4 cell-border h6 display w-100 center">';
+		tableCont +=  '<table id="tableContactsCompany" name="tableContactsCompany" class="mt-4 cell-border h6 display w-100 center">';
 		tableCont +=  	'<thead class="bg-primary secondary regular">';
 		tableCont +=     '<tr>';
 		tableCont += 			'<th>'+ lang.GEN_TABLE_NAME_CLIENT +'</th>';
@@ -349,8 +348,8 @@ function contactsTable(dataResponse) {
 				tableCont += 	'</table>';
 
 			$('#contact-company-table').append(tableCont);
-			$('#tableContacts').DataTable().destroy();
-			$('#tableContacts').DataTable({
+			$('#tableContactsCompany').DataTable().destroy();
+			$('#tableContactsCompany').DataTable({
 				"autoWidth": false,
 				"ordering": true,
 				"searching": true,
