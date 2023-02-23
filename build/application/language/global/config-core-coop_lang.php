@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
-$lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 $lang['CONF_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{3,25}$';
 $lang['CONF_INPUT_PASS'] = 'OFF';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';

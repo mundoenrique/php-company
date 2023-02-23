@@ -7,6 +7,8 @@ $lang['GEN_CONTACTS'] = [
 	' ' => '(0212) 2807575',
 	'E-mail' => 'soporteempresas@tebca.com'
 ];
+$lang["GEN_PROVINCE"] = "Estado";
+$lang["GEN_DEPARTMENT"] = "Ciudad";
 $lang['GEN_FISCAL_REGISTRY'] = 'RIF.';
 //DATATABLES
 $lang['GEN_TABLE_DNI'] = 'Cédula';

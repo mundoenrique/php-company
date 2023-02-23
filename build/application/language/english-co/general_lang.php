@@ -10,3 +10,5 @@ $lang['GEN_CONTACTS'] = [
 ];
 //PASSWORD RECOVERY
 $lang['GEN_FISCAL_REGISTRY'] = 'NIT.';
+$lang["GEN_PROVINCE"] = "Department";
+$lang["GEN_DEPARTMENT"] = "City";

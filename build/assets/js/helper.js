@@ -533,3 +533,21 @@ function generateModalOTP(response){
 	inputModal += '</form>';
 	appMessages(response.title, inputModal, response.icon, response.modalBtn)
 }
+
+function modalDestroy(close) {
+	if ($('#system-info').parents('.ui-dialog').length && close) {
+		$('#system-info').dialog('destroy');
+		$('#accept')
+			.prop('disabled', false)
+			.html(lang.GEN_BTN_ACCEPT)
+			.removeClass()
+			.addClass(lang.CONF_MODAL_BTN_CLASS['accept'])
+			.off('click');
+		$('#cancel')
+			.prop('disabled', false)
+			.removeClass()
+			.addClass(lang.CONF_MODAL_BTN_CLASS['cancel'])
+			.html(lang.GEN_BTN_CANCEL)
+			.off('click');
+	}
+}
