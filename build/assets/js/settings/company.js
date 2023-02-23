@@ -351,7 +351,7 @@ function contactsTable(dataResponse) {
 			$('#tableContactsCompany').DataTable().destroy();
 			$('#tableContactsCompany').DataTable({
 				"autoWidth": false,
-				"ordering": true,
+				"ordering": false,
 				"searching": true,
 				"lengthChange": false,
 				"pagelength": 10,
