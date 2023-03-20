@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'MuseoSans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/pb/MuseoSans_300.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/pb/MuseoSans_700.otf') format('opentype');
+}
+
+:root {
+
+	/* Brand colors */
+	--color-primary: #006937;
+	--color-secondary: #ffffff;
+	--color-tertiary: #f1f1f1;
+	--color-room: #f0f0f0;
+	--color-fifth: #707070;
+	--color-sixth: #4E4044;
+	--color-seventh:#76bc21;
+	--color-eighth: #D0D0D0;
+
+	/* Others */
+	--option-not-active: #ffffff;
+	--option-active: #006937;
+	--black: #111111;
+
+	/* Typography */
+	--font-family-base-first: 'MuseoSans', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+
+  /* Border radius */
+  --border-radius: 0;
+}
