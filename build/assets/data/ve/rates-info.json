@@ -107,13 +107,9 @@
 		{
 			"name": "Pago Móvil*",
 			"description": null,
-			"items": [{
-					"name": "Sin comisión",
-					"description": null,
-					"rates": []
-				},
+			"items": [
 				{
-					"name": "Montos menores a Bs. 941.180.000,00 /<br>  <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 941,18",
+					"name": "Montos menores a Bs. 941.180.000,00 <br>/ <i class='icon-info mr-0 info'></i> Bs. 941,18",
 					"description": null,
 					"rates": [
 						null,
@@ -121,48 +117,11 @@
 					]
 				},
 				{
-					"name": "Montos mayores a Bs. 941.180.000,00 / <br> <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 941,18",
+					"name": "Montos mayores a Bs. 941.180.000,00 <br>/ <i class='icon-info mr-0 info'></i> Bs. 941,18",
 					"description": null,
 					"rates": [
 						null,
 						"0.85%"
-					]
-				},
-				{
-					"name": "Con comisión VIP",
-					"description": null,
-					"rates": []
-				},
-				{
-					"name": "Montos menores a Bs. 1.230.770.000,00 /<br>  <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 1.230,77",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 8.000.000,00 <br> Bs. 8,00"
-					]
-				},
-				{
-					"name": "Montos mayores a Bs. 1.230.770.000,00 / <br> <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs.1.230,77",
-					"description": null,
-					"rates": [
-						null,
-						"0.65%"
-					]
-				},
-				{
-					"name": "Montos menores a Bs. 1.333.330.000,00 /<br>  <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs. 1.333,33",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 8.000.000,00 <br> Bs. 8,00"
-					]
-				},
-				{
-					"name": "Montos mayores a Bs. 1.333.330.000,00 / <br> <span aria-hidden='true' class='icon icon-info-rates' data-icon='&#xe04b;'></span> Bs.1.333,33",
-					"description": null,
-					"rates": [
-						null,
-						"0.60%"
 					]
 				}
 			]
