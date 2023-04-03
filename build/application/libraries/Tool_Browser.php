@@ -30,8 +30,8 @@ class Tool_Browser {
 		if($this->CI->agent->is_browser()) {
 			$platform = 'browser';
 			$validBrowser = [
-				'Chrome' => 47,
-				'Firefox' => 29,
+				'Chrome' => 160,
+				'Firefox' => 160,
 				'Opera' => 34,
 				'Safari' => 9,
 				'Edge' => 13,
