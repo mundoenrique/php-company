@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_MAINTENANCE'] = 'OFF';
+$lang['CONF_MAINT_NOTIF'] = 'OFF';
 $lang['CONF_MAINTENANCE_RC'] = 9997;
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
@@ -116,13 +117,13 @@ $lang['CONF_SETTINGS_DOWNLOADS'] = 'ON';
 $lang['CONF_SETTINGS_TELEPHONES'] = 'ON';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE'] = 'OFF';
-$lang['CONF_SETTINGS_CONTACT'] = 'ON';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
 $lang['CONF_SETT_ICON'] = 'icon-settings.svg';
 $lang['CONF_XLS_ICON'] = 'icon-xls.svg';
+$lang['CONF_ENTERPRICE_CONTACT'] = 'OFF';
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';
@@ -334,9 +335,14 @@ $lang['CONF_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_MINLENGTH'] = 1;
 $lang['CONF_DATATABLE_SLEEP'] = '10000';
 $lang['CONF_DATATABLE_ARRAY_CHUNK'] = '50';
+$lang['CONF_BRANCH_FIELD'] = 'ON';
 $lang['CONF_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{4,25}$';
 $lang['CONF_VALIDATE_ALPHA_NUM'] = '^[a-z0-9]+$';
 $lang['CONF_VALIDATE_NUMERIC'] = '^[0-9]+$';
 $lang['CONF_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
 $lang['CONF_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
 $lang['CONF_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';
+$lang['CONF_MODAL_BTN_CLASS'] = [
+	'cancel' => 'btn-modal btn btn-small btn-link',
+	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+];

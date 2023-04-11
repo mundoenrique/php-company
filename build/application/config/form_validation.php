@@ -448,14 +448,14 @@ $config = [
 	],
 	'deleteContact' => [
 		[
-			'field' => 'acrif',
-			'label' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
 		],
 		[
-			'field' => 'idExper',
-			'label' => 'idExper',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
 			'field' => 'pass',
@@ -465,76 +465,76 @@ $config = [
 	],
 	'updateContact' => [
 		[
-			'field' => 'nameModifyContact',
-			'label' => 'nameModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'field' => 'contactNames',
+			'label' => 'contactNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
-			'field' => 'dniModifyContact',
-			'label' => 'dniModifyContact',
+			'field' => 'contactLastNames',
+			'label' => 'contactLastNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'contactPosition',
+			'label' => 'contactPosition',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
-			'field' => 'emailModifyContact',
-			'label' => 'emailModifyContact',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'field' => 'contactEmail',
+			'label' => 'contactEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
-			'field' => 'modifyContactPass',
-			'label' => 'modifyContactPass',
+			'field' => 'contactType',
+			'label' => 'contactType',
+			'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
 			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'positionModifyContact',
-			'label' => 'positionModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'surnameModifyContact',
-			'label' => 'surnameModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'typeModifyContact',
-			'label' => 'typeModifyContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		]
 	],
 	'addContact' => [
 		[
-			'field' => 'nameNewContact',
-			'label' => 'nameNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+			'field' => 'contactNames',
+			'label' => 'contactNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
 		],
 		[
-			'field' => 'dniNewContact',
-			'label' => 'dniNewContact',
+			'field' => 'contactLastNames',
+			'label' => 'contactLastNames',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'contactPosition',
+			'label' => 'contactPosition',
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+		],
+		[
+			'field' => 'idExtPer',
+			'label' => 'idExtPer',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
-			'field' => 'emailNewContact',
-			'label' => 'emailNewContact',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'field' => 'contactEmail',
+			'label' => 'contactEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
-			'field' => 'newContPass',
-			'label' => 'newContPass',
+			'field' => 'contactType',
+			'label' => 'contactType',
+			'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
 			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'positionNewContact',
-			'label' => 'positionNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'surnameNewContact',
-			'label' => 'surnameNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
-		],
-		[
-			'field' => 'typeNewContact',
-			'label' => 'typeNewContact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		]
 	],
 	'getProducts' => [
@@ -878,30 +878,11 @@ $config = [
 			'rules' => 'null'
 		]
 	],
-	'getBranches' => [
-		[
-			'field' => 'branchListBr',
-			'label' => 'branchListBr',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		]
-	],
 	'getContacts' =>[
 		[
-			'field' => 'acrif',
-			'label' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		],
-	],
-	'uploadFileBranches' => [
-		[
-			'field' => 'file',
-			'label' => 'file',
-			'rules' => 'trim|regex_match[/^[0-9a-zA-z.\/]+$/]|required'
-		],
-		[
-			'field' => 'typeBulkText',
-			'label' => 'typeBulkText',
-			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
+			'field' => 'idEnterpriseList',
+			'label' => 'idEnterpriseList',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
 		]
 	],
 	'geoFilter' => [
@@ -911,16 +892,90 @@ $config = [
 			'rules' => 'required'
 		]
 	],
-	'updateBranch' => [
+	'getBranches' => [
 		[
-			'field' => 'rifB',
-			'label' => 'rifB',
+			'field' => 'idFiscalList',
+			'label' => 'idFiscalList',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+		]
+	],
+	'addBranches' => [
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+		],
+		[
+			'field' => 'branchName',
+			'label' => 'branchName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'zoneName',
+			'label' => 'zoneName',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'address1',
+			'label' => 'address1',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'countryCodBranch',
+			'label' => 'countryCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'stateCodBranch',
+			'label' => 'stateCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'cityCodBranch',
+			'label' => 'cityCodBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'branchCode',
+			'label' => 'branchCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'password1',
+			'label' => 'password1',
+			'rules' => 'trim|required'
+		]
+	],
+	'updateBranches' => [
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
 		],
 		[
 			'field' => 'codB',
 			'label' => 'codB',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'branchName',
@@ -943,29 +998,29 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
 		],
 		[
-			'field' => 'countryCodeBranch',
-			'label' => 'countryCodeBranch',
+			'field' => 'countryCodBranch',
+			'label' => 'countryCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'stateCodeBranch',
-			'label' => 'stateCodeBranch',
+			'field' => 'stateCodBranch',
+			'label' => 'stateCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'cityCodeBranch',
-			'label' => 'cityCodeBranch',
+			'field' => 'cityCodBranch',
+			'label' => 'cityCodBranch',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
 			'field' => 'person',
 			'label' => 'person',
-			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]'
 		],
 		[
 			'field' => 'areaCode',
 			'label' => 'areaCode',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		],
 		[
 			'field' => 'phone',
@@ -975,7 +1030,24 @@ $config = [
 		[
 			'field' => 'userNameB',
 			'label' => 'userNameB',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]|required'
+		],
+		[
+			'field' => 'password1',
+			'label' => 'password1',
+			'rules' => 'trim|required'
+		]
+	],
+	'uploadFileBranches' => [
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+		],
+		[
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
 		]
 	],
 	'unnamedRequest' => [

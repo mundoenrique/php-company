@@ -4,6 +4,22 @@ $(function () {
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
+	if (lang.CONF_MAINT_NOTIF === 'ON') {
+		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/' + customerUri + '/maint_notif.png');
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+			maxHeight: 'none',
+			minWidth: 480,
+			posAt: 'center top',
+			posMy: 'center top+100'
+		}
+
+		appMessages(lang.GEN_SYSTEM_NAME, mesgNotif, '', modalBtn);
+	}
+
 	$('#userPass').on('keyup', function () {
 		$(this).attr('type', 'password');
 
