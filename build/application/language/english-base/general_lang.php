@@ -57,6 +57,7 @@ $lang['GEN_BTN_AUTHORIZE'] = 'Authorize';
 $lang['GEN_BTN_DELETE'] = 'Delete';
 $lang['GEN_BTN_BACK'] = 'Back';
 $lang['GEN_BTN_SELECT'] = 'Select';
+$lang['GEN_BTN_SAVE'] = 'Save';
 $lang['GEN_BTN_SIGN'] = 'Sign';
 $lang['GEN_BTN_DISASS_AUTH'] = 'Disassociate';
 $lang['GEN_BTN_DISASS_SIGN'] = 'Disassociate';
@@ -78,6 +79,11 @@ $lang['GEN_BTN_ALL'] = 'All';
 $lang['GEN_BTN_ENABLE'] = 'Enable';
 $lang['GEN_BTN_UPDATE'] = 'Update';
 $lang['GEN_BTN_TRANSFER'] = 'Transfer';
+$lang['GEN_BTN_NEW_BRANCH'] = 'New';
+$lang['GEN_BTN_LOAD_BRANCH'] = 'Load';
+$lang['GEN_BTN_MODIFY'] = 'Modify';
+$lang['GEN_BTN_CLEAN_UP'] = 'Clean up';
+$lang['GEN_BTN_ADD'] = 'Add';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -104,7 +110,8 @@ $lang['GEN_CHANGE_PASS'] = 'Change password';
 $lang['GEN_SETTINGS_ENTERPRISE'] = 'Enterprise settings';
 $lang['GEN_ADD_CONTACT'] = 'Add contact';
 $lang['GEN_SETTINGS_BRANCH'] = 'Branch settings';
-$lang['GEN_ADD_BRANCH'] = 'Add branch';
+$lang['GEN_NEW'] = 'New';
+$lang['GEN_EDIT'] = 'Edit';
 $lang['GEN_MANUALS'] = 'Manuals';
 $lang['GEN_VIDEOS'] = 'Videos';
 $lang['GEN_CEO_USER_MANUAL'] = 'Enterprise online user manual';
@@ -222,6 +229,8 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activate to sort the column in descendin
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Selected records';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Selected record';
+$lang['GEN_TABLE_CODE'] = 'Code';
+$lang['GEN_TABLE_TELEPHONE'] = 'Telephone';
 $lang['GEN_DATEPICKER_CLOSETEXT'] = 'Accept';
 $lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Today';
 $lang['GEN_DATEPICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -260,6 +269,7 @@ $lang['GEN_ENTERPRISE'] = 'Enterprise';
 $lang['GEN_BRANC_OFFICE'] = 'Branch office';
 $lang['GEN_BRANC_OFFICES'] = 'Branch offices';
 $lang['GEN_CONTAC_PERSON'] = 'Contact';
+$lang['GEN_CONTAC_TYPE'] = 'Type';
 $lang['GEN_MORNING'] = 'Morning';
 $lang['GEN_AFTERNOON'] = 'Afternoon';
 $lang['GEN_EVENING'] = 'Evening';
@@ -412,9 +422,25 @@ $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Export to consolidated Excel';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Export to consolidated PDF';
-
-
-
+// BRANCHES
+$lang["GEN_NAME"] = "Name";
+$lang["GEN_LAST_NAME"] = "Last name";
+$lang["GEN_ZONE"] = "Zone";
+$lang["GEN_ADDRESS"] = "Address %s";
+$lang["GEN_COUNTRY"] = "Country";
+$lang["GEN_PROVINCE"] = "Province";
+$lang["GEN_DEPARTMENT"] = "Department";
+$lang["GEN_DISTRICT"] = "District";
+$lang["GEN_AREA_CODE"] = "Area code";
+$lang["GEN_TELEPHONE"] = "Telephone";
+$lang["GEN_CONTACT_NAME"] = "Contact name";
+$lang["GEN_BRANCH_CODE"] = "Branch code";
+$lang["GEN_BRANCH_UPLOAD"] = "Branch upload";
+$lang["GEN_POSITION"] = "Position";
+$lang["GEN_AREA"] = "Area";
+$lang["GEN_BUSINESS_NAME"] = "Business name";
+$lang["GEN_BILLING_ADDRESS"] = "Billing Address";
+$lang["GEN_NIT"] = "NIT";
 
 
 

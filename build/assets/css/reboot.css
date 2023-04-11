@@ -2184,6 +2184,7 @@ i[class*=" icon-"]:before {
 .icon-plus:before            { content: "\e08d"; }
 .icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
+.icon-edit:before            { content: "\e0b4"; }
 .icon-remove:before          { content: "\e0b5"; }
 .icon-ok:before              { content: "\e0b6"; }
 .icon-cancel:before          { content: "\e0b7"; }

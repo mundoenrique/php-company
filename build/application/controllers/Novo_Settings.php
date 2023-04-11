@@ -37,6 +37,9 @@ class Novo_Settings extends NOVO_Controller {
 			"form_validation",
 			"third_party/additional-methods",
 			"settings/options",
+			"settings/company",
+			"settings/regions",
+			"settings/branches",
 			"user/changePassword-core",
 			"user/passValidate"
 		);
@@ -44,6 +47,8 @@ class Novo_Settings extends NOVO_Controller {
 		$title = '';
 		$valuesArr = [];
 		$disabled = 'big-modal';
+
+		$enterpriseList = $this->session->enterpriseSelect->list;
 
 		if (lang('CONF_SETTINGS_USER') == 'ON') {
 			$this->load->model('Novo_Settings_Model', 'getUser');
@@ -53,9 +58,10 @@ class Novo_Settings extends NOVO_Controller {
 			foreach ($user->data->dataUser AS $index => $render) {
 				$this->render->$index = $render;
 			}
+			$this->render->userType = $userType;
+			$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->addressCompanyUpdate = lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
 		}
-
-		$enterpriseList = $this->session->enterpriseSelect->list;
 
 		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
 			$this->render->enterpriseSettList = $enterpriseList;
@@ -66,6 +72,12 @@ class Novo_Settings extends NOVO_Controller {
 					 $valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
 				}
 			}
+
+			foreach ((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
+				lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
+			}
+
+			$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
 		}
 
 		if (lang('CONF_SETTINGS_BRANCHES') == 'ON') {
@@ -78,15 +90,6 @@ class Novo_Settings extends NOVO_Controller {
 		}
 
 		$this->render->titlePage = lang('GEN_SETTINGS_TITLE');
-		$this->render->userType = $userType;
-		$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
-		$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
-		$this->render->addressCompanyUpdate = lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
-
-		foreach ((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
-			lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
-		}
-
 		$this->render->titleIniFile = $title;
 		$this->render->disabled = $disabled;
 		$this->views = ['settings/'.$view];

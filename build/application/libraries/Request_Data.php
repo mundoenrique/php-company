@@ -54,7 +54,7 @@ class Request_Data {
 
 		$responseList = new stdClass();
 		$enterpriseSelect = new stdClass();
-		$enterpriseSelect->list = $enterpriseArgs->lista;
+		$enterpriseListTemp = $enterpriseArgs->lista;
 		$item = 1; $page = 1; $cat = FALSE;
 		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1;
 		$itemAlphaBeFif = 1; $itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
@@ -63,7 +63,7 @@ class Request_Data {
 
 		foreach($enterpriseArgs->lista AS $pos => $enterprises) {
 			if($enterprises->resumenProductos == 0) {
-				unset($enterpriseSelect->list[$pos]);
+				unset($enterpriseListTemp[$pos]);
 			}
 
 			$string = (mb_strtoupper(trim($enterprises->acnomcia)));
@@ -187,6 +187,7 @@ class Request_Data {
 			$item++;
 		}
 
+		$enterpriseSelect->list = array_values($enterpriseListTemp);
 		$this->CI->session->set_userdata('enterpriseSelect', $enterpriseSelect);
 		$responseList->list = $enterpriseArgs->lista;
 		$responseList->filters = $filters;
