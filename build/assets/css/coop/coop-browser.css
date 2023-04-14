@@ -165,4 +165,14 @@ footer.main-footer div:nth-child(1) { padding-right: 1rem; }
 	transform: translate(-59px, -43px) !important;
 }
 
+.navbar .navbar-brand {
+	padding: 1;
+}
+
+.navbar-brand img {
+	width: auto;
+	height: 50px;
+}
+
+
 .btn-lang{ display: none; }
