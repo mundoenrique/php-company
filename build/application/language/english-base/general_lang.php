@@ -474,3 +474,15 @@ $lang['GEN_TAG_SEARCH_CAT'] = 'Search by category';
 $lang['GEN_TAG_ALL_BULK'] = 'Select all bulks';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Service order type';
 $lang['GEN_TAG_CANCEL_BUTTON'] = 'Cancel button generate service order';
+
+$lang['GEN_MONTHLY_AMOUNT_MAX_EXCEEDED']= "The maximum monthly amount for the transaction has been exceeded.";
+$lang['GEN_DAILY_TRANSACTION_EXCEEDED']= "The daily number of transactions has been exceeded.";
+$lang['GEN_DAILY_AMOUNT_EXCEEDED']= "The daily amount allocated for the transaction has been exceeded.";
+$lang['GEN_ACCOUNT_NOT_AVAILABLE']= "The account is not available.";
+$lang['GEN_INVALID_DOCUMENT']= "The client document does not belong to the account holder.";
+$lang['GEN_MONTHLY_AMOUNT_EXCEEDED']= "The monthly number of transactions has been exceeded.";
+$lang['GEN_CONSIGNMENT_AMOUNT_EXCEEDED']= "The maximum amount for appropriations has been exceeded.";
+$lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits has been exceeded.";
+$lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits and appropriations has been exceeded.";
+$lang['GEN_AMOUNT_MAX_EXCEEDED']= "The maximum allowed balance amount has been exceeded.";
+$lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "The account is not registered.";

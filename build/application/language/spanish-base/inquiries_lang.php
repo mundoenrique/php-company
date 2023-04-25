@@ -16,6 +16,5 @@ $lang['PAGO_OS_INVALID_CODE'] = "El código de seguridad recibido es inválido, 
 $lang['PAGO_OS_USED_CODE'] = "El código de seguridad recibido ya fue usado, por favor vuelve a intentarlo.";
 $lang['PAGO_OS_EXPIRED_CODE'] = "El código de seguridad recibido ha expirado, por favor vuelve a intentarlo.";
 $lang['PAGO_OS_NOT_REGISTERED'] = "No fue posible realizar el registro,<br> por favor comuníquese con el administrador";
-$lang['PAGO_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada";
 $lang['PAGO_OS_INVALID_CONCEPT'] = "El concepto de la cuenta principal es inválido";
 $lang['PAGO_OS_CONCEPT_NOT_EXIST'] = "El concepto de la cuenta principal no existe";

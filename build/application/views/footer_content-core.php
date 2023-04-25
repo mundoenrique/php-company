@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php if (lang('CONF_FOOTER_INFO') == 'ON') : ?>
-	<?php if (lang('CONF_MENU_CIRCLE') == 'ON') : ?>
+	<?php if (lang('CONF_MENU_CIRCLE') == 'ON' && $module !== 'suggestion') : ?>
 		<div class="widget-menu">
 			<div class="help">
 				<div class="content-help">
