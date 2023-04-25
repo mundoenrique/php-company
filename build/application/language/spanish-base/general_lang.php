@@ -482,3 +482,15 @@ $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
 $lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
+
+$lang['GEN_MONTHLY_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo mensual para la transacción.";
+$lang['GEN_DAILY_TRANSACTION_EXCEEDED']= "Se ha superado la cantidad diaria de transacciones.";
+$lang['GEN_DAILY_AMOUNT_EXCEEDED']= "Se ha superado el monto diario asignado para la transacción.";
+$lang['GEN_ACCOUNT_NOT_AVAILABLE']= "La cuenta no está disponible.";
+$lang['GEN_INVALID_DOCUMENT']= "El documento del cliente no pertenece al titular de la cuenta.";
+$lang['GEN_MONTHLY_AMOUNT_EXCEEDED']= "Se ha superado la cantidad mensual de transacciones.";
+$lang['GEN_CONSIGNMENT_AMOUNT_EXCEEDED']= "Se ha superado el monto máximo para consignaciones.";
+$lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos.";
+$lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos y consignaciones.";
+$lang['GEN_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo de saldo permitido.";
+$lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada.";
