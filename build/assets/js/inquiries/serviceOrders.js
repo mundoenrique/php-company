@@ -248,6 +248,14 @@ $(function () {
 			who = 'Inquiries';
 			where = 'GetServiceOrders';
 
+			if(!dataFormOS.initialDate){
+				var initDate = new Date();
+				dataFormOS.initialDate = initDate.getDate() + '/' + (initDate.getMonth() + 1) + '/' + initDate.getFullYear();
+				dataFormOS.finalDate = initDate;
+			}
+			dataFormOS.status = 3
+			dataFormOS.statusText = 'En Proceso'
+
 			callNovoCore(who, where, dataFormOS, function (response) {
 				if (response.code == 0) {
 					$(location).attr('href', response.data);
