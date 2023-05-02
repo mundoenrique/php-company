@@ -59,6 +59,7 @@ $lang['GEN_BTN_AUTHORIZE'] = 'Autorizar';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
 $lang['GEN_BTN_BACK'] = 'Volver';
 $lang['GEN_BTN_SELECT'] = 'Seleccionar';
+$lang['GEN_BTN_SAVE'] = 'Guardar';
 $lang['GEN_BTN_SIGN'] = 'Firmar';
 $lang['GEN_BTN_DISASS_AUTH'] = 'Desasociar';
 $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
@@ -80,6 +81,12 @@ $lang['GEN_BTN_ALL'] = 'Todos';
 $lang['GEN_BTN_ENABLE'] = 'Habilitar';
 $lang['GEN_BTN_UPDATE'] = 'Actualizar';
 $lang['GEN_BTN_TRANSFER'] = 'Transferir';
+$lang['GEN_BTN_NEW_BRANCH'] = 'Nueva';
+$lang['GEN_BTN_LOAD_BRANCH'] = 'Cargar';
+$lang['GEN_BTN_MODIFY'] = 'Modificar';
+$lang['GEN_BTN_CLEAN_UP'] = 'Limpiar';
+$lang['GEN_BTN_ADD'] = 'Agregar';
+$lang['GEN_BTN_NEW'] = 'Nuevo';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -105,8 +112,13 @@ $lang['GEN_SETTINGS_USER'] = 'Configuración de usuario';
 $lang['GEN_CHANGE_PASS'] = 'Cambio de contraseña';
 $lang['GEN_SETTINGS_ENTERPRISE'] = 'Configuración de la empresa';
 $lang['GEN_ADD_CONTACT'] = 'Agregar contacto';
+$lang['GEN_EXIST_CONTACT'] = 'El contacto ya se encuentra registrado.';
+$lang['GEN_ADD_CONTACT_SUCCESS'] = 'Contacto agregado exitosamente.';
+$lang['GEN_UPDATE_CONTACT_SUCCESS'] = 'Contacto modificado exitosamente.';
+$lang['GEN_DELETE_CONTACT_SUCCESS'] = 'Contacto eliminado exitosamente.';
 $lang['GEN_SETTINGS_BRANCH'] = 'Configuración de sucursales';
-$lang['GEN_ADD_BRANCH'] = 'Agregar nueva sucursal';
+$lang['GEN_NEW'] = 'Nueva';
+$lang['GEN_EDIT'] = 'Editar';
 $lang['GEN_MANUALS'] = 'Manuales';
 $lang['GEN_VIDEOS'] = 'Videos';
 $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
@@ -224,6 +236,8 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_TABLE_CODE'] = 'Código';
+$lang['GEN_TABLE_TELEPHONE'] = 'Teléfono';
 $lang['GEN_DATEPICKER_CLOSETEXT'] = 'Aceptar';
 $lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
 $lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -262,6 +276,7 @@ $lang['GEN_ENTERPRISE'] = 'Empresa';
 $lang['GEN_BRANC_OFFICE'] = 'Sucursal';
 $lang['GEN_BRANC_OFFICES'] = 'Sucursales';
 $lang['GEN_CONTAC_PERSON'] = 'Contacto';
+$lang['GEN_CONTAC_TYPE'] = 'Tipo';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
@@ -418,10 +433,25 @@ $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Exportar a Excel consolidado';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Exportar a PDF consolidado';
-
-
-
-
+// BRANCHES
+$lang["GEN_NAME"] = "Nombre";
+$lang["GEN_LAST_NAME"] = "Apellido";
+$lang["GEN_ZONE"] = "Zona";
+$lang["GEN_ADDRESS"] = "Dirección %s";
+$lang["GEN_COUNTRY"] = "País";
+$lang["GEN_PROVINCE"] = "Provincia";
+$lang["GEN_DEPARTMENT"] = "Departamento";
+$lang["GEN_DISTRICT"] = "Distrito";
+$lang["GEN_AREA_CODE"] = "Código de área";
+$lang["GEN_TELEPHONE"] = "Teléfono %s";
+$lang["GEN_CONTACT_NAME"] = "Nombre del contacto";
+$lang["GEN_BRANCH_CODE"] = "Código de sucursal";
+$lang["GEN_BRANCH_UPLOAD"] = "Carga de sucursales";
+$lang["GEN_POSITION"] = "Cargo";
+$lang["GEN_AREA"] = "Área";
+$lang["GEN_BUSINESS_NAME"] = "Razón social";
+$lang["GEN_BILLING_ADDRESS"] = "Dirección de facturación";
+$lang["GEN_NIT"] = "NIT";
 
 
 
@@ -452,3 +482,15 @@ $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
 $lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
+
+$lang['GEN_MONTHLY_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo mensual para la transacción.";
+$lang['GEN_DAILY_TRANSACTION_EXCEEDED']= "Se ha superado la cantidad diaria de transacciones.";
+$lang['GEN_DAILY_AMOUNT_EXCEEDED']= "Se ha superado el monto diario asignado para la transacción.";
+$lang['GEN_ACCOUNT_NOT_AVAILABLE']= "La cuenta no está disponible.";
+$lang['GEN_INVALID_DOCUMENT']= "El documento del cliente no pertenece al titular de la cuenta.";
+$lang['GEN_MONTHLY_AMOUNT_EXCEEDED']= "Se ha superado la cantidad mensual de transacciones.";
+$lang['GEN_CONSIGNMENT_AMOUNT_EXCEEDED']= "Se ha superado el monto máximo para consignaciones.";
+$lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos.";
+$lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos y consignaciones.";
+$lang['GEN_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo de saldo permitido.";
+$lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada.";

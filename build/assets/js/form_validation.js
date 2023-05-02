@@ -9,16 +9,17 @@ function validateForms(form) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
-	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var emailValid = new RegExp(lang.CONF_VALIDATE_EMAIL, 'i');
+	var alphaName =  /^[a-zñáéíóú ]{1,50}$/i;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
-	var alphanum = /^[a-z0-9]+$/i;
-	var alphanumspace = /^['a-z0-9 ']{4,25}$/i;
+	var alphanum =  new RegExp(lang.CONF_VALIDATE_ALPHA_NUM, 'i');
+	var alphanumspace = new RegExp(lang.CONF_VALIDATE_ALPHA_NUM_SPACE, 'i');
 	var userPassword = validatePass;
-	var numeric = /^[0-9]+$/;
-	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z-ñáéíóú ']{3,40}$/i;
-	var floatAmount = /^[0-9,.]+$/;
+	var numeric =  new RegExp(lang.CONF_VALIDATE_NUMERIC, 'i');
+	var alphabetical = new RegExp(lang.CONF_VALIDATE_ALPHABETICAL, 'i');
+	var alphabeticalspace =  new RegExp(lang.CONF_VALIDATE_ALPHABETICAL_SPACE, 'i');
+	var floatAmount =  new RegExp(lang.CONF_VALIDATE_FLOAT_AMOUNT, 'i');
 	var fiscalReg = lang.CONF_VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.CONF_VALIDATE_REG_ID_NUMBER, 'i');
 	var rechargeDesc = new RegExp(lang.CONF_VALIDATE_RECHAR_REGEX_DESC, 'i');
@@ -28,6 +29,7 @@ function validateForms(form) {
 		y: /^[0-9]{4}$/,
 	};
 	var binary = /^[0-1]+$/;
+	var contactType = /^[F|H|C]*$/i;
 	var defaults = {
 		debug: true,
 		errorClass: lang.CONF_VALID_ERROR,
@@ -54,6 +56,7 @@ function validateForms(form) {
 			"branch-office": { requiredBranchOffice: true },
 			"type-bulk": { requiredTypeBulk: true },
 			"file-bulk": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
+			"fileBranch": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {
@@ -244,13 +247,17 @@ function validateForms(form) {
 			"branchName": { required: true, pattern: longPhraseUpper },
 			"zoneName": { required: true, pattern: numeric },
 			"address": { required: true, pattern: longPhraseUpper },
+			"address1": { required: true, pattern: longPhraseUpper },
 			"address2": { pattern: longPhraseUpper },
 			"address3": { pattern: longPhraseUpper },
 			"billingAddress": { required: true, pattern: longPhraseUpper },
 			"countryCode": { required: true, pattern: numeric },
-			"stateCodeBranch": { required: true, pattern: numeric },
-			"cityCodeBranch": { required: true, pattern: numeric },
-			"districtCodeBranch": { required: true, pattern: numeric },
+			"countryCodBranch": { required: true, pattern: numeric },
+			"stateCodBranch": { required: true, pattern: numeric },
+			"cityCodBranch": { required: true, pattern: numeric },
+			"districtCodBranch": { required: true, pattern: numeric },
+			"idFiscalList" : { required: true},
+			"idEnterpriseList" : { required: true},
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
 			"phone1": { required: true, pattern: numeric },
@@ -266,6 +273,14 @@ function validateForms(form) {
 			"finalDateXls":{ pattern: date.dmy},
 			"filterDateXls":{ required: true,pattern: numeric},
 			"nameEnterpriseXls":{ required: true,pattern: alphanumunder},
+			"branchListBr":{ required: true, pattern: alphanumspecial},
+			"contactNames":{ required: true, pattern: alphaName},
+			"contactLastNames":{ required: true, pattern: alphaName},
+			"contactPosition":{ required: true, pattern: alphaName},
+			"idExtPer":{ required: true, pattern: numeric },
+			"contactEmail":{ required: true, pattern: emailValid },
+			"contactType":{ required: true, pattern: contactType },
+
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -292,6 +307,11 @@ function validateForms(form) {
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
 			"file-bulk": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				sizeFile: lang.VALIDATE_FILE_SIZE
+			},
+			"fileBranch": {
 				required: lang.VALIDATE_FILE_TYPE,
 				extension: lang.VALIDATE_FILE_TYPE,
 				sizeFile: lang.VALIDATE_FILE_SIZE
@@ -369,6 +389,7 @@ function validateForms(form) {
 			"firstName": lang.VALIDATE_NAME_LASTNAME,
 			"lastName": lang.VALIDATE_NAME_LASTNAME,
 			"movil": lang.VALIDATE_PHONE,
+			"contactEmail": lang.VALIDATE_EMAIL,
 			"numberMonthlyPurchasesCtp": {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required: lang.VALIDATE_NUMBER_REQ
@@ -517,15 +538,19 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"branchName": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_NAME_BRANCHES,
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"zoneName": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_ZONE_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"address": {
 				required: lang.VALIDATE_ADDRESS_ENTERPRICE,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"address1": {
+				required: lang.VALIDATE_ADDRESS_BRANCHES,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES
 			},
 			"address2": {
@@ -544,17 +569,27 @@ function validateForms(form) {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},
-			"stateCodeBranch": {
+			"countryCodBranch": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
 			},
-			"cityCodeBranch": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+			"stateCodBranch": {
+				required: lang.VALIDATE_PROVINCE_BRANCHES,
+				pattern: lang.VALIDATE_NIT
+			},
+			"cityCodBranch": {
+				required: lang.VALIDATE_DEPARTMENT_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"districtCodeBranch": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
+			},
+			"idFiscalList": {
+				required: lang.VALIDATE_SELECT
+			},
+			"idEnterpriseList": {
+				required: lang.VALIDATE_SELECT
 			},
 			"areaCode": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
@@ -581,7 +616,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
 			"branchCode": {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALIDATE_CODE_BRANCHES,
 				pattern: lang.VALIDATE_NIT
 			},
 			"surnameModifyContact":{
@@ -594,7 +629,27 @@ function validateForms(form) {
 			},
 			"typeModifyContact":{
 				required: lang.VALIDATE_SELECT
-			}
+			},
+			"contactNames": {
+				required: lang.VALIDATE_NAME_BRANCHES,
+				pattern: lang.VALIDATE_NAME_BRANCHES
+			},
+			"contactLastNames": {
+				required: lang.VALIDATE_INPUT_SURNAME,
+				pattern: lang.VALIDATE_INPUT_SURNAME
+			},
+			"contactPosition": {
+				required: lang.VALIDATE_INPUT_POSITION,
+				pattern: lang.VALIDATE_INPUT_POSITION
+			},
+			"idExtPer": {
+				required: lang.VALIDATE_NIT,
+				pattern: lang.VALIDATE_NIT
+			},
+			"contactType": {
+				required: lang.VALIDATE_CONTACT_TYPE_SELECT,
+				pattern: lang.VALIDATE_CONTACT_TYPE_SELECT
+			},
 		},
 		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
