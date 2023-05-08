@@ -25,23 +25,26 @@
         <div class="flex my-2 px-5">
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
-            <div class="row">
-              <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
-              <div class="form-group col-3">
-                <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
-                <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
-                  readonly disabled>
-                <div class="help-block"></div>
-              </div>
+            <div class="row" id="recharge_account">
 
+							<?php if (lang('CONF_SELECT_ACCOUNT') == 'ON'): ?>
+								<div class="form-group col-3">
+									<label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
+									<input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
+										readonly disabled>
+									<div class="help-block"></div>
+								</div>
+							<?php endif; ?>
+
+              <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
                   <input type="radio" id="debit" name="transferType" class="custom-option-input" value="cargo" disabled>
-                  <label class="custom-option-label nowrap" for="debit">Cargo</label>
+                  <label class="custom-option-label nowrap" for="debit"><?= lang('SERVICES_TYPE_CARGO'); ?></label>
                 </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
                   <input type="radio" id="pay" name="transferType" class="custom-option-input" value="abono" disabled>
-                  <label class="custom-option-label nowrap" for="pay">Abono</label>
+                  <label class="custom-option-label nowrap" for="pay"><?= lang('SERVICES_TYPE_ABONO'); ?></label>
                 </div>
                 <div class="help-block"></div>
               </div>
@@ -52,12 +55,14 @@
                   name="transferAmount" autocomplete="off" disabled>
                 <div class="help-block"></div>
               </div>
+							<?php if (lang('CONF_INPUT_DESCRIPTION') == 'ON') : ?>
               <div class="form-group col-3">
                 <label for="description"><?= lang('GEN_DESCRIPTION'); ?></label>
                 <input id="description" class="form-control h5" type="text" placeholder="Ingresa descripción" name="description" autocomlpete="off"
                   disabled>
                 <div class="help-block"></div>
               </div>
+							<?php endif; ?>
               <?php if (lang('CONF_INPUT_PASS') == 'ON') : ?>
               <div class="col-3 form-group mt-3 ml-auto">
                 <div class="input-group">
