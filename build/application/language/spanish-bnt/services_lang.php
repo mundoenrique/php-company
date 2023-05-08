@@ -18,3 +18,6 @@ $lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción 
 //RECEPTION IN ENTERPRICE // DELIVERY OF CARDS
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibido en empresa';
 $lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
+
+$lang["SERVICES_TYPE_CARGO"] = 'Fondear';
+$lang["SERVICES_TYPE_ABONO"] = 'Devolver';

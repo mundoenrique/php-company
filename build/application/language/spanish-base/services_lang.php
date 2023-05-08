@@ -165,3 +165,6 @@ $lang["SERVICES_LIMIT_EXCEEDED"] = 'Límite Excedido.';
 $lang["SERVICES_INSUFFICIENT_BALANCE"] = 'Saldo Insuficiente.';
 $lang["SERVICES_LOCKED_CARD"] = 'Tarjeta bloqueada.';
 $lang["SERVICES_FAILED_TRANSACTION"] = 'No fue posible realizar la transacción.';
+$lang["SERVICES_TYPE_CARGO"] = 'Cargo';
+$lang["SERVICES_TYPE_ABONO"] = 'Abono';
+
