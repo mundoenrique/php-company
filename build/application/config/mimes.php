@@ -129,7 +129,7 @@ return array(
 	'crl'   =>	array('application/pkix-crl', 'application/pkcs-crl'),
 	'der'   =>	'application/x-x509-ca-cert',
 	'kdb'   =>	'application/octet-stream',
-	'pgp'   =>	'application/pgp',
+	'pgp'   =>	array('application/pgp', 'application/octet-stream'),
 	'gpg'   =>	'application/gpg-keys',
 	'sst'   =>	'application/octet-stream',
 	'csr'   =>	'application/octet-stream',

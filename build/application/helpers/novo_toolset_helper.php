@@ -45,6 +45,16 @@ if (!function_exists('arrayTrim')) {
 	}
 }
 
+if(!function_exists('dbSearch')) {
+	function dbSearch($uri) {
+		$CI = &get_instance();
+		$defaultBd = 'alpha';
+		$dbName = DB_VERIFY ? $CI->config->item('client_db')[$uri] ?? $defaultBd : $defaultBd;
+
+		return 'ceo_' . $dbName;
+	}
+}
+
 if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
 		$CI = &get_instance();
@@ -93,7 +103,7 @@ if (!function_exists('languageLoad')) {
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');
 		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
+		$customerUri = $call == 'specific' ? $CI->config->item('customer_lang') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
 		$CI->config->set_item('language', 'global');
 
@@ -105,8 +115,6 @@ if (!function_exists('languageLoad')) {
 			break;
 			case 'specific':
 				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
-				//eliminar despues de la certificación
-				$customerUri = checkTemporalTenant($customerUri);
 
 				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
 					$CI->lang->load('config-core-'.$customerUri,);
