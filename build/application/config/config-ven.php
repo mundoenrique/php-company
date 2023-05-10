@@ -1,7 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config['customer'] = 'Ve';
-$config['customer-uri'] = 'ven';
-$config['base_url']	= BASE_URL.$config['customer-uri'].'/';
-$config['language']	= BASE_LANGUAGE.'-'.$config['customer-uri'];
-$config['language']	= BASE_LANGUAGE.'-ve';
+$config['customer_uri'] = 'ven';
+$config['customer_lang'] = 've';
+$config['customer_program'] = $config['customer_lang'];
+$config['base_url']	= BASE_URL.$config['customer_uri'].'/';
+$config['language']	= BASE_LANGUAGE.'-'.$config['customer_lang'];

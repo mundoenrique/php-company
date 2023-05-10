@@ -4,7 +4,7 @@
 	var baseURL = '<?= base_url(); ?>';
 	var assetUrl = '<?= assetUrl(); ?>';
 	var customerUri = '<?= $customerUri; ?>';
-	var clientStyle = '<?= $clientStyle; ?>';
+	var customerStyle = '<?= $customerStyle; ?>';
 	var oldCustomerUri = '<?= $this->config->item('customer'); ?>';
 	var code = <?= $code ?? 0; ?>;
 	var title = '<?= $title ?? ' '; ?>';

@@ -27,7 +27,7 @@ if (!function_exists('BulkAttrEmissionA'))
 		$tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
 		$tableContent->body = ['idExtPer', 'nombres', 'apellidos', 'status'];
 
-		switch ($CI->config->item('customer-uri')) {
+		switch ($CI->config->item('customer_uri')) {
 			case 'pb':
 			case 'bp':
 				$tableContent->header = [

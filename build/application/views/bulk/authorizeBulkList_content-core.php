@@ -111,7 +111,7 @@
 					</div>
 					<div class="col-6 center">
 						<span class="light"><?= lang('BULK_CREATION_SCHEDULE'); ?> &nbsp;</span><br>
-						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $clientStyle); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $customerLang); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 					</div>
 				</div>
 				<?php endif; ?>
@@ -172,7 +172,7 @@
                   <option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
                 </select>
                 <?php else: ?>
-                <input type="hidden" id="type-order" name="type-order" value="0">
+                <input type="hidden" id="type-order" name="type-order" value="<?= lang('CONF_BULK_TYPE_SERVICE_ORDER'); ?>">
                 <?php endif; ?>
                 <div class="help-block"></div>
               </div>

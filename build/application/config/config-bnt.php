@@ -1,7 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config['customer'] = 'Mx-Bn';
-$config['customer-uri'] = 'bnt';
-$config['client_style'] = $config['customer-uri'];
-$config['base_url']	= BASE_URL.$config['customer-uri'].'/';
-$config['language']	= BASE_LANGUAGE.'-'.$config['customer-uri'];
+$config['customer_uri'] = 'bnt';
+$config['customer_style'] = $config['customer_uri'];
+$config['customer_lang'] = $config['customer_uri'];
+$config['customer_program'] = $config['customer_uri'];
+$config['base_url']	= BASE_URL.$config['customer_uri'].'/';
+$config['language']	= BASE_LANGUAGE.'-'.$config['customer_lang'];

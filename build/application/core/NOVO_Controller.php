@@ -13,7 +13,8 @@ class NOVO_Controller extends CI_Controller {
 	protected $rule;
 	protected $includeAssets;
 	protected $customerUri;
-	protected $clientStyle;
+	protected $customerStyle;
+	protected $customerLang;
 	protected $views;
 	protected $render;
 	protected $dataRequest;
@@ -60,7 +61,10 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->customerUri);
 		languageLoad('specific', $this->router->fetch_class());
-		$this->customerUri = $this->config->item('customer-uri');
+		$this->customerUri = $this->config->item('customer_uri');
+		$this->customerStyle = $this->config->item('customer_style');
+		$this->customerLang = $this->config->item('customer_lang');
+		$this->customerProgram = $this->config->item('customer_program');
 
 		if($this->session->has_userdata('userId')) {
 			if($this->session->customerSess !== $this->config->item('customer')) {
@@ -145,22 +149,23 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
 		if ($auth) {
-			$this->clientStyle = $this->config->item('client_style');
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->loader = lang('IMG_LOADER');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->clientStyle = $this->clientStyle;
+			$this->render->customerStyle = $this->customerStyle;
+			$this->render->customerLang = $this->customerLang;
+			$this->render->customerProgram = $this->customerProgram;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			if (lang('CONF_VIEW_SUFFIX') === '-core') {
 				$this->includeAssets->cssFiles = [
-					"$this->clientStyle/root-$this->clientStyle",
+					"$this->customerStyle/root-$this->customerStyle",
 					"root-general",
 					"reboot",
-					"$this->clientStyle/"."$this->clientStyle-base"
+					"$this->customerStyle/"."$this->customerStyle-base"
 				];
 			} else {
 				$file = $this->customerUri == 'bpi' ? 'pichincha' : 'novo';
