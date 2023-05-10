@@ -52,7 +52,7 @@ if ( ! function_exists('verifyheader'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$customerUri = $CI->config->item('customer-uri');
+		$customerUri = $CI->config->item('customer_uri');
 		$logged = $CI->session->has_userdata('logged');
 
 		switch ($link) {
@@ -104,7 +104,7 @@ if ( ! function_exists('verifyBody'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$customerUri = $CI->config->item('customer-uri');
+		$customerUri = $CI->config->item('customer_uri');
 
 		switch ($link) {
 			case lang('GEN_SIGNIN_TOP'):
@@ -193,7 +193,7 @@ if ( ! function_exists('verifyFooter'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$customerUri = $CI->config->item('customer-uri');
+		$customerUri = $CI->config->item('customer_uri');
 		$logged = $CI->session->has_userdata('logged');
 
 		switch ($link) {
