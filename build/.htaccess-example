@@ -96,7 +96,7 @@ SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceW
 #-------------------------------------#
 SetEnv API_URL http://172.24.6.78:8005/ceo-fuel/1.0/
 SetEnv SERVICE_URL http://172.24.6.78:9008/
-SetEnv DOWNLOAD_ROUTE 172.24.6.123/opt/downloads/site-conexionempresas/
+SetEnv DOWNLOAD_ROUTE 172.21.0.228/opt/downloads/site-conexionempresas/
 SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
 SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
 
@@ -149,7 +149,7 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #-------------------------------------#
 # SetEnv API_URL http://172.24.6.77:8005/ceo-fuel/1.0/
 # SetEnv SERVICE_URL http://172.24.6.77:9008/
-# SetEnv DOWNLOAD_ROUTE 172.24.6.124/opt/downloads/site-conexionempresas/
+# SetEnv DOWNLOAD_ROUTE 172.21.19.240/opt/downloads/site-conexionempresas/
 # SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
 # SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
 
