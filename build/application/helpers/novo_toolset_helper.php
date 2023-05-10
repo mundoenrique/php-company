@@ -48,12 +48,8 @@ if (!function_exists('arrayTrim')) {
 if(!function_exists('dbSearch')) {
 	function dbSearch($uri) {
 		$CI = &get_instance();
-
-		if (!isset($CI->config->item('client_db')[$uri])) {
-			$dbName = 'alpha';
-		} else {
-			$dbName = $CI->config->item('client_db')[$uri];
-		}
+		$defaultBd = 'alpha';
+		$dbName = DB_VERIFY ? $CI->config->item('client_db')[$uri] ?? $defaultBd : $defaultBd;
 
 		return 'ceo_' . $dbName;
 	}

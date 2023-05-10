@@ -158,7 +158,7 @@ defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
 defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
-defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
+defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 
 /*
 |--------------------------------------------------------------------------
