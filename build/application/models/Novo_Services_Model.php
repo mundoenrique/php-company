@@ -1082,6 +1082,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->code = 0;
 		$this->response->data->info['balance'] = '';
 		$this->response->data->info['balanceText'] = '';
+		$this->response->data->info['reloadBalance'] = false;
 		$this->response->data->info['fundingAccount'] = '';
 		$this->response->data->params['validateParams'] = lang('CONF_VALIDATE_PARAMS') == 'OFF' ? FALSE : TRUE;
 		$this->response->data->params['commission'] = (float)0;
@@ -1131,6 +1132,12 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			default:
 			$this->response->code = 4;
+			$this->response->data->info['balanceText'] = lang('SERVICES_UNAVAILABLE_BALANCE');
+			$this->response->data->info['reloadBalance'] = true;
+			$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+			$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
+			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_MatesaccountBlanace');

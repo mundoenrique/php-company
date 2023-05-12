@@ -3,7 +3,11 @@ var rechargeParam;
 var checkType;
 $(function () {
 	rechargeParam = params;
+	//$('#accept').addClass('disabled-recharge').prop('disabled', true);
 	if (params && code == 0) {
+		//$('.disabled-recharge').prop('disabled', false);
+		//$('#accept').removeClass('disabled-recharge')
+
 		$("#pay").prop("checked", true);
 		checkType = $("input:radio[name=transferType]:checked").val();
 
@@ -42,6 +46,28 @@ $(function () {
 			}
 		});
 	}
+
+	$('.disabled-recharge_provis').on('click', function(e) {
+
+		var form = document.getElementById('masterAccountRechargeForm');
+ 		var elements = form.querySelectorAll('input, button');
+
+		elements.forEach(function(elemento) {
+			elemento.disabled = true;
+		});
+
+		$(this)
+			.prop('disabled', false)
+			.removeClass('disabled-recharge');
+	})
+
+	$('#reload_balance').on('click', function() {
+		$(this).html(loader)
+		insertFormInput(true);
+		location.reload()
+	});
+
+
 	$('#masterAccountRechargeBtn').on('click', function(e) {
 		e.preventDefault();
 		form = $('#masterAccountRechargeForm');

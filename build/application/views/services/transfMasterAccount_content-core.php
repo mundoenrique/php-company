@@ -24,7 +24,15 @@
         <span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta maestra </span>
         <div class="flex my-2 px-5">
           <form id="masterAccountRechargeForm" method="post" class="w-100">
-            <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
+            <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span>
+						<?php if($reloadBalance): ?>
+							<a href="javascript:">
+								<span id="reload_balance" class="bold" title="Consultar saldo">
+									<i class="icon-reload mr-0"></i>
+								</span>
+							</a>
+						<?php endif; ?>
+						</p>
             <div class="row" id="recharge_account">
 
 							<?php if (lang('CONF_SELECT_ACCOUNT') == 'ON'): ?>
