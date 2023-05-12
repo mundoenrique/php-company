@@ -159,6 +159,7 @@ $lang['SERVICES_AVAILABLE_BALANCE'] = 'Saldo cuenta maestra:';
 $lang['SERVICES_COMMISSION_TRANS'] = 'Comisión por transacción:';
 $lang['SERVICES_COMMISSION_CONSULTATION'] = 'Comisión por consultar saldo:';
 $lang['SERVICES_BALANCE_ACC_CONCENTRATOR'] = 'Saldo cuenta concentradora:';
+$lang['SERVICES_BALANCE_ACC_ADMINISTRATOR'] = 'Saldo cuenta administradora:';
 $lang['SERVICES_TABLE_NO_REGISTRY_MASTERACCOUNT'] = 'El listado de tarjetas no se encuentra disponible. Por favor verifica si tienes tarjetas afiliadas, ó realiza la búsqueda nuevamente.';
 $lang["SERVICES_SUCCESFUL_TRANSACTION"] = 'Transacción Exitosa.';
 $lang["SERVICES_LIMIT_EXCEEDED"] = 'Límite Excedido.';

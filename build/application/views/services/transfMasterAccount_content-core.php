@@ -140,7 +140,7 @@
               <?php endif; ?>
               <?php if (lang('CONF_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
               <div class="col-4">
-                <label><?= lang('SERVICES_BALANCE_ACC_CONCENTRATOR'); ?></label>
+                <label><?= $balanceAccountAdmin ?></label>
                 <span id="balance-acc-concentrator" class="light text form-control py-0"></span>
               </div>
               <?php endif; ?>

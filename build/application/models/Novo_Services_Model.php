@@ -28,6 +28,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->modeloOperativo = $this->session->enterpriseInf->operatingModel;
 
 		$this->dataRequest->listaTarjetas = [
 			[

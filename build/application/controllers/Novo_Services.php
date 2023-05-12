@@ -58,6 +58,7 @@ Class Novo_Services extends Novo_Controller {
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 		$this->render->skipInputPass = lang('CONF_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
 		$this->render->showRechargeAccount = $showRechargeAccount;
+		$this->render->balanceAccountAdmin = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? lang('SERVICES_BALANCE_ACC_ADMINISTRATOR') : lang('SERVICES_BALANCE_ACC_CONCENTRATOR');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}
