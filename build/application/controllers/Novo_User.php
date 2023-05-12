@@ -9,7 +9,7 @@ class Novo_User extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO User Controller Class Initialized');
+		writeLog('INFO', 'User Controller Class Initialized');
 	}
 	/**
 	 * @info Método que renderiza la vista de inicio de sesión
@@ -18,7 +18,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function signIn()
 	{
-		log_message('INFO', 'NOVO User: signIn Method Initialized');
+		writeLog('INFO', 'User: signIn Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'signIn';
@@ -68,7 +68,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
+		writeLog('INFO', 'User: singleSignOn Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'singleSignOn';
@@ -119,7 +119,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function recoverPass()
 	{
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'recoverPass';
@@ -144,7 +144,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function recoverAccess()
 	{
-		log_message('INFO', 'NOVO User: recoverAccess Method Initialized');
+		writeLog('INFO', 'User: recoverAccess Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'recoverAccess';
@@ -168,7 +168,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function changePassword()
 	{
-		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+		writeLog('INFO', 'User: changePassword Method Initialized');
 
 		$view = 'changePassword';
 
@@ -210,7 +210,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function finishSession($redirect)
 	{
-		log_message('INFO', 'NOVO User: finishSession Method Initialized');
+		writeLog('INFO', 'User: finishSession Method Initialized');
 
 		$view = 'finish';
 		$thirdPartySession = $this->singleSession == 'SignThird';
@@ -253,7 +253,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function suggestion()
 	{
-		log_message('INFO', 'NOVO User: suggestion Method Initialized');
+		writeLog('INFO', 'User: suggestion Method Initialized');
 
 		$view = 'suggestion';
 
@@ -289,7 +289,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function usersManagement()
 	{
-		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
+		writeLog('INFO', 'User: usersManagement Method Initialized');
 
 		$view = 'usersManagement';
 		array_push(
@@ -341,7 +341,7 @@ class Novo_User extends NOVO_Controller {
 	public function userPermissions()
 
 	{
-		log_message('INFO', 'NOVO User: userPermissions Method Initialized');
+		writeLog('INFO', 'User: userPermissions Method Initialized');
 
 		$view = 'userPermissions';
 		array_push(
@@ -390,7 +390,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function login()
 	{
-		log_message('INFO', 'NOVO User: index Method Initialized');
+		writeLog('INFO', 'User: index Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
 			$urlRedirect = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
@@ -444,7 +444,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function passwordRecovery()
 	{
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
 		$view = 'recoverPass';
 
@@ -468,7 +468,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function changePass()
 	{
-		log_message('INFO', 'NOVO User: changePass Method Initialized');
+		writeLog('INFO', 'User: changePass Method Initialized');
 
 		$view = 'changePassword';
 
@@ -511,7 +511,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function browsers()
 	{
-		log_message('INFO', 'NOVO User: browsers Method Initialized');
+		writeLog('INFO', 'User: browsers Method Initialized');
 
 		$view = 'browsers';
 

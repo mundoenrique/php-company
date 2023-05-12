@@ -10,7 +10,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Bulk Model Class Initialized');
+		writeLog('INFO', 'Bulk Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
@@ -19,7 +19,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_GetPendingBulk_Bulk()
 	{
-		log_message('INFO', 'NOVO Bulk Model: getPendingBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: getPendingBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
@@ -96,7 +96,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_GetTypeLots_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
+		writeLog('INFO', 'Bulk Model: getTypeLots Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
@@ -158,7 +158,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: LoadBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: LoadBulk Method Initialized');
 
 		$this->sendFile($dataRequest->fileName, 'LoadBulk');
 
@@ -270,7 +270,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_DeleteNoConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: DeleteNoConfirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: DeleteNoConfirmBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar lotes';
@@ -321,7 +321,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_GetDetailBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: GetDetailBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: GetDetailBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
@@ -407,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_ConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: ConfirmBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Validar Lote';
@@ -511,7 +511,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_AuthorizeBulkList_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulkList Method Initialized');
+		writeLog('INFO', 'Bulk Model: AuthorizeBulkList Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
@@ -553,7 +553,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_SignBulkList_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: SignBulkList Method Initialized');
+		writeLog('INFO', 'Bulk Model: SignBulkList Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
@@ -613,7 +613,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_DeleteConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: DeleteConfirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: DeleteConfirmBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
@@ -681,7 +681,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_DisassConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: DisassConfirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: DisassConfirmBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
@@ -746,7 +746,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_AuthorizeBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');
+		writeLog('INFO', 'Bulk Model: AuthorizeBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
@@ -962,7 +962,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_ServiceOrder_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: ServiceOrder Method Initialized');
+		writeLog('INFO', 'Bulk Model: ServiceOrder Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Orden de servicio';
@@ -1129,7 +1129,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_CancelServiceOrder_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: cancelServiceOrder Method Initialized');
+		writeLog('INFO', 'Bulk Model: cancelServiceOrder Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Orden de servicio';
@@ -1187,7 +1187,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	private function callWs_MakeBulkList_Bulk($bulkList)
 	{
-		log_message('INFO', 'NOVO Bulk Model: MakeBulkList Method Initialized');
+		writeLog('INFO', 'Bulk Model: MakeBulkList Method Initialized');
 
 		$signBulk = [];
 		$authorizeBulk = [];
@@ -1271,7 +1271,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_UnnamedRequest_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: UnnamedRequest Method Initialized');
+		writeLog('INFO', 'Bulk Model: UnnamedRequest Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
@@ -1353,7 +1353,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_UnnamedAffiliate_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: unnamedAffiliate Method Initialized');
+		writeLog('INFO', 'Bulk Model: unnamedAffiliate Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
@@ -1440,7 +1440,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_UnnmamedDetail_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: unnmamedDetail Method Initialized');
+		writeLog('INFO', 'Bulk Model: unnmamedDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';

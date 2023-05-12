@@ -16,7 +16,7 @@ class Verify_Access {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
+		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
@@ -27,19 +27,16 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $customerUri, $user, $class = FALSE)
+	public function validateForm($rule, $customerUri, $class = FALSE)
 	{
-
-		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
+		writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO [' . $user . '] VALIDATION FORM ' . $rule . ': ' .
-			json_encode($result, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'VALIDATION FORM ' . $rule . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  [' . $user . '] VALIDATION ' . $rule . ' ERRORS: ' .
-				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			writeLog('ERROR', 'VALIDATION ' . $rule . ' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		if ($class) {
@@ -56,9 +53,9 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function createRequest($rule, $user)
+	public function createRequest($rule)
 	{
-		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
+		writeLog('INFO', 'Verify_Access: createRequest method initialized');
 
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
@@ -79,8 +76,7 @@ class Verify_Access {
 		}
 
 		unset($_POST);
-		log_message('DEBUG', 'NOVO [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ' . $rule .' REQUEST CREATED '.
-			json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', $rule .' REQUEST CREATED '.	json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
@@ -91,7 +87,7 @@ class Verify_Access {
 	 */
 	public function ResponseByDefect($user)
 	{
-		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
+		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
 		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END')
@@ -115,7 +111,7 @@ class Verify_Access {
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
+		writeLog('DEBUG', ' [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
 			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
@@ -125,9 +121,9 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module, $customerUri, $user = FALSE)
+	public function accessAuthorization($module)
 	{
-		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
+		writeLog('INFO', 'Verify_Access: accessAuthorization method initialized');
 
 		$user = $user ?? $this->user;
 
@@ -349,7 +345,7 @@ class Verify_Access {
 				$auth = in_array($module, $freeAccess);
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'accessAuthorization ' . $module . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		if (!$auth) {
 			$auth = !(preg_match('/Novo_/', $this->CI->router->fetch_class()) === 1);
@@ -365,7 +361,7 @@ class Verify_Access {
 	 */
 	public function verifyAuthorization($moduleLink, $function = FALSE)
 	{
-		log_message('INFO', 'NOVO Verify_Access: verifyAuthorization method initialized');
+		writeLog('INFO', 'Verify_Access: verifyAuthorization method initialized');
 
 		$userAccess = $this->CI->session->user_access;
 		$items = [];
@@ -390,7 +386,7 @@ class Verify_Access {
 			$access = $function ? $function : $moduleLink;
 			$prompter = $function ? '->'.$function : '';
 			$auth = in_array($access, $items);
-			log_message('INFO', 'NOVO ['.$this->user.'] verifyAuthorization '.$moduleLink.$prompter.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+			writeLog('INFO', '['.$this->user.'] verifyAuthorization '.$moduleLink.$prompter.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 		}
 
 
@@ -403,7 +399,7 @@ class Verify_Access {
 	 */
 	public function validateRedirect($redirectUrl, $customerUri)
 	{
-		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
+		writeLog('INFO', 'Verify_Access: validateRedirect method initialized');
 
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 

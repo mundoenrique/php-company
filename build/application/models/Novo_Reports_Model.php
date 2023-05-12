@@ -10,7 +10,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Reports Model Class Initialized');
+		writeLog('INFO', 'Reports Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de reportes
@@ -19,7 +19,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_GetReportsList_Reports()
 	{
-		log_message('INFO', 'NOVO Reports Model: ReporstList Method Initialized');
+		writeLog('INFO', 'Reports Model: ReporstList Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Lista de reportes';
@@ -129,7 +129,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_GetReport_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: GetReport Method Initialized');
+		writeLog('INFO', 'Reports Model: GetReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 
@@ -173,7 +173,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function cardsList($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: repListadoTarjetas Method Initialized');
+		writeLog('INFO', 'Reports Model: repListadoTarjetas Method Initialized');
 
 		$this->dataAccessLog->function = 'Listado de tarjetas';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -218,7 +218,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function movementsByEnterprise($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: movementsByEnterprise Method Initialized');
+		writeLog('INFO', 'Reports Model: movementsByEnterprise Method Initialized');
 
 		$this->dataAccessLog->function = 'Moviminetos por empresa';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -279,7 +279,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function VISAproofpayment($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: VISAproofpayment Method Initialized');
+		writeLog('INFO', 'Reports Model: VISAproofpayment Method Initialized');
 
 		$this->dataAccessLog->function = 'Comprobante de pago VISA';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -330,7 +330,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function clientStatement($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: clientStatement Method Initialized');
+		writeLog('INFO', 'Reports Model: clientStatement Method Initialized');
 
 		$this->dataAccessLog->function = 'Extracto del cliente';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -381,7 +381,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function cardReport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: cardReport Method Initialized');
+		writeLog('INFO', 'Reports Model: cardReport Method Initialized');
 
 		$this->dataAccessLog->function = 'Reporte de tarjetas';
 		$this->dataAccessLog->operation = 'Lista de tarjetas';
@@ -468,7 +468,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function cardsPeople($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: cardsPeople Method Initialized');
+		writeLog('INFO', 'Reports Model: cardsPeople Method Initialized');
 
 		$this->dataAccessLog->function = 'Tarjetas por persona';
 		$this->dataAccessLog->operation = 'Lista de tarjetas';
@@ -538,7 +538,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function movementsByCards($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: movementsByCards Method Initialized');
+		writeLog('INFO', 'Reports Model: movementsByCards Method Initialized');
 
 		$this->dataAccessLog->function = 'Movimientos por tarjeta';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -624,7 +624,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	private function GMPCertificate($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: GMPCertificate Method Initialized');
+		writeLog('INFO', 'Reports Model: GMPCertificate Method Initialized');
 
 		$this->dataAccessLog->function = 'Obtener certificado GMF';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -673,7 +673,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_StatusBulk_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: StatusBulk Method Initialized');
+		writeLog('INFO', 'Reports Model: StatusBulk Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Estado de lote';
@@ -727,7 +727,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_obtenerIdEmpresa_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: obtenerIdEmpresa Method Initialized');
+		writeLog('INFO', 'Reports Model: obtenerIdEmpresa Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Id empresa';
@@ -751,7 +751,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_closingBudgets_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: closingBudgets Method Initialized');
+		writeLog('INFO', 'Reports Model: closingBudgets Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Saldos Amanecidos';
@@ -798,7 +798,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcel_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcel Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToExcel Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Saldos amanecidos';
@@ -838,7 +838,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_masterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: masterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: masterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
@@ -876,7 +876,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_extendedMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: extendedMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: extendedMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
@@ -945,7 +945,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_statusMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: statusMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: statusMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'edoCuentaMaestra';
@@ -997,7 +997,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcelMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToExcelMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
@@ -1039,7 +1039,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcelExtendedMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToExcelExtendedMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
@@ -1090,7 +1090,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToPDFMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToPDFMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
@@ -1129,7 +1129,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcelMasterAccountConsolid_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccountConsolid Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToExcelMasterAccountConsolid Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
@@ -1172,7 +1172,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToPDFMasterAccountConsolid_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccountConsolid Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToPDFMasterAccountConsolid Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
@@ -1215,7 +1215,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_extendedDownloadMasterAccountCon_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: extendedDownloadMasterAccountCon Method Initialized');
+		writeLog('INFO', 'Reports Model: extendedDownloadMasterAccountCon Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Cuenta maestra extendida';
@@ -1271,7 +1271,7 @@ class Novo_Reports_Model extends NOVO_Model {
  	*/
 	public function callWs_CardHolders_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: CardHolders Method Initialized');
+		writeLog('INFO', 'Reports Model: CardHolders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'TarjetaHabientes';
@@ -1318,7 +1318,7 @@ class Novo_Reports_Model extends NOVO_Model {
  	*/
 	public function callWs_exportReportCardHolders_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportReportCardHolders Method Initialized');
+		writeLog('INFO', 'Reports Model: exportReportCardHolders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes Tarjetahabiente';
@@ -1367,7 +1367,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 	public function callWs_RechargeMade_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
+		writeLog('INFO', 'Reports Model: RechargeMade Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes Recargas Realizadas';
@@ -1420,7 +1420,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 	public function callWs_IssuedCards_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
+		writeLog('INFO', 'Reports Model: IssuedCards Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Buscar tarjetas emitidas';
@@ -1493,7 +1493,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_userActivity_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: userActivity Method Initialized');
+		writeLog('INFO', 'Reports Model: userActivity Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
@@ -1562,7 +1562,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportReportUserActivity_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportReportUserActivity Method Initialized');
+		writeLog('INFO', 'Reports Model: exportReportUserActivity Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
@@ -1612,7 +1612,7 @@ class Novo_Reports_Model extends NOVO_Model {
  */
 	public function callWs_usersActivity_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: usersActivity Method Initialized');
+		writeLog('INFO', 'Reports Model: usersActivity Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
@@ -1684,7 +1684,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	*/
 	public function callWs_exportExcelUsersActivity_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportExcelUsersActivity Method Initialized');
+		writeLog('INFO', 'Reports Model: exportExcelUsersActivity Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
@@ -1730,7 +1730,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_searchStatusAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: searchStatusAccount Method Initialized');
+		writeLog('INFO', 'Reports Model: searchStatusAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
@@ -1808,7 +1808,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_searchExtendedAccountStatus_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: searchExtendedAccountStatus Method Initialized');
+		writeLog('INFO', 'Reports Model: searchExtendedAccountStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
@@ -1888,7 +1888,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_statusAccountExcelFile_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: statusAccountExcelFile Method Initialized');
+		writeLog('INFO', 'Reports Model: statusAccountExcelFile Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
@@ -1947,7 +1947,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_statusAccountpdfFile_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: statusAccountpdfFile Method Initialized');
+		writeLog('INFO', 'Reports Model: statusAccountpdfFile Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'generarComprobante';
@@ -2000,7 +2000,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcelExtendedAccountStatus_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedAccountStatus Method Initialized');
+		writeLog('INFO', 'Reports Model: exportToExcelExtendedAccountStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';

@@ -10,7 +10,7 @@ class Novo_Inquiries extends NOVO_Controller {
 	public function __construct()
 	{
 		parent :: __construct();
-		log_message('INFO', 'NOVO Inquiries Controller Class Initialized');
+		writeLog('INFO', 'Inquiries Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar la lista de ordenes de servicio
@@ -19,7 +19,7 @@ class Novo_Inquiries extends NOVO_Controller {
 	 */
 	public function serviceOrders()
 	{
-		log_message('INFO', 'NOVO Inquiries: serviceOrders Method Initialized');
+		writeLog('INFO', 'Inquiries: serviceOrders Method Initialized');
 
 		$view = 'serviceOrders';
 		array_push(
@@ -73,7 +73,7 @@ class Novo_Inquiries extends NOVO_Controller {
 	 */
 	public function bulkDetail()
 	{
-		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
+		writeLog('INFO', 'Inquiries: bulkDetail Method Initialized');
 
 		if(!isset($this->request->bulkId) && !$this->session->flashdata('download'))  {
 			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);

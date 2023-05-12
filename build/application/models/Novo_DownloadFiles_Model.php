@@ -10,7 +10,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO DownloadFiles Model Class Initialized');
+		writeLog('INFO', 'DownloadFiles Model Class Initialized');
 	}
 	/**
 	 * @info Elimina archivos descargados
@@ -19,7 +19,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_DeleteFile_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: DeleteFile Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: DeleteFile Method Initialized');
 
 		unlink(assetPath('downloads/'.$dataRequest->fileName));
 		$this->response->code = 0;
@@ -34,7 +34,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_UnnmamedAffiliate_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: UnnmamedAffiliate Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: UnnmamedAffiliate Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
@@ -81,7 +81,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_BulkDetailExport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: StatusBulkReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Detalle de lote';
@@ -129,7 +129,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_StatusBulkReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: StatusBulkReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Estado de Lote';
@@ -173,7 +173,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 	public function callWs_RechargeMadeReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: RechargeMadeReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: RechargeMadeReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes RecargasRealizadas';
@@ -225,7 +225,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 	public function callWs_IssuedCardsReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: IssuedCardsReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: IssuedCardsReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes TarjetasEmitidas';
@@ -269,7 +269,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function responseFail_DownloadFiles($dataResponse)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: UnnmamedAffiliate Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: UnnmamedAffiliate Method Initialized');
 
 		$this->response->code =  3;
 		$this->response->title = lang('GEN_DOWNLOAD_FILE');

@@ -27,7 +27,7 @@ class Recaptcha {
 	 */
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Recaptcha Library Class Initialized');
+		writeLog('INFO', 'Recaptcha Library Class Initialized');
 
 		$this->_ci = & get_instance();
 		$this->_ci->load->config('recaptcha');

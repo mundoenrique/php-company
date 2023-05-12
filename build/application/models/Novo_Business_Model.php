@@ -10,7 +10,7 @@ class Novo_Business_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Model Class Initialized');
+		writeLog('INFO', 'Business Model Class Initialized');
 
 		$this->load->library('Request_Data');
 	}
@@ -21,7 +21,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetEnterprises_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
+		writeLog('INFO', 'Business Model: getEnterprises Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Empresas';
@@ -118,7 +118,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetBranchOffices_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
+		writeLog('INFO', 'Bulk Model: GetBranchOffices Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Carga de lotes';
@@ -195,7 +195,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetProducts_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
+		writeLog('INFO', 'Business Model: getProducts Method Initialized');
 
 		$select = isset($dataRequest->select);
 		if(!$select) {
@@ -281,7 +281,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetProductDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
+		writeLog('INFO', 'Business Model: getProductDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
@@ -352,7 +352,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('INFO', 'NOVO ['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
+				writeLog('INFO', '['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
 

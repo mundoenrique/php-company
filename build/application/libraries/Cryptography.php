@@ -7,12 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cryptography {
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
+		writeLog('INFO', 'Cryptography Library Class Initialized');
 	}
 
 	public function encrypt($object)
 	{
-		log_message('INFO', 'NOVO Cryptography: Encrypt Method Initialized');
+		writeLog('INFO', 'Cryptography: Encrypt Method Initialized');
 
 		$keyStr = $this->generateKey();
 		$salt = openssl_random_pseudo_bytes(8);

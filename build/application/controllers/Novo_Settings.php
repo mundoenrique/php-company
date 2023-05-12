@@ -10,7 +10,7 @@ class Novo_Settings extends NOVO_Controller {
 	public function __construct()
 	{
 		parent :: __construct();
-		log_message('INFO', 'NOVO Settings Controller Class Initialized');
+		writeLog('INFO', 'Settings Controller Class Initialized');
 	}
 
 	/**
@@ -22,7 +22,7 @@ class Novo_Settings extends NOVO_Controller {
 	 */
 	public function options()
 	{
-		log_message('INFO', 'NOVO Settings: options Method Initialized');
+		writeLog('INFO', 'Settings: options Method Initialized');
 
 		$view = 'options';
 

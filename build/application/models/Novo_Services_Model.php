@@ -10,7 +10,7 @@ class Novo_Services_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Services Model Class Initialized');
+		writeLog('INFO', 'Services Model Class Initialized');
 	}
 	/**
 	 * @info Método para
@@ -18,7 +18,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_TransfMasterAccount_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: TransfMasterAccount Method Initialized');
+		writeLog('INFO', 'Services Model: TransfMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
@@ -149,7 +149,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_ActionMasterAccount_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: ActionMasterAccount Method Initialized');
+		writeLog('INFO', 'Services Model: ActionMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
@@ -439,7 +439,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_CardsInquiry_Services($dataRequest)
 	{
-		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
+		writeLog('INFO', 'Services Model: CardsInquiry Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Consulta de tarjetas';
@@ -549,7 +549,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_InquiriesActions_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: InquiriesActions Method Initialized');
+		writeLog('INFO', 'Services Model: InquiriesActions Method Initialized');
 
 		$className = 'com.novo.objects.MO.SeguimientoLoteMO';
 
@@ -708,7 +708,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 	public function callWs_commercialTwirls_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
+		writeLog('INFO', 'Services Model: commercialTwirls Method Initialized');
 
 		$this->dataAccessLog->modulo = 'servicios';
 		$this->dataAccessLog->function = 'custom_mcc';
@@ -790,7 +790,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 	public function callWs_updateCommercialTwirls_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
+		writeLog('INFO', 'Services Model: updateCommercialTwirls Method Initialized');
 
 		$this->dataAccessLog->modulo = 'servicios';
 		$this->dataAccessLog->function = 'custom_mcc';
@@ -876,7 +876,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_transactionalLimits_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
+		writeLog('INFO', 'Services Model: transactionalLimits Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Limites';
@@ -975,7 +975,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function callWs_updateTransactionalLimits_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
+		writeLog('INFO', 'Services Model: updateTransactionalLimits Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Limites';
@@ -1065,7 +1065,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function CallWs_MasterAccountBalance_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: MasterAccountBalance Method Initialized');
+		writeLog('INFO', 'Services Model: MasterAccountBalance Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
@@ -1141,7 +1141,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function CallWs_MasterAccountTransfer_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: MasterAccountTransfer Method Initialized');
+		writeLog('INFO', 'Services Model: MasterAccountTransfer Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
@@ -1303,7 +1303,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function CallWs_AuthorizationKey_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: AuthorizationKey Method Initialized');
+		writeLog('INFO', 'Services Model: AuthorizationKey Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Comunicación con tercero';
@@ -1357,7 +1357,7 @@ class Novo_Services_Model extends NOVO_Model {
 	 */
 	public function CallWs_RechargeAuthorization_Services($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: RechargeAuthorization Method Initialized');
+		writeLog('INFO', 'Services Model: RechargeAuthorization Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Pagos';
 		$this->dataAccessLog->function = 'Doble Autenticacion';

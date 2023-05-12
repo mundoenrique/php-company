@@ -10,7 +10,7 @@ class Novo_User_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO User Model Class Initialized');
+		writeLog('INFO', 'User Model Class Initialized');
 	}
 	/**
 	 * @info Método para el inicio de sesión
@@ -19,7 +19,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_SignIn_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: SignIn Method Initialized');
+		writeLog('INFO', 'User Model: SignIn Method Initialized');
 
 		$userName = mb_strtoupper($dataRequest->userName);
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
@@ -228,7 +228,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_SingleSignon_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: SingleSignon Method Initialized');
+		writeLog('INFO', 'User Model: SingleSignon Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
@@ -328,7 +328,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_RecoverPass_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: RecoverPass Method Initialized');
+		writeLog('INFO', 'User Model: RecoverPass Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Clave';
@@ -396,7 +396,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_RecoverAccess_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: RecoverAccess Method Initialized');
+		writeLog('INFO', 'User Model: RecoverAccess Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
@@ -458,7 +458,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_ValidateOtp_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: ValidateOtp Method Initialized');
+		writeLog('INFO', 'User Model: ValidateOtp Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
@@ -531,7 +531,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
+		writeLog('INFO', 'User Model: ChangePassword Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Clave';
@@ -591,7 +591,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_KeepSession_User($dataRequest = FALSE)
 	{
-		log_message('INFO', 'NOVO User Model: KeepSession Method Initialized');
+		writeLog('INFO', 'User Model: KeepSession Method Initialized');
 		$response = new stdClass();
 		$response->rc =  0;
 		$this->makeAnswer($response, 'callWs_GetBranchOffices');
@@ -606,7 +606,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_ChangeLanguage_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: ChangeLanguage Method Initialized');
+		writeLog('INFO', 'User Model: ChangeLanguage Method Initialized');
 
 		$response = new stdClass();
 		$response->rc =  0;
@@ -624,7 +624,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
-		log_message('INFO', 'NOVO User Model: FinishSession Method Initialized');
+		writeLog('INFO', 'User Model: FinishSession Method Initialized');
 
 		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->userName;
 
@@ -659,7 +659,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_usersManagement_User($dataRequest = FALSE)
 	{
-		log_message('INFO', 'NOVO User Model: usersManagement Method Initialized');
+		writeLog('INFO', 'User Model: usersManagement Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Obtener usuarios banorte';
@@ -713,7 +713,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_userPermissions_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: userPermissions Method Initialized');
+		writeLog('INFO', 'User Model: userPermissions Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Obtener usuarios banorte';
@@ -764,7 +764,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_updatePermissions_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: updatePermissions Method Initialized');
+		writeLog('INFO', 'User Model: updatePermissions Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Actualizar funciones usuario';
@@ -834,7 +834,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_enableUser_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: enableUser Method Initialized');
+		writeLog('INFO', 'User Model: enableUser Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Obtener usuarios banorte';
@@ -883,17 +883,17 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_ValidateCaptcha_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: validateCaptcha Method Initialized');
+		writeLog('INFO', 'User Model: validateCaptcha Method Initialized');
 
 		$this->load->library('recaptcha');
 
 		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO [' . mb_strtoupper($userName) . '] RESPONSE: recaptcha Customer: "' . $this->config->item('customer');
+		$logMessage = '[' . mb_strtoupper($userName) . '] RESPONSE: recaptcha Customer: "' . $this->config->item('customer');
 		$logMessage.= '", Score: "' . $result["score"] . '", Hostname: "'. $result["hostname"] . '"';
 
-		log_message('DEBUG', ' IP '. $this->input->ip_address() . $logMessage);
+		writeLog('DEBUG', ' IP '. $this->input->ip_address() . $logMessage);
 
 		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 

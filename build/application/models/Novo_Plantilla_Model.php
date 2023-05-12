@@ -10,7 +10,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
+		writeLog('INFO', 'Plantilla Model Class Initialized');
 	}
 	/**
 	 * @info Método para
@@ -18,7 +18,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	 */
 	public function callWs_Plantilla_Plantilla($dataRequest)
 	{
-		log_message('INFO', 'NOVO Plantilla Model: Plantilla Method Initialized');
+		writeLog('INFO', 'Plantilla Model: Plantilla Method Initialized');
 
 		$this->dataAccessLog->modulo = '';
 		$this->dataAccessLog->function = '';

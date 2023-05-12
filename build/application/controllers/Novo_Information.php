@@ -9,7 +9,7 @@ class Novo_Information extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Information Class Initialized');
+		writeLog('INFO', 'Information Class Initialized');
 	}
 	/**
 	 * @info Método que renderiza la vista de beneficios de la aplicación
@@ -25,7 +25,8 @@ class Novo_Information extends NOVO_Controller {
 			"user/benefitsInf",
 		);
 
-		log_message('INFO', 'NOVO Information: benefitsInf Method Initialized');
+		writeLog('INFO', 'Information: benefitsInf Method Initialized');
+
 		$this->render->titlePage =lang('GEN_FOTTER_BENEFITS');
 		$this->render->activeHeader = TRUE;
 		$this->views = ['information/'.$view];
@@ -38,7 +39,7 @@ class Novo_Information extends NOVO_Controller {
 	 */
 	public function termsInf()
 	{
-		log_message('INFO', 'NOVO Information: termsInf Method Initialized');
+		writeLog('INFO', 'Information: termsInf Method Initialized');
 		$newUser = FALSE;
 		$view = 'terms';
 
@@ -70,6 +71,8 @@ class Novo_Information extends NOVO_Controller {
 	 */
 	public function ratesInf()
 	{
+		writeLog('INFO', 'Information: ratesInf Method Initialized');
+
 		$view = 'rates_info';
 		$json_file = file_get_contents(ASSET_PATH . 'data/ve/rates-info.json');
 		$json_data = json_decode($json_file);
@@ -104,7 +107,6 @@ class Novo_Information extends NOVO_Controller {
 			"user/ratesInf"
 		);
 
-		log_message('INFO', 'NOVO Information: ratesInf Method Initialized');
 		$this->render->titlePage =lang('GEN_FOTTER_RATES');
 		$this->render->json_data = $json_data;
 		$this->render->rates_refs = $rates_refs;
@@ -128,9 +130,10 @@ class Novo_Information extends NOVO_Controller {
 	 */
 	public function benefits()
 	{
+		writeLog('INFO', 'Information: benefits Method Initialized');
+
 		$view = 'benefits';
 
-		log_message('INFO', 'NOVO Information: benefits Method Initialized');
 		$this->render->titlePage =lang('GEN_FOTTER_BENEFITS');
 		$this->views = ['information/'.$view];
 		$this->loadView($view);
@@ -142,7 +145,7 @@ class Novo_Information extends NOVO_Controller {
 	 */
 	public function terms()
 	{
-		log_message('INFO', 'NOVO Information: terms Method Initialized');
+		writeLog('INFO', 'Information: terms Method Initialized');
 		$newUser = FALSE;
 		$view = 'terms';
 

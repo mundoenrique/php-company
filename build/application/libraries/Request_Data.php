@@ -11,7 +11,7 @@ class Request_Data {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Request_Data Library Class Initialized');
+		writeLog('INFO', 'Request_Data Library Class Initialized');
 
 		$this->CI = &get_instance();
 	}
@@ -22,7 +22,7 @@ class Request_Data {
 	 */
 	public function setPageSize($screenSize)
 	{
-		log_message('INFO', 'NOVO Request_Data: setPageSize Method Initialized');
+		writeLog('INFO', 'Request_Data: setPageSize Method Initialized');
 
 		switch ($screenSize) {
 			case $screenSize >= 1920:
@@ -50,7 +50,7 @@ class Request_Data {
 	 */
 	public function OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest)
 	{
-		log_message('INFO', 'NOVO Request_Data: OrderEnterpriseList Method Initialized');
+		writeLog('INFO', 'Request_Data: OrderEnterpriseList Method Initialized');
 
 		$responseList = new stdClass();
 		$enterpriseSelect = new stdClass();
@@ -201,7 +201,7 @@ class Request_Data {
 	 */
 	public function setFilters()
 	{
-		log_message('INFO', 'NOVO Request_Data: setFilters Method Initialized');
+		writeLog('INFO', 'Request_Data: setFilters Method Initialized');
 
 		$filters = new stdClass();
 		$filters->FIRST = [
@@ -249,7 +249,7 @@ class Request_Data {
 	 */
 	public function getProductsOrder($responseList, $select)
 	{
-		log_message('INFO', 'NOVO Request_Data: getProductsOrder Method Initialized');
+		writeLog('INFO', 'Request_Data: getProductsOrder Method Initialized');
 
 		if($select) {
 			return $this->orderToSelectList($responseList);
@@ -265,7 +265,7 @@ class Request_Data {
 	 */
 	public function orderToProductList($response)
 	{
-		log_message('INFO', 'NOVO Request_Data: orderToProductList Method Initialized');
+		writeLog('INFO', 'Request_Data: orderToProductList Method Initialized');
 
 		$noDeleteCat = [];
 		$noDeleteBrand = [];
@@ -345,7 +345,7 @@ class Request_Data {
 	 */
 	public function orderToSelectList($response)
 	{
-		log_message('INFO', 'NOVO Request_Data: orderToSelectList Method Initialized');
+		writeLog('INFO', 'Request_Data: orderToSelectList Method Initialized');
 
 		$productListSelect = [];
 

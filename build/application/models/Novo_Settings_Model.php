@@ -10,7 +10,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Settings Model Class Initialized');
+		writeLog('INFO', 'Settings Model Class Initialized');
 	}
 
 		/**
@@ -22,7 +22,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_GetUser_Settings()
 	{
-		log_message('INFO', 'NOVO Settings Model: getUser Method Initialized');
+		writeLog('INFO', 'Settings Model: getUser Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Configuracion';
 		$this->dataAccessLog->function = 'usuario';
@@ -72,7 +72,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_changeEmail_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: ChangeEmail Method Initialized');
+		writeLog('INFO', 'Settings Model: ChangeEmail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'actualizar-usuario';
@@ -119,7 +119,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function callWS_ListaEmpresas_Settings()
 	{
-		log_message('INFO', 'NOVO Business Model: getEnterprise Method Initialized');
+		writeLog('INFO', 'Business Model: getEnterprise Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'obtener empresa';
@@ -164,7 +164,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_ChangeTelephones_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: ChangeTelephones Method Initialized');
+		writeLog('INFO', 'Settings Model: ChangeTelephones Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'cambiar-telefono';
@@ -199,7 +199,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_ChangeDataEnterprice_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: ChangeDataEnterprice Method Initialized');
+		writeLog('INFO', 'Settings Model: ChangeDataEnterprice Method Initialized');
 
 		$this->dataAccessLog->modulo = 'reportes';
 		$this->dataAccessLog->function = 'updateDataEmpresaPBO';
@@ -234,7 +234,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_GetFileIni_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Setting Model: CallWs_GetFileIni Method Initialized');
+		writeLog('INFO', 'Setting Model: CallWs_GetFileIni Method Initialized');
 
 		$this->dataAccessLog->function = 'Listado de tarjetas';
 		$this->dataAccessLog->operation = 'Descargar archivo';
@@ -285,7 +285,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_getContacts_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: getContacts Method Initialized');
+		writeLog('INFO', 'Settings Model: getContacts Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Buscar contactos empresa';
 		$this->dataAccessLog->function = 'Buscar contacto';
@@ -348,7 +348,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_addContact_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: AddContact Method Initialized');
+		writeLog('INFO', 'Settings Model: AddContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Agregar contacto empresa';
 		$this->dataAccessLog->function = 'Agregar contacto';
@@ -404,7 +404,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_updateContact_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: updateContact Method Initialized');
+		writeLog('INFO', 'Settings Model: updateContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Modificar contacto empresa';
 		$this->dataAccessLog->function = 'Modificar contacto';
@@ -455,7 +455,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_deleteContact_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: deleteContact Method Initialized');
+		writeLog('INFO', 'Settings Model: deleteContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Eliminar contacto empresa';
 		$this->dataAccessLog->function = 'Eliminar contacto';
@@ -499,7 +499,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_getBranches_Settings($dataRequest){
 
-		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
+		writeLog('INFO', 'Settings Model: getBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Búsqueda de sucursales';
@@ -567,7 +567,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_addBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: addBranches Method Initialized');
+		writeLog('INFO', 'Settings Model: addBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Agregar Sucursales';
@@ -620,7 +620,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_updateBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Settings Model: updateBranches Method Initialized');
+		writeLog('INFO', 'Settings Model: updateBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Actualizar Sucursales';
@@ -672,7 +672,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_UploadFileBranches_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO UploadFileBranches Model: UploadFileBranches Method Initialized');
+		writeLog('INFO', 'UploadFileBranches Model: UploadFileBranches Method Initialized');
 
 		$this->sendFile($dataRequest->fileName, 'UploadFileBranches');
 

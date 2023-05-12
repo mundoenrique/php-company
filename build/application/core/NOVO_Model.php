@@ -17,7 +17,7 @@ class NOVO_Model extends CI_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Model Class Initialized');
+		writeLog('INFO', 'Model Class Initialized');
 
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
@@ -36,7 +36,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function sendToService($model)
 	{
-		log_message('INFO', 'NOVO Model: sendToService Method Initialized');
+		writeLog('INFO', 'Model: sendToService Method Initialized');
 
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
@@ -73,7 +73,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function sendFile($file, $model)
 	{
-		log_message('INFO', 'NOVO Model: sendFile Method Initialized');
+		writeLog('INFO', 'Model: sendFile Method Initialized');
 
 		$responseUpload = $this->encrypt_connect->moveFile($file, $this->userName, $model);
 
@@ -86,7 +86,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	protected function makeAnswer($responseModel, $model)
 	{
-		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
+		writeLog('INFO', 'Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
 		$this->response->code = lang('CONF_DEFAULT_CODE');
@@ -163,7 +163,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function responseToTheView($model)
 	{
-		log_message('INFO', 'NOVO Model: responseToView Method Initialized');
+		writeLog('INFO', 'Model: responseToView Method Initialized');
 		$responsetoView = new stdClass();
 
 		foreach ($this->response AS $pos => $response) {
@@ -173,7 +173,7 @@ class NOVO_Model extends CI_Model {
 			$responsetoView->$pos = $response;
 		}
 
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] IP ' . $this->input->ip_address() . ' RESULT ' .$model .
+		writeLog('DEBUG', '['.$this->userName.'] IP ' . $this->input->ip_address() . ' RESULT ' .$model .
 			' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
 
 		unset($responsetoView);

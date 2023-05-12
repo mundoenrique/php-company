@@ -22,7 +22,6 @@ class NOVO_Controller extends CI_Controller {
 	protected $method;
 	protected $request;
 	protected $dataResponse;
-	protected $appUserName;
 	protected $greeting;
 	private $ValidateBrowser;
 	public $singleSession;
@@ -30,7 +29,7 @@ class NOVO_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Controller Class Initialized');
+		writeLog('INFO', 'Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
@@ -56,7 +55,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	private function optionsCheck()
 	{
-		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
+		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
 
 		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->customerUri);
@@ -120,17 +119,16 @@ class NOVO_Controller extends CI_Controller {
 				)
 			) : json_decode(utf8_encode($this->input->get_post('request')));
 		} else {
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
-			$this->appUserName = isset($_POST['userName']) ? mb_strtoupper($_POST['userName']) : $this->session->userName;
+			$access = $this->verify_access->accessAuthorization($this->router->fetch_method());
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				log_message('DEBUG', 'NOVO [' . $this->appUserName . '] IP ' . $this->input->ip_address() . ' REQUEST FROM THE VIEW ' . json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+				writeLog('DEBUG', 'REQUEST FROM THE VIEW ' . json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
-				$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
+				$valid = $this->verify_access->validateForm($this->rule, $this->customerUri);
 
 				if ($valid) {
-					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+					$this->request = $this->verify_access->createRequest($this->rule);
 				}
 			}
 
@@ -146,7 +144,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function preloadView($auth)
 	{
-		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
+		writeLog('INFO', 'Controller: preloadView Method Initialized');
 
 		if ($auth) {
 			$this->render->favicon = lang('GEN_FAVICON');
@@ -234,7 +232,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: '.$this->model);
+		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: '.$this->model);
 
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
@@ -248,7 +246,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView = 0, $active = TRUE)
 	{
-		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
+		writeLog('INFO', 'Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
 		$download = FALSE;
@@ -295,7 +293,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function checkBrowser()
 	{
-		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
+		writeLog('INFO', 'Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
@@ -314,14 +312,13 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: '.$module);
+		writeLog('INFO', 'Controller: loadView Method Initialized. Module loaded: '.$module);
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
 		$userMenu->enterpriseUrl = lang('CONF_LINK_ENTERPRISES');
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->logged = $this->session->has_userdata('logged');
-		$this->appUserName = $this->session->userName;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;

@@ -10,7 +10,7 @@ class Novo_Bulk extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Bulk Controller Class Initialized');
+		writeLog('INFO', 'Bulk Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar los lotes pendientes y cargar nuevos lotes
@@ -19,7 +19,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function getPendingBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: getPendingBulk Method Initialized');
+		writeLog('INFO', 'Bulk: getPendingBulk Method Initialized');
 
 		$view = 'getPendingBulk';
 		array_push(
@@ -62,7 +62,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function getDetailBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
+		writeLog('INFO', 'Bulk: getDetailBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
 			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
@@ -84,7 +84,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function confirmBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk: confirmBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
 			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
@@ -114,7 +114,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function authorizeBulkList()
 	{
-		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
+		writeLog('INFO', 'Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
 			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
@@ -157,7 +157,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function calculateServiceOrder()
 	{
-		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
+		writeLog('INFO', 'Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
 			redirect(base_url(lang('CONF_LINK_BULK_AUTH')), 'Location', 302);
@@ -203,7 +203,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnamedRequest()
 	{
-		log_message('INFO', 'NOVO Bulk: unnamedRequest Method Initialized');
+		writeLog('INFO', 'Bulk: unnamedRequest Method Initialized');
 
 		$view = 'unnamedRequest';
 		$branchOffices = 0;
@@ -239,7 +239,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnamedAffiliate()
 	{
-		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
+		writeLog('INFO', 'Bulk: unnamedAffiliate Method Initialized');
 
 		$requestArray = (array)$this->request;
 		$view = 'unnamedAffiliate';
@@ -280,7 +280,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnmamedDetail()
 	{
-		log_message('INFO', 'NOVO Bulk: unnmamedDetail Method Initialized');
+		writeLog('INFO', 'Bulk: unnmamedDetail Method Initialized');
 
 		$view = 'unnmamedDetail';
 		array_push(

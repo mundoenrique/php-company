@@ -9,7 +9,7 @@ Class Novo_Services extends Novo_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Services Controller Class Initialized');
+		writeLog('INFO', 'Services Controller Class Initialized');
 	}
 	/**
 	 * @info Método para las opciones de la cuenta maestra
@@ -18,7 +18,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function transfMasterAccount()
 	{
-		log_message('INFO', 'Novo_Services: transfMasterAccount Method Initialized');
+		writeLog('INFO', 'Services: transfMasterAccount Method Initialized');
 
 		$view = 'transfMasterAccount';
 		array_push(
@@ -68,7 +68,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function cardsInquiry()
 	{
-		log_message('INFO', 'Novo_Services: cardsInquiry Method Initialized');
+		writeLog('INFO', 'Services: cardsInquiry Method Initialized');
 
 		$view = 'cardsInquiry';
 		array_push(
@@ -95,7 +95,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function transactionalLimits()
 	{
-		log_message('INFO', 'Novo_Services: transactionalLimits Method Initialized');
+		writeLog('INFO', 'Services: transactionalLimits Method Initialized');
 
 		$view = 'transactionalLimits';
 		array_push(
@@ -124,7 +124,7 @@ Class Novo_Services extends Novo_Controller {
 
 	public function commercialTwirls()
 	{
-		log_message('INFO', 'Novo_Services: commercialTwirls Method Initialized');
+		writeLog('INFO', 'Services: commercialTwirls Method Initialized');
 
 		$view = 'commercialTwirls';
 		array_push(

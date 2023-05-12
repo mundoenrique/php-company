@@ -12,7 +12,7 @@ class Asset {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Assets Library Class Initialized');
+		writeLog('INFO', 'Assets Library Class Initialized');
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
@@ -25,7 +25,7 @@ class Asset {
 	 */
 	public function initialize($params = [])
 	{
-		log_message('INFO', 'NOVO Asset: initialize method initialized');
+		writeLog('INFO', 'Asset: initialize method initialized');
 
 		foreach($params as $arrayFiles => $file) {
 			isset($this->$arrayFiles) ? $this->$arrayFiles = $file : '';
@@ -37,7 +37,7 @@ class Asset {
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Asset: insertCss method initialized');
+		writeLog('INFO', 'Asset: insertCss method initialized');
 		$file_url = NULL;
 
 
@@ -45,7 +45,7 @@ class Asset {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				log_message('ERROR', 'Archivo requerido '.$fileName.'.css');
+				writeLog('ERROR', 'Archivo requerido '.$fileName.'.css');
 			}
 
 			$file = $this->versionFiles($file, $fileName, '.css');
@@ -60,7 +60,7 @@ class Asset {
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Asset: insertJs method initialized');
+		writeLog('INFO', 'Asset: insertJs method initialized');
 		$file_url = NULL;
 
 		foreach($this->jsFiles as $fileName) {
@@ -77,7 +77,7 @@ class Asset {
 	 */
 	public function insertFile($fileName, $folder = 'images', $customer = FALSE)
 	{
-		log_message('INFO', 'NOVO Asset: insertFile method initialized');
+		writeLog('INFO', 'Asset: insertFile method initialized');
 
 		$customer = $customer ? $customer.'/' : '';
 		$file = assetPath($folder.'/'.$customer.$fileName);

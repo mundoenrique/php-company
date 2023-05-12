@@ -12,7 +12,7 @@ class Create_Menu {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Create_Menu Library Class Initialized');
+		writeLog('INFO', 'Create_Menu Library Class Initialized');
 
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
@@ -25,7 +25,7 @@ class Create_Menu {
 	 */
 	public function mainMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Create_Menu: mainMenu method initialized');
+		writeLog('INFO', 'Create_Menu: mainMenu method initialized');
 
 		switch ($firstLevel) {
 			case 'GESLOT':
@@ -59,7 +59,7 @@ class Create_Menu {
 	 */
 	public function secondaryMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Create_Menu: secondaryMenu method initialized');
+		writeLog('INFO', 'Create_Menu: secondaryMenu method initialized');
 
 		$level = new stdClass();
 		$level->second = [];
@@ -80,7 +80,7 @@ class Create_Menu {
 			$level->second[] = $this->menulang($module->idModulo);
 		}
 
-		log_message('INFO', 'NOVO secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
+		writeLog('INFO', 'secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
 
 		return $level;
 	}
@@ -91,7 +91,7 @@ class Create_Menu {
 	 */
 	public function menulang($subMenu)
 	{
-		log_message('INFO', 'NOVO Create_Menu: menulang method initialized');
+		writeLog('INFO', 'Create_Menu: menulang method initialized');
 
 		$subMenuLang = new stdClass();
 

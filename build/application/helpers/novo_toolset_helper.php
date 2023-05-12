@@ -107,7 +107,7 @@ if (!function_exists('languageLoad')) {
 		$class = lcfirst(str_replace('Novo_', '', $class));
 		$CI->config->set_item('language', 'global');
 
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
+		writeLog('INFO', 'Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
 
 		switch ($call) {
 			case 'generic':

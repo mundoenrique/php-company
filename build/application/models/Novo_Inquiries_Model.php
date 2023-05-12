@@ -10,7 +10,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Inquiries Model Class Initialized');
+		writeLog('INFO', 'Inquiries Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de estados de las ordenes de servicio
@@ -19,7 +19,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ServiceOrderStatus_Inquiries()
 	{
-		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ServiceOrderStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
@@ -67,7 +67,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function callWs_GetServiceOrders_Inquiries($dataRequest)
 	{
 
-		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ServiceOrderStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -179,7 +179,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -234,7 +234,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_BulkDetail_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: BulkDetail Method Initialized');
+		writeLog('INFO', 'Bulk Model: BulkDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = $dataRequest->bulkfunction;
@@ -391,7 +391,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildEmisionRecords_Bulk($emisionRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildEmisionRecords Method Initialized');
 
 		$bulkDetail = [];
 
@@ -443,7 +443,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildCreditRecords_Bulk($creditRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildCreditRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildCreditRecords Method Initialized');
 
 		$bulkDetail = [];
 
@@ -488,7 +488,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildKindergartenRecords_Bulk($gardenRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildKindergartenRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildKindergartenRecords Method Initialized');
 		$bulkDetail = [];
 
 		foreach($emisionRecords AS $key => $records) {
@@ -529,7 +529,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildReplacement_Bulk($replaceRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildreplacement Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildreplacement Method Initialized');
 
 		$detailRecords = [];
 
@@ -566,7 +566,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ExportFiles_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: exportFiles Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -619,7 +619,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 	public function CallWs_PagoOs_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: PagoOS Method Initialized');
+		writeLog('INFO', 'Services Model: PagoOS Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Pagos';
 		$this->dataAccessLog->function = 'Doble Autenticacion';
@@ -652,7 +652,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 	public function CallWs_PagarOS_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: PagarOS Method Initialized');
+		writeLog('INFO', 'Services Model: PagarOS Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Pagos';
 		$this->dataAccessLog->function = 'Pagar Orden de servicio';

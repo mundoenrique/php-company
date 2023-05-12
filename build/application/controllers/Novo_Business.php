@@ -10,7 +10,7 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Controller Class Initialized');
+		writeLog('INFO', 'Business Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar las empresas asociadas al usuario
@@ -19,7 +19,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getEnterprises()
 	{
-		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
+		writeLog('INFO', 'Business: getEnterprises Method Initialized');
 
 		$view = 'getEnterprises';
 		array_push(
@@ -51,7 +51,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getProducts()
 	{
-		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
+		writeLog('INFO', 'Business: getProducts Method Initialized');
 
 		$requestArray = (array)$this->request;
 
@@ -107,7 +107,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getProductDetail()
 	{
-		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
+		writeLog('INFO', 'Business: getProductDetail Method Initialized');
 
 		$requestArray = (array) $this->request;
 
