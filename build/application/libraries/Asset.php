@@ -66,7 +66,7 @@ class Asset {
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/'.$fileName.'.js');
 			$file = $this->versionFiles($file, $fileName, '.js');
-			$file_url .= '<script defer src="'.assetUrl('js/'.$file).'"></script>'.PHP_EOL;
+			$file_url .= '<script type="text/javascript" defer src="'.assetUrl('js/'.$file).'"></script>'.PHP_EOL;
 		}
 
 		return $file_url;
