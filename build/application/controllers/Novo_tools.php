@@ -5,12 +5,12 @@ defined('BASEPATH') OR  exit('No direct script access allowed');
  * @author Luis Molina
  * @date Marz 20Fri, 2020
 */
-class Novo_Settings extends NOVO_Controller {
+class Novo_Tools extends NOVO_Controller {
 
 	public function __construct()
 	{
 		parent :: __construct();
-		writeLog('INFO', 'Settings Controller Class Initialized');
+		writeLog('INFO', 'Tools Controller Class Initialized');
 	}
 
 	/**
@@ -22,7 +22,7 @@ class Novo_Settings extends NOVO_Controller {
 	 */
 	public function options()
 	{
-		writeLog('INFO', 'Settings: options Method Initialized');
+		writeLog('INFO', 'Tools: options Method Initialized');
 
 		$view = 'options';
 
@@ -36,10 +36,10 @@ class Novo_Settings extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"settings/options",
-			"settings/company",
-			"settings/regions",
-			"settings/branches",
+			"tools/options",
+			"tools/company",
+			"tools/regions",
+			"tools/branches",
 			"user/changePassword-core",
 			"user/passValidate"
 		);
@@ -51,8 +51,8 @@ class Novo_Settings extends NOVO_Controller {
 		$enterpriseList = $this->session->enterpriseSelect->list;
 
 		if (lang('CONF_SETTINGS_USER') == 'ON') {
-			$this->load->model('Novo_Settings_Model', 'getUser');
-			$user = $this->getUser->CallWs_GetUser_Settings();
+			$this->load->model('Novo_Tools_Model', 'getUser');
+			$user = $this->getUser->CallWs_GetUser_Tools();
 			$userType = $this->session->userType;
 
 			foreach ($user->data->dataUser AS $index => $render) {
@@ -68,12 +68,12 @@ class Novo_Settings extends NOVO_Controller {
 			$this->render->countEnterpriseList = count($enterpriseList);
 
 			if ($this->render->countEnterpriseList == 1) {
-				foreach((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value){
+				foreach((Object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value){
 					 $valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
 				}
 			}
 
-			foreach ((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
+			foreach ((Object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
 				lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
 			}
 
@@ -92,7 +92,7 @@ class Novo_Settings extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_SETTINGS_TITLE');
 		$this->render->titleIniFile = $title;
 		$this->render->disabled = $disabled;
-		$this->views = ['settings/'.$view];
+		$this->views = ['tools/'.$view];
 		$this->loadView($view);
 	}
 }

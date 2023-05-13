@@ -59,19 +59,19 @@
       </div>
       <div class="flex flex-auto flex-column" style="display:none">
 			<?php if (lang('CONF_SETTINGS_USER') == 'ON'): ?>
-				<?php $this->load->view('/settings/user_content-core') ?>
+				<?php $this->load->view('/tools/user_content-core') ?>
  			<?php endif; ?>
 
 			<?php if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON'): ?>
-				<?php $this->load->view('/settings/company_content-core') ?>
+				<?php $this->load->view('/tools/company_content-core') ?>
 			<?php endif; ?>
 
 			<?php if (lang('CONF_SETTINGS_BRANCHES') == 'ON'): ?>
-				<?php $this->load->view('/settings/branch_content-core') ?>
+				<?php $this->load->view('/tools/branch_content-core') ?>
 			<?php endif; ?>
 
 			<?php if (lang('CONF_SETTINGS_DOWNLOADS') == 'ON'): ?>
-				<?php $this->load->view('/settings/downloads_content-core') ?>
+				<?php $this->load->view('/tools/downloads_content-core') ?>
       <?php endif; ?>
     </div>
   </div>

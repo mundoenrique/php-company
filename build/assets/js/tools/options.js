@@ -52,7 +52,7 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			who = 'Settings';
+			who = 'Tools';
 			where = 'changeEmail';
 			data = getDataForm(form);
 			data.email = $('#currentEmail').val().toLowerCase();
@@ -67,12 +67,12 @@ $(function () {
 		}
 	})
 
-	$.each(lang.SETTINGS_FILES_DOWNLOAD, function( index, header ) {
+	$.each(lang.TOOLS_FILES_DOWNLOAD, function( index, header ) {
 		$.each(header, function( index2, detail ) {
 			if (detail[3] == 'request') {
 				$('a.' + detail[0]).on('click', function () {
 					if ($(this).attr('title') == '') {
-						who = 'Settings';
+						who = 'Tools';
 						where = 'GetFileIni';
 						data = {};
 						callNovoCore(who, where, data, function (response) {

@@ -69,7 +69,7 @@
                   <input type="file" name="fileBranch" id="fileBranch" class="input-file">
                   <label for="fileBranch" class="form-control label-file js-label-file mb-0">
                     <i class="icon icon-upload mr-1 pr-3 right"></i>
-                    <span class="js-file-name h6 regular"><?= lang('SETTINGS_SELECT_BRANCHES_FILE'); ?></span>
+                    <span class="js-file-name h6 regular"><?= lang('TOOLS_SELECT_BRANCHES_FILE'); ?></span>
                   </label>
                   <div class="help-block"></div>
                 </div>

@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author Diego Acosta García
  * @date May 12th, 2020
  */
-class Novo_Settings_Model extends NOVO_Model {
+class Novo_Tools_Model extends NOVO_Model {
 
 	public function __construct()
 	{
 		parent:: __construct();
-		writeLog('INFO', 'Settings Model Class Initialized');
+		writeLog('INFO', 'Tools Model Class Initialized');
 	}
 
 		/**
@@ -20,9 +20,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @modify J. Enrique Peñaloza Piñero
 	 * @date July 28th, 2020
 	 */
-	public function CallWs_GetUser_Settings()
+	public function CallWs_GetUser_Tools()
 	{
-		writeLog('INFO', 'Settings Model: getUser Method Initialized');
+		writeLog('INFO', 'Tools Model: getUser Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Configuracion';
 		$this->dataAccessLog->function = 'usuario';
@@ -70,9 +70,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
 	 */
-	public function CallWs_changeEmail_Settings($dataRequest)
+	public function CallWs_changeEmail_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: ChangeEmail Method Initialized');
+		writeLog('INFO', 'Tools Model: ChangeEmail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'actualizar-usuario';
@@ -117,9 +117,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date May 2nd, 2020
 	 */
-	public function callWS_ListaEmpresas_Settings()
+	public function callWS_ListaEmpresas_Tools()
 	{
-		writeLog('INFO', 'Business Model: getEnterprise Method Initialized');
+		writeLog('INFO', 'Tools Model: ListaEmpresas Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'obtener empresa';
@@ -162,9 +162,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
 	 */
-	public function CallWs_ChangeTelephones_Settings($dataRequest)
+	public function CallWs_ChangeTelephones_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: ChangeTelephones Method Initialized');
+		writeLog('INFO', 'Tools Model: ChangeTelephones Method Initialized');
 
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'cambiar-telefono';
@@ -197,9 +197,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date sept 23, 2021
 	 */
-	public function CallWs_ChangeDataEnterprice_Settings($dataRequest)
+	public function CallWs_ChangeDataEnterprice_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: ChangeDataEnterprice Method Initialized');
+		writeLog('INFO', 'Tools Model: ChangeDataEnterprice Method Initialized');
 
 		$this->dataAccessLog->modulo = 'reportes';
 		$this->dataAccessLog->function = 'updateDataEmpresaPBO';
@@ -232,7 +232,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Jun 07Sun, 2020
 	 */
-	public function CallWs_GetFileIni_Settings($dataRequest)
+	public function CallWs_GetFileIni_Tools($dataRequest)
 	{
 		writeLog('INFO', 'Setting Model: CallWs_GetFileIni Method Initialized');
 
@@ -283,9 +283,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Dec 06th, 2022
 	 */
-	public function CallWs_getContacts_Settings($dataRequest)
+	public function CallWs_getContacts_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: getContacts Method Initialized');
+		writeLog('INFO', 'Tools Model: getContacts Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Buscar contactos empresa';
 		$this->dataAccessLog->function = 'Buscar contacto';
@@ -346,9 +346,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @modified Luis Molina
 	 * @date Jan 05th, 2023
 	 */
-	public function CallWs_addContact_Settings($dataRequest)
+	public function CallWs_addContact_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: AddContact Method Initialized');
+		writeLog('INFO', 'Tools Model: AddContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Agregar contacto empresa';
 		$this->dataAccessLog->function = 'Agregar contacto';
@@ -402,9 +402,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @modified Luis Molina
 	 * @date Dec 07th, 2022
 	 */
-	public function CallWs_updateContact_Settings($dataRequest)
+	public function CallWs_updateContact_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: updateContact Method Initialized');
+		writeLog('INFO', 'Tools Model: updateContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Modificar contacto empresa';
 		$this->dataAccessLog->function = 'Modificar contacto';
@@ -453,9 +453,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @modified Luis Molina
 	 * @date Dec 08th, 2022
 	 */
-	public function CallWs_deleteContact_Settings($dataRequest)
+	public function CallWs_deleteContact_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: deleteContact Method Initialized');
+		writeLog('INFO', 'Tools Model: deleteContact Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Eliminar contacto empresa';
 		$this->dataAccessLog->function = 'Eliminar contacto';
@@ -497,9 +497,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Jun 01th, 2022
 	 */
-	public function CallWs_getBranches_Settings($dataRequest){
+	public function CallWs_getBranches_Tools($dataRequest){
 
-		writeLog('INFO', 'Settings Model: getBranches Method Initialized');
+		writeLog('INFO', 'Tools Model: getBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Búsqueda de sucursales';
@@ -565,9 +565,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date JUn 06th, 2022
 	 */
-	public function CallWs_addBranches_Settings($dataRequest)
+	public function CallWs_addBranches_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: addBranches Method Initialized');
+		writeLog('INFO', 'Tools Model: addBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Agregar Sucursales';
@@ -603,7 +603,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = lang('SETTINGS_BRANCH_ADD');
+				$this->response->msg = lang('TOOLS_BRANCH_ADD');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -618,9 +618,9 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @info Actualizado por Luis Molina
 	 * @date Oct 17th, 2022
 	 */
-	public function CallWs_updateBranches_Settings($dataRequest)
+	public function CallWs_updateBranches_Tools($dataRequest)
 	{
-		writeLog('INFO', 'Settings Model: updateBranches Method Initialized');
+		writeLog('INFO', 'Tools Model: updateBranches Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Sucursales';
 		$this->dataAccessLog->function = 'Actualizar Sucursales';
@@ -657,7 +657,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = lang('SETTINGS_BRANCH_UPDATE');
+				$this->response->msg = lang('TOOLS_BRANCH_UPDATE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 		}
@@ -670,7 +670,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Oct 26th, 2022
 	 */
-	public function CallWs_UploadFileBranches_Settings($dataRequest)
+	public function CallWs_UploadFileBranches_Tools($dataRequest)
 	{
 		writeLog('INFO', 'UploadFileBranches Model: UploadFileBranches Method Initialized');
 
@@ -701,20 +701,20 @@ class Novo_Settings_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->icon =  lang('CONF_ICON_SUCCESS');
-					$this->response->msg = lang('SETTINGS_BRANCH_UPLOAD_FILE');
+					$this->response->msg = lang('TOOLS_BRANCH_UPLOAD_FILE');
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 				case -166:
 				case -167:
 					$this->response->icon =  lang('CONF_ICON_WARNING');
-					$this->response->msg = lang('SETTINGS_BRANCH_NO_LOAD');
+					$this->response->msg = lang('TOOLS_BRANCH_NO_LOAD');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			}
 
 		} else {
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->msg = lang('SETTINGS_BRANCH_FILE_NO_MOVE');
+			$this->response->msg = lang('TOOLS_BRANCH_FILE_NO_MOVE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 

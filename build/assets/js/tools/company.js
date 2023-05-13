@@ -51,7 +51,7 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			who = 'Settings';
+			who = 'Tools';
 			where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
 			data = getDataForm(form);
 			$(this).html(loader);
@@ -72,7 +72,7 @@ $(function () {
 		$('#enterpriseData').hide();
 		$('#sectionConctact').hide();
 
-		$.each( lang.SETTINGS_RENDER_CONTROLLER_VARIABLES, function( key ) {
+		$.each( lang.TOOLS_RENDER_CONTROLLER_VARIABLES, function( key ) {
 			$('#'+ key).val(optionSelect.attr(key));
 		});
 
@@ -163,7 +163,7 @@ function hideSection(){
 function getContacts(value) {
 	table.DataTable().destroy();
 	data = value;
-	who = 'Settings';
+	who = 'Tools';
 	where = 'getContacts';
 
 	callNovoCore(who,where,data, function(response) {
@@ -225,7 +225,7 @@ function getTypeContact(data) {
 };
 
 function getCallNovoCoreContact(data, btn){
-	who = 'Settings';
+	who = 'Tools';
 	where = data.action;
 	callNovoCore(who, where, data, function(response) {
 		btn.btnAction.html(btn.btnText);

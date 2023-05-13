@@ -65,7 +65,7 @@ $(function () {
 		$('#partedSection').fadeIn(700, 'linear');
 		$('#branchLoadSection').hide();
 		$('#fileBranch').val('');
-    $('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE);
+    $('.input-file').next('.js-label-file').find('.js-file-name').html(lang.TOOLS_SELECT_BRANCHES_FILE);
 		$('.has-error').removeClass("has-error");
 		$('.help-block').text('');
 	});
@@ -80,7 +80,7 @@ function getBranches(value) {
 	tableBranches.DataTable().destroy();
 
 	data = value;
-	who = 'Settings';
+	who = 'Tools';
 	where = 'getBranches';
 
 	callNovoCore(who, where, data, function(response) {
@@ -154,7 +154,7 @@ $('#btnBranchUpload').on('click', function(e) {
 		data = {
 			idFiscal : $("option:selected", '#idFiscalList').val(),
 			file: $('#fileBranch')[0].files[0],
-			typeBulkText: lang.SETTINGS_BRANCH_FILE_MASSIVE,
+			typeBulkText: lang.TOOLS_BRANCH_FILE_MASSIVE,
 			branch : 'UploadFileBranches',
 		}
 		getCallNovoCore(data, btn);
@@ -162,7 +162,7 @@ $('#btnBranchUpload').on('click', function(e) {
 });
 
 function getCallNovoCore(data, btn){
-	who = 'Settings';
+	who = 'Tools';
 	where = data.branch;
 	callNovoCore(who, where, data, function(response) {
 		dataResponse = response;
@@ -171,7 +171,7 @@ function getCallNovoCore(data, btn){
 
 		if(dataResponse.code==0){
 			$('#fileBranch').val('');
-			$('.input-file').next('.js-label-file').find('.js-file-name').html(lang.SETTINGS_SELECT_BRANCHES_FILE)
+			$('.input-file').next('.js-label-file').find('.js-file-name').html(lang.TOOLS_SELECT_BRANCHES_FILE)
 			appMessages(dataResponse.title, dataResponse.msg, dataResponse.icon, dataResponse.modalBtn);
 			$('#accept').on('click', function(e) {
 				e.preventDefault();

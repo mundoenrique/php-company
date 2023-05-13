@@ -4,8 +4,8 @@
     <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
     <div class="px-5">
       <div class="container">
-        <?php if (count(lang('SETTINGS_FILES_DOWNLOAD')) > 0): ?>
-        <?php foreach(lang('SETTINGS_FILES_DOWNLOAD') as $title => $detail): ?>
+        <?php if (count(lang('TOOLS_FILES_DOWNLOAD')) > 0): ?>
+        <?php foreach(lang('TOOLS_FILES_DOWNLOAD') as $title => $detail): ?>
         <div class="my-2 tertiary h4 semibold">
           <span><?= $title ?></span>
         </div>
