@@ -1,10 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//SETTINGS
+
 $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
-//SIGNIN
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
-//VALIDATE FORMS
 $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$';

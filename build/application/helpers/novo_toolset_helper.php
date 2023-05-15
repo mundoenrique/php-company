@@ -96,67 +96,6 @@ if (!function_exists('maskString')) {
 	}
 }
 
-if (!function_exists('languageLoad')) {
-	function languageLoad($call, $class) {
-		$CI = &get_instance();
-		$languagesFile = [];
-		$loadLanguages = FALSE;
-		$configLanguage = $CI->config->item('language');
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$customerUri = $call == 'specific' ? $CI->config->item('customer_lang') : '';
-		$class = lcfirst(str_replace('Novo_', '', $class));
-		$CI->config->set_item('language', 'global');
-
-		writeLog('INFO', 'Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
-
-		switch ($call) {
-			case 'generic':
-				$CI->lang->load(['config-core', 'images']);
-			break;
-			case 'specific':
-				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
-
-				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
-					$CI->lang->load('config-core-'.$customerUri,);
-				}
-
-				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
-					$CI->lang->load('images_'.$customerUri);
-				}
-			break;
-		}
-
-		$CI->config->set_item('language', $configLanguage);
-
-		if ($call == 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
-				array_push($languagesFile, 'general');
-				$loadLanguages = TRUE;
-			}
-
-			if (file_exists($pathLang.'validate_lang.php')) {
-				array_push($languagesFile, 'validate');
-				$loadLanguages = TRUE;
-			}
-
-			//eliminar despues de la certificación
-			if (file_exists($pathLang.'config_lang.php')) {
-				array_push($languagesFile, 'config');
-				$loadLanguages = TRUE;
-			}
-		}
-
-		if (file_exists($pathLang.$class.'_lang.php')) {
-			array_push($languagesFile, $class);
-			$loadLanguages = TRUE;
-		}
-
-		if ($loadLanguages) {
-			$CI->lang->load($languagesFile);
-		}
-	}
-}
-
 if (!function_exists('setCurrentPage')) {
 	function setCurrentPage($currentClass, $menu) {
 		$cssClass = '';
@@ -277,22 +216,8 @@ if (! function_exists('currencyFormat')) {
 	}
 }
 
-if (! function_exists('languageCookie')) {
-	function languageCookie($language) {
-		$baseLanguage = [
-			'name' => 'baseLanguage',
-			'value' => $language,
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		set_cookie($baseLanguage);
-
-	}
-}
-//eliminar despues de la certificación
-if (! function_exists('checkTemporalTenant')) {
-	function checkTemporalTenant($customer) {
+if (!function_exists('tenantSameSettings')) {
+	function tenantSameSettings($customer) {
 		$pattern = ['/bog/', '/col/', '/per/', '/usd/', '/ven/'];
 		$replace = ['bdb', 'co', 'pe', 'us', 've'];
 		$customer = preg_replace($pattern, $replace, $customer);

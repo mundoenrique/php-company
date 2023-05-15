@@ -4,7 +4,6 @@ $lang['CONF_VALIDATE_FISCAL_REGISTRY'] = '^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1
 $lang['CONF_FILES_EXTENSION'] = 'txt';
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_TYPE_SERVICE_ORDER'] = '1';
-//LANGUAGE
 $lang['CONF_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("23-04-2023 06:00:00") ? 'ON' : 'OFF';
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_MENU_CIRCLE'] = 'ON';
