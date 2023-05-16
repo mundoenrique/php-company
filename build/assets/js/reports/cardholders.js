@@ -50,7 +50,7 @@ $(function () {
 			"columnDefs": [
 				{
 					"targets": 1,
-					"visible": lang.CONF_CARD_NUMBER_COLUMN == "ON",
+					"visible": lang.SETT_CARD_NUMBER_COLUMN == "ON",
 				},
 			],
 			"language": dataTableLang

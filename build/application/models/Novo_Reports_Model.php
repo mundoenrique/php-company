@@ -187,7 +187,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -202,7 +202,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -30:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -236,7 +236,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -251,19 +251,19 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -30:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -466:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -467:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -298,7 +298,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -314,7 +314,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -350,7 +350,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -365,7 +365,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -423:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -452,7 +452,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -522,7 +522,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS_PEOPLE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -570,7 +570,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -587,28 +587,28 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -30:
 			case -150:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -466:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -467:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -430:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -641,7 +641,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -657,7 +657,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -967,7 +967,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -982,7 +982,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			default:
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		  break;
@@ -1060,7 +1060,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -1075,7 +1075,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			default:
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		  break;
@@ -1666,7 +1666,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -104:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('REPORTS_REQUEST_NO_RESULTS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -1714,7 +1714,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -1782,7 +1782,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -444:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -1796,7 +1796,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->response->data->listStatesAccountsNew = $listStatesAccounts != '' ? array_chunk($listStatesAccounts, lang('CONF_DATATABLE_ARRAY_CHUNK'), true) : '';
+		$this->response->data->listStatesAccountsNew = $listStatesAccounts != '' ? array_chunk($listStatesAccounts, lang('SETT_DATATABLE_ARRAY_CHUNK'), true) : '';
 
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
@@ -1860,7 +1860,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			case -444:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -2034,7 +2034,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -2049,7 +2049,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 			break;
 			default:
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		  break;

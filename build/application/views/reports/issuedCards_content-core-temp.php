@@ -6,16 +6,16 @@
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
         </li> /
         <li class="inline">
-          <a class="tertiary not-pointer" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_REPORTS'); ?></a>
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK'); ?>"><?= lang('GEN_MENU_REPORTS'); ?></a>
         </li>
       </ul>
     </nav>
@@ -30,7 +30,7 @@
       <div class="search-criteria-order flex pb-3 flex-column w-100">
         <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
         <div class="flex my-2 px-5">
-          <form id="issued-cards-form" action="<?= base_url(lang('CONF_LINK_ISSUED_CARDS')); ?>" method="post" class="w-100">
+          <form id="issued-cards-form" action="<?= base_url(lang('SETT_LINK_ISSUED_CARDS')); ?>" method="post" class="w-100">
             <div class="row flex justify-between">
               <div class="form-group col-6 col-lg-4 col-xl-4">
                 <label><?= lang('GEN_ENTERPRISE') ?></label>
@@ -101,7 +101,7 @@
         <div class="flex pb-5 flex-column">
           <span class="line-text mb-2 h4 semibold primary">Resultados</span>
 
-          <form id="download-issuedcards" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
+          <form id="download-issuedcards" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
 
           <div class="center mx-1">
             <div class="flex">

@@ -30,7 +30,7 @@ $(function () {
 		],
 		"autoWidth": false,
     "select": {
-			"style": lang.CONF_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
+			"style": lang.SETT_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
 			"info": false,
 			selector: ':not(td:nth-child(-n+6))'
     },
@@ -80,7 +80,7 @@ $(function () {
       }
 		],
 		"select": {
-      "style": lang.CONF_BULK_SELECT_ALL_AUTH == 'ON' ? 'multi' : 'single',
+      "style": lang.SETT_BULK_SELECT_ALL_AUTH == 'ON' ? 'multi' : 'single',
       "info": false,
       selector: ':not(td:nth-child(-n+6))'
     },
@@ -104,9 +104,9 @@ $(function () {
 		form = $(this).closest('form');
 		btnRemote = $(this);
 
-		if (lang.CONF_REMOTE_AUTH == 'ON' && thisId != 'auth-bulk-btn') {
+		if (lang.SETT_REMOTE_AUTH == 'ON' && thisId != 'auth-bulk-btn') {
 			SignDeleteBulk(form, action, thisId, passwordSignAuht, modalReq);
-		} else if (lang.CONF_REMOTE_AUTH == 'ON') {
+		} else if (lang.SETT_REMOTE_AUTH == 'ON') {
 			if (signAuthBulkValidate(form, action, modalReq)) {
 				remoteAuthArgs.form = form;
 				remoteAuthArgs.action = action;
@@ -159,7 +159,7 @@ $(function () {
 				inputModal = 	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular"> '+textModal+' '+bulkNum+'</span>';
 
-				if (lang.CONF_REMOTE_AUTH == 'OFF') {
+				if (lang.SETT_REMOTE_AUTH == 'OFF') {
 					inputModal+= 		'<div class="input-group">';
 					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
 					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -171,7 +171,7 @@ $(function () {
 				}
 
 				inputModal+=	'</form>';
-				appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
+				appMessages(titleModal, inputModal, lang.SETT_ICON_INFO, modalBtn);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();
 					form = $('#delete-bulk-form');
@@ -214,7 +214,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			bulk: bulkInfo,
 		}
 
-		if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		if (lang.SETT_REMOTE_AUTH == 'OFF') {
 			data.pass = cryptoPass(passwordInput.val().trim());
 		}
 
@@ -296,7 +296,7 @@ function signAuthBulkValidate(currentForm, action, modalReq) {
 			}
 		}
 
-		appMessages(action, lang.BULK_SELECT, lang.CONF_ICON_WARNING, modalBtn);
+		appMessages(action, lang.BULK_SELECT, lang.SETT_ICON_WARNING, modalBtn);
 	}
 
 	return bulkData.length > 0 && currentForm.valid();

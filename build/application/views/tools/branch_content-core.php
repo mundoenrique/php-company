@@ -103,7 +103,7 @@
                   <input id="branchName" name="branchName" type="text" class="form-control" />
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('CONF_BRANCH_FIELD') == 'ON'): ?>
+                <?php if (lang('SETT_BRANCH_FIELD') == 'ON'): ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="zoneName"><?= lang('GEN_ZONE') ?></label>
                   <input id="zoneName" name="zoneName" type="text" class="form-control" />
@@ -112,12 +112,12 @@
                 <?php endif; ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="address1">
-                    <?= lang('CONF_BRANCH_FIELD') == 'ON' ? novoLang(lang('GEN_ADDRESS'), "1") : novoLang(lang('GEN_ADDRESS'), "")  ?>
+                    <?= lang('SETT_BRANCH_FIELD') == 'ON' ? novoLang(lang('GEN_ADDRESS'), "1") : novoLang(lang('GEN_ADDRESS'), "")  ?>
                   </label>
                   <input id="address1" name="address1" type="text" class="form-control" />
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('CONF_BRANCH_FIELD') == 'ON'): ?>
+                <?php if (lang('SETT_BRANCH_FIELD') == 'ON'): ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
                   <input id="address2" name="address2" type="text" class="form-control" />
@@ -144,7 +144,7 @@
                   <select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100"></select>
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('CONF_SETTINGS_DISCTRICT') == 'ON') : ?>
+                <?php if (lang('SETT_SETTINGS_DISCTRICT') == 'ON') : ?>
                 <div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
                   <label for="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
                   <select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100"></select>

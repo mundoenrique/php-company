@@ -8,7 +8,7 @@ var contactList;
 
 $(function () {
 
-	if ((lang.CONF_ENTERPRICE_CONTACT == 'ON') && $('#idEnterpriseList').attr("countEnterpriseList")==1) {
+	if ((lang.SETT_ENTERPRICE_CONTACT == 'ON') && $('#idEnterpriseList').attr("countEnterpriseList")==1) {
 		hideSection();
 		form = $('#enterpriseSettListForm');
 		getContacts(getDataForm(form));
@@ -17,7 +17,7 @@ $(function () {
 		$('#sectionConctact').hide();
 	};
 
-	if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' && $('#idEnterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
+	if ( lang.SETT_SETTINGS_PHONES_UPDATE == 'OFF' && $('#idEnterpriseList>option:selected').attr("countEnterpriseList")==1 ) {
 		enablePhone();
 	};
 
@@ -34,7 +34,7 @@ $(function () {
 		form = $('#enterpriseDataForm');
 		btnText = $(this).text().trim();
 
-		switch (lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE) {
+		switch (lang.SETT_LINK_UPDATE_ADDRESS_ENTERPRICE) {
 			case 'changeTelephones':
 				$("#address").addClass("ignore");
 				$("#billingAddress").addClass("ignore");
@@ -52,7 +52,7 @@ $(function () {
 
 		if (form.valid()) {
 			who = 'Tools';
-			where = lang.CONF_LINK_UPDATE_ADDRESS_ENTERPRICE;
+			where = lang.SETT_LINK_UPDATE_ADDRESS_ENTERPRICE;
 			data = getDataForm(form);
 			$(this).html(loader);
 			insertFormInput(true);
@@ -76,11 +76,11 @@ $(function () {
 			$('#'+ key).val(optionSelect.attr(key));
 		});
 
-		if ( lang.CONF_SETTINGS_PHONES_UPDATE == 'OFF' ) {
+		if ( lang.SETT_SETTINGS_PHONES_UPDATE == 'OFF' ) {
 			enablePhone();
 		};
 
-		if ( lang.CONF_ENTERPRICE_CONTACT == 'ON' ) {
+		if ( lang.SETT_ENTERPRICE_CONTACT == 'ON' ) {
 			form = $('#enterpriseSettListForm');
 			validateForms(form);
 				if (form.valid()) {
@@ -274,7 +274,7 @@ function modalDeleteContact(response) {
 	inputModal += 	'<div class="help-block"></div>';
 	inputModal += '</form>';
 
-	appMessages(response.title, inputModal, lang.CONF_ICON_WARNING, modalBtn);
+	appMessages(response.title, inputModal, lang.SETT_ICON_WARNING, modalBtn);
 
 	$('.delete-contact-button').on('click', function(e) {
 		e.preventDefault();

@@ -26,7 +26,7 @@ $(function() {
 		fiscalNumber = WidgetSelcet.find('option:selected').attr('fiscalNumber');
 		thirdApp = WidgetSelcet.find('option:selected').attr('thirdApp');
 
-		if (formAction == lang.CONF_LINK_PRODUCTS) {
+		if (formAction == lang.SETT_LINK_PRODUCTS) {
 			enterpriseWidgetBtn
 			.prop('disabled', false)
 			.removeAttr('title');

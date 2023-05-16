@@ -78,14 +78,14 @@ class Verify_Access {
 
 		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$linkredirect = $singleSession === 'SignThird'
-			? 'ingresar/'. lang('CONF_LINK_SIGNOUT_END')
-			: lang('CONF_LINK_SIGNIN');
+			? 'ingresar/'. lang('SETT_LINK_SIGNOUT_END')
+			: lang('SETT_LINK_SIGNIN');
 
 		$responseDefect = new stdClass();
-		$responseDefect->code = lang('CONF_DEFAULT_CODE');
+		$responseDefect->code = lang('SETT_DEFAULT_CODE');
 		$responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$responseDefect->msg = lang('GEN_VALIDATION_INPUT');
-		$responseDefect->icon = lang('CONF_ICON_WARNING');
+		$responseDefect->icon = lang('SETT_ICON_WARNING');
 		$responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -140,11 +140,11 @@ class Verify_Access {
 				break;
 			case 'recoverPass':
 			case 'passwordRecovery':
-				$auth = lang('CONF_RECOV_PASS') == 'ON';
+				$auth = lang('SETT_RECOV_PASS') == 'ON';
 				break;
 			case 'recoverAccess':
 			case 'validateOtp':
-				$auth = lang('CONF_RECOV_ACCESS') == 'ON';
+				$auth = lang('SETT_RECOV_ACCESS') == 'ON';
 				break;
 			case 'changeEmail':
 			case 'changeTelephones':
@@ -174,10 +174,10 @@ class Verify_Access {
 				break;
 			case 'benefits':
 			case 'benefitsInf':
-				$auth = lang('CONF_BENEFITS') === 'ON';
+				$auth = lang('SETT_BENEFITS') === 'ON';
 				break;
 			case 'ratesInf':
-				$auth = ($isLogged && lang('CONF_FOOTER_RATES') === 'ON');
+				$auth = ($isLogged && lang('SETT_FOOTER_RATES') === 'ON');
 				break;
 			case 'getProductDetail':
 				$auth = ($isLogged && $enterpriseInf);
@@ -260,11 +260,11 @@ class Verify_Access {
 				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':
-				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') === 'ON');
+				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('SETT_USER_ACTIVITY') === 'ON');
 				break;
 			case 'usersActivity':
 			case 'exportExcelUsersActivity':
-				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') === 'ON');
+				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('SETT_USERS_ACTIVITY') === 'ON');
 				break;
 			case 'statusAccountExcelFile':
 			case 'statusAccountPdfFile':

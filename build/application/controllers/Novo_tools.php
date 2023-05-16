@@ -50,7 +50,7 @@ class Novo_Tools extends NOVO_Controller {
 
 		$enterpriseList = $this->session->enterpriseSelect->list;
 
-		if (lang('CONF_SETTINGS_USER') == 'ON') {
+		if (lang('SETT_SETTINGS_USER') == 'ON') {
 			$this->load->model('Novo_Tools_Model', 'getUser');
 			$user = $this->getUser->CallWs_GetUser_Tools();
 			$userType = $this->session->userType;
@@ -59,11 +59,11 @@ class Novo_Tools extends NOVO_Controller {
 				$this->render->$index = $render;
 			}
 			$this->render->userType = $userType;
-			$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
-			$this->render->addressCompanyUpdate = lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->emailUpdate = lang('SETT_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->addressCompanyUpdate = lang('SETT_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
 		}
 
-		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
+		if (lang('SETT_SETTINGS_ENTERPRISE') == 'ON') {
 			$this->render->enterpriseSettList = $enterpriseList;
 			$this->render->countEnterpriseList = count($enterpriseList);
 
@@ -74,13 +74,13 @@ class Novo_Tools extends NOVO_Controller {
 			}
 
 			foreach ((Object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
-				lang('CONF_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
+				lang('SETT_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
 			}
 
-			$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->phoneUpdate = lang('SETT_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
 		}
 
-		if (lang('CONF_SETTINGS_BRANCHES') == 'ON') {
+		if (lang('SETT_SETTINGS_BRANCHES') == 'ON') {
 			$this->render->enterpriseSettList = $enterpriseList;
 		}
 

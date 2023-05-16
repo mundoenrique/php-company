@@ -48,7 +48,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 			case -7000:
 				$this->response->code = 3;
 				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->data = 'data from service';

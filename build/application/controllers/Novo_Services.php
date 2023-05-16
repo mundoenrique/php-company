@@ -56,7 +56,7 @@ Class Novo_Services extends Novo_Controller {
 
 		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-		$this->render->skipInputPass = lang('CONF_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
+		$this->render->skipInputPass = lang('SETT_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
 		$this->render->showRechargeAccount = $showRechargeAccount;
 		$this->views = ['services/'.$view];
 		$this->loadView($view);

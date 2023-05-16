@@ -27,15 +27,15 @@
 							<span class="icon-lock mr-1 h3 bg-items" aria-hidden="true"></span>
 							<?= lang('LOGIN_BTN') ?>
 						</button>
-						<?php if(lang('CONF_SIGIN_RECOVER_PASS') == 'ON'): ?>
-						<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('CONF_LINK_RECOVER_ACCESS'));?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
+						<?php if(lang('SETT_SIGIN_RECOVER_PASS') == 'ON'): ?>
+						<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('SETT_LINK_RECOVER_ACCESS'));?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
 						<?php endif; ?>
 					</form>
 				</div>
 			</div>
 		</div>
 
-		<?php if(lang('CONF_SIGNIN_IMG') == 'ON'): ?>
+		<?php if(lang('SETT_SIGNIN_IMG') == 'ON'): ?>
 		<div class="col-auto px-0">
 			<div class="h-100">
 				<div class="flex pr-2 pr-lg-0 img-log h-100">
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<?php endif; ?>
-		<?php if (lang('CONF_SIGNIN_WELCOME_MSG') == 'ON') : ?>
+		<?php if (lang('SETT_SIGNIN_WELCOME_MSG') == 'ON') : ?>
 			<div class="col-12 mt-2 center h6">
 				<p><?= lang('USER_WELCOME_MSG') ?></p>
 			</div>

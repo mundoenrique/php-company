@@ -58,7 +58,7 @@ $(function () {
 
 			if (inputDate == 'datepicker_start') {
 				$('#datepicker_end').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);
@@ -176,7 +176,7 @@ $(function () {
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 
-				if (lang.CONF_REMOTE_AUTH == 'OFF') {
+				if (lang.SETT_REMOTE_AUTH == 'OFF') {
 					inputModal+=		'<div class="input-group">';
 					inputModal+=			'<input id="password" class="form-control pwd-input pwd" name="password" type="password" ';
 					inputModal+= 				'autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
@@ -188,7 +188,7 @@ $(function () {
 				}
 
 				inputModal+= 	'</form>';
-				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, modalBtn);
+				appMessages('Anular orden de servicio', inputModal, lang.SETT_ICON_INFO, modalBtn);
 				deleteBulk(oldID, inputSelected);
 
 				$('#cancel').on('click', function (e) {
@@ -268,7 +268,7 @@ function format(bulk) {
 		body+=	'<tr>';
 		body+= 		'<td>';
 		body+=			'<a class="btn-link big-modal this-bulk">'+value.bulkNumber+'</a>';
-		body+= 			'<form class="form-group" action="'+ baseURL + lang.CONF_LINK_INQUIRY_BULK_DETAIL +'" method="post">';
+		body+= 			'<form class="form-group" action="'+ baseURL + lang.SETT_LINK_INQUIRY_BULK_DETAIL +'" method="post">';
 		body+= 				'<input type="hidden" name="bulkId" value="'+value.bulkId+'">';
 		body+= 				'<input type="hidden" name="orderList" value="'+orderList+'">';
 		body+= 				'<input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">';
@@ -282,7 +282,7 @@ function format(bulk) {
 		body+= 		'<td>'+value.bulkCommisAmount+'</td>';
 		body+= 		'<td>'+value.bulkTotalAmount+'</td>';
 		body+=		'</tr>';
-		if (lang.CONF_SERVICEORDERS_ICON == 'ON' && value.bulkObservation != '') {
+		if (lang.SETT_SERVICEORDERS_ICON == 'ON' && value.bulkObservation != '') {
 			body+=		'<tr>';
 			body+=			'<td colspan="8">';
 			body+=				'<span>'+value.bulkObservation+'</span>';
@@ -327,7 +327,7 @@ function deleteBulk(oldID, inputSelected) {
 				OrderNumber: inputSelected
 			}
 
-			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+			if (lang.SETT_REMOTE_AUTH == 'OFF') {
 				data.pass = cryptoPass($('.pwd').val());
 			}
 

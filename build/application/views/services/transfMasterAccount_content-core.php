@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_SERVICES'); ?></a></li>
       </ul>
     </nav>
@@ -26,7 +26,7 @@
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
             <div class="row">
-              <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
+              <?php if (lang('SETT_SELECT_TYPE') == 'ON'): ?>
               <div class="form-group col-3">
                 <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
                 <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
@@ -48,7 +48,7 @@
               <?php endif; ?>
               <div class="form-group col-3">
                 <label for="transferAmount"><?= lang('GEN_TABLE_AMOUNT'); ?></label>
-                <input id="transferAmount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('CONF_DECIMAL').'00'; ?>"
+                <input id="transferAmount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('SETT_DECIMAL').'00'; ?>"
                   name="transferAmount" autocomplete="off" disabled>
                 <div class="help-block"></div>
               </div>
@@ -58,7 +58,7 @@
                   disabled>
                 <div class="help-block"></div>
               </div>
-              <?php if (lang('CONF_INPUT_PASS') == 'ON') : ?>
+              <?php if (lang('SETT_INPUT_PASS') == 'ON') : ?>
               <div class="col-3 form-group mt-3 ml-auto">
                 <div class="input-group">
                   <input id="passwordTranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
@@ -123,7 +123,7 @@
                 <label><?= lang('SERVICES_AVAILABLE_BALANCE'); ?></label>
                 <span id="balance-aviable" class="light block py-0"></span>
               </div>
-              <?php if (lang('CONF_SECTION_COMMISSION') == 'ON'): ?>
+              <?php if (lang('SETT_SECTION_COMMISSION') == 'ON'): ?>
               <div class="col-4">
                 <label><?= lang('SERVICES_COMMISSION_TRANS'); ?></label>
                 <span id="cost-trans" class="light text block py-0"></span>
@@ -133,7 +133,7 @@
                 <span id="cost-inquiry" class="light text block py-0"></span>
               </div>
               <?php endif; ?>
-              <?php if (lang('CONF_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
+              <?php if (lang('SETT_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
               <div class="col-4">
                 <label><?= lang('SERVICES_BALANCE_ACC_CONCENTRATOR'); ?></label>
                 <span id="balance-acc-concentrator" class="light text form-control py-0"></span>
@@ -159,7 +159,7 @@
             <form id="password-table">
               <div class="flex row mt-3 mb-2 mx-2 justify-end">
                 <div class="col-3 col-lg-3 col-xl-3 form-group">
-                  <?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
+                  <?php if (lang('SETT_REMOTE_AUTH') == 'OFF'): ?>
                   <div class="input-group">
                     <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                       placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">

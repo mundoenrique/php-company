@@ -6,7 +6,7 @@
       <div class="flex mx-2">
         <nav class="nav-config">
           <ul class="nav-config-box">
-            <?php if (lang('CONF_SETTINGS_USER') == 'ON' ): ?>
+            <?php if (lang('SETT_SETTINGS_USER') == 'ON' ): ?>
             <li id="user" class="nav-item-config">
               <a href="javascript:">
                 <i class="icon-config icon-user-config"></i>
@@ -18,7 +18,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON'): ?>
+            <?php if (lang('SETT_SETTINGS_ENTERPRISE') == 'ON'): ?>
             <li id="enterprise" class="nav-item-config">
               <a href="javascript:">
                 <i class="icon-config icon-brief-config"></i>
@@ -30,7 +30,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if (lang('CONF_SETTINGS_BRANCHES') == 'ON'): ?>
+            <?php if (lang('SETT_SETTINGS_BRANCHES') == 'ON'): ?>
             <li id="branch" class="nav-item-config">
               <a href="javascript:">
                 <i class="icon-config icon-build-config"></i>
@@ -42,7 +42,7 @@
               </a>
             </li>
             <?php endif; ?>
-            <?php if (lang('CONF_SETTINGS_DOWNLOADS') == 'ON'): ?>
+            <?php if (lang('SETT_SETTINGS_DOWNLOADS') == 'ON'): ?>
             <li id="downloads" class="nav-item-config">
               <a href="javascript:">
                 <i class="icon-config icon-downl-config"></i>
@@ -58,19 +58,19 @@
         </nav>
       </div>
       <div class="flex flex-auto flex-column" style="display:none">
-			<?php if (lang('CONF_SETTINGS_USER') == 'ON'): ?>
+			<?php if (lang('SETT_SETTINGS_USER') == 'ON'): ?>
 				<?php $this->load->view('/tools/user_content-core') ?>
  			<?php endif; ?>
 
-			<?php if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON'): ?>
+			<?php if (lang('SETT_SETTINGS_ENTERPRISE') == 'ON'): ?>
 				<?php $this->load->view('/tools/company_content-core') ?>
 			<?php endif; ?>
 
-			<?php if (lang('CONF_SETTINGS_BRANCHES') == 'ON'): ?>
+			<?php if (lang('SETT_SETTINGS_BRANCHES') == 'ON'): ?>
 				<?php $this->load->view('/tools/branch_content-core') ?>
 			<?php endif; ?>
 
-			<?php if (lang('CONF_SETTINGS_DOWNLOADS') == 'ON'): ?>
+			<?php if (lang('SETT_SETTINGS_DOWNLOADS') == 'ON'): ?>
 				<?php $this->load->view('/tools/downloads_content-core') ?>
       <?php endif; ?>
     </div>

@@ -83,14 +83,14 @@ class NOVO_Controller extends CI_Controller {
 				clientUrlValidate($this->session->customerUri);
 				$urlRedirect = str_replace(
 					$this->customerUri.'/', $this->session->customerUri.'/',
-					base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START'))
+					base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START'))
 				);
 				redirect($urlRedirect, 'Location', 302);
 				exit;
 			}
 		}
 
-		if ($this->controllerMethod !== lang('CONF_LINK_SUGGESTION')) {
+		if ($this->controllerMethod !== lang('SETT_LINK_SUGGESTION')) {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
@@ -118,7 +118,7 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($this->input->is_ajax_request()) {
-			$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
+			$this->dataRequest = lang('SETT_CYPHER_DATA') == 'ON' ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
 						$this->cryptography->decrypt(
@@ -161,7 +161,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->customerProgram = $this->customerProgram;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
+			$validateRecaptcha = in_array($this->router->fetch_method(), lang('SETT_VALIDATE_CAPTCHA'));
 
 			$this->render->widget =  FALSE;
 			$this->render->prefix = '';
@@ -169,7 +169,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 			$this->render->callServer = $this->render->callModal;
 
-			if (lang('CONF_VIEW_SUFFIX') === '-core') {
+			if (lang('SETT_VIEW_SUFFIX') === '-core') {
 				$this->includeAssets->cssFiles = [
 					"$this->customerStyle/root-$this->customerStyle",
 					"root-general",
@@ -208,7 +208,7 @@ class NOVO_Controller extends CI_Controller {
 					"sessionControl"
 				);
 
-				if (lang('CONF_REMOTE_AUTH') == 'ON') {
+				if (lang('SETT_REMOTE_AUTH') == 'ON') {
 					array_push(
 						$this->includeAssets->jsFiles,
 						"remote_connect/$this->customerUri-remoteConnect"
@@ -284,7 +284,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
 				$this->render->widget->countProducts = $this->session->has_userdata('products');
-				$this->render->widget->actionForm = lang('CONF_LINK_PRODUCT_DETAIL');
+				$this->render->widget->actionForm = lang('SETT_LINK_PRODUCT_DETAIL');
 			}
 		}
 
@@ -310,7 +310,7 @@ class NOVO_Controller extends CI_Controller {
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if (!$valid) {
-			redirect(base_url(lang('CONF_LINK_SUGGESTION')), 'location', 302);
+			redirect(base_url(lang('SETT_LINK_SUGGESTION')), 'location', 302);
 			exit;
 		}
 
@@ -327,7 +327,7 @@ class NOVO_Controller extends CI_Controller {
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
-		$userMenu->enterpriseUrl = lang('CONF_LINK_ENTERPRISES');
+		$userMenu->enterpriseUrl = lang('SETT_LINK_ENTERPRISES');
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->logged = $this->session->has_userdata('logged');
 		$this->render->fullName = $this->session->fullName;
@@ -335,10 +335,10 @@ class NOVO_Controller extends CI_Controller {
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->session->has_userdata('logged') || $this->session->flashdata('changePassword'))
-			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
+			? lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START') : lang('SETT_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content'.lang('CONF_VIEW_SUFFIX'), $this->render);
+		$this->load->view('master_content'.lang('SETT_VIEW_SUFFIX'), $this->render);
 	}
 }

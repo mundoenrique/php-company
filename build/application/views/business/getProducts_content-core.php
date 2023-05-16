@@ -4,7 +4,7 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?> /</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?> /</a></li>
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_PRODUCTS') ?></a></li>
 			</ul>
 		</nav>
@@ -67,7 +67,7 @@
 					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
 						<?= lang('GEN_BTN_SELECT') ?>
 					</button>
-					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>" method="POST">
+					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>" method="POST">
 						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
 						<input type="hidden" name="productImg" value="<?= $products->productImg; ?>">
 						<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">

@@ -47,19 +47,19 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		if (lang('CONF_MAINTENANCE') == 'ON') {
-			$this->isResponseRc = lang('CONF_MAINTENANCE_RC');
+		if (lang('SETT_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = lang('SETT_MAINTENANCE_RC');
 		}	elseif (isset($dataRequest->otpCode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
 			$this->isResponseRc = ACTIVE_RECAPTCHA && !isset($dataRequest->skipCaptcha) ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 			if ($this->isResponseRc === 0) {
-				$response = $this->sendToService('callWs_SignIn');
+				$response = $this->sendToWebServices('callWs_SignIn');
 			}
 		}
 
-		if(lang('CONF_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('SETT_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -85,7 +85,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
-					'passWord' => lang('CONF_REMOTE_AUTH') == 'ON' ? $this->dataRequest->password : FALSE,
+					'passWord' => lang('SETT_REMOTE_AUTH') == 'ON' ? $this->dataRequest->password : FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -103,7 +103,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged_in' => TRUE
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
+				$this->response->data = base_url(lang('SETT_LINK_ENTERPRISES'));
 				$this->response->modal = TRUE;
 			break;
 			case -2:
@@ -124,38 +124,38 @@ class Novo_User_Model extends NOVO_Model {
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('CONF_LINK_TERMS'));
+				$this->response->data = base_url(lang('SETT_LINK_TERMS'));
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 				if($this->isResponseRc === -185) {
-					$this->response->data = base_url(lang('CONF_LINK_CHANGE_PASS'));
+					$this->response->data = base_url(lang('SETT_LINK_CHANGE_PASS'));
 					$this->session->set_flashdata('changePassword', 'expiredPass');
 				}
 			break;
 			case -1:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
-				$this->response->className = lang('CONF_VALID_INVALID_USER');
-				$this->response->position = lang('CONF_VALID_POSITION');
+				$this->response->className = lang('SETT_VALID_INVALID_USER');
+				$this->response->position = lang('SETT_VALID_POSITION');
 			break;
 			case -263:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
-				$this->response->className = lang('CONF_VALID_INVALID_USER');
-				$this->response->position = lang('CONF_VALID_POSITION');
+				$this->response->className = lang('SETT_VALID_INVALID_USER');
+				$this->response->position = lang('SETT_VALID_POSITION');
 			break;
 			case -8:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_SUSPENDED');
-				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
-				$this->response->position = lang('CONF_VALID_POSITION');
+				$this->response->className = lang('SETT_VALID_INACTIVE_USER');
+				$this->response->position = lang('SETT_VALID_POSITION');
 			break;
 			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_BLOCKED');
-				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
-				$this->response->position = lang('CONF_VALID_POSITION');
+				$this->response->className = lang('SETT_VALID_INACTIVE_USER');
+				$this->response->position = lang('SETT_VALID_POSITION');
 			break;
 			case -424:
 				$this->response->code = 2;
@@ -176,12 +176,12 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			break;
 			case -229:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('USER_SIGNIN_OLD_APP');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -262:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = novoLang(lang('USER_SIGNIN_NO_MIGRED'), $dataRequest->userName);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -204,7 +204,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 9997:
 				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -212,7 +212,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 9998:
 				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('USER_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -235,7 +235,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
 		$this->dataAccessLog->userName = $this->customer;
 
-		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
+		$this->dataRequest->idOperation = lang('SETT_SINGLE_SIGN_ON');
 		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
 
 		switch ($this->customer) {
@@ -257,7 +257,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_SingleSignon');
 
-		if(lang('CONF_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('SETT_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -300,7 +300,7 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
-				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
+				$this->response->data = base_url(lang('SETT_LINK_ENTERPRISES'));
 			break;
 			case -28:
 				$userData = [
@@ -312,10 +312,10 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('GEN_SESSION_DUPLICATE'));
-				$this->response->data = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END'));
+				$this->response->data = base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END'));
 			break;
 			default:
-				$this->response->data = base_url('ingresar/'.lang('CONF_LINK_SIGNOUT_END'));
+				$this->response->data = base_url('ingresar/'.lang('SETT_LINK_SIGNOUT_END'));
 			break;
 		}
 
@@ -353,9 +353,9 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = novoLang(lang('GEN_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 			case -6:
@@ -383,7 +383,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->icon = lang('SETT_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -431,7 +431,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -100:
@@ -445,7 +445,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->icon = lang('SETT_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -495,8 +495,8 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNIN');
 			break;
 			case -286:
 				$map = 1;
@@ -516,7 +516,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->icon = lang('SETT_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -557,9 +557,9 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('GEN_PASSWORD_LOGIN');
 				$this->response->msg = novoLang(lang('GEN_PASSWORD_CHANGED'), $goLogin);
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SIGNIN');
+				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = $this->session->has_userdata('logged') ? 'destroy' :  'redirect';
 			break;
 			case -4:
@@ -578,7 +578,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -815,13 +815,13 @@ class Novo_User_Model extends NOVO_Model {
 		switch ($this->isResponseRc)   {
 			case 0:
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
-				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('GEN_SUCCESSFULL_UPDATE_PERMISSIONS'), $user);
 
 				if ($this->userName == $user) {
 					$this->response->modalBtn['btn1']['action'] = 'redirect';
 				} else {
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USERS_PERMISSIONS');
+					$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_USERS_PERMISSIONS');
 				}
 				break;
 		}
@@ -864,7 +864,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 4;
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
-				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('GEN_SUCCESSFULL_ENABLE_USER'), $dataRequest->user);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
@@ -891,14 +891,14 @@ class Novo_User_Model extends NOVO_Model {
 
 		writeLog('DEBUG', 'RESPONSE: recaptcha, Score: ' . $result["score"] . ', Hostname: ' . $result["hostname"]);
 
-		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+		$resultRecaptcha = $result["score"] <= lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 
 		if ($resultRecaptcha == 9999) {
 			$this->response->code = 4;
 			$this->response->title = lang('GEN_SYSTEM_NAME');
-			$this->response->icon = lang('CONF_ICON_DANGER');
+			$this->response->icon = lang('SETT_ICON_DANGER');
 			$this->response->msg = lang('GEN_RECAPTCHA_VALIDATION_FAILED');
-			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
+			$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNIN');
 			$this->response->modalBtn['btn1']['action'] = 'redirect';
 		}
 

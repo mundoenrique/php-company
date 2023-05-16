@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS') ?></a></li>
       </ul>
     </nav>
@@ -49,7 +49,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>
@@ -70,7 +70,7 @@
             <div class="flex row mt-3 mb-2 mx-2 justify-end">
               <?php if($authBulk && $authorizeAttr->sign): ?>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
-                <?php if(lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
+                <?php if(lang('SETT_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
@@ -103,7 +103,7 @@
       <?php endif; ?>
       <div class="flex pb-5 flex-column">
         <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING_AUTH'); ?></span>
-				<?php if(lang('CONF_IMAGE_CLOCK') == 'ON'): ?>
+				<?php if(lang('SETT_IMAGE_CLOCK') == 'ON'): ?>
 				<div class="row mx-1 mb-3">
 					<div class="col-6 my-auto">
 						<h5><?= lang('BULK_IMPORTANT'); ?></h5>
@@ -142,7 +142,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>
@@ -166,18 +166,18 @@
             <div class="flex row mt-3 mb-2 mx-2 justify-end">
               <?php if($authBulk && $authorizeAttr->auth): ?>
               <div class="col-4 col-lg-3 h6 regular form-group">
-                <?php if(lang('CONF_BULK_AUTHORIZE') == 'ON'): ?>
+                <?php if(lang('SETT_BULK_AUTHORIZE') == 'ON'): ?>
                 <select id="type-order" name="type-order" class="select-box custom-select h6">
                   <option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
                   <option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
                 </select>
                 <?php else: ?>
-                <input type="hidden" id="type-order" name="type-order" value="<?= lang('CONF_BULK_TYPE_SERVICE_ORDER'); ?>">
+                <input type="hidden" id="type-order" name="type-order" value="<?= lang('SETT_BULK_TYPE_SERVICE_ORDER'); ?>">
                 <?php endif; ?>
                 <div class="help-block"></div>
               </div>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
-                <?php if(lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
+                <?php if(lang('SETT_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">

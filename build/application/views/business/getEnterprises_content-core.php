@@ -60,7 +60,7 @@
 				<span class="product-pb truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
 			</div>
 		</div>
-		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>" method="POST">
+		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>" method="POST">
 			<input type="hidden" name="enterpriseCode" value="<?= $enterpriseaAttr->accodcia; ?>">
 			<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
 			<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">

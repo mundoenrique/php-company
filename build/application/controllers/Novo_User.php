@@ -24,7 +24,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signIn';
 
 		if($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
 			exit();
 		}
 
@@ -80,7 +80,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->form = $this->request;
 		}
 
-		if($sessionId == lang('CONF_LINK_SIGNOUT_END')) {
+		if($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
@@ -174,7 +174,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -221,9 +221,9 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == lang('CONF_LINK_SIGNOUT_END') || $thirdPartySession) {
+		if($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
+			$this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -231,7 +231,7 @@ class Novo_User extends NOVO_Controller {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
-			if($redirect == lang('CONF_LINK_SIGNOUT_START')) {
+			if($redirect == lang('SETT_LINK_SIGNOUT_START')) {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
 			}
 
@@ -242,7 +242,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -259,7 +259,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -474,7 +474,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -517,7 +517,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'browsers';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 

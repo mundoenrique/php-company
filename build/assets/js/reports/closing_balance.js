@@ -147,27 +147,27 @@ function closingBudgets(dataForm) {
 			{
 				"targets": 0,
 				"className": "tarjeta",
-				"visible": lang.CONF_CARD_COLUMN == "ON"
+				"visible": lang.SETT_CARD_COLUMN == "ON"
 			},
 			{
 				"targets": 1,
 				"className": "nombre",
-				"visible": lang.CONF_NAME_COLUMN == "ON"
+				"visible": lang.SETT_NAME_COLUMN == "ON"
 			},
 			{
 				"targets": 2,
 				"className": "idExtPer",
-				"visible": lang.CONF_ID_COLUMN == "ON"
+				"visible": lang.SETT_ID_COLUMN == "ON"
 			},
 			{
 				"targets": 3,
 				"className": "saldo",
-				"visible": lang.CONF_BALANCE_COLUMN == "ON"
+				"visible": lang.SETT_BALANCE_COLUMN == "ON"
 			},
 			{
 				"targets": 4,
 				"className": "fechaUltAct",
-				"visible": lang.CONF_LAST_UPDATE_COLUMN == "ON"
+				"visible": lang.SETT_LAST_UPDATE_COLUMN == "ON"
 			}
 		],
 		"ajax": {
@@ -177,7 +177,7 @@ function closingBudgets(dataForm) {
 			cache: false,
 			data: function (req) {
 				data = req
-				if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
+				if (lang.SETT_NIT_INPUT_BOOL == 'ON' ){
 					data.idExtPer = $('#Nit').val();
 				}else{
 					data.idExtPer = '';
@@ -206,7 +206,7 @@ function closingBudgets(dataForm) {
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
-				var codeDefaul = parseInt(lang.CONF_DEFAULT_CODE);
+				var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
 					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);

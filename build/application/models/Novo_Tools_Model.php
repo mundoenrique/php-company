@@ -59,7 +59,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -96,7 +96,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_EMAIL_CHANGED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -135,7 +135,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_EMAIL_CHANGED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
 			break;
@@ -151,7 +151,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -183,9 +183,9 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_PHONE_CHANGED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_ENTERPRISES');
+				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_ENTERPRISES');
 			break;
 		}
 
@@ -218,9 +218,9 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_ADDRESS_ENTERPRICE_CHANGED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_ENTERPRISES');
+				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_ENTERPRISES');
 			break;
 		}
 
@@ -268,9 +268,9 @@ class Novo_Tools_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SETTING');
+				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_SETTING');
 			break;
 		}
 
@@ -377,17 +377,17 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_ADD_CONTACT_SUCCESS');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -163:
 				$this->response->msg = lang('GEN_EXIST_CONTACT');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -433,12 +433,12 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_UPDATE_CONTACT_SUCCESS');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -479,12 +479,12 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_DELETE_CONTACT_SUCCESS');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -602,7 +602,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = lang('TOOLS_BRANCH_ADD');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
@@ -645,7 +645,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->pass ?: md5($password);
 		}
 
@@ -656,7 +656,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = lang('TOOLS_BRANCH_UPDATE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
@@ -700,20 +700,20 @@ class Novo_Tools_Model extends NOVO_Model {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->icon =  lang('CONF_ICON_SUCCESS');
+					$this->response->icon =  lang('SETT_ICON_SUCCESS');
 					$this->response->msg = lang('TOOLS_BRANCH_UPLOAD_FILE');
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 				case -166:
 				case -167:
-					$this->response->icon =  lang('CONF_ICON_WARNING');
+					$this->response->icon =  lang('SETT_ICON_WARNING');
 					$this->response->msg = lang('TOOLS_BRANCH_NO_LOAD');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			}
 
 		} else {
-			$this->response->icon = lang('CONF_ICON_WARNING');
+			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->msg = lang('TOOLS_BRANCH_FILE_NO_MOVE');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}

@@ -64,7 +64,7 @@
                 <div class="help-block"></div>
               </div>
             </div>
-            <?php if (lang('CONF_SETTINGS_TELEPHONES') == 'ON'): ?>
+            <?php if (lang('SETT_SETTINGS_TELEPHONES') == 'ON'): ?>
             <div class="row">
               <div id='divPhone1' class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                 <label for="phone1"><?= novoLang(lang('GEN_TELEPHONE'), "1") ?></label>
@@ -84,7 +84,7 @@
                 <div class="help-block"></div>
               </div>
             </div>
-            <?php if (lang('CONF_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'ON' || lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
+            <?php if (lang('SETT_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'ON' || lang('SETT_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
             <div class="row">
               <div class="col-6 flex justify-end">
                 <button id="updateEnterpriceBtn" class="btn btn-primary btn-small btn-loading">
@@ -99,7 +99,7 @@
       </div>
     </div>
   </div>
-  <?php if (lang('CONF_ENTERPRICE_CONTACT') == 'ON'): ?>
+  <?php if (lang('SETT_ENTERPRICE_CONTACT') == 'ON'): ?>
   <div id="sectionConctact">
     <div class="flex flex-auto flex-column">
       <div class="flex flex-column mx-4 mb-5">

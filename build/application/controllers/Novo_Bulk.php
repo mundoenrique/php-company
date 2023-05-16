@@ -41,7 +41,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk($this->request);
 		$this->render->typesLot = $typesLot->data->typesLot;
 
-		if(lang('CONF_BULK_BRANCHOFFICE') == 'ON') {
+		if(lang('SETT_BULK_BRANCHOFFICE') == 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$this->request->newGet = $typesLot->code;
@@ -49,7 +49,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 
-		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('CONF_BULK_LOAD') == 'ON';
+		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('SETT_BULK_LOAD') == 'ON';
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
@@ -65,7 +65,7 @@ class Novo_Bulk extends NOVO_Controller {
 		writeLog('INFO', 'Bulk: getDetailBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		}
 
@@ -87,7 +87,7 @@ class Novo_Bulk extends NOVO_Controller {
 		writeLog('INFO', 'Bulk: confirmBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		}
 
@@ -117,7 +117,7 @@ class Novo_Bulk extends NOVO_Controller {
 		writeLog('INFO', 'Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		} */
 
@@ -142,7 +142,7 @@ class Novo_Bulk extends NOVO_Controller {
 		}
 
 		$this->responseAttr($responseList);
-		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('CONF_BULK_AUTH') == 'ON';
+		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('SETT_BULK_AUTH') == 'ON';
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
@@ -160,7 +160,7 @@ class Novo_Bulk extends NOVO_Controller {
 		writeLog('INFO', 'Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
-			redirect(base_url(lang('CONF_LINK_BULK_AUTH')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_BULK_AUTH')), 'Location', 302);
 			exit;
 		}
 
@@ -208,7 +208,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$view = 'unnamedRequest';
 		$branchOffices = 0;
 
-		if(lang('CONF_UNNA_BRANCHOFFICE') == 'ON') {
+		if(lang('SETT_UNNA_BRANCHOFFICE') == 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
@@ -228,7 +228,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_MENU_UNNAMED_REQUEST');
 		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
 		$this->render->maxCards = $this->session->productInf->maxCards;
-		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') == 'ON' ? '' : 'readonly';
+		$this->render->editable = lang('SETT_UNNA_EXPIRED_DATE') == 'ON' ? '' : 'readonly';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}

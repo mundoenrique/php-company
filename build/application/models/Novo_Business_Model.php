@@ -75,19 +75,19 @@ class Novo_Business_Model extends NOVO_Model {
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('GEN_SINGLE_SIGNON'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('GEN_NO_PERMISSIONS'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('BUSINESS_ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 			default:
@@ -162,7 +162,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$branch = [];
 
 					if($select) {
-						$text = ( lang('CONF_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
+						$text = ( lang('SETT_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($text));
 						$branchOffice[] = (object) $branch;
@@ -249,19 +249,19 @@ class Novo_Business_Model extends NOVO_Model {
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('GEN_SINGLE_SIGNON'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('GEN_NO_PERMISSIONS'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('BUSINESS_ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
 			break;
 		}
@@ -390,7 +390,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->code = 3;
 					$this->response->title = lang('GEN_PRODUCTS_DETAIL_TITLE');
 					$this->response->msg = lang('GEN_UNCONFIGURED_PRODUCT');
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
+					$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_PRODUCTS');
 				}
 
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -423,12 +423,12 @@ class Novo_Business_Model extends NOVO_Model {
 			case -38:
 				$this->response->code = 3;
 				$this->response->msg = lang('BUSINESS_NO_PRODUCT_INFO');
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_PRODUCTS');
 			break;
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('GEN_NO_ACCESS'), $this->userName);
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_PRODUCTS');
 			break;
 		}
 

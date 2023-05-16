@@ -191,9 +191,9 @@ if (!function_exists('convertDateMDY')) {
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
 		$CI = &get_instance();
-		$linkredirect = $CI->session->has_userdata('productInf') ? lang('CONF_LINK_PRODUCT_DETAIL') : lang('CONF_LINK_ENTERPRISES');
-		$linkredirect = !$CI->session->has_userdata('logged') ? lang('CONF_LINK_SIGNIN') : $linkredirect;
-		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END') : $linkredirect;
+		$linkredirect = $CI->session->has_userdata('productInf') ? lang('SETT_LINK_PRODUCT_DETAIL') : lang('SETT_LINK_ENTERPRISES');
+		$linkredirect = !$CI->session->has_userdata('logged') ? lang('SETT_LINK_SIGNIN') : $linkredirect;
+		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/'.lang('SETT_LINK_SIGNOUT_END') : $linkredirect;
 
 		return $linkredirect;
 	}

@@ -67,7 +67,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $dataRequest;
 				$this->responseFail_DownloadFiles($response);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_BULK_UNNAMED_DETAIL')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_BULK_UNNAMED_DETAIL')), 'Location', 302);
 				exit;
 		}
 
@@ -115,7 +115,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $request;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')), 'Location', 302);
 				exit;
 		}
 
@@ -163,7 +163,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_STATUS_BULK')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_STATUS_BULK')), 'Location', 302);
 				exit;
 		}
 
@@ -215,7 +215,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_RECHARGE_MADE')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_RECHARGE_MADE')), 'Location', 302);
 				exit;
 		}
 
@@ -255,7 +255,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_ISSUED_CARDS')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_ISSUED_CARDS')), 'Location', 302);
 				exit;
 		}
 
@@ -274,7 +274,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->response->code =  3;
 		$this->response->title = lang('GEN_DOWNLOAD_FILE');
 		$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-		$this->response->icon =  lang('CONF_ICON_WARNING');
+		$this->response->icon =  lang('SETT_ICON_WARNING');
 		$this->response->download =  TRUE;
 		$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 		$this->response->modalBtn['btn1']['action'] = 'destroy';

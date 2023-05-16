@@ -22,7 +22,6 @@ class Tool_Browser {
 	{
 		writeLog('INFO', 'Tool_Browser: validBrowser Method Initialized');
 
-		$this->CI->load->library('user_agent');
 		$valid = FALSE;
 		$platform = 'Unidentified';
 		$browsersIn = FALSE;
@@ -42,7 +41,7 @@ class Tool_Browser {
 			$version = floatval($this->CI->agent->version());
 
 			if(array_key_exists($browser, $validBrowser)) {
-				if(lang('CONF_SUPPORT_IE') == 'ON') {
+				if(lang('SETT_SUPPORT_IE') == 'ON') {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 

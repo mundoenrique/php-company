@@ -39,7 +39,7 @@
           <div id="loader" class="none">
             <span class="spinner-border secondary" role="status" aria-hidden="true"></span>
           </div>
-          <?php if (lang('CONF_SETTINGS_EMAIL_UPDATE') == 'ON'): ?>
+          <?php if (lang('SETT_SETTINGS_EMAIL_UPDATE') == 'ON'): ?>
           <div class="row">
             <div class="col-6 flex justify-end">
               <button id="userDataBtn" class="btn btn-primary btn-small btn-loading" type="submit">
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  <?php if (lang('CONF_SETTINGS_CHANGE_PASSWORD') == 'ON'): ?>
+  <?php if (lang('SETT_SETTINGS_CHANGE_PASSWORD') == 'ON'): ?>
   <div class="flex flex-auto flex-column">
     <div class="flex mb-5 mx-4 flex-column ">
       <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_CHANGE_PASS') ?>

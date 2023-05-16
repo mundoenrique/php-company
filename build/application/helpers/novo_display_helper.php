@@ -199,17 +199,17 @@ if ( ! function_exists('verifyFooter'))
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'login' && $module !== lang('CONF_LINK_SUGGESTION') && !$logged);
+				$display = ($module !== 'login' && $module !== lang('SETT_LINK_SUGGESTION') && !$logged);
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
+				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== lang('SETT_LINK_SUGGESTION'));
 				$display = (in_array($client, $show) && $display && $customerUri != 'bpi');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
+				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== lang('SETT_LINK_SUGGESTION'));
 				$display = (in_array($client, $show) && $display && $customerUri != 'bpi');
 				break;
 			case lang('GEN_FOTTER_RATES'):

@@ -32,13 +32,13 @@ function finishSession() {
 			action: 'destroy'
 		}
 	}
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.SETT_ICON_INFO, modalBtn);
 	$('#accept').addClass('keep-session');
 	resetTimesession = setTimeout(function() {
 		$('#accept')
 			.html(loader)
 			.prop('disabled', true);
-		$(location).attr('href', baseURL + lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_END);
+		$(location).attr('href', baseURL + lang.SETT_LINK_SIGNOUT + lang.SETT_LINK_SIGNOUT_END);
 	}, callServer);
 
 	$('#system-info').on('click', '.keep-session', function() {

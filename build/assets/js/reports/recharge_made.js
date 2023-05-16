@@ -119,6 +119,6 @@ $(function () {
 		setTimeout(function () {
 			insertFormInput(false);
 			$('.cover-spin').hide();
-		}, lang.CONF_TIME_DOWNLOAD_FILE);
+		}, lang.SETT_TIME_DOWNLOAD_FILE);
 	});
 });

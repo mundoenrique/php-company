@@ -17,13 +17,13 @@
               <div class="files btn-link flex items-center">
                 <div class="file">
                   <?php switch ($value[1]): case 'xls': case 'xlsm': case 'xlsx':?>
-                  <img src=<?= $this->asset->insertFile(lang('CONF_XLS_ICON'), 'images/icons');?> />
+                  <img src=<?= $this->asset->insertFile(lang('SETT_XLS_ICON'), 'images/icons');?> />
                   <?php break; case 'pdf': ?>
-                  <img src=<?= $this->asset->insertFile(lang('CONF_PDF_ICON'), 'images/icons');?> />
+                  <img src=<?= $this->asset->insertFile(lang('SETT_PDF_ICON'), 'images/icons');?> />
                   <?php break; case 'rar': ?>
-                  <img src=<?= $this->asset->insertFile(lang('CONF_RAR_ICON'), 'images/icons');?> />
+                  <img src=<?= $this->asset->insertFile(lang('SETT_RAR_ICON'), 'images/icons');?> />
                   <?php break; case 'zip': ?>
-                  <img src=<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?> />
+                  <img src=<?= $this->asset->insertFile(lang('SETT_ZIP_ICON'), 'images/icons');?> />
                   <?php break; endswitch; ?>
                 </div>
                 <span class="ml-2 flex justify-center"><?= $value[2]  ?></span>
@@ -32,11 +32,11 @@
           </div>
           <?php elseif ($value[3] == 'request'): ?>
           <div class="form-group col-auto mb-3 col-xl-5">
-            <a href="<?= lang('CONF_NO_LINK'); ?>" class="<?= $disabled.' '.$value[0]; ?>" title="<?= $titleIniFile; ?>"
+            <a href="<?= lang('SETT_NO_LINK'); ?>" class="<?= $disabled.' '.$value[0]; ?>" title="<?= $titleIniFile; ?>"
               download>
               <div class="files btn-link flex items-center">
                 <div class="file download">
-                  <img src="<?= $this->asset->insertFile(lang('CONF_SETT_ICON'), 'images/icons');?>" />
+                  <img src="<?= $this->asset->insertFile(lang('SETT_SETT_ICON'), 'images/icons');?>" />
                 </div>
                 <span class="ml-2 flex justify-center"><?= $value[2] ?></span>
               </div>
