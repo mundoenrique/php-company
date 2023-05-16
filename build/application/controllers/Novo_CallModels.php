@@ -5,7 +5,6 @@
  * @date April 20th, 2019
 */
 class Novo_CallModels extends Novo_Controller {
-	public $class;
 
 	public function __construct()
 	{
@@ -13,10 +12,10 @@ class Novo_CallModels extends Novo_Controller {
 		writeLog('INFO', 'CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
-			$this->class = lcfirst($this->dataRequest->who);
-			$this->rule = lcfirst($this->dataRequest->where);
-			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
-			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
+			$this->fileLanguage = lcfirst($this->dataRequest->who);
+			$this->validationMethod = lcfirst($this->dataRequest->where);
+			$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
+			$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->where) . '_' . $this->dataRequest->who;
 		} else {
 			redirect('page-no-found', 'Location', 301);
 		}
@@ -36,29 +35,32 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		writeLog('DEBUG', 'REQUEST FROM THE VIEW ' . json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
-
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule);;
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod);;
 
 		if(!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
 		if($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->class);
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
+			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
 
-		if($valid) {
-			$this->request = $this->verify_access->createRequest($this->rule);
+		LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
+		$this->config->set_item('language', BASE_LANGUAGE . '-' . $this->customerLang);
+		LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
+
+		if ($valid) {
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
-			$this->dataResponse = $this->verify_access->ResponseByDefect();
+			$this->dataResponse = $this->verify_access->responseByDefect();
 		}
 
 		$modalBtn = $this->dataResponse->modalBtn;
 		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->customerUri);
-		$dataResponse = $dataResponse = lang('CONF_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
+
+		$dataResponse = lang('CONF_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
 	/**

@@ -170,11 +170,11 @@ class NOVO_Model extends CI_Model {
 			if (is_object($response) && isset($response->file)) {
 				continue;
 			}
+
 			$responsetoView->$pos = $response;
 		}
 
-		writeLog('DEBUG', '['.$this->userName.'] IP ' . $this->input->ip_address() . ' RESULT ' .$model .
-			' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'RESULT ' . $model . ' SENT TO THE VIEW ' . json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
 
 		unset($responsetoView);
 

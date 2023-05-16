@@ -7,44 +7,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Verify_Access {
 	private $CI;
-	private $class;
-	private $method;
-	private $operation;
-	private $requestServ;
-	private $responseDefect;
-	private $user;
 
 	public function __construct()
 	{
 		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
 		$this->CI = &get_instance();
-		$this->requestServ = new stdClass();
-		$this->user = $this->CI->session->userName;
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $customerUri, $class = FALSE)
+	public function validateForm($validationMethod)
 	{
 		writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
-		$result = $this->CI->form_validation->run($rule);
+		$this->CI->form_validation->set_error_delimiters('', '---');
+		$this->CI->config->set_item('language', 'global');
+		$result = $this->CI->form_validation->run($validationMethod);
 
-		writeLog('DEBUG', 'VALIDATION FORM ' . $rule . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'VALIDATION FORM ' . $validationMethod . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
-		if(!$result) {
-			writeLog('ERROR', 'VALIDATION ' . $rule . ' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+		if (!$result) {
+			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
-		if ($class) {
-			$this->CI->config->set_item('language', BASE_LANGUAGE.'-base');
-			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$customerUri);
-			languageLoad('specific', $class);
-		}
+		unset($_POST);
 
 		return $result;
 	}
@@ -53,9 +42,11 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function createRequest($rule)
+	public function createRequest($class, $method)
 	{
 		writeLog('INFO', 'Verify_Access: createRequest method initialized');
+
+		$requestServ = new stdClass();
 
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
@@ -67,37 +58,35 @@ class Verify_Access {
 					$this->CI->session->set_userdata('screenSize', $value);
 				break;
 				default:
-					if (!$this->CI->input->is_ajax_request()) {
-						$value = $this->CI->security->xss_clean(strip_tags($value));
-					}
-
-					$this->requestServ->$key = $value;
+					$requestServ->$key = $value;
 			}
 		}
 
-		unset($_POST);
-		writeLog('DEBUG', $rule .' REQUEST CREATED '.	json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': '	.
+			json_encode($requestServ, JSON_UNESCAPED_UNICODE));
 
-		return $this->requestServ;
+		return $requestServ;
 	}
 	/**
 	 * @info método para crear el request al modelo
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function ResponseByDefect($user)
+	public function ResponseByDefect()
 	{
 		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
 		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
-		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END')
+		$linkredirect = $singleSession === 'SignThird'
+			? 'ingresar/'. lang('CONF_LINK_SIGNOUT_END')
 			: lang('CONF_LINK_SIGNIN');
-		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
-		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT');
-		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
-		$this->responseDefect->modalBtn = [
+
+		$responseDefect = new stdClass();
+		$responseDefect->code = lang('CONF_DEFAULT_CODE');
+		$responseDefect->title = lang('GEN_SYSTEM_NAME');
+		$responseDefect->msg = lang('GEN_VALIDATION_INPUT');
+		$responseDefect->icon = lang('CONF_ICON_WARNING');
+		$responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
 				'link'=> $linkredirect,
@@ -106,15 +95,14 @@ class Verify_Access {
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
-			$this->responseDefect->msg = lang('GEN_VALIDATION_INPUT_LOGGED');
+			$responseDefect->msg = lang('GEN_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		writeLog('DEBUG', ' [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
-			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'ResponseByDefect: ' . json_encode($responseDefect, JSON_UNESCAPED_UNICODE));
 
-		return $this->responseDefect;
+		return $responseDefect;
 	}
 	/**
 	 * @info método que valida la autorización de acceso del usuario a las vistas
@@ -125,17 +113,21 @@ class Verify_Access {
 	{
 		writeLog('INFO', 'Verify_Access: accessAuthorization method initialized');
 
-		$user = $user ?? $this->user;
+		$isLogged = $this->CI->session->has_userdata('logged');
+		$isUserId = $this->CI->session->has_userdata('userId');
+		$enterpriseInf = $this->CI->session->has_userdata('enterpriseInf');
+		$productInf = $this->CI->session->has_userdata('productInf');
+		$referrer = $this->CI->agent->referrer();
+		$ajaxRequest = $this->CI->input->is_ajax_request();
 
-		if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
+		if ($isUserId && $this->CI->session->clientAgent !== $this->CI->agent->agent_string()) {
 			clearSessionsVars();
 		}
 
 		switch($module) {
 			case 'signIn':
 				$auth = TRUE;
-				$uriSegmwnts = $this->CI->uri->segment(2).'/'.$this->CI->uri->segment(3);
-				$ajaxRequest = $this->CI->input->is_ajax_request();
+				$uriSegmwnts = $this->CI->uri->segment(2) . '/' . $this->CI->uri->segment(3);
 
 				if (SINGLE_SIGN_ON && $uriSegmwnts !== 'internal/novopayment' && ENVIRONMENT === 'production' && !$ajaxRequest) {
 					redirect('page-no-found', 'Location', 301);
@@ -174,169 +166,169 @@ class Verify_Access {
 			case 'updateContact':
 			case 'deleteFile':
 			case 'getProducts':
-				$auth = ($this->CI->session->has_userdata('logged'));
+				$auth = $isLogged;
 				break;
 			case 'changePassword':
 			case 'changePass':
-				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
+				$auth = $isLogged || $this->CI->session->flashdata('changePassword') !== NULL;
 				break;
 			case 'benefits':
 			case 'benefitsInf':
-				$auth = lang('CONF_BENEFITS') == 'ON';
+				$auth = lang('CONF_BENEFITS') === 'ON';
 				break;
 			case 'ratesInf':
-				$auth = ($this->CI->session->has_userdata('logged') && lang('CONF_FOOTER_RATES') == 'ON');
+				$auth = ($isLogged && lang('CONF_FOOTER_RATES') === 'ON');
 				break;
 			case 'getProductDetail':
-				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
+				$auth = ($isLogged && $enterpriseInf);
 				break;
 			case 'authorizationKey':
-				$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
+				$auth = ($isLogged && $productInf);
 				break;
 			case 'getPendingBulk':
 			case 'loadBulk':
 			case 'getDetailBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBCAR'));
 				break;
 			case 'unnamedRequest':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
+				$auth = ($productInf && $this->verifyAuthorization('TICARG'));
 				break;
 			case 'unnamedAffiliate':
 			case 'unnmamedDetail':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
+				$auth = ($productInf && $this->verifyAuthorization('TIINVN'));
 				break;
 			case 'confirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
 				break;
 			case 'deleteNoConfirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
 				break;
 			case 'signBulkList':
 			case 'authorizeBulk':
 			case 'authorizeBulkList':
 			case 'calculateServiceOrder':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBAUT'));
 				break;
 			case 'bulkDetail':
-				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
+				$auth = ($productInf && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
 				break;
 			case 'deleteConfirmBulk':
 			case 'disassConfirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
 				break;
 			case 'serviceOrder':
 			case 'cancelServiceOrder':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBAUT'));
 				break;
 			case 'exportFiles':
 			case 'serviceOrders':
 			case 'getServiceOrders':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBORS'));
 				break;
 			case 'clearServiceOrders':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBORS', 'TEBANU'));
 				break;
 			case 'transfMasterAccount':
 			case 'actionMasterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+				$auth = ($productInf && $this->verifyAuthorization('TRAMAE'));
 				break;
 			case 'masterAccountTransfer':
 			case 'rechargeAuthorization':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
+				$auth = ($productInf && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
 				break;
 			case 'cardsInquiry':
 			case 'inquiriesActions':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
+				$auth = ($productInf && $this->verifyAuthorization('COPELO'));
 				break;
 			case 'transactionalLimits':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
+				$auth = ($productInf && $this->verifyAuthorization('LIMTRX'));
 				break;
 			case 'updateTransactionalLimits':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
+				$auth = ($productInf && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
 				break;
 			case 'commercialTwirls':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
+				$auth = ($productInf && $this->verifyAuthorization('GIRCOM'));
 				break;
 			case 'updateCommercialTwirls':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
+				$auth = ($productInf && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
 				break;
 			case 'getReportsList':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
+				$auth = ($productInf && $this->verifyAuthorization('REPALL'));
 				break;
 			case 'getReport':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
+				$auth = ($productInf && $this->verifyAuthorization('REPALL', 'REPALL'));
 				break;
 			case 'userActivity':
 			case 'exportReportUserActivity':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
+				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') === 'ON');
 				break;
 			case 'usersActivity':
 			case 'exportExcelUsersActivity':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
+				$auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') === 'ON');
 				break;
 			case 'statusAccountExcelFile':
 			case 'statusAccountPdfFile':
 			case 'searchStatusAccount':
 			case 'accountStatus':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				$auth = ($productInf && $this->verifyAuthorization('REPEDO'));
 				break;
 			case 'extendedAccountStatus':
 			case 'searchExtendedAccountStatus':
 			case 'exportToExcelExtendedAccountStatus':
-						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDC'));
+						$auth = ($productInf && $this->verifyAuthorization('REPEDC'));
 				break;
 			case 'statusMasterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPECT'));
+				$auth = ($productInf && $this->verifyAuthorization('REPECT'));
 				break;
 			case 'replacement':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
+				$auth = ($productInf && $this->verifyAuthorization('REPREP'));
 				break;
 			case 'closingBalance':
 			case 'exportToExcel':
 			case 'closingBudgets':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
+				$auth = ($productInf && $this->verifyAuthorization('REPSAL'));
 				break;
 			case 'rechargeMade':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
+				$auth = ($productInf && $this->verifyAuthorization('REPPRO'));
 				break;
 			case 'issuedCards':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
+				$auth = ($productInf && $this->verifyAuthorization('REPTAR'));
 				break;
 			case 'categoryExpense':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
+				$auth = ($productInf && $this->verifyAuthorization('REPCAT'));
 				break;
 			case 'statusBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
+				$auth = ($productInf && $this->verifyAuthorization('REPLOT'));
 				break;
 			case 'exportToExcelMasterAccount':
 			case 'exportToPDFMasterAccount':
 			case 'exportToExcelMasterAccountConsolid':
 			case 'exportToPDFMasterAccountConsolid':
 			case 'masterAccount':
-				$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
+				$auth = ($productInf && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
 				break;
 			case 'extendedMasterAccount':
 			case 'exportToExcelExtendedMasterAccount':
 			case 'extendedDownloadMasterAccountCon':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCMT'));
+				$auth = ($productInf && $this->verifyAuthorization('REPCMT'));
 				break;
 			case 'cardHolders':
 			case 'exportReportCardHolders':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBTHA'));
 				break;
 			case 'usersManagement':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
+				$auth = ($productInf && $this->verifyAuthorization('USEREM', 'CONUSU'));
 				break;
 			case 'enableUser':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
+				$auth = ($productInf && $this->verifyAuthorization('USEREM', 'CREUSU'));
 				break;
 			case 'userPermissions':
 			case 'updatePermissions':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
+				$auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));;
 				break;
 			case 'pagoOs':
 			case 'pagarOS':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBPGO'));
+				$auth = ($productInf && $this->verifyAuthorization('TEBORS', 'TEBPGO'));
 				break;
 			default:
 				$freeAccess = [
@@ -377,6 +369,7 @@ class Verify_Access {
 							if($module->idModulo != $moduleLink) {
 								continue;
 							}
+
 							$items[] = $functions->accodfuncion;
 						}
 					}
@@ -386,7 +379,8 @@ class Verify_Access {
 			$access = $function ? $function : $moduleLink;
 			$prompter = $function ? '->'.$function : '';
 			$auth = in_array($access, $items);
-			writeLog('INFO', '['.$this->user.'] verifyAuthorization '.$moduleLink.$prompter.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+
+			writeLog('INFO', 'verifyAuthorization ' . $moduleLink.$prompter . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
 		}
 
 
@@ -404,9 +398,9 @@ class Verify_Access {
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
 		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $redirectUrl);
+			$redirectUrl = str_replace($customerUri . '/', $this->CI->config->item('customer') . '/', $redirectUrl);
 		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $dataLink);
+			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('customer') . '/', $dataLink);
 			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 

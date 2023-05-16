@@ -887,13 +887,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
-		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
-
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = '[' . mb_strtoupper($userName) . '] RESPONSE: recaptcha Customer: "' . $this->config->item('customer');
-		$logMessage.= '", Score: "' . $result["score"] . '", Hostname: "'. $result["hostname"] . '"';
 
-		writeLog('DEBUG', ' IP '. $this->input->ip_address() . $logMessage);
+		writeLog('DEBUG', 'RESPONSE: recaptcha, Score: ' . $result["score"] . ', Hostname: ' . $result["hostname"]);
 
 		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 

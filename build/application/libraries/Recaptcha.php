@@ -67,6 +67,7 @@ class Recaptcha {
 		$response = file_get_contents(self::site_verify_url, false, $context);
 		$responseKeys = json_decode($response,true);
 		header('Content-type: application/json');
+
 		return $responseKeys;
 
 	}

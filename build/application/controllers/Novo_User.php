@@ -25,12 +25,10 @@ class Novo_User extends NOVO_Controller {
 
 		if($this->session->has_userdata('logged')) {
 			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
-			exit;
+			exit();
 		}
 
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
+		clearSessionsVars();
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -71,6 +69,7 @@ class Novo_User extends NOVO_Controller {
 		writeLog('INFO', 'User: singleSignOn Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
@@ -122,6 +121,7 @@ class Novo_User extends NOVO_Controller {
 		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'recoverPass';
 
 		array_push(
@@ -147,6 +147,7 @@ class Novo_User extends NOVO_Controller {
 		writeLog('INFO', 'User: recoverAccess Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'recoverAccess';
 
 		array_push(

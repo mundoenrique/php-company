@@ -85,6 +85,12 @@ SetEnv WS_KEY dGVzdDEyMzQ=
 SetEnv WS_URL https://d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 SetEnv URL_MFA_SERV https://d-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
+	# SOLES
+# SetEnv WS_URL_PE https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# DÓLARES
+# SetEnv WS_URL_US https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
 	# BANORTE
 SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 

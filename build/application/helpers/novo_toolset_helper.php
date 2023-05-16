@@ -55,16 +55,16 @@ if(!function_exists('dbSearch')) {
 	}
 }
 
-if (!function_exists('clearSessionVars')) {
+if (!function_exists('clearSessionsVars')) {
 	function clearSessionsVars() {
-		$CI = &get_instance();
+		$CI =& get_instance();
+		$isLogged = $CI->session->has_userdata('logged');
+		$isUserId = $CI->session->has_userdata('userId');
+		$isLogUser = $CI->session->has_userdata('logUser');
 
-		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
-			if ($pos == '__ci_last_regenerate') {
-				continue;
-			}
-
-			$CI->session->unset_userdata($pos);
+		if($isLogged || $isUserId || $isLogUser) {
+			$CI->session->unset_userdata(['logged', 'userId', 'userName', 'enterpriseInf', 'productInf', 'logUser']);
+			$CI->session->sess_destroy();
 		}
 	}
 }

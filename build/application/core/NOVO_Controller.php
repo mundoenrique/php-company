@@ -10,20 +10,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  */
 class NOVO_Controller extends CI_Controller {
-	protected $rule;
-	protected $includeAssets;
+	private $ValidateBrowser;
 	protected $customerUri;
-	protected $customerStyle;
 	protected $customerLang;
-	protected $views;
-	protected $render;
-	protected $dataRequest;
-	protected $model;
-	protected $method;
+	protected $customerImages;
+	protected $customerStyle;
+	protected $fileLanguage;
+	protected $controllerClass;
+	protected $controllerMethod;
+	protected $modelClass;
+	protected $modelMethod;
+	protected $validationMethod;
+	protected $includeAssets;
 	protected $request;
 	protected $dataResponse;
+	protected $render;
+	protected $dataRequest;
 	protected $greeting;
-	private $ValidateBrowser;
+	protected $views;
 	public $singleSession;
 
 	public function __construct()
@@ -31,21 +35,27 @@ class NOVO_Controller extends CI_Controller {
 		parent:: __construct();
 		writeLog('INFO', 'Controller Class Initialized');
 
+		$class = $this->router->fetch_class();
+		$method = $this->router->fetch_method();
+		$customerUri = $this->uri->segment(1, 0) ?? 'null';
+
+		$this->ValidateBrowser = FALSE;
+		$this->customerUri = $customerUri;
+		$this->customerLang = $customerUri;
+		$this->customerStyle = $customerUri;
+		$this->customerImages = $customerUri;
+		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
+		$this->controllerClass = $class;
+		$this->controllerMethod = $method;
+		$this->modelClass = $class . '_Model';
+		$this->modelMethod = 'callWs_' . ucfirst($method) . '_' . str_replace('Novo_', '', $class);
+		$this->validationMethod = $method;
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
-		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
-		$this->model = ucfirst($this->router->fetch_class()).'_Model';
-		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
-		$this->render->widget =  FALSE;
-		$this->render->prefix = '';
-		$this->render->sessionTime = $this->config->item('session_time');
-		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
-		$this->render->callServer = $this->render->callModal;
-		$this->ValidateBrowser = FALSE;
 		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
+
 		$this->optionsCheck();
 	}
 	/**
@@ -57,13 +67,16 @@ class NOVO_Controller extends CI_Controller {
 	{
 		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
 
-		languageLoad('generic', $this->router->fetch_class());
+		LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
 		clientUrlValidate($this->customerUri);
-		languageLoad('specific', $this->router->fetch_class());
 		$this->customerUri = $this->config->item('customer_uri');
-		$this->customerStyle = $this->config->item('customer_style');
 		$this->customerLang = $this->config->item('customer_lang');
+		$this->customerStyle = $this->config->item('customer_style');
+		$this->customerImages = $this->config->item('customer_images');
+		//eliminar
 		$this->customerProgram = $this->config->item('customer_program');
+		LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
+
 
 		if($this->session->has_userdata('userId')) {
 			if($this->session->customerSess !== $this->config->item('customer')) {
@@ -77,10 +90,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		}
 
-		$this->form_validation->set_error_delimiters('', '---');
-		$this->config->set_item('language', 'global');
-
-		if ($this->rule !== lang('CONF_LINK_SUGGESTION')) {
+		if ($this->controllerMethod !== lang('CONF_LINK_SUGGESTION')) {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
@@ -119,17 +129,12 @@ class NOVO_Controller extends CI_Controller {
 				)
 			) : json_decode(utf8_encode($this->input->get_post('request')));
 		} else {
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method());
+			$access = $this->verify_access->accessAuthorization($this->validationMethod);
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				writeLog('DEBUG', 'REQUEST FROM THE VIEW ' . json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
-
-				$valid = $this->verify_access->validateForm($this->rule, $this->customerUri);
-
-				if ($valid) {
-					$this->request = $this->verify_access->createRequest($this->rule);
-				}
+				$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
+				$valid = $this->verify_access->validateForm($this->validationMethod);
 			}
 
 			$this->preloadView($access && $valid);
@@ -157,6 +162,12 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
+
+			$this->render->widget =  FALSE;
+			$this->render->prefix = '';
+			$this->render->sessionTime = $this->config->item('session_time');
+			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
+			$this->render->callServer = $this->render->callModal;
 
 			if (lang('CONF_VIEW_SUFFIX') === '-core') {
 				$this->includeAssets->cssFiles = [
@@ -232,10 +243,10 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: '.$this->model);
+		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
 
-		$this->load->model($this->model,'modelLoaded');
-		$method = $this->method;
+		$this->load->model($this->modelClass, 'modelLoaded');
+		$method = $this->modelMethod;
 
 		return $this->modelLoaded->$method($request);
 	}

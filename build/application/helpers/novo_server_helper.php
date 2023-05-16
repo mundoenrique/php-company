@@ -12,27 +12,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
 		$CI =& get_instance();
-		$appUserName = $CI->session->appUserName ?? date('U') . '-';
-		$customer = '';
 		$ip = $CI->input->ip_address();
 		$level = mb_strtoupper($level);
 
 		if ($level !== 'INFO') {
-			if (!$CI->session->has_userdata('appUserName')) {
-				$CI->session->set_userdata('appUserName', $appUserName);
+			$customer = $CI->session->customerSess ?? $CI->config->item('customer');
+			$isLogUser = $CI->session->has_userdata('logUser');
+			$logUser = $CI->session->logUser ?? date('U') . '-';
+			list($date, $user) = explode('-', $logUser);
+			$reqUser = $user;
+
+			if ($CI->session->has_userdata('userName')) {
+				$reqUser = $CI->session->userName;
+			} elseif($CI->input->get_post('userName') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('userName'));
+			} elseif($CI->input->get_post('user-name') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('user-name'));
+			} elseif($CI->input->get_post('email') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('email'));
 			}
 
-			if ($CI->session->has_userdata('customerSess')) {
-				$customer = $CI->session->customerSess;
-			} elseif ($CI->config->item('customer') !== NULL) {
-				$customer = $CI->config->item('customer');
+			if (!$isLogUser || $user !== $reqUser) {
+				$logUser = $date . '-' . $reqUser;
+				$CI->session->set_userdata('logUser', $logUser);
 			}
 
-			if ($customer === '') {
-				$message = novoLang('NOVO [%s] IP: %s, %s', [$appUserName, $ip, $message]);
-			} else {
-				$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$appUserName, $ip, $customer, $message]);
-			}
+			$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$logUser, $ip, $customer, $message]);
+
 		} else {
 			$message = novoLang('NOVO %s', $message);
 		}
