@@ -1157,16 +1157,22 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$password = $dataRequest->passwordTranfer;
 
-		if (lang('CONF_INPUT_PASS') == 'ON') {
+		if (lang('CONF_REMOTE_AUTH') === 'OFF') {
 			$password = md5($this->cryptography->decryptOnlyOneData($dataRequest->passwordTranfer));
 		}
+
+		if( lang('CONF_REMOTE_AUTH') === 'ON') {
+			$password = $this->session->passWord;
+		}
+
+		$description = lang('CONF_INPUT_DESCRIPTION') === 'ON' ? $dataRequest->description : '';
 
 		$this->dataRequest->idOperation = 'cargoCuentaMaestraTM';
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->maestroDeposito = [
 			'idExtEmp' => $this->session->enterpriseInf->idFiscal,
 			'saldo' => (float)$dataRequest->transferAmount,
-			'descrip' => $dataRequest->description,
+			'descrip' => $description,
 			'type' => $dataRequest->transferType ?? 'abono',
 			'tokenCliente' => $password,
 			'authToken' => $this->session->userdata('authToken'),
