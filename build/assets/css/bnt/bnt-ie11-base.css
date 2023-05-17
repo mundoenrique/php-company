@@ -141,7 +141,7 @@ footer.main-footer {
 }
 
 .custom-select:hover:not(:disabled) {
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 8px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/default/icons/icon-chevron_down_black.svg") right .75rem center / 14px 8px no-repeat;
 }
 
 .select-box option {

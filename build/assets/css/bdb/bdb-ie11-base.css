@@ -958,7 +958,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:disabled:hover {
-	background: #ececec url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: #ececec url("../images/default/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select option {
