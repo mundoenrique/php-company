@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// PROGRAM IMAGES
 $lang['GEN_IMAGE_LOGIN'] = 'img-servitebca-signin.jpg';
 $lang['IMG_PROGRAM_IMAGES'] = [
 	'bonus_dorada_be' => 'bonus_dorada',

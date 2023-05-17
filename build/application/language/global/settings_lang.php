@@ -17,7 +17,6 @@ $lang['SETT_VALIDATE_CAPTCHA'] = [
 	'recoverPass',
 	'passwordRecovery'
 ];
-$lang['SETT_SUPPORT_IE'] = 'OFF';
 $lang['SETT_AGENT_INFO'] = 'OFF';
 $lang['SETT_SCORE_CAPTCHA'] = [
 	'development' => 0,

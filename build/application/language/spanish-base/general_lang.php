@@ -433,7 +433,6 @@ $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Exportar a Excel consolidado';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Exportar a PDF consolidado';
-// BRANCHES
 $lang["GEN_NAME"] = "Nombre";
 $lang["GEN_LAST_NAME"] = "Apellido";
 $lang["GEN_ZONE"] = "Zona";

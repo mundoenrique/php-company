@@ -100,4 +100,6 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'provis_virtual_r' => 'provis_alimentacion',
 	'provis_campana' => 'provis_virtual',
 	'compras_campana' => 'plata_virtual_navidad',
+	'plata_compras_chip' => 'plata_compras_chip',
+	'plata_gasolina_chip' => 'plata_gasolina_chip',
 ];

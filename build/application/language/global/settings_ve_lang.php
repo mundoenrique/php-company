@@ -5,7 +5,6 @@ $lang['SETT_FILES_EXTENSION'] = 'txt';
 $lang['SETT_BULK_AUTHORIZE'] = 'OFF';
 $lang['SETT_BULK_TYPE_SERVICE_ORDER'] = '1';
 $lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("23-04-2023 06:00:00") ? 'ON' : 'OFF';
-$lang['SETT_BTN_LANG'] = 'OFF';
 $lang['SETT_MENU_CIRCLE'] = 'ON';
 $lang['SETT_ISSUED_MONTHLY'] = 'OFF';
 $lang['SETT_FOOTER_RATES'] = 'ON';
