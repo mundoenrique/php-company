@@ -20,9 +20,9 @@
 		<div class="hide-out hide">
 			<div class="flex mb-3 mx-4 justify-center">
 				<div class="product-presentation relative">
-					<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerProgram); ?>" alt="<?= $productName; ?>" />
+					<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images', $customerFiles, 'programs'); ?>" alt="<?= $productName; ?>" />
 					<?php if(lang('SETT_FRANCHISE_LOGO') === 'ON'):?>
-					<img class="item-network" src="<?= $this->asset->insertFile($productImgBrand, 'images/brands'); ?>" alt="<?= $productBrand; ?>" />
+					<img class="item-network" src="<?= $this->asset->insertFile($productImgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $productBrand; ?>" />
 					<?php endif; ?>
 				</div>
 			</div>

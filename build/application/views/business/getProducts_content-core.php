@@ -35,7 +35,6 @@
 		</select>
 		<?php endif; ?>
 		<div id="sb-search" class="sb-search">
-			<!-- text filter -->
 			<input data-jplist-control="textbox-filter" data-group="group-filter-pagination" data-name="description" data-path=".product-description" id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
 			<span class="sb-icon-search"><i class="icon icon-find mr-1"></i></span>
 		</div>
@@ -48,13 +47,12 @@
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="flex-column hide-out hide">
-		<!-- content to filter -->
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center flex-auto">
-					<img class="img-product-list" src="<?= $this->asset->insertFile($products->productImg, 'images/programs', $customerProgram); ?>" alt="<?= $products->productImg; ?>">
-					<img class="filter-<?= $products->marca; ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images/brands'); ?>" alt="<?= $products->imgBrand; ?>">
+					<img class="img-product-list" src="<?= $this->asset->insertFile($products->productImg, 'images', $customerFiles, 'programs'); ?>" alt="<?= $products->productImg; ?>">
+					<img class="filter-<?= $products->marca; ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text truncate">

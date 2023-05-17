@@ -367,7 +367,7 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 						$brandName = trim($response->estadistica->producto->marca);
-						$imgBrand = mb_strtolower($brandName);
+						$imgBrand = url_title(trim(mb_strtolower($brandName)));
 					}
 
 					if (trim($response->estadistica->producto->idProducto) == 'G') {
@@ -432,12 +432,14 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 		}
 
-		$imgBrand == 'visa' ? $imgBrand.= lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
+		$imgBrand = lang('IMG_BRAND_DEFAULT');
+		$tempBrandImg = $productDetail['imgBrand'];
 
-		if (!file_exists(assetPath('images/brands/'.$imgBrand))) {
-			$imgBrand = 'default.svg';
+		if(array_key_exists($tempBrandImg, lang('IMG_BRANDS'))) {
+			$imgBrand = lang('IMG_BRANDS')[$tempBrandImg];
 		}
 
+		$imgBrand = $productDetail['brand'] == 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
 		$productDetail['imgBrand'] = $imgBrand;
 
 		$this->response->data->productDetail = (object) $productDetail;

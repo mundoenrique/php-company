@@ -111,7 +111,7 @@
 					</div>
 					<div class="col-6 center">
 						<span class="light"><?= lang('BULK_CREATION_SCHEDULE'); ?> &nbsp;</span><br>
-						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $customerLang); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $customerFiles); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 					</div>
 				</div>
 				<?php endif; ?>

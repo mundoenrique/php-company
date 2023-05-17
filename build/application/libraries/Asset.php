@@ -16,7 +16,7 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 	}
 	/**
@@ -38,21 +38,17 @@ class Asset {
 	public function insertCss()
 	{
 		writeLog('INFO', 'Asset: insertCss method initialized');
-		$file_url = NULL;
 
+		$link = NULL;
+		$FileExt = 'css';
 
 		foreach($this->cssFiles as $fileName) {
-			$file = assetPath('css/'.$fileName.'.css');
-
-			if(!file_exists($file)) {
-				writeLog('ERROR', 'Archivo requerido '.$fileName.'.css');
-			}
-
-			$file = $this->versionFiles($file, $fileName, '.css');
-			$file_url .= '<link rel="stylesheet" href="'.assetUrl('css/'.$file).'" media="all">'.PHP_EOL;
+			$FilePath = assetPath('css/' . $fileName);
+			$fileVersion = $this->versionFiles($FilePath, $fileName, $FileExt);
+			$link.= '<link rel="stylesheet" href="' . assetUrl('css/' . $fileVersion) . '" media="all">' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $link;
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
@@ -61,55 +57,58 @@ class Asset {
 	public function insertJs()
 	{
 		writeLog('INFO', 'Asset: insertJs method initialized');
-		$file_url = NULL;
+
+		$script = NULL;
+		$fileExt = 'js';
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/'.$fileName.'.js');
-			$file = $this->versionFiles($file, $fileName, '.js');
-			$file_url .= '<script type="text/javascript" defer src="'.assetUrl('js/'.$file).'"></script>'.PHP_EOL;
+			$filePath = assetPath('js/' . $fileName);
+			$fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
+			$script.= '<script type="text/javascript" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $script;
 	}
 	/**
-	 * @info Método para insertar imagenes, json, etc
+	 * @info Método para insertar imagenes, json, pdf, videos, etc
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function insertFile($fileName, $folder = 'images', $customer = FALSE)
+	public function insertFile($file, $location, $customerFiles = '', $folder = '')
 	{
 		writeLog('INFO', 'Asset: insertFile method initialized');
 
-		$customer = $customer ? $customer.'/' : '';
-		$file = assetPath($folder.'/'.$customer.$fileName);
+		$location.= '/';
+		$customerFiles = !empty($customerFiles) ? $customerFiles . '/' : $customerFiles;
+		$folder = !empty($folder) ? $folder . '/' : $folder;
+		list($fileName, $fileExt) = explode('.', $file);
+		$filePath = assetPath($location . $customerFiles . $folder . $fileName);
 
-		if (!file_exists($file)) {
-			$file = assetPath($folder.'/default'.'/'.$fileName);
-			if($folder == 'images/programs'){
-				$file = assetPath($folder.'/default/default.svg');
-				$fileName = 'default.svg';
-			}
-			$customer = 'default/';
+		if (strpos($location, 'images') !== FALSE && !file_exists($filePath . '.' . $fileExt)) {
+			$customerFiles = 'default/';
+			$filePath = assetPath($location . $customerFiles . $folder . $fileName);
 		}
 
-		$version = '?V'.date('Ymd-U', filemtime($file));
+		$fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
 
-		return assetUrl($folder.'/'.$customer.$fileName.$version);
+		return assetUrl($location .  $customerFiles . $folder . $fileVersion);
 	}
-	/**
-	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	private function versionFiles($file, $fileName, $ext)
+
+	private function versionFiles($file, $fileName, $fileExt)
 	{
 		$version = '';
-		$thirdParty = strpos($fileName, 'third_party');
+		$thirdParty = strpos($file, 'third_party');
+		$fileExt = $thirdParty ? '.min.' . $fileExt : '.' . $fileExt;
+		$file = $file . $fileExt;
+		$fileExists = file_exists($file);
 
-		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V'.date('Ymd-U', filemtime($file));
-		} else {
-			$ext = '.min'.$ext;
+		if(!$fileExists) {
+			writeLog('ERROR', 'Required file ' . $file);
 		}
 
-		return $fileName.$ext.$version;
+		if(!$thirdParty) {
+			$version = '?V' . date('Ymd-U', filemtime($file));
+		}
+
+		return $fileName . $fileExt . $version;
 	}
 }

@@ -294,10 +294,11 @@ class Request_Data {
 						$products->$key = trim(mb_strtoupper($value));
 					break;
 					case 'marca':
-						$imgBrand = url_title(trim(mb_strtolower($value))).'_product.svg';
+						$brand = url_title(trim(mb_strtolower($value)));
+						$imgBrand = lang('IMG_BRAND_DEFAULT');
 
-						if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-							$imgBrand = 'default.svg';
+						if(array_key_exists($brand, lang('IMG_BRANDS'))) {
+							$imgBrand = lang('IMG_BRANDS')[$brand] . '_product.svg';
 						}
 
 						$products->imgBrand = $imgBrand;

@@ -14,8 +14,8 @@
 					<div class="menu-item">
 						<div class="btn-lang-circle">
 							<div class="btn-lang-img">
-								<a id="change-lang" class="big-modal"  href="<?= lang('GEN_NO_LINK') ?>">
-									<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
+								<a id="change-lang" class="big-modal"  href="<?= lang('SETT_NO_LINK') ?>">
+									<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images', $customerFiles, 'lang'); ?>">
 									<span class="text bold"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 									<p class="text-icon text-btn-lang mb-0 inline-block">Cambiar idioma</p>
 								</a>
@@ -61,7 +61,7 @@
 	<footer class="main-footer">
 		<?php if (lang('SETT_SUPERINTENDENCY_LOGO') == 'ON') : ?>
 			<div class="flex pr-2 pr-lg-0">
-				<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $customerLang); ?> " alt="Logo Superintendencia">
+				<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $customerFiles); ?> " alt="Logo Superintendencia">
 			</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
@@ -69,15 +69,15 @@
 				<div class="order-first networks">
 					<?php foreach (lang('GEN_FOTTER_NETWORKS_IMG') as $key => $value) : ?>
 						<a href="<?= lang('SETT_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
-							<img src="<?= $this->asset->insertFile($value, 'images/networks'); ?>" alt="<?= $key; ?>">
+							<img src="<?= $this->asset->insertFile($value, 'images', $customerFiles, 'networks'); ?>" alt="<?= $key; ?>">
 						</a>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
 			<?php if (lang('SETT_FOOTER_LOGO') == 'ON') : ?>
-				<img class="order-first" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_L'), 'images', $customerLang); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
+				<img class="order-first" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_L'), 'images', $customerFiles); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
-			<img class="order-1" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_R'), 'images'); ?>" alt="Logo PCI">
+			<img class="order-1" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_R'), 'images', $customerFiles); ?>" alt="Logo PCI">
 			<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6"><?= lang('GEN_FOTTER_RIGHTS'); ?><?= date("Y") ?></span>
 		</div>
 	</footer>
@@ -89,8 +89,8 @@
 <?php if (lang('SETT_BTN_LANG') == 'ON' && lang('SETT_MENU_CIRCLE') == 'OFF') : ?>
 	<div class="btn-lang">
 		<div class="btn-lang-img">
-			<a id="change-lang" class="big-modal"  href="<?= lang('GEN_NO_LINK') ?>">
-				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
+			<a id="change-lang" class="big-modal"  href="<?= lang('SETT_NO_LINK') ?>">
+				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images', $customerFiles, 'lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
 		</div>

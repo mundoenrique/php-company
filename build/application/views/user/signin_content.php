@@ -2,7 +2,7 @@
 
 <?php if(verifyDisplay('body', $module,  lang('GEN_SIGNIN_TOP'))): ?>
 <center class="margin-bottom">
-	<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER')); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+	<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerFiles); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
 </center>
 <h1 class="welcome-title-bp"><?= lang('USER_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>

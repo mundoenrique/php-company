@@ -7,7 +7,7 @@
 		<nav class="navbar navbar-expand-lg flex-auto <?= lang('SETT_PADDING_LOGO') == 'ON' ? ' py-0' : '' ?>">
 		<?php endif; ?>
 		<a class="navbar-brand">
-			<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerLang); ?>"
+			<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerFiles); ?>"
 				alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 				<?php if(lang('SETT_HEADER_BORDER') == 'ON'):?>
 				<span class="vertical-line mx-1"></span>
