@@ -13,7 +13,7 @@ class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
 	protected $customerUri;
 	protected $customerLang;
-	protected $customerImages;
+	protected $customerFiles;
 	protected $customerStyle;
 	protected $fileLanguage;
 	protected $controllerClass;
@@ -43,7 +43,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->customerUri = $customerUri;
 		$this->customerLang = $customerUri;
 		$this->customerStyle = $customerUri;
-		$this->customerImages = $customerUri;
+		$this->customerFiles = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
@@ -72,11 +72,8 @@ class NOVO_Controller extends CI_Controller {
 		$this->customerUri = $this->config->item('customer_uri');
 		$this->customerLang = $this->config->item('customer_lang');
 		$this->customerStyle = $this->config->item('customer_style');
-		$this->customerImages = $this->config->item('customer_images');
-		//eliminar
-		$this->customerProgram = $this->config->item('customer_program');
+		$this->customerFiles = $this->config->item('customer_files');
 		LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
-
 
 		if($this->session->has_userdata('userId')) {
 			if($this->session->customerSess !== $this->config->item('customer')) {
@@ -152,16 +149,15 @@ class NOVO_Controller extends CI_Controller {
 		writeLog('INFO', 'Controller: preloadView Method Initialized');
 
 		if ($auth) {
-			$this->render->favicon = lang('GEN_FAVICON');
-			$this->render->ext = lang('GEN_FAVICON_EXT');
-			$this->render->loader = lang('IMG_LOADER');
+			$this->render->favicon = lang('GEN_FAVICON') . '.' . lang('GEN_FAVICON_EXT');
+			$this->render->faviconExt = lang('GEN_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
 			$this->render->customerStyle = $this->customerStyle;
 			$this->render->customerLang = $this->customerLang;
-			$this->render->customerProgram = $this->customerProgram;
+			$this->render->customerFiles = $this->customerFiles;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$validateRecaptcha = in_array($this->router->fetch_method(), lang('SETT_VALIDATE_CAPTCHA'));
+			$validateRecaptcha = in_array($this->controllerMethod, lang('SETT_VALIDATE_CAPTCHA'));
 
 			$this->render->widget =  FALSE;
 			$this->render->prefix = '';
@@ -171,10 +167,10 @@ class NOVO_Controller extends CI_Controller {
 
 			if (lang('SETT_VIEW_SUFFIX') === '-core') {
 				$this->includeAssets->cssFiles = [
-					"$this->customerStyle/root-$this->customerStyle",
-					"root-general",
+					"$this->customerStyle/$this->customerStyle-root",
+					"general-root",
 					"reboot",
-					"$this->customerStyle/"."$this->customerStyle-base"
+					"$this->customerStyle/$this->customerStyle-base"
 				];
 			} else {
 				$file = $this->customerUri == 'bpi' ? 'pichincha' : 'novo';
@@ -183,13 +179,6 @@ class NOVO_Controller extends CI_Controller {
 					"third_party/jquery-ui",
 					"$file-base"
 				];
-			}
-
-			if (gettype($this->ValidateBrowser) !== 'boolean') {
-				array_push(
-					$this->includeAssets->cssFiles,
-					"$this->customerUri/$this->customerUri-$this->ValidateBrowser-base"
-				);
 			}
 
 			$this->includeAssets->jsFiles = [
@@ -307,7 +296,7 @@ class NOVO_Controller extends CI_Controller {
 		writeLog('INFO', 'Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
-		$valid = $this->tool_browser->validBrowser($this->customerUri);
+		$valid = $this->tool_browser->validBrowser();
 
 		if (!$valid) {
 			redirect(base_url(lang('SETT_LINK_SUGGESTION')), 'location', 302);

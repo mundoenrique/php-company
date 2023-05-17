@@ -15,7 +15,7 @@ class NOVO_Model extends CI_Model {
 	public $accessLog;
 	public $customer;
 	public $customerUri;
-	public $customerImages;
+	public $customerFiles;
 	public $dataRequest;
 	public $userName;
 	public $autoLogin;
@@ -32,7 +32,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
 		$this->customerUri = $this->session->customerUri ?? $this->config->item('customer_uri');
-		$this->customerImages = $this->config->item('customer_images');
+		$this->customerFiles = $this->config->item('customer_files');
 		$this->dataRequest = new stdClass();
 		$this->userName = $this->session->userName;
 		$this->autoLogin = $this->session->autoLogin ?? '';
@@ -151,6 +151,7 @@ class NOVO_Model extends CI_Model {
 	protected function makeAnswer($responseModel, $model)
 	{
 		writeLog('INFO', 'Model: makeAnswer Method Initialized');
+
 		$responseCode = $responseModel->rc ?? $responseModel->responseCode;
 		$this->isResponseRc = (int) $responseCode;
 
@@ -213,7 +214,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->modalBtn = $arrayResponse;
 		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_RC_0') : $this->response->msg;
 
-		return $responseModel;
+		return $responseModel->data ?? $responseModel;
 	}
 	/**
 	 * @info Método enviar el resultado de la consulta a la vista

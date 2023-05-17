@@ -11,14 +11,14 @@ class Tool_Browser {
 	public function __construct()
 	{
 		writeLog('INFO', 'Tool_Browser Library Class Initialized');
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info Método para determinar que el navegador es compatible con la aplicación
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date January 24th, 2020
 	 */
-	public function validBrowser($client)
+	public function validBrowser()
 	{
 		writeLog('INFO', 'Tool_Browser: validBrowser Method Initialized');
 
@@ -33,26 +33,18 @@ class Tool_Browser {
 				'Firefox' => 29,
 				'Opera' => 34,
 				'Safari' => 9,
-				'Edge' => 13,
-				'Internet Explorer' => 11
+				'Edge' => 13
 			];
 
 			$browser = $this->CI->agent->browser();
 			$version = floatval($this->CI->agent->version());
 
 			if(array_key_exists($browser, $validBrowser)) {
-				if(lang('SETT_SUPPORT_IE') == 'ON') {
-					$validBrowser['Internet Explorer'] = 10;
-				}
 
 				writeLog('DEBUG', 'validBrowser: browser access '.$browser.' version '.$version);
 
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
-
-				if($valid && $browser === 'Internet Explorer') {
-					$valid = 'ie11';
-				}
 			}
 		}
 
@@ -97,7 +89,7 @@ class Tool_Browser {
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
 
-		writeLog('DEBUG', 'validBrowser: platform access '.$platform);
+		writeLog('DEBUG', 'validBrowser: platform access ' . $platform);
 
 		return $valid;
 	}
