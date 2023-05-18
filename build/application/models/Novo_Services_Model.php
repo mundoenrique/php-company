@@ -1076,6 +1076,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->modeloOperativo = $this->session->enterpriseInf->operatingModel;
 
 		$response = $this->sendToService('CallWs_MasterAccountBalance');
 
