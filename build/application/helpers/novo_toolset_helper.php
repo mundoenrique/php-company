@@ -74,8 +74,8 @@ if (!function_exists('accessLog')) {
 		$CI = &get_instance();
 
 		return $accessLog = [
-			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
-			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
+			"sessionId"=> $CI->session->userdata('sessionId') ?? '',
+			"userName" => $CI->session->userdata('userName') ?? $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,
@@ -249,4 +249,27 @@ if (!function_exists('normalizeName')) {
 
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
+
+	if (!function_exists('uriRedirect')) {
+	function uriRedirect($model, $singleSession) {
+		$CI =& get_instance();
+		$redirectLink = $singleSession === 'SignThird'
+			? lang('SETT_LINK_SIGNIN')
+			: 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
+
+		if ($CI->session->has_userdata('logged')) {
+			$redirectLink = lang('SETT_LINK_ENTERPRISES');
+
+			if($model === 'callWs_GetProductDetail') {
+				$linkredirect = lang('SETT_LINK_PRODUCTS');
+			}
+
+			if ($CI->session->has_userdata('productInf')) {
+				$linkredirect = lang('SETT_LINK_PRODUCT_DETAIL');
+			}
+		}
+
+		return $redirectLink;
+	}
+}
 }

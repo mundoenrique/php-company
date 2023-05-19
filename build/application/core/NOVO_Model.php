@@ -154,25 +154,8 @@ class NOVO_Model extends CI_Model {
 
 		$responseCode = $responseModel->rc ?? $responseModel->responseCode;
 		$this->isResponseRc = (int) $responseCode;
+		$linkredirect = uriRedirect($model, $this->singleSession);
 
-		switch ($model) {
-			case 'callWs_GetProductDetail':
-				$linkredirect = lang('SETT_LINK_PRODUCTS');
-			break;
-			case 'callWs_GetProducts':
-				$linkredirect = lang('SETT_LINK_ENTERPRISES');
-			break;
-			default:
-				$linkredirect = lang('SETT_LINK_SIGNIN');
-
-				if ($this->session->has_userdata('logged')) {
-					$linkredirect = lang('SETT_LINK_ENTERPRISES');
-				}
-		}
-
-		$linkredirect = $this->session->has_userdata('productInf') ? lang('SETT_LINK_PRODUCT_DETAIL') : $linkredirect;
-		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61)
-			? 'ingresar/'.lang('SETT_LINK_SIGNOUT_END') : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -186,9 +169,7 @@ class NOVO_Model extends CI_Model {
 			case -61:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
-				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
-					$this->session->sess_destroy();
-				}
+				clearSessionsVars();
 			break;
 			case -259:
 				$this->response->icon = lang('SETT_ICON_DANGER');
@@ -201,7 +182,7 @@ class NOVO_Model extends CI_Model {
 			case 502:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->session->sess_destroy();
+				clearSessionsVars();
 			break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');

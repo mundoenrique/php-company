@@ -643,11 +643,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
-
-		if (!$this->input->is_ajax_request()) {
-			$this->session->sess_destroy();
-		}
-
 		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');
