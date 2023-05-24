@@ -60,10 +60,9 @@ if (!function_exists('clearSessionsVars')) {
 		$CI =& get_instance();
 		$isLogged = $CI->session->has_userdata('logged');
 		$isUserId = $CI->session->has_userdata('userId');
-		$isLogUser = $CI->session->has_userdata('logUser');
 
-		if($isLogged || $isUserId || $isLogUser) {
-			$CI->session->unset_userdata(['logged', 'userId', 'userName', 'enterpriseInf', 'productInf', 'logUser']);
+		if($isLogged || $isUserId) {
+			$CI->session->unset_userdata(['logged', 'userId', 'userName', 'enterpriseInf', 'productInf']);
 			$CI->session->sess_destroy();
 		}
 	}

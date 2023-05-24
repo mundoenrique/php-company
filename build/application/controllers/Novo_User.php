@@ -394,14 +394,15 @@ class Novo_User extends NOVO_Controller {
 		writeLog('INFO', 'User: index Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			$urlRedirect = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
+			$urlRedirect = str_replace(
+				$this->customerUri . '/', $this->config->item('customer') . '/',
+				base_url('dashboard')
+			);
 			redirect($urlRedirect, 'Location', 302);
 			exit;
 		}
 
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
+		clearSessionsVars();
 
 		$view = 'login';
 		$views = ['user/login', 'user/signin'];
