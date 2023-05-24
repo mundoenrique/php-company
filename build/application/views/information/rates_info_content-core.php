@@ -32,10 +32,10 @@
 												<?php echo $parent->name; ?>
 											</td>
 											<td class="text-section center">
-												<span>Bs. / Bs. (Nueva expresión monetaria)</span>
+												<span>Bs.</span>
 											</td>
 											<td class="text-section center">
-												<span>Bs. / Bs. (Nueva expresión monetaria)</span>
+												<span>Bs.</span>
 											</td>
 										</tr>
 										<?php if ($parent->items) :
