@@ -3,10 +3,11 @@ var rechargeParam;
 var checkType;
 $(function () {
 	rechargeParam = params;
-	//$('#accept').addClass('disabled-recharge').prop('disabled', true);
+	$('#accept').addClass('disabled-recharge').prop('disabled', true);
 	if (params && code == 0) {
-		//$('.disabled-recharge').prop('disabled', false);
-		//$('#accept').removeClass('disabled-recharge')
+
+		$('#bloqueoForm').val('false')
+		$('#accept').removeClass('disabled-recharge').prop('disabled', false)
 
 		$("#pay").prop("checked", true);
 		checkType = $("input:radio[name=transferType]:checked").val();
@@ -47,14 +48,9 @@ $(function () {
 		});
 	}
 
-	$('.disabled-recharge_provis').on('click', function(e) {
+	$('.disabled-recharge').on('click', function(e) {
 
-		var form = document.getElementById('masterAccountRechargeForm');
- 		var elements = form.querySelectorAll('input, button');
-
-		elements.forEach(function(elemento) {
-			elemento.disabled = true;
-		});
+		$('#masterAccountRechargeForm :input').prop('disabled', true);
 
 		$(this)
 			.prop('disabled', false)

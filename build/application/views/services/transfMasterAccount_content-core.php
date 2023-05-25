@@ -45,6 +45,7 @@
 							<?php endif; ?>
 
               <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
+								<input type="hidden" id='bloqueoForm' value="true" />
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
                   <input type="radio" id="debit" name="transferType" class="custom-option-input" value="cargo" disabled>
