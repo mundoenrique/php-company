@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SELECT_TYPE'] = 'ON';
 $lang['CONF_SELECT_ACCOUNT'] = 'ON';
 $lang['CONF_INPUT_PASS'] = 'ON';
-$lang['CONF_INPUT_GET_TOKEN'] = 'OFF';
 $lang['CONF_REDIRECT_TRANSF_MASTER_ACCOUNT'] = 'OFF';
 
 $lang['CONF_VALIDATE_PARAMS'] = 'ON';

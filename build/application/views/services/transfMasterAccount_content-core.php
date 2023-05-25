@@ -72,7 +72,7 @@
                 <div class="help-block"></div>
               </div>
 							<?php endif; ?>
-              <?php if (lang('CONF_INPUT_PASS') == 'ON') : ?>
+              <?php if ( lang('CONF_REMOTE_AUTH') == 'OFF' && lang('CONF_INPUT_GET_TOKEN') == 'OFF') : ?>
               <div class="col-3 form-group mt-3 ml-auto">
                 <div class="input-group">
                   <input id="passwordTranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"

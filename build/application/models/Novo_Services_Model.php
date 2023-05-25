@@ -1158,7 +1158,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$password = $dataRequest->passwordTranfer;
 
-		if (lang('CONF_REMOTE_AUTH') === 'OFF') {
+		if (lang('CONF_REMOTE_AUTH') === 'OFF' && lang('CONF_INPUT_GET_TOKEN') === 'OFF') {
 			$password = md5($this->cryptography->decryptOnlyOneData($dataRequest->passwordTranfer));
 		}
 
