@@ -13,12 +13,10 @@
 
 <div class="flex mt-3 items-center">
 	<div class="flex h6 flex-auto justify-end">
-		<?php if(count($brands) > 1): ?>
 		<div id="resetBtn">
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_PRODUCTS_ALL') ?></button>
 		</div>
-		<?php endif; ?>
-		<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
+		<?php if(count($categories) > 1): ?>
 		<select class="select-box custom-select mr-0 h6">
 			<option selected disabled><?= lang('BUSINESS_SEARCH_CATEGORY'); ?></option>
 			<?php foreach($categories AS $categorie): ?>
@@ -30,7 +28,7 @@
 		<select class="select-box custom-select h6" data-jplist-control="select-filter" data-group="group-filter-pagination" data-name="brand">
 			<option selected disabled data-path="default"><?= lang('BUSINESS_SEARCH_BRAND'); ?></option>
 			<?php foreach($brands AS $brand): ?>
-			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= strtolower($brand->nombre); ?>"><?= $brand->nombre; ?></option>
+			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= $brand->nombre; ?>"><?= $brand->nombre; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<?php endif; ?>

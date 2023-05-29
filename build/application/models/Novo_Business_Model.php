@@ -36,7 +36,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
 
-		$response = $this->sendToService('callWs_GetEnterprises');
+		$response = $this->sendToWebServices('callWs_GetEnterprises');
 		$filters = $this->request_data->setFilters();
 
 		switch($this->isResponseRc) {
