@@ -14,10 +14,8 @@ $lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</
 $lang['SERVICES_TWIRLS_EXPIRED_CARD'] = 'La tarjeta <strong>%s</strong> está vencida, asigna una nueva';
 $lang['SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> está bloqueada temporalmente, para consultar desbloquéala y despúes de tu consulta bloquéala';
 $lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción de límites, intenta de nuevo';
-
-//RECEPTION IN ENTERPRICE // DELIVERY OF CARDS
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibido en empresa';
 $lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
-
-$lang["SERVICES_TYPE_CARGO"] = 'Fondear';
-$lang["SERVICES_TYPE_ABONO"] = 'Devolver';
+$lang["SERVICES_TYPE_CARGO"] = 'Devolver';
+$lang["SERVICES_TYPE_ABONO"] = 'Fondear';
+$lang['SERVICES_SUCCESSFUL_TRANSFER'] = 'La solicitud a cuenta maestra fue registrada exitosamente para su autorización';

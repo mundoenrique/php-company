@@ -21,8 +21,9 @@
     <div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
       <?php if ($showRechargeAccount): ?>
       <div class="flex pb-3 flex-column w-100">
-        <span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta maestra </span>
+        <span class="line-text mb-2 h4 semibold primary"><?= lang('SERVICES_TITLE_RECHARGE_MASTER_ACCOUNT')?></span>
         <div class="flex my-2 px-5">
+				<input type="hidden" id='bloqueoForm' value="true" />
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span>
 						<?php if($reloadBalance): ?>
@@ -45,15 +46,14 @@
 							<?php endif; ?>
 
               <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
-								<input type="hidden" id='bloqueoForm' value="true" />
               <div class="form-group col-3">
+								<div class="custom-option-c custom-radio custom-control-inline">
+                  <input type="radio" id="pay" name="transferType" class="custom-option-input" value="abono" disabled>
+                  <label class="custom-option-label nowrap" for="pay"><?= lang('SERVICES_TYPE_ABONO'); ?></label>
+                </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
                   <input type="radio" id="debit" name="transferType" class="custom-option-input" value="cargo" disabled>
                   <label class="custom-option-label nowrap" for="debit"><?= lang('SERVICES_TYPE_CARGO'); ?></label>
-                </div>
-                <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="pay" name="transferType" class="custom-option-input" value="abono" disabled>
-                  <label class="custom-option-label nowrap" for="pay"><?= lang('SERVICES_TYPE_ABONO'); ?></label>
                 </div>
                 <div class="help-block"></div>
               </div>
