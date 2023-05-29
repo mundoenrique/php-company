@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// PROGRAM IMAGES
+
 $lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_volvo' => 'plata_volvo',
 	'latodo_teoma' => 'latodo_teoma',
@@ -100,4 +100,6 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'provis_virtual_r' => 'provis_alimentacion',
 	'provis_campana' => 'provis_virtual',
 	'compras_campana' => 'plata_virtual_navidad',
+	'plata_compras_chip' => 'plata_compras_chip',
+	'plata_gasolina_chip' => 'plata_gasolina_chip',
 ];
