@@ -133,7 +133,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -251:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'No existen parámetros definidos para la empresa sobre éste producto.';
+				$this->response->msg = lang('GEN_NOT_DEFINED_PARAMETERS');
 			break;
 		}
 
@@ -1217,6 +1217,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_DAILY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -44:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_COMPANY_NOT_FOUND');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -155:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
@@ -1237,6 +1243,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -251:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_NOT_DEFINED_PARAMETERS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -285:
@@ -1275,6 +1287,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = $response->msg;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -406:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -472:

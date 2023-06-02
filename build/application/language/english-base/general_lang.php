@@ -486,3 +486,5 @@ $lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits has been
 $lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits and appropriations has been exceeded.";
 $lang['GEN_AMOUNT_MAX_EXCEEDED']= "The maximum allowed balance amount has been exceeded.";
 $lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "The account is not registered.";
+$lang['GEN_COMPANY_NOT_FOUND']= "No company data found.";
+$lang['GEN_NOT_DEFINED_PARAMETERS'] = "There are no defined parameters for the company on this product.";
