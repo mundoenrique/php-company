@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 $lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_volvo' => 'plata_volvo',
 	'latodo_teoma' => 'latodo_teoma',

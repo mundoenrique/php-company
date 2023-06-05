@@ -2,24 +2,24 @@
 	"source_type": "rates",
 	"currency": "ves",
 	"currency_symbol": "Bs.",
-	"last_update": "2023-03-21",
+	"last_update": "2023-05-16",
 	"data": [{
 			"name": "Servicios",
 			"description": null,
 			"items": [{
 					"name": "Servicio administrativo mínimo",
-					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 210.000.000,00 / <i class='icon-info mr-0 info'></i> Bs. 210,00",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 250,00",
 					"rates": [
-						"Bs. 210.000.000,00 <br> Bs. 210,00",
-						"Bs. 210.000.000,00 <br> Bs. 210,00"
+						"Bs. 250,00",
+						"Bs. 250,00"
 					]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo",
 					"rates": [
-						"Bs. 210.000.000,00 <br>  Bs. 210,00",
-						"Bs. 210.000.000,00 <br> Bs. 210,00"
+						"Bs. 250,00",
+						"Bs. 250,00"
 					]
 				}
 			]
@@ -31,16 +31,16 @@
 					"name": "Emisión (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 45.000.000,00 <br> Bs. 45,00",
-						"Bs. 45.000.000,00 <br> Bs. 45,00"
+						"Bs. 50,00",
+						"Bs. 50,00"
 					]
 				},
 				{
 					"name": "Reposición / Renovación (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 45.000.000,00 <br> Bs. 45,00",
-						"Bs. 45.000.000,00 <br> Bs. 45,00"
+						"Bs. 50,00",
+						"Bs. 50,00"
 					]
 				}
 			]
@@ -52,8 +52,8 @@
 				"name": "Reposición",
 				"description": null,
 				"rates": [
-					"Bs. 35.000.000,00 <br> Bs. 35,00",
-					"Bs. 35.000.000,00 <br> Bs. 35,00"
+					"Bs. 50,00",
+					"Bs. 50,00"
 				]
 			}]
 		},
@@ -91,7 +91,7 @@
 					"description": null,
 					"rates": [
 						null,
-						"Bs. 10.000,00 <br> Bs. 0,01"
+						"Bs. 0,01"
 					]
 				},
 				{
@@ -99,7 +99,7 @@
 					"description": null,
 					"rates": [
 						null,
-						"Bs. 10.000,00 <br> Bs. 0,01"
+						"Bs. 0,01"
 					]
 				}
 			]
@@ -109,15 +109,15 @@
 			"description": null,
 			"items": [
 				{
-					"name": "Montos menores a Bs. 941.180.000,00 <br>/ <i class='icon-info mr-0 info'></i> Bs. 941,18",
+					"name": "Montos menores a Bs. 1.176,47",
 					"description": null,
 					"rates": [
 						null,
-						"Bs. 8.000.000,00 <br> Bs. 8,00"
+						"Bs. 10,00"
 					]
 				},
 				{
-					"name": "Montos mayores a Bs. 941.180.000,00 <br>/ <i class='icon-info mr-0 info'></i> Bs. 941,18",
+					"name": "Montos mayores a Bs. 1.176,47",
 					"description": null,
 					"rates": [
 						null,
@@ -140,10 +140,6 @@
 		}
 	],
 	"refs": [
-		{
-			"tag": "<i class='icon-info mr-0 info'></i>",
-			"name": "Nueva expresión monetaria"
-		},
 		{
 			"tag": "*",
 			"name": "Aplican las tarifas establecidas por las instituciones bancarias."
