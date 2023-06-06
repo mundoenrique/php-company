@@ -17,17 +17,27 @@
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_PRODUCTS_ALL') ?></button>
 		</div>
 		<?php if(count($categories) > 1): ?>
-		<select class="select-box custom-select mr-0 h6">
+		<select
+			class="select-box custom-select mr-0 h6"
+			data-jplist-control="select-filter"
+			data-group="group-filter-pagination"
+			data-name="category"
+		>
 			<option selected disabled><?= lang('BUSINESS_SEARCH_CATEGORY'); ?></option>
-			<?php foreach($categories AS $categorie): ?>
-			<option value="<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
+			<?php foreach($categories as $categorie): ?>
+			<option value="<?= $categorie->idCategoria; ?>" data-path=".filter-<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<?php endif; ?>
 		<?php if(count($brands) > 1): ?>
-		<select class="select-box custom-select h6" data-jplist-control="select-filter" data-group="group-filter-pagination" data-name="brand">
+		<select
+			class="select-box custom-select h6"
+			data-jplist-control="select-filter"
+			data-group="group-filter-pagination"
+			data-name="brand"
+		>
 			<option selected disabled data-path="default"><?= lang('BUSINESS_SEARCH_BRAND'); ?></option>
-			<?php foreach($brands AS $brand): ?>
+			<?php foreach($brands as $brand): ?>
 			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= $brand->nombre; ?>"><?= $brand->nombre; ?></option>
 			<?php endforeach; ?>
 		</select>
@@ -50,7 +60,7 @@
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center flex-auto">
 					<img class="img-product-list" src="<?= $this->asset->insertFile($products->productImg, 'images', $customerFiles, 'programs'); ?>" alt="<?= $products->productImg; ?>">
-					<img class="filter-<?= $products->marca; ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $products->imgBrand; ?>">
+					<img class="filter-<?= $products->marca; ?> filter-<?= $products->idCategoria; ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text truncate">

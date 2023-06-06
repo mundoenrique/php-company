@@ -21,7 +21,7 @@
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1" <?= $disabled ?>>
 			<?= lang('BUSINESS_ENTERPRISE_FILTER_ALL'); ?>
 		</button>
-		<?php foreach($filters AS $filtersAttr): ?>
+		<?php foreach($filters as $filtersAttr): ?>
 		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
 			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
 		<?php endforeach; ?>
