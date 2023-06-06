@@ -41,7 +41,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk($this->request);
 		$this->render->typesLot = $typesLot->data->typesLot;
 
-		if(lang('SETT_BULK_BRANCHOFFICE') == 'ON') {
+		if(lang('SETT_BULK_BRANCHOFFICE') === 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$this->request->newGet = $typesLot->code;

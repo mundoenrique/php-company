@@ -135,3 +135,43 @@ if (!function_exists('handleResponseServer')) {
 		return $webServiceResp;
 	}
 }
+
+if (!function_exists('handleLogResponse')) {
+	function handleLogResponse($responseToLog) {
+		$logResponse = new stdClass();
+
+		foreach ($responseToLog as $pos => $data) {
+			if ($pos === 'data') {
+				$logResponse->data = new stdClass();
+
+				foreach ($data as $key => $value) {
+					if ($key === 'archivo') {
+						continue;
+					}
+
+					if ($key === 'bean' && (gettype($value) === 'object'  || gettype($value) === 'array')) {
+						$logResponse->data->bean = new stdClass();
+
+						foreach ($value as $index => $content) {
+							if ($index === 'archivo') {
+								continue;
+							}
+
+							$logResponse->data->bean->$index = $content;
+						}
+
+						continue;
+					}
+
+					$logResponse->data->$key = $value;
+				}
+
+				continue;
+			}
+
+			$logResponse->$pos = $data;
+		}
+
+		return $logResponse;
+	}
+}

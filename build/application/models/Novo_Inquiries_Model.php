@@ -29,7 +29,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.EstatusLotesMO';
 		$this->dataRequest->tipoEstatus = 'TIPO_B';
 
-		$response = $this->sendToService('callWs_ServiceOrderStatus');
+		$response = $this->sendToWebServices('callWs_ServiceOrderStatus');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -84,7 +84,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-   	$response = $this->sendToService('callWs_GetServiceOrders');
+   	$response = $this->sendToWebServices('callWs_GetServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -205,7 +205,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_ClearServiceOrders');
+		$response = $this->sendToWebServices('callWs_ClearServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -244,7 +244,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('callWs_BulkDetail');
+		$response = $this->sendToWebServices('callWs_BulkDetail');
 
 		$detailInfo = [
 			'fiscalId' => '--',
@@ -580,13 +580,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
-		$response = $this->sendToService('callWs_ExportFiles');
+		$response = $this->sendToWebServices('callWs_ExportFiles');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$file = $response->archivo;
-				$name = str_replace("OS","Orden_de_Servicio",$response->nombre);
+				$name = str_replace('OS', 'Orden_de_Servicio', $response->nombre);
 
 				$this->response->data->file = $file;
 				$this->response->data->name = $name;
@@ -628,7 +628,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'dobleAutenticacion';
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
-		$response = $this->sendToService('CallWs_pagoOs');
+		$response = $this->sendToWebServices('CallWs_pagoOs');
 		$this->response->title = lang('PAG_OS_TITLE');
 
 		switch ($this->isResponseRc) {
@@ -670,7 +670,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->nofactura = $dataRequest->noFactura;
 		$this->dataRequest->acUsuario = $this->userName;
 
-		$response = $this->sendToService('CallWs_PagarOS');
+		$response = $this->sendToWebServices('CallWs_PagarOS');
 		$this->response->title = lang('PAG_OS_TITLE');
 
 		switch ($this->isResponseRc) {

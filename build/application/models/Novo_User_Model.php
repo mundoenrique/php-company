@@ -36,7 +36,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
-		if (IP_VERIFY == 'ON') {
+		if (IP_VERIFY === 'ON') {
 			$this->dataRequest->codigoOtp = [
 				'tokenCliente' => $dataRequest->otpCode ?? '',
 				'authToken' => $authToken
@@ -47,7 +47,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		if (lang('SETT_MAINTENANCE') == 'ON') {
+		if (lang('SETT_MAINTENANCE') === 'ON') {
 			$this->isResponseRc = lang('SETT_MAINTENANCE_RC');
 		}	elseif (isset($dataRequest->otpCode) && $authToken == '') {
 			$this->isResponseRc = 9998;
@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		if(lang('SETT_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -255,9 +255,9 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 		}
 
-		$response = $this->sendToService('callWs_SingleSignon');
+		$response = $this->sendToWebServices('callWs_SingleSignon');
 
-		if(lang('SETT_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+		if(lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -346,7 +346,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_RecoverPass');
+			$response = $this->sendToWebServices('callWs_RecoverPass');
 		}
 
 		switch($this->isResponseRc) {
@@ -422,7 +422,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_AccessRecover');
+			$response = $this->sendToWebServices('callWs_AccessRecover');
 		}
 
 		switch($this->isResponseRc) {
@@ -486,7 +486,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if ($this->isResponseRc === 0){
 			if ($this->session->flashdata('authToken') != NULL) {
-				$response = $this->sendToService('callWs_ValidateOtp');
+				$response = $this->sendToWebServices('callWs_ValidateOtp');
 			} else {
 				$this->isResponseRc = 998;
 			}
@@ -546,7 +546,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
 		$changePassType = $this->session->flashdata('changePassword');
-		$this->sendToService('CallWs_ChangePassword');
+		$this->sendToWebServices('CallWs_ChangePassword');
 		$code = 0;
 
 		switch($this->isResponseRc) {
@@ -638,7 +638,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 
-		$response = $this->sendToService('callWs_FinishSession');
+		$response = $this->sendToWebServices('callWs_FinishSession');
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
@@ -664,7 +664,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->opcion = 'getUsers';
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 
-		$response = $this->sendToService('callWs_usersManagement');
+		$response = $this->sendToWebServices('callWs_usersManagement');
 
 		switch ($this->isResponseRc)  {
 			case 0:
@@ -719,7 +719,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $dataRequest->idUser;
 		$this->session->set_flashdata('userDataPermissions', $dataRequest);
 
-		$response = $this->sendToService('callWs_userPermissions');
+		$response = $this->sendToWebServices('callWs_userPermissions');
 
 		switch ($this->isResponseRc)  {
 			case 0:
@@ -805,7 +805,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [      ['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
 
-		$response = $this->sendToService('callWs_updatePermissions');
+		$response = $this->sendToWebServices('callWs_updatePermissions');
 
 		switch ($this->isResponseRc)   {
 			case 0:
@@ -853,7 +853,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->empresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->usuarioPlantilla = $this->session->userName;
 
-		$response = $this->sendToService('callWs_enableUser');
+		$response = $this->sendToWebServices('callWs_enableUser');
 
 		switch ($this->isResponseRc)   {
 			case 0:

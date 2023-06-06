@@ -32,7 +32,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $this->userName;
 
-		$response = $this->sendToService('CallWs_GetUser');
+		$response = $this->sendToWebServices('CallWs_GetUser');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -90,7 +90,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			$this->session->unset_userdata($access);
 		}
 
-		$this->sendToService('CallWs_ChangeEmail');
+		$this->sendToWebServices('CallWs_ChangeEmail');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -129,7 +129,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataRequest->accodusuario = $this->userName;
 
-		$response = $this->sendToService('callWS_ListaEmpresas');
+		$response = $this->sendToWebServices('callWS_ListaEmpresas');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -177,7 +177,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->actel2 = $dataRequest->phone2 ?? '';
 		$this->dataRequest->actel3 = $dataRequest->phone3 ?? '';
 
-		$response = $this->sendToService('CallWs_ChangeTelephones');
+		$response = $this->sendToWebServices('CallWs_ChangeTelephones');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -212,7 +212,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->direccion  = $dataRequest->address ?? '';
 		$this->dataRequest->direccionFact = $dataRequest->billingAddress ?? '';
 
-		$response = $this->sendToService('CallWs_ChangeDataEnterprice');
+		$response = $this->sendToWebServices('CallWs_ChangeDataEnterprice');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -254,7 +254,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			'accodcia' => $enterpriseCode
 		];
 
-		$response = $this->sendToService('CallWs_GetFileIni');
+		$response = $this->sendToWebServices('CallWs_GetFileIni');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -297,7 +297,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->paginaActual = 0;
 		$this->dataRequest->tamanoPagina = 1;
 
-		$response = $this->sendToService('CallWs_getContacts');
+		$response = $this->sendToWebServices('CallWs_getContacts');
 		$contactsList = [];
 		//$this->isResponseRc = -150;
 
@@ -371,7 +371,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			"password" => md5($password)
 		];
 
-		$response = $this->sendToService('CallWs_addContact');
+		$response = $this->sendToWebServices('CallWs_addContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -427,7 +427,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			"password" => md5($password)
 		];
 
-		$response = $this->sendToService('CallWs_updateContact');
+		$response = $this->sendToWebServices('CallWs_updateContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -473,7 +473,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			"password" => md5($password)
 		];
 
-		$response = $this->sendToService('CallWs_deleteContact');
+		$response = $this->sendToWebServices('CallWs_deleteContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -517,7 +517,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$profile = 'S';
 		$country = $this->session->customerSess;
 
-		$response = $this->sendToService('CallWs_getBranches');
+		$response = $this->sendToWebServices('CallWs_getBranches');
 		$listBranches = [];
 
 		switch ($this->isResponseRc) {
@@ -597,7 +597,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToService('CallWs_addBranches');
+		$response = $this->sendToWebServices('CallWs_addBranches');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -651,7 +651,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToService('CallWs_updateBranches');
+		$response = $this->sendToWebServices('CallWs_updateBranches');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -695,7 +695,7 @@ class Novo_Tools_Model extends NOVO_Model {
 				"token" => $this->session->userdata('token'),
 			];
 
-			$response = $this->sendToService('CallWs_UploadFileBranch');
+			$response = $this->sendToWebServices('CallWs_UploadFileBranch');
 
 			switch ($this->isResponseRc) {
 				case 0:

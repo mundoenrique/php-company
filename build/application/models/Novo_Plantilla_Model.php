@@ -29,7 +29,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'id-optation';
 		$this->dataRequest->className = 'class-name';
 
-		$response = $this->sendToService('callWs_Plantilla');
+		$response = $this->sendToWebServices('callWs_Plantilla');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -47,7 +47,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 				break;
 			case -7000:
 				$this->response->code = 3;
-				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
+				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');

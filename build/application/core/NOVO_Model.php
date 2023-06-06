@@ -54,7 +54,6 @@ class NOVO_Model extends CI_Model {
 	{
 		writeLog('INFO', 'Model: sendToWebServices Method Initialized');
 
-		$logResponse = new stdClass();
 		$request = [];
 		$this->accessLog = accessLog($this->dataAccessLog);
 
@@ -81,55 +80,15 @@ class NOVO_Model extends CI_Model {
 		$encryptResponse = $this->connect_services_apis->connectWebServices($request);
 		$response = $this->encrypt_decrypt->decryptWebServices($encryptResponse);
 		$response = handleResponseServer($response);
+		$logResponse = handleLogResponse($response);
 
-		foreach ($response as $key => $value) {
-			if (isset($value->archivo) || isset($value->bean->archivo)) {
-				continue;
-			}
-
-			$logResponse->$key = $value;
-		}
-
-		writeLog('DEBUG', 'WEB SERVICES RESPONSE COMPLETE ' . $model . ': '
-			. json_encode($logResponse, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'WEB SERVICES RESPONSE ' . $model . ': ' . json_encode($logResponse, JSON_UNESCAPED_UNICODE));
 
 		unset($logResponse);
 
 		return $this->makeAnswer($response, $model);
 	}
 
-	public function sendToService($model)
-	{
-		writeLog('INFO', 'Model: sendToService Method Initialized');
-
-		$this->accessLog = accessLog($this->dataAccessLog);
-		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
-		$device = 'desktop';
-
-		$this->dataRequest->pais = $this->customer;
-		$this->dataRequest->token = $this->token;
-		$this->dataRequest->autoLogin = $this->autoLogin;
-
-		if (lang('SETT_AGENT_INFO') == 'ON') {
-			$this->dataRequest->aplicacion = $this->session->enterpriseInf->thirdApp ?? '';
-			$this->dataRequest->dispositivo = $this->agent->is_mobile() ? 'mobile' : 'desktop';
-			$this->dataRequest->marca = $this->agent->is_mobile() ? $this->agent->mobile() : '';
-			$this->dataRequest->navegador = $this->agent->browser().' V-'.floatval($this->agent->version());
-		}
-
-		$this->dataRequest->logAccesoObject = $this->accessLog;
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['bean'=> $encryptData, 'pais'=> $this->customer];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
-
-		if(isset($response->rc)) {
-			$responseDecrypt = $response;
-		} else {
-			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
-		}
-
-		return $this->makeAnswer($responseDecrypt, $model);
-	}
 	/**
 	 * @info Método para comunicación con el servicio
 	 * @author J. Enrique Peñaloza Piñero.
@@ -193,7 +152,7 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->response->modalBtn = $arrayResponse;
-		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_RC_0') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_RC_0') : $this->response->msg;
 
 		return $responseModel->data ?? $responseModel;
 	}
@@ -207,7 +166,7 @@ class NOVO_Model extends CI_Model {
 		writeLog('INFO', 'Model: responseToView Method Initialized');
 		$responsetoView = new stdClass();
 
-		foreach ($this->response AS $pos => $response) {
+		foreach ($this->response as $pos => $response) {
 			if (is_object($response) && isset($response->file)) {
 				continue;
 			}

@@ -64,7 +64,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'TRADBL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRADBL'),
 		];
 
-		$response = $this->sendToService('callWs_TransfMasterAccount');
+		$response = $this->sendToWebServices('callWs_TransfMasterAccount');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -74,7 +74,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->name = $cards->NombreCliente;
 					$record->idNumber = $cards->id_ext_per;
 					$record->status = isset($cards->codBloqueo) ? mb_strtolower($cards->codBloqueo) : '';
-					$record->amount = '0'.lang('SETT_DECIMAL').'00';
+					$record->amount = '0' . lang('SETT_DECIMAL') . '00';
 					array_push(
 						$cardsList,
 						$record
@@ -86,7 +86,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->params->costoComisionTrans = lang('SETT_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
 				$this->response->params->costoComisionCons = lang('SETT_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
 
-				if ( (float)$response->maestroDeposito->saldo < 0 ){
+				if ( (float)$response->maestroDeposito->saldo < 0 ) {
 					$this->response->cssNegativeBalance = "danger";
 				}
 
@@ -234,7 +234,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_ActionMasterAccount');
+		$response = $this->sendToWebServices('callWs_ActionMasterAccount');
 		$listResopnse = [];
 		$listFail = [];
 
@@ -461,7 +461,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->opcion = 'EMI_REC';
 		$this->dataRequest->pagina = 0;
 
-		$response = $this->sendToService('callWs_CardsInquiry');
+		$response = $this->sendToWebServices('callWs_CardsInquiry');
 		$cardsList = [];
 		$operList = ['INQUIRY_BALANCE' => FALSE];
 		$massiveOptions = [];
@@ -638,7 +638,7 @@ class Novo_Services_Model extends NOVO_Model {
 		];
 		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
 
-		$response = $this->sendToService('callWs_InquiriesActions');
+		$response = $this->sendToWebServices('callWs_InquiriesActions');
 		$balanceList = [];
 		$failList = [];
 
@@ -730,7 +730,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0
 		];
 
-		$response = $this->sendToService('callWs_commercialTwirls');
+		$response = $this->sendToWebServices('callWs_commercialTwirls');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -825,7 +825,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0
 		];
 
-		$response = $this->sendToService('callWs_updateCommercialTwirls');
+		$response = $this->sendToWebServices('callWs_updateCommercialTwirls');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -899,7 +899,7 @@ class Novo_Services_Model extends NOVO_Model {
 		];
 
 
-		$response = $this->sendToService('callWs_transactionalLimits');
+		$response = $this->sendToWebServices('callWs_transactionalLimits');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -1017,7 +1017,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_updateTransactionalLimits');
+		$response = $this->sendToWebServices('callWs_updateTransactionalLimits');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -1076,7 +1076,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 
-		$response = $this->sendToService('CallWs_MasterAccountBalance');
+		$response = $this->sendToWebServices('CallWs_MasterAccountBalance');
 
 		$this->response->code = 0;
 		$this->response->data->info['balance'] = '';
@@ -1169,7 +1169,7 @@ class Novo_Services_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('CallWs_MasterAccountTransfer');
+		$response = $this->sendToWebServices('CallWs_MasterAccountTransfer');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1318,7 +1318,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->tipoOperacion = $dataRequest->action;
 		$this->dataRequest->idServicio = '1260';
 
-		$response = $this->sendToService('CallWs_AuthorizationKey');
+		$response = $this->sendToWebServices('CallWs_AuthorizationKey');
 
 		// NO BORRAR
 		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
@@ -1366,7 +1366,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'dobleAutenticacion';
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
-		$response = $this->sendToService('CallWs_RechargeAuthorization');
+		$response = $this->sendToWebServices('CallWs_RechargeAuthorization');
 
 		switch ($this->isResponseRc) {
 			case 0:

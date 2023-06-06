@@ -52,7 +52,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_UnnmamedDetail');
+		$response = $this->sendToWebServices('callWs_UnnmamedDetail');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -101,7 +101,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('callWs_StatusBulkReport');
+		$response = $this->sendToWebServices('callWs_BulkDetailExport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -153,7 +153,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
 
 
-		$response = $this->sendToService('callWs_StatusBulkReport');
+		$response = $this->sendToWebServices('callWs_StatusBulkReport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -205,7 +205,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->mesSeleccionado = $mes;
 		$this->dataRequest->anoSeleccionado = $anio;
 
-		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$response = $this->sendToWebServices('callWs_RechargeMadeReport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -245,7 +245,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
 		$this->dataRequest->fechaMes = $dataRequest->initialDatemy;
 
-		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$response = $this->sendToWebServices('callWs_IssuedCardsReport');
 
 		switch ($this->isResponseRc) {
 			case 0:

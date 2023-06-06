@@ -32,7 +32,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
-		$response = $this->sendToService('callWs_GetReportsList');
+		$response = $this->sendToWebServices('callWs_GetReportsList');
 		$headerCardsRep = [];
 
 		switch ($this->isResponseRc) {
@@ -183,7 +183,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -232,7 +232,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -294,7 +294,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -346,7 +346,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -391,7 +391,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -479,7 +479,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -566,7 +566,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'fechaFin' => $fechaFin
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -637,7 +637,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+		$response = $this->sendToWebServices('GetReport: '.$dataRequest->operation);
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -686,7 +686,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
 		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
 
-		$response = $this->sendToService('callWs_StatusBulk');
+		$response = $this->sendToWebServices('callWs_StatusBulk');
 		$statusBulkList = [];
 
 
@@ -767,7 +767,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
 
-		$response = $this->sendToService('callWs_closingBudgets');
+		$response = $this->sendToWebServices('callWs_closingBudgets');
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
 
@@ -813,7 +813,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->descProd =  $dataRequest->descProd;
 
-		$response = $this->sendToService('callWs_exportToExcel');
+		$response = $this->sendToWebServices('callWs_exportToExcel');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -854,7 +854,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->tamanoPagina = $dataRequest->pageSize;
 		$this->dataRequest->paginaActual = 1;
 
-		$response = $this->sendToService('callWs_masterAccount');
+		$response = $this->sendToWebServices('callWs_masterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -894,7 +894,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = TRUE;
 		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
-		$response = $this->sendToService('callWs_extendedMasterAccount');
+		$response = $this->sendToWebServices('callWs_extendedMasterAccount');
 
 		$listMasterAccount = [];
 
@@ -963,7 +963,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_statusMasterAccount');
+		$response = $this->sendToWebServices('callWs_statusMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1014,7 +1014,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-		$response = $this->sendToService('callWs_exportToExcelMasterAccount');
+		$response = $this->sendToWebServices('callWs_exportToExcelMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1056,7 +1056,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_exportToExcelExtendedMasterAccount');
+		$response = $this->sendToWebServices('callWs_exportToExcelExtendedMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1105,7 +1105,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 
-		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
+		$response = $this->sendToWebServices('callWs_exportToPDFMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1147,7 +1147,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-		$response = $this->sendToService('callWs_exportToExcelMasterAccountConsolid');
+		$response = $this->sendToWebServices('callWs_exportToExcelMasterAccountConsolid');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1190,7 +1190,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-		$response = $this->sendToService('callWs_exportToPDFMasterAccountConsolid');
+		$response = $this->sendToWebServices('callWs_exportToPDFMasterAccountConsolid');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1242,7 +1242,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		//$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-		$response = $this->sendToService('callWs_extendedDownloadMasterAccountCon');
+		$response = $this->sendToWebServices('callWs_extendedDownloadMasterAccountCon');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1284,7 +1284,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->rifEmpresa = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
-		$response = $this->sendToService('callWS_StatusCardHolders');
+		$response = $this->sendToWebServices('callWS_StatusCardHolders');
 		$cardHoldersList = [];
 
     switch ($this->isResponseRc) {
@@ -1342,7 +1342,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->nombreProducto = $dataRequest->productName;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 
-		$response = $this->sendToService('callWs_exportReportCardHolders');
+		$response = $this->sendToWebServices('callWs_exportReportCardHolders');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1387,7 +1387,7 @@ class Novo_Reports_Model extends NOVO_Model {
     $anio=$arreglo[1];
 		$this->dataRequest->mesSeleccionado = $mes;
 		$this->dataRequest->anoSeleccionado = $anio;
-		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$response = $this->sendToWebServices('callWs_RechargeMadeReport');
 		$rechargeMadeList = [];
 
     switch ($this->isResponseRc) {
@@ -1449,7 +1449,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			$this->dataRequest->tipoDetalle = $dataRequest->detailType ?? '';
 		}
 
-		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$response = $this->sendToWebServices('callWs_IssuedCardsReport');
 		$record = [''];
 
     switch($this->isResponseRc) {
@@ -1505,7 +1505,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
-		$response = $this->sendToService('callWs_userActivity');
+		$response = $this->sendToWebServices('callWs_userActivity');
 		$usersActivity = [];
 
 		switch ($this->isResponseRc) {
@@ -1583,7 +1583,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
-		$response = $this->sendToService('callWs_exportReportUserActivity');
+		$response = $this->sendToWebServices('callWs_exportReportUserActivity');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1627,7 +1627,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaInicio =  $dataRequest->initialDate;
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 
-		$response = $this->sendToService('callWs_usersActivity');
+		$response = $this->sendToWebServices('callWs_usersActivity');
 		$usersActivity = [];
 
 		switch ($this->isResponseRc) {
@@ -1700,7 +1700,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 		$this->dataRequest->nombreUsuario =  $dataRequest->userToDownload;
 
-		$response = $this->sendToService('callWs_exportExcelUsersActivity');
+		$response = $this->sendToWebServices('callWs_exportExcelUsersActivity');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1754,7 +1754,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->prefix = $dataRequest->productCode;
 		$this->dataRequest->paginar = false;
 
-		$response = $this->sendToService('callWs_searchStatusAccount');
+		$response = $this->sendToWebServices('callWs_searchStatusAccount');
 		$listStatesAccounts = '';
 
 		switch ($this->isResponseRc) {
@@ -1831,7 +1831,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = TRUE;
 		$this->dataRequest->pagActual = (int) ($dataRequest->start / 10) + 1;
 
-		$response = $this->sendToService('callWs_searchExtendedAccountStatus');
+		$response = $this->sendToWebServices('callWs_searchExtendedAccountStatus');
 
 		$listStatesAccounts = [];
 
@@ -1921,7 +1921,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
 		$this->dataRequest->descProducto = $dataRequest->descProduct;
 
-		$response = $this->sendToService('callWs_statusAccountExcelFile');
+		$response = $this->sendToWebServices('callWs_statusAccountExcelFile');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1976,7 +1976,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
 		$this->dataRequest->descProducto = $dataRequest->descProduct;
 
-		$response = $this->sendToService('callWs_statusAccountPdfFile');
+		$response = $this->sendToWebServices('callWs_statusAccountPdfFile');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -2030,7 +2030,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->descProducto = $dataRequest->descProductXls;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_exportToExcelExtendedAccountStatus');
+		$response = $this->sendToWebServices('callWs_exportToExcelExtendedAccountStatus');
 
 		switch ($this->isResponseRc) {
 			case 0:

@@ -32,6 +32,8 @@ class Connect_Services_Apis
 
 		writeLog('DEBUG', 'REQUEST BY WEB SERVICE URL: ' . $wsUrl);
 
+		$method = $request->method ?? 'POST';
+		unset($request->method);
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$curl = curl_init();
 
@@ -43,13 +45,16 @@ class Connect_Services_Apis
 			CURLOPT_TIMEOUT => 58,
 			CURLOPT_FOLLOWLOCATION => TRUE,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => $request->method ?? 'POST',
+			CURLOPT_CUSTOMREQUEST => $method,
 			CURLOPT_HTTPHEADER => [
 				'Content-Type: text/plain',
 				'Content-Length: ' . strlen($requestSerV)
-			],
-			CURLOPT_POSTFIELDS => $requestSerV
+			]
 		]);
+
+		if ($method !== 'GET') {
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $requestSerV);
+		}
 
 		$curlResp = curl_exec($curl);
 		$executionTime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
@@ -87,6 +92,7 @@ class Connect_Services_Apis
 
 		$urlMfaServ = URL_MFA_SERV . $request->uri;
 		$method = $request->method ?? 'POST';
+		unset($request->method);
 		$uuIdV4 = uuIdV4Generate();
 
 		writeLog('DEBUG', 'REQUEST BY MFA SERVICE URL: ' . $urlMfaServ. ', UUID: '. $uuIdV4);

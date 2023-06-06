@@ -140,8 +140,8 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 		$newGet = isset($dataRequest->newGet) ? $dataRequest->newGet : 0;
 
-		if ($newGet == 0) {
-			$response = $this->sendToService('callWs_GetBranchOffices');
+		if ($newGet === 0) {
+			$response = $this->sendToWebServices('callWs_GetBranchOffices');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
 			$this->makeAnswer($dataRequest, 'callWs_GetBranchOffices');
@@ -162,7 +162,8 @@ class Novo_Business_Model extends NOVO_Model {
 					$branch = [];
 
 					if($select) {
-						$text = ( lang('SETT_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
+						$text = ( lang('SETT_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')
+							? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($text));
 						$branchOffice[] = (object) $branch;
@@ -224,7 +225,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->dataRequest->listaCuentasICBS_BDB = $this->session->thirdEnterprise->icbsAccounts;
 		}
 
-		$response = $this->sendToService('callWs_GetProducts');
+		$response = $this->sendToWebServices('callWs_GetProducts');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -281,11 +282,14 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetProductDetail_Business($dataRequest)
 	{
-		writeLog('INFO', 'Business Model: getProductDetail Method Initialized');
+		writeLog('INFO', 'Business Model: getProductDetail Method Initialized ***************** '.json_encode($dataRequest));
 
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
+
+		$this->dataRequest->idOperation = 'menuPorProducto';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoMenuMO';
 
 		$productName = '';
 		$productImg = '';
@@ -308,8 +312,6 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->set_userdata('enterpriseInf', $dataRequest);
 		}
 
-		$this->dataRequest->idOperation = 'menuPorProducto';
-		$this->dataRequest->className = 'com.novo.objects.MO.ListadoMenuMO';
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',
@@ -327,7 +329,7 @@ class Novo_Business_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_GetProductDetail');
+		$response = $this->sendToWebServices('callWs_GetProductDetail');
 
 		$productDetail = [
 			'name' => $productName,
@@ -352,7 +354,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				writeLog('INFO', '['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
+				writeLog('INFO', 'callWs_GetProductDetail USER_ACCESS LIST: ' . json_encode($response->lista));
 
 				$this->response->code = 0;
 
@@ -370,7 +372,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$imgBrand = url_title(trim(mb_strtolower($brandName)));
 					}
 
-					if (trim($response->estadistica->producto->idProducto) == 'G') {
+					if (trim($response->estadistica->producto->idProducto) === 'G') {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
 
@@ -439,7 +441,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$imgBrand = lang('IMG_BRANDS')[$tempBrandImg];
 		}
 
-		$imgBrand = $productDetail['brand'] == 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
+		$imgBrand = $productDetail['brand'] === 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
 		$productDetail['imgBrand'] = $imgBrand;
 
 		$this->response->data->productDetail = (object) $productDetail;

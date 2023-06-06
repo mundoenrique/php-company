@@ -36,7 +36,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('callWs_GetPendingBulk');
+		$response = $this->sendToWebServices('callWs_GetPendingBulk');
 		$pendingBulkList = [];
 
 		switch($this->isResponseRc) {
@@ -113,7 +113,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 
 		if($dataRequest->newGet == 0) {
-			$response = $this->sendToService('callWs_getTypeLots');
+			$response = $this->sendToWebServices('callWs_getTypeLots');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
 			$this->makeAnswer($dataRequest, 'callWs_getTypeLots');
@@ -185,7 +185,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'userName' => $this->userName
 			];
 
-			$response = $this->sendToService('callWs_LoadBulk');
+			$response = $this->sendToWebServices('callWs_LoadBulk');
 			$respLoadBulk = FALSE;
 
 			switch ($this->isResponseRc) {
@@ -294,7 +294,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_DeleteNoConfirmBulk');
+		$response = $this->sendToWebServices('callWs_DeleteNoConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -336,7 +336,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('callWs_GetDetailBulk');
+		$response = $this->sendToWebServices('callWs_GetDetailBulk');
 		$respLoadBulk = FALSE;
 		$detailBulk = [
 			'idFiscal' => '',
@@ -436,7 +436,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('callWs_ConfirmBulk');
+		$response = $this->sendToWebServices('callWs_ConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -526,7 +526,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->accodusuarioc = $this->userName;
 
 
-		$response = $this->sendToService('callWs_AuthorizeBulkList');
+		$response = $this->sendToWebServices('callWs_AuthorizeBulkList');
 		$response = $this->callWs_MakeBulkList_Bulk($response);
 
 		switch ($this->isResponseRc) {
@@ -586,7 +586,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$this->sendToService('callWs_SignBulkList');
+		$this->sendToWebServices('callWs_SignBulkList');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -648,7 +648,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$this->sendToService('callWs_DeleteConfirmBulk');
+		$this->sendToWebServices('callWs_DeleteConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -714,7 +714,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$this->sendToService('callWs_DisassConfirmBulk');
+		$this->sendToWebServices('callWs_DisassConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -787,7 +787,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_AuthorizeBulk');
+		$response = $this->sendToWebServices('callWs_AuthorizeBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1005,7 +1005,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('callWs_ServiceOrder');
+		$response = $this->sendToWebServices('callWs_ServiceOrder');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1158,7 +1158,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'accodusuarioc' => $this->userName
 		];
 
-		$response = $this->sendToService('cancelServiceOrder');
+		$response = $this->sendToWebServices('cancelServiceOrder');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1321,7 +1321,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			"destinoEmb" => "01"
 		];
 
-		$response = $this->sendToService('callWs_UnnamedRequest');
+		$response = $this->sendToWebServices('callWs_UnnamedRequest');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1380,7 +1380,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_unnamedAffiliate');
+		$response = $this->sendToWebServices('callWs_unnamedAffiliate');
 
 		$detailInfo = [
 			'bulkHeader' => [
@@ -1458,7 +1458,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_unnmamedDetail');
+		$response = $this->sendToWebServices('callWs_unnmamedDetail');
 
 		$detailInfo = [
 			'fiscalId' => $this->session->enterpriseInf->idFiscal,

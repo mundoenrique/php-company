@@ -22,8 +22,8 @@ class Novo_DownloadFiles extends NOVO_Controller {
 	{
 		writeLog('INFO', 'DownloadFiles: exportFiles Method Initialized');
 
-		$this->model = 'Novo_'.ucfirst($this->request->who).'_Model';
-		$this->method = 'callWs_'.ucfirst($this->request->where).'_'.$this->request->who;
+		$this->modelClass = 'Novo_' . ucfirst($this->request->who) . '_Model';
+		$this->modelMethod = 'callWs_' . ucfirst($this->request->where) . '_' . $this->request->who;
 
 		$this->loadModel($this->request);
 	}

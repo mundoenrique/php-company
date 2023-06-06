@@ -149,7 +149,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Logout';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-//DATATABLES
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Bulk Number';
 $lang['GEN_TABLE_BULK_ID'] = 'Bulk ID';
 $lang['GEN_TABLE_BULK_DATE'] = 'Upload date';
@@ -205,7 +204,6 @@ $lang['GEN_TABLE_BALANCE'] = 'Balance';
 $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Document number';
 $lang['GEN_BULK_NUMBER'] = 'Bulk number';
 $lang['GEN_QUERY_TYPE'] = 'Query type';
-//DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Show _MENU_ records';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No results found';
 $lang['GEN_TABLE_RESULTS'] = 'Results';
@@ -330,18 +328,15 @@ $lang['GEN_OTP_NO_SENT'] = 'It was not possible to send the email with the verif
 $lang['GEN_BONUS_CARD'] = 'Tebca Food Bonus';
 $lang['GEN_SILVER_CARD'] = 'Servitebca payment';
 $lang['GEN_BULK_TYPE'] = 'Bulk type';
-// RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Select',
 	'CC' => 'Citizenship card',
 	'PP' => 'Passport',
 ];
-//DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Module';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Function';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Date';
 $lang['REPORTS_TITLE'] = 'Settings';
-//DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Account';
 $lang['GEN_LOGIN_IP_MSG'] = 'You are entering from an unusual computer, for security reasons we will send you a verification code to the email address <span class = "semibold">%s</span>, indicate it below.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'I confirm that I am logging in from a frequently used computer.';
@@ -412,17 +407,14 @@ $lang['GEN_SERVICE_ORDES'] = 'There are no service orders in status "<strong>%s<
 $lang['GEN_GET_AUTH_USER_FAIL'] = 'It was not possible to identify you in the application';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'It was not possible to generate the authorization key';
 $lang['GEN_NO_BULK_AUTHORIZATION'] = 'Unable to authorize bulk and generate service order';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directory created.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directory exists.';
-// LANG IMAGE
 $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Export to consolidated Excel';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Export to consolidated PDF';
-// BRANCHES
 $lang["GEN_NAME"] = "Name";
 $lang["GEN_LAST_NAME"] = "Last name";
 $lang["GEN_ZONE"] = "Zone";
