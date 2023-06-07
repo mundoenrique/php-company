@@ -262,7 +262,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-		if (($this->render->code == 0  && $active) || $download) {
+		if (($this->render->code === 0  && $active) || $download) {
 
 			if (count($this->render->enterpriseList) > 1 || $this->session->has_userdata('products')) {
 				array_push(
@@ -272,7 +272,7 @@ class NOVO_Controller extends CI_Controller {
 
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
-				$this->render->widget->countProducts = $this->session->has_userdata('products');
+				$this->render->widget->hasProducts = $this->session->has_userdata('products');
 				$this->render->widget->actionForm = lang('SETT_LINK_PRODUCT_DETAIL');
 			}
 		}

@@ -187,7 +187,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (lang.SETT_CYPHER_DATA == 'ON') {
+		if (lang.SETT_CYPHER_DATA === 'ON') {
 			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 		}
 

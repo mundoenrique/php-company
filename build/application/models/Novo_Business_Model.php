@@ -55,7 +55,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->session->unset_userdata($access);
 					$this->response->data->filters = $enterpriseList->filters;
 					$this->response->data->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
-					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal / $sizePage);
 					$this->response->data->text = $this->response->data->enterprisesTotal > 0 ? '' : 'Usuario sin empresas asignadas';
 				}
 
@@ -93,12 +93,12 @@ class Novo_Business_Model extends NOVO_Model {
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
 
-				if ($this->isResponseRc =! -29 || $this->isResponseRc =! -61) {
+				if ($this->isResponseRc ==! -29 || $this->isResponseRc ==! -61) {
 					clearSessionsVars();
 				}
 		}
 
-		if($this->response->code != 0) {
+		if($this->response->code !== 0) {
 
 			if(!$dataRequest)	{
 				$this->response->data->filters = $filters;

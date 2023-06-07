@@ -39,9 +39,9 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->filters = $responseList->data->filters;
 		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->render->msgEnterprise = $responseList->data->text;
-		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
+		$this->render->disabled = $responseList->code === 0 ?? 'disabled';
 		$this->render->titlePage = lang('BUSINESS_ENTERPRISE_TITLE');
-		$this->views = ['business/'.$view];
+		$this->views = ['business/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -92,7 +92,7 @@ class Novo_Business extends NOVO_Controller {
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
-			$this->render->widget->countProducts = FALSE;
+			$this->render->widget->hasProducts = FALSE;
 			$this->render->widget->actionForm = lang('SETT_LINK_PRODUCTS');
 		}
 

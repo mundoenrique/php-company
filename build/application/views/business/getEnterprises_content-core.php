@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular"><?= $greeting.' '.$fullName ?></h1>
+<h1 class="primary h3 regular"><?= $greeting . ' ' . $fullName ?></h1>
 <div class="flex mb-2 light items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li>
+				<li class="inline">
+					<a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_ENTERPRISE') ?></a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -52,9 +54,10 @@
 				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
 			</span>
 			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<?php $danger = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
+				<?php $danger = $enterpriseaAttr->resumenProductos === 0 ? ' danger' : FALSE; ?>
 				<span class="product-pb truncate<?= $danger; ?> total-product">
 					<?= $enterpriseaAttr->resumenProductos ?>
+					<?= $enterpriseaAttr->resumenProductos === 1 ? lang('GEN_PRODUCT') : lang('GEN_PRODUCTS') ?>
 				</span>
 				<span class="product-pb truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
 				<span class="product-pb truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
