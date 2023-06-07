@@ -141,7 +141,7 @@ if (!function_exists('handleLogResponse')) {
 		$logResponse = new stdClass();
 
 		foreach ($responseToLog as $pos => $data) {
-			if ($pos === 'data') {
+			if ($pos === 'data' && (gettype($data) === 'object'  || gettype($data) === 'array')) {
 				$logResponse->data = new stdClass();
 
 				foreach ($data as $key => $value) {
