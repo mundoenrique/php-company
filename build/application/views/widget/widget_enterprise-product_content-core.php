@@ -14,7 +14,7 @@
 					<?php if($enterprise->acrif == $enterpriseData->idFiscal && !$countProducts): ?>
 					<?php continue; ?>
 					<?php endif;?>
-					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" fiscalNumber="<?= $enterprise->acnit ?>" thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>">
+					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" fiscalNumber="<?= $enterprise->acnit ?>" thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>" operatingModel="<?= $enterprise->acnil ? $enterprise->acnil : ''?>">
 						<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>
