@@ -152,7 +152,7 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->response->modalBtn = $arrayResponse;
-		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_RC_0') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_MSG_RC_0') : $this->response->msg;
 
 		return $responseModel->data ?? $responseModel;
 	}
