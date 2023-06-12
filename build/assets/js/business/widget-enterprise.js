@@ -22,7 +22,7 @@ $(function() {
 		enterpriseCode = WidgetSelcet.find('option:selected').attr('code');
 		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group');
 		idFiscal = WidgetSelcet.val()
-		enterpriseName = WidgetSelcet.find('option:selected').text();
+		enterpriseName = WidgetSelcet.find('option:selected').text().trim();
 		fiscalNumber = WidgetSelcet.find('option:selected').attr('fiscalNumber');
 		thirdApp = WidgetSelcet.find('option:selected').attr('thirdApp');
 

@@ -19,8 +19,9 @@
 						code="<?= $enterprise->accodcia; ?>"
 						group="<?= $enterprise->accodgrupoe; ?>"
 						fiscalNumber="<?= $enterprise->acnit ?>"
-						thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>">
-						<?= $enterprise->enterpriseName; ?>
+						thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>"
+					>
+					<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>
 				</select>

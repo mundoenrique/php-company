@@ -282,7 +282,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetProductDetail_Business($dataRequest)
 	{
-		writeLog('INFO', 'Business Model: getProductDetail Method Initialized ***************** '.json_encode($dataRequest));
+		writeLog('INFO', 'Business Model: getProductDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
@@ -365,7 +365,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
 
 						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
-							$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName].'.svg';
+							$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName] . '.svg';
 						}
 
 						$brandName = trim($response->estadistica->producto->marca);
@@ -434,14 +434,13 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 		}
 
-		$imgBrand = lang('IMG_BRAND_DEFAULT');
-		$tempBrandImg = $productDetail['imgBrand'];
-
-		if(array_key_exists($tempBrandImg, lang('IMG_BRANDS'))) {
-			$imgBrand = lang('IMG_BRANDS')[$tempBrandImg];
+		if(array_key_exists($imgBrand, lang('IMG_BRANDS'))) {
+			$imgBrand = lang('IMG_BRANDS')[$imgBrand];
+		} else {
+			$imgBrand = lang('IMG_BRAND_DEFAULT');
 		}
 
-		$imgBrand = $productDetail['brand'] === 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
+		$imgBrand = $brandName === 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
 		$productDetail['imgBrand'] = $imgBrand;
 
 		$this->response->data->productDetail = (object) $productDetail;
