@@ -364,14 +364,23 @@ class Novo_User extends NOVO_Controller {
 		$this->render->type = $this->request->typeUser;
 		$responseList = $this->loadModel($this->request);
 
+		$arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
 		$arrayList = $responseList->data;
-		$i = 0;
 
 		foreach ($arrayList as $key => $value) {
-			$titles[$i] = $key;
-			$i++;
+			// Recorre subarreglo de una dimensión
+			foreach ($value as $index => $subArray) {
+				// Recorre subarreglo de dos dimensiones
+				foreach ($subArray as $subIndex => $subValue) {
+					// Si encuentra el objeto que desea eliminar
+					if (in_array($subValue->accodfuncion, $arrayDelete)) {
+						// Elimina el objeto utilizando unset
+						unset($arrayList[$key][$index][$subIndex]);
+					}
+				}
+			}
 		}
-		$this->render->titles = $titles;
+
 		$this->render->modules = $arrayList;
 
 		$this->responseAttr($responseList);
