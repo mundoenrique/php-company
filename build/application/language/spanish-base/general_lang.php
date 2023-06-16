@@ -451,20 +451,6 @@ $lang["GEN_AREA"] = "Área";
 $lang["GEN_BUSINESS_NAME"] = "Razón social";
 $lang["GEN_BILLING_ADDRESS"] = "Dirección de facturación";
 $lang["GEN_NIT"] = "NIT";
-
-
-
-
-
-
-
-
-
-
-
-
-
-//HTML TAG DISPLAY
 $lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
 $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
 $lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
@@ -481,7 +467,6 @@ $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
 $lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
-
 $lang['GEN_MONTHLY_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo mensual para la transacción.";
 $lang['GEN_DAILY_TRANSACTION_EXCEEDED']= "Se ha superado la cantidad diaria de transacciones.";
 $lang['GEN_DAILY_AMOUNT_EXCEEDED']= "Se ha superado el monto diario asignado para la transacción.";
@@ -493,3 +478,5 @@ $lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para d
 $lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo para débitos y consignaciones.";
 $lang['GEN_AMOUNT_MAX_EXCEEDED']= "Se ha superado el monto máximo de saldo permitido.";
 $lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "La cuenta no está registrada.";
+$lang['GEN_COMPANY_NOT_FOUND']= "No se encontraron datos de la empresa.";
+$lang['GEN_NOT_DEFINED_PARAMETERS'] = "No existen parámetros definidos para la empresa sobre éste producto.";

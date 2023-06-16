@@ -28,6 +28,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->modeloOperativo = $this->session->enterpriseInf->operatingModel;
 
 		$this->dataRequest->listaTarjetas = [
 			[
@@ -132,7 +133,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -251:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('SETT_ICON_INFO');
-				$this->response->msg = 'No existen parámetros definidos para la empresa sobre éste producto.';
+				$this->response->msg = lang('GEN_NOT_DEFINED_PARAMETERS');
 			break;
 		}
 
@@ -1075,12 +1076,14 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->modeloOperativo = $this->session->enterpriseInf->operatingModel;
 
 		$response = $this->sendToWebServices('CallWs_MasterAccountBalance');
 
 		$this->response->code = 0;
 		$this->response->data->info['balance'] = '';
 		$this->response->data->info['balanceText'] = '';
+		$this->response->data->info['reloadBalance'] = false;
 		$this->response->data->info['fundingAccount'] = '';
 		$this->response->data->params['validateParams'] = lang('SETT_VALIDATE_PARAMS') == 'OFF' ? FALSE : TRUE;
 		$this->response->data->params['commission'] = (float)0;
@@ -1129,7 +1132,13 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data->info['fundingAccount'] = 'Empresa sin cuenta asociada';
 			break;
 			default:
-				$this->response->code = 4;
+			$this->response->code = 4;
+			$this->response->data->info['balanceText'] = lang('SERVICES_UNAVAILABLE_BALANCE');
+			$this->response->data->info['reloadBalance'] = true;
+			$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+			$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
+			$this->response->icon = lang('SETT_ICON_INFO');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_MatesaccountBlanace');
@@ -1149,16 +1158,22 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$password = $dataRequest->passwordTranfer;
 
-		if (lang('SETT_INPUT_PASS') == 'ON') {
+		if (lang('SETT_REMOTE_AUTH') === 'OFF' && lang('SETT_INPUT_GET_TOKEN') === 'OFF') {
 			$password = md5($this->cryptography->decryptOnlyOneData($dataRequest->passwordTranfer));
 		}
+
+		if( lang('SETT_REMOTE_AUTH') === 'ON') {
+			$password = $this->session->passWord;
+		}
+
+		$description = lang('SETT_INPUT_DESCRIPTION') === 'ON' ? $dataRequest->description : '';
 
 		$this->dataRequest->idOperation = 'cargoCuentaMaestraTM';
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->maestroDeposito = [
 			'idExtEmp' => $this->session->enterpriseInf->idFiscal,
 			'saldo' => (float)$dataRequest->transferAmount,
-			'descrip' => $dataRequest->description,
+			'descrip' => $description,
 			'type' => $dataRequest->transferType ?? 'abono',
 			'tokenCliente' => $password,
 			'authToken' => $this->session->userdata('authToken'),
@@ -1176,8 +1191,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->msg = lang('SERVICES_SUCCESSFUL_TRANSFER');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('SETT_INPUT_PASS') == 'ON'
-				? lang('SETT_LINK_BULK_AUTH')	: lang('SETT_LINK_TRANSF_MASTER_ACCOUNT');
+				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('SETT_REDIRECT_TRANSF_MASTER_ACCOUNT') === 'ON'
+				? lang('SETT_LINK_TRANSF_MASTER_ACCOUNT') : lang('SETT_LINK_BULK_AUTH');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				$this->session->unset_userdata('authToken');
 			break;
@@ -1202,6 +1217,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_DAILY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -44:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->msg = lang('GEN_COMPANY_NOT_FOUND');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -155:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('SETT_ICON_INFO');
@@ -1222,6 +1243,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -251:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->msg = lang('GEN_NOT_DEFINED_PARAMETERS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -285:
@@ -1260,6 +1287,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = $response->msg;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -406:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -472:

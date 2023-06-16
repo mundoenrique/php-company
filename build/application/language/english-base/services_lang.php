@@ -159,4 +159,5 @@ $lang['SERVICES_AVAILABLE_BALANCE'] = 'Master account balance:';
 $lang['SERVICES_COMMISSION_TRANS'] = 'Commission per transaction:';
 $lang['SERVICES_COMMISSION_CONSULTATION'] = 'Commission for checking balance:';
 $lang['SERVICES_BALANCE_ACC_CONCENTRATOR'] = 'Concentrator account balance:';
+$lang['SERVICES_BALANCE_ACC_ADMINISTRATOR'] = 'Administrator account balance:';
 $lang['SERVICES_TABLE_NO_REGISTRY_MASTERACCOUNT'] = 'The card list is not available. Please check if you have affiliate cards, or search again.';

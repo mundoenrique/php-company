@@ -70,6 +70,7 @@
 			<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
 			<input type="hidden" name="thirdApp" value="<?= $enterpriseaAttr->acobservacion ?? 'ANY'; ?>">
 			<input type="hidden" name="fiscalNumber" value="<?= $enterpriseaAttr->acnit; ?>">
+			<input type="hidden" name="operatingModel" value="<?= $enterpriseaAttr->acnil; ?>">
 		</form>
 	</div>
 	<?php endforeach; ?>

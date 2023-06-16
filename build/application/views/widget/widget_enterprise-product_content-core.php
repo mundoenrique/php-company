@@ -20,8 +20,9 @@
 						group="<?= $enterprise->accodgrupoe; ?>"
 						fiscalNumber="<?= $enterprise->acnit ?>"
 						thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>"
+						operatingModel="<?= $enterprise->acnil ? $enterprise->acnil : ''?>"
 					>
-					<?= $enterprise->enterpriseName; ?>
+						<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>
 				</select>

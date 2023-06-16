@@ -3,7 +3,12 @@ var rechargeParam;
 var checkType;
 $(function () {
 	rechargeParam = params;
+	$('#accept').addClass('disabled-recharge').prop('disabled', true);
 	if (params && code == 0) {
+
+		$('#bloqueoForm').val('false')
+		$('#accept').removeClass('disabled-recharge').prop('disabled', false)
+
 		$("#pay").prop("checked", true);
 		checkType = $("input:radio[name=transferType]:checked").val();
 
@@ -42,6 +47,23 @@ $(function () {
 			}
 		});
 	}
+
+	$('.disabled-recharge').on('click', function(e) {
+
+		$('#masterAccountRechargeForm :input').prop('disabled', true);
+
+		$(this)
+			.prop('disabled', false)
+			.removeClass('disabled-recharge');
+	})
+
+	$('#reload_balance').on('click', function() {
+		$(this).html(loader)
+		insertFormInput(true);
+		location.reload()
+	});
+
+
 	$('#masterAccountRechargeBtn').on('click', function(e) {
 		e.preventDefault();
 		form = $('#masterAccountRechargeForm');
@@ -54,7 +76,7 @@ $(function () {
 			data.transferType = checkType;
 			$(this).html(loader);
 			insertFormInput(true);
-			if (lang.SETT_INPUT_PASS == 'OFF') {
+			if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 				getTokenRecharge();
 			} else {
 				rechargeAccount();
@@ -92,14 +114,14 @@ function rechargeAccount() {
 	who = 'Services';
 	where = 'masterAccountTransfer';
 
-	if (lang.SETT_INPUT_PASS == 'OFF') {
+	if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 		data.passwordTranfer = $('#otpCode').val();
 	} else {
 		data.passwordTranfer = cryptoPass(data.passwordTranfer);
 	}
 
 	callNovoCore(who, where, data, function (response) {
-		if (lang.SETT_INPUT_PASS == 'OFF') {
+		if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 			switch (response.code) {
 				case 1:
 					generateModalOTP(response)

@@ -31,6 +31,7 @@ $(function () {
 			$('#pre-loader-table').addClass('hide');
 			$('.hide-table').removeClass('hide');
 			$('#pre-loader').remove();
+			$('.disabled-recharge').prop('disabled', false);
 			$('.hide-out').removeClass('hide');
 		},
 		"autoWidth": false,

@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['SETT_SELECT_TYPE'] = 'ON';
+$lang['SETT_SELECT_ACCOUNT'] = 'ON';
 $lang['SETT_INPUT_PASS'] = 'ON';
+$lang['SETT_REDIRECT_TRANSF_MASTER_ACCOUNT'] = 'OFF';
 $lang['SETT_VALIDATE_PARAMS'] = 'ON';
 $lang['SETT_INQUIRY_DOCTYPE'] = 'OFF';
 $lang['SETT_SIGNIN_WELCOME_MSG'] = 'ON';

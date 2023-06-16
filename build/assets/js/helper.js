@@ -324,7 +324,9 @@ function createButton(elementButton, valuesButton) {
 
 function insertFormInput(disabled, form) {
 	form = form == undefined ? false : form;
-	var notDisabled = '#product-select, #enterprise-widget-btn'
+	var blocked = $('#bloqueoForm').val()
+	var contetBlocked = blocked === 'true' ? ', #debit, #pay, #transferAmount, #masterAccountRechargeBtn' : ''
+	var notDisabled = '#product-select, #enterprise-widget-btn' + contetBlocked
 
 	if (disabled) {
 		notDisabled = false;
