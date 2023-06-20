@@ -44,7 +44,7 @@ Class Novo_Services extends Novo_Controller {
 				'services/transfMasterRecharge'
 			);
 
-			$this->method = 'CallWs_MasterAccountBalance_Services';
+			$this->modelMethod = 'CallWs_MasterAccountBalance_Services';
 			$responseAttr = $this->loadModel();
 
 			foreach ($responseAttr->data->info AS $index => $render) {
