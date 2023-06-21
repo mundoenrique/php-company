@@ -32,7 +32,7 @@ if (!function_exists('writeLog')) {
 				$reqUser = mb_strtoupper($CI->input->get_post('email'));
 			}
 
-			if (!$isLogUser || $user !== $reqUser) {
+			if ($isLogUser === NULL || $user !== $reqUser) {
 				$logUser = $date . '-' . $reqUser;
 				$CI->session->set_userdata('logUser', $logUser);
 			}
