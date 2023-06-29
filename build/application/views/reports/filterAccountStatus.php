@@ -51,8 +51,15 @@
 							<label class="custom-control-label mr-1" for="resultByCard"><?= lang('REPORTS_ACCOUNT_CARD'); ?></label>
 						</div>
 					<?php endif; ?>
+					<?php if (lang('CONF_ACCOUNT_NAME') == 'ON') : ?>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="resultByName" name="results" class="custom-control-input">
+							<label class="custom-control-label mr-1" for="resultByName"><?= lang('REPORTS_ACCOUNT_NAME'); ?></label>
+						</div>
+					<?php endif; ?>
 					<div class="form-group col-5 mt-2 pl-0">
 						<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
+						<input id="resultByNameInput" name="radioName" type="text" class="form-control visible" />
 						<div id="blockMessage" class="help-block"></div>
 					</div>
 				</div>
