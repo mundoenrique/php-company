@@ -1,6 +1,5 @@
 'use strict'
 var resultServiceOrders;
-var dataFormOS;
 
 $(function () {
 	$('#pre-loader').remove();
@@ -248,6 +247,14 @@ $(function () {
 			who = 'Inquiries';
 			where = 'GetServiceOrders';
 
+			var initDate = new Date();
+			var dataFormOS = {
+				initialDate : initDate.getDate() + '/' + (initDate.getMonth() + 1) + '/' + initDate.getFullYear(),
+				finalDate: initDate.getDate() + '/' + (initDate.getMonth() + 1) + '/' + initDate.getFullYear(),
+				status: 3,
+				statusText: 'En Proceso'
+			}
+
 			callNovoCore(who, where, dataFormOS, function (response) {
 				if (response.code == 0) {
 					$(location).attr('href', response.data);
@@ -386,7 +393,6 @@ function payOrderService() {
 			switch (response.code) {
 				case 0:
 					$('#accept').addClass('viewOS');
-					dataFormOS = response.dataFormListOS;
 					appMessages(lang.PAG_OS_TITLE, response.msg, response.icon, response.modalBtn);
 					break;
 				case 1:
