@@ -1,0 +1,301 @@
+#--------------------#
+# FRAMEWORK SETTINGS #
+#--------------------#
+SetEnv CI_ENV development
+# SetEnv CI_ENV testing
+# SetEnv CI_ENV production
+
+	#	LOCALHOST HTTP
+# SetEnv BASE_URL http://localhost/site-conexionempresas/build/
+# SetEnv ASSET_URL http://localhost/site-conexionempresas/build/assets/
+# SetEnv COOKIE_DOMAIN localhost
+# SetEnv COOKIE_SECURE OFF
+
+	#	LOCALHOST HTTPS
+# SetEnv BASE_URL https://localhost:8443/site-conexionempresas/build/
+# SetEnv ASSET_URL https://localhost:8443/site-conexionempresas/build/assets/
+# SetEnv COOKIE_DOMAIN localhost
+# SetEnv COOKIE_SECURE ON
+
+	#	VIRTUALHOST HTTP
+# SetEnv BASE_URL http://empresas.novopayment.lc/
+# SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
+# SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+# SetEnv COOKIE_SECURE OFF
+
+	#	VIRTUALHOST HTTPS
+SetEnv BASE_URL https://empresas.novopayment.lc/
+SetEnv ASSET_URL https://empresas.novopayment.lc/assets/
+SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+SetEnv COOKIE_SECURE ON
+
+SetEnv ASSET_PATH {{ubicación-física}}/site-conexionempresas/build/assets/
+SetEnv LOG_PATH ''
+SetEnv ENCRYPTION_KEY n0v0p4ym3nt-k3y
+# SetEnv SESS_DRIVER database
+# SetEnv SESS_SAVE_PATH ceo_sessions
+SetEnv SESS_DRIVER files
+SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
+SetEnv SESS_COOKIE_NAME empresas
+SetEnv SESS_EXPIRATION 1800
+SetEnv COOKIE_PREFIX 'ceo_'
+
+#----------------------#
+# APPLICATION SETTINGS #
+#----------------------#
+SetEnv ACTIVE_SAFETY ON
+SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
+SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, coop, bog, bpi, per, usd, ven, col'
+SetEnv ACTIVE_RECAPTCHA ON
+SetEnv IP_VERIFY OFF
+SetEnv DB_VERIFY ON
+SetEnv SINGLE_SIGN_ON ON
+SetEnv API_CONTENT_URL 172.24.6.123:3001/
+SetEnv UPLOAD_PATH {{ubicación-física}}/upload/
+SetEnv API_GEE_WAY OFF
+
+#-------------------------------------------------------------------#
+#																LOCAL																#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+# SetEnv DB_HOSTNAME ip-loval
+# SetEnv DB_PORT 3306
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD **contraseña**
+
+#-------------------------------------------------------------------#
+#														DEVELOPMENT															#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_PORT 3301
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+SetEnv WS_KEY dGVzdDEyMzQ=
+SetEnv WS_URL https://d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv URL_MFA_SERV https://d-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
+
+	# BANORTE
+SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# Coop central
+# SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+SetEnv API_URL http://172.24.6.78:8005/ceo-fuel/1.0/
+SetEnv SERVICE_URL http://172.24.6.78:9008/
+SetEnv DOWNLOAD_ROUTE 172.21.0.228/opt/downloads/site-conexionempresas/
+SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+SetEnv CLIENT_ID_APIGEE z3f9JpzgVjR55NNVQB24s44YaVjCmhDU
+SetEnv CLIENT_SECRET_APIGEE hkA3SkHyL13hfs4p
+
+#--------------------#
+# SETTINGS TO ARGON2 #
+#--------------------#
+SetEnv ARGON2_MEMORY_LIMIT 8192
+SetEnv ARGON2_LENGTH 93
+SetEnv ARGON2_OPS_LIMIT 4
+SetEnv ARGON2_SALT fdcf2077639765bc3ccee10ffacefe88
+
+#------------#
+# KEY TO API #
+#------------#
+SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
+SetEnv BULK_FTP_USERNAME npdaemon
+SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------------------------------------------#
+#															TESTING																#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_PORT 3302
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv WS_URL https://t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT https://t-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.77:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.77:9008/
+# SetEnv DOWNLOAD_ROUTE 172.21.19.240/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#--------------------#
+# SETTINGS TO ARGON2 #
+#--------------------#
+# SetEnv ARGON2_MEMORY_LIMIT 8192
+# SetEnv ARGON2_LENGTH 93
+# SetEnv ARGON2_OPS_LIMIT 4
+# SetEnv ARGON2_SALT fdcf2077639765bc3ccee10ffacefe88
+
+#------------#
+# KEY TO API #
+#------------#
+# SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------------------------------------------#
+#																UAT																	#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_PORT 3303
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv https:/uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT https://uat-banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.73:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.73:9008/
+# SetEnv DOWNLOAD_ROUTE 172.24.6.122/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#--------------------#
+# SETTINGS TO ARGON2 #
+#--------------------#
+# SetEnv ARGON2_MEMORY_LIMIT 8192
+# SetEnv ARGON2_LENGTH 93
+# SetEnv ARGON2_OPS_LIMIT 4
+# SetEnv ARGON2_SALT fdcf2077639765bc3ccee10ffacefe88
+
+#------------#
+# KEY TO API #
+#------------#
+# SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------------------------------------------#
+#														PRODUCTION															#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+# SetEnv DB_HOSTNAME 172.24.6.67
+# SetEnv DB_PORT 3300
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+
+	# BANORTE
+# SetEnv DB_HOSTNAME 172.18.38.84
+# SetEnv DB_PORT 3300
+# SetEnv DB_USERNAME cpo_user
+# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv https:/web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT https://banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.75:8005/ceo-fuel/1.0/
+# SetEnv API_URL http://172.24.6.76:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.75:9008/
+# SetEnv SERVICE_URL http://172.24.6.76:9008/
+# SetEnv DOWNLOAD_ROUTE 172.24.6.125/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#--------------------#
+# SETTINGS TO ARGON2 #
+#--------------------#
+# SetEnv ARGON2_MEMORY_LIMIT 8192
+# SetEnv ARGON2_LENGTH 93
+# SetEnv ARGON2_OPS_LIMIT 4
+# SetEnv ARGON2_SALT fdcf2077639765bc3ccee10ffacefe88
+
+#------------#
+# KEY TO API #
+#------------#
+# SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.130:22/home/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD #.3Nv!!
+
+#-------------------------#
+# COOKIES SameSite=strict #
+#-------------------------#
+# <ifmodule mod_headers.c>
+# 	Header always edit Set-Cookie (.*) "$1; SameSite=strict"
+# 	Header onsuccess edit Set-Cookie (.*) "$1; SameSite=strict"
+# 	Header edit Set-Cookie ^(.*);\s?SameSite=strict;?\s?(.*);\s?SameSite=strict;?\s?(.*)$ "$1; $2; $3; SameSite=strict"
+# 	Header edit Set-Cookie ^(.*);\s?;\s?(.*)$ "$1; $2"
+# </ifmodule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	# si usas localhost comenta la siguiente linea
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>

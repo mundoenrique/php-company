@@ -541,7 +541,7 @@ $config = [
 		[
 			'field' => 'enterpriseCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\- ]+)+$/i]'
 		],
 		[
 			'field' => 'enterpriseGroup',

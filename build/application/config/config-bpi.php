@@ -2,7 +2,7 @@
 
 $config['client'] = 'pichincha';
 $config['customer'] = 'Ec-bp';
-$config['customer-uri'] = 'bpi';
-$config['base_url']	= BASE_URL.$config['customer-uri'].'/';
+$config['customer_uri'] = 'bpi';
+$config['base_url']	= BASE_URL.$config['customer_uri'].'/';
 $config['language']	= BASE_LANGUAGE.'-pich';
 
