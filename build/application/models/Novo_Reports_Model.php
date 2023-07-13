@@ -2045,10 +2045,6 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_exportTo'.$typeFile.'ExtendedAccountStatus');
 
-		$response->bean = 'estado_cuenta_123.txt';
-		$response->code = 0;
-		$this->isResponseRc = 0;
-
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
