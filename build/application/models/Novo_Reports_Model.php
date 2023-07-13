@@ -1820,7 +1820,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$typeSearch = $dataRequest->resultSearch;
 
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
-		$this->dataRequest->nameSearch = strtoupper($dataRequest->resultByNameInput ?? '');
+		$this->dataRequest->fullName = strtoupper($dataRequest->resultByNameInput ?? '');
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -2004,12 +2004,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportToExcelExtendedAccountStatus_Reports($dataRequest)
 	{
-		return $this->downLoadFileReports($dataRequest, 'Xls');
+		return $this->downLoadFileReportStatusAccount($dataRequest, 'Xls');
 	}
 
 	public function callWs_exportToTxtExtendedAccountStatus_Reports($dataRequest)
 	{
-		return $this->downLoadFileReports($dataRequest, 'Txt');
+		return $this->downLoadFileReportStatusAccount($dataRequest, 'Txt');
 	}
 
 	/**
@@ -2017,7 +2017,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @author Yelsyns Lopez
 	 * @date Jun 26, 2023
 	 */
-	public function downLoadFileReports($dataRequest, $typeFile)
+	public function downLoadFileReportStatusAccount($dataRequest, $typeFile)
 	{
 		log_message('INFO', 'NOVO Reports Model: exportTo'.$typeFile.'ExtendedAccountStatus Method Initialized');
 
@@ -2029,7 +2029,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCodeFileDownload;
-		$this->dataRequest->nameSearch = strtoupper($dataRequest->resultByNameFileDownload ?? '');
+		$this->dataRequest->fullName = strtoupper($dataRequest->resultByNameFileDownload ?? '');
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITFileDownload ?? '');
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateActFileDownload)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
