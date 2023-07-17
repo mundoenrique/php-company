@@ -21,8 +21,8 @@ $lang['CONF_SUPPORT_IE'] = 'OFF';
 $lang['CONF_AGENT_INFO'] = 'OFF';
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
-	'testing' => 0.2,
-	'production' => 0.5
+	'testing' => 0,
+	'production' => 0
 ];
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
