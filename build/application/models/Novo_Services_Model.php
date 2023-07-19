@@ -1181,7 +1181,8 @@ class Novo_Services_Model extends NOVO_Model {
 			'usuario' => [
 				'userName' => $this->session->userName,
 				'password' => $password
-			]
+			],
+			'tipoEjecucion' => 1
 		];
 
 		$response = $this->sendToService('CallWs_MasterAccountTransfer');
