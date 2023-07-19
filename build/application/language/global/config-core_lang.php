@@ -351,7 +351,7 @@ $lang['CONF_MODAL_BTN_CLASS'] = [
 ];
 $lang['CONF_ACCOUNT_NAME'] = 'OFF';
 $lang['SETT_STATUS_TRANSACTION'] = [
-	'POSTEADA' => 'Retenido',
+	'POSTEADA' => 'En proceso',
 	'AUTORIZADA' => 'Procesado',
 ];
 $lang['CONF_STATUS_MOVEMENT'] = 'OFF';
