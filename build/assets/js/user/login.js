@@ -5,7 +5,7 @@ $(function () {
 	insertFormInput(false);
 
 	if (lang.CONF_MAINT_NOTIF === 'ON') {
-		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/' + customerUri + '/maint_notif2.png');
+		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/' + customerUri + '/maint_notif3.png');
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
