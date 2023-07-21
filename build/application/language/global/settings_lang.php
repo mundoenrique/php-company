@@ -20,8 +20,8 @@ $lang['SETT_VALIDATE_CAPTCHA'] = [
 $lang['SETT_AGENT_INFO'] = 'OFF';
 $lang['SETT_SCORE_CAPTCHA'] = [
 	'development' => 0,
-	'testing' => 0.2,
-	'production' => 0.5
+	'testing' => 0,
+	'production' => 0
 ];
 $lang['SETT_VALID_ERROR'] = 'has-error';
 $lang['SETT_VALID_VALID'] = 'has-success';

@@ -16,3 +16,4 @@ $lang['SETT_LINK_ENTERPRISES'] = 'dashboard';
 $lang['SETT_LINK_TERMS'] = 'inf-condiciones';
 $lang['SETT_LINK_SUGGESTION'] = 'browsers';
 $lang['SETT_SIGNIN_IMG'] = 'OFF';
+$lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("23-07-2023 14:00:00") ? 'ON' : 'OFF';
