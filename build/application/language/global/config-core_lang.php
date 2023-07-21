@@ -350,8 +350,4 @@ $lang['CONF_MODAL_BTN_CLASS'] = [
 	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
 $lang['CONF_ACCOUNT_NAME'] = 'OFF';
-$lang['SETT_STATUS_TRANSACTION'] = [
-	'POSTEADA' => 'En proceso',
-	'AUTORIZADA' => 'Procesado',
-];
 $lang['CONF_STATUS_MOVEMENT'] = 'OFF';
