@@ -1853,6 +1853,7 @@ class Novo_Reports_Model extends NOVO_Model {
 						$record->codigo = $listMov->codigo;
 						$record->tipoTransaccion = $listMov->tipoTransaccion;
 						$record->monto = $listMov->monto;
+						$record->status = isset($listMov->estadoTransaccion) ? $listMov->estadoTransaccion : '';
 						array_push(
 							$listStatesAccounts,
 							$record
