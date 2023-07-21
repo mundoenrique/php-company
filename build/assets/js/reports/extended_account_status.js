@@ -51,7 +51,7 @@ $(function () {
 		}
 		else if (($('#resultByName:checked').val() == 'on')) {
 			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore').css("display", "none");
-			$('#resultByNameInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').css("display", "block").attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
+			$('#resultByNameInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').css("display", "block").attr("maxlength",lang.VALIDATE_MAXLENGTH);
 			$("#blockMessage").text('');
 		}
 	});
