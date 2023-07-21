@@ -347,3 +347,9 @@ $lang['SETT_MODAL_BTN_CLASS'] = [
 	'cancel' => 'btn-modal btn btn-small btn-link',
 	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
+$lang['SETT_ACCOUNT_NAME'] = 'OFF';
+$lang['SETT_STATUS_TRANSACTION'] = [
+	'POSTEADA' => 'En proceso',
+	'AUTORIZADA' => 'Procesado',
+];
+$lang['SETT_STATUS_MOVEMENT'] = 'OFF';

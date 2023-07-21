@@ -1820,6 +1820,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$typeSearch = $dataRequest->resultSearch;
 
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITInput ?? '');
+		$this->dataRequest->fullName = strtoupper($dataRequest->resultByNameInput ?? '');
 
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -1852,6 +1853,7 @@ class Novo_Reports_Model extends NOVO_Model {
 						$record->codigo = $listMov->codigo;
 						$record->tipoTransaccion = $listMov->tipoTransaccion;
 						$record->monto = $listMov->monto;
+						$record->status = isset($listMov->estadoTransaccion) ? lang('SETT_STATUS_TRANSACTION')[$listMov->estadoTransaccion] : '';
 						array_push(
 							$listStatesAccounts,
 							$record
@@ -1997,40 +1999,51 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @info Método para descargar nuevo reporte excel de Estado de Cuenta Extendido
 	 * @author Luis Molina
 	 * @date Mar 02, 2022
+	 * @update Yelsyns Lopez
+	 * @date Jun 26 2023
 	 */
 	public function callWs_exportToExcelExtendedAccountStatus_Reports($dataRequest)
 	{
-		writeLog('INFO', 'Reports Model: exportToExcelExtendedAccountStatus Method Initialized');
+		return $this->downLoadFileReportStatusAccount($dataRequest, 'Xls');
+	}
+
+	public function callWs_exportToTxtExtendedAccountStatus_Reports($dataRequest)
+	{
+		return $this->downLoadFileReportStatusAccount($dataRequest, 'Txt');
+	}
+
+	/**
+	 * @info Método para descargar nuevo reporte de Estado de Cuenta Extendido
+	 * @author Yelsyns Lopez
+	 * @date Jun 26, 2023
+	 */
+	public function downLoadFileReportStatusAccount($dataRequest, $typeFile)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportTo'.$typeFile.'ExtendedAccountStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
-		$this->dataAccessLog->operation = 'generaArchivoXlsEdoCta';
+		$this->dataAccessLog->function = 'generaArchivo'.$typeFile.'EdoCta';
+		$this->dataAccessLog->operation = 'generaArchivo'.$typeFile.'EdoCta';
 
-		$this->dataRequest->idOperation = 'generaArchivoXlsEdoCta';
+		$this->dataRequest->idOperation = 'generaArchivo'.$typeFile.'EdoCta';
 		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
 
-		if ($dataRequest->resultByNITXls === 'all') {
-			$dataRequest->resultByNITXls = '';
-			$typeSearch = '0';
-		} else {
-			$typeSearch = '1';
-		}
-
-		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCodeXls;
-		$this->dataRequest->idExtPer = $dataRequest->resultByNITXls;
-    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateActXls)));
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCodeFileDownload;
+		$this->dataRequest->fullName = strtoupper($dataRequest->resultByNameFileDownload ?? '');
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNITFileDownload ?? '');
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateActFileDownload)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
-		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateActXls;
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateActFileDownload;
 		$this->dataRequest->tamanoPagina = '5';
-		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->tipoConsulta = $dataRequest->resultSearchFileDownload;
 		$this->dataRequest->pagActual = '1';
-		$this->dataRequest->prefix = $dataRequest->productCodeXls;
+		$this->dataRequest->prefix = $dataRequest->productCodeFileDownload;
 		$this->dataRequest->paginar = false;
-		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseNameXls;
-		$this->dataRequest->descProducto = $dataRequest->descProductXls;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseNameFileDownload;
+		$this->dataRequest->descProducto = $dataRequest->descProductFileDownload;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToWebServices('callWs_exportToExcelExtendedAccountStatus');
+		$response = $this->sendToService('callWs_exportTo'.$typeFile.'ExtendedAccountStatus');
 
 		switch ($this->isResponseRc) {
 			case 0:

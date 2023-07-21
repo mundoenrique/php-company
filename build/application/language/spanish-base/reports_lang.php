@@ -51,6 +51,8 @@ $lang['REPORTS_ACCOUNT_REFERENCE']="Referencia";
 $lang['REPORTS_ACCOUNT_DESCRIPTION']="Descripción";
 $lang['REPORTS_ACCOUNT_OPERATION']="Operación(+/-)";
 $lang['REPORTS_ACCOUNT_AMOUNT']="Monto";
+$lang['REPORTS_ACCOUNT_STATUS']="Estado";
+$lang['REPORTS_ACCOUNT_NAME']="Nombre y apellido";
 
 
 

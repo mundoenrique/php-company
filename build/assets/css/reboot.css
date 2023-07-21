@@ -2232,6 +2232,7 @@ i[class*=" icon-"]:before {
 .icon-arrow-up:before        { content: "\e0ee"; }
 .icon-info:before        	   { content: "\e04f"; }
 .icon-file-excel:before 	   { content: "\e10e"; }
+.icon-file-txt:before 	     { content: "\e903"; }
 .icon-unlock:before 			   { content: "\e0cf"; }
 .icon-arrow-down:before      { content: "\e0ef"; }
 .icon-chart-pie:before  	   { content: "\e0ff"; }
