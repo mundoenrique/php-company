@@ -165,7 +165,7 @@ class Request_Data {
 				}
 			}
 
-			if(strpos('ZX', $TemCategory) !== FALSE) {
+			if(strpos('XYZ', $TemCategory) !== FALSE) {
 				if($itemAlphabetic7 > $enterpriseArgs->sizePage) {
 					$itemAlphabetic7 = 1; $pageAlphabetic7++;
 				}
