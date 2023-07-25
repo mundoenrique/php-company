@@ -58,13 +58,16 @@
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
-				<div class="flex mr-3 mx-1 items-center flex-auto filter-<?= $products->marca; ?> filter-<?= $products->idCategoria; ?> ">
+				<div class="flex mr-3 mx-1 items-center flex-auto filter-<?= $products->marca; ?> filter-<?= $products->idCategoria ?? ''; ?> ">
 					<img class="img-product-list" src="<?= $this->asset->insertFile($products->productImg, 'images', $customerFiles, 'programs'); ?>" alt="<?= $products->productImg; ?>">
 					<img class="mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text truncate">
-							<?php $category = isset($products->categoria) ? ' / '.$products->categoria : ''; ?>
+							<?php
+								$category = isset($products->categoria) && $products->categoria !== ''
+									? ' / '.$products->categoria : '';
+							?>
 							<?= $products->filial.$category ?>
 						</span>
 					</div>
@@ -82,13 +85,11 @@
 				</div>
 			</div>
 			<?php endforeach; ?>
-			<!-- no results control -->
 			<div class="flex-auto my-5 py-4 center" style="display: none" data-jplist-control="no-results" data-group="group-filter-pagination" data-name="no-results">
 				<span class="h4"><?= lang('GEN_TABLE_SZERORECORDS') ?></span>
 			</div>
 		</div>
 
-		<!-- pagination control -->
 		<div id="pagination-control" class="pagination page-number mb-5 py-5 flex-auto justify-center hide" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
 			<nav class="h4">
 				<a href="#" data-type="first"><?= lang('GEN_TABLE_SFIRST') ?></a>

@@ -282,8 +282,8 @@ class Request_Data {
 			$products->productImg = $productImg;
 			$products->imgBrand = $brandImg;
 			$products->descripcion = trim(mb_strtoupper($products->descripcion));
-			$products->categoria = trim(ucwords(mb_strtolower($products->categoria)));
-			$noDeleteCat[] = $products->idCategoria;
+			$products->categoria = isset($products->categoria) ? trim(ucwords(mb_strtolower($products->categoria))) : '';
+			$noDeleteCat[] = isset($products->idCategoria) ? $products->idCategoria : '';
 			$noDeleteBrand[] =  trim($products->marca);
 			$products->filial = trim(mb_strtoupper($products->filial));
 		}
