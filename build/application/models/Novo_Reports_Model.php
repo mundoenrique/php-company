@@ -1036,16 +1036,27 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @info Método para obtener excel de tabla cuenta maestra extendido
 	 * @author Jennifer Cadiz / Luis Molina
 	 * @date April 07, 2022
+	 * @update Yelsyns Lopez July 13, 2023
 	 */
+	public function callWs_exportToTxtExtendedMasterAccount_Reports($dataRequest)
+	{
+		return $this->downLoadFileReportMasterAccount($dataRequest, 'Txt', 'generarDepositoGarantiaTxt');
+	}
+
 	public function callWs_exportToExcelExtendedMasterAccount_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelExtendedMasterAccount Method Initialized');
+		return $this->downLoadFileReportMasterAccount($dataRequest, 'Excel', 'generarDepositoGarantia');
+	}
+
+	public function downLoadFileReportMasterAccount($dataRequest, $fileType, $operation)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportTo'.$fileType.'ExtendedMasterAccount Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
-		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra extendido';
+		$this->dataAccessLog->operation = 'Obtener '.$fileType.' de tabla cuenta maestra extendido';
 
-		$this->dataRequest->idOperation = 'generarDepositoGarantia';
+		$this->dataRequest->idOperation = $operation;
 		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
 		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
@@ -1056,7 +1067,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_exportToExcelExtendedMasterAccount');
+		$response = $this->sendToService('callWs_exportTo'.$fileType.'ExtendedMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:

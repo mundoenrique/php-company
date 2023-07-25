@@ -230,6 +230,28 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
+	'exportToTxtExtendedMasterAccount' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
+		]
+	],
 	'extendedDownloadMasterAccountCon' => [
 		[
 			'field' => 'idExtEmpXls',

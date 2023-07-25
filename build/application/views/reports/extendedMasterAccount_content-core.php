@@ -34,6 +34,11 @@
 					<div class="flex">
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center ">
 						<div id="files-btn" class="hide">
+						<?php if(lang('CONF_FILE_MASTER_ACCOUNT_TXT') === 'ON'):?>
+							<button id="export_txt" class="btn btn-file px-1 big-modal" title="Exportar a txt" data-toggle="tooltip">
+								<i class="icon icon-file-txt" aria-hidden="true"></i>
+							</button>
+						<?php endif; ?>
 							<button id="export_excel" class="btn btn-file px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>

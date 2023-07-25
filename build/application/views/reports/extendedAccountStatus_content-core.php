@@ -40,9 +40,11 @@
 						<button id="export_excel" class="big-modal btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
+						<?php if(lang('CONF_FILE_STATUS_ACCOUNT_TXT') === 'ON'):?>
 						<button id="export_txt" class="big-modal btn px-1" title="Exportar a txt" data-toggle="tooltip">
 							<i class="icon icon-file-txt" aria-hidden="true"></i>
 						</button>
+						<?php endif; ?>
 						<?php if(FALSE): ?>
 						<button id="export_pdf" class="big-modal btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
