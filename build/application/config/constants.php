@@ -108,7 +108,6 @@ defined('DB_COLLATION')	OR define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'u
 |
 */
 $uriSegments  =  explode( "/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-$proxyIps = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
 $timeZone = [
 	'bdb'	=>	'America/Bogota',
 	'bg' 	=>	'America/Guayaquil',
@@ -157,7 +156,7 @@ defined('SESS_SAVE_PATH')		OR define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'
 defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
-defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
+defined('PROXY_IPS')				OR define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] === 'ON' ? $_SERVER['REMOTE_ADDR'] : '');
 defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 
 /*
@@ -192,4 +191,4 @@ defined('SERVICE_URL')						OR define('SERVICE_URL', $_SERVER['SERVICE_URL']);
 defined('SERVICE_CLIENT_ID')			OR define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')	OR define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($uriSegments, $proxyIps, $timeZone, $baseLanguage, $errorController);
+unset($uriSegments, $timeZone, $baseLanguage, $errorController);
