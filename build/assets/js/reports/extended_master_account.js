@@ -219,8 +219,11 @@ $(function () {
 		validateForms(form);
 		if (form.valid()) {
 			switch(action) {
+				case 'export_txt':
+					extendedDownloadFiles(dataForm, 'exportToTxtExtendedMasterAccount');
+     		break;
 				case 'export_excel':
-					extendedDownloadFiles(dataForm);
+					extendedDownloadFiles(dataForm, 'exportToExcelExtendedMasterAccount');
 				break;
 				case 'export_pdf':
 					exportToPDF(passData);
@@ -234,9 +237,9 @@ $(function () {
 	});
 });
 
-function extendedDownloadFiles(data) {
+function extendedDownloadFiles(data, service) {
 	who = 'Reports';
-	where = 'exportToExcelExtendedMasterAccount';
+	where = service;
 	callNovoCore(who, where, data, function (response) {
 
 		if (response.code == 0) {

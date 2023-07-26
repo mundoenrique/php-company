@@ -348,8 +348,6 @@ $lang['SETT_MODAL_BTN_CLASS'] = [
 	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
 $lang['SETT_ACCOUNT_NAME'] = 'OFF';
-$lang['SETT_STATUS_TRANSACTION'] = [
-	'POSTEADA' => 'En proceso',
-	'AUTORIZADA' => 'Procesado',
-];
 $lang['SETT_STATUS_MOVEMENT'] = 'OFF';
+$lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'OFF';
+$lang['CONF_FILE_MASTER_ACCOUNT_TXT'] = 'OFF';

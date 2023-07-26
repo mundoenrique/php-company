@@ -83,5 +83,6 @@ $lang['VALIDATE_INPUT_SURNAME'] = 'Indica un apellido válido';
 $lang['VALIDATE_ADDRESS_ENTERPRICE'] = 'Indica la dirección';
 $lang['VALIDATE_BILLING_ADDRESS_ENTERPRICE'] = 'Indica la dirección de facturación';
 $lang['VALIDATE_MAXLENGTH_IDEXTPER'] = '20';
+$lang['VALIDATE_MAXLENGTH'] = '40';
 $lang['VALIDATE_MAXLENGTH_CARD'] = '16';
 $lang['VALIDATE_MINLENGTH_CARD'] = '6';

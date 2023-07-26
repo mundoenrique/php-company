@@ -206,7 +206,7 @@ function validateForms(form) {
 						}
 						return check
 					}
-				}, pattern: alphaName, minlength: 3,
+				}, pattern: alphaName, minlength: 3, maxlength: lang.VALIDATE_MAXLENGTH
 			},
 			"radioCard": {
 				required: {
