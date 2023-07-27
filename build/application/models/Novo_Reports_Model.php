@@ -1067,7 +1067,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = false;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_exportTo'.$fileType.'ExtendedMasterAccount');
+		$response = $this->sendToWebServices('callWs_exportTo'.$fileType.'ExtendedMasterAccount');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -2054,7 +2054,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->descProducto = $dataRequest->descProductFileDownload;
 		$this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('callWs_exportTo'.$typeFile.'ExtendedAccountStatus');
+		$response = $this->sendToWebServices('callWs_exportTo'.$typeFile.'ExtendedAccountStatus');
 
 		switch ($this->isResponseRc) {
 			case 0:
