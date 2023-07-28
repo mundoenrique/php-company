@@ -23,6 +23,7 @@
 			<?php $this->load->view('reports/filterMasterAccount', $data)  ?>
 			<form id="extMasterAccountFormXls" class="hide">
 					<input id="idExtEmpXls" name="idExtEmpXls"  type="text" value="">
+					<input id="typeNote" name="typeNote"  type="text" value="">
 					<input id="initialDateXls" name="initialDateXls"  type="text" value="">
 					<input id="finalDateXls" name="finalDateXls"  type="text" value="">
 					<input id="filterDateXls" name="filterDateXls"  type="text" value="">
