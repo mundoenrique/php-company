@@ -1061,6 +1061,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmpXls;
 		$this->dataRequest->fechaIni =  $dataRequest->initialDateXls;
 		$this->dataRequest->fechaFin =  $dataRequest->finalDateXls;
+		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
 		$this->dataRequest->filtroFecha = $dataRequest->filterDateXls;
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterpriseXls;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;

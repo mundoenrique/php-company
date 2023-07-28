@@ -181,6 +181,7 @@ $(function () {
 						$('#finalDateXls').val(responseTableEnd.finalDate);
 						$('#filterDateXls').val(responseTableEnd.filterDate);
 						$('#nameEnterpriseXls').val(responseTableEnd.nameEnterprise);
+						$('#typeNote').val(dataForm.typeNote);
 
 						$('#files-btn').removeClass("hide");
 					}
@@ -214,6 +215,7 @@ $(function () {
 			dateEnd: dataForm.finalDateXls,
 			dateFilter: dataForm.filterDateXls,
 			nameEnterprise: dataForm.nameEnterpriseXls,
+			typeNote: dataForm.typeNote
 		};
 
 		validateForms(form);
