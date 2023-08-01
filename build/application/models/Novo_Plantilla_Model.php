@@ -10,7 +10,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
+		writeLog('INFO', 'Plantilla Model Class Initialized');
 	}
 	/**
 	 * @info Método para
@@ -18,7 +18,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	 */
 	public function callWs_Plantilla_Plantilla($dataRequest)
 	{
-		log_message('INFO', 'NOVO Plantilla Model: Plantilla Method Initialized');
+		writeLog('INFO', 'Plantilla Model: Plantilla Method Initialized');
 
 		$this->dataAccessLog->modulo = '';
 		$this->dataAccessLog->function = '';
@@ -29,7 +29,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'id-optation';
 		$this->dataRequest->className = 'class-name';
 
-		$response = $this->sendToService('callWs_Plantilla');
+		$response = $this->sendToWebServices('callWs_Plantilla');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -47,8 +47,8 @@ class Novo_Plantilla_Model extends NOVO_Model {
 				break;
 			case -7000:
 				$this->response->code = 3;
-				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');
 				$this->response->data = 'data from service';

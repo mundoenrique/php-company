@@ -63,6 +63,9 @@ $autoload['libraries'] = array(
 	'session',
 	'parser',
 	'form_validation',
+	'user_agent',
+	'Connect_Services_Apis',
+	'Encrypt_Decrypt',
 	'Encrypt_Connect',
 	'Cryptography',
 	'Verify_Access',
@@ -107,6 +110,7 @@ $autoload['helper'] = array(
 	'tools',
 	'form',
 	'cookie',
+	'novo_server',
 	'novo_toolset',
 	'novo_language',
 	'novo_display'
@@ -141,8 +145,9 @@ $autoload['config'] = array(
 |
 */
 $autoload['language'] = array(
-	'general',
-	'validate'
+	'settings',
+	'images',
+	'regexp'
 );
 
 /*

@@ -9,7 +9,7 @@ class Novo_User extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO User Controller Class Initialized');
+		writeLog('INFO', 'User Controller Class Initialized');
 	}
 	/**
 	 * @info Método que renderiza la vista de inicio de sesión
@@ -18,19 +18,17 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function signIn()
 	{
-		log_message('INFO', 'NOVO User: signIn Method Initialized');
+		writeLog('INFO', 'User: signIn Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'signIn';
 
 		if($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
-			exit;
+			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
+			exit();
 		}
 
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
+		clearSessionsVars();
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -68,9 +66,10 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
+		writeLog('INFO', 'User: singleSignOn Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
@@ -81,7 +80,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->form = $this->request;
 		}
 
-		if($sessionId == lang('CONF_LINK_SIGNOUT_END')) {
+		if($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
@@ -119,9 +118,10 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function recoverPass()
 	{
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'recoverPass';
 
 		array_push(
@@ -144,9 +144,10 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function recoverAccess()
 	{
-		log_message('INFO', 'NOVO User: recoverAccess Method Initialized');
+		writeLog('INFO', 'User: recoverAccess Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
+		clearSessionsVars();
 		$view = 'recoverAccess';
 
 		array_push(
@@ -168,12 +169,12 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function changePassword()
 	{
-		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+		writeLog('INFO', 'User: changePassword Method Initialized');
 
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -210,7 +211,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function finishSession($redirect)
 	{
-		log_message('INFO', 'NOVO User: finishSession Method Initialized');
+		writeLog('INFO', 'User: finishSession Method Initialized');
 
 		$view = 'finish';
 		$thirdPartySession = $this->singleSession == 'SignThird';
@@ -220,9 +221,9 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == lang('CONF_LINK_SIGNOUT_END') || $thirdPartySession) {
+		if($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
+			$this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -230,7 +231,7 @@ class Novo_User extends NOVO_Controller {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
-			if($redirect == lang('CONF_LINK_SIGNOUT_START')) {
+			if($redirect == lang('SETT_LINK_SIGNOUT_START')) {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
 			}
 
@@ -241,7 +242,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -253,23 +254,23 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function suggestion()
 	{
-		log_message('INFO', 'NOVO User: suggestion Method Initialized');
+		writeLog('INFO', 'User: suggestion Method Initialized');
 
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
 		$views = ['staticpages/content-browser'];
 
 		$this->includeAssets->cssFiles = [
-			"$this->customerUri/"."$this->customerUri-browser",
-			"$this->clientStyle/root-$this->clientStyle",
-			"root-general",
+			"$this->customerStyle/$this->customerStyle-browser",
+			"$this->customerStyle/$this->customerStyle-root",
+			"general-root",
 			"reboot",
-			"$this->clientStyle/"."$this->clientStyle-base"
+			"$this->customerStyle/"."$this->customerStyle-base"
 		];
 
 		$messageBrowser = $this->session->flashdata('messageBrowser');
@@ -289,7 +290,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function usersManagement()
 	{
-		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
+		writeLog('INFO', 'User: usersManagement Method Initialized');
 
 		$view = 'usersManagement';
 		array_push(
@@ -341,7 +342,7 @@ class Novo_User extends NOVO_Controller {
 	public function userPermissions()
 
 	{
-		log_message('INFO', 'NOVO User: userPermissions Method Initialized');
+		writeLog('INFO', 'User: userPermissions Method Initialized');
 
 		$view = 'userPermissions';
 		array_push(
@@ -364,14 +365,23 @@ class Novo_User extends NOVO_Controller {
 		$this->render->type = $this->request->typeUser;
 		$responseList = $this->loadModel($this->request);
 
+		$arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
 		$arrayList = $responseList->data;
-		$i = 0;
 
 		foreach ($arrayList as $key => $value) {
-			$titles[$i] = $key;
-			$i++;
+			// Recorre subarreglo de una dimensión
+			foreach ($value as $index => $subArray) {
+				// Recorre subarreglo de dos dimensiones
+				foreach ($subArray as $subIndex => $subValue) {
+					// Si encuentra el objeto que desea eliminar
+					if (in_array($subValue->accodfuncion, $arrayDelete)) {
+						// Elimina el objeto utilizando unset
+						unset($arrayList[$key][$index][$subIndex]);
+					}
+				}
+			}
 		}
-		$this->render->titles = $titles;
+
 		$this->render->modules = $arrayList;
 
 		$this->responseAttr($responseList);
@@ -390,17 +400,18 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function login()
 	{
-		log_message('INFO', 'NOVO User: index Method Initialized');
+		writeLog('INFO', 'User: index Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			$urlRedirect = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
+			$urlRedirect = str_replace(
+				$this->customerUri . '/', $this->config->item('customer') . '/',
+				base_url('dashboard')
+			);
 			redirect($urlRedirect, 'Location', 302);
 			exit;
 		}
 
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
+		clearSessionsVars();
 
 		$view = 'login';
 		$views = ['user/login', 'user/signin'];
@@ -444,7 +455,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function passwordRecovery()
 	{
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
 		$view = 'recoverPass';
 
@@ -468,12 +479,12 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function changePass()
 	{
-		log_message('INFO', 'NOVO User: changePass Method Initialized');
+		writeLog('INFO', 'User: changePass Method Initialized');
 
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -511,12 +522,12 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function browsers()
 	{
-		log_message('INFO', 'NOVO User: browsers Method Initialized');
+		writeLog('INFO', 'User: browsers Method Initialized');
 
 		$view = 'browsers';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 

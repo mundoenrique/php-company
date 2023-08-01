@@ -10,7 +10,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO DownloadFiles Model Class Initialized');
+		writeLog('INFO', 'DownloadFiles Model Class Initialized');
 	}
 	/**
 	 * @info Elimina archivos descargados
@@ -19,7 +19,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_DeleteFile_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: DeleteFile Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: DeleteFile Method Initialized');
 
 		unlink(assetPath('downloads/'.$dataRequest->fileName));
 		$this->response->code = 0;
@@ -34,7 +34,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_UnnmamedAffiliate_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: UnnmamedAffiliate Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: UnnmamedAffiliate Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
@@ -52,7 +52,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_UnnmamedDetail');
+		$response = $this->sendToWebServices('callWs_UnnmamedDetail');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -67,7 +67,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $dataRequest;
 				$this->responseFail_DownloadFiles($response);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_BULK_UNNAMED_DETAIL')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_BULK_UNNAMED_DETAIL')), 'Location', 302);
 				exit;
 		}
 
@@ -81,7 +81,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_BulkDetailExport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: StatusBulkReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Detalle de lote';
@@ -101,7 +101,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('callWs_StatusBulkReport');
+		$response = $this->sendToWebServices('callWs_BulkDetailExport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -115,7 +115,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $request;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')), 'Location', 302);
 				exit;
 		}
 
@@ -129,7 +129,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_StatusBulkReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: StatusBulkReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Estado de Lote';
@@ -153,7 +153,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
 
 
-		$response = $this->sendToService('callWs_StatusBulkReport');
+		$response = $this->sendToWebServices('callWs_StatusBulkReport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -163,7 +163,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_STATUS_BULK')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_STATUS_BULK')), 'Location', 302);
 				exit;
 		}
 
@@ -173,7 +173,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 	public function callWs_RechargeMadeReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: RechargeMadeReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: RechargeMadeReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes RecargasRealizadas';
@@ -205,7 +205,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->mesSeleccionado = $mes;
 		$this->dataRequest->anoSeleccionado = $anio;
 
-		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$response = $this->sendToWebServices('callWs_RechargeMadeReport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -215,7 +215,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_RECHARGE_MADE')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_RECHARGE_MADE')), 'Location', 302);
 				exit;
 		}
 
@@ -225,7 +225,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 	public function callWs_IssuedCardsReport_DownloadFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: IssuedCardsReport Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: IssuedCardsReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes TarjetasEmitidas';
@@ -245,7 +245,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
 		$this->dataRequest->fechaMes = $dataRequest->initialDatemy;
 
-		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$response = $this->sendToWebServices('callWs_IssuedCardsReport');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -255,7 +255,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('CONF_LINK_ISSUED_CARDS')), 'Location', 302);
+				redirect(base_url(lang('SETT_LINK_ISSUED_CARDS')), 'Location', 302);
 				exit;
 		}
 
@@ -269,12 +269,12 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function responseFail_DownloadFiles($dataResponse)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: UnnmamedAffiliate Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: UnnmamedAffiliate Method Initialized');
 
 		$this->response->code =  3;
 		$this->response->title = lang('GEN_DOWNLOAD_FILE');
 		$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-		$this->response->icon =  lang('CONF_ICON_WARNING');
+		$this->response->icon =  lang('SETT_ICON_WARNING');
 		$this->response->download =  TRUE;
 		$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 		$this->response->modalBtn['btn1']['action'] = 'destroy';

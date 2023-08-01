@@ -46,9 +46,9 @@
 	</ul>
 
 	<div id="text-general">
-	<?php if(lang('CONF_SIGNIN_IMG') === 'ON'): ?>
+	<?php if(lang('SETT_SIGNIN_IMG') === 'ON'): ?>
 		<div class="text-brand">
-			<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN')); ?>"
+			<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $customerFiles); ?>"
 			alt="Tebca" />
 			<p>Emitido por Servitebca Péru, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A.</p>
 		</div>

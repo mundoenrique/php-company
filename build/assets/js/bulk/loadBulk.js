@@ -129,13 +129,13 @@ $(function () {
 			case lang.GEN_BTN_SEE:
 				form = $(this).parent().find('form')
 				insertFormInput(true, form);
-				form.attr('action', baseURL + lang.CONF_LINK_BULK_DETAIL);
+				form.attr('action', baseURL + lang.SETT_LINK_BULK_DETAIL);
 				form.append('<input type="hidden" name="bulkView" value="detail">');
 			break;
 			case lang.GEN_BTN_CONFIRM:
 				form = $(this).parent().find('form')
 				insertFormInput(true, form);
-				form.attr('action', baseURL + lang.CONF_LINK_BULK_CONFIRM);
+				form.attr('action', baseURL + lang.SETT_LINK_BULK_CONFIRM);
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 			break;
 			case lang.GEN_BTN_DELETE:
@@ -157,7 +157,7 @@ $(function () {
 				inputModal = '<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal += 	'<span>' + lang.BULK_DELETE + ' <strong>' + bulkFile + '</strong> de Fecha: <strong>' + bulkDate + '</strong></span>';
 
-				if (lang.CONF_REMOTE_AUTH == 'OFF') {
+				if (lang.SETT_REMOTE_AUTH == 'OFF') {
 					inputModal+=		'<div class="input-group">';
 					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
 					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -169,7 +169,7 @@ $(function () {
 				}
 
 				inputModal+= 	'</form>';
-				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
+				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.SETT_ICON_INFO, modalBtn);
 				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');
@@ -203,7 +203,7 @@ $(function () {
 				bulkDate: form.find('input[name="bulkDate"]').val()
 			}
 
-			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+			if (lang.SETT_REMOTE_AUTH == 'OFF') {
 				data.pass = cryptoPass($('.pwd-auth').val());
 			}
 

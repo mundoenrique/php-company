@@ -55,16 +55,15 @@ if(!function_exists('dbSearch')) {
 	}
 }
 
-if (!function_exists('clearSessionVars')) {
+if (!function_exists('clearSessionsVars')) {
 	function clearSessionsVars() {
-		$CI = &get_instance();
+		$CI =& get_instance();
+		$isLogged = $CI->session->has_userdata('logged');
+		$isUserId = $CI->session->has_userdata('userId');
 
-		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
-			if ($pos == '__ci_last_regenerate') {
-				continue;
-			}
-
-			$CI->session->unset_userdata($pos);
+		if($isLogged || $isUserId) {
+			$CI->session->unset_userdata(['logged', 'userId', 'userName', 'enterpriseInf', 'productInf']);
+			$CI->session->sess_destroy();
 		}
 	}
 }
@@ -74,8 +73,8 @@ if (!function_exists('accessLog')) {
 		$CI = &get_instance();
 
 		return $accessLog = [
-			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
-			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
+			"sessionId"=> $CI->session->userdata('sessionId') ?? '',
+			"userName" => $CI->session->userdata('userName') ?? $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,
@@ -93,67 +92,6 @@ if (!function_exists('maskString')) {
 		$type = $type ? $type : '';
 		$length = strlen($string);
 		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
-	}
-}
-
-if (!function_exists('languageLoad')) {
-	function languageLoad($call, $class) {
-		$CI = &get_instance();
-		$languagesFile = [];
-		$loadLanguages = FALSE;
-		$configLanguage = $CI->config->item('language');
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$customerUri = $call == 'specific' ? $CI->config->item('customer_lang') : '';
-		$class = lcfirst(str_replace('Novo_', '', $class));
-		$CI->config->set_item('language', 'global');
-
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
-
-		switch ($call) {
-			case 'generic':
-				$CI->lang->load(['config-core', 'images']);
-			break;
-			case 'specific':
-				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
-
-				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
-					$CI->lang->load('config-core-'.$customerUri,);
-				}
-
-				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
-					$CI->lang->load('images_'.$customerUri);
-				}
-			break;
-		}
-
-		$CI->config->set_item('language', $configLanguage);
-
-		if ($call == 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
-				array_push($languagesFile, 'general');
-				$loadLanguages = TRUE;
-			}
-
-			if (file_exists($pathLang.'validate_lang.php')) {
-				array_push($languagesFile, 'validate');
-				$loadLanguages = TRUE;
-			}
-
-			//eliminar despues de la certificación
-			if (file_exists($pathLang.'config_lang.php')) {
-				array_push($languagesFile, 'config');
-				$loadLanguages = TRUE;
-			}
-		}
-
-		if (file_exists($pathLang.$class.'_lang.php')) {
-			array_push($languagesFile, $class);
-			$loadLanguages = TRUE;
-		}
-
-		if ($loadLanguages) {
-			$CI->lang->load($languagesFile);
-		}
 	}
 }
 
@@ -252,9 +190,9 @@ if (!function_exists('convertDateMDY')) {
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
 		$CI = &get_instance();
-		$linkredirect = $CI->session->has_userdata('productInf') ? lang('CONF_LINK_PRODUCT_DETAIL') : lang('CONF_LINK_ENTERPRISES');
-		$linkredirect = !$CI->session->has_userdata('logged') ? lang('CONF_LINK_SIGNIN') : $linkredirect;
-		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/'.lang('CONF_LINK_SIGNOUT_END') : $linkredirect;
+		$linkredirect = $CI->session->has_userdata('productInf') ? lang('SETT_LINK_PRODUCT_DETAIL') : lang('SETT_LINK_ENTERPRISES');
+		$linkredirect = !$CI->session->has_userdata('logged') ? lang('SETT_LINK_SIGNIN') : $linkredirect;
+		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/'.lang('SETT_LINK_SIGNOUT_END') : $linkredirect;
 
 		return $linkredirect;
 	}
@@ -277,22 +215,8 @@ if (! function_exists('currencyFormat')) {
 	}
 }
 
-if (! function_exists('languageCookie')) {
-	function languageCookie($language) {
-		$baseLanguage = [
-			'name' => 'baseLanguage',
-			'value' => $language,
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		set_cookie($baseLanguage);
-
-	}
-}
-//eliminar despues de la certificación
-if (! function_exists('checkTemporalTenant')) {
-	function checkTemporalTenant($customer) {
+if (!function_exists('tenantSameSettings')) {
+	function tenantSameSettings($customer) {
 		$pattern = ['/bog/', '/col/', '/per/', '/usd/', '/ven/'];
 		$replace = ['bdb', 'co', 'pe', 'us', 've'];
 		$customer = preg_replace($pattern, $replace, $customer);
@@ -324,4 +248,27 @@ if (!function_exists('normalizeName')) {
 
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
+
+	if (!function_exists('uriRedirect')) {
+	function uriRedirect($model, $singleSession) {
+		$CI =& get_instance();
+		$redirectLink = $singleSession === 'SignThird'
+			? lang('SETT_LINK_SIGNIN')
+			: 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
+
+		if ($CI->session->has_userdata('logged')) {
+			$redirectLink = lang('SETT_LINK_ENTERPRISES');
+
+			if($model === 'callWs_GetProductDetail') {
+				$linkredirect = lang('SETT_LINK_PRODUCTS');
+			}
+
+			if ($CI->session->has_userdata('productInf')) {
+				$linkredirect = lang('SETT_LINK_PRODUCT_DETAIL');
+			}
+		}
+
+		return $redirectLink;
+	}
+}
 }

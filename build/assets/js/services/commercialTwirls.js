@@ -40,7 +40,7 @@ $(function () {
 			insertFormInput(true);
 			$(this).html(loader);
 
-			if (lang.CONF_REMOTE_AUTH == 'ON') {
+			if (lang.SETT_REMOTE_AUTH == 'ON') {
 				remoteFunction = 'updateTwirlsCard';
 				btnRemote = $(this);
 				remoteAuthArgs.action = lang.GEN_COMMERCIAL_TWIRLS_TITTLE;
@@ -87,7 +87,7 @@ function updateTwirlsCard() {
 	data = getDataForm(form);
 	data.cardNumber = cardnumber;
 
-	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+	if (lang.SETT_REMOTE_AUTH == 'OFF') {
 		data.passwordAuth = cryptoPass(data.passwordAuth);
 	}
 
@@ -126,6 +126,6 @@ function buildList(code, dataResponse, msg, title) {
 			inputModal += '<h6 class="light mr-1">' + key + '</h6>';
 		})
 
-		appMessages(title, inputModal, lang.CONF_ICON_WARNING, modalBtn);
+		appMessages(title, inputModal, lang.SETT_ICON_WARNING, modalBtn);
 	}
 };

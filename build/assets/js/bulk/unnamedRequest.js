@@ -23,7 +23,7 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 
-			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+			if (lang.SETT_REMOTE_AUTH == 'OFF') {
 				data.password = cryptoPass(data.password);
 			}
 

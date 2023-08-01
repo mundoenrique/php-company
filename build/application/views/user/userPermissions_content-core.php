@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_USERS') ?></a></li>
 			</ul>
 		</nav>
@@ -42,7 +42,7 @@
 							</div>
 						</div>
 						<div id="enableSectionBtn" class="flex row mb-2 mx-2 items-center justify-end ">
-							<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+							<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_USERS_MANAGEMENT')) ?>">
 								<?= lang('GEN_BTN_CANCEL'); ?>
 							</a>
 							<button id="enableUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
@@ -86,23 +86,24 @@
 								</label>
 							</div>
 						</div>
+
 						<form id="checkFormPermits">
-							<?php $i =0; foreach(($titles) AS $key => $value): ?>
-								<div class="row mx-3 mb-1">
-									<h4 class="col-12 pl-0 bold"><?=  $value?></h4>
-									<?php foreach(($modules[$value]) AS $key1 => $value1): ?>
-										<?php   foreach(($modules[$value][$key1]) AS $key2 => $value2):  ?>
-											<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-												<input id="<?=$modules[$value][$key1][$key2]->accodfuncion ?>" class="permissions custom-control-input" type="checkbox" name=<?="checkbox". $i; $i++;?> value="<?= $modules[$value][$key1][$key2]->status; ?>">
-												<label class="custom-control-label" for="<?=$modules[$value][$key1][$key2]->accodfuncion ?>"><?= $modules[$value][$key1][$key2]->acnomfuncion ?></span>
-												</label>
-											</div>
-										<?php  endforeach; ?>
+							<?php $i =0; foreach($modules as $index => $value): ?>
+							<div class="row mx-3 mb-1">
+								<h4 class="col-12 pl-0 bold"><?=  $index?></h4>
+								<?php foreach($value as $index => $subArray): ?>
+									<?php foreach($subArray as $subIndex => $subValue): ?>
+										<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
+										<input id="<?=$subValue->accodfuncion ?>" class="permissions custom-control-input" type="checkbox" name=<?="checkbox". $i; $i++;?> value="<?= $subValue->status; ?>">
+										<label class="custom-control-label" for="<?=$subValue->accodfuncion ?>"><?= $subValue->acnomfuncion ?></span>
+										</label>
+										</div>
 									<?php endforeach; ?>
-								</div>
+								<?php endforeach; ?>
+							</div>
 							<?php endforeach; ?>
 							<div class="flex row mb-2 mx-2 items-center justify-end">
-								<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+								<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_USERS_MANAGEMENT')) ?>">
 									<?= lang('GEN_BTN_CANCEL'); ?>
 								</a>
 								<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>

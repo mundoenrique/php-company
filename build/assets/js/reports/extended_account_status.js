@@ -3,8 +3,9 @@
 $(function () {
 
 	var form = $('#extStatusAccountForm');
-	var formXls = $('#extStatusAccountFormXls');
+	var formFileDownload = $('#extStatusAccountFormFileDownload');
 	$('#resultByNITInput').val('');
+	$('#resultByNameInput').val('');
 
 	var datePicker = $('.date-picker');
 	$('#pre-loader').remove();
@@ -12,6 +13,7 @@ $(function () {
 	$("#allResults").prop( "checked", true );
 	$('#blockResults').addClass('hidden');
 	$('#resultByNITInput').addClass('ignore');
+	$('#resultByNameInput').addClass('ignore');
 
 	datePicker.datepicker({
 		dateFormat: 'mm/yy',
@@ -36,12 +38,20 @@ $(function () {
 
 	$(":radio").on("change", function (e) {
 		$('#resultByNITInput').val('');
+		$('#resultByNameInput').val('');
 		if (($('#allResults:checked').val() == 'on')) {
 			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
+			$('#resultByNameInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore');
 			$("#blockMessage").text('');
 		}
 		else if (($('#resultByNIT:checked').val() == 'on')) {
-			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
+			$('#resultByNITInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').css("display", "block").attr("maxlength",lang.VALIDATE_MAXLENGTH_IDEXTPER);
+			$('#resultByNameInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore').css("display", "none");
+			$("#blockMessage").text('');
+		}
+		else if (($('#resultByName:checked').val() == 'on')) {
+			$('#resultByNITInput').addClass('visible').removeClass('has-error').removeAttr('aria-describedby').addClass('ignore').css("display", "none");
+			$('#resultByNameInput').removeClass('visible').removeClass('has-error').removeAttr('aria-describedby').removeClass('ignore').css("display", "block").attr("maxlength",lang.VALIDATE_MAXLENGTH);
 			$("#blockMessage").text('');
 		}
 	});
@@ -52,6 +62,7 @@ $(function () {
 		$('#extAccountStatusTable').DataTable().destroy();
 		$('#blockResults').addClass('hidden');
 		$('#export_excel').addClass('hidden');
+		$('#export_txt').addClass('hidden');
 
 		if(($('#allResults:checked').val() == 'on')){
 			data.resultSearch = 0;
@@ -59,17 +70,23 @@ $(function () {
 		else if(($('#resultByNIT:checked').val() == 'on')){
 			data.resultSearch = 1;
 		}
+		else if(($('#resultByName:checked').val() == 'on')){
+			data.resultSearch = 3;
+		}
 
 		delete data.allResults;
 		delete data.resultByNIT;
+		delete data.resultByName;
 
-	  $('#enterpriseNameXls').val($('#enterpriseCode').find('option:selected').attr('name'));
-		$('#descProductXls').val($('#productCode').find('option:selected').attr('doc'));
-		$('#resultByNITXls').val(data.resultByNITInput);
-		$('#enterpriseCodeXls').val(data.enterpriseCode);
-		$('#productCodeXls').val(data.productCode);
-		$('#initialDateActXls').val(data.initialDateAct);
-		$('#resultSearchXls').val(data.resultSearch);
+	  $('#enterpriseNameFileDownload').val($('#enterpriseCode').find('option:selected').attr('name'));
+		$('#descProductFileDownload').val($('#productCode').find('option:selected').attr('doc'));
+		$('#resultByNITFileDownload').val(data.resultByNITInput);
+		$('#resultByNameFileDownload').val(data.resultByNameInput);
+		$('#enterpriseCodeFileDownload').val(data.enterpriseCode);
+		$('#productCodeFileDownload').val(data.productCode);
+		$('#initialDateActFileDownload').val(data.initialDateAct);
+		$('#resultSearchFileDownload').val(data.resultSearch);
+
 
 		validateForms(form);
 		if (form.valid()) {
@@ -80,10 +97,18 @@ $(function () {
 	});
 
 	$("#export_excel").click(function(){
-		validateForms(formXls);
-		if (formXls.valid()) {
-			var dataXls = getDataForm(formXls);
-			extendedDownloadFiles(dataXls);
+		validateForms(formFileDownload);
+		if (formFileDownload.valid()) {
+			var dataXls = getDataForm(formFileDownload)
+			extendedDownloadFiles(dataXls, 'exportToExcelExtendedAccountStatus');
+		}
+	});
+
+	$("#export_txt").click(function(){
+		validateForms(formFileDownload);
+		if (formFileDownload.valid()) {
+			var dataXls = getDataForm(formFileDownload)
+			extendedDownloadFiles(dataXls, 'exportToTxtExtendedAccountStatus');
 		}
 	});
 });
@@ -113,7 +138,8 @@ function searchExtAccountStatus(dataForm) {
       { "data": 'referencia' },
       { "data": 'descripcion'},
       { "data": 'tipoTransaccion' },
-      { "data": 'monto' }
+      { "data": 'monto' },
+      { "data": 'status' }
     ],
 		"columnDefs": [
 			{"targets": 0, "className": "fecha"},
@@ -123,7 +149,8 @@ function searchExtAccountStatus(dataForm) {
 			{"targets": 4, "className": "referencia"},
 			{"targets": 5, "className": "descripcion", "width": "260px",},
 			{"targets": 6, "className": "tipoTransaccion", "width": "110px"},
-			{"targets": 7, "className": "monto"}
+			{"targets": 7, "className": "monto"},
+			{"targets": 8, "className": "status", "visible": lang.SETT_STATUS_MOVEMENT == "ON"}
 		],
 		"ajax": {
 			url: baseURL + 'async-call',
@@ -136,6 +163,7 @@ function searchExtAccountStatus(dataForm) {
 				data.productCode = dataForm.productCode;
 				data.initialDateAct = dataForm.initialDateAct;
 				data.resultByNITInput = dataForm.resultByNITInput;
+				data.resultByNameInput = dataForm.resultByNameInput;
 				data.resultSearch = dataForm.resultSearch;
 				data.screenSize = screen.width;
 				data.paginar = true;
@@ -159,6 +187,7 @@ function searchExtAccountStatus(dataForm) {
 				);
 				if (responseTable.data.length > 0) {
 					$('#export_excel').removeClass('hidden');
+					$('#export_txt').removeClass('hidden');
 				}
 				return JSON.stringify(responseTable);
 			}
@@ -166,10 +195,10 @@ function searchExtAccountStatus(dataForm) {
 	});
 }
 
-function extendedDownloadFiles(data) {
+function extendedDownloadFiles(data, service) {
 	insertFormInput(true);
 	who = 'Reports';
-	where = 'exportToExcelExtendedAccountStatus';
+	where = service;
 	callNovoCore(who, where, data, function (response) {
 
 		if (response.code == 0) {

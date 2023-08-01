@@ -5,10 +5,10 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_BULK_AUTH')) ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_BULK_AUTH')) ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
 				/
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CACULATE_SERVICE_ORDERS') ?></a></li>
 			</ul>
@@ -88,7 +88,7 @@
 				</div>
 				<form id="auth-bulk-form">
 					<div class="flex flex-column mb-4 px-5 justify-center items-center">
-						<?php if (lang('CONF_SERVICE_ORDER_OTP') == 'ON'): ?>
+						<?php if (lang('SETT_SERVICE_ORDER_OTP') == 'ON'): ?>
 						<div class="form-group col-6 col-xl-4 center">
 							<label for="otpCode" class="pb-1 regular"><?= lang('GEN_OTP'); ?></label>
 							<input id="otpCode" name="otpCode" class="form-control col-6 block m-auto" type="text" autocomplete="off">
@@ -101,7 +101,7 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
-							<?php if(lang('CONF_SERVICE_ORDER_CANCEL') == 'ON'): ?>
+							<?php if(lang('SETT_SERVICE_ORDER_CANCEL') == 'ON'): ?>
 							<div class="mb-3 mr-4">
 								<button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
 							</div>

@@ -16,7 +16,7 @@ $(function () {
 				bulkTicked: $('#bulkTicked').val(),
 			}
 
-			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+			if (lang.SETT_REMOTE_AUTH == 'OFF') {
 				data.pass = cryptoPass(inputPass.val());
 			}
 

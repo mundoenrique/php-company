@@ -60,7 +60,7 @@ $(function () {
 			case lang.GEN_BTN_EDIT_PERMITS:
 				form = $(this).parent().find('form[name=formManagement]');
 				insertFormInput(true, form);
-				form.attr('action', baseURL + lang.CONF_LINK_USERS_PERMISSIONS);
+				form.attr('action', baseURL + lang.SETT_LINK_USERS_PERMISSIONS);
 				form.append('<input type="hidden" name="editPermits" value="edit">');
 				form.submit();
 				break;

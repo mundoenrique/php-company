@@ -10,7 +10,7 @@ class Novo_Errors extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Novo_Errors Controller Class Initialized');
+		writeLog('INFO', 'Novo_Errors Controller Class Initialized');
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
 		$this->lang->load('errors');
@@ -29,7 +29,7 @@ class Novo_Errors extends NOVO_Controller {
 	 */
 	public function pageNoFound()
 	{
-		log_message('INFO', 'NOVO errors: pageNoFound Method Initialized');
+		writeLog('INFO', 'errors: pageNoFound Method Initialized');
 
 		$view = 'html/error_404';
 		$this->render->activeHeader = TRUE;

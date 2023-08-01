@@ -11,7 +11,7 @@ class Request_Data {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Request_Data Library Class Initialized');
+		writeLog('INFO', 'Request_Data Library Class Initialized');
 
 		$this->CI = &get_instance();
 	}
@@ -22,7 +22,7 @@ class Request_Data {
 	 */
 	public function setPageSize($screenSize)
 	{
-		log_message('INFO', 'NOVO Request_Data: setPageSize Method Initialized');
+		writeLog('INFO', 'Request_Data: setPageSize Method Initialized');
 
 		switch ($screenSize) {
 			case $screenSize >= 1920:
@@ -50,140 +50,134 @@ class Request_Data {
 	 */
 	public function OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest)
 	{
-		log_message('INFO', 'NOVO Request_Data: OrderEnterpriseList Method Initialized');
+		writeLog('INFO', 'Request_Data: OrderEnterpriseList Method Initialized');
 
 		$responseList = new stdClass();
 		$enterpriseSelect = new stdClass();
 		$enterpriseListTemp = $enterpriseArgs->lista;
-		$item = 1; $page = 1; $cat = FALSE;
-		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1;
-		$itemAlphaBeFif = 1; $itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
-		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1;
-		$pageAlphaBeFif = 1; $pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
+		$item = 1; $page = 1; $TemCategory = NULL;
+		$itemAlphabetic1 = 1; $itemAlphabetic2 = 1; $itemAlphabetic3 = 1;  $itemAlphabetic4 = 1;
+		$itemAlphabetic5 = 1; $itemAlphabetic6 = 1; $itemAlphabetic7 = 1;
+		$pageAlphabetic1 = 1; $pageAlphabetic2 = 1; $pageAlphabetic3 = 1;  $pageAlphabetic4 = 1;
+		$pageAlphabetic5 = 1; $pageAlphabetic6 = 1; $pageAlphabetic7 = 1;
 
-		foreach($enterpriseArgs->lista AS $pos => $enterprises) {
-			if($enterprises->resumenProductos == 0) {
+		foreach ($enterpriseArgs->lista as $pos => $enterprise) {
+			foreach ($enterprise as $key => $value) {
+				$enterpriseArgs->lista[$pos]->$key = gettype($value) === 'string' ? trim($value) : $value;
+			}
+
+			$enterpriseName = (mb_strtoupper($enterprise->acnomcia));
+			$enterpriseName = strlen($enterpriseName) > 30 ? substr($enterpriseName, 0, 29) . '...' : $enterpriseName;
+			$enterprise->enterpriseName = $enterpriseName;
+			$enterprise->resumenProductos = (int) $enterprise->resumenProductos;
+			$enterprise->acdesc = mb_strtoupper($enterprise->acdesc);
+			$enterprise->acpercontac = ucwords(mb_strtolower($enterprise->acpercontac));
+
+			if($enterprise->resumenProductos === 0) {
 				unset($enterpriseListTemp[$pos]);
 			}
 
-			$string = (mb_strtoupper(trim($enterprises->acnomcia)));
-			$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
-			$enterprises->enterpriseName = $string;
-
-			foreach($enterprises AS $key => $value) {
-				$enterpriseArgs->lista[$pos]->$key = trim($value);
-
-				if($item > $enterpriseArgs->sizePage) {
-					$item = 1;
-					$page++;
-				}
-
-				$enterpriseArgs->lista[$pos]->page = 'page_'.$page;
-
-				if($key === 'resumenProductos') {
-					$enterpriseArgs->lista[$pos]->resumenProductos = $value == 1 ?
-					$value.' '.lang('GEN_PRODUCT') :
-					$value.' '.lang('GEN_PRODUCTS');
-				}
-
-				if($key === 'acpercontac') {
-					$enterpriseArgs->lista[$pos]->acpercontac = ucwords(mb_strtolower($value));
-				}
-
-				if($key === 'acnomcia') {
-					preg_match('/([^\W])/', mb_strtoupper($value), $matches);
-					$cat = substr(reset($matches), 0, 1);
-					$enterpriseArgs->lista[$pos]->category = $cat;
-
-					switch ($cat) {
-						case strpos('ABC', $cat) !== FALSE:
-							if($itemAlphaBeFi > $enterpriseArgs->sizePage) {
-								$itemAlphaBeFi = 1; 	$pageAlphaBeFi++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_1').'_'.$pageAlphaBeFi;
-							$itemAlphaBeFi++;
-
-							if(!$filters->FIRST['active']) {
-								$filters->FIRST['active'] = TRUE;
-							}
-						break;
-						case strpos('DEFG', $cat) !== FALSE:
-							if($itemAlphaBeSec > $enterpriseArgs->sizePage) {
-								$itemAlphaBeSec = 1; 	$pageAlphaBeSec++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_2').'_'.$pageAlphaBeSec;
-							$itemAlphaBeSec++;
-
-							if(!$filters->SECOND['active']) {
-								$filters->SECOND['active'] = TRUE;
-							}
-						break;
-						case strpos('HIJK', $cat) !== FALSE:
-							if($itemAlphaBeTh > $enterpriseArgs->sizePage) {
-								$itemAlphaBeTh = 1; 	$pageAlphaBeTh++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_3').'_'.$pageAlphaBeTh;
-							$itemAlphaBeTh++;
-
-							if(!$filters->THIRD['active']) {
-								$filters->THIRD['active'] = TRUE;
-							}
-						break;
-						case strpos('LMNO', $cat) !== FALSE:
-							if($itemAlphaBeFo > $enterpriseArgs->sizePage) {
-								$itemAlphaBeFo = 1; 	$pageAlphaBeFo++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_4').'_'.$pageAlphaBeFo;
-							$itemAlphaBeFo++;
-
-							if(!$filters->FOURTH['active']) {
-								$filters->FOURTH['active'] = TRUE;
-							}
-						break;
-						case strpos('PQRS', $cat) !== FALSE:
-							if($itemAlphaBeFi > $enterpriseArgs->sizePage) {
-								$itemAlphaBeFi = 1; 	$pageAlphaBeFif++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_5').'_'.$pageAlphaBeFif;
-							$itemAlphaBeFif++;
-
-							if(!$filters->FIFTH['active']) {
-								$filters->FIFTH['active'] = TRUE;
-							}
-						break;
-						case strpos('TUVW', $cat) !== FALSE:
-							if($itemAlphaBeSi > $enterpriseArgs->sizePage) {
-								$itemAlphaBeSi = 1; 	$pageAlphaBeSi++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_6').'_'.$pageAlphaBeSi;
-							$itemAlphaBeSi++;
-
-							if(!$filters->SIXTH['active']) {
-								$filters->SIXTH['active'] = TRUE;
-							}
-						break;
-						case strpos('XYZ', $cat) !== FALSE:
-							if($itemAlphaBeSev > $enterpriseArgs->sizePage) {
-								$itemAlphaBeSev = 1; 	$pageAlphaBeSev++;
-							}
-
-							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_7').'_'.$pageAlphaBeSev;
-							$itemAlphaBeSev++;
-
-							if(!$filters->SEVENTH['active']) {
-								$filters->SEVENTH['active'] = TRUE;
-							}
-						break;
-					}
-				}
-
+			if($item > $enterpriseArgs->sizePage) {
+				$item = 1;
+				$page++;
 			}
+
+			$enterprise->page = 'page_' . $page;
+			preg_match('/([^\W])/', $enterpriseName, $matches);
+			$TemCategory = substr(reset($matches), 0, 1);
+			$enterprise->category = $TemCategory;
+
+			if(strpos('ABC012', $TemCategory) !== FALSE) {
+				if($itemAlphabetic1 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic1 = 1; $pageAlphabetic1++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_1') . '_' . $pageAlphabetic1;
+				$itemAlphabetic1++;
+
+				if(!$filters->FIRST['active']) {
+					$filters->FIRST['active'] = TRUE;
+				}
+			}
+
+			if(strpos('DEFG3456', $TemCategory) !== FALSE) {
+				if($itemAlphabetic2 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic2 = 1; $pageAlphabetic2++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_2') . '_' . $pageAlphabetic2;
+				$itemAlphabetic2++;
+
+				if(!$filters->SECOND['active']) {
+					$filters->SECOND['active'] = TRUE;
+				}
+			}
+
+			if(strpos('HIJK789', $TemCategory) !== FALSE) {
+				if($itemAlphabetic3 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic3 = 1; $pageAlphabetic3++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_3') . '_' . $pageAlphabetic2;
+				$itemAlphabetic3++;
+
+				if(!$filters->THIRD['active']) {
+					$filters->THIRD['active'] = TRUE;
+				}
+			}
+
+			if(strpos('LMNO', $TemCategory) !== FALSE) {
+				if($itemAlphabetic4 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic4 = 1; $pageAlphabetic4++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_4') . '_' . $pageAlphabetic4;
+				$itemAlphabetic4++;
+
+				if(!$filters->FOURTH['active']) {
+					$filters->FOURTH['active'] = TRUE;
+				}
+			}
+
+			if(strpos('PQRS', $TemCategory) !== FALSE) {
+				if($itemAlphabetic5 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic5 = 1; $pageAlphabetic5++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_5') . '_' . $pageAlphabetic5;
+				$itemAlphabetic5++;
+
+				if(!$filters->FIFTH['active']) {
+					$filters->FIFTH['active'] = TRUE;
+				}
+			}
+
+			if(strpos('TUVW', $TemCategory) !== FALSE) {
+				if($itemAlphabetic6 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic6 = 1; $pageAlphabetic6++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_6') . '_' . $pageAlphabetic6;
+				$itemAlphabetic6++;
+
+				if(!$filters->SIXTH['active']) {
+					$filters->SIXTH['active'] = TRUE;
+				}
+			}
+
+			if(strpos('XYZ', $TemCategory) !== FALSE) {
+				if($itemAlphabetic7 > $enterpriseArgs->sizePage) {
+					$itemAlphabetic7 = 1; $pageAlphabetic7++;
+				}
+
+				$enterprise->albeticalPage = lang('ENTERPRISE_FILTER_7') . '_' . $pageAlphabetic7;
+				$itemAlphabetic7++;
+
+				if(!$filters->SEVENTH['active']) {
+					$filters->SEVENTH['active'] = TRUE;
+				}
+			}
+
 			$item++;
 		}
 
@@ -201,7 +195,7 @@ class Request_Data {
 	 */
 	public function setFilters()
 	{
-		log_message('INFO', 'NOVO Request_Data: setFilters Method Initialized');
+		writeLog('INFO', 'Request_Data: setFilters Method Initialized');
 
 		$filters = new stdClass();
 		$filters->FIRST = [
@@ -249,7 +243,7 @@ class Request_Data {
 	 */
 	public function getProductsOrder($responseList, $select)
 	{
-		log_message('INFO', 'NOVO Request_Data: getProductsOrder Method Initialized');
+		writeLog('INFO', 'Request_Data: getProductsOrder Method Initialized');
 
 		if($select) {
 			return $this->orderToSelectList($responseList);
@@ -265,46 +259,33 @@ class Request_Data {
 	 */
 	public function orderToProductList($response)
 	{
-		log_message('INFO', 'NOVO Request_Data: orderToProductList Method Initialized');
+		writeLog('INFO', 'Request_Data: orderToProductList Method Initialized');
 
 		$noDeleteCat = [];
 		$noDeleteBrand = [];
+		$programsList = new stdClass();
 
-		foreach($response->productos AS $pos => $products) {
-			foreach($products AS $key => $value) {
-				switch ($key) {
-					case 'descripcion':
-						$productImgName = normalizeName(mb_strtolower($value));
-						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
+		foreach($response->productos as $products) {
+			$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
+			$brandImg = lang('IMG_BRAND_DEFAULT');
+			$productImgName = normalizeName(mb_strtolower($products->descripcion));
+			$brand = url_title(trim(mb_strtolower($products->marca)));
 
-						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
-							$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName].'.svg';
-						}
-
-						$products->productImg = $productImg;
-						$products->$key = trim(mb_strtoupper($value));
-					break;
-					case 'categoria':
-						$products->$key = trim(ucwords(mb_strtolower($value)));
-					break;
-					case 'idCategoria':
-						$noDeleteCat[] =  $value;
-					break;
-					case 'filial':
-						$products->$key = trim(mb_strtoupper($value));
-					break;
-					case 'marca':
-						$imgBrand = url_title(trim(mb_strtolower($value))).'_product.svg';
-
-						if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-							$imgBrand = 'default.svg';
-						}
-
-						$products->imgBrand = $imgBrand;
-						$noDeleteBrand[] =  $value;
-					break;
-				}
+			if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
+				$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName] . '.svg';
 			}
+
+			if(array_key_exists($brand, lang('IMG_BRANDS'))) {
+				$brandImg = lang('IMG_BRANDS')[$brand] . '_product.svg';
+			}
+
+			$products->productImg = $productImg;
+			$products->imgBrand = $brandImg;
+			$products->descripcion = trim(mb_strtoupper($products->descripcion));
+			$products->categoria = isset($products->categoria) ? trim(ucwords(mb_strtolower($products->categoria))) : '';
+			$noDeleteCat[] = isset($products->idCategoria) ? $products->idCategoria : '';
+			$noDeleteBrand[] =  trim($products->marca);
+			$products->filial = trim(mb_strtoupper($products->filial));
 		}
 
 		$noDeleteCat = array_unique($noDeleteCat);
@@ -313,7 +294,7 @@ class Request_Data {
 
 		foreach($response->listaCategorias AS $pos => $categorie) {
 			foreach($noDeleteCat AS $item) {
-				if($categorie->idCategoria == $item) {
+				if($categorie->idCategoria === $item) {
 					$categorieList[] = $response->listaCategorias[$pos];
 				}
 			}
@@ -345,26 +326,17 @@ class Request_Data {
 	 */
 	public function orderToSelectList($response)
 	{
-		log_message('INFO', 'NOVO Request_Data: orderToSelectList Method Initialized');
+		writeLog('INFO', 'Request_Data: orderToSelectList Method Initialized');
 
 		$productListSelect = [];
 
-		foreach($response->productos AS $pos => $products) {
-			foreach($products AS $key => $value) {
-				switch ($key) {
-					case 'descripcion':
-						$string = (mb_strtoupper(trim($value)));
-						$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
-						$productList['desc'] = $string;
-						break;
-					case 'idProducto':
-						$productList['id'] = trim($value);
-						break;
-					case 'marca':
-						$productList['brand'] = trim($value);
-						break;
-				}
-			}
+		foreach($response->productos as $products) {
+			$productList = [];
+			$string = $products->descripcion;
+			$string = strlen($string) > 30 ? substr($string, 0, 29) .'...' : $string;
+			$productList['desc'] = $string;
+			$productList['id'] = trim($products->idProducto);
+			$productList['brand'] = trim($products->marca);
 
 			$productListSelect[] = $productList;
 		}

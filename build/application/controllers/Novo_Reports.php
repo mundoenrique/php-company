@@ -10,7 +10,7 @@ class Novo_Reports extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'Novo_Reports Controller Class Initialized');
+		writeLog('INFO', 'Reports Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar la lista de reportes
@@ -19,7 +19,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function getReportsList()
 	{
-		log_message('INFO', 'Novo_Reports: getReportsList Method Initialized');
+		writeLog('INFO', 'Reports: getReportsList Method Initialized');
 
 		$view = 'reports';
 		array_push(
@@ -53,7 +53,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function accountStatus()
 	{
-		log_message('INFO', 'Novo_Reports: accountStatus Method Initialized');
+		writeLog('INFO', 'Reports: accountStatus Method Initialized');
 
 		$view = 'accountStatus';
 		array_push(
@@ -91,7 +91,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function extendedAccountStatus()
 	{
-		log_message('INFO', 'Novo_Reports: extendedAccountStatus Method Initialized');
+		writeLog('INFO', 'Reports: extendedAccountStatus Method Initialized');
 
 		$view = 'extendedAccountStatus';
 		array_push(
@@ -128,7 +128,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function replacement()
 	{
-		log_message('INFO', 'Novo_Reports: replacement Method Initialized');
+		writeLog('INFO', 'Reports: replacement Method Initialized');
 
 		$view = 'replacement';
 		array_push(
@@ -157,7 +157,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function closingBalance()
 	{
-		log_message('INFO', 'Novo_Reports: closingBalance Method Initialized');
+		writeLog('INFO', 'Reports: closingBalance Method Initialized');
 
 		$view = 'closingBalance';
 		array_push(
@@ -203,7 +203,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function userActivity()
 	{
-		log_message('INFO', 'Novo_Reports: userActivity Method Initialized');
+		writeLog('INFO', 'Reports: userActivity Method Initialized');
 
 		$view = 'userActivity';
 		array_push(
@@ -230,7 +230,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function usersActivity()
 	{
-		log_message('INFO', 'Novo_Reports: usersActivity Method Initialized');
+		writeLog('INFO', 'Reports: usersActivity Method Initialized');
 
 		$view = 'usersActivity';
 		array_push(
@@ -257,7 +257,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function rechargeMade()
 	{
-		log_message('INFO', 'Novo_Reports: rechargeMade Method Initialized');
+		writeLog('INFO', 'Reports: rechargeMade Method Initialized');
 
 		$view = 'rechargeMade';
 		array_push(
@@ -297,7 +297,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function issuedCards()
 	{
-		log_message('INFO', 'Novo_Reports: issuedCards Method Initialized');
+		writeLog('INFO', 'Reports: issuedCards Method Initialized');
 
 		$view = 'issuedCards';
 		array_push(
@@ -333,7 +333,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function categoryExpense()
 	{
-		log_message('INFO', 'Novo_Reports: categoryExpense Method Initialized');
+		writeLog('INFO', 'Reports: categoryExpense Method Initialized');
 
 		$view = 'categoryExpense';
 		array_push(
@@ -360,7 +360,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function masterAccount()
 	{
-		log_message('INFO', 'Novo_Reports: masterAccount Method Initialized');
+		writeLog('INFO', 'Reports: masterAccount Method Initialized');
 
 		$view = 'masterAccount';
 		array_push(
@@ -388,7 +388,7 @@ class Novo_Reports extends NOVO_Controller {
 	*/
 	public function extendedMasterAccount()
 	{
-		log_message('INFO', 'Novo_Reports: extendedMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports: extendedMasterAccount Method Initialized');
 
 		$view = 'extendedMasterAccount';
 		array_push(
@@ -416,7 +416,8 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function statusBulk()
 	{
-		log_message('INFO', 'Novo_Reports: statusBulk Method Initialized');
+		writeLog('INFO', 'Reports: statusBulk Method Initialized');
+
 		$view = 'statusBulk';
 		$statusBulkList = FALSE;
 		array_push(
@@ -457,7 +458,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function cardHolders()
 	{
-		log_message('INFO', 'Novo_Reports: cardHolders Method Initialized');
+		writeLog('INFO', 'Reports: cardHolders Method Initialized');
 		$view = 'cardHolders';
 		$cardHoldersList = FALSE;
 		array_push(
@@ -498,7 +499,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function statusMasterAccount()
 	{
-		log_message('INFO', 'Novo_Reports: statusMasterAccount Method Initialized');
+		writeLog('INFO', 'Reports: statusMasterAccount Method Initialized');
 
 		$view = 'statusMasterAccount';
 		array_push(

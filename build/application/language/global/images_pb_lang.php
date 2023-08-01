@@ -5,5 +5,4 @@ $lang['GEN_FAVICON'] = 'favicon-pb';
 $lang['GEN_LOGO_HEADER'] = 'logo-menu.svg';
 $lang['GEN_FOTTER_IMAGE_L'] = 'logo-footer.png';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
-// PROGRAM IMAGES
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'pb_default.svg';

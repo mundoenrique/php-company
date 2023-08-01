@@ -112,7 +112,7 @@ function searchStatusAccount(passData){
 			$('#blockResults').removeClass('hidden');
 
 			paintTable(dataResponse);
-			if (dataResponse[0].length >= lang.CONF_DATATABLE_ARRAY_CHUNK)
+			if (dataResponse[0].length >= lang.SETT_DATATABLE_ARRAY_CHUNK)
 				$('#spinnerResults').removeClass('hide');
 
 		};
@@ -281,59 +281,59 @@ async function paintTable(dataResponse) {
 					{
 						"targets": 0,
 						"className": "Tarjeta",
-						"visible": lang.CONF_CARD_STATUS_COLUMN == "ON"
+						"visible": lang.SETT_CARD_STATUS_COLUMN == "ON"
 					},
 					{
 						"targets": 1,
 						"className": "date",
-						"visible": lang.CONF_DATE_COLUMN == "ON"
+						"visible": lang.SETT_DATE_COLUMN == "ON"
 					},
 					{
 						"targets": 1,
 						"className": "date",
-						"visible": lang.CONF_DATE_COLUMN == "ON"
+						"visible": lang.SETT_DATE_COLUMN == "ON"
 					},
 					{
 						"targets": 2,
 						"className": "fid",
-						"visible": lang.CONF_DNI_COLUMN == "ON"
+						"visible": lang.SETT_DNI_COLUMN == "ON"
 					},
 					{
 						"targets": 3,
 						"className": "terminal",
-						"visible": lang.CONF_TERMINAL_COLUMN == "ON"
+						"visible": lang.SETT_TERMINAL_COLUMN == "ON"
 					},
 					{
 						"targets": 4,
 						"className": "secuence",
-						"visible": lang.CONF_SECUENCE_COLUMN == "ON"
+						"visible": lang.SETT_SECUENCE_COLUMN == "ON"
 					},
 					{
 						"targets": 5,
 						"className": "reference",
-						"visible": lang.CONF_REFERENCE_COLUMN == "ON"
+						"visible": lang.SETT_REFERENCE_COLUMN == "ON"
 					},
 					{
 						"targets": 6,
 						"className": "description",
-						"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
+						"visible": lang.SETT_DESCRIPTION_COLUMN == "ON"
 					},
 					{
 						"targets": 7,
 						"className": "typeTransaction",
-						"visible": lang.CONF_OPERATION_COLUMN == "ON",
+						"visible": lang.SETT_OPERATION_COLUMN == "ON",
 						"width": "15%",
 					},
 					{
 						"targets": 8,
 						"className": "amount",
-						"visible": lang.CONF_AMOUNT_COLUMN == "ON"
+						"visible": lang.SETT_AMOUNT_COLUMN == "ON"
 					}
 				],
 				"language": dataTableLang,
 			});
 		});
-		await sleep(lang.CONF_DATATABLE_SLEEP);
+		await sleep(lang.SETT_DATATABLE_SLEEP);
 	};
 	$('#spinnerResults').addClass('hide');
 };

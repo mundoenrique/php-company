@@ -10,11 +10,18 @@
 				<input type="hidden" name="isGet" value="<?= TRUE; ?>">
 				<select id="enterprise-select" class="select-box custom-select mt-1 mb-4 h6 w-100">
 					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
-					<?php foreach($enterpriseList AS $enterprise) : ?>
-					<?php if($enterprise->acrif == $enterpriseData->idFiscal && !$countProducts): ?>
+					<?php foreach($enterpriseList as $enterprise) : ?>
+					<?php if($enterprise->acrif === $enterpriseData->idFiscal && !$hasProducts): ?>
 					<?php continue; ?>
 					<?php endif;?>
-					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" fiscalNumber="<?= $enterprise->acnit ?>" thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>">
+					<option
+						value="<?= $enterprise->acrif; ?>"
+						code="<?= $enterprise->accodcia; ?>"
+						group="<?= $enterprise->accodgrupoe; ?>"
+						fiscalNumber="<?= $enterprise->acnit ?>"
+						thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>"
+						operatingModel="<?= $enterprise->acnil ? $enterprise->acnil : ''?>"
+					>
 						<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>

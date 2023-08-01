@@ -12,7 +12,7 @@ class Create_Menu {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Create_Menu Library Class Initialized');
+		writeLog('INFO', 'Create_Menu Library Class Initialized');
 
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
@@ -25,7 +25,7 @@ class Create_Menu {
 	 */
 	public function mainMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Create_Menu: mainMenu method initialized');
+		writeLog('INFO', 'Create_Menu: mainMenu method initialized');
 
 		switch ($firstLevel) {
 			case 'GESLOT':
@@ -59,7 +59,7 @@ class Create_Menu {
 	 */
 	public function secondaryMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Create_Menu: secondaryMenu method initialized');
+		writeLog('INFO', 'Create_Menu: secondaryMenu method initialized');
 
 		$level = new stdClass();
 		$level->second = [];
@@ -80,7 +80,7 @@ class Create_Menu {
 			$level->second[] = $this->menulang($module->idModulo);
 		}
 
-		log_message('INFO', 'NOVO secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
+		writeLog('INFO', 'secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
 
 		return $level;
 	}
@@ -91,26 +91,26 @@ class Create_Menu {
 	 */
 	public function menulang($subMenu)
 	{
-		log_message('INFO', 'NOVO Create_Menu: menulang method initialized');
+		writeLog('INFO', 'Create_Menu: menulang method initialized');
 
 		$subMenuLang = new stdClass();
 
 		switch ($subMenu) {
 			case 'TEBCAR':
 				$subMenuLang->text = lang('GEN_MENU_BULK_LOAD');
-				$subMenuLang->link = lang('CONF_LINK_BULK_LOAD');
+				$subMenuLang->link = lang('SETT_LINK_BULK_LOAD');
 			break;
 			case 'TEBAUT':
 				$subMenuLang->text = lang('GEN_MENU_BULK_AUTH');
-				$subMenuLang->link = lang('CONF_LINK_BULK_AUTH');
+				$subMenuLang->link = lang('SETT_LINK_BULK_AUTH');
 			break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
-				$subMenuLang->link = lang('CONF_LINK_BULK_UNNAMED_REQ');
+				$subMenuLang->link = lang('SETT_LINK_BULK_UNNAMED_REQ');
 			break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
-				$subMenuLang->link = lang('CONF_LINK_BULK_UNNAMED_AFFIL');
+				$subMenuLang->link = lang('SETT_LINK_BULK_UNNAMED_AFFIL');
 			break;
 			case 'TEBGUR':
 				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');
@@ -118,7 +118,7 @@ class Create_Menu {
 			break;
 			case 'TEBORS':
 				$subMenuLang->text = lang('GEN_MENU_CONS_ORDERS_SERV');
-				$subMenuLang->link = lang('CONF_LINK_SERVICE_ORDERS');
+				$subMenuLang->link = lang('SETT_LINK_SERVICE_ORDERS');
 			break;
 			case 'TEBPOL':
 				$subMenuLang->text = lang('GEN_MENU_CONS_DATA_UPGRADE');
@@ -126,19 +126,19 @@ class Create_Menu {
 			break;
 			case 'TRAMAE':
 				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('CONF_LINK_TRANSF_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('SETT_LINK_TRANSF_MASTER_ACCOUNT');
 			break;
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
-				$subMenuLang->link = lang('CONF_LINK_CARDS_INQUIRY');
+				$subMenuLang->link = lang('SETT_LINK_CARDS_INQUIRY');
 			break;
 			case 'GIRCOM':
 				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
-				$subMenuLang->link = lang('CONF_LINK_COMMERCIAL_TWIRLS');
+				$subMenuLang->link = lang('SETT_LINK_COMMERCIAL_TWIRLS');
 			break;
 			case 'LIMTRX':
 				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');
-				$subMenuLang->link = lang('CONF_LINK_TRANSACTIONAL_LIMITS');
+				$subMenuLang->link = lang('SETT_LINK_TRANSACTIONAL_LIMITS');
 			break;
 			case 'CONVIS':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');
@@ -166,51 +166,51 @@ class Create_Menu {
 			break;
 			case 'TEBTHA':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARDHOLDERS');
-				$subMenuLang->link = lang('CONF_LINK_CARD_HOLDERS');
+				$subMenuLang->link = lang('SETT_LINK_CARD_HOLDERS');
 			break;
 			case 'REPREP':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
-				$subMenuLang->link = lang('CONF_LINK_REPLACEMENT');
+				$subMenuLang->link = lang('SETT_LINK_REPLACEMENT');
 			break;
 			case 'REPEDO':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
-				$subMenuLang->link = lang('CONF_LINK_ACCOUNT_STATUS');
+				$subMenuLang->link = lang('SETT_LINK_ACCOUNT_STATUS');
 			break;
 			case 'REPEDC':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCOUNT_STATUS');
-				$subMenuLang->link = lang('CONF_LINK_EXTENDED_ACCOUNT_STATUS');
+				$subMenuLang->link = lang('SETT_LINK_EXTENDED_ACCOUNT_STATUS');
 			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
-				$subMenuLang->link = lang('CONF_LINK_CLOSING_BALANCE');
+				$subMenuLang->link = lang('SETT_LINK_CLOSING_BALANCE');
 			break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
-				$subMenuLang->link = lang('CONF_LINK_USER_ACTIVITY');
+				$subMenuLang->link = lang('SETT_LINK_USER_ACTIVITY');
 			break;
 			case 'REPPRO':
 				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_MADE');
-				$subMenuLang->link = lang('CONF_LINK_RECHARGE_MADE');
+				$subMenuLang->link = lang('SETT_LINK_RECHARGE_MADE');
 			break;
 			case 'REPTAR':
 				$subMenuLang->text = lang('GEN_MENU_REP_ISSUED_CARDS');
-				$subMenuLang->link = lang('CONF_LINK_ISSUED_CARDS');
+				$subMenuLang->link = lang('SETT_LINK_ISSUED_CARDS');
 			break;
 			case 'REPLOT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_BULK');
-				$subMenuLang->link = lang('CONF_LINK_STATUS_BULK');
+				$subMenuLang->link = lang('SETT_LINK_STATUS_BULK');
 			break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
-				$subMenuLang->link = lang('CONF_LINK_CATEGORY_EXPENSE');
+				$subMenuLang->link = lang('SETT_LINK_CATEGORY_EXPENSE');
 			break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('CONF_LINK_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('SETT_LINK_MASTER_ACCOUNT');
 			break;
 			case 'REPCMT':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('CONF_LINK_EXTENDED_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('SETT_LINK_EXTENDED_MASTER_ACCOUNT');
 			break;
 			case 'REPPGE':
 				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');
@@ -226,11 +226,11 @@ class Create_Menu {
 			break;
 			case 'REPALL':
 				$subMenuLang->text = lang('GEN_MENU_REP_ALL');
-				$subMenuLang->link = lang('CONF_LINK_REPORTS');
+				$subMenuLang->link = lang('SETT_LINK_REPORTS');
 			break;
 			case 'USEREM':
 				$subMenuLang->text = lang('GEN_MENU_USERS_MANAGEMENT');
-				$subMenuLang->link = lang('CONF_LINK_USERS_MANAGEMENT');
+				$subMenuLang->link = lang('SETT_LINK_USERS_MANAGEMENT');
 			break;
 			case 'UNNAMED':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');
@@ -238,7 +238,7 @@ class Create_Menu {
 			break;
 			case 'REPECT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('CONF_LINK_STATUS_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('SETT_LINK_STATUS_MASTER_ACCOUNT');
 			break;
 			default:
 				$subMenuLang->text = '---';

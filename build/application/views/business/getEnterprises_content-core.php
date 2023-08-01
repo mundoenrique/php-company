@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular"><?= $greeting.' '.$fullName ?></h1>
+<h1 class="primary h3 regular"><?= $greeting . ' ' . $fullName ?></h1>
 <div class="flex mb-2 light items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li>
+				<li class="inline">
+					<a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_ENTERPRISE') ?></a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -21,7 +23,7 @@
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1" <?= $disabled ?>>
 			<?= lang('BUSINESS_ENTERPRISE_FILTER_ALL'); ?>
 		</button>
-		<?php foreach($filters AS $filtersAttr): ?>
+		<?php foreach($filters as $filtersAttr): ?>
 		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
 			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
 		<?php endforeach; ?>
@@ -52,21 +54,23 @@
 				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
 			</span>
 			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<?php $danger = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
+				<?php $danger = $enterpriseaAttr->resumenProductos === 0 ? ' danger' : FALSE; ?>
 				<span class="product-pb truncate<?= $danger; ?> total-product">
 					<?= $enterpriseaAttr->resumenProductos ?>
+					<?= $enterpriseaAttr->resumenProductos === 1 ? lang('GEN_PRODUCT') : lang('GEN_PRODUCTS') ?>
 				</span>
 				<span class="product-pb truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
 				<span class="product-pb truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
 			</div>
 		</div>
-		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>" method="POST">
+		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>" method="POST">
 			<input type="hidden" name="enterpriseCode" value="<?= $enterpriseaAttr->accodcia; ?>">
 			<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
 			<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">
 			<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
 			<input type="hidden" name="thirdApp" value="<?= $enterpriseaAttr->acobservacion ?? 'ANY'; ?>">
 			<input type="hidden" name="fiscalNumber" value="<?= $enterpriseaAttr->acnit; ?>">
+			<input type="hidden" name="operatingModel" value="<?= $enterpriseaAttr->acnil; ?>">
 		</form>
 	</div>
 	<?php endforeach; ?>

@@ -53,7 +53,7 @@
 	</div>
 </footer>
 <div id="loader" class="hidden">
-	<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting"
+	<img src="<?= $this->asset->insertFile(lang('IMG_LOADER'), 'images', $customerFiles) ?>" class="requesting"
 		alt="<?= lang('GEN_ALT_LOADER'); ?>">
 </div>
 <div id="system-info" class="hidden">
