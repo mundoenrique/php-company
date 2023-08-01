@@ -57,12 +57,12 @@ $route['translate_uri_dashes'] = FALSE;
 | TEMPORAL ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(bpi|co|pe|us|ve)/browsers'] = "Novo_User/browsers";
-$route['(bpi|co|pe|us|ve)/inicio'] = "Novo_User/login";
-$route['(bpi|co|pe|us|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
-$route['(bpi|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePass";
-$route['(bpi|co|pe|us|ve)/inf-beneficios'] = "Novo_Information/benefits";
-$route['(bpi|co|pe|us|ve)/inf-condiciones'] = "Novo_Information/terms";
+$route['(bpi|co|per|usd|ve)/browsers'] = "Novo_User/browsers";
+$route['(bpi|co|per|usd|ve)/inicio'] = "Novo_User/login";
+$route['(bpi|co|per|usd|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
+$route['(bpi|co|per|usd|ve)/cambiar-clave'] = "Novo_User/changePass";
+$route['(bpi|co|per|usd|ve)/inf-beneficios'] = "Novo_Information/benefits";
+$route['(bpi|co|per|usd|ve)/inf-condiciones'] = "Novo_Information/terms";
 /*
 |--------------------------------------------------------------------------
 | CURRENT ROUTES
