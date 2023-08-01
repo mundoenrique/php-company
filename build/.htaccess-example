@@ -39,6 +39,7 @@ SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
 SetEnv SESS_COOKIE_NAME empresas
 SetEnv SESS_EXPIRATION 1800
 SetEnv COOKIE_PREFIX 'ceo_'
+SetEnv PROXY_ENABLE OFF
 
 #----------------------#
 # APPLICATION SETTINGS #
