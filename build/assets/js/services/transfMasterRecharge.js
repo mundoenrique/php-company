@@ -16,7 +16,7 @@ $(function () {
 			 checkType = $("input:radio[name=transferType]:checked").val();
 		})
 
-		$('#transferAmount').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
+		$('#transferAmount').mask('#' + lang.SETT_THOUSANDS + '##0' + lang.SETT_DECIMAL + '00', { reverse: true });
 		$('#transferAmount').on('keyup', function() {
 			$(this).val(function(_index, value) {
 
@@ -25,7 +25,7 @@ $(function () {
 				}
 
 				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-					value = '00' + lang.CONF_DECIMAL + value
+					value = '00' + lang.SETT_DECIMAL + value
 				}
 
 				return value
@@ -76,7 +76,7 @@ $(function () {
 			data.transferType = checkType;
 			$(this).html(loader);
 			insertFormInput(true);
-			if (lang.CONF_INPUT_PASS == 'OFF' && lang.CONF_INPUT_GET_TOKEN == 'ON') {
+			if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 				getTokenRecharge();
 			} else {
 				rechargeAccount();
@@ -114,14 +114,14 @@ function rechargeAccount() {
 	who = 'Services';
 	where = 'masterAccountTransfer';
 
-	if (lang.CONF_INPUT_PASS == 'OFF' && lang.CONF_INPUT_GET_TOKEN == 'ON') {
+	if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 		data.passwordTranfer = $('#otpCode').val();
 	} else {
 		data.passwordTranfer = cryptoPass(data.passwordTranfer);
 	}
 
 	callNovoCore(who, where, data, function (response) {
-		if (lang.CONF_INPUT_PASS == 'OFF' && lang.CONF_INPUT_GET_TOKEN == 'ON') {
+		if (lang.SETT_INPUT_PASS === 'OFF' && lang.SETT_INPUT_GET_TOKEN === 'ON') {
 			switch (response.code) {
 				case 1:
 					generateModalOTP(response)

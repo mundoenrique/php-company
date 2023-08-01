@@ -64,7 +64,7 @@ class Encrypt_Connect {
 		if(!$response) {
 			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
 			$response = new stdClass();
-			$response->rc = lang('CONF_RC_DEFAULT');
+			$response->rc = lang('SETT_RC_DEFAULT');
 			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
@@ -187,7 +187,7 @@ class Encrypt_Connect {
 					$failResponse->msg = lang('GEN_TIMEOUT');
 				break;
 				default:
-					$failResponse->rc = lang('CONF_RC_DEFAULT');
+					$failResponse->rc = lang('SETT_RC_DEFAULT');
 			}
 
 			switch ($httpCode) {
@@ -238,7 +238,7 @@ class Encrypt_Connect {
 		$result = curl_errno($ch);
 
 		log_message('DEBUG', 'NOVO [' . $userName . '] UPLOAD FILE BULK SFTP ' . $model .': ' . $result . ' ' .
-			lang('CONF_UPLOAD_SFTP(' . $result . ')'));
+			lang('SETT_UPLOAD_SFTP(' . $result . ')'));
 
 		if($result != 0) {
 			$respUpload->rc = -105;

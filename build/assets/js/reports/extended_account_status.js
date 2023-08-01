@@ -150,7 +150,7 @@ function searchExtAccountStatus(dataForm) {
 			{"targets": 5, "className": "descripcion", "width": "260px",},
 			{"targets": 6, "className": "tipoTransaccion", "width": "110px"},
 			{"targets": 7, "className": "monto"},
-			{"targets": 8, "className": "status", "visible": lang.CONF_STATUS_MOVEMENT == "ON"}
+			{"targets": 8, "className": "status", "visible": lang.SETT_STATUS_MOVEMENT == "ON"}
 		],
 		"ajax": {
 			url: baseURL + 'async-call',

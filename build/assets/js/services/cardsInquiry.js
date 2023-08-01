@@ -149,7 +149,7 @@ function getCardList(request) {
 				},
 				{
 					"targets": 9,
-					"visible": lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == 'ON'
+					"visible": lang.SETT_CARDS_INQUIRY_ISSUE_STATUS == 'ON'
 				},
 				{
 					"targets": 13,
@@ -292,7 +292,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '</div>';
 	}
 
-	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+	if (lang.SETT_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
 		inputModal += 	'<div class="form-group col-12">';
@@ -310,16 +310,16 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 		currentBtn = btnRemote;
 		form = $('#nonForm');
 
-		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
+		if ($.inArray(currentAction, lang.SETT_AUTH_VALIDATE) == -1) {
 			$('.cover-spin').show(0);
 		}
 	}
 
 	inputModal += '</form>';
 
-	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
-		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
-	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
+	if (lang.SETT_REMOTE_AUTH == 'OFF' || (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)) {
+		appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
+	} else if ($.inArray(currentAction, lang.SETT_AUTH_LIST) != -1) {
 		remoteAuthArgs.title = currentTitle;
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.form = form;
@@ -359,7 +359,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			action: currentAction
 		}
 
-		if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		if (lang.SETT_REMOTE_AUTH == 'OFF') {
 			data.password = userInfo.password ? cryptoPass(userInfo.password) : cryptoPass(userInfo.passAction);
 		}
 
@@ -401,7 +401,7 @@ function InqValidateActions(currentAction, currentForm) {
 			}
 		}
 
-		appMessages(currentAction, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, modalBtn);
+		appMessages(currentAction, lang.VALIDATE_SELECT, lang.SETT_ICON_WARNING, modalBtn);
 	}
 
 	if (currentForm.valid()) {
@@ -460,6 +460,6 @@ function evalResult(response, currentAction) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		appMessages(response.title, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(response.title, inputModal, lang.SETT_ICON_INFO, modalBtn);
 	}
 }

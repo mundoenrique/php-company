@@ -32,7 +32,7 @@ $(function () {
 
 			if (inputDate == 'initialDate') {
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
@@ -167,13 +167,13 @@ $(function () {
 					if (responseTableEnd.code == 0) {
 						$.each(responseTableEnd.data,function(posLista,itemLista){
 							if (itemLista.tipoNota == 'D') {
-								itemLista.montoDeposito = lang.CONF_CURRENCY + ' ' + itemLista.montoDeposito;
+								itemLista.montoDeposito = lang.SETT_CURRENCY + ' ' + itemLista.montoDeposito;
 								itemLista.tipoNota = '';
 							} else if (itemLista.tipoNota == 'C') {
-								itemLista.tipoNota = lang.CONF_CURRENCY + ' ' + itemLista.montoDeposito;
+								itemLista.tipoNota = lang.SETT_CURRENCY + ' ' + itemLista.montoDeposito;
 								itemLista.montoDeposito = ''
 							}
-							itemLista.saldoDisponible = lang.CONF_CURRENCY + ' ' +itemLista.saldoDisponible;
+							itemLista.saldoDisponible = lang.SETT_CURRENCY + ' ' +itemLista.saldoDisponible;
 						});
 
 						$('#idExtEmpXls').val(responseTableEnd.idExtEmp);
@@ -305,7 +305,7 @@ function ModalConsolid(param) {
 	inputModal += '<div class="form-group">';
 	inputModal += 	'<select id="yearReport" name="yearReport" class="select-box custom-select form-control date-picker-year">';
 	inputModal += 		'<option selected disabled>Seleccione año</option>';
-		for (var i = 0; i < lang.CONF_YEAR; i++) {
+		for (var i = 0; i < lang.SETT_YEAR; i++) {
 			var dateGetYear = new Date();
 			var date = dateGetYear.getFullYear();
 			year = (parseInt(date)-i).toString();
@@ -320,7 +320,7 @@ function ModalConsolid(param) {
 	$("#formatReport").val('');
 	$('#accept').addClass('extended');
 
-	appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(titleModal, inputModal, lang.SETT_ICON_INFO, modalBtn);
 
 	if(param == 'export_excelCons'){
 		$("#formatReport").val('Excel');

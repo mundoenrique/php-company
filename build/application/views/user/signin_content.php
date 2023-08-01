@@ -2,7 +2,7 @@
 
 <?php if(verifyDisplay('body', $module,  lang('GEN_SIGNIN_TOP'))): ?>
 <center class="margin-bottom">
-	<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER')); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+	<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerFiles); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
 </center>
 <h1 class="welcome-title-bp"><?= lang('USER_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
@@ -29,7 +29,7 @@
 					<div class="general-form-msg"></div>
 					<button id="signInBtn" name="signInBtn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
 				</form>
-				<?php if(lang('CONF_SIGIN_RECOVER_PASS') == 'ON'): ?>
+				<?php if(lang('SETT_SIGIN_RECOVER_PASS') == 'ON'): ?>
 				<div class="align-center">
 					<p><?= lang('GEN_RECOVER_PASS_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">

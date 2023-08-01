@@ -4,7 +4,7 @@ $(function () {
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
-	if (lang.CONF_MAINT_NOTIF === 'ON') {
+	if (lang.SETT_MAINT_NOTIF === 'ON') {
 		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/' + customerUri + '/maint_notif3.png');
 		modalBtn = {
 			btn1: {
@@ -170,7 +170,7 @@ function getSignIn(forWhere) {
 			$('#signInBtn').html(btnText);
 			insertFormInput(false);
 
-			if (lang.CONF_RESTAR_USERNAME == 'ON') {
+			if (lang.SETT_RESTAR_USERNAME == 'ON') {
 				$('#userPass').val('');
 			}
 

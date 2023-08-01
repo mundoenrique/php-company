@@ -80,7 +80,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= BASE_LANGUAGE.'-base';
+$config['language']	= 'global';
 
 /*
 |--------------------------------------------------------------------------
@@ -390,7 +390,7 @@ $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 70 : SESS_EXPIRATION;
 $config['sess_save_path'] =  SESS_SAVE_PATH;
 $config['sess_match_ip'] = TRUE;
-$config['sess_time_to_update'] = ACTIVE_SAFETY == 'ON' ? 60 : 0;
+$config['sess_time_to_update'] = ACTIVE_SAFETY === 'ON' ? 60 : 0;
 $config['sess_regenerate_destroy'] = TRUE;
 
 /*

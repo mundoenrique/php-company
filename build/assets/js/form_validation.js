@@ -9,20 +9,20 @@ function validateForms(form) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
-	var emailValid = new RegExp(lang.CONF_VALIDATE_EMAIL, 'i');
+	var emailValid = new RegExp(lang.SETT_VALIDATE_EMAIL, 'i');
 	var alphaName =  /^[a-zñáéíóú ]{1,50}$/i;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
-	var alphanum =  new RegExp(lang.CONF_VALIDATE_ALPHA_NUM, 'i');
-	var alphanumspace = new RegExp(lang.CONF_VALIDATE_ALPHA_NUM_SPACE, 'i');
+	var alphanum =  new RegExp(lang.SETT_VALIDATE_ALPHA_NUM, 'i');
+	var alphanumspace = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM_SPACE, 'i');
 	var userPassword = validatePass;
-	var numeric =  new RegExp(lang.CONF_VALIDATE_NUMERIC, 'i');
-	var alphabetical = new RegExp(lang.CONF_VALIDATE_ALPHABETICAL, 'i');
-	var alphabeticalspace =  new RegExp(lang.CONF_VALIDATE_ALPHABETICAL_SPACE, 'i');
-	var floatAmount =  new RegExp(lang.CONF_VALIDATE_FLOAT_AMOUNT, 'i');
-	var fiscalReg = lang.CONF_VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.CONF_VALIDATE_REG_ID_NUMBER, 'i');
-	var rechargeDesc = new RegExp(lang.CONF_VALIDATE_RECHAR_REGEX_DESC, 'i');
+	var numeric =  new RegExp(lang.SETT_VALIDATE_NUMERIC, 'i');
+	var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
+	var alphabeticalspace =  new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');
+	var floatAmount =  new RegExp(lang.SETT_VALIDATE_FLOAT_AMOUNT, 'i');
+	var fiscalReg = lang.SETT_VALIDATE_FISCAL_REGISTRY;
+	var idNumberReg = new RegExp(lang.SETT_VALIDATE_REG_ID_NUMBER, 'i');
+	var rechargeDesc = new RegExp(lang.SETT_VALIDATE_RECHAR_REGEX_DESC, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -32,11 +32,11 @@ function validateForms(form) {
 	var contactType = /^[F|H|C]*$/i;
 	var defaults = {
 		debug: true,
-		errorClass: lang.CONF_VALID_ERROR,
-		validClass: lang.CONF_VALID_VALID,
-		success: lang.CONF_VALID_SUCCESS,
-		ignore: lang.CONF_VALID_IGNORE,
-		errorElement: lang.CONF_VALID_ELEMENT
+		errorClass: lang.SETT_VALID_ERROR,
+		validClass: lang.SETT_VALID_VALID,
+		success: lang.SETT_VALID_SUCCESS,
+		ignore: lang.SETT_VALID_IGNORE,
+		errorElement: lang.SETT_VALID_ELEMENT
 	};
 
 	jQuery.validator.setDefaults(defaults);
@@ -55,8 +55,8 @@ function validateForms(form) {
 			"confirm-pass": { required: true, equalTo: "#newPass" },
 			"branch-office": { requiredBranchOffice: true },
 			"type-bulk": { requiredTypeBulk: true },
-			"file-bulk": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
-			"fileBranch": { required: true, extension: lang.CONF_FILES_EXTENSION, sizeFile: true },
+			"file-bulk": { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
+			"fileBranch": { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
 			"password": { required: true, pattern: userPassword },
 			"type-order": { required: true },
 			"datepicker_start": {
@@ -113,7 +113,7 @@ function validateForms(form) {
 				required: {
 					depends: function () {
 
-						return lang.CONF_STARTING_LINE1_REQUIRED == 'ON';
+						return lang.SETT_STARTING_LINE1_REQUIRED == 'ON';
 					}
 				},
 				pattern: alphanumspace
@@ -122,7 +122,7 @@ function validateForms(form) {
 				required: {
 					depends: function () {
 
-						return lang.CONF_STARTING_LINE2_REQUIRED == 'ON';
+						return lang.SETT_STARTING_LINE2_REQUIRED == 'ON';
 					}
 				},
 				pattern: alphanumspace
@@ -166,7 +166,7 @@ function validateForms(form) {
 					depends: function (element) {
 						var valid = false;
 
-						if (lang.CONF_INQUIRY_DOCTYPE == 'ON') {
+						if (lang.SETT_INQUIRY_DOCTYPE == 'ON') {
 							valid = alphabetical.test($('#docType').val()) && $('#docType').val() != '';
 						}
 
@@ -183,7 +183,7 @@ function validateForms(form) {
 				},
 				pattern: alphabetical
 			},
-			"cardNumberP": { pattern: numeric, minlength: lang.CONF_VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
+			"cardNumberP": { pattern: numeric, minlength: lang.SETT_VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
 			"masiveOptions": { requiredSelect: true },
 			"documentId": { required: true, pattern: alphanum },
 			"radioDni": {

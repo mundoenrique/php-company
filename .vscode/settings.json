@@ -1,0 +1,17 @@
+{
+	"editor.defaultFormatter": "EditorConfig.EditorConfig",
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"editor.tabSize": 2,
+	"editor.wordWrap": "wordWrapColumn",
+	"editor.wordWrapColumn": 120,
+	"files.associations": {
+		".env": "properties",
+		".env*": "properties",
+		".htaccess-local": "apacheconf",
+		".htaccess-deploy": "apacheconf",
+		".htaccess-example": "apacheconf",
+		"docker-*": "shellscript"
+	}
+}

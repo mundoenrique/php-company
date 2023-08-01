@@ -54,7 +54,7 @@ $(function () {
 
 			if (inputDate == 'initialDate') {
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
@@ -125,7 +125,7 @@ function dialog(e){
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
-			appMessages(titleModalExcel, inputModal, lang.CONF_ICON_INFO, modalBtn);
+			appMessages(titleModalExcel, inputModal, lang.SETT_ICON_INFO, modalBtn);
 
 			var i=0;
 			var anioB;
@@ -160,7 +160,7 @@ function dialog(e){
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, modalBtn);
+				appMessages(titleModalPdf, inputModal, lang.SETT_ICON_INFO, modalBtn);
 
 				var i=0;
 				var anioB;

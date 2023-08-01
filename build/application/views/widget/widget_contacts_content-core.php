@@ -19,7 +19,7 @@
           <td class="text-right"><?= $number ?></td>
         </tr>
 				<?php endforeach; ?>
-				<?php if(lang('CONF_WIDGET_REST_COUNTRY') == 'ON'): ?>
+				<?php if(lang('SETT_WIDGET_REST_COUNTRY') == 'ON'): ?>
         <tr class="center bold">
           <td colspan="2"><?= lang('GEN_CONTACTS_REST_COUNTRY'); ?></td>
         </tr>

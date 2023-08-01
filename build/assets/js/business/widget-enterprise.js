@@ -23,12 +23,12 @@ $(function() {
 		enterpriseCode = WidgetSelcet.find('option:selected').attr('code');
 		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group');
 		idFiscal = WidgetSelcet.val()
-		enterpriseName = WidgetSelcet.find('option:selected').text();
+		enterpriseName = WidgetSelcet.find('option:selected').text().trim();
 		fiscalNumber = WidgetSelcet.find('option:selected').attr('fiscalNumber');
 		thirdApp = WidgetSelcet.find('option:selected').attr('thirdApp');
 		operatingModel = WidgetSelcet.find('option:selected').attr('operatingModel');
 
-		if (formAction == lang.CONF_LINK_PRODUCTS) {
+		if (formAction == lang.SETT_LINK_PRODUCTS) {
 			enterpriseWidgetBtn
 			.prop('disabled', false)
 			.removeAttr('title');

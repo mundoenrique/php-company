@@ -10,7 +10,7 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Controller Class Initialized');
+		writeLog('INFO', 'Business Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar las empresas asociadas al usuario
@@ -19,7 +19,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getEnterprises()
 	{
-		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
+		writeLog('INFO', 'Business: getEnterprises Method Initialized');
 
 		$view = 'getEnterprises';
 		array_push(
@@ -39,9 +39,9 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->filters = $responseList->data->filters;
 		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->render->msgEnterprise = $responseList->data->text;
-		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
+		$this->render->disabled = $responseList->code === 0 ?? 'disabled';
 		$this->render->titlePage = lang('BUSINESS_ENTERPRISE_TITLE');
-		$this->views = ['business/'.$view];
+		$this->views = ['business/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -51,12 +51,12 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getProducts()
 	{
-		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
+		writeLog('INFO', 'Business: getProducts Method Initialized');
 
 		$requestArray = (array)$this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('enterpriseInf')) {
-			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
 			exit;
 		}
 
@@ -93,8 +93,8 @@ class Novo_Business extends NOVO_Controller {
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('GEN_SELECT_ENTERPRISE');
-			$this->render->widget->countProducts = FALSE;
-			$this->render->widget->actionForm = lang('CONF_LINK_PRODUCTS');
+			$this->render->widget->hasProducts = FALSE;
+			$this->render->widget->actionForm = lang('SETT_LINK_PRODUCTS');
 		}
 
 		$this->render->titlePage = lang('GEN_PRODUCTS');
@@ -108,12 +108,12 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function getProductDetail()
 	{
-		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
+		writeLog('INFO', 'Business: getProductDetail Method Initialized');
 
 		$requestArray = (array) $this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
-			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
 			exit;
 		}
 
@@ -136,20 +136,20 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
 		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->viewSomeAttr = $detailList->data->productDetail->viewSomeAttr;
-		$this->render->loadBulkLink = $this->verify_access->verifyAuthorization('TEBCAR') ? lang('CONF_LINK_BULK_LOAD') : lang('CONF_NO_LINK');
-		$this->render->loadDisabled = $this->render->loadBulkLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
-		$this->render->bulkAuthLink = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('CONF_LINK_BULK_AUTH') : lang('CONF_NO_LINK');
-		$this->render->authDisabled = $this->render->bulkAuthLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
+		$this->render->loadBulkLink = $this->verify_access->verifyAuthorization('TEBCAR') ? lang('SETT_LINK_BULK_LOAD') : lang('SETT_NO_LINK');
+		$this->render->loadDisabled = $this->render->loadBulkLink == lang('SETT_NO_LINK') ? 'is-disabled' : '';
+		$this->render->bulkAuthLink = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('SETT_LINK_BULK_AUTH') : lang('SETT_NO_LINK');
+		$this->render->authDisabled = $this->render->bulkAuthLink == lang('SETT_NO_LINK') ? 'is-disabled' : '';
 		$this->render->lotsTotal = $detailList->data->productSummary->lots;
 		$this->render->toSign = $detailList->data->productSummary->toSign;
 		$this->render->toAuthorize = $detailList->data->productSummary->toAuthorize;
-		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('CONF_LINK_SERVICE_ORDERS') : lang('CONF_NO_LINK');
-		$this->render->orderDisabled = $this->render->OrderServLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
+		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('SETT_LINK_SERVICE_ORDERS') : lang('SETT_NO_LINK');
+		$this->render->orderDisabled = $this->render->OrderServLink == lang('SETT_NO_LINK') ? 'is-disabled' : '';
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
 		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
-		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('CONF_LINK_TRANSF_MASTER_ACCOUNT') : lang('CONF_NO_LINK');
-		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
+		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('SETT_LINK_TRANSF_MASTER_ACCOUNT') : lang('SETT_NO_LINK');
+		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('SETT_NO_LINK') ? 'is-disabled' : '';
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;

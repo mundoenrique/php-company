@@ -87,8 +87,8 @@ $(function () {
 		"oPaginate": {
 			"sFirst": lang.GEN_TABLE_SFIRST,
 			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.CONF_TABLE_SNEXT,
-			"sPrevious": lang.CONF_TABLE_SPREVIOUS
+			"sNext": lang.SETT_TABLE_SNEXT,
+			"sPrevious": lang.SETT_TABLE_SPREVIOUS
 		},
 		"oAria": {
 			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
@@ -105,17 +105,17 @@ $(function () {
 
 	currentDate = new Date();
 	$.datepicker.regional['es'] = {
-		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
-		changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
-		dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
-		firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
-		isRTL: lang.CONF_DATEPICKER_ISRLT,
+		changeMonth: lang.SETT_DATEPICKER_CHANGEMONTH,
+		changeYear: lang.SETT_DATEPICKER_CHANGEYEAR,
+		dateFormat: lang.SETT_DATEPICKER_DATEFORMAT,
+		firstDay: lang.SETT_DATEPICKER_FIRSTDATE,
+		isRTL: lang.SETT_DATEPICKER_ISRLT,
 		maxDate: currentDate,
-		minDate: lang.CONF_DATEPICKER_MINDATE,
-		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
-		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
-		yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX,
+		minDate: lang.SETT_DATEPICKER_MINDATE,
+		showAnim: lang.SETT_DATEPICKER_SHOWANIM,
+		showMonthAfterYear: lang.SETT_DATEPICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.SETT_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
+		yearSuffix: lang.SETT_DATEPICKER_YEARSUFFIX,
 		closeText: lang.GEN_DATEPICKER_CLOSETEXT,
 		currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
 		dayNames: lang.GEN_DATEPICKER_DAYNAMES,
@@ -152,7 +152,7 @@ function callNovoCore(who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.CONF_DEFAULT_CODE);
+	var codeResp = parseInt(lang.SETT_DEFAULT_CODE);
 	var formData = new FormData();
 	dataRequest = cryptoPass(dataRequest, true);
 
@@ -163,7 +163,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	formData.append('request', dataRequest);
 
-	if (lang.CONF_CYPHER_DATA == 'ON') {
+	if (lang.SETT_CYPHER_DATA == 'ON') {
 		formData.append('ceo_name', ceo_cook);
 		formData.append('plot', btoa(ceo_cook));
 	}
@@ -187,7 +187,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (lang.CONF_CYPHER_DATA == 'ON') {
+		if (lang.SETT_CYPHER_DATA === 'ON') {
 			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 		}
 
@@ -219,11 +219,11 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
 			msg: lang.GEN_SYSTEM_MESSAGE,
-			icon: lang.CONF_ICON_DANGER,
+			icon: lang.SETT_ICON_DANGER,
 			modalBtn: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: lang.CONF_LINK_ENTERPRISES,
+					link: lang.SETT_LINK_ENTERPRISES,
 					action: 'redirect'
 				}
 			}
@@ -253,8 +253,8 @@ function appMessages(title, message, icon, modalBtn) {
 		resizable: false,
 		closeOnEscape: false,
 		focus: false,
-		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
-		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
+		width: modalBtn.width || lang.SETT_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.SETT_MODAL_WIDTH,
 		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
@@ -267,7 +267,7 @@ function appMessages(title, message, icon, modalBtn) {
 			}
 
 			if (icon != '') {
-				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+				$('#system-icon').addClass(lang.SETT_ICON + ' ' + icon);
 			} else {
 				$('#system-icon').removeAttr('class');
 			}
@@ -373,7 +373,7 @@ function cryptoPass(jsonObject, req) {
 	ceo_cook = getCookieValue();
 	var cipherObject = jsonObject;
 
-	if (lang.CONF_CYPHER_DATA == 'ON') {
+	if (lang.SETT_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		if (!req) {
@@ -408,7 +408,7 @@ function downLoadfiles(data) {
 		$('#download-file').attr('download', data.name);
 		document.getElementById('download-file').click();
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.CONF_NO_LINK);
+		$('#download-file').attr('href', lang.SETT_NO_LINK);
 		$('#download-file').attr('download', '');
 	}
 
@@ -417,7 +417,7 @@ function downLoadfiles(data) {
 
 function getauhtKey() {
 	// NO BORRAR DEJAR PARA PRUEBAS INTERNAS
-	 /*if (lang.CONF_REMOTE_AUTH == 'ON') {
+	 /*if (lang.SETT_REMOTE_AUTH == 'ON') {
 		$('#accept').addClass('sender');
 		$('#system-info').on('click', '.sender', function () {
 			$('#accept')
@@ -500,12 +500,12 @@ function getResponse(Exitoso, MensajeError) {
 			},
 		}
 
-		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
+		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.SETT_ICON_WARNING, data);
 	}
 }
 
 function normalizeAmount(amount) {
-	var valueAttr = amount.split(lang.CONF_DECIMAL);
+	var valueAttr = amount.split(lang.SETT_DECIMAL);
 	amount = valueAttr[0].replace(/[,.]/g, '') + '.' + valueAttr[1];
 	amount = parseFloat(amount);
 
@@ -543,12 +543,12 @@ function modalDestroy(close) {
 			.prop('disabled', false)
 			.html(lang.GEN_BTN_ACCEPT)
 			.removeClass()
-			.addClass(lang.CONF_MODAL_BTN_CLASS['accept'])
+			.addClass(lang.SETT_MODAL_BTN_CLASS['accept'])
 			.off('click');
 		$('#cancel')
 			.prop('disabled', false)
 			.removeClass()
-			.addClass(lang.CONF_MODAL_BTN_CLASS['cancel'])
+			.addClass(lang.SETT_MODAL_BTN_CLASS['cancel'])
 			.html(lang.GEN_BTN_CANCEL)
 			.off('click');
 	}

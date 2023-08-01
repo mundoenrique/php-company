@@ -6,13 +6,13 @@
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
         </li> /
         <li class="inline">
           <a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_SERVICES'); ?></a>
@@ -42,7 +42,7 @@
                 <input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
                 <div class="help-block mb-1"></div>
               </div>
-              <?php if(lang('CONF_INQUIRY_DOCTYPE') == 'ON'): ?>
+              <?php if(lang('SETT_INQUIRY_DOCTYPE') == 'ON'): ?>
               <div class="form-group col-4 col-xl-3">
                 <label for="docType"><?= lang('GEN_DOCUMENT_TYPE'); ?></label>
                 <select id="docType" name="docType" class="form-control select-box custom-select flex h6 w-100">
@@ -119,7 +119,7 @@
                   <select id="masiveOptions" name="masiveOptions" class="form-control select-box custom-select flex h6 w-100"></select>
                   <div class="help-block item-select text-left"></div>
                 </div>
-								<?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
+								<?php if (lang('SETT_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="col-4 col-lg-3 col-xl-3 form-group">
                   <div class="input-group">
                     <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"

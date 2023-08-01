@@ -5,18 +5,17 @@
  * @date April 20th, 2019
 */
 class Novo_CallModels extends Novo_Controller {
-	public $class;
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
+		writeLog('INFO', 'CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
-			$this->class = lcfirst($this->dataRequest->who);
-			$this->rule = lcfirst($this->dataRequest->where);
-			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
-			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
+			$this->fileLanguage = lcfirst($this->dataRequest->who);
+			$this->validationMethod = lcfirst($this->dataRequest->where);
+			$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
+			$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->where) . '_' . $this->dataRequest->who;
 		} else {
 			redirect('page-no-found', 'Location', 301);
 		}
@@ -28,7 +27,7 @@ class Novo_CallModels extends Novo_Controller {
 	 */
 	public function index()
 	{
-		log_message('INFO', 'NOVO CallModels: index Method Initialized');
+		writeLog('INFO', 'CallModels: index Method Initialized');
 
 		if (!empty($this->dataRequest->data)) {
 			foreach($this->dataRequest->data AS $item => $value) {
@@ -36,32 +35,32 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = isset($_POST['userName']) ? mb_strtoupper($_POST['userName']) : $this->session->userName;
-
-		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] IP ' . $this->input->ip_address() . ' REQUEST FROM THE VIEW ' .
-			json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
-
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule, $this->customerUri, $this->appUserName);;
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod);;
 
 		if(!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
 		if($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName, $this->class);
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
+			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
 
-		if($valid) {
-			$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+		LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
+		$this->config->set_item('language', BASE_LANGUAGE . '-' . $this->customerLang);
+		LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
+
+		if ($valid) {
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
-			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
+			$this->dataResponse = $this->verify_access->responseByDefect();
 		}
 
 		$modalBtn = $this->dataResponse->modalBtn;
 		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->customerUri);
-		$dataResponse = $dataResponse = lang('CONF_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
+
+		$dataResponse = lang('SETT_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
 	/**
@@ -71,8 +70,8 @@ class Novo_CallModels extends Novo_Controller {
 	 */
 	private function manageFile()
 	{
-		log_message('INFO', 'NOVO CallModels: manageFile Method Initialized');
-		log_message('DEBUG', 'NOVO UPLOAD FILE MIMETYPE: '.$_FILES['file']['type']);
+		writeLog('INFO', 'CallModels: manageFile Method Initialized');
+		writeLog('DEBUG', 'UPLOAD FILE MIMETYPE: ' . $_FILES['file']['type']);
 
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
@@ -99,14 +98,14 @@ class Novo_CallModels extends Novo_Controller {
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = UPLOAD_PATH;
-		$config['allowed_types'] = lang('CONF_FILES_EXTENSION');
-		$config['max_size'] = lang('CONF_MAX_FILE_SIZE');
+		$config['allowed_types'] = lang('SETT_FILES_EXTENSION');
+		$config['max_size'] = lang('SETT_MAX_FILE_SIZE');
 		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload('file')) {
 			$errors = $this->upload->display_errors();
 
-			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] VALIDATION FILEUPLOAD ERRORS: '.json_encode($errors, JSON_UNESCAPED_UNICODE));
+			writeLog('DEBUG', 'VALIDATION FILEUPLOAD ERRORS: ' . json_encode($errors, JSON_UNESCAPED_UNICODE));
 
 			$valid = FALSE;
 		} else {
