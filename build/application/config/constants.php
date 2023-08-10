@@ -115,8 +115,8 @@ $timeZone = [
 	'bp'	=>	'America/Guayaquil',
 	'col'	=>	'America/Bogota',
 	'pb'	=>	'America/Guayaquil',
-	'per'	=>	'America/Lima',
-	'usd'	=>	'America/Lima',
+	'pe'	=>	'America/Lima',
+	'us'	=>	'America/Lima',
 	'ven'	=>	'America/Caracas',
 	'vg'	=>	'America/Lima',
 ];
