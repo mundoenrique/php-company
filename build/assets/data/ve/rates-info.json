@@ -16,7 +16,7 @@
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
-					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo",
+					"description": null,
 					"rates": [
 						"Bs. 350,00",
 						"Bs. 350,00"
@@ -109,19 +109,19 @@
 			"description": null,
 			"items": [
 				{
-					"name": "Montos menores a Bs. 1.411,76",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 15,00"
-					]
-				},
-				{
-					"name": "Montos mayores a Bs. 1.411,76",
+					"name": "Comisión general",
 					"description": null,
 					"rates": [
 						null,
 						"0.85%"
+					]
+				},
+				{
+					"name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 15,00)",
+					"description": null,
+					"rates": [
+						null,
+						"Bs. 15,00"
 					]
 				}
 			]
