@@ -66,14 +66,6 @@
 					"rates": []
 				},
 				{
-					"name": "Banco Venezolano de Crédito",
-					"description": null,
-					"rates": [
-						null,
-						"3%"
-					]
-				},
-				{
 					"name": "Otros bancos",
 					"description": null,
 					"rates": [
@@ -85,14 +77,6 @@
 					"name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
 					"description": null,
 					"rates": []
-				},
-				{
-					"name": "Banco Venezolano de Crédito",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 0,01"
-					]
 				},
 				{
 					"name": "Otros bancos",
