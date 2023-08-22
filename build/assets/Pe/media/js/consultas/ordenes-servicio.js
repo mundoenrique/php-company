@@ -1,12 +1,12 @@
 $(function(){
 
 $('.OS-icon ').attr('style', 'display: none !important;');
-
 $('#lotes-general').show();
 
 if($("#msg").val()){
 	notificacion("ADVERTENCIA", $("#msg").val());
 }
+
 	COS_var = {
 		fecha_inicio: "",
 		fecha_fin: "",
@@ -42,12 +42,11 @@ if($("#msg").val()){
 			if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
 		$aux = $("#loading").dialog({title:'Buscando orden de servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
-
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
-				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     		$('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
@@ -82,10 +81,10 @@ if($("#msg").val()){
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
     		$('form#formulario').append($('#data-OS'));
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
-				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').submit();
     		setTimeout(function(){$aux.dialog('destroy')},8000);
 	});
@@ -254,8 +253,14 @@ $('#tabla-datos-general').on('click','#anular', function(){
 							var ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
-			   .done(function(data){
+							var dataRequest = JSON.stringify ({
+								data_idOS:idOS,
+								data_pass:pass
+							})
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+              $.post(baseURL+api+isoPais+'/consulta/anularos',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			   .done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $aux.dialog('destroy');
 
                 if(!data.ERROR){
