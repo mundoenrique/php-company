@@ -1100,6 +1100,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -242:
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = $response->msg;
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -287:
 			case -288:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
