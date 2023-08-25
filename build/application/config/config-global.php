@@ -21,8 +21,8 @@ $config['client_db'] = [
 	'col' => 'co',
 	'coop' => 'coop',
 	'pb' => 'pb',
-	'per' => 'pe',
-	'usd' => 'us',
+	'pe' => 'pe',
+	'us' => 'us',
 	'ven' => 've',
 	'vg' => 'vg'
 ];
