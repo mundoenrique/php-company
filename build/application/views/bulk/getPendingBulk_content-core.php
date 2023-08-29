@@ -24,8 +24,11 @@
             <label class="mt-1 h6" for="type-bulk"><?= lang('GEN_BULK_TYPE'); ?></label>
             <select id="type-bulk" name="type-bulk" class="form-control select-box custom-select h6 w-100">
               <?php foreach($typesLot AS $pos => $type): ?>
-              <option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?>
-              </option>
+              <option
+								value="<?= $type->key; ?>"
+								format="<?= $type->format; ?>"
+								<?= $pos != 0 ? '' : 'selected disabled' ?>
+							><?= $type->text; ?></option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>

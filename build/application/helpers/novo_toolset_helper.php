@@ -248,8 +248,9 @@ if (!function_exists('normalizeName')) {
 
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
+}
 
-	if (!function_exists('uriRedirect')) {
+if (!function_exists('uriRedirect')) {
 	function uriRedirect($model, $singleSession) {
 		$CI =& get_instance();
 		$redirectLink = $singleSession === 'SignThird'
@@ -260,15 +261,44 @@ if (!function_exists('normalizeName')) {
 			$redirectLink = lang('SETT_LINK_ENTERPRISES');
 
 			if($model === 'callWs_GetProductDetail') {
-				$linkredirect = lang('SETT_LINK_PRODUCTS');
+				$redirectLink = lang('SETT_LINK_PRODUCTS');
 			}
 
 			if ($CI->session->has_userdata('productInf')) {
-				$linkredirect = lang('SETT_LINK_PRODUCT_DETAIL');
+				$redirectLink = lang('SETT_LINK_PRODUCT_DETAIL');
 			}
 		}
 
 		return $redirectLink;
 	}
 }
+
+if (!function_exists('lowerUcFirtsString')) {
+	function manageString($string, $case, $upperFirst = false) {
+		$stringCase = [
+			'upper' => 'upperString',
+			'lower' => 'lowerString'
+		];
+
+		$stringConverted = trim(preg_replace(
+			['/\s+/', '/^\s|\s$/'], [' ', ''], $string
+		));
+
+		switch ($stringCase[$case]) {
+			case 'upperString':
+				$stringConverted = mb_strtoupper($string, 'UTF-8');
+				break;
+
+				case 'lowerString':
+				$stringConverted = mb_strtolower($string, 'UTF-8');
+				break;
+
+			default:
+				$stringConverted = $string;
+		}
+
+		$stringConverted = $upperFirst ? ucfirst($stringConverted) : $stringConverted;
+
+		return $stringConverted;
+	}
 }

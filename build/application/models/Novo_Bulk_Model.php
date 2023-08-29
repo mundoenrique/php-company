@@ -130,9 +130,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 				foreach($response->lista AS $pos => $types) {
 					$type = [];
-					$type['key'] = mb_strtoupper($response->lista[$pos]->idTipoLote);
-					$type['format'] = ucfirst(mb_strtolower($response->lista[$pos]->formato));
-					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
+					$type['key'] = manageString($response->lista[$pos]->idTipoLote, 'upper');
+					$type['format'] = manageString($response->lista[$pos]->formato, 'lower', TRUE);
+					$type['text'] = manageString($response->lista[$pos]->tipoLote, 'lower', TRUE);
+
 					$typesLot[] = (object) $type;
 				}
 			break;
@@ -227,16 +228,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 					if(!empty($errorsHeader)) {
 						foreach($errorsHeader AS $errors) {
-							$errorsList['header'][] = ucfirst(mb_strtolower($errors));
+							$errorsList['header'][] = manageString($errors, 'lower', true);
 						}
 
 					}
 
 					if(!empty($errorsFields)) {
 						foreach($errorsFields AS $errors) {
-							$name = ucfirst(mb_strtolower(str_replace(',', ':', trim($errors->nombre))));
+							$name = str_replace(',', ':', manageString($errors->nombre, 'lower', TRUE));
 							foreach($errors->errores AS $item) {
-								$errorsList['fields'][$name][] = ucfirst(mb_strtolower($item));
+								$errorsList['fields'][$name][] = manageString($item, 'lower', TRUE);
 							}
 						}
 					}
