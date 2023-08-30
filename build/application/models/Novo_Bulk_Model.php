@@ -128,11 +128,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 					'text' => lang('BULK_SELECT_BULK_TYPE')
 				];
 
-				foreach($response->lista AS $pos => $types) {
+				foreach($response->lista AS $types) {
 					$type = [];
-					$type['key'] = manageString($response->lista[$pos]->idTipoLote, 'upper');
-					$type['format'] = manageString($response->lista[$pos]->formato, 'lower', TRUE);
-					$type['text'] = manageString($response->lista[$pos]->tipoLote, 'lower', TRUE);
+					$type['key'] = manageString($types->idTipoLote, 'upper');
+					$type['format'] = manageString($types->formato, 'lower', TRUE);
+					$type['text'] = manageString($types->tipoLote, 'lower', TRUE);
 
 					$typesLot[] = (object) $type;
 				}

@@ -273,16 +273,14 @@ if (!function_exists('uriRedirect')) {
 	}
 }
 
-if (!function_exists('lowerUcFirtsString')) {
+if (!function_exists('manageString')) {
 	function manageString($string, $case, $upperFirst = false) {
 		$stringCase = [
 			'upper' => 'upperString',
 			'lower' => 'lowerString'
 		];
 
-		$stringConverted = trim(preg_replace(
-			['/\s+/', '/^\s|\s$/'], [' ', ''], $string
-		));
+		$string = preg_replace('/\s+/', ' ', trim($string));
 
 		switch ($stringCase[$case]) {
 			case 'upperString':
