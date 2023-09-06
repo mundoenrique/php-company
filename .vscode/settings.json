@@ -1,17 +1,58 @@
 {
-	"editor.defaultFormatter": "EditorConfig.EditorConfig",
-	"editor.formatOnPaste": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.bracketPairColorization.enabled": true,
+	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+	"editor.guides.bracketPairs": "active",
+	"editor.guides.bracketPairsHorizontal": "active",
+	"editor.detectIndentation": false,
 	"editor.formatOnSave": true,
 	"editor.formatOnType": true,
+	"editor.renderWhitespace": "all",
 	"editor.tabSize": 2,
 	"editor.wordWrap": "wordWrapColumn",
 	"editor.wordWrapColumn": 120,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"php.validate.run": "onType",
+	"prettier.useEditorConfig": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.singleQuote": true,
+	"prettier.printWidth": 120,
+	"prettier.semi": true,
+	"prettier.bracketSameLine": false,
+	"prettier.singleAttributePerLine": false,
+	"intelephense.environment.phpVersion": "7.4.15",
+	"intelephense.diagnostics.deprecated": false,
+	"intelephense.diagnostics.undefinedProperties": false,
+	"intelephense.diagnostics.undefinedFunctions": false,
+	"intelephense.diagnostics.undefinedMethods": false,
+	"intelephense.diagnostics.typeErrors": false,
+	"intelephense.diagnostics.undefinedConstants": false,
 	"files.associations": {
-		".env": "properties",
+		".env.*": "properties",
 		".env*": "properties",
-		".htaccess-local": "apacheconf",
-		".htaccess-deploy": "apacheconf",
-		".htaccess-example": "apacheconf",
-		"docker-*": "shellscript"
+		".htaccess.*": "apacheconf",
+		".htaccess*": "apacheconf"
+	},
+	"[dockerfile]": {
+		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
+	},
+	"[dockercompose]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "advanced",
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	},
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+	},
+	"[html]": {
+		"editor.suggest.insertMode": "replace"
+	},
+	"[shellscript]": {
+		"files.eol": "\n"
 	}
 }
