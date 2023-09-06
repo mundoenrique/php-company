@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $lang["TERMS_CONTENT"] = '
 <p>
 	<strong>NovoPayment Colombia S.A.S.</strong>, sociedad legalmente constituida y registrada ante la Cámara de Comercio
-	de Bogotá (en adelante “La Empresa”); a continuación establece las Condiciones Generales y Términos de Uso y
+	de Bogotá (en adelante "La Empresa"); a continuación establece las Condiciones Generales y Términos de Uso y
 	Confidencialidad que rigen la plataforma electrónica desarrollada por La Empresa y que ha sido habilitada para que los
 	clientes de las instituciones financieras emisoras (en adelante los “Usuarios”), puedan hacer uso de las distintas
 	funcionalidades que ofrece.
@@ -52,12 +52,6 @@ $lang["TERMS_CONTENT"] = '
 	datos son grabados y pueden ser recuperados para ulterior consulta.
 </p>
 <p>
-	Así mismo, La Empresa declara que las creaciones intelectuales, tales como marcas, slogans, nombres de dominio,
-	diseños, entre otros, tendrán como único titular de los derechos económicos que de aquellos se deriven a La Empresa,
-	quien es la única que los podrá utilizar conforme a la protección y facultades que les otorga en Colombia el sistema
-	jurídico de propiedad intelectual vigente.
-</p>
-<p>
 	A su vez, queda expresamente entendido que entre La Empresa y los Usuarios de las bases de datos digitales, originales
 	o no, que han sido creadas con ocasión de brindar servicios y productos con información personal, privada y
 	confidencial de los Usuarios le pertenecen a La Empresa quien,
@@ -80,11 +74,9 @@ $lang["TERMS_CONTENT"] = '
 	parte de La Empresa.
 </p>
 <p>
-	La Empresa podrá emplear a su total discreción todos los medios necesarios a su alcance para retirar de forma
-	inmediata al Usuario que infrinja cualquiera de las condiciones de seguridad y privacidad de la plataforma
-	tecnológica, lo cual incluye que el Usuario haya enviado información falsa que no sea susceptible de verificación.
-	Igualmente, La Empresa tiene el derecho de cambiar, sin previo aviso, la política de seguridad y privacidad, velando
-	en todo momento el cumplimiento de la normatividad vigente.
+	Los Usuarios, de conformidad con las políticas de seguridad y privacidad de la plataforma tecnológica, al momento de
+	su registro en la misma, tendrán la posibilidad de elegir si desean recibir o no mensajes electrónicos comerciales por
+	parte de La Empresa.
 </p>
 <p>
 	En caso de cualquier violación a por parte de los Usuarios de las condiciones de seguridad y privacidad, de los
@@ -93,8 +85,13 @@ $lang["TERMS_CONTENT"] = '
 	por las distintas normas que regulan la materia.
 </p>
 <p>
-	Los Usuarios, de conformidad con las políticas de seguridad y privacidad de la plataforma tecnológica, al momento de
-	su registro en la misma, tendrán la posibilidad de elegir si desean recibir o no mensajes electrónicos comerciales por
-	parte de La Empresa.
+	En caso de cualquier violación a por parte de los Usuarios de las condiciones de seguridad y privacidad, de los
+	sistemas que utilizan tecnología de la información, de la privacidad de las personas y comunicaciones y de la
+	propiedad intelectual que estén vinculados a la plataforma tecnológica, se estará en incumplimiento de lo establecido
+	por las distintas normas que regulan la materia.
+</p>
+<p>
+	Al seleccionar la opción "Acepto las Condiciones de Uso de este sistema", El Usuario también está aceptando el
+	Reglamento tarjeta prepago recargable.
 </p>
 ';
