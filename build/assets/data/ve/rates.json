@@ -8,18 +8,18 @@
 			"description": null,
 			"items": [{
 					"name": "Servicio administrativo mínimo",
-					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 300,00",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 350,00",
 					"rates": [
-						"Bs. 300,00",
-						"Bs. 300,00"
+						"Bs. 350,00",
+						"Bs. 350,00"
 					]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
-					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo",
+					"description": null,
 					"rates": [
-						"Bs. 300,00",
-						"Bs. 300,00"
+						"Bs. 350,00",
+						"Bs. 350,00"
 					]
 				}
 			]
@@ -31,16 +31,16 @@
 					"name": "Emisión (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 60,00",
-						"Bs. 60,00"
+						"Bs. 70,00",
+						"Bs. 70,00"
 					]
 				},
 				{
 					"name": "Reposición / Renovación (c/u)",
 					"description": null,
 					"rates": [
-						"Bs. 60,00",
-						"Bs. 60,00"
+						"Bs. 70,00",
+						"Bs. 70,00"
 					]
 				}
 			]
@@ -52,8 +52,8 @@
 				"name": "Reposición",
 				"description": null,
 				"rates": [
-					"Bs. 60,00",
-					"Bs. 60,00"
+					"Bs. 70,00",
+					"Bs. 70,00"
 				]
 			}]
 		},
@@ -64,14 +64,6 @@
 					"name": "Retiro de cajeros",
 					"description": null,
 					"rates": []
-				},
-				{
-					"name": "Banco Venezolano de Crédito",
-					"description": null,
-					"rates": [
-						null,
-						"3%"
-					]
 				},
 				{
 					"name": "Otros bancos",
@@ -85,14 +77,6 @@
 					"name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
 					"description": null,
 					"rates": []
-				},
-				{
-					"name": "Banco Venezolano de Crédito",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 0,01"
-					]
 				},
 				{
 					"name": "Otros bancos",
@@ -109,19 +93,19 @@
 			"description": null,
 			"items": [
 				{
-					"name": "Montos menores a Bs. 1.411,76",
-					"description": null,
-					"rates": [
-						null,
-						"Bs. 12,00"
-					]
-				},
-				{
-					"name": "Montos mayores a Bs. 1.411,76",
+					"name": "Comisión general",
 					"description": null,
 					"rates": [
 						null,
 						"0.85%"
+					]
+				},
+				{
+					"name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 15,00)",
+					"description": null,
+					"rates": [
+						null,
+						"Bs. 15,00"
 					]
 				}
 			]
