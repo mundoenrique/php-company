@@ -6,9 +6,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_CONS_ORDERS_SERV'); ?></a></li>
       </ul>
     </nav>
@@ -99,7 +99,7 @@
                   <td><?= $list->OrderAmount; ?></td>
                   <td><?= $list->OrderDeposit; ?></td>
                   <td class="p-0 nowrap">
-                    <?php if(lang('CONF_SERVICEORDERS_ICON') == 'ON' && $list->warningEnabled == TRUE): ?>
+                    <?php if(lang('SETT_SERVICEORDERS_ICON') == 'ON' && $list->warningEnabled == TRUE): ?>
 										<span class="btn mx-1 px-0">
                       <i class="icon icon-warning warning not-pointer" aria-hidden="true"></i>
                     </span>
@@ -122,7 +122,7 @@
                       <i class="icon icon-credit-card" aria-hidden="true"></i>
                     </button>
                     <?php endif; ?>
-                    <form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
+                    <form method="POST" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>">
 											<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
                     </form>
                   </td>

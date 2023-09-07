@@ -124,7 +124,7 @@ $route['(:any)/extended-master-account'] = "Novo_Reports/extendedMasterAccount";
 $route['(:any)/status-master-account'] = "Novo_Reports/statusMasterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
-$route['(:any)/setting'] = "Novo_Settings/options";
+$route['(:any)/tools'] = "Novo_Tools/options";
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
 $route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
@@ -132,10 +132,10 @@ $route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount
 $route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
 $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
-$route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
-$route['(:any)/Contact'] = "Novo_Settings/addContact";
-$route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
-$route['(:any)/cambiar-telefonos'] = "Novo_Settings/changeTelephones";
+$route['(:any)/empresa'] = "Novo_Tools/getEnterprise";
+$route['(:any)/Contact'] = "Novo_Tools/addContact";
+$route['(:any)/cambiar-email'] = "Novo_Tools/changeEmail";
+$route['(:any)/cambiar-telefonos'] = "Novo_Tools/changeTelephones";
 /*
 |--------------------------------------------------------------------------
 | OLD ROUTES

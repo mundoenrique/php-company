@@ -4,9 +4,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
 			</ul>
 		</nav>
@@ -21,14 +21,15 @@
 			<?php $data['name']='extStatusAccountForm' ?>
 			<?php $this->load->view('reports/filterAccountStatus', $data)  ?>
 			<div class="flex my-2 px-5">
-				<form id="extStatusAccountFormXls" class="w-100 hide">
-					<input id="enterpriseNameXls" name="enterpriseNameXls"  type="text" value="">
-					<input id="descProductXls" name="descProductXls"  type="text" value="">
-					<input id="resultByNITXls" name="resultByNITXls"  type="text" value="">
-					<input id="enterpriseCodeXls" name="enterpriseCodeXls"  type="text" value="">
-					<input id="productCodeXls" name="productCodeXls"  type="text" value="">
-					<input id="initialDateActXls" name="initialDateActXls"  type="text" value="">
-					<input id="resultSearchXls" name="resultSearchXls"  type="text" value="">
+				<form id="extStatusAccountFormFileDownload" class="w-100 hide">
+					<input id="enterpriseNameFileDownload" name="enterpriseNameFileDownload"  type="text" value="">
+					<input id="descProductFileDownload" name="descProductFileDownload"  type="text" value="">
+					<input id="resultByNITFileDownload" name="resultByNITFileDownload"  type="text" value="">
+					<input id="resultByNameFileDownload" name="resultByNameFileDownload"  type="text" value="">
+					<input id="enterpriseCodeFileDownload" name="enterpriseCodeFileDownload"  type="text" value="">
+					<input id="productCodeFileDownload" name="productCodeFileDownload"  type="text" value="">
+					<input id="initialDateActFileDownload" name="initialDateActFileDownload"  type="text" value="">
+					<input id="resultSearchFileDownload" name="resultSearchFileDownload"  type="text" value="">
 				</form>
 			</div>
 
@@ -37,8 +38,13 @@
 				<div class="center mx-1">
 					<div class="flex mr-2 py-3 justify-end items-center">
 						<button id="export_excel" class="big-modal btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
-							<i class=" icon icon-file-excel" aria-hidden="true"></i>
+							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
+						<?php if(lang('SETT_FILE_STATUS_ACCOUNT_TXT') === 'ON'):?>
+						<button id="export_txt" class="big-modal btn px-1" title="Exportar a txt" data-toggle="tooltip">
+							<i class="icon icon-file-txt" aria-hidden="true"></i>
+						</button>
+						<?php endif; ?>
 						<?php if(FALSE): ?>
 						<button id="export_pdf" class="big-modal btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
@@ -63,6 +69,7 @@
 								<th><?= lang('REPORTS_ACCOUNT_DESCRIPTION') ?></th>
 								<th><?= lang('REPORTS_ACCOUNT_OPERATION') ?></th>
 								<th><?= lang('REPORTS_ACCOUNT_AMOUNT') ?></th>
+								<th><?= lang('REPORTS_ACCOUNT_STATUS') ?></th>
 							</tr>
 						</thead>
 						<tbody id="tbody-datos-general" class = "tbody-reportes">

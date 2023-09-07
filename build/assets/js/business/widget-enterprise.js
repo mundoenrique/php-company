@@ -12,6 +12,7 @@ $(function() {
 	var idFiscal;
 	var fiscalNumber;
 	var thirdApp;
+	var operatingModel;
 	var enterpriseName;
 	var productPrefix;
 	var productName;
@@ -22,11 +23,12 @@ $(function() {
 		enterpriseCode = WidgetSelcet.find('option:selected').attr('code');
 		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group');
 		idFiscal = WidgetSelcet.val()
-		enterpriseName = WidgetSelcet.find('option:selected').text();
+		enterpriseName = WidgetSelcet.find('option:selected').text().trim();
 		fiscalNumber = WidgetSelcet.find('option:selected').attr('fiscalNumber');
 		thirdApp = WidgetSelcet.find('option:selected').attr('thirdApp');
+		operatingModel = WidgetSelcet.find('option:selected').attr('operatingModel');
 
-		if (formAction == lang.CONF_LINK_PRODUCTS) {
+		if (formAction == lang.SETT_LINK_PRODUCTS) {
 			enterpriseWidgetBtn
 			.prop('disabled', false)
 			.removeAttr('title');
@@ -95,6 +97,7 @@ $(function() {
 		enterpriseWidgetForm.append('<input type="hidden" name="enterpriseName" value="' + enterpriseName + '">');
 		enterpriseWidgetForm.append('<input type="hidden" name="fiscalNumber" value="' + fiscalNumber + '">');
 		enterpriseWidgetForm.append('<input type="hidden" name="thirdApp" value="' + thirdApp + '">');
+		enterpriseWidgetForm.append('<input type="hidden" name="operatingModel" value="' + operatingModel + '">');
 
 		if(goToDetail) {
 			enterpriseWidgetForm.append('<input type="hidden" name="productPrefix" value="' + productPrefix + '">');

@@ -8,7 +8,6 @@ $(function () {
 	var showPage = $('#show-page');
 	var SelectEnterprise = $('.product');
 
-	//external js: isotope.pkgd.js
 	var enterpriseList = enterpriseListEvent.isotope({
 		itemSelector: '.card',
 		layoutMode: 'masonry',

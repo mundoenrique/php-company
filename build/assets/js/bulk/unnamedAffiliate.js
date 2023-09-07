@@ -30,42 +30,42 @@ $(function () {
 			{
 				"targets": 0,
 				"className": "numberBulk",
-				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+				"visible": lang.SETT_TABLE_UNNAMED_CARDS == "ON"
 			},
 			{
 				"targets": 1,
 				"className": "elemCards",
-				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+				"visible": lang.SETT_TABLE_UNNAMED_CARDS == "ON"
 			},
 			{
 				"targets": 2,
 				"className": "emitionDate",
-				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+				"visible": lang.SETT_TABLE_UNNAMED_CARDS == "ON"
 			},
 			{
 				"targets": 3,
 				"className": "status",
-				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+				"visible": lang.SETT_TABLE_UNNAMED_CARDS == "ON"
 			},
 			{
 				"targets": 4,
 				"className": "affiliatedCards",
-				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+				"visible": lang.SETT_TABLE_AFFILIATED_COLUMNS == "ON"
 			},
 			{
 				"targets": 5,
 				"className": "forAffiliateCards",
-				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+				"visible": lang.SETT_TABLE_AFFILIATED_COLUMNS == "ON"
 			},
 			{
 				"targets": 6,
 				"className": "availableCards",
-				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+				"visible": lang.SETT_TABLE_AFFILIATED_COLUMNS == "ON"
 			},
 			{
 				"targets": 7,
 				"className": "options",
-				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+				"visible": lang.SETT_TABLE_UNNAMED_CARDS == "ON"
 			}
 		],
 	});
@@ -82,7 +82,7 @@ $(function () {
 
 			if (inputDate == 'initialDate') {
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);

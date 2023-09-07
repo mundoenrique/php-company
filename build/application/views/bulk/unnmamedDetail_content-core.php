@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Cuentas Innominadas</a></li>
 			</ul>
 		</nav>
@@ -61,7 +61,7 @@
 							<button id="download-file" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
+							<form method="POST" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>">
 								<input type="hidden" name="bulkNumber" value="<?= $bulkNumber; ?>">
 								<input type="hidden" name="issuanDate" value="<?= $issuanDate; ?>">
 								<input type="hidden" name="amount" value="<?= $ammount; ?>">
@@ -83,7 +83,7 @@
 							<?php foreach($bulkRecords AS $records): ?>
 							<tr>
 								<td><?= $records->cardNumber ?></td>
-								<?php if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'ON'): ?>
+								<?php if (lang('SETT_UNNA_ACCOUNT_NUMBER') == 'ON'): ?>
 								<td><?= $records->accountNumber ?></td>
 								<?php endif; ?>
 								<td><?= $records->idDoc ?></td>
@@ -99,7 +99,7 @@
 			<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 				<div class="flex flex-row">
 					<div class="mb-3 mr-4">
-						<a href="<?= base_url(lang('CONF_LINK_BULK_UNNAMED_AFFIL')) ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+						<a href="<?= base_url(lang('SETT_LINK_BULK_UNNAMED_AFFIL')) ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 					</div>
 				</div>
 			</div>

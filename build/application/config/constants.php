@@ -168,7 +168,7 @@ defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
-defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
+defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('LANGUAGE')					OR define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('SINGLE_SIGN_ON')		OR define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] == 'ON' ? TRUE : FALSE);

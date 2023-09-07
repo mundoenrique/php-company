@@ -230,6 +230,28 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
 		]
 	],
+	'exportToTxtExtendedMasterAccount' => [
+		[
+			'field' => 'idExtEmpXls',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'filterDateXls',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nameEnterpriseXls',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]|required'
+		]
+	],
 	'extendedDownloadMasterAccountCon' => [
 		[
 			'field' => 'idExtEmpXls',
@@ -1616,23 +1638,45 @@ $config = [
 	],
 	'exportToExcelExtendedAccountStatus' => [
 		[
-			'field' => 'resultByNITInputXls',
+			'field' => 'resultByNITInputFileDownload',
 			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
 		],
 		[
-			'field' => 'enterpriseCodeXls',
+			'field' => 'enterpriseCodeFileDownload',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
-			'field' => 'productCodeXls',
+			'field' => 'productCodeFileDownload',
 			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
-			'field' => 'initialDateActXls',
+			'field' => 'initialDateActFileDownload',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'resultSearchXls',
+			'field' => 'resultSearchFileDownload',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'exportToTxtExtendedAccountStatus' => [
+		[
+			'field' => 'resultByNITInputFileDownload',
+			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+		],
+		[
+			'field' => 'enterpriseCodeFileDownload',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'productCodeFileDownload',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'initialDateActFileDownload',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'resultSearchFileDownload',
 			'rules' => 'trim|numeric|required'
 		]
 	],

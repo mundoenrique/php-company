@@ -10,7 +10,7 @@ class Novo_Bulk extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Bulk Controller Class Initialized');
+		writeLog('INFO', 'Bulk Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar los lotes pendientes y cargar nuevos lotes
@@ -19,7 +19,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function getPendingBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: getPendingBulk Method Initialized');
+		writeLog('INFO', 'Bulk: getPendingBulk Method Initialized');
 
 		$view = 'getPendingBulk';
 		array_push(
@@ -41,7 +41,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk($this->request);
 		$this->render->typesLot = $typesLot->data->typesLot;
 
-		if(lang('CONF_BULK_BRANCHOFFICE') == 'ON') {
+		if(lang('SETT_BULK_BRANCHOFFICE') === 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$this->request->newGet = $typesLot->code;
@@ -49,7 +49,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 
-		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('CONF_BULK_LOAD') == 'ON';
+		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('SETT_BULK_LOAD') == 'ON';
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
@@ -62,10 +62,10 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function getDetailBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
+		writeLog('INFO', 'Bulk: getDetailBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		}
 
@@ -84,10 +84,10 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function confirmBulk()
 	{
-		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
+		writeLog('INFO', 'Bulk: confirmBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		}
 
@@ -114,10 +114,10 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function authorizeBulkList()
 	{
-		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
+		writeLog('INFO', 'Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_PRODUCT_DETAIL')), 'Location', 302);
 			exit;
 		} */
 
@@ -142,7 +142,7 @@ class Novo_Bulk extends NOVO_Controller {
 		}
 
 		$this->responseAttr($responseList);
-		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('CONF_BULK_AUTH') == 'ON';
+		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('SETT_BULK_AUTH') == 'ON';
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
@@ -157,10 +157,10 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function calculateServiceOrder()
 	{
-		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
+		writeLog('INFO', 'Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
-			redirect(base_url(lang('CONF_LINK_BULK_AUTH')), 'Location', 302);
+			redirect(base_url(lang('SETT_LINK_BULK_AUTH')), 'Location', 302);
 			exit;
 		}
 
@@ -203,12 +203,12 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnamedRequest()
 	{
-		log_message('INFO', 'NOVO Bulk: unnamedRequest Method Initialized');
+		writeLog('INFO', 'Bulk: unnamedRequest Method Initialized');
 
 		$view = 'unnamedRequest';
 		$branchOffices = 0;
 
-		if(lang('CONF_UNNA_BRANCHOFFICE') == 'ON') {
+		if(lang('SETT_UNNA_BRANCHOFFICE') == 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
@@ -228,7 +228,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_MENU_UNNAMED_REQUEST');
 		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
 		$this->render->maxCards = $this->session->productInf->maxCards;
-		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') == 'ON' ? '' : 'readonly';
+		$this->render->editable = lang('SETT_UNNA_EXPIRED_DATE') == 'ON' ? '' : 'readonly';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
@@ -239,7 +239,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnamedAffiliate()
 	{
-		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
+		writeLog('INFO', 'Bulk: unnamedAffiliate Method Initialized');
 
 		$requestArray = (array)$this->request;
 		$view = 'unnamedAffiliate';
@@ -280,7 +280,7 @@ class Novo_Bulk extends NOVO_Controller {
 	 */
 	public function unnmamedDetail()
 	{
-		log_message('INFO', 'NOVO Bulk: unnmamedDetail Method Initialized');
+		writeLog('INFO', 'Bulk: unnmamedDetail Method Initialized');
 
 		$view = 'unnmamedDetail';
 		array_push(

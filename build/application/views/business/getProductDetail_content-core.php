@@ -4,8 +4,8 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-inline list-style-none">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li>
 			</ul>
 		</nav>
@@ -20,9 +20,9 @@
 		<div class="hide-out hide">
 			<div class="flex mb-3 mx-4 justify-center">
 				<div class="product-presentation relative">
-					<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerProgram); ?>" alt="<?= $productName; ?>" />
-					<?php if(lang('CONF_FRANCHISE_LOGO') === 'ON'):?>
-					<img class="item-network" src="<?= $this->asset->insertFile($productImgBrand, 'images/brands'); ?>" alt="<?= $productBrand; ?>" />
+					<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images', $customerFiles, 'programs'); ?>" alt="<?= $productName; ?>" />
+					<?php if(lang('SETT_FRANCHISE_LOGO') === 'ON'):?>
+					<img class="item-network" src="<?= $this->asset->insertFile($productImgBrand, 'images', $customerFiles, 'brands'); ?>" alt="<?= $productBrand; ?>" />
 					<?php endif; ?>
 				</div>
 			</div>

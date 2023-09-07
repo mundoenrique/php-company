@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
 			</ul>
 		</nav>
@@ -24,7 +24,7 @@
 				<div class="flex my-2 px-5">
 					<form id="closingBudgetForm" class="w-100">
 						<div class="row flex flex items-center justify-start col-sm-12">
-							<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
+							<div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
 								<label><?= lang('GEN_ENTERPRISE') ?></label>
 								<select id="enterpriseReport" name="enterpriseReport" class="select-box custom-select mt-1 mb-1 h6 w-100">
 								<?php foreach($enterpriseList AS $enterprise) : ?>
@@ -38,7 +38,7 @@
 								<div class="help-block"></div>
 								<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
 							</div>
-							<div  class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
+							<div  class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
 								<label><?= lang('GEN_PRODUCT') ?></label>
 								<select id="productCode" name = "productCode" class="select-box custom-select flex h6 w-100">
 									<?php if($productsSelect): ?>
@@ -51,8 +51,8 @@
 								<div class="help-block"></div>
 							</div>
 
-							<?php if (lang('CONF_NIT_INPUT_BOOL') == 'ON' ): ?>
-								<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
+							<?php if (lang('SETT_NIT_INPUT_BOOL') == 'ON' ): ?>
+								<div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
 									<label ><?= lang('REPORTS_ID_FISCAL') ?></label>
 									<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
 									<div class="help-block"></div>
@@ -91,7 +91,7 @@
 								<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
 								<th><?= lang('REPORTS_TABLE_DNI') ?></th>
 								<th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
-								<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
+								<?php if (lang('SETT_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
 									<th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
 								<?php endif; ?>
 							</tr>

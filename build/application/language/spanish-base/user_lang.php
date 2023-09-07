@@ -47,3 +47,4 @@ $lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
 	'tranTipoUsuario' => 'type',
 	'registed' => 'registered'
 ];
+$lang['PERMISSIONS_EXCLUDED'] = [];

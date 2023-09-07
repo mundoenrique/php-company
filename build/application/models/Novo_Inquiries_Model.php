@@ -10,7 +10,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Inquiries Model Class Initialized');
+		writeLog('INFO', 'Inquiries Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de estados de las ordenes de servicio
@@ -19,7 +19,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ServiceOrderStatus_Inquiries()
 	{
-		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ServiceOrderStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
@@ -29,7 +29,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.EstatusLotesMO';
 		$this->dataRequest->tipoEstatus = 'TIPO_B';
 
-		$response = $this->sendToService('callWs_ServiceOrderStatus');
+		$response = $this->sendToWebServices('callWs_ServiceOrderStatus');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -67,7 +67,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function callWs_GetServiceOrders_Inquiries($dataRequest)
 	{
 
-		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ServiceOrderStatus Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -84,12 +84,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-   	$response = $this->sendToService('callWs_GetServiceOrders');
+   	$response = $this->sendToWebServices('callWs_GetServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = lang('CONF_LINK_SERVICE_ORDERS');
+				$this->response->data = lang('SETT_LINK_SERVICE_ORDERS');
 
 				foreach($response->lista AS $list) {
 					foreach($list AS $key => $value) {
@@ -140,7 +140,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$bulkList['bulkObservation'] = '';
 
-									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('CONF_STATUS_REJECTED')){
+									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('SETT_STATUS_REJECTED')){
 										$bulkList['bulkObservation'] = $bulk->obs;
 										$serviceOrders['warningEnabled'] = TRUE;
 									}
@@ -159,13 +159,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = lang('INQ_NO_SERVICE_ORDER');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('GEN_SERVICE_ORDES'), $statusText);
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -179,7 +179,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
+		writeLog('INFO', 'Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -196,7 +196,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -205,20 +205,20 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('callWs_ClearServiceOrders');
+		$response = $this->sendToWebServices('callWs_ClearServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = 'La orden fue anulada exitosamente';
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -234,7 +234,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_BulkDetail_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: BulkDetail Method Initialized');
+		writeLog('INFO', 'Bulk Model: BulkDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = $dataRequest->bulkfunction;
@@ -244,7 +244,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('callWs_BulkDetail');
+		$response = $this->sendToWebServices('callWs_BulkDetail');
 
 		$detailInfo = [
 			'fiscalId' => '--',
@@ -391,7 +391,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildEmisionRecords_Bulk($emisionRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildEmisionRecords Method Initialized');
 
 		$bulkDetail = [];
 
@@ -443,7 +443,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildCreditRecords_Bulk($creditRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildCreditRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildCreditRecords Method Initialized');
 
 		$bulkDetail = [];
 
@@ -488,7 +488,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildKindergartenRecords_Bulk($gardenRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildKindergartenRecords Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildKindergartenRecords Method Initialized');
 		$bulkDetail = [];
 
 		foreach($emisionRecords AS $key => $records) {
@@ -529,7 +529,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	private function buildReplacement_Bulk($replaceRecords, $acceptAttr)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: buildreplacement Method Initialized');
+		writeLog('INFO', 'Inquiries Model: buildreplacement Method Initialized');
 
 		$detailRecords = [];
 
@@ -566,7 +566,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ExportFiles_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
+		writeLog('INFO', 'DownloadFiles Model: exportFiles Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
@@ -580,13 +580,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
-		$response = $this->sendToService('callWs_ExportFiles');
+		$response = $this->sendToWebServices('callWs_ExportFiles');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$file = $response->archivo;
-				$name = str_replace("OS","Orden_de_Servicio",$response->nombre);
+				$name = str_replace('OS', 'Orden_de_Servicio', $response->nombre);
 
 				$this->response->data->file = $file;
 				$this->response->data->name = $name;
@@ -596,7 +596,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->code = 1;
 				$this->response->title = lang('GEN_ORDER_TITLE');
 				$this->response->msg = lang('GEN_NO_BULK_AUTHORIZATION');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
@@ -606,7 +606,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->code =  $response->code != 0 ? $response->code : 3;
 				$this->response->title = $response->code != 0 ? $response->title : lang('GEN_DOWNLOAD_FILE');
 				$this->response->msg = $response->code != 0 ? $response->msg : lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->icon =  $response->code != 0 ? $response->icon : lang('CONF_ICON_WARNING');
+				$this->response->icon =  $response->code != 0 ? $response->icon : lang('SETT_ICON_WARNING');
 				$this->response->download =  $response->modalBtn['btn1']['action'] == 'redirect' ? FALSE : TRUE;
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
@@ -619,7 +619,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 	public function CallWs_PagoOs_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: PagoOS Method Initialized');
+		writeLog('INFO', 'Services Model: PagoOS Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Pagos';
 		$this->dataAccessLog->function = 'Doble Autenticacion';
@@ -628,13 +628,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'dobleAutenticacion';
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
-		$response = $this->sendToService('CallWs_pagoOs');
+		$response = $this->sendToWebServices('CallWs_pagoOs');
 		$this->response->title = lang('PAG_OS_TITLE');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
@@ -642,7 +642,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->session->set_userdata('authToken', $response->bean);
 			break;
 			default:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_OTP_NO_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -652,7 +652,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 	public function CallWs_PagarOS_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Services Model: PagarOS Method Initialized');
+		writeLog('INFO', 'Services Model: PagarOS Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Pagos';
 		$this->dataAccessLog->function = 'Pagar Orden de servicio';
@@ -670,41 +670,41 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->nofactura = $dataRequest->noFactura;
 		$this->dataRequest->acUsuario = $this->userName;
 
-		$response = $this->sendToService('CallWs_PagarOS');
+		$response = $this->sendToWebServices('CallWs_PagarOS');
 		$this->response->title = lang('PAG_OS_TITLE');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->dataFormListOS = $this->session->userdata('requestOrdersList');
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('PAG_OS_OK');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->session->unset_userdata('requestOrdersList');
 				$this->session->unset_userdata('authToken');
 			break;
 			case -14:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -21:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_CONECTION_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -24:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DAILY_TRANSACTION_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -25:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DAILY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -155:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_UNAVAILABLE_BALANCE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -714,33 +714,33 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			case -470:
 			case -471:
 			case -474:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_ACCOUNT_NOT_AVAILABLE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -230:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_GENERAL_MSG');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -241:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_PARAMS_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -281:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_ACCOUNT_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -285:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_ACCOUNT_INACTIV');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_INVALID_CODE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
@@ -748,7 +748,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -287:
 				$this->response->code = 2;
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_USED_CODE');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
@@ -756,64 +756,64 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -288:
 				$this->response->code = 2;
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_EXPIRED_CODE');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;
 			case -296:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_NOT_REGISTERED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -297:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_OS_UNREGISTERED_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -298:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_INVALID_CONCEPT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -299:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_CONCEPT_NOT_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -300:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -472:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_INVALID_DOCUMENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -473:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -475:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_CONSIGNMENT_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -476:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DEBITS_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -477:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -478:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;

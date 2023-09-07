@@ -9,7 +9,7 @@ Class Novo_Services extends Novo_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Services Controller Class Initialized');
+		writeLog('INFO', 'Services Controller Class Initialized');
 	}
 	/**
 	 * @info Método para las opciones de la cuenta maestra
@@ -18,7 +18,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function transfMasterAccount()
 	{
-		log_message('INFO', 'Novo_Services: transfMasterAccount Method Initialized');
+		writeLog('INFO', 'Services: transfMasterAccount Method Initialized');
 
 		$view = 'transfMasterAccount';
 		array_push(
@@ -44,7 +44,7 @@ Class Novo_Services extends Novo_Controller {
 				'services/transfMasterRecharge'
 			);
 
-			$this->method = 'CallWs_MasterAccountBalance_Services';
+			$this->modelMethod = 'CallWs_MasterAccountBalance_Services';
 			$responseAttr = $this->loadModel();
 
 			foreach ($responseAttr->data->info AS $index => $render) {
@@ -56,8 +56,9 @@ Class Novo_Services extends Novo_Controller {
 
 		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-		$this->render->skipInputPass = lang('CONF_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
+		$this->render->skipInputPass = lang('SETT_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
 		$this->render->showRechargeAccount = $showRechargeAccount;
+		$this->render->balanceAccountAdmin = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? lang('SERVICES_BALANCE_ACC_ADMINISTRATOR') : lang('SERVICES_BALANCE_ACC_CONCENTRATOR');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}
@@ -68,7 +69,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function cardsInquiry()
 	{
-		log_message('INFO', 'Novo_Services: cardsInquiry Method Initialized');
+		writeLog('INFO', 'Services: cardsInquiry Method Initialized');
 
 		$view = 'cardsInquiry';
 		array_push(
@@ -95,7 +96,7 @@ Class Novo_Services extends Novo_Controller {
 	 */
 	public function transactionalLimits()
 	{
-		log_message('INFO', 'Novo_Services: transactionalLimits Method Initialized');
+		writeLog('INFO', 'Services: transactionalLimits Method Initialized');
 
 		$view = 'transactionalLimits';
 		array_push(
@@ -124,7 +125,7 @@ Class Novo_Services extends Novo_Controller {
 
 	public function commercialTwirls()
 	{
-		log_message('INFO', 'Novo_Services: commercialTwirls Method Initialized');
+		writeLog('INFO', 'Services: commercialTwirls Method Initialized');
 
 		$view = 'commercialTwirls';
 		array_push(

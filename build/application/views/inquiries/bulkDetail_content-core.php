@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="javascript:"><?= lang('GEN_MENU_CONSULTATIONS') ?></a></li>
 			</ul>
 		</nav>
@@ -83,7 +83,7 @@
 							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
-							<form id="download-detail-bulk" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post">
+							<form id="download-detail-bulk" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>" method="post">
 								<input type="hidden" name="bulkId" value="<?= $bulkId; ?>">
 								<input type="hidden" name="bulkfunction" value="<?= $function; ?>">
 							</form>

@@ -1,9 +1,9 @@
 'use strict'
 function getRecaptchaToken(module, _function_) {
-	if (lang.CONF_ACTIVE_RECAPTCHA) {
+	if (lang.SETT_ACTIVE_RECAPTCHA) {
 		grecaptcha.ready(function () {
 			grecaptcha
-				.execute(lang.CONF_KEY_RECAPTCHA, { action: module })
+				.execute(lang.SETT_KEY_RECAPTCHA, { action: module })
 				.then(function (token) {
 					if (token) {
 						token
@@ -11,11 +11,11 @@ function getRecaptchaToken(module, _function_) {
 					}
 				}, function (token) {
 					if (!token) {
-						icon = lang.CONF_ICON_WARNING;
+						icon = lang.SETT_ICON_WARNING;
 						modalBtn = {
 							btn1: {
 								text: lang.GEN_BTN_ACCEPT,
-								link: lang.CONF_LINK_SIGNIN,
+								link: lang.SETT_LINK_SIGNIN,
 								action: 'redirect'
 							}
 						};

@@ -32,7 +32,7 @@
             </div>
             <hr class="separador-one">
             <div class="flex items-center justify-end pt-3">
-              <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_SIGNIN')) ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+              <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_SIGNIN')) ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
               <button id="btn-pass-recover" class="btn btn-small btn-primary btn-loading" type="submit"
                 disabled><?= lang('GEN_BTN_CONTINUE'); ?></button>
             </div>

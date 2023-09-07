@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
 			</ul>
 		</nav>
@@ -23,6 +23,7 @@
 			<?php $this->load->view('reports/filterMasterAccount', $data)  ?>
 			<form id="extMasterAccountFormXls" class="hide">
 					<input id="idExtEmpXls" name="idExtEmpXls"  type="text" value="">
+					<input id="typeNote" name="typeNote"  type="text" value="">
 					<input id="initialDateXls" name="initialDateXls"  type="text" value="">
 					<input id="finalDateXls" name="finalDateXls"  type="text" value="">
 					<input id="filterDateXls" name="filterDateXls"  type="text" value="">
@@ -34,6 +35,11 @@
 					<div class="flex">
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center ">
 						<div id="files-btn" class="hide">
+						<?php if(lang('SETT_FILE_MASTER_ACCOUNT_TXT') === 'ON'):?>
+							<button id="export_txt" class="btn btn-file px-1 big-modal" title="Exportar a txt" data-toggle="tooltip">
+								<i class="icon icon-file-txt" aria-hidden="true"></i>
+							</button>
+						<?php endif; ?>
 							<button id="export_excel" class="btn btn-file px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>

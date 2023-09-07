@@ -51,7 +51,7 @@ footer.main-footer {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/default/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -61,7 +61,7 @@ footer.main-footer {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/default/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -487,7 +487,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/default/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 @supports (-ms-ime-align:auto) {

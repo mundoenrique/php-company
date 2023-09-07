@@ -51,7 +51,7 @@ $style_css = $this->uri->segment(3);
 <header id="head">
 	<div id="head-wrapper">
 		<?php if($pais == 'Ec-bp'): ?>
-		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images', 'pb'); ?>" alt="Banco PICHINCHA">
 		<?php endif; ?>
 		<a id="branding" rel="start">
 		</a>

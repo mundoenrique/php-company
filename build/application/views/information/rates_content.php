@@ -189,16 +189,16 @@
 					<tr>
 						<th class="table-header table-header-padded background-brand-novopayment" width="40%">
 							Descripción
-							<img alt="" src="<?= $this->asset->insertFile('rates-header-description.png', 'images', $countryUri); ?>">
+							<img alt="" src="<?= $this->asset->insertFile('rates-header-description.png', 'images', $countryFiles); ?>">
 						</th>
 						<th class="table-header background-brand-bonus" width="30%">
 							Bonus Alimentación<br>
 							Tebca
-							<img alt="" src="<?= $this->asset->insertFile('rates-header-bonus.png', 'images', $countryUri); ?>">
+							<img alt="" src="<?= $this->asset->insertFile('rates-header-bonus.png', 'images', $countryFiles); ?>">
 						</th>
 						<th class="table-header background-brand-plata" width="30%">
 							Plata Servitebca
-							<img alt="" src="<?= $this->asset->insertFile('rates-header-plata.png', 'images', $countryUri); ?>">
+							<img alt="" src="<?= $this->asset->insertFile('rates-header-plata.png', 'images', $countryFiles); ?>">
 						</th>
 					</tr>
 				</thead>

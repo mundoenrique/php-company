@@ -149,7 +149,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Logout';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-//DATATABLES
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Bulk Number';
 $lang['GEN_TABLE_BULK_ID'] = 'Bulk ID';
 $lang['GEN_TABLE_BULK_DATE'] = 'Upload date';
@@ -205,7 +204,6 @@ $lang['GEN_TABLE_BALANCE'] = 'Balance';
 $lang['GEN_TABLE_DOCUMENT_NUMBER'] = 'Document number';
 $lang['GEN_BULK_NUMBER'] = 'Bulk number';
 $lang['GEN_QUERY_TYPE'] = 'Query type';
-//DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Show _MENU_ records';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No results found';
 $lang['GEN_TABLE_RESULTS'] = 'Results';
@@ -330,18 +328,15 @@ $lang['GEN_OTP_NO_SENT'] = 'It was not possible to send the email with the verif
 $lang['GEN_BONUS_CARD'] = 'Tebca Food Bonus';
 $lang['GEN_SILVER_CARD'] = 'Servitebca payment';
 $lang['GEN_BULK_TYPE'] = 'Bulk type';
-// RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Select',
 	'CC' => 'Citizenship card',
 	'PP' => 'Passport',
 ];
-//DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Module';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Function';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Date';
 $lang['REPORTS_TITLE'] = 'Settings';
-//DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Account';
 $lang['GEN_LOGIN_IP_MSG'] = 'You are entering from an unusual computer, for security reasons we will send you a verification code to the email address <span class = "semibold">%s</span>, indicate it below.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'I confirm that I am logging in from a frequently used computer.';
@@ -351,7 +346,7 @@ $lang['GEN_RESP_CODE_INVALID'] = 'The received security code is invalid, please 
 $lang['GEN_CODE_OTP_REQUIRED'] = 'Indicate the code sent to your email.';
 $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'The code format is invalid.';
 $lang['GEN_WITHOUT_AUTHORIZATION'] = 'You are not authorized to perform this action.';
-$lang['GEN_RC_0'] = 'Process executed successfully.';
+$lang['GEN_MSG_RC_0'] = 'Process executed successfully.';
 $lang['GEN_FAILED_THIRD_PARTY'] = 'The response for this process was not successful. %s';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['PASSWORD_CHANGE']= "Change of password";
@@ -412,17 +407,14 @@ $lang['GEN_SERVICE_ORDES'] = 'There are no service orders in status "<strong>%s<
 $lang['GEN_GET_AUTH_USER_FAIL'] = 'It was not possible to identify you in the application';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'It was not possible to generate the authorization key';
 $lang['GEN_NO_BULK_AUTHORIZATION'] = 'Unable to authorize bulk and generate service order';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directory created.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directory exists.';
-// LANG IMAGE
 $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
 $lang["GEN_TITLE_EXPORT_XLS_CON"] = 'Export to consolidated Excel';
 $lang["GEN_TITLE_EXPORT_PDF_CON"] = 'Export to consolidated PDF';
-// BRANCHES
 $lang["GEN_NAME"] = "Name";
 $lang["GEN_LAST_NAME"] = "Last name";
 $lang["GEN_ZONE"] = "Zone";
@@ -486,3 +478,5 @@ $lang['GEN_DEBITS_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits has been
 $lang['GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED']= "The maximum amount for debits and appropriations has been exceeded.";
 $lang['GEN_AMOUNT_MAX_EXCEEDED']= "The maximum allowed balance amount has been exceeded.";
 $lang['GEN_OS_UNREGISTERED_ACCOUNT'] = "The account is not registered.";
+$lang['GEN_COMPANY_NOT_FOUND']= "No company data found.";
+$lang['GEN_NOT_DEFINED_PARAMETERS'] = "There are no defined parameters for the company on this product.";

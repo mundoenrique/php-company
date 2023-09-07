@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_BULK_UNNAMED') ?></a></li>
       </ul>
     </nav>
@@ -34,21 +34,21 @@
               <input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>" autocomplete="off">
               <div class="help-block mb-1"></div>
             </div>
-            <?php if(lang('CONF_UNNA_STARTING_LINE1') == 'ON'): ?>
+            <?php if(lang('SETT_UNNA_STARTING_LINE1') == 'ON'): ?>
             <div class="form-group col-4 col-xl-3">
               <label for="startingLine1"><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
               <input type="text" id="startingLine1" name="starting-line1" class="form-control h5" maxlength="25" autocomplete="off">
               <div class="help-block mb-1"></div>
             </div>
             <?php endif; ?>
-            <?php if(lang('CONF_UNNA_STARTING_LINE2') == 'ON'): ?>
+            <?php if(lang('SETT_UNNA_STARTING_LINE2') == 'ON'): ?>
             <div class="form-group col-4 col-xl-3">
               <label for="startingLine2"><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
               <input type="text" id="startingLine2" name="starting-line2" class="form-control h5" maxlength="25" autocomplete="off">
               <div class="help-block mb-1"></div>
             </div>
             <?php endif; ?>
-            <?php if(lang('CONF_UNNA_BRANCHOFFICE') == 'ON'): ?>
+            <?php if(lang('SETT_UNNA_BRANCHOFFICE') == 'ON'): ?>
             <div class="form-group col-4 col-xl-3">
               <label><?= lang('BULK_BRANCH_OFFICE'); ?></label>
               <select id="branchOffice" name="branch-office" class="form-control select-box custom-select h6 w-100">
@@ -62,7 +62,7 @@
               <div class="help-block mb-1"></div>
             </div>
             <?php endif; ?>
-            <?php if(lang('CONF_UNNA_PASSWORD') == 'ON'): ?>
+            <?php if(lang('SETT_UNNA_PASSWORD') == 'ON'): ?>
             <div class="form-group col-4 col-xl-3">
               <label for="password"><?= lang('GEN_PASSWORD');  ?></label>
               <div class="input-group">

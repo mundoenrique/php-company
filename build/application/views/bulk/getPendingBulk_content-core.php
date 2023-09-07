@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS'); ?></a></li>
       </ul>
     </nav>
@@ -30,7 +30,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <?php if(lang('CONF_BULK_BRANCHOFFICE') == 'ON'): ?>
+          <?php if(lang('SETT_BULK_BRANCHOFFICE') == 'ON'): ?>
           <div class="form-group col-6 col-lg-3 col-xl-3 hide">
             <label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
             <select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">

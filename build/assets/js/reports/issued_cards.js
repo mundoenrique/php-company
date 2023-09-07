@@ -32,7 +32,7 @@ $(function () {
 
 			if (inputDate == 'initDate') {
 				$('#finalDate').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
@@ -108,7 +108,7 @@ $(function () {
 							table += '<tr>';
 							table += '<td>' + lang.GEN_TABLE_PRINCIPAL + '</td>';
 
-							if (lang.CONF_ISSUED_MONTHLY == 'ON' && value.emision > 0) {
+							if (lang.SETT_ISSUED_MONTHLY == 'ON' && value.emision > 0) {
 								table += '<td>';
 								table += '<a class="hyper-link" title="' + lang.GEN_TABLE_EMISSION + '" index="' + index + '" type="ep" href="javascript:">';
 								table += value.emision;
@@ -118,7 +118,7 @@ $(function () {
 								table += '<td>' + value.emision + '</td>';
 							}
 
-							if (lang.CONF_ISSUED_MONTHLY == 'ON' && value.repPlastico > 0) {
+							if (lang.SETT_ISSUED_MONTHLY == 'ON' && value.repPlastico > 0) {
 								table += '<td>';
 								table += '<a class="hyper-link" title="' + lang.GEN_TABLE_EMISSION + '" index="' + index + '" type="rp" href="javascript:">';
 								table += value.repPlastico;
@@ -165,7 +165,7 @@ $(function () {
 					"columnDefs": [
 						{
 							"targets": 3,
-							"visible": lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == "ON",
+							"visible": lang.SETT_CARDS_INQUIRY_ISSUE_STATUS == "ON",
 						},
 					],
 				});

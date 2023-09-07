@@ -72,11 +72,11 @@ $(function () {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: lang.CONF_LINK_REPORTS,
+					link: lang.SETT_LINK_REPORTS,
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.CONF_ICON_INFO, modalBtn);
+			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.SETT_ICON_INFO, modalBtn);
 		}
 
 		$('.month-year').datepicker({
@@ -129,7 +129,7 @@ $(function () {
 
 			if (inputDate == 'enterpriseDateBegin') {
 				$('#enterpriseDateEnd').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#enterpriseDateEnd').datepicker('option', 'maxDate', maxTime);
@@ -156,7 +156,7 @@ $(function () {
 
 			if (inputDate == 'cardDateBegin') {
 				$('#cardDateEnd').datepicker('option', 'minDate', dateSelected);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.CONF_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
 
 				if (currentDate > maxTime) {
 					$('#cardDateEnd').datepicker('option', 'maxDate', maxTime);
