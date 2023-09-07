@@ -85,8 +85,8 @@ $lang["TERMS_CONTENT"] = '
 	<a
 		class="btn-link"
 		href="https://www.coopcentral.com.co/Filef_linka.asp?IDe=1004"
+		target="_blank"
 		rel="coopcentral"
-		download
 	>
 		coopcentral.com.co
 	</a>
