@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['SETT_SCORE_CAPTCHA'] = [
 	'development' => 0,
@@ -26,18 +26,18 @@ $lang['SETT_BULK_AUTHORIZE'] = 'OFF';
 $lang['SETT_BULK_SELECT_ALL_AUTH'] = 'OFF';
 $lang['SETT_NIT_INPUT_BOOL'] = 'OFF';
 $lang['SETT_CLOSING_BALANCE_BOOL'] = 'OFF';
-$lang['SETT_LAST_UPDATE_COLUMN']= 'OFF';
+$lang['SETT_LAST_UPDATE_COLUMN'] = 'OFF';
 $lang['SETT_SETTINGS_BRANCHES'] = 'OFF';
 $lang['SETT_SETTINGS_TELEPHONES'] = 'OFF';
 $lang['SETT_SETTINGS_CHANGE_PASSWORD'] = 'OFF';
 $lang['SETT_SETT_STYLE_SKIN'] = 'col-4';
-$lang['SETT_DNI_COLUMN']= 'OFF';
-$lang['SETT_TERMINAL_COLUMN']= 'OFF';
-$lang['SETT_SECUENCE_COLUMN']= 'OFF';
+$lang['SETT_DNI_COLUMN'] = 'OFF';
+$lang['SETT_TERMINAL_COLUMN'] = 'OFF';
+$lang['SETT_SECUENCE_COLUMN'] = 'OFF';
 $lang['SETT_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 $lang['SETT_STATUS_MOVEMENT'] = 'ON';
-$lang['SETT_INPUT_UPPERCASE']= 'ON';
-$lang['SETT_REFERENCE']= 'ON';
+$lang['SETT_INPUT_UPPERCASE'] = 'ON';
+$lang['SETT_REFERENCE'] = 'ON';
 $lang['SETT_REMOTE_AUTH'] = 'ON';
 $lang['SETT_AUTH_LIST'] = [
 	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'LOCK_TYPES', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT', 'CARD_CANCELLATION'

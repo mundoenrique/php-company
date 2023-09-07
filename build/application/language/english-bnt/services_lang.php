@@ -18,3 +18,4 @@ $lang['SERVICES_LIMITS_NO_UPDATE'] = 'Unable to update limit constraint, please 
 //RECEPTION IN ENTERPRICE // DELIVERY OF CARDS
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Received in company';
 $lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Receive in company';
+$lang['SERVICES_SUCCESSFUL_TRANSFER'] = 'The master account application was successfully registered for authorization.';

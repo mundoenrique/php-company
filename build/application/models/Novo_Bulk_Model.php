@@ -1101,6 +1101,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -242:
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = $response->msg;
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -287:
 			case -288:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
@@ -1108,6 +1114,14 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_BULK_AUTH');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
+			break;
+			case -437:
+				$tipoLote = $response->bean->lista[0]->lotes[0]->ctipolote;
+				$msg = $tipoLote === 'Z' ? lang('BULK_PROCESS_FUND_REGISTRY') : lang('BULK_PROCESS_RETURN_REGISTRY');
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = $msg;
+				$this->response->icon = lang('SETT_ICON_INFO');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 

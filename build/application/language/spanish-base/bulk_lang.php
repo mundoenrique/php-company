@@ -90,3 +90,5 @@ $lang['BULK_CREATION_SCHEDULE'] = 'Los horarios para creación de tarjetas son l
 $lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'El contenido del archivo supera el límite de filas permitidas. Debe contener un máximo de %s registro(s).';
 $lang["BULK_LIMIT_EXCEEDED"] = 'Límite Excedido.';
 $lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Tu lote supera el límite diario de emisiones, solo quedan %s y estás cargando %s.';
+$lang["BULK_PROCESS_FUND_REGISTRY"] = 'No se puede ejecutar el fondeo de saldo en estos momentos. Intente más tarde.';
+$lang["BULK_PROCESS_RETURN_REGISTRY"] = 'No se puede ejecutar la devolución de saldo en estos momentos. Intente más tarde.';
