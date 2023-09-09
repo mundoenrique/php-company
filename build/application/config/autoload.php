@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -66,7 +66,6 @@ $autoload['libraries'] = array(
 	'user_agent',
 	'Connect_Services_Apis',
 	'Encrypt_Decrypt',
-	'Encrypt_Connect',
 	'Cryptography',
 	'Verify_Access',
 	'Create_Menu'
