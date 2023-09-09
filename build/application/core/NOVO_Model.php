@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Clase Modelo de Conexión Empresas Online (CEO)
  *
@@ -10,7 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date May 16th, 2020
  */
-class NOVO_Model extends CI_Model {
+class NOVO_Model extends CI_Model
+{
 	public $dataAccessLog;
 	public $accessLog;
 	public $customer;
@@ -26,7 +27,7 @@ class NOVO_Model extends CI_Model {
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Model Class Initialized');
 
 		$this->dataAccessLog = new stdClass();
@@ -98,7 +99,13 @@ class NOVO_Model extends CI_Model {
 	{
 		writeLog('INFO', 'Model: sendFile Method Initialized');
 
-		$responseUpload = $this->encrypt_connect->moveFile($file, $this->userName, $model);
+		$responseUpload = $this->connect_services_apis->moveFileToWebService($file, $model);
+		$responseUpload = handleResponseServer($responseUpload);
+		$logResponse = handleLogResponse($responseUpload);
+
+		writeLog('DEBUG', 'SFTP SERVICE RESPONSE ' . $model . ': ' . json_encode($logResponse, JSON_UNESCAPED_UNICODE));
+
+		unset($logResponse);
 
 		return $this->makeAnswer($responseUpload, $model);
 	}
@@ -116,39 +123,39 @@ class NOVO_Model extends CI_Model {
 		$linkredirect = uriRedirect($model, $this->singleSession);
 
 		$arrayResponse = [
-			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> $linkredirect,
-				'action'=> 'redirect'
+			'btn1' => [
+				'text' => lang('GEN_BTN_ACCEPT'),
+				'link' => $linkredirect,
+				'action' => 'redirect'
 			]
 		];
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case -29:
 			case -61:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
 				clearSessionsVars();
-			break;
+				break;
 			case -259:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_WITHOUT_AUTHORIZATION');
-			break;
+				break;
 			case -437:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), '');
-			break;
+				break;
 			case 502:
 				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				clearSessionsVars();
-			break;
+				break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');
-			break;
+				break;
 			default:
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-			break;
+				break;
 		}
 
 		$this->response->modalBtn = $arrayResponse;

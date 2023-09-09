@@ -3,15 +3,16 @@
  * @info Controlador para las peticiones asíncronas de la aplicación
  * @author J. Enrique Peñaloza Piñero
  * @date April 20th, 2019
-*/
-class Novo_CallModels extends Novo_Controller {
+ */
+class Novo_CallModels extends Novo_Controller
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'CallModels Controller Class Initialized');
 
-		if($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request()) {
 			$this->fileLanguage = lcfirst($this->dataRequest->who);
 			$this->validationMethod = lcfirst($this->dataRequest->where);
 			$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
@@ -30,7 +31,7 @@ class Novo_CallModels extends Novo_Controller {
 		writeLog('INFO', 'CallModels: index Method Initialized');
 
 		if (!empty($this->dataRequest->data)) {
-			foreach($this->dataRequest->data AS $item => $value) {
+			foreach ($this->dataRequest->data as $item => $value) {
 				$_POST[$item] = $value;
 			}
 		}
@@ -38,11 +39,11 @@ class Novo_CallModels extends Novo_Controller {
 		unset($this->dataRequest);
 		$valid = $this->verify_access->accessAuthorization($this->validationMethod);;
 
-		if(!empty($_FILES) && $valid) {
+		if (!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
-		if($valid) {
+		if ($valid) {
 			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
 			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
@@ -93,16 +94,17 @@ class Novo_CallModels extends Novo_Controller {
 			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
 			'n', 'N', 'c', 'C'
 		];
-		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 19);
-		$filenameT = time().'_'.date('s').$this->customerUri.$filename;
-		$filenameT = mb_strtolower($filenameT.'.'.$ext);
+		$filename = '_' . substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 19);
+		$filename = preg_replace('/_+/', '_', trim($filename));
+		$filenameT = time() . '_' . date('s') . $this->customerUri . $filename;
+		$filenameT = mb_strtolower($filenameT . '.' . $ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = UPLOAD_PATH;
 		$config['allowed_types'] = lang('SETT_FILES_EXTENSION');
 		$config['max_size'] = lang('SETT_MAX_FILE_SIZE');
 		$this->load->library('upload', $config);
 
-		if(!$this->upload->do_upload('file')) {
+		if (!$this->upload->do_upload('file')) {
 			$errors = $this->upload->display_errors();
 
 			writeLog('DEBUG', 'VALIDATION FILEUPLOAD ERRORS: ' . json_encode($errors, JSON_UNESCAPED_UNICODE));
@@ -112,7 +114,7 @@ class Novo_CallModels extends Novo_Controller {
 			$uploadData = (object) $this->upload->data();
 			$_POST['fileName'] = $uploadData->file_name;
 			$_POST['filePath'] = $uploadData->file_path;
-			$_POST['rawName'] = mb_strtolower($this->customerUri.$filename);
+			$_POST['rawName'] = mb_strtolower($this->customerUri . $filename);
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeBulkText'], $_POST['file']);
 

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * NOVOPAYMENT server Helpers
  *
@@ -10,8 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 if (!function_exists('writeLog')) {
-	function writeLog($level, $message) {
-		$CI =& get_instance();
+	function writeLog($level, $message)
+	{
+		$CI = &get_instance();
 		$ip = $CI->input->ip_address();
 		$level = mb_strtoupper($level);
 
@@ -24,11 +25,11 @@ if (!function_exists('writeLog')) {
 
 			if ($CI->session->has_userdata('userName')) {
 				$reqUser = $CI->session->userName;
-			} elseif($CI->input->get_post('userName') !== NULL) {
+			} elseif ($CI->input->get_post('userName') !== NULL) {
 				$reqUser = mb_strtoupper($CI->input->get_post('userName'));
-			} elseif($CI->input->get_post('user-name') !== NULL) {
+			} elseif ($CI->input->get_post('user-name') !== NULL) {
 				$reqUser = mb_strtoupper($CI->input->get_post('user-name'));
-			} elseif($CI->input->get_post('email') !== NULL) {
+			} elseif ($CI->input->get_post('email') !== NULL) {
 				$reqUser = mb_strtoupper($CI->input->get_post('email'));
 			}
 
@@ -38,7 +39,6 @@ if (!function_exists('writeLog')) {
 			}
 
 			$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$logUser, $ip, $customer, $message]);
-
 		} else {
 			$message = novoLang('NOVO %s', $message);
 		}
@@ -49,24 +49,26 @@ if (!function_exists('writeLog')) {
 
 // generar uuIdV4
 if (!function_exists('uuIdV4Generate')) {
-	function uuIdV4Generate() {
-    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
-    $data = random_bytes(16);
-    assert(strlen($data) == 16);
+	function uuIdV4Generate()
+	{
+		// Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+		$data = random_bytes(16);
+		assert(strlen($data) == 16);
 
-    // Set version to 0100
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-    // Set bits 6-7 to 10
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+		// Set version to 0100
+		$data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+		// Set bits 6-7 to 10
+		$data[8] = chr(ord($data[8]) & 0x3f | 0x80);
 
-    // Output the 36 character UUID.
-    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+		// Output the 36 character UUID.
+		return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 	}
 }
 
 // Maneja respuesta del servicio
 if (!function_exists('responseServer')) {
-	function responseServer($responseServer) {
+	function responseServer($responseServer)
+	{
 		$code = explode('.', $responseServer->code);
 
 		switch ($responseServer->HttpCode) {
@@ -95,7 +97,8 @@ if (!function_exists('responseServer')) {
 }
 
 if (!function_exists('handleResponseServer')) {
-	function handleResponseServer($webServiceResp) {
+	function handleResponseServer($webServiceResp)
+	{
 		if (isset($webServiceResp->data->rc)) {
 			$webServiceResp->responseCode = $webServiceResp->data->rc;
 		}
@@ -137,7 +140,8 @@ if (!function_exists('handleResponseServer')) {
 }
 
 if (!function_exists('handleLogResponse')) {
-	function handleLogResponse($responseToLog) {
+	function handleLogResponse($responseToLog)
+	{
 		$logResponse = new stdClass();
 
 		foreach ($responseToLog as $pos => $data) {

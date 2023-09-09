@@ -12,7 +12,7 @@ class Connect_Services_Apis
 	{
 		writeLog('INFO', 'Connect_Services_Apis Library Class Initialized');
 
-		$this->CI =& get_instance();
+		$this->CI = &get_instance();
 	}
 
 	public function connectWebServices($request)
@@ -73,10 +73,61 @@ class Connect_Services_Apis
 		curl_close($curl);
 		$executionTime = round($executionTime, 2, PHP_ROUND_HALF_UP);
 
-		writeLog('DEBUG', 'RESPONSE IN '. $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode);
+		writeLog('DEBUG', 'RESPONSE IN ' . $executionTime . ' SEC, CURL HTTP CODE: ' . $response->HttpCode);
 
 		if ($response->errorNo !== 0) {
 			writeLog('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
+		}
+
+		return responseServer($response);
+	}
+
+	public function moveFileToWebService($file)
+	{
+		writeLog('INFO', 'Connect_Services_Apis: moveFileToWebService Method Initialized');
+
+		$urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
+		$userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
+
+		writeLog('DEBUG', 'UPLOAD FILE TO' . $urlBulkService . $file);
+		writeLog('INFO', 'USER CREDENCIALS: ' . $userpassBulk);
+
+		$curl = curl_init();
+		$sftp = fopen(UPLOAD_PATH . $file, 'r');
+
+		curl_setopt_array($curl, [
+			CURLOPT_URL => $urlBulkService . $file,
+			CURLOPT_RETURNTRANSFER => TRUE,
+			CURLOPT_TIMEOUT => 58,
+			CURLOPT_FOLLOWLOCATION => TRUE,
+			CURLOPT_USERPWD => $userpassBulk,
+			CURLOPT_UPLOAD => 1,
+			CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
+			CURLOPT_INFILE => $sftp,
+			CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file)
+		]);
+
+		curl_exec($curl);
+		$executionTime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+
+		$response = new stdClass();
+		$response->HttpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		$response->code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+		$response->data = new stdClass();
+		$response->errorNo = (int) curl_errno($curl);
+		$response->error = curl_error($curl);
+
+		curl_close($curl);
+		fclose($sftp);
+		unlink(UPLOAD_PATH . $file);
+		$executionTime = round($executionTime, 2, PHP_ROUND_HALF_UP);
+
+		writeLog('DEBUG', 'RESPONSE IN ' . $executionTime . ' SEC, UPLOAD FILE RESPONSE CODE: ' . $response->code);
+
+		if ($response->errorNo !== 0) {
+			$response->HttpCode = 100;
+			$response->code = -105;
+			writeLog('ERROR', 'UPLOAD FILE ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
 		}
 
 		return responseServer($response);
@@ -95,7 +146,7 @@ class Connect_Services_Apis
 		unset($request->method);
 		$uuIdV4 = uuIdV4Generate();
 
-		writeLog('DEBUG', 'REQUEST BY MFA SERVICE URL: ' . $urlMfaServ. ', UUID: '. $uuIdV4);
+		writeLog('DEBUG', 'REQUEST BY MFA SERVICE URL: ' . $urlMfaServ . ', UUID: ' . $uuIdV4);
 
 		$curl = curl_init();
 
@@ -135,8 +186,8 @@ class Connect_Services_Apis
 		curl_close($curl);
 		$executionTime = round($executionTime, 2, PHP_ROUND_HALF_UP);
 
-		writeLog('DEBUG', 'RESPONSE IN '. $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode .
-			', SERVICE CODE: ' . $response->code . ' ' .$response->message);
+		writeLog('DEBUG', 'RESPONSE IN ' . $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode .
+			', SERVICE CODE: ' . $response->code . ' ' . $response->message);
 
 		if ($response->errorNo !== 0) {
 			writeLog('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
@@ -191,10 +242,10 @@ class Connect_Services_Apis
 
 		$curlResponse = json_decode($curlResponse);
 
-		if($curlHttpCode !== 200 || !$curlResponse) {
-			switch ($CurlErrorNo) {
+		if ($curlHttpCode !== 200 || !$curlResponse) {
+			switch ($curlErrorNo) {
 				case 28:
-					$failResponse->rc = 504;
+					$curlResponse->rc = 504;
 					break;
 				default:
 					$curlResponse->rc = lang('SETT_RC_DEFAULT');
@@ -202,10 +253,9 @@ class Connect_Services_Apis
 
 			switch ($curlHttpCode) {
 				case 502:
-					$failResponse->rc = 502;
+					$curlResponse->rc = 502;
 					break;
 			}
-
 		} else {
 			$curlResponse->rc = 0;
 			$this->CI->session->set_tempdata('jwtOauth', $curlResponse->access_token, 1860);
