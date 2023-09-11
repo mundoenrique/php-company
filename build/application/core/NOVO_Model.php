@@ -120,7 +120,7 @@ class NOVO_Model extends CI_Model
 
 		$responseCode = $responseModel->rc ?? $responseModel->responseCode;
 		$this->isResponseRc = (int) $responseCode;
-		$linkredirect = uriRedirect($model, $this->singleSession);
+		$linkredirect = uriRedirect($this->singleSession);
 
 		$arrayResponse = [
 			'btn1' => [

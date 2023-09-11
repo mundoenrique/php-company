@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Clase contralador de Conexión Empresas Online (CEO)
  *
@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package controllers
  * @author J. Enrique Peñaloza Piñero
  */
-class NOVO_Controller extends CI_Controller {
+class NOVO_Controller extends CI_Controller
+{
 	private $ValidateBrowser;
 	protected $customerUri;
 	protected $customerLang;
@@ -32,7 +33,7 @@ class NOVO_Controller extends CI_Controller {
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Controller Class Initialized');
 
 		$class = $this->router->fetch_class();
@@ -75,12 +76,13 @@ class NOVO_Controller extends CI_Controller {
 		$this->customerFiles = $this->config->item('customer_files');
 		LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
-		if($this->session->has_userdata('userId')) {
-			if($this->session->customerSess !== $this->config->item('customer')) {
+		if ($this->session->has_userdata('userId')) {
+			if ($this->session->customerSess !== $this->config->item('customer')) {
 				clientUrlValidate($this->session->customerUri);
 				$urlRedirect = str_replace(
-					$this->customerUri.'/', $this->session->customerUri.'/',
-					base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START'))
+					$this->customerUri . '/',
+					$this->session->customerUri . '/',
+					base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_START'))
 				);
 				redirect($urlRedirect, 'Location', 302);
 				exit;
@@ -105,13 +107,13 @@ class NOVO_Controller extends CI_Controller {
 		switch ($this->greeting) {
 			case $this->greeting >= 19 && $this->greeting <= 23:
 				$this->render->greeting = lang('GEN_EVENING');
-			break;
+				break;
 			case $this->greeting >= 12 && $this->greeting < 19:
 				$this->render->greeting = lang('GEN_AFTERNOON');
-			break;
+				break;
 			case $this->greeting >= 0 && $this->greeting < 12:
 				$this->render->greeting = lang('GEN_MORNING');
-			break;
+				break;
 		}
 
 		if ($this->input->is_ajax_request()) {
@@ -216,9 +218,8 @@ class NOVO_Controller extends CI_Controller {
 					$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 				}
 			}
-
 		} else {
-			$linkredirect = uriRedirect();
+			$linkredirect = uriRedirect($this->singleSession);
 			redirect(base_url($linkredirect), 'Location', 'GET');
 			exit;
 		}
@@ -282,7 +283,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
 			$this->render->modalBtn = json_encode($responseView->modalBtn);
-		} elseif(isset($responseView->data->params))  {
+		} elseif (isset($responseView->data->params)) {
 			$this->render->params = json_encode($responseView->data->params);
 		}
 	}
@@ -312,7 +313,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		writeLog('INFO', 'Controller: loadView Method Initialized. Module loaded: '.$module);
+		writeLog('INFO', 'Controller: loadView Method Initialized. Module loaded: ' . $module);
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
@@ -321,13 +322,13 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->logged = $this->session->has_userdata('logged');
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
+			$this->session->productInf->productName . ' / ' . $this->session->productInf->brand;
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->session->has_userdata('logged') || $this->session->flashdata('changePassword'))
-			? lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START') : lang('SETT_LINK_SIGNIN');
+			? lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_START') : lang('SETT_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content'.lang('SETT_VIEW_SUFFIX'), $this->render);
+		$this->load->view('master_content' . lang('SETT_VIEW_SUFFIX'), $this->render);
 	}
 }

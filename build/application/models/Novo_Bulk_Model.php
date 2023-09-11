@@ -131,9 +131,9 @@ class Novo_Bulk_Model extends NOVO_Model
 
 				foreach ($response->lista as $types) {
 					$type = [];
-					$type['key'] = manageString($types->idTipoLote, 'upper');
-					$type['format'] = manageString($types->formato, 'lower', TRUE);
-					$type['text'] = manageString($types->tipoLote, 'lower', TRUE);
+					$type['key'] = manageString($types->idTipoLote, 'upper', 'none');
+					$type['format'] = manageString($types->formato, 'lower', 'first');
+					$type['text'] = manageString($types->tipoLote, 'lower', 'first');
 
 					$typesLot[] = (object) $type;
 				}
@@ -229,15 +229,15 @@ class Novo_Bulk_Model extends NOVO_Model
 
 					if (!empty($errorsHeader)) {
 						foreach ($errorsHeader as $errors) {
-							$errorsList['header'][] = manageString($errors, 'lower', true);
+							$errorsList['header'][] = manageString($errors, 'lower', 'first');
 						}
 					}
 
 					if (!empty($errorsFields)) {
 						foreach ($errorsFields as $errors) {
-							$name = str_replace(',', ':', manageString($errors->nombre, 'lower', TRUE));
+							$name = str_replace(',', ':', manageString($errors->nombre, 'lower', 'first'));
 							foreach ($errors->errores as $item) {
-								$errorsList['fields'][$name][] = manageString($item, 'lower', TRUE);
+								$errorsList['fields'][$name][] = manageString($item, 'lower', 'first');
 							}
 						}
 					}

@@ -1,19 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Módelo para uso de funcionalidades en configuracion
  * @author Diego Acosta García
  * @date May 12th, 2020
  */
-class Novo_Tools_Model extends NOVO_Model {
+class Novo_Tools_Model extends NOVO_Model
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Tools Model Class Initialized');
 	}
 
-		/**
+	/**
 	 * @info Método para Obtener los datos del usuario
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
@@ -34,7 +35,7 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_GetUser');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$dataUser = new stdClass();
@@ -46,18 +47,18 @@ class Novo_Tools_Model extends NOVO_Model {
 				$dataUser->email = mb_strtoupper(trim($response->email));
 
 				$this->response->data->dataUser = $dataUser;
-			break;
+				break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('GEN_USER_INCORRECT');
-			break;
+				break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('GEN_USER_INCORRECT');
-			break;
+				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
+		if ($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
 			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -83,7 +84,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $this->session->userdata('userName');
 		$this->dataRequest->email = $dataRequest->email;
 
-		if(!$dataRequest) {
+		if (!$dataRequest) {
 			$access = [
 				'user_access',
 			];
@@ -92,14 +93,14 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$this->sendToWebServices('CallWs_ChangeEmail');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_EMAIL_CHANGED');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		if ($this->isResponseRc != 0) {
@@ -131,25 +132,25 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('callWS_ListaEmpresas');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_EMAIL_CHANGED');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
-			break;
+				break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('GEN_USER_INCORRECT');
-			break;
+				break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('GEN_USER_INCORRECT');
-			break;
+				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
+		if ($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
 			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -179,14 +180,14 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_ChangeTelephones');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_PHONE_CHANGED');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_ENTERPRISES');
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');
@@ -214,14 +215,14 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_ChangeDataEnterprice');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_ADDRESS_ENTERPRICE_CHANGED');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_ENTERPRISES');
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');
@@ -256,29 +257,29 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_GetFileIni');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$file = $response->archivo;
-					$name = $response->nombre;
-					$ext =  mb_strtolower($response->formatoArchivo);
+				$name = $response->nombre;
+				$ext =  mb_strtolower($response->formatoArchivo);
 				$this->response->data->file = $file;
-				$this->response->data->name = $name.'.'.$ext;
+				$this->response->data->name = $name . '.' . $ext;
 				$this->response->data->ext = $ext;
-			break;
+				break;
 			default:
 				$this->response->code = 4;
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 				$this->response->modalBtn['btn1']['link']  = lang('SETT_LINK_SETTING');
-			break;
+				break;
 		}
 
-		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+		return $this->responseToTheView('CallWs_GetFileIni: ' . $this->dataRequest->idOperation);
 	}
 
 
-		/**
+	/**
 	 * @info Método para buscar contactos de la empresa
 	 * @author Luis Molina
 	 * @date Dec 06th, 2022
@@ -301,10 +302,10 @@ class Novo_Tools_Model extends NOVO_Model {
 		$contactsList = [];
 		//$this->isResponseRc = -150;
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				foreach ($response->lista AS $key =>$contacts) {
+				foreach ($response->lista as $key => $contacts) {
 					$record = new stdClass();
 					$record->id = $key;
 					$record->acrif = $contacts->acrif;
@@ -315,13 +316,13 @@ class Novo_Tools_Model extends NOVO_Model {
 					$record->contactEmail = $contacts->email;
 					$record->contactStatus = $contacts->estatus;
 					$record->typeContactValue = $contacts->tipoContacto;
-					if($contacts->tipoContacto!=''){
-						foreach(lang('PRUE_ENTERPRICE_TYPE_CONTACT') as $key => $value){
-							if($contacts->tipoContacto == $key){
+					if ($contacts->tipoContacto != '') {
+						foreach (lang('PRUE_ENTERPRICE_TYPE_CONTACT') as $key => $value) {
+							if ($contacts->tipoContacto == $key) {
 								$record->typeContact = $value;
 							}
 						}
-					}else{
+					} else {
 						$record->typeContact = '';
 					}
 					array_push(
@@ -329,10 +330,10 @@ class Novo_Tools_Model extends NOVO_Model {
 						$record
 					);
 				}
-			break;
+				break;
 			case -150:
 				$this->response->code = 1;
-			break;
+				break;
 		}
 
 		$this->response->data = $contactsList;
@@ -373,23 +374,23 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_addContact');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_ADD_CONTACT_SUCCESS');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
-			break;
+				break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -163:
 				$this->response->msg = lang('GEN_EXIST_CONTACT');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_addContact');
@@ -429,18 +430,18 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_updateContact');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_UPDATE_CONTACT_SUCCESS');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
-			break;
+				break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_updateContact');
@@ -475,18 +476,18 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_deleteContact');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_DELETE_CONTACT_SUCCESS');
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
-			break;
+				break;
 			case -1:
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_deleteContact');
@@ -497,7 +498,8 @@ class Novo_Tools_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date Jun 01th, 2022
 	 */
-	public function CallWs_getBranches_Tools($dataRequest){
+	public function CallWs_getBranches_Tools($dataRequest)
+	{
 
 		writeLog('INFO', 'Tools Model: getBranches Method Initialized');
 
@@ -524,7 +526,7 @@ class Novo_Tools_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 
-				foreach ($response->lista as $key =>$detailBranches) {
+				foreach ($response->lista as $key => $detailBranches) {
 					$record = new stdClass();
 					$record->codB = $detailBranches->cod;
 					$record->person = $detailBranches->persona;
@@ -549,8 +551,8 @@ class Novo_Tools_Model extends NOVO_Model {
 					);
 				};
 				break;
-				case -150:
-					$this->response->code = 1;
+			case -150:
+				$this->response->code = 1;
 				break;
 		};
 
@@ -591,7 +593,7 @@ class Novo_Tools_Model extends NOVO_Model {
 		$this->dataRequest->costoDistribucion = '0';
 		$this->dataRequest->costoUnitDistribucion = '0';
 		$this->dataRequest->costoMinimo = '0';
-		$this->dataRequest->costoDistribRep= '0';
+		$this->dataRequest->costoDistribRep = '0';
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
@@ -599,13 +601,13 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_addBranches');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = lang('TOOLS_BRANCH_ADD');
 				$this->response->modalBtn['btn1']['action'] = 'none';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_addBranches');
@@ -653,13 +655,13 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('CallWs_updateBranches');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon =  lang('SETT_ICON_SUCCESS');
 				$this->response->msg = lang('TOOLS_BRANCH_UPDATE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('CallWs_updateBranches');
@@ -687,10 +689,10 @@ class Novo_Tools_Model extends NOVO_Model {
 				"pais" => $this->session->customerSess,
 				"idOperation" => $this->dataRequest->idOperation,
 				"className" => $this->dataRequest->className,
-				"rif"=> $dataRequest->idFiscal,
-				"url"=>$dataRequest->fileName,
-				"idTipoLote"=>"7",
-				"usuario"=> $this->session->userdata('userName'),
+				"rif" => $dataRequest->idFiscal,
+				"url" => $dataRequest->fileName,
+				"idTipoLote" => "7",
+				"usuario" => $this->session->userdata('userName'),
 				"logAccesoObject" => $this->dataAccessLog,
 				"token" => $this->session->userdata('token'),
 			];
@@ -703,15 +705,14 @@ class Novo_Tools_Model extends NOVO_Model {
 					$this->response->icon =  lang('SETT_ICON_SUCCESS');
 					$this->response->msg = lang('TOOLS_BRANCH_UPLOAD_FILE');
 					$this->response->modalBtn['btn1']['action'] = 'none';
-				break;
+					break;
 				case -166:
 				case -167:
 					$this->response->icon =  lang('SETT_ICON_WARNING');
 					$this->response->msg = lang('TOOLS_BRANCH_NO_LOAD');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
+					break;
 			}
-
 		} else {
 			$this->response->icon = lang('SETT_ICON_WARNING');
 			$this->response->msg = lang('TOOLS_BRANCH_FILE_NO_MOVE');
@@ -720,5 +721,4 @@ class Novo_Tools_Model extends NOVO_Model {
 
 		return $this->responseToTheView('UploadFileBranches');
 	}
-
 }

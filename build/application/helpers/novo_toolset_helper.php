@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * NOVOPAYMENT toolset Helpers
  *
@@ -9,19 +9,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date				Novembre 23th, 2019
  */
 if (!function_exists('assetPath')) {
-	function assetPath($route = '') {
-		return get_instance()->config->item('asset_path').$route;
+	function assetPath($route = '')
+	{
+		return get_instance()->config->item('asset_path') . $route;
 	}
 }
 
 if (!function_exists('assetUrl')) {
-	function assetUrl($route = '') {
-		return get_instance()->config->item('asset_url').$route;
+	function assetUrl($route = '')
+	{
+		return get_instance()->config->item('asset_url') . $route;
 	}
 }
 
 if (!function_exists('clientUrlValidate')) {
-	function clientUrlValidate($customer) {
+	function clientUrlValidate($customer)
+	{
 		$CI = &get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
@@ -29,24 +32,26 @@ if (!function_exists('clientUrlValidate')) {
 
 		if (!in_array($customer, $accessUrl)) {
 			$customer = current($accessUrl);
-			redirect(base_url($customer.'/inicio'), 'Location', 302);
+			redirect(base_url($customer . '/inicio'), 'Location', 302);
 			exit;
 		}
 
-		$CI->config->load('config-'.$customer);
+		$CI->config->load('config-' . $customer);
 	}
 }
 
 if (!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
+	function arrayTrim(&$value)
+	{
 		$value = trim($value);
 
 		return $value;
 	}
 }
 
-if(!function_exists('dbSearch')) {
-	function dbSearch($uri) {
+if (!function_exists('dbSearch')) {
+	function dbSearch($uri)
+	{
 		$CI = &get_instance();
 		$defaultBd = 'alpha';
 		$dbName = DB_VERIFY ? $CI->config->item('client_db')[$uri] ?? $defaultBd : $defaultBd;
@@ -56,12 +61,13 @@ if(!function_exists('dbSearch')) {
 }
 
 if (!function_exists('clearSessionsVars')) {
-	function clearSessionsVars() {
-		$CI =& get_instance();
+	function clearSessionsVars()
+	{
+		$CI = &get_instance();
 		$isLogged = $CI->session->has_userdata('logged');
 		$isUserId = $CI->session->has_userdata('userId');
 
-		if($isLogged || $isUserId) {
+		if ($isLogged || $isUserId) {
 			$CI->session->unset_userdata(['logged', 'userId', 'userName', 'enterpriseInf', 'productInf']);
 			$CI->session->sess_destroy();
 		}
@@ -69,34 +75,37 @@ if (!function_exists('clearSessionsVars')) {
 }
 
 if (!function_exists('accessLog')) {
-	function accessLog($dataAccessLog) {
+	function accessLog($dataAccessLog)
+	{
 		$CI = &get_instance();
 
-		return $accessLog = [
-			"sessionId"=> $CI->session->userdata('sessionId') ?? '',
+		return [
+			"sessionId" => $CI->session->userdata('sessionId') ?? '',
 			"userName" => $CI->session->userdata('userName') ?? $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
-			"modulo"=> $dataAccessLog->modulo,
-			"function"=> $dataAccessLog->function,
-			"operacion"=> $dataAccessLog->operation,
-			"RC"=> 0,
-			"IP"=> $CI->input->ip_address(),
-			"dttimesstamp"=> date('m/d/Y H:i'),
-			"lenguaje"=> strtoupper(LANGUAGE)
+			"modulo" => $dataAccessLog->modulo,
+			"function" => $dataAccessLog->function,
+			"operacion" => $dataAccessLog->operation,
+			"RC" => 0,
+			"IP" => $CI->input->ip_address(),
+			"dttimesstamp" => date('m/d/Y H:i'),
+			"lenguaje" => strtoupper(LANGUAGE)
 		];
 	}
 }
 
 if (!function_exists('maskString')) {
-	function maskString($string, $start = 1, $end = 1, $type = NULL) {
+	function maskString($string, $start = 1, $end = 1, $type = NULL)
+	{
 		$type = $type ? $type : '';
 		$length = strlen($string);
-		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
+		return substr($string, 0, $start) . str_repeat('*', 3) . $type . str_repeat('*', 3) . substr($string, $length - $end, $end);
 	}
 }
 
 if (!function_exists('setCurrentPage')) {
-	function setCurrentPage($currentClass, $menu) {
+	function setCurrentPage($currentClass, $menu)
+	{
 		$cssClass = '';
 
 		switch ($currentClass) {
@@ -137,26 +146,27 @@ if (!function_exists('setCurrentPage')) {
 }
 
 if (!function_exists('exportFile')) {
-	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
+	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
+	{
 		switch ($typeFile) {
 			case 'pdf':
 				header('Content-type: application/pdf');
-				header('Content-Disposition: attachment; filename='.$filename.'.pdf');
+				header('Content-Disposition: attachment; filename=' . $filename . '.pdf');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-			break;
+				break;
 			case 'xls':
 				header('Content-type: application/vnd.ms-excel');
-				header('Content-Disposition: attachment; filename='.$filename.'.xls');
+				header('Content-Disposition: attachment; filename=' . $filename . '.xls');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-			break;
+				break;
 			case 'xlsx':
 				header('Content-type: application/vnd.ms-excel');
-				header('Content-Disposition: attachment; filename='.$filename.'.xlsx');
+				header('Content-Disposition: attachment; filename=' . $filename . '.xlsx');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-			break;
+				break;
 		}
 
 		if ($bytes) {
@@ -170,37 +180,29 @@ if (!function_exists('exportFile')) {
 }
 
 if (!function_exists('convertDate')) {
-	function convertDate($date) {
+	function convertDate($date)
+	{
 		$date = explode('/', $date);
-		$date = $date[2].'-'.$date[1].'-'.$date[0];
+		$date = $date[2] . '-' . $date[1] . '-' . $date[0];
 
 		return $date;
 	}
 }
 
 if (!function_exists('convertDateMDY')) {
-	function convertDateMDY($date) {
+	function convertDateMDY($date)
+	{
 		$date = explode('/', $date);
-		$date = $date[1].'/'.$date[0].'/'.$date[2];
+		$date = $date[1] . '/' . $date[0] . '/' . $date[2];
 
 		return $date;
 	}
 }
 
-if (!function_exists('uriRedirect')) {
-	function uriRedirect() {
+if (!function_exists('currencyFormat')) {
+	function currencyFormat($amount)
+	{
 		$CI = &get_instance();
-		$linkredirect = $CI->session->has_userdata('productInf') ? lang('SETT_LINK_PRODUCT_DETAIL') : lang('SETT_LINK_ENTERPRISES');
-		$linkredirect = !$CI->session->has_userdata('logged') ? lang('SETT_LINK_SIGNIN') : $linkredirect;
-		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/'.lang('SETT_LINK_SIGNOUT_END') : $linkredirect;
-
-		return $linkredirect;
-	}
-}
-
-if (! function_exists('currencyFormat')) {
-	function currencyFormat($amount){
-		$CI =& get_instance();
 		$client = $CI->session->userdata('customerSess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
 		$amount = (float)$amount;
@@ -216,7 +218,8 @@ if (! function_exists('currencyFormat')) {
 }
 
 if (!function_exists('tenantSameSettings')) {
-	function tenantSameSettings($customer) {
+	function tenantSameSettings($customer)
+	{
 		$pattern = ['/bog/', '/col/', '/per/', '/usd/', '/ven/'];
 		$replace = ['bdb', 'co', 'pe', 'us', 've'];
 		$customer = preg_replace($pattern, $replace, $customer);
@@ -226,9 +229,10 @@ if (!function_exists('tenantSameSettings')) {
 }
 
 if (!function_exists('normalizeName')) {
-	function normalizeName($name) {
+	function normalizeName($name)
+	{
 		$pattern = [
-			'/\s/',
+			'/\s+/', '/\(/', '/\)/',
 			'/á/', '/à/', '/ä/', '/â/', '/ª/', '/Á/', '/À/', '/Â/', '/Ä/',
 			'/é/', '/è/', '/ë/', '/ê/', '/É/', '/È/', '/Ê/', '/Ë/',
 			'/í/', '/ì/', '/ï/', '/î/', '/Í/', '/Ì/', '/Ï/', '/Î/',
@@ -237,30 +241,31 @@ if (!function_exists('normalizeName')) {
 			'/ñ/', '/Ñ/', '/ç/', '/Ç/'
 		];
 		$replace = [
-			'_',
+			'_', '_', '  ',
 			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
 			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
 			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
 			'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
 			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
-			'n', 'N', 'c', 'C'
+			'n', 'n', 'c', 'c'
 		];
 
-		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
+		return manageString(preg_replace($pattern, $replace, $name), 'lower', 'none');
 	}
 }
 
 if (!function_exists('uriRedirect')) {
-	function uriRedirect($model, $singleSession) {
-		$CI =& get_instance();
-		$redirectLink = $singleSession === 'SignThird'
+	function uriRedirect($singleSession)
+	{
+		$CI = &get_instance();
+		$redirectLink = $singleSession === 'signIn'
 			? lang('SETT_LINK_SIGNIN')
 			: 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
 
 		if ($CI->session->has_userdata('logged')) {
 			$redirectLink = lang('SETT_LINK_ENTERPRISES');
 
-			if($model === 'callWs_GetProductDetail') {
+			if ($CI->session->has_userdata('enterpriseInf')) {
 				$redirectLink = lang('SETT_LINK_PRODUCTS');
 			}
 
@@ -274,28 +279,39 @@ if (!function_exists('uriRedirect')) {
 }
 
 if (!function_exists('manageString')) {
-	function manageString($string, $case, $upperFirst = false) {
+	function manageString($string, $case, $upperCase)
+	{
 		$stringCase = [
+			'none' => 'none',
 			'upper' => 'upperString',
-			'lower' => 'lowerString'
+			'lower' => 'lowerString',
+			'first' => 'ucFirst',
+			'word' => 'ucWords'
 		];
 
-		$string = preg_replace('/\s+/', ' ', trim($string));
+		$pattern = ['/\s+/', '/_+/'];
+		$replace = [' ', '_'];
+		$stringConverted = preg_replace($pattern, $replace, trim($string));
 
 		switch ($stringCase[$case]) {
 			case 'upperString':
 				$stringConverted = mb_strtoupper($string, 'UTF-8');
 				break;
 
-				case 'lowerString':
+			case 'lowerString':
 				$stringConverted = mb_strtolower($string, 'UTF-8');
 				break;
-
-			default:
-				$stringConverted = $string;
 		}
 
-		$stringConverted = $upperFirst ? ucfirst($stringConverted) : $stringConverted;
+		switch ($stringCase[$upperCase]) {
+			case 'ucFirst':
+				$stringConverted = ucfirst($stringConverted);
+				break;
+
+			case 'ucWords':
+				$stringConverted = ucwords($stringConverted);
+				break;
+		}
 
 		return $stringConverted;
 	}
