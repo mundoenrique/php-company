@@ -39,12 +39,12 @@ class Novo_Tools_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$dataUser = new stdClass();
-				$dataUser->userName = mb_strtoupper(trim($response->idUsuario));
-				$dataUser->firstName = mb_strtoupper(trim($response->primerNombre));
-				$dataUser->lastName = mb_strtoupper(trim($response->primerApellido));
-				$dataUser->position = mb_strtoupper(trim($response->cargo));
-				$dataUser->area = mb_strtoupper(trim($response->area));
-				$dataUser->email = mb_strtoupper(trim($response->email));
+				$dataUser->userName = manageString($response->idUsuario, 'upper', 'none');
+				$dataUser->firstName = manageString($response->primerNombre, 'upper', 'none');
+				$dataUser->lastName = manageString($response->primerApellido, 'upper', 'none');
+				$dataUser->position = manageString($response->cargo, 'upper', 'none');
+				$dataUser->area = manageString($response->area, 'upper', 'none');
+				$dataUser->email = manageString($response->email, 'upper', 'none');
 
 				$this->response->data->dataUser = $dataUser;
 				break;

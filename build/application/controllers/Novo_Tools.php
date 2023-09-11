@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR  exit('No direct script access allowed');
+defined('BASEPATH') or  exit('No direct script access allowed');
 /**
  * @info Controlador para manejar las peticiones referentes a configuraciones
  * @author Luis Molina
  * @date Marz 20Fri, 2020
-*/
-class Novo_Tools extends NOVO_Controller {
+ */
+class Novo_Tools extends NOVO_Controller
+{
 
 	public function __construct()
 	{
-		parent :: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Tools Controller Class Initialized');
 	}
 
@@ -50,37 +51,37 @@ class Novo_Tools extends NOVO_Controller {
 
 		$enterpriseList = $this->session->enterpriseSelect->list;
 
-		if (lang('SETT_SETTINGS_USER') == 'ON') {
+		if (lang('SETT_SETTINGS_USER') === 'ON') {
 			$this->load->model('Novo_Tools_Model', 'getUser');
 			$user = $this->getUser->CallWs_GetUser_Tools();
 			$userType = $this->session->userType;
 
-			foreach ($user->data->dataUser AS $index => $render) {
+			foreach ($user->data->dataUser as $index => $render) {
 				$this->render->$index = $render;
 			}
 			$this->render->userType = $userType;
-			$this->render->emailUpdate = lang('SETT_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
-			$this->render->addressCompanyUpdate = lang('SETT_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->emailUpdate = lang('SETT_SETTINGS_EMAIL_UPDATE') === 'OFF' ? 'readonly' : '';
+			$this->render->addressCompanyUpdate = lang('SETT_SETTINGS_ADDRESS_ENTERPRICE_UPDATE') === 'OFF' ? 'readonly' : '';
 		}
 
-		if (lang('SETT_SETTINGS_ENTERPRISE') == 'ON') {
+		if (lang('SETT_SETTINGS_ENTERPRISE') === 'ON') {
 			$this->render->enterpriseSettList = $enterpriseList;
 			$this->render->countEnterpriseList = count($enterpriseList);
 
 			if ($this->render->countEnterpriseList == 1) {
-				foreach((Object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value){
-					 $valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
+				foreach ((object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value) {
+					$valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
 				}
 			}
 
-			foreach ((Object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value ) {
-				lang('SETT_SETTINGS_ENTERPRISE') == 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
+			foreach ((object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value) {
+				lang('SETT_SETTINGS_ENTERPRISE') === 'ON' ? $this->render->$key = $this->render->countEnterpriseList == 1 ? $valuesArr[$key] : '' : '';
 			}
 
-			$this->render->phoneUpdate = lang('SETT_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
+			$this->render->phoneUpdate = lang('SETT_SETTINGS_PHONES_UPDATE') === 'OFF' ? 'readonly' : '';
 		}
 
-		if (lang('SETT_SETTINGS_BRANCHES') == 'ON') {
+		if (lang('SETT_SETTINGS_BRANCHES') === 'ON') {
 			$this->render->enterpriseSettList = $enterpriseList;
 		}
 
@@ -92,7 +93,7 @@ class Novo_Tools extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_SETTINGS_TITLE');
 		$this->render->titleIniFile = $title;
 		$this->render->disabled = $disabled;
-		$this->views = ['tools/'.$view];
+		$this->views = ['tools/' . $view];
 		$this->loadView($view);
 	}
 }
