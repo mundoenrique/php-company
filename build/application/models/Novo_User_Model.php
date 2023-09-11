@@ -126,7 +126,8 @@ class Novo_User_Model extends NOVO_Model
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('SETT_LINK_TERMS'));
+				$nextWayFirstLogIn = lang('SETT_READ_TERMS') === 'ON' ? lang('SETT_LINK_TERMS') : lang('SETT_LINK_CHANGE_PASS');
+				$this->response->data = base_url($nextWayFirstLogIn);
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
