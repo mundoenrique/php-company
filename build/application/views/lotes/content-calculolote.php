@@ -6,7 +6,7 @@ $ceo_name = $this->security->get_csrf_token_name();
 $ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
-writeLog('info', '------------------------------' . gettype($data));
+
 if (isset($data->tokenOTP->authToken)) {
 	$this->session->set_userdata('authToken', $data->tokenOTP->authToken);
 }
