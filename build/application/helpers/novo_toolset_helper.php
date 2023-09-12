@@ -295,11 +295,11 @@ if (!function_exists('manageString')) {
 
 		switch ($stringCase[$case]) {
 			case 'upperString':
-				$stringConverted = mb_strtoupper($string, 'UTF-8');
+				$stringConverted = mb_strtoupper($stringConverted, 'UTF-8');
 				break;
 
 			case 'lowerString':
-				$stringConverted = mb_strtolower($string, 'UTF-8');
+				$stringConverted = mb_strtolower($stringConverted, 'UTF-8');
 				break;
 		}
 
