@@ -74,24 +74,21 @@ $lang["TERMS_CONTENT"] = '
 	parte de La Empresa.
 </p>
 <p>
-	Los Usuarios, de conformidad con las políticas de seguridad y privacidad de la plataforma tecnológica, al momento de
-	su registro en la misma, tendrán la posibilidad de elegir si desean recibir o no mensajes electrónicos comerciales por
-	parte de La Empresa.
-</p>
-<p>
 	En caso de cualquier violación a por parte de los Usuarios de las condiciones de seguridad y privacidad, de los
 	sistemas que utilizan tecnología de la información, de la privacidad de las personas y comunicaciones y de la
 	propiedad intelectual que estén vinculados a la plataforma tecnológica, se estará en incumplimiento de lo establecido
 	por las distintas normas que regulan la materia.
 </p>
 <p>
-	En caso de cualquier violación a por parte de los Usuarios de las condiciones de seguridad y privacidad, de los
-	sistemas que utilizan tecnología de la información, de la privacidad de las personas y comunicaciones y de la
-	propiedad intelectual que estén vinculados a la plataforma tecnológica, se estará en incumplimiento de lo establecido
-	por las distintas normas que regulan la materia.
-</p>
-<p>
-	Al seleccionar la opción "Acepto las Condiciones de Uso de este sistema", El Usuario también está aceptando el
-	Reglamento tarjeta prepago recargable.
+	Al seleccionar la opción “Acepto las Condiciones de Uso de este sistema”, El Usuario también está aceptando el
+	Reglamento tarjeta prepago recargable publicado en
+	<a
+		class="btn-link"
+		href="https://www.coopcentral.com.co/Filef_linka.asp?IDe=1004"
+		target="_blank"
+		rel="coopcentral"
+	>
+		coopcentral.com.co
+	</a>
 </p>
 ';
