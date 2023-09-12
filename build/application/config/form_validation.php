@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
 	'signIn' => [
@@ -900,7 +901,7 @@ $config = [
 			'rules' => 'null'
 		]
 	],
-	'getContacts' =>[
+	'getContacts' => [
 		[
 			'field' => 'idEnterpriseList',
 			'label' => 'idEnterpriseList',
@@ -1691,10 +1692,10 @@ $config = [
 		]
 	],
 	'userPermissions' => [
-			[
-				'field' => 'adminUser',
-				'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
-			],
+		[
+			'field' => 'adminUser',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
+		],
 	],
 	'usersManagement' => [
 		[

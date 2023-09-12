@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $config['session_time'] = SESS_EXPIRATION * 1000;
 $config['session_call_server'] = $config['session_time'] < 30000 ? ceil($config['session_time'] * 50 / 100) : 15000;
 $config['client'] = 'novo';

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -71,7 +71,7 @@ $route['(bpi|co|per|usd|ve)/inf-condiciones'] = "Novo_Information/terms";
 $route['(:any)/async-call'] = "Novo_CallModels";
 $route['(:any)/single'] = "Novo_CallModels";
 $route['(:any)/inicio'] = function ($customer) {
-	header('Location: '.BASE_URL.$customer.'/sign-in', 302);
+	header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
 	exit;
 };
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
@@ -208,7 +208,7 @@ $route['(:any)/lotes/calculo'] = "lotes/pantallaCalculoOSLote/$1";
 $route['(:any)/lotes/autorizacion/eliminarAuth'] = "lotes/eliminarLotesPorAutorizar/$1";
 $route['(:any)/lotes/autorizacion/detalle'] = "lotes/detalleLoteAuth/$1";
 $route['api/v1/(:any)/reportes/detalleLoteAuthExpPDF'] = "lotes/expdetalleLoteAuthPDF/$1";
-$route['api/v1/(:any)/reportes/detalleLoteAuthExpXLS']= "lotes/expdetalleLoteAuthXLS/$1";
+$route['api/v1/(:any)/reportes/detalleLoteAuthExpXLS'] = "lotes/expdetalleLoteAuthXLS/$1";
 $route['api/v1/(:any)/lotes/confirmarPreOSL'] = "lotes/callAutorizarLote/$1";
 //RUTAS DE ACCESO DESDE JS
 $route['api/v1/(:any)/lotes/reproceso/crear'] = "lotes/crearBeneficiario/$1";
@@ -228,7 +228,7 @@ $route['api/v1/(:any)/login'] = "users/validationAuth/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradora'] = "reportes/getCuentaConcentradora/$1";
 $route['api/v1/(:any)/reportes/graficoCuentaConcentradora'] = "reportes/graficoCuentaConcentradora/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraExpPDF'] = "reportes/expCuentaConcentradoraPDF/$1";
-$route['api/v1/(:any)/reportes/cuentaConcentradoraExpXLS']= "reportes/expCuentaConcentradoraXLS/$1";
+$route['api/v1/(:any)/reportes/cuentaConcentradoraExpXLS'] = "reportes/expCuentaConcentradoraXLS/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraConsolidadoExpXLS'] = "reportes/expCuentaConcentradoraConsolidadoXLS/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraConsolidadoExpPDF'] = "reportes/expCuentaConcentradoraConsolidadoPDF/$1";
 $route['api/v1/(:any)/reportes/tarjetasEmitidasExpXLS'] = "reportes/expTarjetasEmitidasXLS/$1";

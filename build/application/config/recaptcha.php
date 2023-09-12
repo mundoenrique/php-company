@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 // To use reCAPTCHA, you need to sign up for an API key pair for your site.
 // link: http://www.google.com/recaptcha/admin
 $config['recaptcha_site_key'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
