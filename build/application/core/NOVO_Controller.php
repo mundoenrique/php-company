@@ -11,7 +11,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller
 {
-	private $ValidateBrowser;
 	protected $customerUri;
 	protected $customerLang;
 	protected $customerFiles;
@@ -40,7 +39,6 @@ class NOVO_Controller extends CI_Controller
 		$method = $this->router->fetch_method();
 		$customerUri = $this->uri->segment(1, 0) ?? 'null';
 
-		$this->ValidateBrowser = FALSE;
 		$this->customerUri = $customerUri;
 		$this->customerLang = $customerUri;
 		$this->customerStyle = $customerUri;
@@ -90,7 +88,7 @@ class NOVO_Controller extends CI_Controller
 		}
 
 		if ($this->controllerMethod !== lang('SETT_LINK_SUGGESTION')) {
-			$this->ValidateBrowser = $this->checkBrowser();
+			$this->checkBrowser();
 		}
 
 		if ($this->session->has_userdata('time')) {
