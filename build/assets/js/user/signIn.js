@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 $(function () {
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
@@ -8,13 +8,13 @@ $(function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'destroy'
+				action: 'destroy',
 			},
 			maxHeight: 'none',
 			minWidth: 480,
 			posAt: 'center top',
-			posMy: 'center top+100'
-		}
+			posMy: 'center top+100',
+		};
 
 		appMessages(lang.GEN_SYSTEM_NAME, mesgNotif, '', modalBtn);
 	}
@@ -22,7 +22,7 @@ $(function () {
 	$('#userPass').on('keyup', function () {
 		$(this).attr('type', 'password');
 
-		if ($(this).val() == '') {
+		if ($(this).val() === '') {
 			$(this).attr('type', 'text');
 		}
 	});
@@ -49,10 +49,7 @@ $(function () {
 	});
 
 	$('#system-info').on('click', '.session-close', function () {
-		$(this)
-			.html(loader)
-			.prop('disabled', true)
-			.removeClass('session-close');
+		$(this).html(loader).prop('disabled', true).removeClass('session-close');
 
 		getSignIn('FinishSession');
 	});
@@ -62,10 +59,7 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			$(this)
-				.html(loader)
-				.prop('disabled', true)
-				.removeClass('send-otp');
+			$(this).html(loader).prop('disabled', true).removeClass('send-otp');
 			insertFormInput(true);
 
 			getRecaptchaToken('verifyIP', function (recaptchaToken) {
@@ -88,15 +82,15 @@ function getSignIn(forWhere) {
 				if (forWhere == 'SignIn') {
 					$(location).attr('href', response.data);
 				}
-			break;
+				break;
 			case 1:
 				$('#userName').showBalloon({
 					html: true,
 					classname: response.className,
 					position: response.position,
-					contents: response.msg
+					contents: response.msg,
 				});
-			break;
+				break;
 			case 2:
 				$('#accept').addClass('send-otp');
 				response.modalBtn.minWidth = 480;
@@ -104,31 +98,33 @@ function getSignIn(forWhere) {
 				response.modalBtn.posAt = 'center top';
 				response.modalBtn.posMy = 'center top+160';
 
-				inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
-				inputModal+= 		'<p class="pt-0 p-0">' + response.msg +'</p>';
-				inputModal+= 		'<div class="row">';
-				inputModal+=			'<div class="form-group col-8">';
-				inputModal +=				'<label for="otpCode">' + response.labelInput +'</label>'
-				inputModal +=				'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
-				inputModal+=				'<div class="help-block"></div>'
-				inputModal+=			'</div">';
-				inputModal+= 		'</div>';
-				inputModal+=		'<div class="form-group custom-control custom-switch mb-0">'
-				inputModal+=			'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">'
-				inputModal+=			'<label class="custom-control-label" for="acceptAssert">' + response.assert +'</label>'
-				inputModal+=		'</div">'
-				inputModal+= '</form>';
+				inputModal =
+					'<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+				inputModal += '<p class="pt-0 p-0">' + response.msg + '</p>';
+				inputModal += '<div class="row">';
+				inputModal += '<div class="form-group col-8">';
+				inputModal += '<label for="otpCode">' + response.labelInput + '</label>';
+				inputModal +=
+					'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
+				inputModal += '<div class="help-block"></div>';
+				inputModal += '</div">';
+				inputModal += '</div>';
+				inputModal += '<div class="form-group custom-control custom-switch mb-0">';
+				inputModal += '<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">';
+				inputModal += '<label class="custom-control-label" for="acceptAssert">' + response.assert + '</label>';
+				inputModal += '</div">';
+				inputModal += '</form>';
 
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
-			break;
+				break;
 			case 3:
 				response.modalBtn.minWidth = 480;
 				response.modalBtn.maxHeight = 'none';
 				response.modalBtn.posAt = 'center top';
 				response.modalBtn.posMy = 'center top+160';
-				inputModal = response.msg
+				inputModal = response.msg;
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
-			break;
+				break;
 			default:
 				if (response.data == 'session-close') {
 					$('#accept').addClass(response.data);
@@ -145,7 +141,7 @@ function getSignIn(forWhere) {
 			}
 
 			setTimeout(function () {
-				$("#userName").hideBalloon();
+				$('#userName').hideBalloon();
 			}, 2000);
 		}
 	});
