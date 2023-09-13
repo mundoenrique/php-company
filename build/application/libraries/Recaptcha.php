@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * CodeIgniter Recaptcha library
  *
@@ -6,13 +6,13 @@
  * @author  Bo-Yi Wu <appleboy.tw@gmail.com>
  * @link    https://github.com/appleboy/CodeIgniter-reCAPTCHA
  */
-class Recaptcha {
-
+class Recaptcha
+{
 	/**
-	 * ci instance object
+	 * CI instance object
 	 *
 	 */
-	private $_ci;
+	private $CI;
 	/**
 	 * reCAPTCHA site up, verify and api url.
 	 *
@@ -29,14 +29,14 @@ class Recaptcha {
 	{
 		writeLog('INFO', 'Recaptcha Library Class Initialized');
 
-		$this->_ci = & get_instance();
-		$this->_ci->load->config('recaptcha');
-		$this->_siteKey = $this->_ci->config->item('recaptcha_site_key');
-		$this->_secretKey = $this->_ci->config->item('recaptcha_secret_key');
-		$this->_language = $this->_ci->config->item('recaptcha_lang');
-		if (empty($this->_siteKey) or empty($this->_secretKey)) {
+		$this->CI = &get_instance();
+		$this->CI->load->config('recaptcha');
+		$this->siteKey = $this->CI->config->item('recaptcha_site_key');
+		$this->secretKey = $this->CI->config->item('recaptcha_secret_key');
+		$this->language = $this->CI->config->item('recaptcha_lang');
+		if (empty($this->siteKey) or empty($this->secretKey)) {
 			die("To use reCAPTCHA you must get an API key from <a href='"
-				.self::sign_up_url."'>".self::sign_up_url."</a>");
+				. self::sign_up_url . "'>" . self::sign_up_url . "</a>");
 		}
 	}
 
@@ -51,10 +51,15 @@ class Recaptcha {
 	 */
 	public function verifyResponse($captcha)
 	{
-		$ip = $this->_ci->input->ip_address();
+		$ip = $this->CI->input->ip_address();
 
-		// post request to server
-		$data = array('secret' => $this->_secretKey, 'response' => $captcha);
+		$data = [
+			'secret' => $this->secretKey,
+			'response' => $captcha,
+			'remoteip' => $ip
+		];
+
+		writeLog('DEBUG', 'RECAPTCHA REQUEST: ' . json_encode($data, JSON_UNESCAPED_UNICODE));
 
 		$options = array(
 			'http' => array(
@@ -65,11 +70,10 @@ class Recaptcha {
 		);
 		$context  = stream_context_create($options);
 		$response = file_get_contents(self::site_verify_url, false, $context);
-		$responseKeys = json_decode($response,true);
+		$responseKeys = json_decode($response);
 		header('Content-type: application/json');
 
 		return $responseKeys;
-
 	}
 	/**
 	 * Render Script Tag
@@ -86,12 +90,15 @@ class Recaptcha {
 	public function getScriptTag(array $parameters = array())
 	{
 		$default = array(
-			'render' => $this->_siteKey
+			'render' => $this->siteKey
 		);
 		$result = array_merge($default, $parameters);
-		$scripts = sprintf('<script type="text/javascript" src="%s?%s"></script>',
-			self::api_url, http_build_query($result));
+		$scripts = sprintf(
+			'<script type="text/javascript" async defer src="%s?%s"></script>',
+			self::api_url,
+			http_build_query($result)
+		);
+
 		return $scripts;
 	}
-
 }
