@@ -89,7 +89,7 @@ class Connect_Services_Apis
 		$urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
 		$userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
-		writeLog('DEBUG', 'UPLOAD FILE TO' . $urlBulkService . $file);
+		writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 		writeLog('INFO', 'USER CREDENCIALS: ' . $userpassBulk);
 
 		$curl = curl_init();

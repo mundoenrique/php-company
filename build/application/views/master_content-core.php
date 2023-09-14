@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="<?= LANGUAGE; ?>">
 
@@ -19,14 +19,14 @@
 <body>
 	<?php $this->load->view('header_content-core') ?>
 	<main class="content bg-content">
-		<?php if(!isset($skipProductInf)): ?>
-		<div id="product-info" class="pt-3 px-5 pb-5 mt-ie11" prefix-prod="<?= $prefix ?>">
-		<?php endif; ?>
-			<?php foreach($viewPage as $views): ?>
-			<?php $this->load->view($views.'_content-core'); ?>
+		<?php if (!isset($skipProductInf)) : ?>
+			<div id="product-info" class="pt-3 px-5 pb-5 mt-ie11" prefix-prod="<?= $prefix ?>">
+			<?php endif; ?>
+			<?php foreach ($viewPage as $views) : ?>
+				<?php $this->load->view($views . '_content-core'); ?>
 			<?php endforeach; ?>
-		<?php if(!isset($skipProductInf)): ?>
-		</div>
+			<?php if (!isset($skipProductInf)) : ?>
+			</div>
 		<?php endif; ?>
 	</main>
 	<a id="download-file" href="javascript:" download></a>

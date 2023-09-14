@@ -1,29 +1,16 @@
 'use strict';
 var currenTime;
 var screenSize;
-var inputModal;
-var who;
-var where;
 var dataResponse;
 var ceo_cook;
-var btnText;
-var form;
-var cypherPass;
-var data;
-var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
-var dataTableLang;
 var validator;
-var currentDate;
 var btnRemote = $('#btn-auth');
 var remoteFunction;
 var remoteAuthArgs = {};
 var classWidget;
 $(function () {
-	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
-
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input');
 		var inputType = pwdInput.attr('type');

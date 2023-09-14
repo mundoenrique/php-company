@@ -165,7 +165,7 @@ defined('DB_VERIFY')				or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? 
 |--------------------------------------------------------------------------
 */
 defined('ERROR_CONTROLLER')		or define('ERROR_CONTROLLER', $errorController);
-defined('ACTIVE_SAFETY')		or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
+defined('ACTIVE_SAFETY')		or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')			or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);

@@ -35,9 +35,9 @@ class NOVO_Controller extends CI_Controller
 		parent::__construct();
 		writeLog('INFO', 'Controller Class Initialized');
 
-		$class = $this->router->fetch_class();
-		$method = $this->router->fetch_method();
-		$customerUri = $this->uri->segment(1, 0) ?? 'null';
+		$class = $this->router->class;
+		$method = $this->router->method;
+		$customerUri = $this->uri->segment(1, 0);
 
 		$this->customerUri = $customerUri;
 		$this->customerLang = $customerUri;
@@ -187,6 +187,8 @@ class NOVO_Controller extends CI_Controller
 				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
 				"aes-json-format",
+				"encrypt_decrypt",
+				"utils",
 				"helper"
 			];
 
@@ -197,7 +199,7 @@ class NOVO_Controller extends CI_Controller
 					"sessionControl"
 				);
 
-				if (lang('SETT_REMOTE_AUTH') == 'ON') {
+				if (lang('SETT_REMOTE_AUTH') === 'ON') {
 					array_push(
 						$this->includeAssets->jsFiles,
 						"remote_connect/$this->customerUri-remoteConnect"
@@ -280,9 +282,9 @@ class NOVO_Controller extends CI_Controller
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->modalBtn = json_encode($responseView->modalBtn);
+			$this->render->modalBtn = $responseView->modalBtn;
 		} elseif (isset($responseView->data->params)) {
-			$this->render->params = json_encode($responseView->data->params);
+			$this->render->params = $responseView->data->params;
 		}
 	}
 	/**
@@ -318,6 +320,7 @@ class NOVO_Controller extends CI_Controller
 		$userMenu->enterpriseUrl = lang('SETT_LINK_ENTERPRISES');
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->logged = $this->session->has_userdata('logged');
+		$this->render->userId = $this->session->has_userdata('userId');
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
 			$this->session->productInf->productName . ' / ' . $this->session->productInf->brand;
@@ -326,6 +329,7 @@ class NOVO_Controller extends CI_Controller
 			? lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_START') : lang('SETT_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
+		$this->render->singleSession = $this->singleSession;
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('master_content' . lang('SETT_VIEW_SUFFIX'), $this->render);
 	}

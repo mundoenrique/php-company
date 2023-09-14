@@ -15,7 +15,7 @@ function validateForms(form) {
 	var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
 	var alphanum = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM, 'i');
 	var alphanumspace = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM_SPACE, 'i');
-	var userPassword = validatePass;
+	var userPassword = new RegExp(lang.REGEX_PASSWORD, 'i');
 	var numeric = new RegExp(lang.SETT_VALIDATE_NUMERIC, 'i');
 	var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
 	var alphabeticalspace = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');

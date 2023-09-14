@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="<?= LANGUAGE; ?>">
 
@@ -11,19 +11,19 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="icon" type="image/<?= $faviconExt ?>" href="<?= $this->asset->insertFile($favicon, 'images', $customerFiles, 'favicon') ?>">
 	<?= $this->asset->insertCss(); ?>
+	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
+	<?= $this->asset->insertJs(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
 
 <body>
 	<?php $this->load->view('header_content') ?>
 	<div id="wrapper">
-		<?php foreach($viewPage as $views): ?>
-		<?php $this->load->view($views.'_content'); ?>
+		<?php foreach ($viewPage as $views) : ?>
+			<?php $this->load->view($views . '_content'); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php $this->load->view('footer_content') ?>
-	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
-	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>
 </body>
 

@@ -14,7 +14,7 @@
 					<div class="menu-item">
 						<div class="btn-lang-circle">
 							<div class="btn-lang-img">
-								<a id="change-lang" class="big-modal"  href="<?= lang('SETT_NO_LINK') ?>">
+								<a id="change-lang" class="big-modal" href="<?= lang('SETT_NO_LINK') ?>">
 									<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images', $customerFiles, 'lang'); ?>">
 									<span class="text bold"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 									<p class="text-icon text-btn-lang mb-0 inline-block">Cambiar idioma</p>
@@ -47,7 +47,9 @@
 						</a>
 					</div>
 				<?php endif; ?>
-				<?php if (($this->session->has_userdata('logged') && !isset($skipmenu)) && lang('SETT_FOOTER_RATES') == 'ON') : ?>
+				<?php
+				if (($this->session->has_userdata('logged') && !isset($skipmenu)) && lang('SETT_FOOTER_RATES') == 'ON') :
+				?>
 					<div class="menu-item">
 						<a class="text-icon" href="<?= base_url(lang('SETT_LINK_RATES')); ?>" rel="section">
 							<i class="items-center m-auto icon-rates h3">&nbsp;</i>
@@ -89,7 +91,7 @@
 <?php if (lang('SETT_BTN_LANG') == 'ON' && lang('SETT_MENU_CIRCLE') == 'OFF') : ?>
 	<div class="btn-lang">
 		<div class="btn-lang-img">
-			<a id="change-lang" class="big-modal"  href="<?= lang('SETT_NO_LINK') ?>">
+			<a id="change-lang" class="big-modal" href="<?= lang('SETT_NO_LINK') ?>">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images', $customerFiles, 'lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
