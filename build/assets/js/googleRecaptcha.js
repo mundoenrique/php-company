@@ -1,5 +1,5 @@
 'use strict';
-function getRecaptchaToken(module, _function_) {
+const getRecaptchaToken = function (module, _function_) {
 	if (lang.SETT_ACTIVE_RECAPTCHA) {
 		grecaptcha.ready(function () {
 			grecaptcha.execute(lang.SETT_KEY_RECAPTCHA, { action: module }).then(
@@ -28,4 +28,4 @@ function getRecaptchaToken(module, _function_) {
 	} else {
 		_function_('');
 	}
-}
+};

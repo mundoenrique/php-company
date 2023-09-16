@@ -147,7 +147,7 @@ class NOVO_Controller extends CI_Controller
 		}
 
 		if ($this->input->is_ajax_request() && $this->before) {
-			$this->dataRequest = lang('SETT_CYPHER_DATA') === 'ON' ? json_decode(
+			$this->dataRequest = ACTIVE_SAFETY ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
 						$this->cryptography->decrypt(

@@ -8,7 +8,6 @@ $(function () {
 	});
 
 	delete assetsClient.response;
-	loader = $('#loader').html();
 });
 
 const toggleDisableActions = function (disable) {
@@ -115,4 +114,38 @@ const calledCoreApp = function (who, where, request, _response_) {
 				_response_(response);
 			}
 		});
+};
+
+const calledCoreAppForm = function (request) {
+	let data = cryptography.encrypt({ request });
+
+	let form = document.createElement('form');
+	form.setAttribute('id', 'payloadForm');
+	form.setAttribute('name', 'payloadForm');
+	form.setAttribute('method', 'post');
+	form.setAttribute('enctype', 'multipart/form-data');
+	form.setAttribute('action', baseURL + 'sign-in');
+
+	let inputData = document.createElement('input');
+	inputData.setAttribute('type', 'hidden');
+	inputData.setAttribute('id', 'payload');
+	inputData.setAttribute('name', 'payload');
+	inputData.setAttribute('value', data);
+	form.appendChild(inputData);
+
+	if (activeSafety) {
+		let inputNovo = document.createElement('input');
+		inputNovo.setAttribute('type', 'hidden');
+		inputNovo.setAttribute('id', novoName);
+		inputNovo.setAttribute('name', novoName);
+		inputNovo.setAttribute('value', novoValue);
+		form.appendChild(inputNovo);
+	}
+
+	document.getElementById('calledCoreApp').appendChild(form);
+	form.submit();
+};
+
+const getLoader = function () {
+	return $('#loader').html();
 };

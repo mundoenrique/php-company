@@ -2,85 +2,27 @@
 $(function () {
 	$.balloon.defaults.css = null;
 	toggleDisableActions(false);
-
-	if (lang.SETT_MAINT_NOTIF === 'ON') {
-		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/ve/maint_notif3.png');
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'destroy',
-			},
-			maxHeight: 'none',
-			minWidth: 480,
-			posAt: 'center top',
-			posMy: 'center top+100',
-		};
-
-		appMessages(lang.GEN_SYSTEM_NAME, mesgNotif, '', modalBtn);
-	}
-
-	$('#userPass').on('keyup', function () {
-		$(this).attr('type', 'password');
-
-		if ($(this).val() === '') {
-			$(this).attr('type', 'text');
-		}
-	});
+	let btnSignin;
+	let dataSignin;
+	let formSignin;
 
 	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
-		form = $('#signInForm');
-		formValidation(form);
+		formSignin = $('#signInForm');
+		formValidation(formSignin);
 
-		if (form.valid()) {
-			btnContent = $(this).html();
-			data = takeFormData(form);
-			data.userPass = cryptography.encrypt(data.userPass);
-			data.active = '';
+		if (formSignin.valid()) {
+			btnSignin = $(this).html();
+			dataSignin = takeFormData(formSignin);
+			dataSignin.userPass = cryptography.encrypt(data.userPass);
+			dataSignin.active = '';
 			$(this).html(loader);
-			form.validate().resetForm();
+			formSignin.validate().resetForm();
 			toggleDisableActions(true);
 			getRecaptchaToken('SignIn', function (recaptchaToken) {
-				data.token = recaptchaToken;
+				dataSignin.token = recaptchaToken;
 				getSignIn('SignIn');
 			});
-
-			// btnContent = $(this).html();
-			// data = takeFormData(form);
-			// data.userPass = cryptography.encrypt(data.userPass);
-			// data.active = '';
-			// $(this).html(loader);
-			// form.validate().resetForm();
-			// toggleDisableActions(true);
-			// getRecaptchaToken('SignIn', function (recaptchaToken) {
-			// 	data.token = recaptchaToken;
-			// 	data = cryptography.encrypt({ data });
-			// 	let form = document.createElement('form');
-			// 	form.setAttribute('id', 'payloadForm');
-			// 	form.setAttribute('name', 'payloadForm');
-			// 	form.setAttribute('method', 'post');
-			// 	form.setAttribute('enctype', 'multipart/form-data');
-			// 	form.setAttribute('action', baseURL + 'sign-in');
-
-			// 	let inputData = document.createElement('input');
-			// 	inputData.setAttribute('type', 'hidden');
-			// 	inputData.setAttribute('id', 'payload');
-			// 	inputData.setAttribute('name', 'payload');
-			// 	inputData.setAttribute('value', data);
-			// 	form.appendChild(inputData);
-
-			// 	if (activeSafety) {
-			// 		let inputNovo = document.createElement('input');
-			// 		inputNovo.setAttribute('type', 'hidden');
-			// 		inputNovo.setAttribute('id', novoName);
-			// 		inputNovo.setAttribute('name', novoName);
-			// 		inputNovo.setAttribute('value', novoValue);
-			// 		form.appendChild(inputNovo);
-			// 	}
-
-			// 	document.getElementById('calledCoreApp').appendChild(form);
-			// 	form.submit();
-			// });
 		}
 	});
 
@@ -91,10 +33,10 @@ $(function () {
 	});
 
 	$('#system-info').on('click', '.send-otp', function () {
-		form = $('#formVerificationOTP');
-		validateForms(form);
+		formSignin = $('#formVerificationOTP');
+		validateForms(formSignin);
 
-		if (form.valid()) {
+		if (formSignin.valid()) {
 			$(this).html(loader).prop('disabled', true).removeClass('send-otp');
 			toggleDisableActions(true);
 
@@ -108,11 +50,10 @@ $(function () {
 	});
 });
 
-function getSignIn(forWhere) {
-	who = 'User';
-	where = forWhere;
+function getSignIn(whereSignin, dataRequest, btnHtml) {
+	const whoSignin = 'User';
 
-	calledCoreApp(who, where, data, function (response) {
+	calledCoreApp(whoSignin, whereSignin, dataRequest, function (response) {
 		switch (response.code) {
 			case 0:
 				if (forWhere === 'SignIn') {

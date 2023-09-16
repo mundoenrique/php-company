@@ -1,11 +1,9 @@
 'use strict';
-var currenTime;
 var screenSize;
 var dataResponse;
 var ceo_cook;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
-var validator;
 var btnRemote = $('#btn-auth');
 var remoteFunction;
 var remoteAuthArgs = {};
@@ -14,6 +12,7 @@ $(function () {
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input');
 		var inputType = pwdInput.attr('type');
+		loader = $('#loader').html();
 
 		if (pwdInput.val() != '') {
 			if (inputType === 'password') {
@@ -150,7 +149,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	formData.append('request', dataRequest);
 
-	if (lang.SETT_CYPHER_DATA == 'ON') {
+	if (lang.SETT_ACTIVE_SAFETY) {
 		formData.append('ceo_name', ceo_cook);
 		formData.append('plot', btoa(ceo_cook));
 	}
@@ -174,7 +173,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json',
 	})
 		.done(function (response, status, jqXHR) {
-			if (lang.SETT_CYPHER_DATA === 'ON') {
+			if (lang.SETT_ACTIVE_SAFETY) {
 				response = JSON.parse(
 					CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
@@ -351,7 +350,7 @@ function cryptoPass(jsonObject, req) {
 	ceo_cook = getCookieValue();
 	var cipherObject = jsonObject;
 
-	if (lang.SETT_CYPHER_DATA == 'ON') {
+	if (lang.SETT_ACTIVE_SAFETY) {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		if (!req) {
