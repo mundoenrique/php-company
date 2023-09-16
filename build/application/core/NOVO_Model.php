@@ -44,7 +44,9 @@ class NOVO_Model extends CI_Model
 		$this->response->icon = lang('SETT_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
+		$this->response->link = uriRedirect($this->singleSession);
 		$this->response->data = new stdClass();
+		$this->response->modalBtn = [];
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -158,8 +160,8 @@ class NOVO_Model extends CI_Model
 				break;
 		}
 
-		$this->response->modalBtn = $arrayResponse;
 		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_MSG_RC_0') : $this->response->msg;
+		$this->response->modalBtn = $arrayResponse;
 
 		return $responseModel->data ?? $responseModel;
 	}
