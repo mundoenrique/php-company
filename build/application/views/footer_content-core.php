@@ -112,10 +112,10 @@
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset flex">
-			<button type="button" id="cancel" class="btn-modal btn btn-small btn-link" ignore-el>
+			<button type="button" id="cancel" class="<?= lang('SETT_MODAL_BTN_CLASS')['cancel']; ?>" ignore-el>
 				<?= lang('GEN_BTN_CANCEL'); ?>
 			</button>
-			<button type="button" id="accept" class="btn-modal btn btn-small btn-loading btn-primary" ignore-el>
+			<button type="button" id="accept" class="<?= lang('SETT_MODAL_BTN_CLASS')['accept']; ?>" ignore-el>
 				<?= lang('GEN_BTN_ACCEPT'); ?>
 			</button>
 		</div>

@@ -75,10 +75,10 @@ class NOVO_Controller extends CI_Controller
 			unset($_POST['payload']);
 
 			if ($this->input->is_ajax_request()) {
-				$this->fileLanguage = lcfirst($this->dataRequest->who);
-				$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
-				$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->where) . '_' . $this->dataRequest->who;
-				$this->validationMethod = lcfirst($this->dataRequest->where);
+				$this->fileLanguage = lcfirst($this->dataRequest->module);
+				$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->module) . '_Model';
+				$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->section) . '_' . $this->dataRequest->module;
+				$this->validationMethod = lcfirst($this->dataRequest->section);
 			}
 
 			foreach ($this->dataRequest->data as $item => $value) {
@@ -213,9 +213,10 @@ class NOVO_Controller extends CI_Controller
 
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
-				"third_party/jquery-3.6.0",
+				"third_party/jQuery v3.7.1",
 				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
+				"connection/core_app",
 				"aes-json-format",
 				"encrypt_decrypt",
 				"utils",

@@ -12,7 +12,6 @@ $(function () {
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input');
 		var inputType = pwdInput.attr('type');
-		loader = $('#loader').html();
 
 		if (pwdInput.val() != '') {
 			if (inputType === 'password') {

@@ -8,6 +8,7 @@ $(function () {
 	});
 
 	delete assetsClient.response;
+	loader = $('#loader').html();
 });
 
 const toggleDisableActions = function (disable) {
@@ -21,6 +22,84 @@ const takeFormData = function (form) {
 	});
 
 	return dataForm;
+};
+
+const getLoader = function () {
+	return $('#loader').html();
+};
+
+const uiModalMessage = function (title, message, icon, modalBtn) {
+	const btn1 = modalBtn.btn1;
+	const btn2 = modalBtn.btn2;
+	const maxHeight = modalBtn.maxHeight || 350;
+
+	$('#system-info').dialog({
+		title: title || lang.GEN_SYSTEM_NAME,
+		closeText: '',
+		modal: 'true',
+		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
+		draggable: false,
+		resizable: false,
+		closeOnEscape: false,
+		width: modalBtn.width || lang.SETT_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.SETT_MODAL_WIDTH,
+		minHeight: modalBtn.minHeight || 100,
+		maxHeight: maxHeight !== 'none' ? maxHeight : false,
+		dialogClass: 'border-none',
+		classes: {
+			'ui-dialog-titlebar': 'border-none',
+		},
+		open: function (event, ui) {
+			if (!modalBtn.close) {
+				$('.ui-dialog-titlebar-close').hide();
+			}
+
+			$('#system-icon').removeAttr('class');
+
+			if (icon != '') {
+				$('#system-icon').addClass(lang.SETT_ICON + ' ' + icon);
+			}
+
+			$('#system-msg').html(message);
+
+			if (!btn1) {
+				$('#accept').addClass('hide');
+			} else {
+				uiModalButtons($('#accept'), btn1);
+			}
+
+			if (!btn2) {
+				$('#cancel').addClass('hide');
+			} else {
+				uiModalButtons($('#cancel'), btn2);
+			}
+		},
+	});
+};
+
+const uiModalButtons = function (elementButton, valuesButton) {
+	elementButton.text(valuesButton.text);
+	elementButton.show();
+	elementButton.on('click', function () {
+		switch (valuesButton.action) {
+			case 'redirect':
+				$(this).html(loader).prop('disabled', true);
+				$(this).children('span').addClass('spinner-border-sm');
+
+				if ($(this).attr('id') === 'cancel') {
+					$(this).children('span').removeClass('secondary').addClass('primary');
+				}
+
+				$(location).attr('href', baseURL + valuesButton.link);
+				break;
+
+			case 'destroy':
+				modalDestroy(true);
+				break;
+		}
+
+		$(this).off('click');
+	});
 };
 
 const uiMdalClose = function (close) {
@@ -39,113 +118,4 @@ const uiMdalClose = function (close) {
 			.html(lang.GEN_BTN_CANCEL)
 			.off('click');
 	}
-};
-
-const calledCoreApp = function (who, where, request, _response_) {
-	request.currentTime = new Date().getHours();
-	const formData = new FormData();
-	let dataRequest = {
-		who: who,
-		where: where,
-		data: request,
-	};
-
-	dataRequest = cryptography.encrypt(dataRequest);
-	formData.append('payload', dataRequest);
-
-	if (activeSafety) {
-		formData.append(novoName, novoValue);
-	}
-
-	if (request.files) {
-		request.files.forEach(function (element) {
-			formData.append(element.name, element.file);
-		});
-
-		delete request.files;
-	}
-
-	if (logged || userId) {
-		sessionControl();
-	}
-
-	const uri = data.route || 'novo-async-call';
-
-	$.ajax({
-		method: 'POST',
-		url: baseURL + uri,
-		data: formData,
-		context: document.body,
-		cache: false,
-		contentType: false,
-		processData: false,
-		dataType: 'json',
-	})
-		.done(function (data, status, jqXHR) {
-			response = cryptography.decrypt(data.response);
-
-			var modalClose = response.modal ? false : true;
-			uiMdalClose(modalClose);
-
-			if (response.code === defaultCode) {
-				appMessages(response.title, response.msg, response.icon, response.modalBtn);
-			}
-
-			if (_response_) {
-				_response_(response);
-			}
-		})
-		.fail(function (jqXHR, textStatus, errorThrown) {
-			uiMdalClose(true);
-
-			var response = {
-				code: defaultCode,
-				modalBtn: {
-					btn1: {
-						link: redirectLink,
-						action: 'redirect',
-					},
-				},
-			};
-
-			appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.SETT_ICON_DANGER, response.modalBtn);
-
-			if (_response_) {
-				_response_(response);
-			}
-		});
-};
-
-const calledCoreAppForm = function (request) {
-	let data = cryptography.encrypt({ request });
-
-	let form = document.createElement('form');
-	form.setAttribute('id', 'payloadForm');
-	form.setAttribute('name', 'payloadForm');
-	form.setAttribute('method', 'post');
-	form.setAttribute('enctype', 'multipart/form-data');
-	form.setAttribute('action', baseURL + 'sign-in');
-
-	let inputData = document.createElement('input');
-	inputData.setAttribute('type', 'hidden');
-	inputData.setAttribute('id', 'payload');
-	inputData.setAttribute('name', 'payload');
-	inputData.setAttribute('value', data);
-	form.appendChild(inputData);
-
-	if (activeSafety) {
-		let inputNovo = document.createElement('input');
-		inputNovo.setAttribute('type', 'hidden');
-		inputNovo.setAttribute('id', novoName);
-		inputNovo.setAttribute('name', novoName);
-		inputNovo.setAttribute('value', novoValue);
-		form.appendChild(inputNovo);
-	}
-
-	document.getElementById('calledCoreApp').appendChild(form);
-	form.submit();
-};
-
-const getLoader = function () {
-	return $('#loader').html();
 };

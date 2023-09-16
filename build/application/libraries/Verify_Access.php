@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Librería para validar el acceso del usuario a las funciones
  * @author J. Enrique Peñaloza Piñero
  * @date October 31th, 2019
  */
-class Verify_Access {
+class Verify_Access
+{
 	private $CI;
 
 	public function __construct()
@@ -48,8 +49,8 @@ class Verify_Access {
 
 		$requestServ = new stdClass();
 
-		foreach ($_POST AS $key => $value) {
-			switch($key) {
+		foreach ($_POST as $key => $value) {
+			switch ($key) {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
@@ -78,7 +79,7 @@ class Verify_Access {
 
 		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$linkredirect = $singleSession === 'SignThird'
-			? 'ingresar/'. lang('SETT_LINK_SIGNOUT_END')
+			? 'ingresar/' . lang('SETT_LINK_SIGNOUT_END')
 			: lang('SETT_LINK_SIGNIN');
 
 		$responseDefect = new stdClass();
@@ -87,14 +88,14 @@ class Verify_Access {
 		$responseDefect->msg = lang('GEN_VALIDATION_INPUT');
 		$responseDefect->icon = lang('SETT_ICON_WARNING');
 		$responseDefect->modalBtn = [
-			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> $linkredirect,
-				'action'=> 'redirect'
+			'btn1' => [
+				'text' => lang('GEN_BTN_ACCEPT'),
+				'link' => $linkredirect,
+				'action' => 'redirect'
 			]
 		];
 
-		if($this->CI->session->has_userdata('logged')) {
+		if ($this->CI->session->has_userdata('logged')) {
 			$responseDefect->msg = lang('GEN_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
@@ -109,7 +110,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module)
+	public function accessAuthorization($validationMethod)
 	{
 		writeLog('INFO', 'Verify_Access: accessAuthorization method initialized');
 
@@ -124,7 +125,7 @@ class Verify_Access {
 			clearSessionsVars();
 		}
 
-		switch($module) {
+		switch ($validationMethod) {
 			case 'signIn':
 				$auth = TRUE;
 				$uriSegmwnts = $this->CI->uri->segment(2) . '/' . $this->CI->uri->segment(3);
@@ -276,7 +277,7 @@ class Verify_Access {
 			case 'searchExtendedAccountStatus':
 			case 'exportToExcelExtendedAccountStatus':
 			case 'exportToTxtExtendedAccountStatus':
-						$auth = ($productInf && $this->verifyAuthorization('REPEDC'));
+				$auth = ($productInf && $this->verifyAuthorization('REPEDC'));
 				break;
 			case 'statusMasterAccount':
 				$auth = ($productInf && $this->verifyAuthorization('REPECT'));
@@ -336,10 +337,10 @@ class Verify_Access {
 				$freeAccess = [
 					'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
 				];
-				$auth = in_array($module, $freeAccess);
+				$auth = in_array($validationMethod, $freeAccess);
 		}
 
-		writeLog('DEBUG', 'accessAuthorization ' . $module . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'accessAuthorization ' . $validationMethod . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		if (!$auth) {
 			$auth = !(preg_match('/Novo_/', $this->CI->router->fetch_class()) === 1);
@@ -361,14 +362,14 @@ class Verify_Access {
 		$items = [];
 		$auth = FALSE;
 
-		if($userAccess) {
-			foreach($userAccess AS $item) {
-				foreach($item->modulos AS $module) {
-					if(!$function) {
+		if ($userAccess) {
+			foreach ($userAccess as $item) {
+				foreach ($item->modulos as $module) {
+					if (!$function) {
 						$items[] = $module->idModulo;
 					} else {
-						foreach($module->funciones AS $functions) {
-							if($module->idModulo != $moduleLink) {
+						foreach ($module->funciones as $functions) {
+							if ($module->idModulo != $moduleLink) {
 								continue;
 							}
 
@@ -379,10 +380,10 @@ class Verify_Access {
 			}
 
 			$access = $function ? $function : $moduleLink;
-			$prompter = $function ? '->'.$function : '';
+			$prompter = $function ? '->' . $function : '';
 			$auth = in_array($access, $items);
 
-			writeLog('INFO', 'verifyAuthorization ' . $moduleLink.$prompter . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
+			writeLog('INFO', 'verifyAuthorization ' . $moduleLink . $prompter . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
 		}
 
 
@@ -399,10 +400,10 @@ class Verify_Access {
 
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
-		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
+		if (!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
 			$redirectUrl = str_replace($customerUri . '/', $this->CI->config->item('customer') . '/', $redirectUrl);
-		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('customer') . '/', $dataLink);
+		} elseif ($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
+			$dataLink = str_replace($customerUri . '/', $this->CI->config->item('customer') . '/', $dataLink);
 			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 
