@@ -1,34 +1,31 @@
 'use strict';
 $(function () {
-	cryptography = {
-		encrypt: function (request) {
-			var requestDAta = typeof request === 'string' ? request : JSON.stringify(request);
-			cpo_cook = getCookieValue();
+	cryptography.encrypt = function (request) {
+		let requestData = typeof request === 'string' ? request : JSON.stringify(request);
 
-			if (traslate) {
-				var cipher = CryptoJS.AES.encrypt(requestDAta, cpo_cook, { format: CryptoJSAesJson }).toString();
-				requestDAta = btoa(
-					JSON.stringify({
-						data: cipher,
-						plot: btoa(cpo_cook),
-					})
-				);
-			}
+		if (activeSafety) {
+			let cipher = CryptoJS.AES.encrypt(requestData, novoValue, { format: CryptoJSAesJson }).toString();
+			requestData = btoa(
+				JSON.stringify({
+					data: cipher,
+					plot: btoa(novoValue),
+				})
+			);
+		}
 
-			return requestDAta;
-		},
+		return requestData;
+	};
 
-		decrypt: function (objec) {
-			var decryptData = objec;
+	cryptography.decrypt = function (objec) {
+		let decryptData = objec;
 
-			if (traslate) {
-				var cipher = JSON.parse(atob(decryptData));
-				decryptData = JSON.parse(
-					CryptoJS.AES.decrypt(cipher.code, cipher.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
-				);
-			}
+		if (activeSafety) {
+			let cipher = JSON.parse(atob(decryptData));
+			decryptData = JSON.parse(
+				CryptoJS.AES.decrypt(cipher.code, cipher.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
+			);
+		}
 
-			return decryptData;
-		},
+		return decryptData;
 	};
 });

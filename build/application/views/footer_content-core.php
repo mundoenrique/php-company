@@ -112,8 +112,12 @@
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset flex">
-			<button type="button" id="cancel" class="btn-modal btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL'); ?></button>
-			<button type="button" id="accept" class="btn-modal btn btn-small btn-loading btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
+			<button type="button" id="cancel" class="btn-modal btn btn-small btn-link" ignore-el>
+				<?= lang('GEN_BTN_CANCEL'); ?>
+			</button>
+			<button type="button" id="accept" class="btn-modal btn btn-small btn-loading btn-primary" ignore-el>
+				<?= lang('GEN_BTN_ACCEPT'); ?>
+			</button>
 		</div>
 	</div>
 </div>

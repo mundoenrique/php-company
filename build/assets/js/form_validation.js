@@ -317,11 +317,11 @@ function validateForms(form) {
 		messages: {
 			userName: lang.VALIDATE_USERLOGIN,
 			userPass: {
-				verifyRequired: lang.VALIDATE_USERPASS_REQ,
-				verifyPattern: lang.VALIDATE_USERPASS_PATT,
+				verifyRequired: lang.VALID_USERPASS_REQ,
+				verifyPattern: lang.VALID_USERPASS_PATTERN,
 			},
-			'user-name': lang.VALIDATE_USERNAME,
-			nit: lang.VALIDATE_USERNAME,
+			'user-name': lang.VALID_USERNAME,
+			nit: lang.VALID_USERNAME,
 			'id-company': lang.VALIDATE_ID_COMPANY + lang.VALIDATE_EXAMPLE_ID_FISCAL,
 			'anio-consolid': lang.VALIDATE_SELECTED_YEAR,
 			yearReport: lang.VALIDATE_SELECTED_YEAR,
@@ -330,7 +330,7 @@ function validateForms(form) {
 			'new-pass': {
 				required: lang.VALIDATE_NEW_PASS,
 				differs: lang.VALIDATE_DIFFERS_PASS,
-				validatePass: lang.VALIDATE_REQUIREMENTS_PASS,
+				validatePass: lang.VALID_PASSWORD,
 			},
 			'confirm-pass': {
 				required: lang.VALIDATE_CONFIRM_PASS,
@@ -585,11 +585,11 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES,
 			},
 			address2: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES,
 			},
 			address3: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES,
 			},
 			billingAddress: {
@@ -597,11 +597,11 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ADDRESS_BRANCHES,
 			},
 			countryCode: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			countryCodBranch: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			stateCodBranch: {
@@ -613,7 +613,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT,
 			},
 			districtCodeBranch: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			idFiscalList: {
@@ -623,27 +623,27 @@ function validateForms(form) {
 				required: lang.VALIDATE_SELECT,
 			},
 			areaCode: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			phone: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			phone1: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			phone2: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			phone3: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NIT,
 			},
 			person: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_NAME_BRANCHES,
 			},
 			branchCode: {
@@ -651,11 +651,11 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_NIT,
 			},
 			surnameModifyContact: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_INPUT_SURNAME,
 			},
 			positionModifyContact: {
-				required: lang.VALIDATE_INPUT_REQUIRED,
+				required: lang.VALID_REQUIRED,
 				pattern: lang.VALIDATE_INPUT_POSITION,
 			},
 			typeModifyContact: {

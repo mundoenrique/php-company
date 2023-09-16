@@ -37,7 +37,7 @@ class Novo_CallModels extends Novo_Controller
 		}
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->validationMethod);;
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod);
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();

@@ -1,10 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-//VALIDATE FORMS
-$lang['VALIDATE_USERLOGIN'] = '';
-$lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
-$lang['VALIDATE_USERPASS_PATT'] = 'Combinación incorrecta de usuario y contraseña';
-$lang['VALIDATE_USERNAME'] = 'Indica un usuario válido';
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['VALID_REQUIRED'] = 'Este campo es requerido.';
+$lang['VALID_USERNAME'] = 'Indica un usuario válido.';
+$lang['VALID_PASSWORD'] = 'La contraseña debe cumplir los requisitos.';
+$lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';
+$lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contraseña.';
+
+
+
+
+
 $lang['VALIDATE_NIT'] = 'Indica un número válido';
 $lang['VALIDATE_ID_COMPANY'] = 'Indica un RUC válido';
 $lang['VALIDATE_EMAIL'] = 'Indica un correo válido';
@@ -12,7 +18,6 @@ $lang['VALIDATE_CURRENT_PASS'] = 'Indica tu contraseña actual';
 $lang['VALIDATE_NEW_PASS'] = 'Indica tu nueva contraseña';
 $lang['VALIDATE_DIFFERS_PASS'] = 'La nueva contraseña debe ser diferente a la actual';
 $lang['VALIDATE_EQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';
-$lang['VALIDATE_REQUIREMENTS_PASS'] = 'La contraseña debe cumplir los requisitos';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Selecciona una sucursal';
 $lang['VALIDATE_BULK_TYPE'] = 'Selecciona un tipo de lote';
@@ -77,7 +82,6 @@ $lang['VALIDATE_CODE_BRANCHES'] = 'Indica un código válido';
 $lang['VALIDATE_ADDRESS_BRANCHES'] = 'Indica una dirección válida';
 $lang['VALIDATE_PROVINCE_BRANCHES'] = 'Selecciona una provincia';
 $lang['VALIDATE_DEPARTMENT_BRANCHES'] = 'Selecciona un departamento';
-$lang['VALIDATE_INPUT_REQUIRED'] = 'Este campo es requerido';
 $lang['VALIDATE_INPUT_POSITION'] = 'Indica un cargo válido';
 $lang['VALIDATE_INPUT_SURNAME'] = 'Indica un apellido válido';
 $lang['VALIDATE_ADDRESS_ENTERPRICE'] = 'Indica la dirección';

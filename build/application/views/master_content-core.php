@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta http-equiv="cleartype" content="on">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="icon" type="image/<?= $faviconExt ?>" href="<?= $this->asset->insertFile($favicon, 'images', $customerFiles, 'favicon') ?>">
 	<?= $this->asset->insertCss(); ?>
 	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>

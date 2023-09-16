@@ -1,17 +1,22 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-//VALIDATE FORMS
-$lang['VALIDATE_USERLOGIN'] = '';
-$lang['VALIDATE_USERPASS_REQ'] = 'Both fields are required';
-$lang['VALIDATE_USERPASS_PATT'] = 'Incorrect username and password combination';
-$lang['VALIDATE_USERNAME'] = 'Please indicate a valid user';
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['VALID_REQUIRED'] = 'This field is required.';
+$lang['VALID_USERNAME'] = 'Please indicate a valid user.';
+$lang['VALID_PASSWORD'] = 'The password must meet the requirements.';
+$lang['VALID_USERPASS_REQ'] = 'Both fields are required.';
+$lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.';
+
+
+
+
+
 $lang['VALIDATE_NIT'] = 'Please enter a valid number';
 $lang['VALIDATE_ID_COMPANY'] = 'Indicate a valid RUC';
 $lang['VALIDATE_EMAIL'] = 'Indicate a valid email';
 $lang['VALIDATE_CURRENT_PASS'] = 'Enter your current password';
 $lang['VALIDATE_NEW_PASS'] = 'Enter your new password';
 $lang['VALIDATE_DIFFERS_PASS'] = 'The new password must be different from the current one';
-$lang['VALIDATE_REQUIREMENTS_PASS'] = 'The password must meet the requirements';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirm your password';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Select a branch';
 $lang['VALIDATE_BULK_TYPE'] = 'Select a bulk type';

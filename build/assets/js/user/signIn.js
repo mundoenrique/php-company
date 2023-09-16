@@ -1,7 +1,7 @@
 'use strict';
 $(function () {
 	$.balloon.defaults.css = null;
-	insertFormInput(false);
+	toggleDisableActions(false);
 
 	if (lang.SETT_MAINT_NOTIF === 'ON') {
 		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/ve/maint_notif3.png');
@@ -30,21 +30,57 @@ $(function () {
 	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#signInForm');
-		validateForms(form);
+		formValidation(form);
 
 		if (form.valid()) {
-			btnText = $(this).html();
-			data = getDataForm(form);
-			data.userPass = cryptoPass(data.userPass);
+			btnContent = $(this).html();
+			data = takeFormData(form);
+			data.userPass = cryptography.encrypt(data.userPass);
 			data.active = '';
-			data.currentTime = new Date().getHours();
 			$(this).html(loader);
-			insertFormInput(true);
-
+			form.validate().resetForm();
+			toggleDisableActions(true);
 			getRecaptchaToken('SignIn', function (recaptchaToken) {
 				data.token = recaptchaToken;
 				getSignIn('SignIn');
 			});
+
+			// btnContent = $(this).html();
+			// data = takeFormData(form);
+			// data.userPass = cryptography.encrypt(data.userPass);
+			// data.active = '';
+			// $(this).html(loader);
+			// form.validate().resetForm();
+			// toggleDisableActions(true);
+			// getRecaptchaToken('SignIn', function (recaptchaToken) {
+			// 	data.token = recaptchaToken;
+			// 	data = cryptography.encrypt({ data });
+			// 	let form = document.createElement('form');
+			// 	form.setAttribute('id', 'payloadForm');
+			// 	form.setAttribute('name', 'payloadForm');
+			// 	form.setAttribute('method', 'post');
+			// 	form.setAttribute('enctype', 'multipart/form-data');
+			// 	form.setAttribute('action', baseURL + 'sign-in');
+
+			// 	let inputData = document.createElement('input');
+			// 	inputData.setAttribute('type', 'hidden');
+			// 	inputData.setAttribute('id', 'payload');
+			// 	inputData.setAttribute('name', 'payload');
+			// 	inputData.setAttribute('value', data);
+			// 	form.appendChild(inputData);
+
+			// 	if (activeSafety) {
+			// 		let inputNovo = document.createElement('input');
+			// 		inputNovo.setAttribute('type', 'hidden');
+			// 		inputNovo.setAttribute('id', novoName);
+			// 		inputNovo.setAttribute('name', novoName);
+			// 		inputNovo.setAttribute('value', novoValue);
+			// 		form.appendChild(inputNovo);
+			// 	}
+
+			// 	document.getElementById('calledCoreApp').appendChild(form);
+			// 	form.submit();
+			// });
 		}
 	});
 
@@ -60,7 +96,7 @@ $(function () {
 
 		if (form.valid()) {
 			$(this).html(loader).prop('disabled', true).removeClass('send-otp');
-			insertFormInput(true);
+			toggleDisableActions(true);
 
 			getRecaptchaToken('verifyIP', function (recaptchaToken) {
 				data.token = recaptchaToken;
@@ -76,10 +112,10 @@ function getSignIn(forWhere) {
 	who = 'User';
 	where = forWhere;
 
-	callNovoCore(who, where, data, function (response) {
+	calledCoreApp(who, where, data, function (response) {
 		switch (response.code) {
 			case 0:
-				if (forWhere == 'SignIn') {
+				if (forWhere === 'SignIn') {
 					$(location).attr('href', response.data);
 				}
 				break;
@@ -126,17 +162,17 @@ function getSignIn(forWhere) {
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 				break;
 			default:
-				if (response.data == 'session-close') {
+				if (response.data === 'session-close') {
 					$('#accept').addClass(response.data);
 				}
 		}
 
-		if (response.code != 0) {
+		if (response.code !== 0) {
 			$('#userPass').val('');
 			$('#signInBtn').html(btnText);
-			insertFormInput(false);
+			toggleDisableActions(false);
 
-			if (lang.SETT_RESTAR_USERNAME == 'ON') {
+			if (lang.SETT_RESTAR_USERNAME === 'ON') {
 				$('#userName').val('');
 			}
 

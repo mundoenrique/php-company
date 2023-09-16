@@ -28,6 +28,7 @@ class NOVO_Controller extends CI_Controller
 	protected $dataRequest;
 	protected $greeting;
 	protected $views;
+	protected $before;
 	public $singleSession;
 
 	public function __construct()
@@ -53,6 +54,7 @@ class NOVO_Controller extends CI_Controller
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
+		$this->before = true;
 		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
 
 		$this->optionsCheck();
@@ -65,6 +67,36 @@ class NOVO_Controller extends CI_Controller
 	private function optionsCheck()
 	{
 		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
+
+		if ($this->input->post('payload')) {
+			$this->before = false;
+			$request = decryptData($this->input->post('payload'));
+			$this->dataRequest = json_decode($request);
+			unset($_POST['payload']);
+
+			if ($this->input->is_ajax_request()) {
+				$this->fileLanguage = lcfirst($this->dataRequest->who);
+				$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
+				$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->where) . '_' . $this->dataRequest->who;
+				$this->validationMethod = lcfirst($this->dataRequest->where);
+			}
+
+			foreach ($this->dataRequest->data as $item => $value) {
+				$_POST[$item] = $value;
+			}
+
+			unset($this->dataRequest);
+			$valid = $this->verify_access->accessAuthorization($this->validationMethod);
+
+			if (!empty($_FILES) && $valid) {
+				$valid = $this->manageFile();
+			}
+
+			if ($valid) {
+				$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
+				$valid = $this->verify_access->validateForm($this->validationMethod);
+			}
+		}
 
 		LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
 		clientUrlValidate($this->customerUri);
@@ -114,7 +146,7 @@ class NOVO_Controller extends CI_Controller
 				break;
 		}
 
-		if ($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request() && $this->before) {
 			$this->dataRequest = lang('SETT_CYPHER_DATA') === 'ON' ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
@@ -129,7 +161,7 @@ class NOVO_Controller extends CI_Controller
 			$access = $this->verify_access->accessAuthorization($this->validationMethod);
 			$valid = TRUE;
 
-			if ($_POST && $access) {
+			if ($_POST && $access && $this->before) {
 				$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
 				$valid = $this->verify_access->validateForm($this->validationMethod);
 			}
@@ -155,8 +187,6 @@ class NOVO_Controller extends CI_Controller
 			$this->render->customerStyle = $this->customerStyle;
 			$this->render->customerLang = $this->customerLang;
 			$this->render->customerFiles = $this->customerFiles;
-			$this->render->novoName = $this->security->get_csrf_token_name();
-			$this->render->novoCook = $this->security->get_csrf_hash();
 			$validateRecaptcha = in_array($this->controllerMethod, lang('SETT_VALIDATE_CAPTCHA'));
 
 			$this->render->widget =  FALSE;

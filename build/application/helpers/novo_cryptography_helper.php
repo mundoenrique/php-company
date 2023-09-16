@@ -43,12 +43,13 @@ if (!function_exists('encryptData')) {
 	function encryptData($responseData)
 	{
 		$CI = &get_instance();
-
 		$responseData = [
 			'response' => $responseData
 		];
 
 		if (ACTIVE_SAFETY) {
+			$responseData['response']->novoName = $CI->security->get_csrf_token_name();
+			$responseData['response']->novoValue = $CI->security->get_csrf_hash();
 			$responseData['response'] = base64_encode(
 				json_encode($CI->cryptography->encrypt($responseData['response']), JSON_UNESCAPED_UNICODE)
 			);

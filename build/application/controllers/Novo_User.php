@@ -1,14 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Controlador para la vista principal de la aplicación
  * @author J. Enrique Peñaloza Piñero
-*/
-class Novo_User extends NOVO_Controller {
-
+ */
+class Novo_User extends NOVO_Controller
+{
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'User Controller Class Initialized');
 	}
 	/**
@@ -23,7 +23,7 @@ class Novo_User extends NOVO_Controller {
 		languageCookie(BASE_LANGUAGE);
 		$view = 'signIn';
 
-		if($this->session->has_userdata('logged')) {
+		if ($this->session->has_userdata('logged')) {
 			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
 			exit();
 		}
@@ -33,13 +33,14 @@ class Novo_User extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods",
+			"third_party/jquery.validate-1.19.5",
+			"third_party/additional-methods-1.19.5",
+			"validation/form_validation",
+			"validation/messages_validation",
 			"user/signIn"
 		);
 
-		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
+		if ($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -80,7 +81,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->form = $this->request;
 		}
 
-		if($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
+		if ($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
@@ -108,9 +109,8 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
-
 	}
 	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
@@ -135,7 +135,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -160,7 +160,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -173,7 +173,7 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'changePassword';
 
-		if(!$this->session->flashdata('changePassword')) {
+		if (!$this->session->flashdata('changePassword')) {
 			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
@@ -188,13 +188,13 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods"
 		);
 
-		switch($this->session->flashdata('changePassword')) {
+		switch ($this->session->flashdata('changePassword')) {
 			case 'newUser':
 				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
-			break;
+				break;
 			case 'expiredPass':
 				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
-			break;
+				break;
 		}
 
 		$this->render->userType = $this->session->flashdata('userType');
@@ -202,7 +202,7 @@ class Novo_User extends NOVO_Controller {
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
 		$this->render->activeHeader = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -216,12 +216,12 @@ class Novo_User extends NOVO_Controller {
 		$view = 'finish';
 		$thirdPartySession = $this->singleSession == 'SignThird';
 
-		if($this->session->has_userdata('userId')) {
+		if ($this->session->has_userdata('userId')) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
+		if ($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
@@ -231,7 +231,7 @@ class Novo_User extends NOVO_Controller {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
-			if($redirect == lang('SETT_LINK_SIGNOUT_START')) {
+			if ($redirect == lang('SETT_LINK_SIGNOUT_START')) {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
 			}
 
@@ -239,13 +239,12 @@ class Novo_User extends NOVO_Controller {
 			$this->render->activeHeader = TRUE;
 			$this->render->skipProductInf = TRUE;
 			$this->render->titlePage = lang('GEN_FINISH_TITLE');
-			$this->views = ['user/'.$view];
+			$this->views = ['user/' . $view];
 			$this->loadView($view);
 		} else {
 			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
-
 	}
 	/**
 	 * @info Método que renderiza la vista de segerencias de navegador
@@ -258,7 +257,7 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'suggestion';
 
-		if(!$this->session->flashdata('messageBrowser')) {
+		if (!$this->session->flashdata('messageBrowser')) {
 			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
@@ -270,7 +269,7 @@ class Novo_User extends NOVO_Controller {
 			"$this->customerStyle/$this->customerStyle-root",
 			"general-root",
 			"reboot",
-			"$this->customerStyle/"."$this->customerStyle-base"
+			"$this->customerStyle/" . "$this->customerStyle-base"
 		];
 
 		$messageBrowser = $this->session->flashdata('messageBrowser');
@@ -283,7 +282,7 @@ class Novo_User extends NOVO_Controller {
 		$this->views = $views;
 		$this->loadView($view);
 	}
-		/**
+	/**
 	 * @info Método que renderiza la vista de administración de usuarios
 	 * @author Hector D. Corredor.
 	 *
@@ -311,9 +310,9 @@ class Novo_User extends NOVO_Controller {
 		$code = $responseList->code;
 
 		if (($code) == 4) {
-			$this->render->userList= [];
+			$this->render->userList = [];
 			$this->render->userRegistered = '';
-		}else{
+		} else {
 			$this->render->userList = $data;
 			$registeredUser = 'OFF';
 			$countRegisteredUser = 0;
@@ -331,11 +330,11 @@ class Novo_User extends NOVO_Controller {
 
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 
-		/**
+	/**
 	 * @info Método que renderiza la vista de permisos de usuario
 	 * @author Jennifer C. Cádiz.
 	 */
@@ -386,7 +385,7 @@ class Novo_User extends NOVO_Controller {
 
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/*
@@ -402,9 +401,10 @@ class Novo_User extends NOVO_Controller {
 	{
 		writeLog('INFO', 'User: index Method Initialized');
 
-		if($this->session->has_userdata('logged')) {
+		if ($this->session->has_userdata('logged')) {
 			$urlRedirect = str_replace(
-				$this->customerUri . '/', $this->config->item('customer') . '/',
+				$this->customerUri . '/',
+				$this->config->item('customer') . '/',
 				base_url('dashboard')
 			);
 			redirect($urlRedirect, 'Location', 302);
@@ -416,7 +416,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'login';
 		$views = ['user/login', 'user/signin'];
 
-		if($this->customerUri == 'bpi') {
+		if ($this->customerUri == 'bpi') {
 			$views = ['user/signin'];
 		}
 
@@ -429,7 +429,7 @@ class Novo_User extends NOVO_Controller {
 			"user/login"
 		);
 
-		if($this->customerUri !== 'bpi') {
+		if ($this->customerUri !== 'bpi') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",
@@ -437,7 +437,7 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
-		if($this->customerUri === 'bpi' && ENVIRONMENT === 'production') {
+		if ($this->customerUri === 'bpi' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -470,7 +470,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -483,7 +483,7 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'changePassword';
 
-		if(!$this->session->flashdata('changePassword')) {
+		if (!$this->session->flashdata('changePassword')) {
 			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
@@ -498,13 +498,13 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods"
 		);
 
-		switch($this->session->flashdata('changePassword')) {
+		switch ($this->session->flashdata('changePassword')) {
 			case 'newUser':
 				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
-			break;
+				break;
 			case 'expiredPass':
 				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
-			break;
+				break;
 		}
 
 		$this->render->userType = $this->session->flashdata('userType');
@@ -512,7 +512,7 @@ class Novo_User extends NOVO_Controller {
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
 		$this->render->activeHeader = TRUE;
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->loadView($view);
 	}
 	/**
@@ -526,7 +526,7 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'browsers';
 
-		if(!$this->session->flashdata('messageBrowser')) {
+		if (!$this->session->flashdata('messageBrowser')) {
 			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
