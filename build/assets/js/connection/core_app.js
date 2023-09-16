@@ -2,13 +2,14 @@
 
 const calledCoreApp = function (module, section, request, _response_) {
 	request.currentTime = new Date().getHours();
+	const uri = request.route || 'callCoreApp';
+	delete request.route;
 	const formData = new FormData();
 	let dataRequest = {
 		module: module,
 		section: section,
 		data: request,
 	};
-
 	dataRequest = cryptography.encrypt(dataRequest);
 	formData.append('payload', dataRequest);
 
@@ -27,9 +28,6 @@ const calledCoreApp = function (module, section, request, _response_) {
 	if (logged || userId) {
 		sessionControl();
 	}
-
-	const uri = dataRequest.route || 'novo-async-call';
-	delete dataRequest.route;
 
 	$.ajax({
 		method: 'POST',
@@ -74,7 +72,7 @@ const calledCoreApp = function (module, section, request, _response_) {
 };
 
 const calledCoreAppForm = function (request) {
-	let data = cryptography.encrypt({ request });
+	let formData = cryptography.encrypt({ request });
 
 	let form = document.createElement('form');
 	form.setAttribute('id', 'payloadForm');
@@ -87,7 +85,7 @@ const calledCoreAppForm = function (request) {
 	inputData.setAttribute('type', 'hidden');
 	inputData.setAttribute('id', 'payload');
 	inputData.setAttribute('name', 'payload');
-	inputData.setAttribute('value', data);
+	inputData.setAttribute('value', formData);
 	form.appendChild(inputData);
 
 	if (activeSafety) {
