@@ -255,6 +255,13 @@ if (!function_exists('normalizeName')) {
 }
 
 if (!function_exists('uriRedirect')) {
+	/**
+	 * @info Handling uri redirect
+	 * @author epenaloza
+	 * @date May 19th, 2023
+	 * @param string $string signIn | singleSession
+	 * @return string uri redirec.
+	 */
 	function uriRedirect($singleSession)
 	{
 		$CI = &get_instance();
@@ -279,6 +286,15 @@ if (!function_exists('uriRedirect')) {
 }
 
 if (!function_exists('manageString')) {
+	/**
+	 * @info Handling strings for trim and special cases
+	 * @author epenaloza
+	 * @date September 11th, 2023
+	 * @param string $string string to manage
+	 * @param string $case none | upper | lower
+	 * @param string $upperCase none | first | word
+	 * @return string the modified string.
+	 */
 	function manageString($string, $case, $upperCase)
 	{
 		$stringCase = [
