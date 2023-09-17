@@ -68,6 +68,7 @@ $route['(bpi|co|per|usd|ve)/inf-condiciones'] = "Novo_Information/terms";
 | CURRENT ROUTES
 |--------------------------------------------------------------------------
 */
+$route['(:any)/callCoreApp'] = "Novo_LoadModels";
 $route['(:any)/async-call'] = "Novo_CallModels";
 $route['(:any)/single'] = "Novo_CallModels";
 $route['(:any)/inicio'] = function ($customer) {

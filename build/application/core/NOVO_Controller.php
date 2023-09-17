@@ -28,6 +28,7 @@ class NOVO_Controller extends CI_Controller
 	protected $dataRequest;
 	protected $greeting;
 	protected $views;
+	protected $isValidRequest;
 	protected $before;
 	public $singleSession;
 
@@ -54,7 +55,8 @@ class NOVO_Controller extends CI_Controller
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
-		$this->before = true;
+		$this->isValidRequest = FALSE;
+		$this->before = TRUE;
 		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
 
 		$this->optionsCheck();
@@ -68,11 +70,15 @@ class NOVO_Controller extends CI_Controller
 	{
 		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
 
+		if ($this->controllerMethod !== lang('SETT_LINK_SUGGESTION')) {
+			$this->checkBrowser();
+		}
+
 		if ($this->input->post('payload')) {
 			$this->before = false;
 			$request = decryptData($this->input->post('payload'));
 			$this->dataRequest = json_decode($request);
-			unset($_POST['payload']);
+			unset($_POST);
 
 			if ($this->input->is_ajax_request()) {
 				$this->fileLanguage = lcfirst($this->dataRequest->module);
@@ -86,15 +92,15 @@ class NOVO_Controller extends CI_Controller
 			}
 
 			unset($this->dataRequest);
-			$valid = $this->verify_access->accessAuthorization($this->validationMethod);
+			$this->isValidRequest = $this->verify_access->accessAuthorization($this->validationMethod);
 
-			if (!empty($_FILES) && $valid) {
-				$valid = $this->manageFile();
+			if (!empty($_FILES) && $this->isValidRequest) {
+				$this->isValidRequest = $this->manageFile();
 			}
 
-			if ($valid) {
+			if ($this->isValidRequest) {
 				$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
-				$valid = $this->verify_access->validateForm($this->validationMethod);
+				$this->isValidRequest = $this->verify_access->validateForm($this->validationMethod);
 			}
 		}
 
@@ -117,10 +123,6 @@ class NOVO_Controller extends CI_Controller
 				redirect($urlRedirect, 'Location', 302);
 				exit;
 			}
-		}
-
-		if ($this->controllerMethod !== lang('SETT_LINK_SUGGESTION')) {
-			$this->checkBrowser();
 		}
 
 		if ($this->session->has_userdata('time')) {
@@ -213,8 +215,8 @@ class NOVO_Controller extends CI_Controller
 
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
-				"third_party/jQuery v3.7.1",
-				"third_party/jquery-ui-1.13.1",
+				"third_party/jquery-3.7.1",
+				"third_party/jquery-ui-1.13.2",
 				"third_party/aes",
 				"connection/core_app",
 				"modal/ui_modal",
