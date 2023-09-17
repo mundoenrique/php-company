@@ -4,10 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_MAINTENANCE'] = 'OFF';
 $lang['SETT_MAINT_NOTIF'] = 'OFF';
 $lang['SETT_MAINTENANCE_RC'] = 9997;
+$lang['SETT_RC_DEFAULT'] = -9999;
 $lang['SETT_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['SETT_ACTIVE_SAFETY'] = ACTIVE_SAFETY;
 $lang['SETT_VIEW_SUFFIX'] = '-core';
-$lang['SETT_RC_DEFAULT'] = -9999;
 $lang['SETT_DEFAULT_CODE'] = 4;
 $lang['SETT_VALIDATE_CAPTCHA'] = [
 	'signIn',
@@ -43,7 +43,6 @@ $lang['SETT_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['SETT_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['SETT_SIGNIN_IMG'] = 'OFF';
 $lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'ON';
-$lang['SETT_PASS_EXPIRED'] = 'ON';
 $lang['SETT_READ_TERMS'] = 'ON';
 $lang['SETT_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['SETT_LONG_TEXT'] = '';

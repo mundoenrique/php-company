@@ -8,7 +8,6 @@ $lang['SETT_VALID_POSITION'] = 'right';
 $lang['SETT_SINGLE_SIGN_ON'] = 'loginFull';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
 $lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'OFF';
-$lang['SETT_PASS_EXPIRED'] = 'OFF';
 $lang['SETT_RECOV_PASS'] = 'OFF';
 $lang['SETT_FOOTER_NETWORKS'] = 'ON';
 $lang['SETT_FOOTER_LOGO'] = 'OFF';

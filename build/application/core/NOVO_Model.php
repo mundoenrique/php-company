@@ -44,7 +44,6 @@ class NOVO_Model extends CI_Model
 		$this->response->icon = lang('SETT_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
-		$this->response->link = uriRedirect($this->singleSession);
 		$this->response->data = new stdClass();
 		$this->response->modalBtn = [];
 	}
