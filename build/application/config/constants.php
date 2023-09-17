@@ -97,6 +97,7 @@ defined('DB_PASSWORD')	or define('DB_PASSWORD', $_SERVER['DB_PASSWORD'] ?? NULL)
 defined('DB_DRIVER')		or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
 defined('DB_CHARSET')		or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
 defined('DB_COLLATION')	or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
+defined('DB_VERIFY')		or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 
 /*
 |--------------------------------------------------------------------------
@@ -157,21 +158,20 @@ defined('COOKIE_PREFIX')		or define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		or define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		or define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
 defined('PROXY_IPS')				or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] === 'ON' ? $_SERVER['REMOTE_ADDR'] : '');
-defined('DB_VERIFY')				or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 
 /*
 |--------------------------------------------------------------------------
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
-defined('ERROR_CONTROLLER')		or define('ERROR_CONTROLLER', $errorController);
+defined('ERROR_CONTROLLER')	or define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')		or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')			or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('LANGUAGE')					or define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
-defined('IP_VERIFY')				or define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-defined('SINGLE_SIGN_ON')		or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] == 'ON' ? TRUE : FALSE);
+defined('IP_VERIFY')				or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
+defined('SINGLE_SIGN_ON')		or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
 defined('API_CONTENT_URL')	or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
 defined('UPLOAD_PATH')			or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 
