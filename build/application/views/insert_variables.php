@@ -24,17 +24,16 @@ $dataclient->currentDate = NULL;
 $dataclient->otpActive = $this->session->otpActive;
 $dataclient->otpChannel = $this->session->otpChannel;
 $dataclient->otpMfaAuth = $this->session->otpMfaAuth;
-// --------------------------------
 $dataclient->who = NULL;
 $dataclient->where = NULL;
 $dataclient->btnContent = NULL;
 $dataclient->loader = NULL;
+// --------------------------------
+$dataclient->response = $response ?? NULL;
 $dataclient->dataTableLang = NULL;
 $dataclient->datePickerLang = NULL;
-$dataclient->response = $response ?? NULL;
 $dataclient->baseURL = base_url();
 $dataclient->assetUrl = assetUrl();
-$dataclient->redirectLink = uriRedirect($singleSession);
 $dataclient->logged = $logged;
 $dataclient->userId = $userId;
 $dataclient->customerUri = $customerUri;
@@ -49,5 +48,4 @@ $customerData = encryptData($dataclient);
 <script>
 	const assetsClient = <?= $customerData; ?>;
 	const activeSafety = <?= json_encode(ACTIVE_SAFETY); ?>;
-	const cryptography = {};
 </script>

@@ -47,14 +47,7 @@ class Novo_User extends NOVO_Controller
 			);
 		}
 
-		$singleSession = [
-			'name' => 'singleSession',
-			'value' => base64_encode('signIn'),
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		set_cookie($singleSession);
+		SetSignSessionType(lang('SETT_COOKIE_SINGN_IN'));
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
@@ -87,7 +80,7 @@ class Novo_User extends NOVO_Controller
 			$this->render->showBtn = FALSE;
 			$this->render->sessionEnd = lang('GEN_SINGLE_SIGNON');
 
-			if ($this->session->flashdata('unauthorized') != NULL) {
+			if ($this->session->flashdata('unauthorized') !== NULL) {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 		} else {
@@ -98,14 +91,7 @@ class Novo_User extends NOVO_Controller
 			$this->render->skipmenu = TRUE;
 		}
 
-		$singleSession = [
-			'name' => 'singleSession',
-			'value' => base64_encode('SignThird'),
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		set_cookie($singleSession);
+		SetSignSessionType(lang('SETT_COOKIE_SINGN_ON'));
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
@@ -214,7 +200,7 @@ class Novo_User extends NOVO_Controller
 		writeLog('INFO', 'User: finishSession Method Initialized');
 
 		$view = 'finish';
-		$thirdPartySession = $this->singleSession == 'SignThird';
+		$thirdPartySession = getSignSessionType() === lang('SETT_COOKIE_SINGN_ON');
 
 		if ($this->session->has_userdata('userId')) {
 			$this->load->model('Novo_User_Model', 'finishSession');
@@ -227,7 +213,7 @@ class Novo_User extends NOVO_Controller
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
-			if ($this->session->flashdata('unauthorized') != NULL) {
+			if ($this->session->flashdata('unauthorized') !== NULL) {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 

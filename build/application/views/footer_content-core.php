@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="menu-help none" id="widget-menu">
-				<?php if (lang('SETT_BTN_LANG') == 'ON') : ?>
+				<?php if (lang('SETT_BTN_LANG') === 'ON') : ?>
 					<div class="menu-item">
 						<div class="btn-lang-circle">
 							<div class="btn-lang-img">
@@ -84,11 +84,11 @@
 		</div>
 	</footer>
 <?php endif; ?>
-<?php if (lang('SETT_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
+<?php if (lang('SETT_SIGNIN_WIDGET_CONTACT') === 'ON') : ?>
 	<?php $this->load->view('widget/widget_contacts_content-core') ?>
 <?php endif; ?>
 
-<?php if (lang('SETT_BTN_LANG') == 'ON' && lang('SETT_MENU_CIRCLE') == 'OFF') : ?>
+<?php if (lang('SETT_BTN_LANG') === 'ON' && lang('SETT_MENU_CIRCLE') === 'OFF') : ?>
 	<div class="btn-lang">
 		<div class="btn-lang-img">
 			<a id="change-lang" class="big-modal" href="<?= lang('SETT_NO_LINK') ?>">
@@ -112,10 +112,10 @@
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset flex">
-			<button type="button" id="cancel" class="<?= lang('SETT_MODAL_BTN_CLASS')['cancel']; ?>" ignore-el>
+			<button type="button" id="cancel" class="<?= lang('SETT_MODAL_BTN_CLASS')['cancel']; ?>">
 				<?= lang('GEN_BTN_CANCEL'); ?>
 			</button>
-			<button type="button" id="accept" class="<?= lang('SETT_MODAL_BTN_CLASS')['accept']; ?>" ignore-el>
+			<button type="button" id="accept" class="<?= lang('SETT_MODAL_BTN_CLASS')['accept']; ?>">
 				<?= lang('GEN_BTN_ACCEPT'); ?>
 			</button>
 		</div>

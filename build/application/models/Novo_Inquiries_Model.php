@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info clase para obtener información relacionada con los lotes
  * @author
  *
  */
-class Novo_Inquiries_Model extends NOVO_Model {
+class Novo_Inquiries_Model extends NOVO_Model
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Inquiries Model Class Initialized');
 	}
 	/**
@@ -31,7 +32,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$response = $this->sendToWebServices('callWs_ServiceOrderStatus');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$orderStatus[] = (object) [
@@ -39,7 +40,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					'text' => 'Selecciona un estado'
 				];
 
-				foreach($response->lista AS $pos => $types) {
+				foreach ($response->lista as $pos => $types) {
 					$type = [];
 					$type['key'] = mb_strtoupper($response->lista[$pos]->codEstatus);
 					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->descEstatus));
@@ -48,7 +49,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 		}
 
-		if($this->isResponseRc != 0) {
+		if ($this->isResponseRc != 0) {
 			$orderStatus[] = (object) [
 				'key' => '',
 				'text' => lang('GEN_TRY_AGAIN')
@@ -84,51 +85,51 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-   	$response = $this->sendToWebServices('callWs_GetServiceOrders');
+		$response = $this->sendToWebServices('callWs_GetServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = lang('SETT_LINK_SERVICE_ORDERS');
 
-				foreach($response->lista AS $list) {
-					foreach($list AS $key => $value) {
+				foreach ($response->lista as $list) {
+					foreach ($list as $key => $value) {
 						switch ($key) {
 							case 'idOrden':
 								$serviceOrders['OrderNumber'] = $value;
-							break;
+								break;
 							case 'estatus':
 								$serviceOrders['OrderStatus'] = $value;
 								$serviceOrders['OrderVoidable'] = FALSE;
 
-								if($value == '0') {
+								if ($value == '0') {
 									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
 								}
-							break;
+								break;
 							case 'nofactura':
 								$serviceOrders['noFactura'] = $value;
 								$serviceOrders['pagoOS']['factura'] = $value;
-							break;
+								break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
-							break;
+								break;
 							case 'montoComision':
 								$serviceOrders['OrderCommission'] = currencyFormat($value);
-							break;
+								break;
 							case 'montoIVA':
 								$serviceOrders['OrderTax'] = currencyFormat($value);
-							break;
+								break;
 							case 'montoOS':
 								$serviceOrders['OrderAmount'] = currencyFormat($value);
-							break;
+								break;
 							case 'montoDeposito':
 								$serviceOrders['OrderDeposit'] = currencyFormat($value);
 								$serviceOrders['pagoOS']['total'] = $value;
-							break;
+								break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
 								$serviceOrders['warningEnabled'] = FALSE;
-								foreach($value AS $bulk) {
+								foreach ($value as $bulk) {
 									$bulkList['bulkNumber'] = $bulk->acnumlote;
 									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
 									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
@@ -140,13 +141,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$bulkList['bulkObservation'] = '';
 
-									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('SETT_STATUS_REJECTED')){
+									if (isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('SETT_STATUS_REJECTED')) {
 										$bulkList['bulkObservation'] = $bulk->obs;
 										$serviceOrders['warningEnabled'] = TRUE;
 									}
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
-							break;
+								break;
 						}
 					}
 
@@ -155,19 +156,19 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 				$this->session->set_userdata('requestOrdersList', $dataRequest);
-			break;
+				break;
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = lang('INQ_NO_SERVICE_ORDER');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('GEN_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('callWs_GetServiceOrders');
@@ -185,7 +186,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Anular orden de servicio';
 
-		$rifEmpresa=$this->session->userdata('enterpriseInf')->idFiscal;
+		$rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
 
 		unset($dataRequest->modalReq);
 
@@ -196,7 +197,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -214,13 +215,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->msg = 'La orden fue anulada exitosamente';
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -1:
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('callWs_ClearServiceOrders');
@@ -280,14 +281,14 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkAmount'] = currencyFormat($response->nmonto);
 				$detailInfo['bulkId'] = $response->acidlote;
 
-				switch($response->ctipolote) {
+				switch ($response->ctipolote) {
 					case '1':
 					case '10':
-						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+						if (isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$tableContent = BulkAttrEmissionA();
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $tableContent->body);
 						}
-					break;
+						break;
 					case '3':
 					case '6':
 					case 'A':
@@ -295,19 +296,19 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$tableContent = BulkAttrEmissionB();
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $tableContent->body);
 						}
-					break;
+						break;
 					case 'V':
 						if (isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$tableContent = BulkAttrEmissionC();
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $tableContent->body);
 						}
-					break;
+						break;
 					case '2':
 						if (isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$tableContent = BulkAttrCreditsA();
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $tableContent->body);
 						}
-					break;
+						break;
 					case '5':
 					case 'L':
 					case 'F':
@@ -315,35 +316,35 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$tableContent = BulkAttrCreditsB();
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $tableContent->body);
 						}
-					break;
+						break;
 					case 'M':
 						if (isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$tableContent = BulkAttrCreditsC();
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $tableContent->body);
 						}
-					break;
+						break;
 					case 'E':
-						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+						if (isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
 							$tableContent = BulkAttrKindergastenA();
 							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $tableContent->body);
 						}
-					break;
+						break;
 					case 'G':
-						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+						if (isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
 							$tableContent = BulkAttrKindergastenB();
 							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $tableContent->body);
 						}
-					break;
+						break;
 					case 'R':
 					case 'C':
 					case 'N':
-						if(isset($response->registrosLoteReposicion) && count($response->registrosLoteReposicion) > 0) {
+						if (isset($response->registrosLoteReposicion) && count($response->registrosLoteReposicion) > 0) {
 							$tableContent = BulkAttrReplacementA();
 							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $tableContent->body);
 						}
-					break;
+						break;
 					default:
-						if(isset($response->registros) && count($response->registros->detalle) > 0) {
+						if (isset($response->registros) && count($response->registros->detalle) > 0) {
 							array_shift($response->registros->ordenAtributos);
 							$attrOrder = $response->registros->ordenAtributos;
 							array_shift($response->registros->nombresColumnas);
@@ -357,9 +358,9 @@ class Novo_Inquiries_Model extends NOVO_Model {
 								);
 							}
 
-							foreach ($response->registros->detalle AS $key => $records) {
+							foreach ($response->registros->detalle as $key => $records) {
 								$record = new stdClass();
-								foreach ($attrOrder AS $attr) {
+								foreach ($attrOrder as $attr) {
 									if ($attr == 'NUMERO_CUENTA') {
 										$records->$attr = maskString($records->$attr, 6, 4);
 									}
@@ -374,7 +375,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							}
 						}
 				}
-			break;
+				break;
 		}
 
 		$detailInfo['bulkHeader'] = $tableContent->header;
@@ -395,10 +396,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$bulkDetail = [];
 
-		foreach($emisionRecords AS $key => $records) {
+		foreach ($emisionRecords as $key => $records) {
 			$recordDetail = new stdClass();
 
-			foreach ($acceptAttr AS $pos => $attr) {
+			foreach ($acceptAttr as $pos => $attr) {
 				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'status') {
@@ -425,7 +426,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			}
 
 			if (in_array('nombres', $acceptAttr) && in_array('apellidos', $acceptAttr)) {
-				$recordDetail->nombres = $recordDetail->nombres.' '.$recordDetail->apellidos;
+				$recordDetail->nombres = $recordDetail->nombres . ' ' . $recordDetail->apellidos;
 				unset($recordDetail->apellidos);
 			}
 
@@ -447,10 +448,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$bulkDetail = [];
 
-		foreach($creditRecords AS $key => $records) {
+		foreach ($creditRecords as $key => $records) {
 			$recordDetail = new stdClass();
 
-			foreach ($acceptAttr AS $pos => $attr) {
+			foreach ($acceptAttr as $pos => $attr) {
 				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'monto') {
@@ -491,10 +492,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		writeLog('INFO', 'Inquiries Model: buildKindergartenRecords Method Initialized');
 		$bulkDetail = [];
 
-		foreach($emisionRecords AS $key => $records) {
+		foreach ($gardenRecords as $key => $records) {
 			$recordDetail = new stdClass();
 
-			foreach ($acceptAttr AS $pos => $attr) {
+			foreach ($acceptAttr as $pos => $attr) {
 				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'nombre') {
@@ -511,7 +512,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			}
 
 			if (in_array('nombre', $acceptAttr) && in_array('apellido', $acceptAttr)) {
-				$recordDetail->nombre = $recordDetail->nombre.' '.$recordDetail->apellido;
+				$recordDetail->nombre = $recordDetail->nombre . ' ' . $recordDetail->apellido;
 				unset($recordDetail->apellidos);
 			}
 
@@ -533,26 +534,25 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$detailRecords = [];
 
-		foreach($replaceRecords AS $records) {
+		foreach ($replaceRecords as $records) {
 			$record = new stdClass();
-			foreach($records AS $pos => $value) {
+			foreach ($records as $pos => $value) {
 				switch ($pos) {
 					case 'nocuenta':
 						if (in_array($pos, $acceptAttr)) {
 							$record->cardHoldAccount = maskString($value, 6, 4);
 						}
-					break;
+						break;
 					case 'aced_rif':
 						if (in_array($pos, $acceptAttr)) {
 							$cardHoldId = $value != '' ? $value : '- -';
 							$record->cardHoldId = $value;
 						}
-					break;
+						break;
 				}
 			}
 
 			$detailRecords[] = $record;
-
 		}
 
 		return $detailRecords;
@@ -591,14 +591,14 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->data->file = $file;
 				$this->response->data->name = $name;
 				$this->response->data->ext = $ext;
-			break;
+				break;
 			case -52:
 				$this->response->code = 1;
 				$this->response->title = lang('GEN_ORDER_TITLE');
 				$this->response->msg = lang('GEN_NO_BULK_AUTHORIZATION');
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			default:
 				$requestOrdersList = $this->session->userdata('requestOrdersList');
 				$this->load->model('Novo_inquiries_Model', 'getOrders');
@@ -611,7 +611,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
-			break;
+				break;
 		}
 
 		return $this->responseToTheView('callWs_ExportFiles');
@@ -640,12 +640,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'close';
 				$this->session->set_userdata('authToken', $response->bean);
-			break;
+				break;
 			default:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_OTP_NO_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 		return $this->responseToTheView('CallWs_pagoOs');
 	}
@@ -682,32 +682,32 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->session->unset_userdata('requestOrdersList');
 				$this->session->unset_userdata('authToken');
-			break;
+				break;
 			case -14:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -21:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_CONECTION_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -24:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DAILY_TRANSACTION_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -25:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DAILY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -155:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_UNAVAILABLE_BALANCE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -220:
 			case -275:
 			case -468:
@@ -717,27 +717,27 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_ACCOUNT_NOT_AVAILABLE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -230:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_GENERAL_MSG');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -241:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_PARAMS_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -281:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_ACCOUNT_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -285:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_ACCOUNT_INACTIV');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -286:
 				$this->response->code = 1;
 				$this->response->icon = lang('SETT_ICON_WARNING');
@@ -745,7 +745,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-			break;
+				break;
 			case -287:
 				$this->response->code = 2;
 				$this->response->icon = lang('SETT_ICON_WARNING');
@@ -753,7 +753,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-			break;
+				break;
 			case -288:
 				$this->response->code = 2;
 				$this->response->icon = lang('SETT_ICON_WARNING');
@@ -761,62 +761,62 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_RESEND');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-			break;
+				break;
 			case -296:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_NOT_REGISTERED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -297:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_OS_UNREGISTERED_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -298:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_INVALID_CONCEPT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -299:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('PAGO_OS_CONCEPT_NOT_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -300:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -472:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_INVALID_DOCUMENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -473:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_MONTHLY_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -475:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_CONSIGNMENT_AMOUNT_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -476:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DEBITS_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -477:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_DEBITS_CONSIGNMENT_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 			case -478:
 				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = lang('GEN_AMOUNT_MAX_EXCEEDED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+				break;
 		}
 		return $this->responseToTheView('CallWs_PagarOS');
 	}

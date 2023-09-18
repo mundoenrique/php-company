@@ -29,8 +29,7 @@ class NOVO_Controller extends CI_Controller
 	protected $greeting;
 	protected $views;
 	protected $isValidRequest;
-	protected $before;
-	public $singleSession;
+	protected $wasMigrated;
 
 	public function __construct()
 	{
@@ -56,8 +55,7 @@ class NOVO_Controller extends CI_Controller
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
 		$this->isValidRequest = FALSE;
-		$this->before = TRUE;
-		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
+		$this->wasMigrated = moduleWasmigrated($this->controllerMethod);
 
 		$this->optionsCheck();
 	}
@@ -74,8 +72,7 @@ class NOVO_Controller extends CI_Controller
 			$this->checkBrowser();
 		}
 
-		if ($this->input->post('payload')) {
-			$this->before = false;
+		if ($this->input->post('payload') !== NULL) {
 			$request = decryptData($this->input->post('payload'));
 			$this->dataRequest = json_decode($request);
 			unset($_POST);
@@ -148,7 +145,7 @@ class NOVO_Controller extends CI_Controller
 				break;
 		}
 
-		if ($this->input->is_ajax_request() && $this->before) {
+		if ($this->input->is_ajax_request() && !$this->wasMigrated) {
 			$this->dataRequest = ACTIVE_SAFETY ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
@@ -163,7 +160,7 @@ class NOVO_Controller extends CI_Controller
 			$access = $this->verify_access->accessAuthorization($this->validationMethod);
 			$valid = TRUE;
 
-			if ($_POST && $access && $this->before) {
+			if ($_POST && $access && !$this->wasMigrated) {
 				$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
 				$valid = $this->verify_access->validateForm($this->validationMethod);
 			}
@@ -189,6 +186,7 @@ class NOVO_Controller extends CI_Controller
 			$this->render->customerStyle = $this->customerStyle;
 			$this->render->customerLang = $this->customerLang;
 			$this->render->customerFiles = $this->customerFiles;
+			$this->render->wasMigrated = $this->wasMigrated;
 			$validateRecaptcha = in_array($this->controllerMethod, lang('SETT_VALIDATE_CAPTCHA'));
 
 			$this->render->widget =  FALSE;
@@ -212,7 +210,7 @@ class NOVO_Controller extends CI_Controller
 					"$file-base"
 				];
 			}
-
+			$utilsFile = $this->wasMigrated ? "encrypt_decrypt thirdPartyConfig utils" : 'helper';
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.7.1",
@@ -221,11 +219,19 @@ class NOVO_Controller extends CI_Controller
 				"connection/core_app",
 				"modal/ui_modal",
 				"aes-json-format",
-				"encrypt_decrypt",
-				"utils",
 				"helper",
-				"thirdPartyConfig"
 			];
+
+			if ($this->wasMigrated) {
+				$helperPos = array_search('helper', $this->includeAssets->jsFiles, TRUE);
+				unset($this->includeAssets->jsFiles[$helperPos]);
+				array_push(
+					$this->includeAssets->jsFiles,
+					"utils",
+					"encrypt_decrypt",
+					"thirdPartyConfig",
+				);
+			}
 
 			if ($this->session->has_userdata('logged')) {
 				array_push(
@@ -254,8 +260,7 @@ class NOVO_Controller extends CI_Controller
 				}
 			}
 		} else {
-			$linkredirect = uriRedirect($this->singleSession);
-			redirect(base_url($linkredirect), 'Location', 'GET');
+			redirect(base_url(uriRedirect()), 'Location', 'GET');
 			exit;
 		}
 	}
@@ -364,7 +369,6 @@ class NOVO_Controller extends CI_Controller
 			? lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_START') : lang('SETT_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
-		$this->render->singleSession = $this->singleSession;
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('master_content' . lang('SETT_VIEW_SUFFIX'), $this->render);
 	}

@@ -22,8 +22,8 @@ class Novo_User_Model extends NOVO_Model
 	{
 		writeLog('INFO', 'User Model: SignIn Method Initialized');
 
-		$userName = mb_strtoupper($dataRequest->userName);
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
+		$userName = manageString($dataRequest->userName, 'upper', 'none');
+		$password = decryptData($dataRequest->userPass);
 		$authToken = $this->session->flashdata('authToken') ?? '';
 
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -37,7 +37,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
-		if (IP_VERIFY === 'ON') {
+		if (IP_VERIFY) {
 			$this->dataRequest->codigoOtp = [
 				'tokenCliente' => $dataRequest->otpCode ?? '',
 				'authToken' => $authToken
@@ -50,17 +50,17 @@ class Novo_User_Model extends NOVO_Model
 
 		if (lang('SETT_MAINTENANCE') === 'ON') {
 			$this->isResponseRc = lang('SETT_MAINTENANCE_RC');
-		} elseif (isset($dataRequest->otpCode) && $authToken == '') {
+		} elseif (isset($dataRequest->otpCode) && $authToken === '') {
 			$this->isResponseRc = 9998;
 		} else {
-			$this->isResponseRc = ACTIVE_RECAPTCHA && !isset($dataRequest->skipCaptcha) ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 			if ($this->isResponseRc === 0) {
 				$response = $this->sendToWebServices('callWs_SignIn');
 			}
 		}
 
-		if (lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
+		if (SINGLE_SIGN_ON && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -68,12 +68,11 @@ class Novo_User_Model extends NOVO_Model
 			'customerTime' => (int) $dataRequest->currentTime,
 			'serverTime' => (int) date("H")
 		];
-
+		// $this->isResponseRc = -28; // -2 -185
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$fullName = mb_strtolower($response->usuario->primerNombre) . ' ';
-				$fullName .= mb_strtolower($response->usuario->primerApellido);
+				$fullName = $response->usuario->primerNombre . ' ' . $response->usuario->primerApellido;
 				$formatDate = $this->config->item('format_date');
 				$formatTime = $this->config->item('format_time');
 				$lastSession = date(
@@ -88,95 +87,99 @@ class Novo_User_Model extends NOVO_Model
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'passWord' => lang('SETT_REMOTE_AUTH') === 'ON' ? $this->dataRequest->password : FALSE,
-					'fullName' => ucwords(mb_strtolower($fullName)),
+					'fullName' => manageString($fullName, 'lower', 'word'),
 					'userType' => $response->usuario->ctipo,
-					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'groupCode' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_decrypt->encryptWebServices($this->input->ip_address()),
 					'customerSess' => $this->config->item('customer'),
 					'customerUri' => $this->config->item('customer_uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'false',
+					// Eliminar al finalizar la migración
 					'idUsuario' => $response->usuario->idUsuario,
+					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'pais' => $this->config->item('customer'),
 					'nombreCompleto' => $fullName,
+					'cl_addr' => $this->encrypt_decrypt->encryptWebServices($this->input->ip_address()),
 					'logged_in' => TRUE
+					// -----------------------------------
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('SETT_LINK_ENTERPRISES'));
-				$this->response->modal = TRUE;
+				$this->response->data->link = base_url(lang('SETT_LINK_ENTERPRISES'));
+				$this->response->keepModal = TRUE;
 				break;
 			case -2:
 			case -185:
 				$this->response->code = 0;
-				$fullName = mb_strtolower($response->usuario->primerNombre . ' ' . $response->usuario->primerApellido);
+				$fullName = $response->usuario->primerNombre . ' ' . $response->usuario->primerApellido;
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
-					'fullName' => ucwords(mb_strtolower($fullName)),
-					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'fullName' => manageString($fullName, 'lower', 'word'),
+					'groupCode' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->$this->encrypt_decrypt->encryptWebServices($this->input->ip_address()),
 					'customerSess' => $this->config->item('customer'),
 					'customerUri' => $this->config->item('customer_uri'),
-					'clientAgent' => $this->agent->agent_string()
+					'clientAgent' => $this->agent->agent_string(),
+					// Eliminar al finalizar la migración
+					'cl_addr' => $this->encrypt_decrypt->encryptWebServices($this->input->ip_address()),
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+					// ----------------------------------
 				];
 				$this->session->set_userdata($userData);
 				$nextWayFirstLogIn = lang('SETT_READ_TERMS') === 'ON' ? lang('SETT_LINK_TERMS') : lang('SETT_LINK_CHANGE_PASS');
-				$this->response->data = base_url($nextWayFirstLogIn);
+				$this->response->data->link = base_url($nextWayFirstLogIn);
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 				if ($this->isResponseRc === -185) {
-					$this->response->data = base_url(lang('SETT_LINK_CHANGE_PASS'));
+					$this->response->data->link = base_url(lang('SETT_LINK_CHANGE_PASS'));
 					$this->session->set_flashdata('changePassword', 'expiredPass');
 				}
 				break;
 			case -1:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
-				$this->response->className = lang('SETT_VALID_INVALID_USER');
-				$this->response->position = lang('SETT_VALID_POSITION');
+				$this->response->data->className = lang('SETT_VALID_INVALID_USER');
+				$this->response->data->position = lang('SETT_VALID_POSITION');
 				break;
 			case -263:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
-				$this->response->className = lang('SETT_VALID_INVALID_USER');
-				$this->response->position = lang('SETT_VALID_POSITION');
+				$this->response->data->className = lang('SETT_VALID_INVALID_USER');
+				$this->response->data->position = lang('SETT_VALID_POSITION');
 				break;
 			case -8:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_SUSPENDED');
-				$this->response->className = lang('SETT_VALID_INACTIVE_USER');
-				$this->response->position = lang('SETT_VALID_POSITION');
+				$this->response->data->className = lang('SETT_VALID_INACTIVE_USER');
+				$this->response->data->position = lang('SETT_VALID_POSITION');
 				break;
 			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_BLOCKED');
-				$this->response->className = lang('SETT_VALID_INACTIVE_USER');
-				$this->response->position = lang('SETT_VALID_POSITION');
+				$this->response->data->className = lang('SETT_VALID_INACTIVE_USER');
+				$this->response->data->position = lang('SETT_VALID_POSITION');
 				break;
 			case -424:
 				$this->response->code = 2;
 				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $response->usuario->emailEnc);
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
-				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', json_decode($response->usuario->codigoOtp->access_token));
 				break;
 			case -28:
 				$this->response->msg = lang('GEN_INCORRECTLY_CLOSED');
-				$this->response->data = 'session-close';
-				$this->response->modalBtn['btn1']['action'] = 'none';
-				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->data->action = 'session-close';
+				$this->response->modalBtn['btn1']['action'] = 'request';
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-				break;
 				break;
 			case -229:
 				$this->response->icon = lang('SETT_ICON_INFO');
@@ -260,7 +263,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$response = $this->sendToWebServices('callWs_SingleSignon');
 
-		if (lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
+		if (SINGLE_SIGN_ON && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -268,8 +271,7 @@ class Novo_User_Model extends NOVO_Model
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$fullName = mb_strtolower($response->usuario->primerNombre) . ' ';
-				$fullName .= mb_strtolower($response->usuario->primerApellido);
+				$fullName = $response->usuario->primerNombre . ' ' . $response->usuario->primerApellido;
 				$formatDate = $this->config->item('format_date');
 				$formatTime = $this->config->item('format_time');
 				$lastSession = date(
@@ -288,7 +290,7 @@ class Novo_User_Model extends NOVO_Model
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'passWord' => $response->usuario->password ?? FALSE,
-					'fullName' => ucwords(mb_strtolower($fullName)),
+					'fullName' => manageString($fullName, 'lower', 'word'),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,

@@ -11,7 +11,7 @@
 	<link rel="icon" type="image/<?= $faviconExt ?>" href="<?= $this->asset->insertFile($favicon, 'images', $customerFiles, 'favicon') ?>">
 	<?= $this->asset->insertCss(); ?>
 	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
-	<?= $this->asset->insertJs(); ?>
+	<?= $this->asset->insertJs($wasMigrated); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
 
@@ -30,7 +30,7 @@
 	</main>
 	<a id="download-file" href="javascript:" download></a>
 	<?php $this->load->view('footer_content-core') ?>
-	<?php $this->load->view('insert_variables') ?>
+	<?php $wasMigrated ? $this->load->view('insert_variables') : $this->load->view('insert_variables-legacy')	?>
 </body>
 
 </html>

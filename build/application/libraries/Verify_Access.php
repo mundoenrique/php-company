@@ -77,10 +77,7 @@ class Verify_Access
 	{
 		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
-		$singleSession = base64_decode(get_cookie('singleSession', TRUE));
-		$linkredirect = $singleSession === 'SignThird'
-			? 'ingresar/' . lang('SETT_LINK_SIGNOUT_END')
-			: lang('SETT_LINK_SIGNIN');
+		$redirectLink = uriRedirect();
 
 		$responseDefect = new stdClass();
 		$responseDefect->code = lang('SETT_DEFAULT_CODE');
@@ -90,7 +87,7 @@ class Verify_Access
 		$responseDefect->modalBtn = [
 			'btn1' => [
 				'text' => lang('GEN_BTN_ACCEPT'),
-				'link' => $linkredirect,
+				'link' => $redirectLink,
 				'action' => 'redirect'
 			]
 		];

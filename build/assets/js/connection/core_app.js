@@ -1,7 +1,6 @@
 'use strict';
 
-const calledCoreApp = function (module, section, request, _response_) {
-	request.currentTime = new Date().getHours();
+const calledCoreApp = function (module, section, request, _response_ = false) {
 	const uri = request.route || 'callCoreApp';
 	delete request.route;
 	const formData = new FormData();
@@ -41,11 +40,18 @@ const calledCoreApp = function (module, section, request, _response_) {
 	})
 		.done(function (data, status, jqXHR) {
 			const response = cryptography.decrypt(data.response);
-			const modalClose = response.modal ? false : true;
+			const modalClose = response.keepModal ? false : true;
 			uiMdalClose(modalClose);
 
-			if (response.code === defaultCode) {
-				appMessages(response.title, response.msg, response.icon, response.modalBtn);
+			if (response.code === parseInt(lang.SETT_DEFAULT_CODE)) {
+				const modalArgs = {
+					title: response.title,
+					msg: response.msg,
+					icon: response.icon,
+					modalBtn: response.modalBtn,
+					link: response.link,
+				};
+				uiModalMessage(modalArgs);
 			}
 
 			if (_response_) {

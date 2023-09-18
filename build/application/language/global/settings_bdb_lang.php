@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['SETT_SIGIN_RECOVER_PASS'] = 'OFF';
 $lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+$lang['SETT_PASS_EXPIRED'] = 'OFF';
 $lang['SETT_RECOV_PASS'] = 'OFF';
 $lang['SETT_BENEFITS'] = 'OFF';
 $lang['SETT_BULK_LOAD'] = 'OFF';

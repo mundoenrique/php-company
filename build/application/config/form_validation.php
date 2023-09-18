@@ -5,11 +5,11 @@ $config = [
 	'signIn' => [
 		[
 			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+			'rules' => lang('REGEX_USER_NAME_SERVER')
 		],
 		[
 			'field' => 'userPass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => lang('REGEX_PASSWORD_SERVER')
 		],
 		[
 			'field' => 'otpCode',

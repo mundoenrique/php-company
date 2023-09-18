@@ -1,8 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['GEN_SYSTEM_MESSAGE'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
-$lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas';//COPELO
+$lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas'; //COPELO
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
 $lang['GEN_FISCAL_REGISTRY'] = 'Cuenta';
 $lang['GEN_FISCAL_REGISTRY_OF'] = '';
@@ -29,7 +29,7 @@ $lang['GEN_NO_CARD_FOUND'] = "El número de tarjeta <strong>%s</strong> no está
 $lang['GEN_NO_LIST'] = 'No fue posible obtener el listado, verifica los criterios de búsqueda e intenta de nuevo';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'No fue posible generar la llave de autorización, intenta esta operación de nuevo';
 $lang['GEN_REJECTED_REGISTRY'] = 'Todos los registros fueron rechazados, verifica';
-$lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
+$lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [

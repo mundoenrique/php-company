@@ -22,7 +22,6 @@ class NOVO_Model extends CI_Model
 	public $autoLogin;
 	public $token;
 	public $isResponseRc;
-	public $singleSession;
 	public $response;
 
 	public function __construct()
@@ -38,7 +37,6 @@ class NOVO_Model extends CI_Model
 		$this->userName = $this->session->userName;
 		$this->autoLogin = $this->session->autoLogin ?? '';
 		$this->token = $this->session->token ?? '';
-		$this->singleSession = base64_decode(get_cookie('singleSession', TRUE));
 		$this->response = new stdClass();
 		$this->response->code = lang('SETT_DEFAULT_CODE');
 		$this->response->icon = lang('SETT_ICON_WARNING');
@@ -121,7 +119,7 @@ class NOVO_Model extends CI_Model
 
 		$responseCode = $responseModel->rc ?? $responseModel->responseCode;
 		$this->isResponseRc = (int) $responseCode;
-		$linkredirect = uriRedirect($this->singleSession);
+		$linkredirect = uriRedirect();
 
 		$arrayResponse = [
 			'btn1' => [

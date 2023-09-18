@@ -291,7 +291,7 @@ class Novo_Bulk_Model extends NOVO_Model
 		];
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -432,7 +432,7 @@ class Novo_Bulk_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -580,7 +580,7 @@ class Novo_Bulk_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -640,7 +640,7 @@ class Novo_Bulk_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -708,7 +708,7 @@ class Novo_Bulk_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -770,7 +770,7 @@ class Novo_Bulk_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
@@ -1305,7 +1305,7 @@ class Novo_Bulk_Model extends NOVO_Model
 			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn' && $password != '') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN') && $password != '') {
 			$password = md5($password);
 		}
 

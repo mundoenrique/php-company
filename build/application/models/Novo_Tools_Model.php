@@ -647,13 +647,13 @@ class Novo_Tools_Model extends NOVO_Model
 
 		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
-		if (lang('SETT_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+		if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
 			$password = $this->session->pass ?: md5($password);
 		}
 
 		$this->dataRequest->password = $password;
 
-		$response = $this->sendToWebServices('CallWs_updateBranches');
+		$this->sendToWebServices('CallWs_updateBranches');
 
 		switch ($this->isResponseRc) {
 			case 0:

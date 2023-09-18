@@ -259,13 +259,12 @@ if (!function_exists('uriRedirect')) {
 	 * @info Handling uri redirect
 	 * @author epenaloza
 	 * @date May 19th, 2023
-	 * @param string $string signIn | singleSession
 	 * @return string uri redirec.
 	 */
-	function uriRedirect($singleSession)
+	function uriRedirect()
 	{
 		$CI = &get_instance();
-		$redirectLink = $singleSession === 'signIn'
+		$redirectLink = getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')
 			? lang('SETT_LINK_SIGNIN')
 			: 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
 
@@ -330,5 +329,66 @@ if (!function_exists('manageString')) {
 		}
 
 		return $stringConverted;
+	}
+}
+
+if (!function_exists('getSignSessionType ')) {
+	/**
+	 * @info Get sign type cookie
+	 * @author epenaloza
+	 * @date September 17th, 2023
+	 * @return string getSignSessionType value.
+	 */
+	function getSignSessionType()
+	{
+		$signType = get_cookie('signSessionType', TRUE);
+		$signType = ACTIVE_SAFETY ? base64_decode($signType) : $signType;
+
+		return $signType;
+	}
+}
+
+if (!function_exists('setSignSessionType')) {
+	/**
+	 * @info Set sign type cookie
+	 * @author epenaloza
+	 * @date September 17th, 2023
+	 * @param string $SignSessionType type cookie signInSession | singleSignOnSession
+	 * @return void
+	 */
+	function setSignSessionType($signType)
+	{
+		$SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
+
+		$signSessionType = [
+			'name' => 'signSessionType',
+			'value' => $SignSessionType,
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		set_cookie($signSessionType);
+	}
+}
+
+if (!function_exists('moduleWasmigrated')) {
+	/**
+	 * @info Valid if the module was migrated
+	 * @author epenaloza
+	 * @date (September 18th, 2023
+	 * @param string $module module to valid
+	 * @return bool
+	 */
+	function moduleWasmigrated($module)
+	{
+		$modulesIn = [
+			'signIn'
+		];
+
+		$migratedModule = array_search($module, $modulesIn, TRUE) !== FALSE;
+
+		writeLog('INFO', '**** Migrated module ' . $module . ' ****: ' . json_encode($migratedModule, JSON_UNESCAPED_UNICODE));
+
+		return $migratedModule;
 	}
 }

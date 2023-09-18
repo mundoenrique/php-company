@@ -61,17 +61,18 @@ class Asset
 	 * @param void
 	 * @return string
 	 */
-	public function insertJs()
+	public function insertJs($wasMigrated)
 	{
-		writeLog('INFO', 'Asset: insertJs method initialized');
+		writeLog('INFO', 'Asset: insertJs method initialized *****************' . $wasMigrated);
 
 		$script = NULL;
 		$fileExt = 'js';
+		$typeScript = $wasMigrated ? 'module' : 'text/javascript';
 
 		foreach ($this->jsFiles as $fileName) {
 			$filePath = assetPath('js/' . $fileName);
 			$fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
-			$script .= '<script type="text/javascript" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
+			$script .= '<script type="' . $typeScript . '" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
 		}
 
 		return $script;
