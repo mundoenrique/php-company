@@ -1,7 +1,8 @@
-'use strict';
+import { cryptography } from '../common/encrypt_decrypt.js';
+import { uiMdalClose, uiModalMessage } from '../modal/ui_modal.js';
 
-const calledCoreApp = function (module, section, request, _response_ = false) {
-	const uri = request.route || 'callCoreApp';
+export const calledCoreApp = function (module, section, request, _response_ = false) {
+	const uri = request.route || '/callCoreApp';
 	delete request.route;
 	const formData = new FormData();
 	let dataRequest = {
@@ -43,13 +44,12 @@ const calledCoreApp = function (module, section, request, _response_ = false) {
 			const modalClose = response.keepModal ? false : true;
 			uiMdalClose(modalClose);
 
-			if (response.code === parseInt(lang.SETT_DEFAULT_CODE)) {
+			if (response.code === lang.SETT_DEFAULT_CODE) {
 				const modalArgs = {
 					title: response.title,
 					msg: response.msg,
 					icon: response.icon,
 					modalBtn: response.modalBtn,
-					link: response.link,
 				};
 				uiModalMessage(modalArgs);
 			}
@@ -61,7 +61,7 @@ const calledCoreApp = function (module, section, request, _response_ = false) {
 		.fail(function (jqXHR, textStatus, errorThrown) {
 			uiMdalClose(true);
 			const response = {
-				code: defaultCode,
+				code: lang.SETT_DEFAULT_CODE,
 				modalBtn: {
 					btn1: {
 						link: redirectLink,
@@ -69,7 +69,14 @@ const calledCoreApp = function (module, section, request, _response_ = false) {
 					},
 				},
 			};
-			uiModalMessage(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.SETT_ICON_DANGER, response.modalBtn);
+			const modalArgs = {
+				title: lang.GEN_SYSTEM_NAME,
+				msg: lang.GEN_SYSTEM_MESSAGE,
+				icon: response.icon,
+				modalBtn: lang.SETT_ICON_DANGER,
+			};
+
+			uiModalMessage(modalArgs);
 
 			if (_response_) {
 				_response_(response);
@@ -77,7 +84,7 @@ const calledCoreApp = function (module, section, request, _response_ = false) {
 		});
 };
 
-const calledCoreAppForm = function (request) {
+export const calledCoreAppForm = function (request) {
 	let formData = cryptography.encrypt({ request });
 
 	let form = document.createElement('form');
