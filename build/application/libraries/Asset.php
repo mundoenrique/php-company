@@ -63,7 +63,7 @@ class Asset
 	 */
 	public function insertJs($wasMigrated)
 	{
-		writeLog('INFO', 'Asset: insertJs method initialized *****************' . $wasMigrated);
+		writeLog('INFO', 'Asset: insertJs method initialized');
 
 		$script = NULL;
 		$fileExt = 'js';
