@@ -35,7 +35,6 @@ class Novo_User extends NOVO_Controller
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate-1.19.5",
 			"third_party/additional-methods-1.19.5",
-			"validation/form_validation",
 			"validation/messages_validation",
 			"user/signIn"
 		);
