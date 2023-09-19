@@ -1,5 +1,5 @@
 'use strict';
-const formValidation = function (form) {
+export const formValidation = function (form) {
 	clearInputForm(form);
 
 	const formId = form.prop('id');
