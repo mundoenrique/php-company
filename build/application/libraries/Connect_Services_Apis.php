@@ -87,7 +87,7 @@ class Connect_Services_Apis
 		writeLog('INFO', 'Connect_Services_Apis: moveFileToWebService Method Initialized');
 
 		$urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
-		$userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
+		$userpassBulk =  BULK_FTP_USERNAME . ':' . base64_decode(BULK_FTP_PASSWORD);
 
 		writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 		writeLog('INFO', 'USER CREDENCIALS: ' . $userpassBulk);
