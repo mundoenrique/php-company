@@ -60,7 +60,7 @@ class Novo_User_Model extends NOVO_Model
 			}
 		}
 
-		if (SINGLE_SIGN_ON && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
+		if (lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -68,7 +68,7 @@ class Novo_User_Model extends NOVO_Model
 			'customerTime' => (int) $dataRequest->currentTime,
 			'serverTime' => (int) date("H")
 		];
-		// $this->isResponseRc = -28; // -2 -185
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -175,6 +175,14 @@ class Novo_User_Model extends NOVO_Model
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', json_decode($response->usuario->codigoOtp->access_token));
 				break;
+			case 9996:
+				$this->response->code = 3;
+				$this->response->icon = '';
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), assetUrl('images/nueva-expresion-monetaria.png'));
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				break;
 			case -28:
 				$this->response->msg = lang('GEN_INCORRECTLY_CLOSED');
 				$this->response->data->action = 'session-close';
@@ -199,14 +207,6 @@ class Novo_User_Model extends NOVO_Model
 			case -288:
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 9996:
-				$this->response->code = 3;
-				$this->response->icon = '';
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), assetUrl('images/nueva-expresion-monetaria.png'));
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				break;
 			case 9997:
 				$this->response->code = 4;
@@ -263,7 +263,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$response = $this->sendToWebServices('callWs_SingleSignon');
 
-		if (SINGLE_SIGN_ON && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
+		if (lang('SETT_PASS_EXPIRED') === 'OFF' && ($this->isResponseRc === -2 || $this->isResponseRc === -185)) {
 			$this->isResponseRc = 0;
 		}
 
@@ -642,13 +642,12 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $userName;
-		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
+		$this->dataRequest->codigoGrupo = $this->session->groupCode;
 
-		$response = $this->sendToWebServices('callWs_FinishSession');
+		$this->sendToWebServices('callWs_FinishSession');
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
-		$this->response->data = FALSE;
 		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');

@@ -3,7 +3,10 @@ import { appLoader } from '../utils.js';
 export const uiModalMessage = function (modalArgs) {
 	const btn1 = modalArgs.modalBtn.btn1;
 	const btn2 = modalArgs.modalBtn.btn2;
+	const width = modalArgs.width || lang.SETT_MODAL_WIDTH;
+	const minWidth = modalArgs.minWidth || lang.SETT_MODAL_WIDTH;
 	const maxHeight = modalArgs.maxHeight || 350;
+	const minHeight = modalArgs.minHeight || 100;
 
 	$('#system-info').dialog({
 		title: modalArgs.title || lang.GEN_SYSTEM_NAME,
@@ -13,9 +16,9 @@ export const uiModalMessage = function (modalArgs) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: modalArgs.width || lang.SETT_MODAL_WIDTH,
-		minWidth: modalArgs.minWidth || lang.SETT_MODAL_WIDTH,
-		minHeight: modalArgs.minHeight || 100,
+		width: width,
+		minWidth: minWidth,
+		minHeight: minHeight,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: 'border-none',
 		classes: {
@@ -28,7 +31,7 @@ export const uiModalMessage = function (modalArgs) {
 
 			$('#system-icon').removeAttr('class');
 
-			if (modalArgs.icon != '') {
+			if (modalArgs.icon !== '') {
 				$('#system-icon').addClass(lang.SETT_ICON + ' ' + modalArgs.icon);
 			}
 

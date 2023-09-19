@@ -390,7 +390,7 @@ $lang['GEN_INCORRECTLY_CLOSED'] = '
 <div>
 	<h5 class="regular">
 		Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar
-		<strong>"Cerrar Sesión"</strong>.
+		<b>"Cerrar Sesión"</b>.
 	</h5>
 </div>
 ';

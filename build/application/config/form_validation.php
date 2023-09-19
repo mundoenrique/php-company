@@ -41,13 +41,12 @@ $config = [
 	'finishSession' => [
 		[
 			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+			'rules' => lang('REGEX_USER_NAME_SERVER')
 		]
 	],
 	'recoverPass' => [
 		[
 			'field' => 'user',
-			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		],
 		[
@@ -88,18 +87,15 @@ $config = [
 	'changePassword' => [
 		[
 			'field' => 'currentPass',
-			'label' => 'currentPass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => lang('REGEX_PASSWORD_SERVER')
 		],
 		[
 			'field' => 'newPass',
-			'label' => 'newPass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => lang('REGEX_PASSWORD_SERVER')
 		],
 		[
 			'field' => 'confirmPass',
-			'label' => 'confirmPass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'rules' => lang('REGEX_PASSWORD_SERVER')
 		]
 	],
 	'changeEmail' => [

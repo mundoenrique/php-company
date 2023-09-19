@@ -1,6 +1,7 @@
 import { getToken } from '../common/captchaHelper.js';
 import { cryptography } from '../common/encrypt_decrypt.js';
 import { calledCoreApp } from '../connection/core_app.js';
+import { uiModalMessage } from '../modal/ui_modal.js';
 import { appLoader, takeFormData, toggleDisableActions } from '../utils.js';
 import { formValidation } from '../validation/form_validation.js';
 
@@ -33,10 +34,26 @@ $(function () {
 		}
 	});
 
+	$('#system-info').on('click', '.session-close', function () {
+		toggleDisableActions(true);
+		dataSignin = {
+			userName: dataSignin.userName,
+		};
+		signIn('FinishSession');
+	});
+
 	const signIn = function (section) {
-		const module = 'user';
+		const module = 'User';
 
 		calledCoreApp(module, section, dataSignin, function (response) {
+			if (response.code !== 0) {
+				$('#userPass').val('');
+
+				if (lang.SETT_RESTAR_USERNAME === 'ON') {
+					$('#userName').val('');
+				}
+			}
+
 			handleSignInResponse[response.code](response);
 		});
 	};
@@ -66,16 +83,34 @@ $(function () {
 			formSignin.validate().resetForm();
 		},
 		2: function (response) {},
-		3: function (response) {},
-		4: function (response) {},
+		3: function (response) {
+			const modalArgs = {
+				title: response.title,
+				msg: response.msg,
+				icon: response.icon,
+				modalBtn: response.modalBtn,
+				minWidth: 480,
+				maxHeight: 'none',
+				posAt: 'center top',
+				posMy: 'center top+60',
+			};
+			uiModalMessage(modalArgs);
+
+			toggleDisableActions(false);
+			btnCalled.html(btnSignin);
+			formSignin.validate().resetForm();
+		},
+		4: function (response) {
+			if (response.data.action === 'session-close') {
+				$('#accept').addClass(response.data.action);
+			}
+
+			toggleDisableActions(false);
+			btnCalled.html(btnSignin);
+			formSignin.validate().resetForm();
+		},
 	};
 });
-/*
-$('#system-info').on('click', '.session-close', function () {
-	toggleDisableActions(true);
-	getSignIn('FinishSession');
-});
- */
 /*
 $('#system-info').on('click', '.send-otp', function () {
 	formSignin = $('#formVerificationOTP');
@@ -148,21 +183,6 @@ const getSignIn = function (section) {
 				if (response.data.action === 'session-close') {
 					$('#accept').addClass(response.data.action);
 				}
-		}
-
-		if (response.code !== 0) {
-			$('#userPass').val('');
-			$('#signInBtn').html(btnSignin);
-			toggleDisableActions(false);
-			formSignin.validate().resetForm();
-
-			if (lang.SETT_RESTAR_USERNAME === 'ON') {
-				$('#userName').val('');
-			}
-
-			setTimeout(function () {
-				$('#userName').hideBalloon();
-			}, 3000);
 		}
 	});
 };

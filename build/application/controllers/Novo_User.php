@@ -20,15 +20,10 @@ class Novo_User extends NOVO_Controller
 	{
 		writeLog('INFO', 'User: signIn Method Initialized');
 
-		languageCookie(BASE_LANGUAGE);
-		$view = 'signIn';
-
-		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
-			exit();
-		}
-
 		clearSessionsVars();
+		languageCookie(BASE_LANGUAGE);
+		SetSignSessionType(lang('SETT_COOKIE_SINGN_IN'));
+		$view = 'signIn';
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -45,8 +40,6 @@ class Novo_User extends NOVO_Controller
 				"third_party/borders"
 			);
 		}
-
-		SetSignSessionType(lang('SETT_COOKIE_SINGN_IN'));
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
