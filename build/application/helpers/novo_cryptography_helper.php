@@ -28,7 +28,7 @@ if (!function_exists('decryptData')) {
 			$requestData = utf8_encode($requestData);
 		}
 
-		return $CI->security->xss_clean(strip_tags($requestData));
+		return xss_clean(strip_tags($requestData));
 	}
 }
 
