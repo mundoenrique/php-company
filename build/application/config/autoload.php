@@ -102,6 +102,7 @@ $autoload['drivers'] = array();
 */
 $autoload['helper'] = array(
 	'url',
+	'security',
 	'cdn',
 	'encryption',
 	'connections',
