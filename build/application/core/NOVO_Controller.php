@@ -126,7 +126,6 @@ class NOVO_Controller extends CI_Controller
 			$customerTime = $this->session->time->customerTime;
 			$serverTime = $this->session->time->serverTime;
 			$currentTime = (int) date("H");
-			$currentTime2 = date("Y-d-m H:i:s");
 			$serverelapsed = $currentTime - $serverTime;
 			$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
 			$elapsed = $customerTime + $serverelapsed;
@@ -203,35 +202,22 @@ class NOVO_Controller extends CI_Controller
 					"$this->customerStyle/$this->customerStyle-base"
 				];
 			} else {
-				$file = $this->customerUri == 'bpi' ? 'pichincha' : 'novo';
+				$file = $this->customerUri === 'bpi' ? 'pichincha' : 'novo';
 				$this->includeAssets->cssFiles = [
 					"$file-validate",
 					"third_party/jquery-ui",
 					"$file-base"
 				];
 			}
-			$utilsFile = $this->wasMigrated ? "encrypt_decrypt thirdPartyConfig utils" : 'helper';
+			$utilsFile = $this->wasMigrated ? "common/index" : 'helper';
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.7.1",
 				"third_party/jquery-ui-1.13.2",
 				"third_party/aes",
-				"connection/core_app",
-				"modal/ui_modal",
 				"aes-json-format",
-				"helper",
+				$utilsFile
 			];
-
-			if ($this->wasMigrated) {
-				$helperPos = array_search('helper', $this->includeAssets->jsFiles, TRUE);
-				unset($this->includeAssets->jsFiles[$helperPos]);
-				array_push(
-					$this->includeAssets->jsFiles,
-					"utils",
-					"encrypt_decrypt",
-					"thirdPartyConfig",
-				);
-			}
 
 			if ($this->session->has_userdata('logged')) {
 				array_push(
@@ -248,7 +234,7 @@ class NOVO_Controller extends CI_Controller
 				}
 			}
 
-			if ($validateRecaptcha) {
+			if ($validateRecaptcha && !$this->wasMigrated) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"googleRecaptcha"
