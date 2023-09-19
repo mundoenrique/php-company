@@ -1,5 +1,6 @@
-'use strict';
-const uiModalMessage = function (modalArgs) {
+import { appLoader } from '../utils.js';
+
+export const uiModalMessage = function (modalArgs) {
 	const btn1 = modalArgs.modalBtn.btn1;
 	const btn2 = modalArgs.modalBtn.btn2;
 	const maxHeight = modalArgs.maxHeight || 350;
@@ -49,11 +50,10 @@ const uiModalMessage = function (modalArgs) {
 };
 
 const uiModalButtons = function (elementButton, valuesButton) {
-	const loaderBnt = getLoader();
 	elementButton.text(valuesButton.text);
 	elementButton.show();
 	elementButton.on('click', function () {
-		$(this).html(loaderBnt);
+		$(this).html(appLoader);
 		$(this).children('span').addClass('spinner-border-sm');
 
 		if (action.hasOwnProperty(valuesButton.action)) {
@@ -80,7 +80,7 @@ const uiModalButtons = function (elementButton, valuesButton) {
 	};
 };
 
-const uiMdalClose = function (close) {
+export const uiMdalClose = function (close) {
 	if ($('#system-info').parents('.ui-dialog').length && close) {
 		$('#system-info').dialog('destroy');
 		$('#system-msg').html(lang.GEN_SYSTEM_MESSAGE);
