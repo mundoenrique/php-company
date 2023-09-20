@@ -23,14 +23,7 @@ class Novo_User_Model extends NOVO_Model
 		writeLog('INFO', 'User Model: SignIn Method Initialized');
 
 		$userName = manageString($dataRequest->userName, 'upper', 'none');
-		$dataPass = json_decode(base64_decode($dataRequest->userPass));
-
-		if (property_exists($dataPass, 'data')) {
-			$password = decryptData($dataRequest->userPass);
-		} else {
-			$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
-		}
-
+		$password = decryptData($dataRequest->userPass);
 		$authToken = $this->session->flashdata('authToken') ?? '';
 
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -219,7 +212,7 @@ class Novo_User_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case 9997:
-				$this->response->code = 4;
+
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
@@ -227,7 +220,7 @@ class Novo_User_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				break;
 			case 9998:
-				$this->response->code = 4;
+
 				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('USER_EXPIRE_TIME');

@@ -43,6 +43,7 @@ if (!function_exists('encryptData')) {
 	function encryptData($responseData)
 	{
 		$CI = &get_instance();
+		$responseData->redirectLink = uriRedirect();
 		$responseData = [
 			'payload' => $responseData
 		];

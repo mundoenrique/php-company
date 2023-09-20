@@ -61,7 +61,13 @@ $(function () {
 	const handleSignInResponse = {
 		0: function (response) {
 			if (response.data.link) {
-				$(location).attr('href', response.data.link);
+				let link = response.data.link;
+
+				if (response.data.link.indexOf('dashboard') !== -1) {
+					link = link.replace(customerUri, customer);
+				}
+
+				$(location).attr('href', link);
 			} else {
 				toggleDisableActions(false);
 				btnCalled.html(btnSignin);

@@ -25,7 +25,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 
 		delete request.files;
 	}
-
+	console.log(logged || userId);
 	if (logged || userId) {
 		sessionControl();
 	}

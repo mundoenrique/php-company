@@ -378,17 +378,6 @@ class Novo_User extends NOVO_Controller
 	public function login()
 	{
 		writeLog('INFO', 'User: index Method Initialized');
-
-		if ($this->session->has_userdata('logged')) {
-			$urlRedirect = str_replace(
-				$this->customerUri . '/',
-				$this->config->item('customer') . '/',
-				base_url('dashboard')
-			);
-			redirect($urlRedirect, 'Location', 302);
-			exit;
-		}
-
 		clearSessionsVars();
 
 		$view = 'login';
@@ -401,10 +390,10 @@ class Novo_User extends NOVO_Controller
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods",
-			"user/login"
+			"third_party/jquery.validate-1.19.5",
+			"third_party/additional-methods-1.19.5",
+			"validation/messages_validation",
+			"user/signIn"
 		);
 
 		if ($this->customerUri !== 'bpi') {

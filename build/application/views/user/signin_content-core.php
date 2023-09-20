@@ -11,12 +11,12 @@
 					<form id="signInForm" name="signInForm" method="post" action="<?= base_url(('sign-in')) ?>">
 						<div class="form-group">
 							<label for="userName"><?= lang('GEN_USER'); ?></label>
-							<input type="text" id="userName" name="userName" class="form-control required-group" autocomplete="off" disabled>
+							<input type="text" id="userName" name="userName" class="form-control required-group" autocomplete="user-name" disabled>
 						</div>
 						<div class="form-group">
 							<label for="userPass"><?= lang('GEN_PASSWORD'); ?></label>
 							<div class="input-group">
-								<input type="password" id="userPass" name="userPass" class="form-control required-group pwd-input" autocomplete="off" disabled>
+								<input type="password" id="userPass" name="userPass" class="form-control required-group pwd-input" autocomplete="user-password" disabled>
 								<div class="input-group-append">
 									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 										<i class="icon-view mr-0"></i>
@@ -29,8 +29,8 @@
 							<span class="icon-lock mr-1 h3 bg-items" aria-hidden="true"></span>
 							<?= lang('LOGIN_BTN') ?>
 						</button>
-						<?php if (lang('SETT_SIGIN_RECOVER_PASS') == 'ON') : ?>
-							<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('SETT_LINK_RECOVER_ACCESS')); ?>">
+						<?php if (lang('SETT_SIGIN_RECOVER_PASS') === 'ON') : ?>
+							<a class="block mb-1 h5 primary hyper-link spiner-loader" href="<?= base_url(lang('SETT_LINK_RECOVER_ACCESS')); ?>">
 								<?= lang('LOGIN_RECOVER_PASS'); ?>
 							</a>
 						<?php endif; ?>

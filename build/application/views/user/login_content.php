@@ -1,9 +1,9 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+
 <div id="content">
 	<div class="img-back">
 		<h1 class="welcome-title"><?= lang('USER_WELCOME_TITLE'); ?></h1>
 	</div>
-
 	<p><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
 	<ul class='acordion kwicks kwicks-horizontal'>
 		<li class="acordion-item" id="panel-1">
@@ -23,10 +23,10 @@
 		<li>
 			<div class="acordion-item-content-3" id="panel-3">
 				<p><span aria-hidden="true" class="icon" data-icon="&#xe023;"></span>
-					<p class="titulo-login-desc"><?= lang('LOGIN_AUTOMATIC_UPGRADE_TITLE'); ?></p>
-					<p class='desc-func'>
-						<?= lang('LOGIN_AUTOMATIC_UPGRADE_MSG'); ?>
-					</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_AUTOMATIC_UPGRADE_TITLE'); ?></p>
+				<p class='desc-func'>
+					<?= lang('LOGIN_AUTOMATIC_UPGRADE_MSG'); ?>
+				</p>
 			</div>
 		</li>
 		<li>
@@ -44,15 +44,13 @@
 			</div>
 		</li>
 	</ul>
-
 	<div id="text-general">
-	<?php if(lang('SETT_SIGNIN_IMG') === 'ON'): ?>
-		<div class="text-brand">
-			<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $customerFiles); ?>"
-			alt="Tebca" />
-			<p>Emitido por Servitebca Péru, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A.</p>
-		</div>
-		<?php endif;?>
+		<?php if (lang('SETT_SIGNIN_IMG') === 'ON') : ?>
+			<div class="text-brand">
+				<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $customerFiles); ?>" alt="Tebca" />
+				<p>Emitido por Servitebca Péru, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A.</p>
+			</div>
+		<?php endif; ?>
 		<div class="text-der">
 			<p class="subtitulos-login"><?= lang('LOGIN_NEED_HELP_TITLE'); ?></p>
 			<p><?= lang('LOGIN_NEED_HELP_MSG'); ?></p>
@@ -62,5 +60,4 @@
 			<p><?= lang('LOGIN_INFO-3'); ?></p>
 		</div>
 	</div>
-
 </div>

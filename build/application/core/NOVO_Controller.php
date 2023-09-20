@@ -186,6 +186,7 @@ class NOVO_Controller extends CI_Controller
 			$this->render->favicon = lang('GEN_FAVICON') . '.' . lang('GEN_FAVICON_EXT');
 			$this->render->faviconExt = lang('GEN_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
+			$this->render->customer = $this->config->item('customer');
 			$this->render->customerStyle = $this->customerStyle;
 			$this->render->customerLang = $this->customerLang;
 			$this->render->customerFiles = $this->customerFiles;

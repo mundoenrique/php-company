@@ -383,7 +383,8 @@ if (!function_exists('methodWasmigrated')) {
 	{
 		$methodsIn = [
 			'signIn',
-			'finishSession'
+			'login',
+			'finishSession',
 		];
 
 		$migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;

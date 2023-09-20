@@ -12,3 +12,7 @@ export const takeFormData = function (form) {
 
 	return dataForm;
 };
+
+export const spinerLoader = function (show) {
+	show ? $('.cover-spin').show(0) : $('.cover-spin').hide();
+};
