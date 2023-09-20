@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_VIEW_SUFFIX'] = '';
 $lang['SETT_VALID_ERROR'] = 'validate-error';
 $lang['SETT_VALID_VALID'] = 'success';

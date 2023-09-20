@@ -71,7 +71,7 @@ class Recaptcha
 		$context  = stream_context_create($options);
 		$response = file_get_contents(self::site_verify_url, false, $context);
 		$responseKeys = json_decode($response);
-		header('Content-type: application/json');
+		// header('Content-type: application/json');
 
 		return $responseKeys;
 	}

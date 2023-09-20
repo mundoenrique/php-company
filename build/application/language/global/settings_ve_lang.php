@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)';
 $lang['SETT_FILES_EXTENSION'] = 'txt';
 $lang['SETT_BULK_AUTHORIZE'] = 'OFF';

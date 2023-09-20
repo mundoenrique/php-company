@@ -84,24 +84,26 @@ $(function () {
 		},
 		2: function (response) {},
 		3: function (response) {
-			const modalArgs = {
-				title: response.title,
-				msg: response.msg,
-				icon: response.icon,
-				modalBtn: response.modalBtn,
-				minWidth: 480,
-				maxHeight: 'none',
-				posAt: 'center top',
-				posMy: 'center top+60',
-			};
-			uiModalMessage(modalArgs);
+			const img = document.createElement('img');
+			img.setAttribute('src', response.data.img);
+			img.setAttribute('alt', 'Notificación');
+			img.setAttribute('style', 'height: 440px; width: 425px;');
+			document.getElementById('system-msg').appendChild(img);
+
+			response.msg = '';
+			response.minWidth = 470;
+			response.maxHeight = 'none';
+			response.posAt = 'center top';
+			response.posMy = 'center top+60';
+
+			uiModalMessage(response);
 
 			toggleDisableActions(false);
 			btnCalled.html(btnSignin);
 			formSignin.validate().resetForm();
 		},
 		4: function (response) {
-			if (response.data.action === 'session-close') {
+			if (response.data.action) {
 				$('#accept').addClass(response.data.action);
 			}
 

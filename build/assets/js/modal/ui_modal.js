@@ -1,12 +1,16 @@
 import { appLoader } from '../utils.js';
 
 export const uiModalMessage = function (modalArgs) {
-	const btn1 = modalArgs.modalBtn.btn1;
-	const btn2 = modalArgs.modalBtn.btn2;
 	const width = modalArgs.width || lang.SETT_MODAL_WIDTH;
 	const minWidth = modalArgs.minWidth || lang.SETT_MODAL_WIDTH;
-	const maxHeight = modalArgs.maxHeight || 350;
-	const minHeight = modalArgs.minHeight || 100;
+	const maxWidth = modalArgs.maxWidth || lang.SETT_MODAL_WIDTH;
+	const height = modalArgs.height || lang.SETT_MODAL_HEIGHT;
+	const minHeight = modalArgs.minHeight || lang.SETT_MODAL_MINHEIGHT;
+	const maxHeight = modalArgs.maxHeight || lang.SETT_MODAL_MAXHEIGHT;
+	const icon = modalArgs.icon || false;
+	const msg = modalArgs.msg || false;
+	const btn1 = modalArgs.modalBtn.btn1;
+	const btn2 = modalArgs.modalBtn.btn2;
 
 	$('#system-info').dialog({
 		title: modalArgs.title || lang.GEN_SYSTEM_NAME,
@@ -18,8 +22,10 @@ export const uiModalMessage = function (modalArgs) {
 		closeOnEscape: false,
 		width: width,
 		minWidth: minWidth,
+		maxWidth: maxWidth,
+		height: height,
 		minHeight: minHeight,
-		maxHeight: maxHeight !== 'none' ? maxHeight : false,
+		maxHeight: maxHeight,
 		dialogClass: 'border-none',
 		classes: {
 			'ui-dialog-titlebar': 'border-none',
@@ -31,11 +37,13 @@ export const uiModalMessage = function (modalArgs) {
 
 			$('#system-icon').removeAttr('class');
 
-			if (modalArgs.icon !== '') {
-				$('#system-icon').addClass(lang.SETT_ICON + ' ' + modalArgs.icon);
+			if (icon && icon !== '') {
+				$('#system-icon').addClass(lang.SETT_ICON + ' ' + icon);
 			}
 
-			$('#system-msg').html(modalArgs.msg || lang.GEN_SYSTEM_MESSAGE);
+			if (msg && msg !== '') {
+				$('#system-msg').html(msg);
+			}
 
 			if (!btn1) {
 				$('#accept').addClass('hide');
@@ -86,7 +94,7 @@ const uiModalButtons = function (elementButton, valuesButton) {
 export const uiMdalClose = function (close) {
 	if ($('#system-info').parents('.ui-dialog').length && close) {
 		$('#system-info').dialog('destroy');
-		$('#system-msg').html(lang.GEN_SYSTEM_MESSAGE);
+		$('#system-msg').html('');
 		$('#accept')
 			.prop('disabled', false)
 			.html(lang.GEN_BTN_ACCEPT)

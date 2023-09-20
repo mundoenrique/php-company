@@ -371,23 +371,28 @@ if (!function_exists('setSignSessionType')) {
 	}
 }
 
-if (!function_exists('moduleWasmigrated')) {
+if (!function_exists('methodWasmigrated')) {
 	/**
-	 * @info Valid if the module was migrated
+	 * @info Valid if the method was migrated
 	 * @author epenaloza
-	 * @date (September 18th, 2023
-	 * @param string $module module to valid
+	 * @date September 18th, 2023
+	 * @param string $method method to valid
 	 * @return bool
 	 */
-	function moduleWasmigrated($module)
+	function methodWasmigrated($method, $class)
 	{
-		$modulesIn = [
-			'signIn'
+		$methodsIn = [
+			'signIn',
+			'finishSession'
 		];
 
-		$migratedModule = array_search($module, $modulesIn, TRUE) !== FALSE;
+		$migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;
 
-		writeLog('INFO', '**** Migrated module ' . $module . ' ****: ' . json_encode($migratedModule, JSON_UNESCAPED_UNICODE));
+		writeLog(
+			'INFO',
+			'************************ METHOD ' . $method . ' FROM CLASS ' . $class . ' MIGRATED ************************: ' .
+				json_encode($migratedModule, JSON_UNESCAPED_UNICODE)
+		);
 
 		return $migratedModule;
 	}

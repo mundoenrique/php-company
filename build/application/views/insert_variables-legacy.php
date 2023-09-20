@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <script>
 	var lang = <?php print_r(json_encode($this->lang->language)); ?>;
 	var baseURL = '<?= base_url(); ?>';
@@ -17,4 +17,5 @@
 	var callModal = <?= $callModal; ?>;
 	var callServer = <?= $callServer; ?>;
 	var data;
+	const activeSafety = <?= json_encode(ACTIVE_SAFETY); ?>;
 </script>

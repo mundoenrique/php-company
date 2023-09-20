@@ -1,3 +1,6 @@
+import { CryptoJS } from '../third_party/aes-3.1.2.min.js';
+import { CryptoJSAesJson } from './common.js';
+
 export const cryptography = {
 	encrypt: function (request) {
 		let requestData = typeof request === 'string' ? request : JSON.stringify(request);

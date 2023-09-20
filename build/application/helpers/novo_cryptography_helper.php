@@ -25,7 +25,7 @@ if (!function_exists('decryptData')) {
 			$req = json_decode(base64_decode($requestData));
 			$requestData = $CI->cryptography->decrypt(base64_decode($req->plot), utf8_encode($req->data));
 		} else {
-			$requestData = utf8_encode($requestData);
+			$requestData = $requestData;
 		}
 
 		return xss_clean(strip_tags($requestData));
@@ -44,14 +44,14 @@ if (!function_exists('encryptData')) {
 	{
 		$CI = &get_instance();
 		$responseData = [
-			'response' => $responseData
+			'payload' => $responseData
 		];
 
 		if (ACTIVE_SAFETY) {
-			$responseData['response']->novoName = $CI->security->get_csrf_token_name();
-			$responseData['response']->novoValue = $CI->security->get_csrf_hash();
-			$responseData['response'] = base64_encode(
-				json_encode($CI->cryptography->encrypt($responseData['response']), JSON_UNESCAPED_UNICODE)
+			$responseData['payload']->novoName = $CI->security->get_csrf_token_name();
+			$responseData['payload']->novoValue = $CI->security->get_csrf_hash();
+			$responseData['payload'] = base64_encode(
+				json_encode($CI->cryptography->encrypt($responseData['payload']), JSON_UNESCAPED_UNICODE)
 			);
 		}
 

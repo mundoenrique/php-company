@@ -23,7 +23,14 @@ class Novo_User_Model extends NOVO_Model
 		writeLog('INFO', 'User Model: SignIn Method Initialized');
 
 		$userName = manageString($dataRequest->userName, 'upper', 'none');
-		$password = decryptData($dataRequest->userPass);
+		$dataPass = json_decode(base64_decode($dataRequest->userPass));
+
+		if (property_exists($dataPass, 'data')) {
+			$password = decryptData($dataRequest->userPass);
+		} else {
+			$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
+		}
+
 		$authToken = $this->session->flashdata('authToken') ?? '';
 
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -170,7 +177,7 @@ class Novo_User_Model extends NOVO_Model
 				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $response->usuario->emailEnc);
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'request';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', json_decode($response->usuario->codigoOtp->access_token));
@@ -179,7 +186,10 @@ class Novo_User_Model extends NOVO_Model
 				$this->response->code = 3;
 				$this->response->icon = '';
 				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), assetUrl('images/nueva-expresion-monetaria.png'));
+				$img = $this->asset->insertFile('nueva-expresion-monetaria.png', 'images', $this->customerFiles);
+				// $this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), $img);
+				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
+				$this->response->data->img = $img;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				break;

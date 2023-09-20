@@ -113,8 +113,8 @@ function getSignIn(forWhere) {
 			case 1:
 				$('#userName').showBalloon({
 					html: true,
-					classname: response.className,
-					position: response.position,
+					classname: response.data.className,
+					position: response.data.position,
 					contents: response.msg,
 				});
 				break;
@@ -155,7 +155,7 @@ function getSignIn(forWhere) {
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 				break;
 			default:
-				if (response.data == 'session-close') {
+				if (response.data.action) {
 					$('#accept').addClass(response.data.action);
 					windowsStyle();
 				}

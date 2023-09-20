@@ -55,7 +55,7 @@ class NOVO_Controller extends CI_Controller
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
 		$this->isValidRequest = FALSE;
-		$this->wasMigrated = moduleWasmigrated($this->controllerMethod);
+		$this->wasMigrated = methodWasmigrated($method, $class);
 
 		$this->optionsCheck();
 	}
@@ -78,10 +78,14 @@ class NOVO_Controller extends CI_Controller
 			unset($_POST);
 
 			if ($this->input->is_ajax_request()) {
-				$this->fileLanguage = lcfirst($this->dataRequest->module);
-				$this->modelClass = 'Novo_' . ucfirst($this->dataRequest->module) . '_Model';
-				$this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->section) . '_' . $this->dataRequest->module;
-				$this->validationMethod = lcfirst($this->dataRequest->section);
+				$class = $this->dataRequest->module;
+				$section = $this->dataRequest->section;
+
+				$this->fileLanguage = lcfirst($class);
+				$this->modelClass = 'Novo_' . ucfirst($class) . '_Model';
+				$this->modelMethod = 'callWs_' . ucfirst($section) . '_' . ucfirst($class);
+				$this->validationMethod = lcfirst($section);
+				$this->wasMigrated = methodWasmigrated($this->validationMethod, $this->modelClass);
 			}
 
 			foreach ($this->dataRequest->data as $item => $value) {
@@ -154,7 +158,7 @@ class NOVO_Controller extends CI_Controller
 						)
 					)
 				)
-			) : json_decode(utf8_encode($this->input->get_post('request')));
+			) : json_decode($this->input->get_post('request'));
 		} else {
 			$access = $this->verify_access->accessAuthorization($this->validationMethod);
 			$valid = TRUE;
@@ -209,15 +213,25 @@ class NOVO_Controller extends CI_Controller
 					"$file-base"
 				];
 			}
-			$utilsFile = $this->wasMigrated ? "common/index" : 'helper';
+
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.7.1",
 				"third_party/jquery-ui-1.13.2",
-				"third_party/aes",
-				"aes-json-format",
-				$utilsFile
+				"common/index",
 			];
+
+			if (!$this->wasMigrated) {
+				$posIndex = array_search('common/index', $this->includeAssets->jsFiles, TRUE);
+				unset($this->includeAssets->jsFiles[$posIndex]);
+
+				array_push(
+					$this->includeAssets->jsFiles,
+					"third_party/aes",
+					"aes-json-format",
+					"helper"
+				);
+			}
 
 			if ($this->session->has_userdata('logged')) {
 				array_push(
@@ -234,11 +248,13 @@ class NOVO_Controller extends CI_Controller
 				}
 			}
 
-			if ($validateRecaptcha && !$this->wasMigrated) {
-				array_push(
-					$this->includeAssets->jsFiles,
-					"googleRecaptcha"
-				);
+			if ($validateRecaptcha) {
+				if (!$this->wasMigrated) {
+					array_push(
+						$this->includeAssets->jsFiles,
+						"googleRecaptcha"
+					);
+				}
 
 				if (ACTIVE_RECAPTCHA) {
 					$this->load->library('recaptcha');

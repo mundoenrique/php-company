@@ -445,12 +445,12 @@ $config = [
 		[
 			'field' => 'phone2',
 			'label' => 'phone2',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[0-9]*$]'
 		],
 		[
 			'field' => 'phone3',
 			'label' => 'phone3',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'rules' => 'trim|regex_match[/^[0-9]*$]'
 		]
 	],
 	'changeDataEnterprice' => [
@@ -523,22 +523,22 @@ $config = [
 		[
 			'field' => 'contactNames',
 			'label' => 'contactNames',
-			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
 		],
 		[
 			'field' => 'contactLastNames',
 			'label' => 'contactLastNames',
-			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
 		],
 		[
 			'field' => 'contactPosition',
 			'label' => 'contactPosition',
-			'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
 		],
 		[
 			'field' => 'idExtPer',
 			'label' => 'idExtPer',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\s]/i]|required'
 		],
 		[
 			'field' => 'contactEmail',

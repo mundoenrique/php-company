@@ -63,7 +63,7 @@ class Verify_Access
 			}
 		}
 
-		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': '	.
+		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': ' .
 			json_encode($requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $requestServ;
@@ -82,8 +82,9 @@ class Verify_Access
 		$responseDefect = new stdClass();
 		$responseDefect->code = lang('SETT_DEFAULT_CODE');
 		$responseDefect->title = lang('GEN_SYSTEM_NAME');
+		$responseDefect->icon = lang('SETT_ICON_DANGER');
 		$responseDefect->msg = lang('GEN_VALIDATION_INPUT');
-		$responseDefect->icon = lang('SETT_ICON_WARNING');
+		$responseDefect->data = new stdClass();
 		$responseDefect->modalBtn = [
 			'btn1' => [
 				'text' => lang('GEN_BTN_ACCEPT'),

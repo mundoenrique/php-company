@@ -108,7 +108,7 @@
 		<span class="dialog-icon">
 			<i id="system-icon"></i>
 		</span>
-		<span id="system-msg" class="system-msg"><?= lang('GEN_SYSTEM_MESSAGE'); ?></span>
+		<span id="system-msg" class="system-msg"></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset flex">

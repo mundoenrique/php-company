@@ -1,8 +1,9 @@
 import { cryptography } from '../common/encrypt_decrypt.js';
 import { uiMdalClose, uiModalMessage } from '../modal/ui_modal.js';
+import { toggleDisableActions } from '../utils.js';
 
 export const calledCoreApp = function (module, section, request, _response_ = false) {
-	const uri = request.route || '/callCoreApp';
+	const uri = request.route || 'callCoreApp';
 	delete request.route;
 	const formData = new FormData();
 	let dataRequest = {
@@ -40,18 +41,17 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 		dataType: 'json',
 	})
 		.done(function (data, status, jqXHR) {
-			const response = cryptography.decrypt(data.response);
+			const response = cryptography.decrypt(data.payload);
 			const modalClose = response.keepModal ? false : true;
 			uiMdalClose(modalClose);
 
+			if (activeSafety) {
+				novoName = response.novoName;
+				novoValue = response.novoValue;
+			}
+
 			if (response.code === lang.SETT_DEFAULT_CODE) {
-				const modalArgs = {
-					title: response.title,
-					msg: response.msg,
-					icon: response.icon,
-					modalBtn: response.modalBtn,
-				};
-				uiModalMessage(modalArgs);
+				uiModalMessage(response);
 			}
 
 			if (_response_) {
@@ -59,9 +59,14 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 			}
 		})
 		.fail(function (jqXHR, textStatus, errorThrown) {
+			toggleDisableActions(false);
 			uiMdalClose(true);
 			const response = {
 				code: lang.SETT_DEFAULT_CODE,
+				icon: lang.SETT_ICON_DANGER,
+				title: lang.GEN_SYSTEM_NAME,
+				msg: lang.GEN_SYSTEM_MESSAGE,
+				data: {},
 				modalBtn: {
 					btn1: {
 						link: redirectLink,
@@ -69,14 +74,8 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 					},
 				},
 			};
-			const modalArgs = {
-				title: lang.GEN_SYSTEM_NAME,
-				msg: lang.GEN_SYSTEM_MESSAGE,
-				icon: response.icon,
-				modalBtn: lang.SETT_ICON_DANGER,
-			};
 
-			uiModalMessage(modalArgs);
+			uiModalMessage(response);
 
 			if (_response_) {
 				_response_(response);
