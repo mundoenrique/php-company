@@ -103,6 +103,7 @@ export const uiMdalClose = function (close) {
 		// .off('click');
 		$('#cancel')
 			.prop('disabled', false)
+			.html(lang.GEN_BTN_CANCEL)
 			.removeClass()
 			.addClass(lang.SETT_MODAL_BTN_CLASS['cancel'])
 			.html(lang.GEN_BTN_CANCEL);
