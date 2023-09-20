@@ -90,7 +90,6 @@ class Connect_Services_Apis
 		$userpassBulk =  BULK_FTP_USERNAME . ':' . base64_decode(BULK_FTP_PASSWORD);
 
 		writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
-		writeLog('INFO', 'USER CREDENCIALS: ' . $userpassBulk);
 
 		$curl = curl_init();
 		$sftp = fopen(UPLOAD_PATH . $file, 'r');
