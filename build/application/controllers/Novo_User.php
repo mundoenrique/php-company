@@ -21,7 +21,6 @@ class Novo_User extends NOVO_Controller
 		writeLog('INFO', 'User: signIn Method Initialized');
 
 		clearSessionsVars();
-		languageCookie(BASE_LANGUAGE);
 		SetSignSessionType(lang('SETT_COOKIE_SINGN_IN'));
 		$view = 'signIn';
 
@@ -54,7 +53,6 @@ class Novo_User extends NOVO_Controller
 	{
 		writeLog('INFO', 'User: singleSignOn Method Initialized');
 
-		languageCookie(BASE_LANGUAGE);
 		clearSessionsVars();
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
@@ -98,7 +96,6 @@ class Novo_User extends NOVO_Controller
 	{
 		writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
-		languageCookie(BASE_LANGUAGE);
 		clearSessionsVars();
 		$view = 'recoverPass';
 
@@ -124,7 +121,6 @@ class Novo_User extends NOVO_Controller
 	{
 		writeLog('INFO', 'User: recoverAccess Method Initialized');
 
-		languageCookie(BASE_LANGUAGE);
 		clearSessionsVars();
 		$view = 'recoverAccess';
 

@@ -617,12 +617,18 @@ class Novo_User_Model extends NOVO_Model
 	{
 		writeLog('INFO', 'User Model: ChangeLanguage Method Initialized');
 
+		$search = [$this->customerUri . '/', '/' . lang('GEN_BEFORE_COD_LANG')];
+		$replace = ['/', '/' . lang('GEN_AFTER_COD_LANG')];
+		$path = str_replace($search, $replace, $dataRequest->path);
 		$response = new stdClass();
-		$response->rc =  0;
+		$response->responseCode =  0;
 		$this->makeAnswer($response, 'callWs_ChangeLanguage');
-		$this->response->code = 0;
 
-		languageCookie(lang('GEN_AFTER_LANG'));
+		languageCookie($dataRequest->lang);
+
+		$this->response->code = 0;
+		$this->response->msg = 'Idioma cambiado a ' . lang('GEN_AFTER_LANG');
+		$this->response->data->link = base_url($path);
 
 		return $this->responseToTheView('ChangeLanguage');
 	}

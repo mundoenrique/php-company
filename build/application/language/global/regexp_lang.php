@@ -8,5 +8,6 @@ $regexPass = ACTIVE_SAFETY ? '^([a-zA-Z0-9=]+)+$' : $lang['REGEX_PASSWORD'];
 $lang['REGEX_PASSWORD_SERVER'] = 'trim|regex_match[/' . $regexPass . '/i]|required';
 
 
-
+$lang['REGEX_CHANGE_LANG'] = '(es|en)';
+$lang['REGEX_CHANGE_LANG_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CHANGE_LANG'] . '/]|required';
 $lang['REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';

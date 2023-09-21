@@ -98,13 +98,58 @@ if (!function_exists('LoadLangFile')) {
 	}
 }
 
-if (!function_exists('languageCookie')) {
-	function languageCookie($language)
+if (!function_exists('getLanguageValues')) {
+	/**
+	 * @info Get language cookie value.
+	 * @author epenaloza
+	 * @date September 20th, 2023
+	 * @return array $language .language values
+	 */
+	function getLanguageValues()
 	{
+		$CI = &get_instance();
+		$language = lang('SETT_LANGUAGE')['es'];
+		$cookieLang = get_cookie('baseLanguage', TRUE);
+		$cookieLang = ACTIVE_SAFETY ? base64_decode($cookieLang) : $cookieLang;
+		$uriCode = $CI->uri->segment(3, 0);
+
+		$validCookie = array_key_exists($cookieLang, lang('SETT_LANG_CODE'));
+		$validUri = array_key_exists($uriCode, lang('SETT_LANGUAGE'));
+
+		$cookieLang = $validCookie ? $cookieLang : $language;
+		$uriLang = $validUri ? lang('SETT_LANGUAGE')[$uriCode] : $cookieLang;
+		$language = $uriLang;
+
+		if ($cookieLang !== $uriLang) {
+			languageCookie(lang('SETT_LANG_CODE')[$language]);
+		}
+
+		return [
+			'lang' => $language,
+			'code' => lang('SETT_LANG_CODE')[$language]
+		];
+	}
+}
+
+if (!function_exists('languageCookie')) {
+	/**
+	 * @info Set language cookie value.
+	 * @author epenaloza
+	 * @date September 20th, 2023
+	 * @param string $lang language es | en
+	 * @return void
+	 */
+	function languageCookie($lang)
+	{
+		$isValidLang = array_key_exists($lang, lang('SETT_LANGUAGE'));
+		$lang = $isValidLang ? $lang : lang('SETT_LANG_CODE')['spanish'];
+
+		$baseLanguage = ACTIVE_SAFETY ? base64_encode(lang('SETT_LANGUAGE')[$lang]) : lang('SETT_LANGUAGE')[$lang];
+
 		$baseLanguage = [
 			'name' => 'baseLanguage',
-			'value' => $language,
-			'expire' => 0,
+			'value' => $baseLanguage,
+			'expire' => 259200,
 			'httponly' => TRUE
 		];
 

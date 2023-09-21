@@ -343,6 +343,8 @@ if (!function_exists('getSignSessionType ')) {
 	{
 		$signType = get_cookie('signSessionType', TRUE);
 		$signType = ACTIVE_SAFETY ? base64_decode($signType) : $signType;
+		$signType = $signType === NULL && SINGLE_SIGN_ON
+			? 'ingresar/' . lang('SETT_LINK_SIGNOUT_END') : lang('SETT_LINK_SIGNIN');
 
 		return $signType;
 	}
@@ -363,7 +365,7 @@ if (!function_exists('setSignSessionType')) {
 		$signSessionType = [
 			'name' => 'signSessionType',
 			'value' => $SignSessionType,
-			'expire' => 0,
+			'expire' => 259200,
 			'httponly' => TRUE
 		];
 

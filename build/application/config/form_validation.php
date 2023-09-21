@@ -20,6 +20,12 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'changeLanguage' => [
+		[
+			'field' => 'lang',
+			'rules' => lang('REGEX_CHANGE_LANG_SERVER')
+		]
+	],
 	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
@@ -1860,12 +1866,6 @@ $config = [
 			'field' => 'modalReq',
 			'label' => 'modalReq',
 			'rules' => 'trim'
-		]
-	],
-	'changeLanguage' => [
-		[
-			'field' => 'lang',
-			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
 		]
 	],
 	// Old Arquitectures

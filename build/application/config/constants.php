@@ -124,20 +124,7 @@ $timeZone = [
 $errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
-$baseLanguage = 'spanish';
 
-switch (end($uriSegments)) {
-	case 'es':
-		$baseLanguage = 'spanish';
-		break;
-	case 'en':
-		$baseLanguage = 'english';
-		break;
-	default:
-		if (isset($_COOKIE['ceo_baseLanguage']) && ($_COOKIE['ceo_baseLanguage'] === 'spanish' || $_COOKIE['ceo_baseLanguage'] === 'english')) {
-			$baseLanguage = $_COOKIE['ceo_baseLanguage'];
-		}
-}
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -146,7 +133,6 @@ switch (end($uriSegments)) {
 defined('BASE_URL')					or define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')				or define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')				or define('ASSET_PATH', $_SERVER['ASSET_PATH']);
-defined('BASE_LANGUAGE')		or define('BASE_LANGUAGE', $baseLanguage);
 defined('THRESHOLD')				or define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					or define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
 defined('ENCRYPTION_KEY')		or define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
@@ -169,7 +155,6 @@ defined('ACTIVE_SAFETY')		or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] =
 defined('CYPHER_BASE')			or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
-defined('LANGUAGE')					or define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')				or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
 defined('SINGLE_SIGN_ON')		or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
 defined('API_CONTENT_URL')	or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
@@ -190,4 +175,4 @@ defined('SERVICE_URL')						or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
 defined('SERVICE_CLIENT_ID')			or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')	or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($uriSegments, $timeZone, $baseLanguage, $errorController);
+unset($uriSegments, $timeZone, $errorController);

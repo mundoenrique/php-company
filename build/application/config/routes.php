@@ -52,6 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'Novo_User/login';
 $route['404_override'] = ERROR_CONTROLLER;
 $route['translate_uri_dashes'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | TEMPORAL ROUTES
@@ -65,43 +66,71 @@ $route['(bpi|co|per|usd|ve)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(bpi|co|per|usd|ve)/inf-condiciones'] = "Novo_Information/terms";
 /*
 |--------------------------------------------------------------------------
-| CURRENT ROUTES
+*/
+
+/*
+|--------------------------------------------------------------------------
+| ASYNC ROUTES
 |--------------------------------------------------------------------------
 */
 $route['(:any)/callCoreApp'] = "Novo_LoadModels";
 $route['(:any)/async-call'] = "Novo_CallModels";
 $route['(:any)/single'] = "Novo_CallModels";
+/*
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| EXTERNAL ROUTES
+|--------------------------------------------------------------------------
+*/
 $route['(:any)/inicio'] = function ($customer) {
 	header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
 	exit;
 };
 $route['(:any)/sign-in'] = function ($customer) {
-	$denyUri = ['per', 'usd', 've'];
-	$deny = array_search($customer, $denyUri, TRUE);
+	$denyUri = ['bpi', 'co', 'per', 'usd', 've'];
+	$deny = in_array($customer, $denyUri, TRUE);
 
-	if ($deny !== FALSE) {
+	if ($deny) {
 		header('Location: ' . BASE_URL . $customer . '/inicio', 302);
 		exit;
 	}
 
 	return 'Novo_User/signIn';
 };
-$route['(:any)/sign-in/(es|en)'] = "Novo_User/signIn/$2";
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
-$route['(:any)/suggestion'] = "Novo_User/suggestion";
 $route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
-$route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
-$route['(:any)/recover-password'] = "Novo_User/recoverPass";
-$route['(:any)/recover-password/(:any)'] = "Novo_User/recoverPass";
-$route['(:any)/recover-access'] = "Novo_User/recoverAccess";
-$route['(:any)/recover-access/(:any)'] = "Novo_User/recoverAccess";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
-$route['(:any)/users-management'] = "Novo_User/usersManagement";
-$route['(:any)/user-permissions'] = "Novo_User/userPermissions";
+$route['(:any)/recover-password'] = "Novo_User/recoverPass";
+$route['(:any)/recover-access'] = "Novo_User/recoverAccess";
 $route['(:any)/terms'] = "Novo_Information/termsInf";
 $route['(:any)/benefits'] = "Novo_Information/benefitsInf";
+$route['(:any)/suggestion'] = "Novo_User/suggestion";
+/*
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| EXTERNAL ROUTES WITH LANGUAGE
+|--------------------------------------------------------------------------
+*/
+$route['(:any)/sign-in/(es|en)'] = "Novo_User/signIn";
+$route['(:any)/ingresar/(:any)/(es|en)']['GET'] = "Novo_User/singleSignOn";
+$route['(:any)/ingresar/(es|en)']['POST'] = "Novo_User/singleSignOn";
+$route['(:any)/recover-password/(es|en)'] = "Novo_User/recoverPass";
+$route['(:any)/recover-access/(es|en)'] = "Novo_User/recoverAccess";
+/*
+|--------------------------------------------------------------------------
+*/
+
 $route['(:any)/rates'] = "Novo_Information/ratesInf";
+$route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
+$route['(:any)/users-management'] = "Novo_User/usersManagement";
+$route['(:any)/user-permissions'] = "Novo_User/userPermissions";
 $route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
 $route['(:any)/products'] = "Novo_Business/getProducts";
 $route['(:any)/product-detail'] = "Novo_Business/getProductDetail";
@@ -136,7 +165,6 @@ $route['(:any)/status-master-account'] = "Novo_Reports/statusMasterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
 $route['(:any)/tools'] = "Novo_Tools/options";
-$route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
 $route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
 $route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount";
@@ -147,6 +175,16 @@ $route['(:any)/empresa'] = "Novo_Tools/getEnterprise";
 $route['(:any)/Contact'] = "Novo_Tools/addContact";
 $route['(:any)/cambiar-email'] = "Novo_Tools/changeEmail";
 $route['(:any)/cambiar-telefonos'] = "Novo_Tools/changeTelephones";
+
+
+$route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
+$route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
+$route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | OLD ROUTES
@@ -348,6 +386,8 @@ $route['(:any)/visa'] = "visa/callWSVisaModel/$1";
 $route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
 $route['(:any)/pagos'] = "payment/payments/$1";
 $route['(:any)/payments'] = "payment/callAPImodel/$1";
-//cuenta maestra
-$route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
-$route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
+/*
+|--------------------------------------------------------------------------
+| OLD ROUTES
+|--------------------------------------------------------------------------
+*/
