@@ -446,17 +446,17 @@ $config = [
 		[
 			'field' => 'phone1',
 			'label' => 'phone1',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[0-9]*$/]|required'
 		],
 		[
 			'field' => 'phone2',
 			'label' => 'phone2',
-			'rules' => 'trim|regex_match[/^[0-9]*$]'
+			'rules' => 'trim|regex_match[/^[0-9]*$/]'
 		],
 		[
 			'field' => 'phone3',
 			'label' => 'phone3',
-			'rules' => 'trim|regex_match[/^[0-9]*$]'
+			'rules' => 'trim|regex_match[/^[0-9]*$/]'
 		]
 	],
 	'changeDataEnterprice' => [
