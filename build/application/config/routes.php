@@ -75,11 +75,21 @@ $route['(:any)/inicio'] = function ($customer) {
 	header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
 	exit;
 };
+$route['(:any)/sign-in'] = function ($customer) {
+	$denyUri = ['per', 'usd', 've'];
+	$deny = array_search($customer, $denyUri, TRUE);
+
+	if ($deny !== FALSE) {
+		header('Location: ' . BASE_URL . $customer . '/inicio', 302);
+		exit;
+	}
+
+	return 'Novo_User/signIn';
+};
+$route['(:any)/sign-in/(es|en)'] = "Novo_User/signIn/$2";
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
 $route['(:any)/suggestion'] = "Novo_User/suggestion";
-$route['(:any)/sign-in'] = "Novo_User/signIn";
-$route['(:any)/sign-in/(:any)'] = "Novo_User/signIn";
 $route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
 $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recover-password'] = "Novo_User/recoverPass";
