@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="menu-help none" id="widget-menu">
-				<?php if (lang('SETT_BTN_LANG') === 'ON') : ?>
+				<?php if (lang('SETT_CHANGE_LANG') === 'ON') : ?>
 					<div class="menu-item">
 						<div class="btn-lang-circle">
 							<div class="btn-lang-img">
@@ -88,7 +88,7 @@
 	<?php $this->load->view('widget/widget_contacts_content-core') ?>
 <?php endif; ?>
 
-<?php if (lang('SETT_BTN_LANG') === 'ON' && lang('SETT_MENU_CIRCLE') === 'OFF') : ?>
+<?php if (lang('SETT_CHANGE_LANG') === 'ON' && lang('SETT_MENU_CIRCLE') === 'OFF') : ?>
 	<div class="btn-lang">
 		<div class="btn-lang-img">
 			<a id="change-lang" class="spiner-loader" href="<?= lang('SETT_NO_LINK') ?>">

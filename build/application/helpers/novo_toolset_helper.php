@@ -360,6 +360,10 @@ if (!function_exists('setSignSessionType')) {
 	 */
 	function setSignSessionType($signType)
 	{
+		if (get_cookie('ceo_singleSession') !== NULL) {
+			delete_cookie('ceo_singleSession', config_item('cookie_domain'), config_item('cookie_path'));
+		}
+
 		$SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
 
 		$signSessionType = [
