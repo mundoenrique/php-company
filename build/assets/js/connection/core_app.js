@@ -43,6 +43,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 		.done(function (data, status, jqXHR) {
 			const response = cryptography.decrypt(data.payload);
 			const modalClose = response.keepModal ? false : true;
+			redirectLink = response.redirectLink;
 			uiMdalClose(modalClose);
 
 			if (activeSafety) {
