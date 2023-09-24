@@ -391,6 +391,7 @@ if (!function_exists('methodWasmigrated')) {
 			'signIn',
 			'login',
 			'finishSession',
+			'changeLanguage',
 		];
 
 		$migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;
