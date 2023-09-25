@@ -32,7 +32,7 @@ if (!function_exists('LoadLangFile')) {
 	 * @info Load language file
 	 * @author epenaloza
 	 * @date January 25th, 2020
-	 * @param string $call general or specific
+	 * @param string $call general | specific
 	 * @param string $fileLanguage language file
 	 * @param string $customerLang language custumer
 	 * @return void

@@ -131,7 +131,7 @@ SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
 #------------------#
 SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
 SetEnv BULK_FTP_USERNAME npdaemon
-SetEnv BULK_FTP_PASSWORD npd43m0n
+SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 
 #-------------------------------------------------------------------#
 #															TESTING																#
@@ -194,7 +194,7 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------#
 # SetEnv BULK_FTP_URL sftp://172.24.6.154:22/opt/npdaemon/
 # SetEnv BULK_FTP_USERNAME npdaemon
-# SetEnv BULK_FTP_PASSWORD npd43m0n
+# SetEnv BULK_FTP_PASSWORD QiE5ek1nTHR4RWtTUFEkeQ==
 
 #-------------------------------------------------------------------#
 #																UAT																	#
@@ -257,7 +257,7 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------#
 # SetEnv BULK_FTP_URL sftp://172.24.6.155:22/opt/npdaemon/
 # SetEnv BULK_FTP_USERNAME npdaemon
-# SetEnv BULK_FTP_PASSWORD npd43m0n
+# SetEnv BULK_FTP_PASSWORD M1BaZVMhSFF3ckNLOFhFJA==
 
 #-------------------------------------------------------------------#
 #														PRODUCTION															#

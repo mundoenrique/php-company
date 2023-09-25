@@ -90,14 +90,14 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 |--------------------------------------------------------------------------
 */
 $db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
-defined('DB_HOSTNAME')	or define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME'] ?? NULL);
-defined('DB_PORT')			or define('DB_PORT', $db_port);
-defined('DB_USERNAME')	or define('DB_USERNAME', $_SERVER['DB_USERNAME'] ?? NULL);
-defined('DB_PASSWORD')	or define('DB_PASSWORD', $_SERVER['DB_PASSWORD'] ?? NULL);
-defined('DB_DRIVER')		or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
-defined('DB_CHARSET')		or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
-defined('DB_COLLATION')	or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
-defined('DB_VERIFY')		or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
+defined('DB_HOSTNAME')    or define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME'] ?? NULL);
+defined('DB_PORT')        or define('DB_PORT', $db_port);
+defined('DB_USERNAME')    or define('DB_USERNAME', $_SERVER['DB_USERNAME'] ?? NULL);
+defined('DB_PASSWORD')    or define('DB_PASSWORD', $_SERVER['DB_PASSWORD'] ?? NULL);
+defined('DB_DRIVER')      or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
+defined('DB_CHARSET')     or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
+defined('DB_COLLATION')   or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
+defined('DB_VERIFY')      or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 
 /*
 |--------------------------------------------------------------------------
@@ -110,16 +110,16 @@ defined('DB_VERIFY')		or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TR
 */
 $uriSegments  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $timeZone = [
-	'bdb'	=>	'America/Bogota',
-	'bg' 	=>	'America/Guayaquil',
-	'bnt'	=>	'America/Mexico_City',
-	'bp'	=>	'America/Guayaquil',
-	'col'	=>	'America/Bogota',
-	'pb'	=>	'America/Guayaquil',
-	'pe'	=>	'America/Lima',
-	'us'	=>	'America/Lima',
-	'ven'	=>	'America/Caracas',
-	'vg'	=>	'America/Lima',
+  'bdb' => 'America/Bogota',
+  'bg'  => 'America/Guayaquil',
+  'bnt' => 'America/Mexico_City',
+  'bp'  => 'America/Guayaquil',
+  'col' => 'America/Bogota',
+  'pb'  => 'America/Guayaquil',
+  'pe'  => 'America/Lima',
+  'us'  => 'America/Lima',
+  'ven' => 'America/Caracas',
+  'vg'  => 'America/Lima',
 ];
 $errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
@@ -130,49 +130,49 @@ date_default_timezone_set($timeZone);
 | FRAMEWORK SETTINGS
 |--------------------------------------------------------------------------
 */
-defined('BASE_URL')					or define('BASE_URL', $_SERVER['BASE_URL']);
-defined('ASSET_URL')				or define('ASSET_URL', $_SERVER['ASSET_URL']);
-defined('ASSET_PATH')				or define('ASSET_PATH', $_SERVER['ASSET_PATH']);
-defined('THRESHOLD')				or define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-defined('LOG_PATH')					or define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
-defined('ENCRYPTION_KEY')		or define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
-defined('SESS_DRIVER')			or define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'files');
-defined('SESS_COOKIE_NAME')	or define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
-defined('SESS_EXPIRATION')	or define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
-defined('SESS_SAVE_PATH')		or define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
-defined('COOKIE_PREFIX')		or define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
-defined('COOKIE_DOMAIN')		or define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
-defined('COOKIE_SECURE')		or define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
-defined('PROXY_IPS')				or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] === 'ON' ? $_SERVER['REMOTE_ADDR'] : '');
+defined('BASE_URL')           or define('BASE_URL', $_SERVER['BASE_URL']);
+defined('ASSET_URL')          or define('ASSET_URL', $_SERVER['ASSET_URL']);
+defined('ASSET_PATH')         or define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('THRESHOLD')          or define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
+defined('LOG_PATH')           or define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
+defined('ENCRYPTION_KEY')     or define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
+defined('SESS_DRIVER')        or define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'files');
+defined('SESS_COOKIE_NAME')   or define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
+defined('SESS_EXPIRATION')    or define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
+defined('SESS_SAVE_PATH')     or define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
+defined('COOKIE_PREFIX')      or define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
+defined('COOKIE_DOMAIN')      or define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
+defined('COOKIE_SECURE')      or define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
+defined('PROXY_IPS')          or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] === 'ON' ? $_SERVER['REMOTE_ADDR'] : '');
 
 /*
 |--------------------------------------------------------------------------
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
-defined('ERROR_CONTROLLER')	or define('ERROR_CONTROLLER', $errorController);
-defined('ACTIVE_SAFETY')		or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
-defined('CYPHER_BASE')			or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
-defined('ACCESS_URL')				or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
-defined('ACTIVE_RECAPTCHA')	or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
-defined('IP_VERIFY')				or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
-defined('SINGLE_SIGN_ON')		or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
-defined('API_CONTENT_URL')	or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
-defined('UPLOAD_PATH')			or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
+defined('ERROR_CONTROLLER')  or define('ERROR_CONTROLLER', $errorController);
+defined('ACTIVE_SAFETY')    or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
+defined('CYPHER_BASE')      or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
+defined('ACCESS_URL')        or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
+defined('ACTIVE_RECAPTCHA')  or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
+defined('IP_VERIFY')        or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
+defined('SINGLE_SIGN_ON')    or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
+defined('API_CONTENT_URL')  or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
+defined('UPLOAD_PATH')      or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 
 /*
 |--------------------------------------------------------------------------
 | SERVICE ENVIROMENT VARIABLES
 |--------------------------------------------------------------------------
 */
-defined('WS_KEY')			 						or define('WS_KEY', $_SERVER['WS_KEY']);
-defined('DOWNLOAD_ROUTE')					or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
-defined('BULK_FTP_USERNAME')			or define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
-defined('BULK_FTP_PASSWORD')			or define('BULK_FTP_PASSWORD', $_SERVER['BULK_FTP_PASSWORD']);
-defined('BULK_FTP_URL')						or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
-defined('API_URL')								or define('API_URL', $_SERVER['API_URL']);
-defined('SERVICE_URL')						or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
-defined('SERVICE_CLIENT_ID')			or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
-defined('SERVICE_CLIENT_SECRET')	or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
+defined('WS_KEY')                   or define('WS_KEY', $_SERVER['WS_KEY']);
+defined('DOWNLOAD_ROUTE')          or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
+defined('BULK_FTP_USERNAME')      or define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
+defined('BULK_FTP_PASSWORD')      or define('BULK_FTP_PASSWORD', base64_decode($_SERVER['BULK_FTP_PASSWORD']));
+defined('BULK_FTP_URL')            or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
+defined('API_URL')                or define('API_URL', $_SERVER['API_URL']);
+defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
+defined('SERVICE_CLIENT_ID')      or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
+defined('SERVICE_CLIENT_SECRET')  or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
 unset($uriSegments, $timeZone, $errorController);
