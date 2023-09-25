@@ -341,10 +341,18 @@ if (!function_exists('getSignSessionType ')) {
 	 */
 	function getSignSessionType()
 	{
-		$signType = get_cookie('signSessionType', TRUE);
-		$signType = ACTIVE_SAFETY ? base64_decode($signType) : $signType;
-		$signType = $signType === NULL && SINGLE_SIGN_ON
-			? 'ingresar/' . lang('SETT_LINK_SIGNOUT_END') : lang('SETT_LINK_SIGNIN');
+		$signType = SINGLE_SIGN_ON ? lang('SETT_COOKIE_SINGN_ON') : lang('SETT_COOKIE_SINGN_IN');
+
+		$signValue = get_cookie('appLanguage', TRUE);
+		$cookieSign = ACTIVE_SAFETY ? base64_decode($signValue) : $signValue;
+
+		$validCookie = array_key_exists($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
+		$signType = $validCookie ? $cookieSign : $signType;
+		$signType = str_replace(config_item('cookie_prefix'), '', $signType);
+
+		if (!$validCookie) {
+			setSignSessionType($signType);
+		}
 
 		return $signType;
 	}
@@ -369,7 +377,7 @@ if (!function_exists('setSignSessionType')) {
 		$signSessionType = [
 			'name' => 'signSessionType',
 			'value' => $SignSessionType,
-			'expire' => 259200,
+			'expire' => 1296000,
 			'httponly' => TRUE
 		];
 

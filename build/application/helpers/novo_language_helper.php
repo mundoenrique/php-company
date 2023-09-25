@@ -124,7 +124,10 @@ if (!function_exists('getLanguageValues')) {
 		$cookieLang = $validCookie ? $cookieLang : $language;
 		$uriLang = $validUri ? lang('SETT_LANGUAGE')[$uriCode] : $cookieLang;
 		$language = $uriLang;
-		languageCookie(lang('SETT_LANG_CODE')[$language]);
+
+		if (($cookieLang !== $uriLang) || ($cookieValue === NULL)) {
+			languageCookie(lang('SETT_LANG_CODE')[$language]);
+		}
 
 		return [
 			'lang' => $language,
@@ -151,7 +154,7 @@ if (!function_exists('languageCookie')) {
 		$appLanguage = [
 			'name' => 'appLanguage',
 			'value' => $appLanguage,
-			'expire' => 259200,
+			'expire' => 1296000,
 			'httponly' => TRUE
 		];
 
