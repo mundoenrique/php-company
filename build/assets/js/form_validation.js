@@ -9,15 +9,17 @@ function validateForms(form) {
   var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
   var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
   var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
-  var emailValid = new RegExp(lang.SETT_VALIDATE_EMAIL, 'i');
-  var phoneNumber = new RegExp(lang.REGEX_PHONE);
   var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
   var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
   var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
+  var phoneNumber = new RegExp(lang.REGEX_PHONE);
+  var userPassword = new RegExp(lang.REGEX_PASSWORD, 'i');
+  var alphaString = new RegExp(lang.REGEX_ALPHA_STRING, 'i');
+  var idNumber = new RegExp(lang.REGEX_ID_NUMBER, 'i');
+  var numeric = new RegExp(lang.REGEX_NUMERIC, 'i');
+  var emailValid = new RegExp(lang.REGEX_EMAIL, 'i');
   var alphanum = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM, 'i');
   var alphanumspace = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM_SPACE, 'i');
-  var userPassword = new RegExp(lang.REGEX_PASSWORD, 'i');
-  var numeric = new RegExp(lang.SETT_VALIDATE_NUMERIC, 'i');
   var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
   var alphabeticalspace = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');
   var floatAmount = new RegExp(lang.SETT_VALIDATE_FLOAT_AMOUNT, 'i');
@@ -308,10 +310,10 @@ function validateForms(form) {
       filterDateXls: { required: true, pattern: numeric },
       nameEnterpriseXls: { required: true, pattern: alphanumunder },
       branchListBr: { required: true, pattern: alphanumspecial },
-      contactNames: { required: true, pattern: alphaName },
-      contactLastNames: { required: true, pattern: alphaName },
-      contactPosition: { required: true, pattern: alphaName },
-      idExtPer: { required: true, pattern: numeric },
+      contactNames: { required: true, pattern: alphaString },
+      contactLastNames: { required: true, pattern: alphaString },
+      contactPosition: { required: true, pattern: alphaString },
+      idExtPer: { required: true, pattern: idNumber },
       contactEmail: { required: true, pattern: emailValid },
       contactType: { required: true, pattern: contactType },
     },
@@ -358,13 +360,13 @@ function validateForms(form) {
       'selected-month-year': lang.VALIDATE_SELECTED_MONTH_YEAR,
       'selected-year': lang.VALIDATE_SELECTED_YEAR,
       'id-type': lang.VALIDATE_ID_TYPE,
-      'id-number': lang.VALIDATE_ID_NUMBER,
+      'id-number': lang.VALIDATE_NUMBER_ID,
       'id-number1': {
-        pattern: lang.VALIDATE_ID_NUMBER,
+        pattern: lang.VALIDATE_NUMBER_ID,
         maxlength: lang.VALIDATE_LENGHT_NUMBER,
       },
       tlf1: {
-        pattern: lang.VALIDATE_ID_NUMBER,
+        pattern: lang.VALIDATE_NUMBER_ID,
         required: lang.VALIDATE_PHONE_REQ,
         maxlength: lang.VALIDATE_LENGHT_NUMBER,
       },
@@ -384,7 +386,7 @@ function validateForms(form) {
       initialDatemy: lang.VALIDATE_DATE_MY,
       monthYear: lang.VALIDATE_DATE_MY,
       selection: lang.VALIDATE_OPTION,
-      idNumber: lang.VALIDATE_ID_NUMBER,
+      idNumber: lang.VALIDATE_NUMBER_ID,
       reference: lang.VALIDATE_REFERENCE,
       cardNumber: lang.VALIDATE_CARD_NUMBER,
       lockType: lang.VALIDATE_OPTION,
@@ -398,8 +400,8 @@ function validateForms(form) {
         require_from_group: lang.VALIDATE_SELECT_GROUP,
       },
       idNumberP: {
-        required: lang.VALIDATE_ID_NUMBER,
-        pattern: lang.VALIDATE_ID_NUMBER,
+        required: lang.VALIDATE_NUMBER_ID,
+        pattern: lang.VALIDATE_NUMBER_ID,
         require_from_group: lang.VALIDATE_SELECT_GROUP,
       },
       docType: {
@@ -629,19 +631,19 @@ function validateForms(form) {
       },
       phone: {
         required: lang.VALID_REQUIRED,
-        pattern: lang.VALIDATE_PONE_NUMBER,
+        pattern: lang.VALIDATE_PHONE_NUMBER,
       },
       phone1: {
         required: lang.VALID_REQUIRED,
-        pattern: lang.VALIDATE_PONE_NUMBER,
+        pattern: lang.VALIDATE_PHONE_NUMBER,
       },
       phone2: {
         required: lang.VALID_REQUIRED,
-        pattern: lang.VALIDATE_PONE_NUMBER,
+        pattern: lang.VALIDATE_PHONE_NUMBER,
       },
       phone3: {
         required: lang.VALID_REQUIRED,
-        pattern: lang.VALIDATE_PONE_NUMBER,
+        pattern: lang.VALIDATE_PHONE_NUMBER,
       },
       person: {
         required: lang.VALID_REQUIRED,
@@ -675,8 +677,8 @@ function validateForms(form) {
         pattern: lang.VALIDATE_INPUT_POSITION,
       },
       idExtPer: {
-        required: lang.VALIDATE_NIT,
-        pattern: lang.VALIDATE_NIT,
+        required: lang.VALIDATE_ID_NUMBER,
+        pattern: lang.VALIDATE_ID_NUMBER,
       },
       contactType: {
         required: lang.VALIDATE_CONTACT_TYPE_SELECT,

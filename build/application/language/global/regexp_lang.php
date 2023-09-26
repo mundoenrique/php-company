@@ -9,7 +9,16 @@ $lang['REGEX_PASSWORD_SERVER'] = 'trim|regex_match[/' . $regexPass . '/i]|requir
 $lang['REGEX_CHANGE_LANG'] = '(es|en)';
 $lang['REGEX_CHANGE_LANG_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CHANGE_LANG'] . '/]|required';
 
+
+
+$lang['REGEX_ID_NUMBER'] = '^([0-9]{7,9}$)';
+$lang['REGEX_ID_NUMBER_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ID_NUMBER'] . '/]|required';
+$lang['REGEX_EMAIL'] = '^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$';
+$lang['REGEX_EMAIL_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_EMAIL'] . '/]|required';
 $lang['REGEX_PHONE'] = '^([0-9]{6,15}$)';
 $lang['REGEX_PHONE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_PHONE'] . '/]';
+$lang['REGEX_ALPHA_STRING'] = '^([\wñáéíóúüÀÈÌÒÙÜ\s]{2,50}$)';
+$lang['REGEX_ALPHA_STRING_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_STRING'] . '/i]|required';
 
-$lang['REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
+
+$lang['REGEX_NUMERIC'] = '^[0-9]+$';

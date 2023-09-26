@@ -8,7 +8,8 @@ $lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';
 $lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contraseña.';
 
 
-$lang['VALIDATE_PONE_NUMBER'] = 'Indica un número telefónico válido min 6 max 15.';
+$lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido min 6 max 15.';
+$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, min 7 max 9.';
 
 
 
@@ -33,7 +34,7 @@ $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
 $lang['VALIDATE_SELECTED_MONTH_YEAR'] = 'Selecciona una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECTED_YEAR'] = 'Selecciona un año disponible';
 $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
-$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
+$lang['VALIDATE_NUMBER_ID'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_LENGHT_NUMBER'] = 'El número es demasiado largo';
 $lang['VALIDATE_PHONE_REQ'] = 'Este teléfono es requerido';
 $lang['VALIDATE_REFERENCE'] = 'Indica un número de referencia válido';

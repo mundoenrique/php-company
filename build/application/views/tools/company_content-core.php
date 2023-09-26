@@ -122,27 +122,27 @@
               <div class="row">
                 <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
                   <label for="contactNames"><?= lang('GEN_TABLE_NAME_CLIENT') ?></label>
-                  <input id="contactNames" name="contactNames" type="text" class="form-control" value="" />
+                  <input id="contactNames" name="contactNames" type="text" class="form-control">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
                   <label for="contactLastNames"><?= lang('GEN_LAST_NAME') ?></label>
-                  <input id="contactLastNames" name="contactLastNames" type="text" class="form-control" value="" />
+                  <input id="contactLastNames" name="contactLastNames" type="text" class="form-control">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
                   <label for="contactPosition"><?= lang('GEN_POSITION') ?></label>
-                  <input id="contactPosition" name="contactPosition" type="text" class="form-control" value="" />
+                  <input id="contactPosition" name="contactPosition" type="text" class="form-control">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
                   <label for="idExtPer"><?= lang('GEN_TABLE_DNI') ?></label>
-                  <input id="idExtPer" name="idExtPer" type="text" class="form-control" value="" />
+                  <input id="idExtPer" name="idExtPer" type="text" class="form-control">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
                   <label for="contactEmail"><?= lang('GEN_EMAIL') ?></label>
-                  <input type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
+                  <input type="email" class="form-control" id="contactEmail" name="contactEmail">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">

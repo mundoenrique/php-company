@@ -471,92 +471,75 @@ $config = [
   'deleteContact' => [
     [
       'field' => 'idFiscal',
-      'label' => 'idFiscal',
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
     ],
     [
       'field' => 'idExtPer',
-      'label' => 'idExtPer',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
+      'rules' => lang('REGEX_ID_NUMBER_SERVER')
     ],
     [
       'field' => 'pass',
-      'label' => 'pass',
-      'rules' => 'trim|required'
+      'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
   'updateContact' => [
     [
       'field' => 'contactNames',
-      'label' => 'contactNames',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'contactLastNames',
-      'label' => 'contactLastNames',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'contactPosition',
-      'label' => 'contactPosition',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú ]{1,50}$/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'idExtPer',
-      'label' => 'idExtPer',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
+      'rules' => lang('REGEX_ID_NUMBER_SERVER')
     ],
     [
       'field' => 'contactEmail',
-      'label' => 'contactEmail',
-      'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+      'rules' => lang('REGEX_EMAIL_SERVER')
     ],
     [
       'field' => 'contactType',
-      'label' => 'contactType',
       'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
     ],
     [
       'field' => 'pass',
-      'label' => 'pass',
-      'rules' => 'trim|required'
+      'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
   'addContact' => [
     [
       'field' => 'contactNames',
-      'label' => 'contactNames',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'contactLastNames',
-      'label' => 'contactLastNames',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'contactPosition',
-      'label' => 'contactPosition',
-      'rules' => 'trim|regex_match[/^[a-zñáéíóú\s]{1,50}/i]|required'
+      'rules' => lang('REGEX_ALPHA_STRING_SERVER')
     ],
     [
       'field' => 'idExtPer',
-      'label' => 'idExtPer',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9\s]/i]|required'
+      'rules' => lang('REGEX_ID_NUMBER_SERVER')
     ],
     [
       'field' => 'contactEmail',
-      'label' => 'contactEmail',
-      'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+      'rules' => lang('REGEX_EMAIL_SERVER')
     ],
     [
       'field' => 'contactType',
-      'label' => 'contactType',
       'rules' => 'trim|regex_match[/^[F|H|C]*$/i]|required'
     ],
     [
       'field' => 'pass',
-      'label' => 'pass',
-      'rules' => 'trim|required'
+      'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
   'getProducts' => [
