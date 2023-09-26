@@ -8,6 +8,7 @@ $lang['VALID_USERPASS_REQ'] = 'Both fields are required.';
 $lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.';
 
 
+$lang['VALIDATE_PONE_NUMBER'] = 'Enter a valid phone number  min 6 max 15.';
 
 
 
