@@ -150,26 +150,28 @@ defined('PROXY_IPS')          or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] ==
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
-defined('ERROR_CONTROLLER')  or define('ERROR_CONTROLLER', $errorController);
-defined('ACTIVE_SAFETY')    or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
-defined('CYPHER_BASE')      or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
-defined('ACCESS_URL')        or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
-defined('ACTIVE_RECAPTCHA')  or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
-defined('IP_VERIFY')        or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
-defined('SINGLE_SIGN_ON')    or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
-defined('API_CONTENT_URL')  or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
-defined('UPLOAD_PATH')      or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
+defined('CUSTUMER_OLD_WAY')   or define('CUSTUMER_OLD_WAY', 'bpi|col|per|usd|ve');
+defined('CUSTUMER_DENY_WAY')  or define('CUSTUMER_DENY_WAY', explode('|', CUSTUMER_OLD_WAY));
+defined('ERROR_CONTROLLER')   or define('ERROR_CONTROLLER', $errorController);
+defined('ACTIVE_SAFETY')      or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
+defined('CYPHER_BASE')        or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
+defined('ACCESS_URL')         or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
+defined('ACTIVE_RECAPTCHA')   or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
+defined('IP_VERIFY')          or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
+defined('SINGLE_SIGN_ON')     or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
+defined('API_CONTENT_URL')    or define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
+defined('UPLOAD_PATH')        or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 
 /*
 |--------------------------------------------------------------------------
 | SERVICE ENVIROMENT VARIABLES
 |--------------------------------------------------------------------------
 */
-defined('WS_KEY')                   or define('WS_KEY', $_SERVER['WS_KEY']);
-defined('DOWNLOAD_ROUTE')          or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
+defined('WS_KEY')                 or define('WS_KEY', $_SERVER['WS_KEY']);
+defined('DOWNLOAD_ROUTE')         or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
 defined('BULK_FTP_USERNAME')      or define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
 defined('BULK_FTP_PASSWORD')      or define('BULK_FTP_PASSWORD', base64_decode($_SERVER['BULK_FTP_PASSWORD']));
-defined('BULK_FTP_URL')            or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
+defined('BULK_FTP_URL')           or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
 defined('API_URL')                or define('API_URL', $_SERVER['API_URL']);
 defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
 defined('SERVICE_CLIENT_ID')      or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);

@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 //País
 $config['country'] = 'Usd';
 $config['countryUri'] = 'usd';
+$config['countryUri'] = in_array('usd', CUSTUMER_DENY_WAY, TRUE) ? 'usd' : 'us';
 $config['sess_expiration'] = 7200;
 
 /*
@@ -28,7 +29,7 @@ $config['CDN'] = ASSET_PATH . $config['country'] . '/';
 | than english.
 |
 */
-$config['language']	= 'usd-spanish';
+$config['language'] = 'usd-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

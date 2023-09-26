@@ -3,7 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 //País
 $config['country'] = 'Ec-bp';
-$config['countryUri'] = 'bp';
+$config['countryUri'] = 'bpi';
+$config['countryUri'] = in_array('bpi', CUSTUMER_DENY_WAY, TRUE) ? 'bpi' : 'bp';
 $config['sess_expiration'] = 7200;
 $config['client'] = 'pichincha';
 /*
@@ -28,7 +29,7 @@ $config['CDN'] = ASSET_PATH . $config['country'] . '/';
 | than english.
 |
 */
-$config['language']	= 'ec-bp-spanish';
+$config['language'] = 'ec-bp-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

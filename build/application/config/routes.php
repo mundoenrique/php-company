@@ -58,12 +58,12 @@ $route['translate_uri_dashes'] = FALSE;
 | TEMPORAL ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(bpi|co|per|usd|ve)/browsers'] = "Novo_User/browsers";
-$route['(bpi|co|per|usd|ve)/inicio'] = "Novo_User/login";
-$route['(bpi|co|per|usd|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
-$route['(bpi|co|per|usd|ve)/cambiar-clave'] = "Novo_User/changePass";
-$route['(bpi|co|per|usd|ve)/inf-beneficios'] = "Novo_Information/benefits";
-$route['(bpi|co|per|usd|ve)/inf-condiciones'] = "Novo_Information/terms";
+$route['(' . CUSTUMER_OLD_WAY . ')/browsers'] = "Novo_User/browsers";
+$route['(' . CUSTUMER_OLD_WAY . ')/inicio'] = "Novo_User/login";
+$route['(' . CUSTUMER_OLD_WAY . ')/recuperar-clave'] = "Novo_User/passwordRecovery";
+$route['(' . CUSTUMER_OLD_WAY . ')/cambiar-clave'] = "Novo_User/changePass";
+$route['(' . CUSTUMER_OLD_WAY . ')/inf-beneficios'] = "Novo_Information/benefits";
+$route['(' . CUSTUMER_OLD_WAY . ')/inf-condiciones'] = "Novo_Information/terms";
 /*
 |--------------------------------------------------------------------------
 */
@@ -86,19 +86,18 @@ $route['(:any)/single'] = "Novo_CallModels";
 |--------------------------------------------------------------------------
 */
 $route['(:any)/inicio'] = function ($customer) {
-	header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
-	exit;
+  header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
+  exit;
 };
 $route['(:any)/sign-in'] = function ($customer) {
-	$denyUri = ['bpi', 'co', 'per', 'usd', 've'];
-	$deny = in_array($customer, $denyUri, TRUE);
+  $deny = in_array($customer, CUSTUMER_DENY_WAY, TRUE);
 
-	if ($deny) {
-		header('Location: ' . BASE_URL . $customer . '/inicio', 302);
-		exit;
-	}
+  if ($deny) {
+    header('Location: ' . BASE_URL . $customer . '/inicio', 302);
+    exit;
+  }
 
-	return 'Novo_User/signIn';
+  return 'Novo_User/signIn';
 };
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
