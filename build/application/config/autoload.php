@@ -59,16 +59,16 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 $autoload['libraries'] = array(
-	'Asset',
-	'session',
-	'parser',
-	'form_validation',
-	'user_agent',
-	'Connect_Services_Apis',
-	'Encrypt_Decrypt',
-	'Cryptography',
-	'Verify_Access',
-	'Create_Menu'
+  'Asset',
+  'session',
+  'parser',
+  'form_validation',
+  'user_agent',
+  'Connect_Services_Apis',
+  'Encrypt_Decrypt',
+  'Cryptography',
+  'Verify_Access',
+  'Create_Menu'
 );
 
 /*
@@ -101,20 +101,20 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 $autoload['helper'] = array(
-	'url',
-	'security',
-	'cdn',
-	'encryption',
-	'connections',
-	'language',
-	'tools',
-	'form',
-	'cookie',
-	'novo_server',
-	'novo_cryptography',
-	'novo_toolset',
-	'novo_language',
-	'novo_display'
+  'url',
+  'security',
+  'cdn',
+  'encryption',
+  'connections',
+  'language',
+  'tools',
+  'form',
+  'cookie',
+  'novo_server',
+  'novo_cryptography',
+  'novo_toolset',
+  'novo_language',
+  'novo_display'
 );
 
 /*
@@ -130,7 +130,7 @@ $autoload['helper'] = array(
 |
 */
 $autoload['config'] = array(
-	'config-global'
+  'config-global'
 );
 
 /*
@@ -146,9 +146,9 @@ $autoload['config'] = array(
 |
 */
 $autoload['language'] = array(
-	'settings',
-	'images',
-	'regexp'
+  'settings',
+  'images',
+  'regexp'
 );
 
 /*
