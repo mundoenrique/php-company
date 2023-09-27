@@ -8,8 +8,8 @@ $lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';
 $lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contraseña.';
 
 
-$lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido min 6 max 15.';
-$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, min 7 max 9.';
+$lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido mín 6 máx 15.';
+$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, mín 7 máx 9.';
 
 
 
