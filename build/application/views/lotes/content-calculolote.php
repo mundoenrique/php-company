@@ -230,7 +230,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 								<td class='th-empresa'>" . ucwords(mb_strtolower($valueNF->acnomcia)) . "</td>
 								<td>$valueNF->acnumlote</td>
 								<td>$valueNF->dtfechorcarga</td>
-								<td>" . ucfirst(mb_strtolower($valueNF->acnombre / $valueNF->ncantregs)) . "</td>
+								<td>" . ucfirst(mb_strtolower($valueNF->acnombre . '/' . $valueNF->ncantregs)) . "</td>
 								<td>" . ucfirst(mb_strtolower($valueNF->status)) . "</td>
 							</tr>
 							";
