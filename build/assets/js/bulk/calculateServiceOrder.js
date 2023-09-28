@@ -19,6 +19,16 @@ $(function () {
     language: dataTableLang,
   });
 
+  $('#resultNonBillable').DataTable({
+    drawCallback: function (d) {
+      $('#pre-loader').remove();
+      $('.hide-out').removeClass('hide');
+    },
+    ordering: false,
+    pagingType: 'full_numbers',
+    language: dataTableLang,
+  });
+
   $('#resultServiceOrders tbody').on('click', 'button.details-control', function () {
     var tr = $(this).closest('tr');
     var row = serviceOrder.row(tr);

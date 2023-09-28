@@ -15,7 +15,6 @@
     </nav>
   </div>
 </div>
-
 <div class="flex mt-1 bg-color flex-nowrap justify-between">
   <div id="pre-loader" class="mt-2 mx-auto">
     <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
@@ -42,7 +41,7 @@
                   <?php $tempOrdersId .= $serviceOrders->tempOrderId . ',' ?>
                   <tr bulk="<?= htmlspecialchars(json_encode($serviceOrders->bulk), ENT_QUOTES, 'UTF-8'); ?>">
                     <td><?= $serviceOrders->commisAmount; ?></td>
-                    <td><?= $serviceOrders->VatAmount; ?></td>
+                    <td><?= $serviceOrders->taxAmount; ?></td>
                     <td><?= $serviceOrders->soAmount; ?></td>
                     <td><?= $serviceOrders->totalAmount; ?></td>
                     <td><?= $serviceOrders->depositedAmount; ?></td>
@@ -60,7 +59,7 @@
         <?php if (count($bulkNotBillable) > 0) : ?>
           <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NO_BILLABLE'); ?></span>
           <div class="center mx-1">
-            <table id="resultServiceOrders" class="cell-border h6 display">
+            <table id="resultNonBillable" class="cell-border h6 display">
               <thead class="bg-primary secondary regular">
                 <tr>
                   <th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
@@ -72,7 +71,7 @@
               </thead>
               <tbody>
                 <?php foreach ($bulkNotBillable as $NotBillable) : ?>
-                  <?php $bulknotBill .= $NotBillable->tempOrderId . ',' ?>
+                  <?php $bulknotBill .= $NotBillable->bulkId . ',' ?>
                   <tr>
                     <td><?= $NotBillable->bulkNumber; ?></td>
                     <td><?= $NotBillable->bulkLoadDate; ?></td>
@@ -101,7 +100,7 @@
                 <div class="help-block"></div>
               </div>
               <div class="flex flex-row">
-                <?php if (lang('SETT_SERVICE_ORDER_CANCEL') == 'ON') : ?>
+                <?php if (lang('SETT_SERVICE_ORDER_CANCEL') === 'ON') : ?>
                   <div class="mb-3 mr-4">
                     <button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
                   </div>

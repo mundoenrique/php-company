@@ -160,12 +160,17 @@ class Novo_Bulk extends NOVO_Controller
   {
     writeLog('INFO', 'Bulk: calculateServiceOrder Method Initialized');
 
-    if (!$this->session->flashdata('serviceOrdersList')) {
+    $ordersList = $this->session->flashdata('serviceOrdersList');
+    $nonBillable = $this->session->flashdata('bulkNotBillable');
+
+    if ($ordersList === NULL && $nonBillable === NULL) {
       redirect(base_url(lang('SETT_LINK_BULK_AUTH')), 'Location', 302);
       exit;
     }
 
-    $view = 'calculateServiceOrder';
+    $this->session->keep_flashdata('serviceOrdersList');
+    $this->session->keep_flashdata('bulkNotBillable');
+
     array_push(
       $this->includeAssets->cssFiles,
       "third_party/dataTables-1.10.20"
@@ -178,19 +183,14 @@ class Novo_Bulk extends NOVO_Controller
       "third_party/additional-methods",
       "bulk/calculateServiceOrder"
     );
-    $serviceOrdersList = $this->session->flashdata('serviceOrdersList');
-    $bulkNotBillable = $this->session->flashdata('bulkNotBillable');
-    $authToken = '';
+    $view = 'calculateServiceOrder';
 
-    if ($this->session->flashdata('authToken') != NULL) {
-      $authToken = $this->session->flashdata('authToken');
-      $this->session->set_flashdata('authToken', $authToken);
+    if ($this->session->flashdata('authToken') !== NULL) {
+      $this->session->keep_flashdata('authToken');
     }
 
-    $this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-    $this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
-    $this->render->serviceOrdersList = $serviceOrdersList;
-    $this->render->bulkNotBillable = $bulkNotBillable;
+    $this->render->serviceOrdersList = $ordersList;
+    $this->render->bulkNotBillable = $nonBillable;
     $this->render->tempOrdersId = '';
     $this->render->bulknotBill = '';
     $this->render->titlePage = lang('GEN_CACULATE_ORDER_TITLE');
