@@ -11,7 +11,6 @@
   "editor.tabSize": 2,
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 120,
-  "diffEditor.ignoreTrimWhitespace": false,
   "php.validate.run": "onType",
   "prettier.useEditorConfig": true,
   "prettier.jsxSingleQuote": true,
