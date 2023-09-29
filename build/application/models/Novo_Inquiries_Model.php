@@ -96,8 +96,6 @@ class Novo_Inquiries_Model extends NOVO_Model
         $bulkNonBillable = [];
         foreach ($response->lista as $dataOrder) {
           $serviceOrders = new stdClass();
-          $bulkList = new stdClass();
-
           $serviceOrders->OrderNumber = $dataOrder->idOrden;
           $serviceOrders->OrderStatus = $dataOrder->estatus;
           $serviceOrders->Orderdate = $dataOrder->fechaGeneracion;
@@ -116,6 +114,7 @@ class Novo_Inquiries_Model extends NOVO_Model
           }
 
           foreach ($dataOrder->lotes as $bulk) {
+            $bulkList = new stdClass();
             $bulkList->bulkNumber = $bulk->acnumlote;
             $bulkList->bulkLoadDate = $bulk->dtfechorcarga;
             $bulkList->bulkRecords = $bulk->ncantregs;
@@ -140,7 +139,6 @@ class Novo_Inquiries_Model extends NOVO_Model
 
         foreach ($response->lotesNF as $nonBillable) {
           $bulkList = new stdClass();
-
           $bulkList->bulkId = $nonBillable->acidlote;
           $bulkList->bulkNumber = $nonBillable->acnumlote;
           $bulkList->bulkLoadDate = $nonBillable->dtfechorcarga;

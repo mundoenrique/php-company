@@ -55,6 +55,27 @@ $(function () {
     bulkdetail.submit();
   });
 
+  $('#osNonBillable tbody').on('click', 'a.this-bulk', function () {
+    var bulkdetail = $(this).siblings('form');
+    var orderList = cryptoPass($('#inquiriesResult').attr('orderList'));
+    var nonBillable = cryptoPass($('#inquiriesResult').attr('nonBillable'));
+
+    const orderInput = document.createElement('input');
+    orderInput.setAttribute('type', 'hidden');
+    orderInput.setAttribute('name', 'orderList');
+    orderInput.setAttribute('value', orderList);
+    bulkdetail.append(orderInput);
+
+    const nfInput = document.createElement('input');
+    nfInput.setAttribute('type', 'hidden');
+    nfInput.setAttribute('name', 'nonBillable');
+    nfInput.setAttribute('value', nonBillable);
+    bulkdetail.append(nfInput);
+
+    insertFormInput(true, bulkdetail);
+    bulkdetail.submit();
+  });
+
   $('.date-picker').datepicker({
     onSelect: function (selectedDate) {
       $(this).focus().blur();
@@ -130,7 +151,11 @@ $(function () {
           insertFormInput(false);
           $('#resultServiceOrders').dataTable().fnClearTable();
           $('#resultServiceOrders').dataTable().fnDestroy();
-          $('.hide-table').addClass('hide');
+          $('#osNonBillable').dataTable().fnClearTable();
+          $('#osNonBillable').dataTable().fnDestroy();
+          $('#inquiriesResult').removeAttr('orderlist');
+          $('#inquiriesResult').removeAttr('nonbillable');
+          $('#inquiriesResult').addClass('hide');
         }
       });
     }
@@ -272,7 +297,8 @@ $(function () {
 function format(bulk) {
   var table,
     body = '';
-  var orderList = cryptoPass($('#resultServiceOrders').attr('orderList'));
+  var orderList = cryptoPass($('#inquiriesResult').attr('orderList'));
+  var nonBillable = cryptoPass($('#inquiriesResult').attr('nonBillable'));
   bulk = JSON.parse(bulk);
   $.each(bulk, function (key, value) {
     body += '<tr>';
@@ -281,6 +307,7 @@ function format(bulk) {
     body += '<form class="form-group" action="' + baseURL + lang.SETT_LINK_INQUIRY_BULK_DETAIL + '" method="post">';
     body += '<input type="hidden" name="bulkId" value="' + value.bulkId + '">';
     body += '<input type="hidden" name="orderList" value="' + orderList + '">';
+    body += '<input type="hidden" name="nonBillable" value="' + nonBillable + '">';
     body += '<input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">';
     body += '</form>';
     body += '</td>';

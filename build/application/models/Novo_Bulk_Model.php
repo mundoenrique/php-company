@@ -805,8 +805,6 @@ class Novo_Bulk_Model extends NOVO_Model
 
         foreach ($response->lista as $dataOrder) {
           $serviceOrders = new stdClass();
-          $bulkList = new stdClass();
-
           $serviceOrders->tempOrderId = $dataOrder->idOrdenTemp;
           $serviceOrders->commisAmount = currencyFormat($dataOrder->montoComision);
           $serviceOrders->taxAmount = currencyFormat($dataOrder->montoIVA);
@@ -815,15 +813,16 @@ class Novo_Bulk_Model extends NOVO_Model
           $serviceOrders->depositedAmount = currencyFormat($dataOrder->montoDeposito);
 
           foreach ($dataOrder->lotes as $bulk) {
+            $bulkList = new stdClass();
+            $bulkList->bulkId = $bulk->acidlote;
             $bulkList->bulkNumber = $bulk->acnumlote;
             $bulkList->bulkLoadDate = $bulk->dtfechorcarga;
-            $bulkList->bulkLoadType = manageString($bulk->acnombre, 'lower', 'first');
             $bulkList->bulkRecords = $bulk->ncantregs;
-            $bulkList->bulkStatus = manageString($bulk->status, 'lower', 'first');
             $bulkList->bulkAmount = currencyFormat($bulk->montoRecarga);
+            $bulkList->bulkLoadType = manageString($bulk->acnombre, 'lower', 'first');
+            $bulkList->bulkStatus = manageString($bulk->status, 'lower', 'first');
             $bulkList->bulkCommisAmount = currencyFormat($bulk->montoComision);
             $bulkList->bulkTotalAmount = currencyFormat($bulk->montoNeto);
-            $bulkList->bulkId = $bulk->acidlote;
             $serviceOrders->bulk[] = $bulkList;
           }
 
@@ -997,8 +996,6 @@ class Novo_Bulk_Model extends NOVO_Model
         $bulkNonBillable = [];
         foreach ($response->lista as $dataOrder) {
           $serviceOrders = new stdClass();
-          $bulkList = new stdClass();
-
           $serviceOrders->OrderNumber = $dataOrder->idOrden;
           $serviceOrders->OrderStatus = $dataOrder->estatus;
           $serviceOrders->Orderdate = $dataOrder->fechaGeneracion;
@@ -1017,6 +1014,7 @@ class Novo_Bulk_Model extends NOVO_Model
           }
 
           foreach ($dataOrder->lotes as $bulk) {
+            $bulkList = new stdClass();
             $bulkList->bulkNumber = $bulk->acnumlote;
             $bulkList->bulkLoadDate = $bulk->dtfechorcarga;
             $bulkList->bulkRecords = $bulk->ncantregs;
@@ -1041,7 +1039,6 @@ class Novo_Bulk_Model extends NOVO_Model
 
         foreach ($response->lotesNF as $nonBillable) {
           $bulkList = new stdClass();
-
           $bulkList->bulkId = $nonBillable->acidlote;
           $bulkList->bulkNumber = $nonBillable->acnumlote;
           $bulkList->bulkLoadDate = $nonBillable->dtfechorcarga;
@@ -1091,14 +1088,13 @@ class Novo_Bulk_Model extends NOVO_Model
         break;
     }
 
-    $serviceOrdersList = $this->session->flashdata('serviceOrdersList');
-    $bulkNotBillable = $this->session->flashdata('bulkNotBillable');
-    $this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-    $this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
+    if ($this->isResponseRc !== 0) {
+      $this->session->keep_flashdata('serviceOrdersList');
+      $this->session->keep_flashdata('bulkNotBillable');
 
-    if ($this->session->flashdata('authToken') !== NULL) {
-      $authToken = $this->session->flashdata('authToken');
-      $this->session->set_flashdata('authToken', $authToken);
+      if ($this->session->flashdata('authToken') !== NULL) {
+        $this->session->keep_flashdata('authToken');
+      }
     }
 
     return $this->responseToTheView('callWs_ServiceOrder');

@@ -102,6 +102,16 @@ class Novo_Inquiries extends NOVO_Controller
       unset($this->request->orderList);
     }
 
+    if (isset($this->request->nonBillable)) {
+      $nonBillable = json_decode(base64_decode($this->request->nonBillable));
+      $nonBillable = json_decode($this->cryptography->decrypt(
+        base64_decode($nonBillable->plot),
+        utf8_encode($nonBillable->password)
+      ));
+      $this->session->set_flashdata('bulkNotBillable', $nonBillable);
+      unset($this->request->nonBillable);
+    }
+
     $response = $this->loadModel($this->request);
 
     if (!$download) {

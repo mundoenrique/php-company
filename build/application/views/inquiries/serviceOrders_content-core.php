@@ -71,12 +71,12 @@
         <div id="loader-table" class="mt-2 mx-auto">
           <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
         </div>
-        <div class="w-100 hide-table hide">
+        <div id="inquiriesResult" class="w-100 hide-table hide" orderList="<?= htmlspecialchars(json_encode($orderList), ENT_QUOTES, 'UTF-8'); ?>" nonBillable="<?= htmlspecialchars(json_encode($nonBillable), ENT_QUOTES, 'UTF-8');  ?>">
           <div class="flex pb-5 flex-column">
             <?php if (count($orderList) > 0) : ?>
               <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></span>
               <div class="center mx-1">
-                <table id="resultServiceOrders" class="cell-border h6 display" orderList="<?= htmlspecialchars(json_encode($orderList), ENT_QUOTES, 'UTF-8'); ?>">
+                <table id="resultServiceOrders" class="cell-border h6 display">
                   <thead class="bg-primary secondary regular">
                     <tr>
                       <th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
@@ -155,7 +155,13 @@
                   <tbody>
                     <?php foreach ($nonBillable as $bulk) : ?>
                       <tr>
-                        <td><?= $bulk->bulkNumber; ?></td>
+                        <td>
+                          <a class="btn-link big-modal this-bulk"><?= $bulk->bulkNumber; ?></a>
+                          <form class="form-group" action="<?= base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
+                            <input type="hidden" name="bulkId" value="<?= $bulk->bulkId; ?>">
+                            <input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">
+                          </form>
+                        </td>
                         <td><?= $bulk->bulkLoadDate; ?></td>
                         <td><?= $bulk->bulkLoadType; ?></td>
                         <td><?= $bulk->bulkRecords; ?></td>
@@ -167,8 +173,8 @@
               </div>
             <?php endif; ?>
           </div>
+          <div class="line mb-2"></div>
         </div>
-        <div class="line mb-2"></div>
       <?php endif; ?>
     </div>
   </div>
