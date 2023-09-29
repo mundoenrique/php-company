@@ -6,118 +6,118 @@ import { appLoader, takeFormData, toggleDisableActions } from '../utils.js';
 import { formValidation } from '../validation/form_validation.js';
 
 $(function () {
-	$.balloon.defaults.css = null;
-	toggleDisableActions(false);
-	let btnCalled;
-	let btnSignin;
-	let dataSignin;
-	let formSignin;
+  $.balloon.defaults.css = null;
+  toggleDisableActions(false);
+  let btnCalled;
+  let btnSignin;
+  let dataSignin;
+  let formSignin;
 
-	$('#signInBtn').on('click', function (e) {
-		e.preventDefault();
-		formSignin = $('#signInForm');
-		formValidation(formSignin);
+  $('#signInBtn').on('click', function (e) {
+    e.preventDefault();
+    formSignin = $('#signInForm');
+    formValidation(formSignin);
 
-		if (formSignin.valid()) {
-			btnCalled = $(this);
-			btnSignin = $(this).html();
-			dataSignin = takeFormData(formSignin);
-			dataSignin.userPass = cryptography.encrypt(dataSignin.userPass);
-			dataSignin.active = '';
-			dataSignin.currentTime = new Date().getHours();
-			$(this).html(appLoader);
-			toggleDisableActions(true);
-			getToken('SignIn', function (recaptchaToken) {
-				dataSignin.token = recaptchaToken;
-				signIn('SignIn');
-			});
-		}
-	});
+    if (formSignin.valid()) {
+      btnCalled = $(this);
+      btnSignin = $(this).html();
+      dataSignin = takeFormData(formSignin);
+      dataSignin.userPass = cryptography.encrypt(dataSignin.userPass);
+      dataSignin.active = '';
+      dataSignin.currentTime = new Date().getHours();
+      $(this).html(appLoader);
+      toggleDisableActions(true);
+      getToken('SignIn', function (recaptchaToken) {
+        dataSignin.token = recaptchaToken;
+        signIn('SignIn');
+      });
+    }
+  });
 
-	$('#system-info').on('click', '.session-close', function () {
-		toggleDisableActions(true);
-		dataSignin = {
-			userName: dataSignin.userName,
-		};
-		signIn('FinishSession');
-	});
+  $('#system-info').on('click', '.session-close', function () {
+    toggleDisableActions(true);
+    dataSignin = {
+      userName: dataSignin.userName,
+    };
+    signIn('FinishSession');
+  });
 
-	const signIn = function (section) {
-		const module = 'User';
+  const signIn = function (section) {
+    const module = 'User';
 
-		calledCoreApp(module, section, dataSignin, function (response) {
-			if (response.code !== 0) {
-				$('#userPass').val('');
+    calledCoreApp(module, section, dataSignin, function (response) {
+      if (response.code !== 0) {
+        $('#userPass').val('');
 
-				if (lang.SETT_RESTAR_USERNAME === 'ON') {
-					$('#userName').val('');
-				}
-			}
+        if (lang.SETT_RESTAR_USERNAME === 'ON') {
+          $('#userName').val('');
+        }
+      }
 
-			handleSignInResponse[response.code](response);
-		});
-	};
+      handleSignInResponse[response.code](response);
+    });
+  };
 
-	const handleSignInResponse = {
-		0: function (response) {
-			if (response.data.link) {
-				let link = response.data.link;
+  const handleSignInResponse = {
+    0: function (response) {
+      if (response.data.link) {
+        let link = response.data.link;
 
-				if (response.data.link.indexOf('dashboard') !== -1) {
-					link = link.replace(customerUri, customer);
-				}
+        if (response.data.link.indexOf('dashboard') !== -1) {
+          link = link.replace(customerUri, customer);
+        }
 
-				$(location).attr('href', link);
-			} else {
-				toggleDisableActions(false);
-				btnCalled.html(btnSignin);
-				formSignin.validate().resetForm();
-			}
-		},
-		1: function (response) {
-			$('#userName').showBalloon({
-				html: true,
-				classname: response.data.className,
-				position: response.data.position,
-				contents: response.msg,
-			});
-			setTimeout(function () {
-				$('#userName').hideBalloon();
-			}, 2500);
-			toggleDisableActions(false);
-			btnCalled.html(btnSignin);
-			formSignin.validate().resetForm();
-		},
-		2: function (response) {},
-		3: function (response) {
-			const img = document.createElement('img');
-			img.setAttribute('src', response.data.img);
-			img.setAttribute('alt', 'Notificación');
-			img.setAttribute('style', 'height: 440px; width: 425px;');
-			document.getElementById('system-msg').appendChild(img);
+        $(location).attr('href', link);
+      } else {
+        toggleDisableActions(false);
+        btnCalled.html(btnSignin);
+        formSignin.validate().resetForm();
+      }
+    },
+    1: function (response) {
+      $('#userName').showBalloon({
+        html: true,
+        classname: response.data.className,
+        position: response.data.position,
+        contents: response.msg,
+      });
+      setTimeout(function () {
+        $('#userName').hideBalloon();
+      }, 2500);
+      toggleDisableActions(false);
+      btnCalled.html(btnSignin);
+      formSignin.validate().resetForm();
+    },
+    2: function (response) {},
+    3: function (response) {
+      const img = document.createElement('img');
+      img.setAttribute('src', response.data.img);
+      img.setAttribute('alt', 'Notificación');
+      img.setAttribute('style', 'height: 440px; width: 425px;');
+      document.getElementById('system-msg').appendChild(img);
 
-			response.msg = '';
-			response.minWidth = 470;
-			response.maxHeight = 'none';
-			response.posAt = 'center top';
-			response.posMy = 'center top+60';
+      response.msg = '';
+      response.minWidth = 470;
+      response.maxHeight = 'none';
+      response.posAt = 'center top';
+      response.posMy = 'center top+60';
 
-			uiModalMessage(response);
+      uiModalMessage(response);
 
-			toggleDisableActions(false);
-			btnCalled.html(btnSignin);
-			formSignin.validate().resetForm();
-		},
-		4: function (response) {
-			if (response.data.action) {
-				$('#accept').addClass(response.data.action);
-			}
+      toggleDisableActions(false);
+      btnCalled.html(btnSignin);
+      formSignin.validate().resetForm();
+    },
+    4: function (response) {
+      if (response.data.action) {
+        $('#accept').addClass(response.data.action);
+      }
 
-			toggleDisableActions(false);
-			btnCalled.html(btnSignin);
-			formSignin.validate().resetForm();
-		},
-	};
+      toggleDisableActions(false);
+      btnCalled.html(btnSignin);
+      formSignin.validate().resetForm();
+    },
+  };
 });
 /*
 $('#system-info').on('click', '.send-otp', function () {
