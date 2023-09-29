@@ -4,6 +4,26 @@ import { languageTenant } from './language.js';
 
 $(function () {
   languageTenant();
+  spinerLoader(false);
+
+  $('body').on('click', '.pwd-action', function () {
+    const passInput = $('body').find('.pwd-input');
+    const inputType = passInput.attr('type');
+
+    if (passInput.val() !== '') {
+      if (inputType === 'password') {
+        passInput.attr('type', 'text');
+        $(this).attr('title', lang.GEN_HIDE_PASS);
+      } else {
+        passInput.attr('type', 'password');
+        $(this).attr('title', lang.GEN_SHOW_PASS);
+      }
+    }
+  });
+
+  $('body').on('keydown', '.pwd-input', function () {
+    ($(this).attr('type') === 'text') & $(this).attr('type', 'password');
+  });
 
   $('.spiner-loader').on('click', function () {
     spinerLoader(true);
