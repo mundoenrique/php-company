@@ -19,8 +19,8 @@ $(function () {
 
   $('#osNonBillable').DataTable({
     drawCallback: function (d) {
-      $('#pre-loader').remove();
-      $('.hide-out').removeClass('hide');
+      $('#loader-table').remove();
+      $('.hide-table').removeClass('hide');
     },
     ordering: false,
     pagingType: 'full_numbers',

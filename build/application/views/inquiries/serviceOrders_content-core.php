@@ -14,7 +14,6 @@
     </nav>
   </div>
 </div>
-
 <div class="flex mt-1 bg-color flex-nowrap justify-between">
   <div id="pre-loader" class="mx-auto flex justify-center">
     <span class="spinner-border spinner-border-lg my-2" role="status" aria-hidden="true"></span>
