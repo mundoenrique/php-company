@@ -30,9 +30,16 @@ $(function () {
   });
 
   $('#resultServiceOrders tbody').on('click', 'button.details-control', function () {
+    var oldTr = $(this).closest('tbody').find('tr.shown');
+    var oldRow = serviceOrder.row(oldTr);
     var tr = $(this).closest('tr');
     var row = serviceOrder.row(tr);
     var bulk = $(this).closest('tr').attr('bulk');
+
+    if (!tr.hasClass('shown')) {
+      oldRow.child.hide();
+      oldTr.removeClass('shown');
+    }
 
     if (row.child.isShown()) {
       row.child.hide();
