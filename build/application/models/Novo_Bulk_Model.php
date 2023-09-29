@@ -1019,13 +1019,13 @@ class Novo_Bulk_Model extends NOVO_Model
           foreach ($dataOrder->lotes as $bulk) {
             $bulkList->bulkNumber = $bulk->acnumlote;
             $bulkList->bulkLoadDate = $bulk->dtfechorcarga;
-            $bulkList->bulkLoadType = manageString($bulk->acnombre, 'lower', 'first');
             $bulkList->bulkRecords = $bulk->ncantregs;
+            $bulkList->bulkId = $bulk->acidlote;
+            $bulkList->bulkLoadType = manageString($bulk->acnombre, 'lower', 'first');
             $bulkList->bulkStatus = manageString($bulk->status, 'lower', 'first');
             $bulkList->bulkAmount = currencyFormat($bulk->montoRecarga);
             $bulkList->bulkCommisAmount = currencyFormat($bulk->montoComision);
             $bulkList->bulkTotalAmount = currencyFormat($bulk->montoNeto);
-            $bulkList->bulkId = $bulk->acidlote;
             $bulkList->bulkObservation = '';
 
             if (isset($bulk->obs)  && $bulk->obs !== '' && $bulk->cestatus === lang('SETT_STATUS_REJECTED')) {
