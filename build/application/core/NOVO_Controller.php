@@ -331,7 +331,7 @@ class NOVO_Controller extends CI_Controller
       $this->render->icon = $responseView->icon;
       $this->render->modalBtn = $responseView->modalBtn;
     } elseif (isset($responseView->data->params)) {
-      $this->render->params = $responseView->data->params;
+      $this->render->params = json_encode($responseView->data->params);
     }
   }
   /**
