@@ -36,10 +36,10 @@ class Novo_Inquiries extends NOVO_Controller
       "inquiries/serviceOrders"
     );
     $renderOrderList = FALSE;
-    $orderList = [];
+    $ordersList = $this->session->flashdata('serviceOrdersList');
+    $nonBillable = $this->session->flashdata('bulkNotBillable');
 
-    if ($this->session->flashdata('serviceOrdersList')) {
-      $orderList = $this->session->flashdata('serviceOrdersList');
+    if ($ordersList !== NULL || $nonBillable !== NULL) {
       $renderOrderList = TRUE;
     }
 
@@ -60,7 +60,8 @@ class Novo_Inquiries extends NOVO_Controller
 
     $this->render->orderStatus = $responseList->data->orderStatus;
     $this->render->renderOrderList = $renderOrderList;
-    $this->render->orderList = $orderList;
+    $this->render->orderList = $ordersList ?? [];
+    $this->render->nonBillable = $nonBillable ?? [];
     $this->render->titlePage = lang('GEN_SERVICE_ORDERS_TITLE');
     $this->views = ['inquiries/' . $view];
     $this->loadView($view);

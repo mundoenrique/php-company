@@ -23,7 +23,7 @@
     <div class="flex flex-auto flex-column">
       <div class="flex pb-5 flex-column">
         <?php if (count($serviceOrdersList) > 0) : ?>
-          <span class="line-text mb-2 h4 semibold primary"></span>
+          <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></span>
           <div class="center mx-1">
             <table id="resultServiceOrders" class="cell-border h6 display">
               <thead class="bg-primary secondary regular">
@@ -57,7 +57,7 @@
           </div>
         <?php endif; ?>
         <?php if (count($bulkNotBillable) > 0) : ?>
-          <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NO_BILLABLE'); ?></span>
+          <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_NON_BILLABLE'); ?></span>
           <div class="center mx-1">
             <table id="resultNonBillable" class="cell-border h6 display">
               <thead class="bg-primary secondary regular">
@@ -82,38 +82,38 @@
                 <?php endforeach; ?>
               </tbody>
             </table>
-          <?php endif; ?>
-          <div class="line my-2"></div>
           </div>
-          <form id="auth-bulk-form">
-            <div class="flex flex-column mb-4 px-5 justify-center items-center">
-              <?php if (lang('SETT_SERVICE_ORDER_OTP') == 'ON') : ?>
-                <div class="form-group col-6 col-xl-4 center">
-                  <label for="otpCode" class="pb-1 regular"><?= lang('GEN_OTP'); ?></label>
-                  <input id="otpCode" name="otpCode" class="form-control col-6 block m-auto" type="text" autocomplete="off">
-                  <div class="help-block center"></div>
-                </div>
-              <?PHP endif; ?>
-              <div class="form-group col-4 col-lg-3">
-                <input id="tempOrders" name="tempOrders" type="hidden" value="<?= $tempOrdersId; ?>">
-                <input id="bulkNoBill" name="bulkNoBill" type="hidden" value="<?= $bulknotBill; ?>">
-                <div class="help-block"></div>
+        <?php endif; ?>
+        <div class="line my-2"></div>
+        <form id="auth-bulk-form">
+          <div class="flex flex-column mb-4 px-5 justify-center items-center">
+            <?php if (lang('SETT_SERVICE_ORDER_OTP') === 'ON') : ?>
+              <div class="form-group col-6 col-xl-4 center">
+                <label for="otpCode" class="pb-1 regular"><?= lang('GEN_OTP'); ?></label>
+                <input id="otpCode" name="otpCode" class="form-control col-6 block m-auto" type="text" autocomplete="off">
+                <div class="help-block center"></div>
               </div>
-              <div class="flex flex-row">
-                <?php if (lang('SETT_SERVICE_ORDER_CANCEL') === 'ON') : ?>
-                  <div class="mb-3 mr-4">
-                    <button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
-                  </div>
-                <?php endif; ?>
-                <div class="mb-3 mr-1">
-                  <button id="auth-bulk-btn" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_AUTHORIZE'); ?></button>
+            <?PHP endif; ?>
+            <div class="form-group col-4 col-lg-3">
+              <input id="tempOrders" name="tempOrders" type="hidden" value="<?= $tempOrdersId; ?>">
+              <input id="bulkNoBill" name="bulkNoBill" type="hidden" value="<?= $bulknotBill; ?>">
+              <div class="help-block"></div>
+            </div>
+            <div class="flex flex-row">
+              <?php if (lang('SETT_SERVICE_ORDER_CANCEL') === 'ON') : ?>
+                <div class="mb-3 mr-4">
+                  <button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
                 </div>
+              <?php endif; ?>
+              <div class="mb-3 mr-1">
+                <button id="auth-bulk-btn" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_AUTHORIZE'); ?></button>
               </div>
             </div>
-          </form>
-          <div class="my-5 py-4 center none">
-            <span class="h4"><?= lang('GEN_NO_LIST'); ?></span>
           </div>
+        </form>
+        <div class="my-5 py-4 center none">
+          <span class="h4"><?= lang('GEN_NO_LIST'); ?></span>
+        </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['BULK_TITLE'] = 'Cargar lote';
 $lang['BULK_TITLE_PAGE'] = 'Carga de lote';
@@ -57,7 +57,6 @@ $lang['BULK_DELETE'] = 'Por favor ingresa la contraseña para eliminar el lote';
 $lang['BULK_DISASS'] = 'Por favor ingresa la contraseña para desasociar el lote';
 $lang['BULK_DELETE_NAME'] = 'Por favor ingresa la contraseña para eliminar el lote';
 $lang['BULK_SELECT'] = 'Selecciona al menos un lote';
-$lang['BULK_NO_BILLABLE'] = 'Lotes no facturables';
 $lang['BULK_WITAOUT_TAX'] = 'La empresa no tiene impuesto asociado al producto.';
 $lang['BULK_CALCULATE_ORDER'] = 'Calcular orden de servicio';
 $lang['BULK_SIGNEDS'] = 'Lotes firmados exitosamente';

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['BULK_TITLE'] = 'Load bulk';
 $lang['BULK_TITLE_PAGE'] = 'Bulk loading';
@@ -57,7 +57,6 @@ $lang['BULK_DELETE'] = 'Please enter the password to delete the bulk';
 $lang['BULK_DISASS'] = 'Please enter the password to disassociate the bulk';
 $lang['BULK_DELETE_NAME'] = 'Please enter the password to delete the bulk';
 $lang['BULK_SELECT'] = 'Select at least one bulk';
-$lang['BULK_NO_BILLABLE'] = 'Non-billable bulks';
 $lang['BULK_WITAOUT_TAX'] = 'The company does not have a tax associated with the product.';
 $lang['BULK_CALCULATE_ORDER'] = 'Calculate Service Order';
 $lang['BULK_SIGNEDS'] = 'Successfully signed bulks';

@@ -758,6 +758,9 @@ class Novo_Bulk_Model extends NOVO_Model
     $this->dataAccessLog->function = 'Autorización de lotes';
     $this->dataAccessLog->operation = 'Calcular orden de servicio';
 
+    $this->dataRequest->idOperation = 'calcularOS';
+    $this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
+
     $signListBulk = [];
 
     foreach ($dataRequest->bulk as $bulkInfo) {
@@ -774,8 +777,6 @@ class Novo_Bulk_Model extends NOVO_Model
       $password = $this->session->passWord ?: md5($password);
     }
 
-    $this->dataRequest->idOperation = 'calcularOS';
-    $this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
     $this->dataRequest->datosEmpresa = [
       'acrif' => $this->session->enterpriseInf->idFiscal
     ];
@@ -873,13 +874,13 @@ class Novo_Bulk_Model extends NOVO_Model
         break;
       case -154:
         $this->response->title = lang('BULK_AUTH_TITLE');
-        $this->response->msg = lang('SETT_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_DAILY_AMOUNT_EXCEEDED');
+        $this->response->msg = lang('SETT_BULK_AUTH_MSG_SERV') === 'ON' ? $response->msg : lang('BULK_DAILY_AMOUNT_EXCEEDED');
         $this->response->icon = lang('SETT_ICON_WARNING');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
       case -250:
         $this->response->title = lang('BULK_AUTH_TITLE');
-        $this->response->msg = lang('SETT_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_AMOUNT_EXCEEDED');
+        $this->response->msg = lang('SETT_BULK_AUTH_MSG_SERV') === 'ON' ? $response->msg : lang('BULK_AMOUNT_EXCEEDED');
         $this->response->icon = lang('SETT_ICON_WARNING');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
@@ -939,6 +940,9 @@ class Novo_Bulk_Model extends NOVO_Model
     $this->dataAccessLog->function = 'Orden de servicio';
     $this->dataAccessLog->operation = 'Generar orden de servicio';
 
+    $this->dataRequest->idOperation = 'generarOS';
+    $this->dataRequest->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
+
     $listTemp = [];
     $listTempNoBill = [];
 
@@ -962,8 +966,6 @@ class Novo_Bulk_Model extends NOVO_Model
       }
     }
 
-    $this->dataRequest->idOperation = 'generarOS';
-    $this->dataRequest->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
     $this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
     $this->dataRequest->lista = $listTemp;
     $this->dataRequest->lotesNF = $listTempNoBill;
@@ -980,7 +982,6 @@ class Novo_Bulk_Model extends NOVO_Model
 
     switch ($this->isResponseRc) {
       case 0:
-
         if (!$this->verify_access->verifyAuthorization('TEBORS')) {
           $this->response->title = lang('BULK_SO_CREATE_TITLE');
           $this->response->msg = lang('GEN_SO_SUCCESSFULL');
@@ -993,72 +994,67 @@ class Novo_Bulk_Model extends NOVO_Model
         }
 
         $serviceOrdersList = [];
+        $bulkNonBillable = [];
+        foreach ($response->lista as $dataOrder) {
+          $serviceOrders = new stdClass();
+          $bulkList = new stdClass();
 
-        foreach ($response->lista as $list) {
+          $serviceOrders->OrderNumber = $dataOrder->idOrden;
+          $serviceOrders->OrderStatus = $dataOrder->estatus;
+          $serviceOrders->Orderdate = $dataOrder->fechaGeneracion;
+          $serviceOrders->noFactura = $dataOrder->nofactura;
+          $serviceOrders->pagoOS['factura'] = $dataOrder->nofactura;
+          $serviceOrders->pagoOS['total'] = $dataOrder->montoDeposito;
+          $serviceOrders->OrderDeposit = currencyFormat($dataOrder->montoDeposito);
+          $serviceOrders->OrderCommission = currencyFormat($dataOrder->montoComision);
+          $serviceOrders->OrderTax = currencyFormat($dataOrder->montoIVA);
+          $serviceOrders->OrderAmount = currencyFormat($dataOrder->montoOS);
+          $serviceOrders->OrderVoidable = FALSE;
+          $serviceOrders->warningEnabled = FALSE;
 
-          foreach ($list as $key => $value) {
-            switch ($key) {
-              case 'idOrden':
-                $serviceOrders['OrderNumber'] = $value;
-                break;
-              case 'fechaGeneracion':
-                $serviceOrders['Orderdate'] = $value;
-                break;
-              case 'estatus':
-                $serviceOrders['OrderStatus'] = $value;
-                $serviceOrders['OrderVoidable'] = FALSE;
-                if ($value == '0') {
-                  $serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
-                }
-                break;
-              case 'montoComision':
-                $serviceOrders['OrderCommission'] = currencyFormat($value);
-                break;
-              case 'montoIVA':
-                $serviceOrders['OrderTax'] = currencyFormat($value);
-                break;
-              case 'montoOS':
-                $serviceOrders['OrderAmount'] = currencyFormat($value);
-                break;
-              case 'montoDeposito':
-                $serviceOrders['OrderDeposit'] = currencyFormat($value);
-                $serviceOrders['pagoOS']['total'] = $value;
-                break;
-              case 'nofactura':
-                $serviceOrders['noFactura'] = $value;
-                $serviceOrders['pagoOS']['factura'] = $value;
-                break;
-              case 'lotes':
-                $serviceOrders['bulk'] = [];
-                $serviceOrders['warningEnabled'] = FALSE;
-                foreach ($value as $bulk) {
-                  $bulkList['bulkNumber'] = $bulk->acnumlote;
-                  $bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
-                  $bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
-                  $bulkList['bulkRecords'] = $bulk->ncantregs;
-                  $bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
-                  $bulkList['bulkAmount'] = currencyFormat($bulk->montoRecarga);
-                  $bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
-                  $bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
-                  $bulkList['bulkId'] = $bulk->acidlote;
-                  $bulkList['bulkObservation'] = '';
-
-                  if (isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('SETT_STATUS_REJECTED')) {
-                    $bulkList['bulkObservation'] = $bulk->obs;
-                    $serviceOrders['warningEnabled'] = TRUE;
-                  }
-                  $serviceOrders['bulk'][] = (object) $bulkList;
-                }
-                break;
-            }
+          if ($dataOrder->estatus == '0' &&  $dataOrder->nofactura === '' && $dataOrder->fechafactura === '') {
+            $serviceOrders->OrderVoidable = TRUE;
           }
 
-          $serviceOrdersList[] = (object) $serviceOrders;
+          foreach ($dataOrder->lotes as $bulk) {
+            $bulkList->bulkNumber = $bulk->acnumlote;
+            $bulkList->bulkLoadDate = $bulk->dtfechorcarga;
+            $bulkList->bulkLoadType = manageString($bulk->acnombre, 'lower', 'first');
+            $bulkList->bulkRecords = $bulk->ncantregs;
+            $bulkList->bulkStatus = manageString($bulk->status, 'lower', 'first');
+            $bulkList->bulkAmount = currencyFormat($bulk->montoRecarga);
+            $bulkList->bulkCommisAmount = currencyFormat($bulk->montoComision);
+            $bulkList->bulkTotalAmount = currencyFormat($bulk->montoNeto);
+            $bulkList->bulkId = $bulk->acidlote;
+            $bulkList->bulkObservation = '';
+
+            if (isset($bulk->obs)  && $bulk->obs !== '' && $bulk->cestatus === lang('SETT_STATUS_REJECTED')) {
+              $bulkList->bulkObservation = $bulk->obs;
+              $serviceOrders->warningEnabled = TRUE;
+            }
+
+            $serviceOrders->bulk[] = $bulkList;
+          }
+
+          $serviceOrdersList[] = $serviceOrders;
+        }
+
+        foreach ($response->lotesNF as $nonBillable) {
+          $bulkList = new stdClass();
+
+          $bulkList->bulkId = $nonBillable->acidlote;
+          $bulkList->bulkNumber = $nonBillable->acnumlote;
+          $bulkList->bulkLoadDate = $nonBillable->dtfechorcarga;
+          $bulkList->bulkLoadType = $nonBillable->acnombre;
+          $bulkList->bulkRecords = $nonBillable->ncantregs;
+          $bulkList->bulkStatus = manageString($nonBillable->status, 'lower', 'first');
+
+          $bulkNonBillable[] = $bulkList;
         }
 
         $this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+        $this->session->set_flashdata('bulkNotBillable', $bulkNonBillable);
         break;
-
       case -5:
       case -56:
         $this->response->title = lang('BULK_SO_CREATE_TITLE');
@@ -1100,7 +1096,7 @@ class Novo_Bulk_Model extends NOVO_Model
     $this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
     $this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 
-    if ($this->session->flashdata('authToken') != NULL) {
+    if ($this->session->flashdata('authToken') !== NULL) {
       $authToken = $this->session->flashdata('authToken');
       $this->session->set_flashdata('authToken', $authToken);
     }

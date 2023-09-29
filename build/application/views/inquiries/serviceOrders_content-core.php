@@ -74,74 +74,102 @@
         </div>
         <div class="w-100 hide-table hide">
           <div class="flex pb-5 flex-column">
-            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></span>
-            <div class="center mx-1">
-              <table id="resultServiceOrders" class="cell-border h6 display" orderList="<?= htmlspecialchars(json_encode($orderList), ENT_QUOTES, 'UTF-8'); ?>">
-                <thead class="bg-primary secondary regular">
-                  <tr>
-                    <th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
-                    <th><?= lang('GEN_TABLE_DATE'); ?></th>
-                    <th><?= lang('GEN_TABLE_COMMISSION'); ?></th>
-                    <th><?= lang('GEN_TABLE_VAT'); ?></th>
-                    <th><?= lang('GEN_TABLE_AMOUNT_SO'); ?></th>
-                    <th><?= lang('GEN_TABLE_DEPOSIT_AMOUNT'); ?></th>
-                    <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($orderList as $list) : ?>
-                    <tr pagoOS="<?= htmlspecialchars(json_encode($list->pagoOS), ENT_QUOTES, 'UTF-8'); ?>" bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
-                      <td><?= $list->OrderNumber; ?></td>
-                      <td><?= $list->Orderdate; ?></td>
-                      <td><?= $list->OrderCommission; ?></td>
-                      <td><?= $list->OrderTax; ?></td>
-                      <td><?= $list->OrderAmount; ?></td>
-                      <td><?= $list->OrderDeposit; ?></td>
-                      <td class="p-0 nowrap">
-                        <?php if (lang('SETT_SERVICEORDERS_ICON') == 'ON' && $list->warningEnabled == TRUE) : ?>
-                          <span class="btn mx-1 px-0">
-                            <i class="icon icon-warning warning not-pointer" aria-hidden="true"></i>
-                          </span>
-                        <?php endif; ?>
-                        <?php if ($this->verify_access->verifyAuthorization('TEBORS')) : ?>
-                          <button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
-                            <i class="icon icon-find" aria-hidden="true"></i>
-                          </button>
-                        <?php endif; ?>
-                        <button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
-                          <i class="icon icon-file-pdf" aria-hidden="true"></i>
-                        </button>
-                        <?php if ($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable) : ?>
-                          <button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
-                            <i class="icon icon-remove" aria-hidden="true"></i>
-                          </button>
-                        <?php endif; ?>
-                        <?php if ($this->verify_access->verifyAuthorization('TEBORS', 'TEBPGO') && $list->OrderVoidable) : ?>
-                          <button class="btn mx-1 px-0" title="<?= lang('PAG_OS_TITLE') ?>" data-toggle="tooltip">
-                            <i class="icon icon-credit-card" aria-hidden="true"></i>
-                          </button>
-                        <?php endif; ?>
-                        <form method="POST" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>">
-                          <input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
-                        </form>
-                      </td>
+            <?php if (count($orderList) > 0) : ?>
+              <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></span>
+              <div class="center mx-1">
+                <table id="resultServiceOrders" class="cell-border h6 display" orderList="<?= htmlspecialchars(json_encode($orderList), ENT_QUOTES, 'UTF-8'); ?>">
+                  <thead class="bg-primary secondary regular">
+                    <tr>
+                      <th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
+                      <th><?= lang('GEN_TABLE_DATE'); ?></th>
+                      <th><?= lang('GEN_TABLE_COMMISSION'); ?></th>
+                      <th><?= lang('GEN_TABLE_VAT'); ?></th>
+                      <th><?= lang('GEN_TABLE_AMOUNT_SO'); ?></th>
+                      <th><?= lang('GEN_TABLE_DEPOSIT_AMOUNT'); ?></th>
+                      <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
                     </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-              <form id="pagoOrden" name="pagoOrden">
-                <input type="hidden" id="idOS" name="idOS" value="">
-                <input type="hidden" id="totalAmount" name="totalAmount" value="">
-                <input type="hidden" id="noFactura" name="noFactura" value="">
-              </form>
-              <div class="line my-2"></div>
-            </div>
-
-            <div class="my-5 py-4 center none">
-              <span class="h4"><?= lang('GEN_WARNING_SERVICE_ORDERS'); ?>"</span>
-            </div>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($orderList as $list) : ?>
+                      <tr pagoOS="<?= htmlspecialchars(json_encode($list->pagoOS), ENT_QUOTES, 'UTF-8'); ?>" bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
+                        <td><?= $list->OrderNumber; ?></td>
+                        <td><?= $list->Orderdate; ?></td>
+                        <td><?= $list->OrderCommission; ?></td>
+                        <td><?= $list->OrderTax; ?></td>
+                        <td><?= $list->OrderAmount; ?></td>
+                        <td><?= $list->OrderDeposit; ?></td>
+                        <td class="p-0 nowrap">
+                          <?php if (lang('SETT_SERVICEORDERS_ICON') === 'ON' && $list->warningEnabled == TRUE) : ?>
+                            <span class="btn mx-1 px-0">
+                              <i class="icon icon-warning warning not-pointer" aria-hidden="true"></i>
+                            </span>
+                          <?php endif; ?>
+                          <?php if ($this->verify_access->verifyAuthorization('TEBORS')) : ?>
+                            <button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
+                              <i class="icon icon-find" aria-hidden="true"></i>
+                            </button>
+                          <?php endif; ?>
+                          <button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+                            <i class="icon icon-file-pdf" aria-hidden="true"></i>
+                          </button>
+                          <?php if ($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable) : ?>
+                            <button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
+                              <i class="icon icon-remove" aria-hidden="true"></i>
+                            </button>
+                          <?php endif; ?>
+                          <?php if ($this->verify_access->verifyAuthorization('TEBORS', 'TEBPGO') && $list->OrderVoidable) : ?>
+                            <button class="btn mx-1 px-0" title="<?= lang('PAG_OS_TITLE') ?>" data-toggle="tooltip">
+                              <i class="icon icon-credit-card" aria-hidden="true"></i>
+                            </button>
+                          <?php endif; ?>
+                          <form method="POST" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>">
+                            <input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
+                          </form>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+                <form id="pagoOrden" name="pagoOrden">
+                  <input type="hidden" id="idOS" name="idOS">
+                  <input type="hidden" id="totalAmount" name="totalAmount">
+                  <input type="hidden" id="noFactura" name="noFactura">
+                </form>
+              </div>
+              <div class="my-5 py-4 center none">
+                <span class="h4"><?= lang('GEN_WARNING_SERVICE_ORDERS'); ?>"</span>
+              </div>
+            <?php endif; ?>
+            <?php if (count($nonBillable) > 0) : ?>
+              <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_NON_BILLABLE'); ?></span>
+              <div class="center mx-1">
+                <table id="osNonBillable" class="cell-border h6 display">
+                  <thead class="bg-primary secondary regular">
+                    <tr>
+                      <th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
+                      <th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
+                      <th><?= lang('GEN_TABLE_TYPE'); ?></th>
+                      <th><?= lang('GEN_TABLE_RECORDS'); ?></th>
+                      <th><?= lang('GEN_TABLE_STATUS'); ?></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($nonBillable as $bulk) : ?>
+                      <tr>
+                        <td><?= $bulk->bulkNumber; ?></td>
+                        <td><?= $bulk->bulkLoadDate; ?></td>
+                        <td><?= $bulk->bulkLoadType; ?></td>
+                        <td><?= $bulk->bulkRecords; ?></td>
+                        <td><?= $bulk->bulkStatus; ?></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
+        <div class="line mb-2"></div>
       <?php endif; ?>
     </div>
   </div>

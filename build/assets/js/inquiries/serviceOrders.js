@@ -17,6 +17,16 @@ $(function () {
     language: dataTableLang,
   });
 
+  $('#osNonBillable').DataTable({
+    drawCallback: function (d) {
+      $('#pre-loader').remove();
+      $('.hide-out').removeClass('hide');
+    },
+    ordering: false,
+    pagingType: 'full_numbers',
+    language: dataTableLang,
+  });
+
   $('#resultServiceOrders tbody').on('click', 'button.details-control', function () {
     var oldTr = $(this).closest('tbody').find('tr.shown');
     var oldRow = resultServiceOrders.row(oldTr);

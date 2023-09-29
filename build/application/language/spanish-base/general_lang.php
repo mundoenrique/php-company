@@ -103,6 +103,7 @@ $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
+$lang['GEN_NON_BILLABLE'] = 'Lotes no facturables';
 $lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo, por favor intentalo de nuevo.';
 $lang['GEN_COMMERCIAL_TWIRLS_TITTLE'] = 'Giros comerciales';
@@ -137,10 +138,10 @@ $lang['GEN_CONTACTS_CITY'] = '';
 $lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
 $lang['GEN_CONTACTS'] = [
-	'Teléfono' => '(51-1) 619-8900',
-	'Fax' => '(51-1) 619-8900',
-	'' => 'anexo 200',
-	'E-mail' => 'ventas@tebca.com.pe',
+  'Teléfono' => '(51-1) 619-8900',
+  'Fax' => '(51-1) 619-8900',
+  '' => 'anexo 200',
+  'E-mail' => 'ventas@tebca.com.pe',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
@@ -244,7 +245,7 @@ $lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 
 $lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
 $lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
 $lang['GEN_DATEPICKER_MONTHNAMES'] = [
-	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
 $lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 $lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
@@ -345,9 +346,9 @@ $lang['GEN_SILVER_CARD'] = 'Plata Servitebca';
 $lang['GEN_BULK_TYPE'] = 'Tipo de lote';
 $lang['GEN_TIMEOUT_HTTP'] = 'Tu solicitud continua procesandose, por favor espera.';
 $lang['GEN_RECOVER_DOC_TYPE'] = [
-	'' => 'Selecciona',
-	'CC' => 'Cédula de ciudadania',
-	'PP' => 'Pasaporte',
+  '' => 'Selecciona',
+  'CC' => 'Cédula de ciudadania',
+  'PP' => 'Pasaporte',
 ];
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';

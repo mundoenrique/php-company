@@ -100,6 +100,7 @@ $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Authorize bulk';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Cancel order';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Service orders';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Service orders details';
+$lang['GEN_NON_BILLABLE'] = 'Non-billable bulks';
 $lang['GEN_DOWNLOAD_FILE'] = 'Download file';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'The file could not be downloaded, please try again.';
 $lang['GEN_COMMERCIAL_TWIRLS_TITTLE'] = 'Commercial twirls';
@@ -130,10 +131,10 @@ $lang['GEN_CONTACTS_CITY'] = '';
 $lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'REST OF THE COUNTRY';
 $lang['GEN_CONTACTS'] = [
-	'Phone' => '(51-1) 619-8900',
-	'Fax' => '(51-1) 619-8900',
-	'' => 'anexo 200',
-	'E-mail' => 'ventas@tebca.com.pe',
+  'Phone' => '(51-1) 619-8900',
+  'Fax' => '(51-1) 619-8900',
+  '' => 'anexo 200',
+  'E-mail' => 'ventas@tebca.com.pe',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_USER_PERMISSION_TITLE'] = 'User permits';
@@ -235,7 +236,7 @@ $lang['GEN_DATEPICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 
 $lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 $lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 $lang['GEN_DATEPICKER_MONTHNAMES'] = [
-	'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
 ];
 $lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 $lang['GEN_DATEPICKER_NEXTTEXT'] = 'Next';
@@ -329,9 +330,9 @@ $lang['GEN_BONUS_CARD'] = 'Tebca Food Bonus';
 $lang['GEN_SILVER_CARD'] = 'Servitebca payment';
 $lang['GEN_BULK_TYPE'] = 'Bulk type';
 $lang['GEN_RECOVER_DOC_TYPE'] = [
-	'' => 'Select',
-	'CC' => 'Citizenship card',
-	'PP' => 'Passport',
+  '' => 'Select',
+  'CC' => 'Citizenship card',
+  'PP' => 'Passport',
 ];
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Module';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Function';
