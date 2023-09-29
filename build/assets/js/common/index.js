@@ -4,7 +4,6 @@ import { languageTenant } from './language.js';
 
 $(function () {
   languageTenant();
-  spinerLoader(false);
 
   $('body').on('click', '.pwd-action', function () {
     const passInput = $('body').find('.pwd-input');
@@ -27,6 +26,10 @@ $(function () {
 
   $('.spiner-loader').on('click', function () {
     spinerLoader(true);
+
+    setTimeout(() => {
+      spinerLoader(false);
+    }, 3000);
   });
 
   $('#change-lang').on('click', function () {
