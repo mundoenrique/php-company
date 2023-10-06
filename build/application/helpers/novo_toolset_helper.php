@@ -343,10 +343,10 @@ if (!function_exists('getSignSessionType ')) {
   {
     $signType = SINGLE_SIGN_ON ? lang('SETT_COOKIE_SINGN_ON') : lang('SETT_COOKIE_SINGN_IN');
 
-    $signValue = get_cookie('appLanguage', TRUE);
+    $signValue = get_cookie('signSessionType', TRUE);
     $cookieSign = ACTIVE_SAFETY ? base64_decode($signValue) : $signValue;
+    $validCookie = in_array($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
 
-    $validCookie = array_key_exists($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
     $signType = $validCookie ? $cookieSign : $signType;
     $signType = str_replace(config_item('cookie_prefix'), '', $signType);
 
@@ -371,7 +371,7 @@ if (!function_exists('setSignSessionType')) {
     if (get_cookie('singleSession', TRUE) !== NULL) {
       delete_cookie('singleSession', config_item('cookie_domain'), config_item('cookie_path'));
     }
-
+    writeLog('INFO', '***********************setSignSessionType ' . $signType);
     $SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
 
     $signSessionType = [
