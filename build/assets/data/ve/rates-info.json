@@ -3,64 +3,55 @@
 	"currency": "ves",
 	"currency_symbol": "Bs.",
 	"last_update": "2023-05-16",
-	"data": [{
+	"data": [
+		{
 			"name": "Servicios",
 			"description": null,
-			"items": [{
+			"items": [
+				{
 					"name": "Servicio administrativo mínimo",
 					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 350,00",
-					"rates": [
-						"Bs. 350,00",
-						"Bs. 350,00"
-					]
+					"rates": ["Bs. 350,00", "Bs. 350,00"]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": null,
-					"rates": [
-						"Bs. 350,00",
-						"Bs. 350,00"
-					]
+					"rates": ["Bs. 350,00", "Bs. 350,00"]
 				}
 			]
 		},
 		{
 			"name": "Tarjetas",
 			"description": null,
-			"items": [{
-					"name": "Emisión (c/u)",
+			"items": [
+				{
+					"name": "Emisión (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
 					"description": null,
-					"rates": [
-						"Bs. 70,00",
-						"Bs. 70,00"
-					]
+					"rates": ["Bs. 70,00 <br> Bs. 120,00", "Bs. 70,00 <br> Bs. 120,00"]
 				},
 				{
-					"name": "Reposición / Renovación (c/u)",
+					"name": "Reposición / Renovación (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
 					"description": null,
-					"rates": [
-						"Bs. 70,00",
-						"Bs. 70,00"
-					]
+					"rates": ["Bs. 70,00 <br> Bs. 120,00", "Bs. 70,00 <br> Bs. 120,00"]
 				}
 			]
 		},
 		{
 			"name": "Claves",
 			"description": null,
-			"items": [{
-				"name": "Reposición",
-				"description": null,
-				"rates": [
-					"Bs. 70,00",
-					"Bs. 70,00"
-				]
-			}]
+			"items": [
+				{
+					"name": "Reposición",
+					"description": null,
+					"rates": ["Bs. 70,00", "Bs. 70,00"]
+				}
+			]
 		},
 		{
 			"name": "Cajeros automáticos*",
 			"description": null,
-			"items": [{
+			"items": [
+				{
 					"name": "Retiro de cajeros",
 					"description": null,
 					"rates": []
@@ -68,10 +59,7 @@
 				{
 					"name": "Otros bancos",
 					"description": null,
-					"rates": [
-						null,
-						"5%"
-					]
+					"rates": [null, "5%"]
 				},
 				{
 					"name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
@@ -81,10 +69,7 @@
 				{
 					"name": "Otros bancos",
 					"description": null,
-					"rates": [
-						null,
-						"Bs. 0,01"
-					]
+					"rates": [null, "Bs. 0,01"]
 				}
 			]
 		},
@@ -95,32 +80,25 @@
 				{
 					"name": "Comisión general",
 					"description": null,
-					"rates": [
-						null,
-						"0.85%"
-					]
+					"rates": [null, "0.85%"]
 				},
 				{
 					"name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 15,00)",
 					"description": null,
-					"rates": [
-						null,
-						"Bs. 15,00"
-					]
+					"rates": [null, "Bs. 15,00"]
 				}
 			]
 		},
 		{
 			"name": "IVR, Centro de Contacto, App Móvil, Página Web",
 			"description": null,
-			"items": [{
-				"name": "Consulta de saldo",
-				"description": null,
-				"rates": [
-					0.00,
-					0.00
-				]
-			}]
+			"items": [
+				{
+					"name": "Consulta de saldo",
+					"description": null,
+					"rates": [0.0, 0.0]
+				}
+			]
 		}
 	],
 	"refs": [
