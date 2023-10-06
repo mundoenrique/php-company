@@ -353,6 +353,7 @@ $lang['SETT_MODAL_BTN_CLASS'] = [
 $lang['SETT_ACCOUNT_NAME'] = 'OFF';
 $lang['SETT_STATUS_MOVEMENT'] = 'OFF';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'OFF';
+$lang['SETT_FILE_STATUS_ACCOUNT_PDF'] = 'OFF';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'OFF';
 $lang['SETT_LANG_CODE'] = [
   'spanish' => 'es',

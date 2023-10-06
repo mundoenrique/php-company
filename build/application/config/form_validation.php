@@ -1661,6 +1661,28 @@ $config = [
       'rules' => 'trim|numeric|required'
     ]
   ],
+  'exportToPdfExtendedAccountStatus' => [
+    [
+      'field' => 'resultByNITInputFileDownload',
+      'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]'
+    ],
+    [
+      'field' => 'enterpriseCodeFileDownload',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+    ],
+    [
+      'field' => 'productCodeFileDownload',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+    ],
+    [
+      'field' => 'initialDateActFileDownload',
+      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+    ],
+    [
+      'field' => 'resultSearchFileDownload',
+      'rules' => 'trim|numeric|required'
+    ]
+  ],
   'statusAccountPdfFile' => [
     [
       'field' => 'resultByNITInput',

@@ -275,6 +275,7 @@ class Verify_Access
       case 'searchExtendedAccountStatus':
       case 'exportToExcelExtendedAccountStatus':
       case 'exportToTxtExtendedAccountStatus':
+      case 'exportToPdfExtendedAccountStatus':
         $auth = ($productInf && $this->verifyAuthorization('REPEDC'));
         break;
       case 'statusMasterAccount':
