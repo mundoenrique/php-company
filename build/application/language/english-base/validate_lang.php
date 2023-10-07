@@ -10,6 +10,7 @@ $lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.'
 
 $lang['VALIDATE_PHONE_NUMBER'] = 'Enter a valid phone number  min 6 max 15.';
 $lang['VALIDATE_ID_NUMBER'] = 'Enter a valid identification number, min 7 max 9.';
+$lang['VALIDATE_FILE_TYPE'] = 'Choose an allowed file (xls, xlsx, txt)';
 
 
 
@@ -22,7 +23,6 @@ $lang['VALIDATE_DIFFERS_PASS'] = 'The new password must be different from the cu
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirm your password';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Select a branch';
 $lang['VALIDATE_BULK_TYPE'] = 'Select a bulk type';
-$lang['VALIDATE_FILE_TYPE'] = 'Choose an allowed file (xls, xlsx, txt)';
 $lang['VALIDATE_FILE_SIZE'] = 'The file must not be empty';
 $lang['VALIDATE_PASS'] = 'Please enter a valid password';
 $lang['VALIDATE_ORDER_TYPE'] = 'Select an order type';
