@@ -130,6 +130,7 @@ $route['(:any)/rates'] = "Novo_Information/ratesInf";
 $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/users-management'] = "Novo_User/usersManagement";
 $route['(:any)/user-permissions'] = "Novo_User/userPermissions";
+$route['(:any)/user-accounts'] = "Novo_User/userAccounts";
 $route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
 $route['(:any)/products'] = "Novo_Business/getProducts";
 $route['(:any)/product-detail'] = "Novo_Business/getProductDetail";

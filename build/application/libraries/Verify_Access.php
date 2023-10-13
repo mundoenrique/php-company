@@ -324,6 +324,7 @@ class Verify_Access
       case 'enableUser':
         $auth = ($productInf && $this->verifyAuthorization('USEREM', 'CREUSU'));
         break;
+      case 'userAccounts':
       case 'userPermissions':
       case 'updatePermissions':
         $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));;

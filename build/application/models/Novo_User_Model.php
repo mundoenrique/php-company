@@ -766,6 +766,57 @@ class Novo_User_Model extends NOVO_Model
     return $this->responseToTheView('callWs_userPermissions');
   }
   /**
+   * @info Método para consulta de permisos de usuarios.
+   * @author Diego Acosta García
+   * @date Oct 2st, 2020
+   */
+  public function callWs_userAccounts_User($dataRequest)
+  {
+    writeLog('INFO', 'User Model: userAccounts Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Usuario';
+    $this->dataAccessLog->function = 'Obtener usuarios banorte';
+    $this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+    $this->dataRequest->idOperation = 'gestionUsuarios';
+    $this->dataRequest->opcion = 'obtenerFuncionesUsuario';
+    $this->dataRequest->userName = $dataRequest->idUser;
+    $this->session->set_flashdata('userDataPermissions', $dataRequest);
+
+    $response = $this->sendToWebServices('callWs_userAccounts');
+
+    switch ($this->isResponseRc) {
+      case 0:
+
+        $this->response->code = 0;
+        $data = $response->bean->perfiles;
+
+
+        foreach ($data as $key => $val) {
+          $titles[$key] = $data[$key]->descripcion;
+          $arrayList[$titles[$key]] = $data[$key]->modulos;
+        }
+
+        foreach ($titles as $key => $value) {
+          foreach ($arrayList[$titles[$key]]  as $key1 => $value1) {
+            $arrayList[$titles[$key]][$key1] = $arrayList[$titles[$key]][$key1]->funciones;
+            foreach ($arrayList[$titles[$key]][$key1] as $key2 => $val2) {
+              if ($arrayList[$titles[$key]][$key1][$key2]->status == "A") {
+                $arrayList[$titles[$key]][$key1][$key2]->status = "on";
+              } else {
+                $arrayList[$titles[$key]][$key1][$key2]->status = "off";
+              }
+            }
+          }
+        }
+
+        $this->response->data = $arrayList;
+        break;
+    }
+
+    return $this->responseToTheView('callWs_userAccounts');
+  }
+  /**
    * @info Método para actualizar permisos de usuarios.
    * @author Diego Acosta García
    * @date Oct 5st, 2020

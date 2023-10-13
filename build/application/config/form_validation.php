@@ -1699,6 +1699,12 @@ $config = [
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
     ],
   ],
+  'userAccounts' => [
+    [
+      'field' => 'adminUser',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
+    ],
+  ],
   'usersManagement' => [
     [
       'field' => 'adminUser',

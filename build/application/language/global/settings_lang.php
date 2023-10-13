@@ -200,6 +200,7 @@ $lang['SETT_FOTTER_NETWORKS_LINK'] = [
 ];
 $lang['SETT_LINK_USERS_MANAGEMENT'] = 'users-management'; //permiso asociado USEREM
 $lang['SETT_LINK_USERS_PERMISSIONS'] = 'user-permissions'; //permiso asociado USEREM-->CREUSU y USEREM-->ASGPER
+$lang['SETT_LINK_USERS_ACCOUNT'] = 'user-accounts'; //permiso asociado USEREM-->CREUSU y USEREM-->ASGPER
 $lang['SETT_LINK_BULK_LOAD'] = 'bulk-load'; //permiso asociado TEBCAR
 $lang['SETT_LINK_BULK_DETAIL'] = 'bulk-detail'; //permiso asociado TEBCAR
 $lang['SETT_LINK_BULK_CONFIRM'] = 'bulk-confirm'; //permiso asociado TEBCAR-->TEBCON
