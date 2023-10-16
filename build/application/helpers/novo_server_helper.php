@@ -33,7 +33,7 @@ if (!function_exists('writeLog')) {
         $reqUser = mb_strtoupper($CI->input->get_post('email'));
       }
 
-      if ($isLogUser === NULL || $user !== $reqUser) {
+      if (!$isLogUser || $user !== $reqUser) {
         $logUser = $date . '-' . $reqUser;
         $CI->session->set_userdata('logUser', $logUser);
       }
@@ -104,9 +104,10 @@ if (!function_exists('handleResponseServer')) {
     }
 
     if (isset($webServiceResp->data->logAcceso)) {
-      $accessLog = json_decode($webServiceResp->data->logAcceso);
+      $accessLog = $webServiceResp->data->logAcceso;
+      $accessLog =  gettype($accessLog) === 'string' ? json_decode($accessLog) : $accessLog;
 
-      if (gettype($accessLog) === 'object') {
+      if (gettype($accessLog) === 'object' || gettype($accessLog) === 'array') {
         $webServiceResp->data->logAcceso = $accessLog;
       }
     }
@@ -120,7 +121,8 @@ if (!function_exists('handleResponseServer')) {
     }
 
     if (isset($webServiceResp->data->bean)) {
-      $bean = json_decode($webServiceResp->data->bean);
+      $bean = $webServiceResp->data->bean;
+      $bean =  gettype($bean) === 'string' ? json_decode($bean) : $bean;
 
       if (gettype($bean) === 'object' || gettype($bean) === 'array') {
         $webServiceResp->data->bean = $bean;
