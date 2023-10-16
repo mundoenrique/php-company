@@ -188,15 +188,15 @@ class Novo_Services_Model extends NOVO_Model
 
     switch ($dataRequest->action) {
       case 'CHECK_BALANCE':
-        $this->dataAccessLog->operation = lang('GEN_CHECK_BALANCE');
+        $this->dataAccessLog->operation = 'saldoTM';
         $this->dataRequest->idOperation = 'saldoTM';
         break;
       case 'CREDIT_TO_CARD':
-        $this->dataAccessLog->operation = lang('GEN_CREDIT_TO_CARD');
+        $this->dataAccessLog->operation = 'saldoTM';
         $this->dataRequest->idOperation = 'abonarTM';
         break;
       case 'DEBIT_TO_CARD':
-        $this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
+        $this->dataAccessLog->operation = 'saldoTM';
         $this->dataRequest->idOperation = 'cargoTM';
         break;
       case 'LOCK_TYPES':
