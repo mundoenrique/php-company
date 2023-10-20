@@ -117,11 +117,21 @@ $route['(:any)/suggestion'] = "Novo_User/suggestion";
 | EXTERNAL ROUTES WITH LANGUAGE
 |--------------------------------------------------------------------------
 */
-$route['(:any)/sign-in/(es|en)'] = "Novo_User/signIn";
-$route['(:any)/ingresar/(:any)/(es|en)']['GET'] = "Novo_User/singleSignOn";
-$route['(:any)/ingresar/(es|en)']['POST'] = "Novo_User/singleSignOn";
-$route['(:any)/recover-password/(es|en)'] = "Novo_User/recoverPass";
-$route['(:any)/recover-access/(es|en)'] = "Novo_User/recoverAccess";
+$route['(:any)/sign-in/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/signIn" : ERROR_CONTROLLER;
+};
+$route['(:any)/ingresar/(:any)/(es|en)']['GET'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(:any)/ingresar/(es|en)']['POST'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(:any)/recover-password/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/recoverPass" : ERROR_CONTROLLER;
+};
+$route['(:any)/recover-access/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/recoverAccess" : ERROR_CONTROLLER;
+};
 /*
 |--------------------------------------------------------------------------
 */

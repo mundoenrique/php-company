@@ -371,7 +371,7 @@ if (!function_exists('setSignSessionType')) {
     if (get_cookie('singleSession', TRUE) !== NULL) {
       delete_cookie('singleSession', config_item('cookie_domain'), config_item('cookie_path'));
     }
-    writeLog('INFO', '***********************setSignSessionType ' . $signType);
+
     $SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
 
     $signSessionType = [

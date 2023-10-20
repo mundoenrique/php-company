@@ -107,7 +107,6 @@ if (!function_exists('getLanguageValues')) {
    */
   function getLanguageValues()
   {
-    $CI = &get_instance();
     $language = lang('SETT_LANGUAGE')['es'];
 
     if (get_cookie('baseLanguage') !== NULL) {
@@ -116,22 +115,23 @@ if (!function_exists('getLanguageValues')) {
 
     $cookieValue = get_cookie('appLanguage', TRUE);
     $cookieLang = ACTIVE_SAFETY ? base64_decode($cookieValue) : $cookieValue;
-    $uriCode = $CI->uri->segment(3, 0);
+    $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $uriCode = end($uriSegments);
 
-    $validCookie = array_key_exists($cookieLang, lang('SETT_LANG_CODE'));
+    $validCookie = in_array($cookieLang, lang('SETT_LANGUAGE'));
     $validUri = array_key_exists($uriCode, lang('SETT_LANGUAGE'));
 
-    $cookieLang = $validCookie ? $cookieLang : $language;
-    $uriLang = $validUri ? lang('SETT_LANGUAGE')[$uriCode] : $cookieLang;
+    $cookieLang = ENGLISH_ACTIVE && $validCookie ? $cookieLang : $language;
+    $uriLang = ENGLISH_ACTIVE && $validUri ? lang('SETT_LANGUAGE')[$uriCode] : $cookieLang;
     $language = $uriLang;
 
-    if (($cookieLang !== $uriLang) || ($cookieValue === NULL)) {
-      languageCookie(lang('SETT_LANG_CODE')[$language]);
+    if (!$validCookie || $cookieLang !== $uriCode || $cookieValue === NULL) {
+      languageCookie(array_search($language, lang('SETT_LANGUAGE')));
     }
 
     return [
       'lang' => $language,
-      'code' => lang('SETT_LANG_CODE')[$language]
+      'code' =>  array_search($language, lang('SETT_LANGUAGE'))
     ];
   }
 }
@@ -147,10 +147,8 @@ if (!function_exists('languageCookie')) {
   function languageCookie($lang)
   {
     $isValidLang = array_key_exists($lang, lang('SETT_LANGUAGE'));
-    $lang = $isValidLang ? $lang : lang('SETT_LANG_CODE')['spanish'];
-
+    $lang = $isValidLang ? $lang : array_search('spanish', lang('SETT_LANGUAGE'));
     $appLanguage = ACTIVE_SAFETY ? base64_encode(lang('SETT_LANGUAGE')[$lang]) : lang('SETT_LANGUAGE')[$lang];
-
     $appLanguage = [
       'name' => 'appLanguage',
       'value' => $appLanguage,
