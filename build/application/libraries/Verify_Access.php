@@ -327,7 +327,7 @@ class Verify_Access
       case 'userAccounts':
       case 'userPermissions':
       case 'updatePermissions':
-        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));;
+        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));
         break;
       case 'pagoOs':
       case 'pagarOS':
@@ -335,7 +335,7 @@ class Verify_Access
         break;
       default:
         $freeAccess = [
-          'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf'
+          'login', 'suggestion', 'browsers', 'finishSession', 'singleSignOn', 'changeLanguage', 'terms', 'termsInf', 'pageNoFound'
         ];
         $auth = in_array($validationMethod, $freeAccess);
     }

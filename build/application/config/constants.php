@@ -111,15 +111,17 @@ defined('DB_VERIFY')      or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' 
 $uriSegments  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $timeZone = [
   'bdb' => 'America/Bogota',
-  'bg'  => 'America/Guayaquil',
+  'bg' => 'America/Guayaquil',
   'bnt' => 'America/Mexico_City',
-  'bp'  => 'America/Guayaquil',
-  'col' => 'America/Bogota',
-  'pb'  => 'America/Guayaquil',
-  'pe'  => 'America/Lima',
-  'us'  => 'America/Lima',
+  'bp' => 'America/Guayaquil',
+  'co' => 'America/Bogota',
+  'coop' => 'America/Bogota',
+  'pb' => 'America/Guayaquil',
+  'pe' => 'America/Lima',
+  'us' => 'America/Lima',
+  've' => 'America/Caracas',
   'ven' => 'America/Caracas',
-  'vg'  => 'America/Lima',
+  'vg' => 'America/Lima',
 ];
 $errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
@@ -152,6 +154,7 @@ defined('PROXY_IPS')          or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] ==
 */
 defined('CUSTUMER_OLD_WAY')   or define('CUSTUMER_OLD_WAY', 'bpi|col|per|usd|ve');
 defined('CUSTUMER_DENY_WAY')  or define('CUSTUMER_DENY_WAY', explode('|', CUSTUMER_OLD_WAY));
+defined('ENGLISH_ACTIVE')     or define('ENGLISH_ACTIVE', in_array($uriSegments[1], ['vg']));
 defined('ERROR_CONTROLLER')   or define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')      or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')        or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);

@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 //País
 $config['country'] = 'Usd';
-$config['countryUri'] = 'usd';
 $config['countryUri'] = in_array('usd', CUSTUMER_DENY_WAY, TRUE) ? 'usd' : 'us';
 $config['sess_expiration'] = 7200;
 

@@ -32,10 +32,11 @@ SetEnv COOKIE_SECURE ON
 SetEnv ASSET_PATH {{ubicación-física}}/site-conexionempresas/build/assets/
 SetEnv LOG_PATH ''
 SetEnv ENCRYPTION_KEY n0v0p4ym3nt-k3y
-# SetEnv SESS_DRIVER database
-# SetEnv SESS_SAVE_PATH ceo_sessions
 SetEnv SESS_DRIVER files
 SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
+# SetEnv SESS_DRIVER database
+# SetEnv SESS_SAVE_PATH ceo_sessions
+
 SetEnv SESS_COOKIE_NAME empresas
 SetEnv SESS_EXPIRATION 1800
 SetEnv COOKIE_PREFIX 'ceo_'
@@ -46,7 +47,7 @@ SetEnv PROXY_ENABLE OFF
 #----------------------#
 SetEnv ACTIVE_SAFETY ON
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, coop, bog, bpi, per, usd, ven, col'
+SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, vgy, coop, bog, bpi, per, usd, ven, col'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
@@ -62,10 +63,10 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME ip-loval
-# SetEnv DB_PORT 3306
-# SetEnv DB_USERNAME cpo_user
-# SetEnv DB_PASSWORD **contraseña**
+# SetEnv DB_HOSTNAME {{ip-loval}}
+# SetEnv DB_PORT {{puerto-local}}
+# SetEnv DB_USERNAME {{usuario-lolca}}
+# SetEnv DB_PASSWORD {{clave-lolca}}
 
 #-------------------------------------------------------------------#
 #														DEVELOPMENT															#
@@ -216,7 +217,7 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 # SetEnv URL_MFA_SERV https://uat-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
 	# SOLES
-# SetEnv WS_URL_PE https://aut-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_PE https://uat-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# DÓLARES
 # SetEnv WS_URL_US https://uat-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS

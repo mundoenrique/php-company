@@ -10,6 +10,7 @@ $lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contrase
 
 $lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido mín 6 máx 15.';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, mín 7 máx 9.';
+$lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (xls, xlsx, txt)';
 
 
 
@@ -23,7 +24,6 @@ $lang['VALIDATE_EQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Selecciona una sucursal';
 $lang['VALIDATE_BULK_TYPE'] = 'Selecciona un tipo de lote';
-$lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (xls, xlsx, txt)';
 $lang['VALIDATE_FILE_SIZE'] = 'El archivo no debe estar vacío';
 $lang['VALIDATE_PASS'] = 'Indica una contraseña válida';
 $lang['VALIDATE_ORDER_TYPE'] = 'Selecciona un tipo de orden';
