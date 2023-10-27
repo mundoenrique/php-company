@@ -11,17 +11,17 @@ $lang['SETT_ACTIVE_SAFETY'] = ACTIVE_SAFETY;
 $lang['SETT_VIEW_SUFFIX'] = '-core';
 $lang['SETT_DEFAULT_CODE'] = 4;
 $lang['SETT_VALIDATE_CAPTCHA'] = [
-  'signIn',
-  'login',
-  'recoverAccess',
-  'recoverPass',
-  'passwordRecovery'
+	'signIn',
+	'login',
+	'recoverAccess',
+	'recoverPass',
+	'passwordRecovery'
 ];
 $lang['SETT_AGENT_INFO'] = 'OFF';
 $lang['SETT_SCORE_CAPTCHA'] = [
-  'development' => 0,
-  'testing' => 0,
-  'production' => 0
+	'development' => 0,
+	'testing' => 0,
+	'production' => 0
 ];
 $lang['SETT_COOKIE_SINGN_IN'] = 'signInSession';
 $lang['SETT_COOKIE_SINGN_ON'] = 'singleSignOnSession';
@@ -157,20 +157,20 @@ $lang['SETT_REMOTE_AUTH'] = 'OFF';
 $lang['SETT_AUTH_LIST'] = [];
 $lang['SETT_AUTH_VALIDATE'] = [];
 $lang['SETT_AUTH_LOADING_URL'] = [
-  'development' => [
-    'ANY' => ''
-  ],
+	'development' => [
+		'ANY' => ''
+	],
 ];
 $lang['SETT_AUTH_URL'] = [
-  'development' => [
-    'ANY' => ''
-  ],
-  'testing' => [
-    'ANY' => ''
-  ],
-  'production' => [
-    'ANY' => ''
-  ]
+	'development' => [
+		'ANY' => ''
+	],
+	'testing' => [
+		'ANY' => ''
+	],
+	'production' => [
+		'ANY' => ''
+	]
 ];
 $lang['SETT_USER_ACTIVITY'] = 'ON';
 $lang['SETT_USERS_ACTIVITY'] = 'OFF';
@@ -192,11 +192,11 @@ $lang['SETT_LINK_ENTERPRISES'] = 'enterprises';
 $lang['SETT_LINK_PRODUCTS'] = 'products';
 $lang['SETT_LINK_PRODUCT_DETAIL'] = 'product-detail';
 $lang['SETT_FOTTER_NETWORKS_LINK'] = [
-  'facebook' => $lang['SETT_NO_LINK'],
-  'twitter' => $lang['SETT_NO_LINK'],
-  'youtube' => $lang['SETT_NO_LINK'],
-  'instagram' => $lang['SETT_NO_LINK'],
-  'linkedin' => $lang['SETT_NO_LINK'],
+	'facebook' => $lang['SETT_NO_LINK'],
+	'twitter' => $lang['SETT_NO_LINK'],
+	'youtube' => $lang['SETT_NO_LINK'],
+	'instagram' => $lang['SETT_NO_LINK'],
+	'linkedin' => $lang['SETT_NO_LINK'],
 ];
 $lang['SETT_LINK_USERS_MANAGEMENT'] = 'users-management'; //permiso asociado USEREM
 $lang['SETT_LINK_USERS_PERMISSIONS'] = 'user-permissions'; //permiso asociado USEREM-->CREUSU y USEREM-->ASGPER
@@ -348,15 +348,18 @@ $lang['SETT_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
 $lang['SETT_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
 $lang['SETT_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';
 $lang['SETT_MODAL_BTN_CLASS'] = [
-  'cancel' => 'btn-modal btn btn-small btn-link',
-  'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+	'cancel' => 'btn-modal btn btn-small btn-link',
+	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
 $lang['SETT_ACCOUNT_NAME'] = 'OFF';
 $lang['SETT_STATUS_MOVEMENT'] = 'OFF';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'OFF';
 $lang['SETT_FILE_STATUS_ACCOUNT_PDF'] = 'OFF';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'OFF';
+$lang['SETT_FILE_CLOSE_BALANCE_TXT'] = 'OFF';
+$lang['SETT_FILE_CLOSE_BALANCE_PDF'] = 'OFF';
+$lang['SETT_DOWNLOAD_SERVER'] = 'OFF';
 $lang['SETT_LANGUAGE'] = [
-  'es' => 'spanish',
-  'en' => 'english',
+	'es' => 'spanish',
+	'en' => 'english',
 ];

@@ -792,6 +792,57 @@ class Novo_Reports_Model extends NOVO_Model
 
     return $this->responseToTheView('callWs_closingBudgets');
   }
+
+  /**
+   * @info Método para obtener reportes de tabla saldos al cierre
+   * @author Yelsyns Lopez
+   * @date May 21, 2020
+   */
+  public function callWs_exportToClosingBalance_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: exportTo' . $dataRequest->type . ' Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Saldos amanecidos';
+    $this->dataAccessLog->operation = 'Obtener ' . $dataRequest->type . ' de tabla';
+
+    $this->dataRequest->idOperation = 'generarClosingBalance' . $dataRequest->type;
+    $this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+    $this->dataRequest->producto =  $dataRequest->product;
+    $this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
+    $this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
+    $this->dataRequest->paginar = $dataRequest->paged;
+    $this->dataRequest->paginaActual = $dataRequest->actualPage;
+    $this->dataRequest->descProd =  $dataRequest->descProd;
+
+    $response = $this->sendToWebServices('callWs_exportToClosingBalance');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->icon = lang('SETT_ICON_DANGER');
+        $this->response->title = lang('REPORTS_TITLE');
+        $this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+
+        if (file_exists(assetPath('downloads/' . $response->bean))) {
+          $this->response->code = 0;
+          $this->response->msg = lang('GEN_MSG_RC_0');
+          $this->response->data = [
+            'file' => assetUrl('downloads/' . $response->bean),
+            'name' => $response->bean
+          ];
+        }
+        break;
+      default:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    return $this->response;
+  }
+
   /**
    * @info Método para obtener excel de tabla saldos al cierre
    * @author Diego Acosta García

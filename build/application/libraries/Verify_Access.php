@@ -286,6 +286,7 @@ class Verify_Access
         break;
       case 'closingBalance':
       case 'exportToExcel':
+      case 'exportToClosingBalance':
       case 'closingBudgets':
         $auth = ($productInf && $this->verifyAuthorization('REPSAL'));
         break;

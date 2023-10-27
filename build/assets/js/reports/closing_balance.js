@@ -3,12 +3,15 @@ var access;
 
 $(function () {
 
+  var typeDownload = $('#typeDownload').val();
 	$('#blockBudgetResults').addClass('hide');
 	$('#titleResults').addClass('hide');
 	$('#Nit').attr('maxlength', 10);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('#export_excel').addClass('hide');
+	$('#export_txt').addClass('hide');
+	$('#export_pdf').addClass('hide');
 
 	$('#enterpriseReport').on('change', function(){
 		var form = $('#closingBudgetForm')
@@ -32,6 +35,8 @@ $(function () {
 		$('#spinnerBlock').removeClass("hide");
 		$('#blockBudgetResults').addClass("hide");
 		$('#export_excel').removeClass("hide");
+		$('#export_txt').removeClass("hide");
+		$('#export_pdf').removeClass("hide");
 		e.preventDefault();
 		form = $('#closingBudgetForm');
 		validateForms(form)
@@ -45,68 +50,102 @@ $(function () {
 	});
 
 	$("#export_excel").click(function(){
-		var form = $('#closingBudgetForm');
-		var data = {
-			identificationCard: $('#enterpriseReport').find('option:selected').attr('acrif'),
-			product: $("#productCode").val(),
-			descProd: $("#productCode").find('option:selected').attr('value'),
-			actualPage: 1,
-			paged: true,
-			pageLenght: $("#tamP").val()
-		};
-		validateForms(form);
-		if (form.valid()) {
-			exportToExcel(data)
-		}
-	});
+		downLoadReport({type: 'Xls'})
+  });
+
+  $("#export_pdf").click(function(){
+		downLoadReport({type: 'Pdf'})
+  });
+
+  $("#export_txt").click(function(){
+		downLoadReport({type: 'Txt'})
+  });
+
+  function selectionBussine(passData) {
+    who = 'Business';
+    where = 'getProducts';
+    data = passData;
+    $("#productCode").html("");
+
+    callNovoCore(who, where, data, function(response) {
+      dataResponse = response.data
+      code = response.code
+      var info = dataResponse;
+      if (code == 3) {
+        $('#productCode').append("<option>"+		$("#errProd").val() +"</option>");
+        $('#closingBudgetsBtn').attr('disabled', 'disabled');
+      } else if (code == 0) {
+        insertFormInput(false);
+      }
+      $('#productCode').removeAttr('disabled');
+      for (var index = 0; index < info.length; index++) {
+        $('#productCode').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
+      }
+    })
+  };
+
+  function downLoadReport({ type }) {
+
+    var form = $('#closingBudgetForm');
+      var data = {
+        identificationCard: $('#enterpriseReport').find('option:selected').attr('acrif'),
+        product: $("#productCode").val(),
+        descProd: $("#productCode").find('option:selected').attr('value'),
+        actualPage: 1,
+        paged: true,
+        pageLenght: $("#tamP").val()
+      };
+      validateForms(form);
+      if (form.valid()) {
+        typeDownload === 'ON' ? closingBalanceDownloadFiles(data, type) : exportToExcel(data)
+      }
+  }
+
+  function closingBalanceDownloadFiles(data, type) {
+    insertFormInput(true);
+    who = 'Reports';
+    where = `exportToClosingBalance`;
+    data.type = type
+    callNovoCore(who, where, data, function (response) {
+
+      if (response.code == 0) {
+        $('#download-file').attr('href', response.data.file);
+        document.getElementById('download-file').click();
+        who = 'DownloadFiles';
+        where = 'DeleteFile';
+        data.fileName = response.data.name
+        callNovoCore(who, where, data, function (response) { })
+      }
+
+      insertFormInput(false);
+      $('.cover-spin').hide();
+    })
+  }
+
+  function exportToExcel(passData) {
+    who = 'Reports';
+    where = 'exportToExcel';
+    data = passData;
+
+    callNovoCore(who, where, data, function(response) {
+      dataResponse = response.data;
+      code = response.code
+      var info = dataResponse;
+      if(info.formatoArchivo == 'excel'){
+        info.formatoArchivo = '.xls'
+      }
+      if(code == 0){
+        data = {
+          "name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+          "ext": info.formatoArchivo,
+          "file": info.archivo
+        }
+        downLoadfiles (data);
+        $('.cover-spin').removeAttr("style");
+      }
+    })
+  };
 });
-
-function selectionBussine(passData) {
-	who = 'Business';
-	where = 'getProducts';
-	data = passData;
-	$("#productCode").html("");
-
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data
-		code = response.code
-		var info = dataResponse;
-		if (code == 3) {
-			$('#productCode').append("<option>"+		$("#errProd").val() +"</option>");
-			$('#closingBudgetsBtn').attr('disabled', 'disabled');
-		} else if (code == 0) {
-			insertFormInput(false);
-		}
-		$('#productCode').removeAttr('disabled');
-		for (var index = 0; index < info.length; index++) {
-			$('#productCode').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
-		}
-	})
-};
-
-function exportToExcel(passData) {
-	who = 'Reports';
-	where = 'exportToExcel';
-	data = passData;
-
-	callNovoCore(who, where, data, function(response) {
-		dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
-		if(info.formatoArchivo == 'excel'){
-			info.formatoArchivo = '.xls'
-		}
-		if(code == 0){
-			data = {
-				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
-				"ext": info.formatoArchivo,
-				"file": info.archivo
-			}
-			downLoadfiles (data);
-			$('.cover-spin').removeAttr("style");
-		}
-	})
-};
 
 function closingBudgets(dataForm) {
 	var table = $('#balancesClosing').DataTable();

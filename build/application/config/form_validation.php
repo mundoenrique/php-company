@@ -155,6 +155,28 @@ $config = [
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
     ],
   ],
+  'exportToClosingBalance' => [
+    [
+      'field' => 'idExtEmp',
+      'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+    ],
+    [
+      'field' => 'producto',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+    ],
+    [
+      'field' => 'tamanoPagina',
+      'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+    ],
+    [
+      'field' => 'paginaActual',
+      'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+    ],
+    [
+      'field' => 'descProd',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+    ],
+  ],
   'exportToExcelMasterAccount' => [
     [
       'field' => 'idExtEmp',
