@@ -327,7 +327,7 @@ class Verify_Access
       case 'userAccounts':
       case 'userPermissions':
       case 'updatePermissions':
-        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));
+        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER', 'COACUE'));
         break;
       case 'pagoOs':
       case 'pagarOS':
