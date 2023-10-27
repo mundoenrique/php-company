@@ -95,3 +95,4 @@ $lang['SETT_VALIDATE_PARAMS'] = 'ON';
 $lang['SETT_ACCOUNT_NAME'] = 'ON';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'ON';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'ON';
+$lang['SETT_BULK_TYPE_EXCLUDED'] = ['Y', 'Z'];

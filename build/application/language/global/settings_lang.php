@@ -354,6 +354,7 @@ $lang['SETT_ACCOUNT_NAME'] = 'OFF';
 $lang['SETT_STATUS_MOVEMENT'] = 'OFF';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'OFF';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'OFF';
+$lang['SETT_BULK_TYPE_EXCLUDED'] = [];
 $lang['SETT_LANGUAGE'] = [
   'es' => 'spanish',
   'en' => 'english',
