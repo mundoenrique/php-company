@@ -246,9 +246,8 @@ function closingBudgets(dataForm) {
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
 				var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
-
 				if (responseTable.code === codeDefaul) {
-					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.modalBtn);
 				}
 				access = responseTable.access;
 				return JSON.stringify(responseTable);
