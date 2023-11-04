@@ -13,11 +13,11 @@ $config = [
     ],
     [
       'field' => 'otpCode',
-      'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+      'rules' => lang('REGEX_ALPHA_NUM_SERVER')
     ],
     [
       'field' => 'saveIP',
-      'rules' => 'trim'
+      'rules' => lang('REGEX_SAVE_IP_SERVER')
     ]
   ],
   'changeLanguage' => [

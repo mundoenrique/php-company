@@ -238,6 +238,22 @@ $lang['SETT_MENU_CIRCLE'] = 'OFF';
 $lang['SETT_FRANCHISE_LOGO'] = 'ON';
 $lang['SETT_TIME_DOWNLOAD_FILE'] = '7000';
 $lang['SETT_STATUS_REJECTED'] = '5';
+$lang['SETT_SAVE_IP_FORM'] = '
+<form id="otpForm" name="otpForm" class="mr-2" method="post" onsubmit="return false;">
+  <p class="pt-0 p-0">%s</p>
+  <div class="row">
+    <div class="form-group col-8">
+      <label for="otpCode">%s</label>
+      <input type="text" id="otpCode" name="otpCode" class="form-control" autocomplete="off" maxlength="10" />
+      <div class="help-block"></div>
+    </div>
+  </div>
+  <div class="form-group custom-control custom-switch mb-0">
+    <input type="checkbox" id="saveIp" name="saveIp" class="custom-control-input" />
+    <label class="custom-control-label" for="saveIp">%s</label>
+  </div>
+</form>
+';
 $lang['SETT_UPLOAD_SFTP(0)'] = 'CURLE_PROCESS_OK';
 $lang['SETT_UPLOAD_SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL';
 $lang['SETT_UPLOAD_SFTP(2)'] = 'CURLE_FAILED_INIT';
@@ -342,7 +358,6 @@ $lang['SETT_DATATABLE_SLEEP'] = '10000';
 $lang['SETT_DATATABLE_ARRAY_CHUNK'] = '50';
 $lang['SETT_BRANCH_FIELD'] = 'ON';
 $lang['SETT_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{4,25}$';
-$lang['SETT_VALIDATE_ALPHA_NUM'] = '^[a-z0-9]+$';
 $lang['SETT_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
 $lang['SETT_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
 $lang['SETT_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';

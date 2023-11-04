@@ -166,9 +166,10 @@ class Novo_User_Model extends NOVO_Model
         break;
       case -424:
         $this->response->code = 2;
-        $this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $response->usuario->emailEnc);
-        $this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
-        $this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
+        $labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
+        $assert = lang('GEN_LOGIN_IP_ASSERT');
+        $msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $response->usuario->emailEnc);
+        $this->response->msg = novoLang(lang('SETT_SAVE_IP_FORM'), [$msg,  $labelInput, $assert]);
         $this->response->modalBtn['btn1']['action'] = 'request';
         $this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
         $this->response->modalBtn['btn2']['action'] = 'destroy';
@@ -179,8 +180,7 @@ class Novo_User_Model extends NOVO_Model
         $this->response->icon = '';
         $this->response->title = lang('GEN_SYSTEM_NAME');
         $img = $this->asset->insertFile('nueva-expresion-monetaria.png', 'images', $this->customerFiles);
-        // $this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), $img);
-        $this->response->msg = lang('GEN_MAINTENANCE_MSG');
+        $this->response->msg = novolang(lang('GEN_MSG_MAINT_NOTIF'), $img);
         $this->response->data->img = $img;
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         $this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
@@ -597,7 +597,7 @@ class Novo_User_Model extends NOVO_Model
    * @author J. Enrique Peñaloza Piñero
    * @date May 1st, 2019
    */
-  public function callWs_KeepSession_User($dataRequest = FALSE)
+  public function callWs_KeepSession_User()
   {
     writeLog('INFO', 'User Model: KeepSession Method Initialized');
     $response = new stdClass();
@@ -862,7 +862,7 @@ class Novo_User_Model extends NOVO_Model
     }
     $this->dataRequest->apellido2 = '';
     $this->dataRequest->clonarPermisos = 'true';
-    $this->dataRequest->mail = $dataRequest->mail;;
+    $this->dataRequest->mail = $dataRequest->mail;
     $this->dataRequest->empresa = $this->session->enterpriseInf->idFiscal;
     $this->dataRequest->usuarioPlantilla = $this->session->userName;
 
@@ -895,10 +895,11 @@ class Novo_User_Model extends NOVO_Model
 
     $this->load->library('recaptcha');
     $result = $this->recaptcha->verifyResponse($dataRequest->token);
+    $score = $result->score ?? 0;
 
     writeLog('DEBUG', 'RECAPTCH RESPONSE: ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
-    $resultRecaptcha = $result->score < lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+    $resultRecaptcha = $score < lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 
     if ($resultRecaptcha == 9999) {
       $this->response->code = 4;
