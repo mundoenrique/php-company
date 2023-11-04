@@ -129,13 +129,16 @@ class Novo_Bulk_Model extends NOVO_Model
           'text' => lang('BULK_SELECT_BULK_TYPE')
         ];
 
-        foreach ($response->lista as $types) {
-          $type = [];
-          $type['key'] = manageString($types->idTipoLote, 'upper', 'none');
-          $type['format'] = manageString($types->formato, 'lower', 'first');
-          $type['text'] = manageString($types->tipoLote, 'lower', 'first');
+        $arrayDelete = lang('SETT_BULK_TYPE_EXCLUDED');;
 
-          $typesLot[] = (object) $type;
+        foreach ($response->lista as $pos => $types) {
+          if (!in_array($response->lista[$pos]->idTipoLote, $arrayDelete)) {
+            $type = [];
+            $type['key'] = mb_strtoupper($response->lista[$pos]->idTipoLote);
+            $type['format'] = ucfirst(mb_strtolower($response->lista[$pos]->formato));
+            $type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
+            $typesLot[] = (object) $type;
+          }
         }
         break;
     }

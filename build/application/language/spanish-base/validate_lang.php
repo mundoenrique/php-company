@@ -6,6 +6,7 @@ $lang['VALID_USERNAME'] = 'Indica un usuario válido.';
 $lang['VALID_PASSWORD'] = 'La contraseña debe cumplir los requisitos.';
 $lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';
 $lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contraseña.';
+$lang['VALID_OTP_CODE'] = 'Indica un código válido (letras y números)';
 
 
 $lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido mín 6 máx 15.';
@@ -56,7 +57,6 @@ $lang['VALIDATE_OPTION'] = 'Selecciona una opción';
 $lang['VALIDATE_SELECT_GROUP'] = 'Selecciona alguno de estos criterios';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Indica un número de identificación válido';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Selecciona un tipo de documento de identidad';
-$lang['VALIDATE_OTP_CODE'] = 'Ingresa un código de seguridad válido (letras y números)';
 $lang['VALIDATE_MAX_WEEK'] = 'Monto diario no puede ser mayor al semanal';
 $lang['VALIDATE_MAX_MONTH'] = 'Monto semanal no puede ser mayor al mensual';
 $lang['VALIDATE_MAX_DAY'] = 'Monto de transacción no puede ser mayor al monto diario';

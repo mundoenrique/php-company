@@ -6,6 +6,7 @@ $lang['VALID_USERNAME'] = 'Please indicate a valid user.';
 $lang['VALID_PASSWORD'] = 'The password must meet the requirements.';
 $lang['VALID_USERPASS_REQ'] = 'Both fields are required.';
 $lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.';
+$lang['VALID_OTP_CODE'] = 'Enter a valid code (letters and/or numbers)';
 
 
 $lang['VALIDATE_PHONE_NUMBER'] = 'Enter a valid phone number  min 6 max 15.';
@@ -55,7 +56,6 @@ $lang['VALIDATE_OPTION'] = 'Please select an option';
 $lang['VALIDATE_SELECT_GROUP'] = 'Select any of these criteria';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Please enter a valid identification number';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Select a type of identity document';
-$lang['VALIDATE_OTP_CODE'] = 'Please enter a valid security code (letters and numbers)';
 $lang['VALIDATE_MAX_WEEK'] = 'Daily amount cannot be higher than weekly';
 $lang['VALIDATE_MAX_MONTH'] = 'Weekly amount cannot be greater than monthly';
 $lang['VALIDATE_MAX_DAY'] = 'Transaction amount cannot be greater than the daily amount';

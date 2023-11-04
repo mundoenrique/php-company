@@ -18,7 +18,7 @@ function validateForms(form) {
   var idNumber = new RegExp(lang.REGEX_ID_NUMBER, 'i');
   var numeric = new RegExp(lang.REGEX_NUMERIC, 'i');
   var emailValid = new RegExp(lang.REGEX_EMAIL, 'i');
-  var alphanum = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM, 'i');
+  var alphanum = new RegExp(lang.REGEX_ALPHA_NUM, 'i');
   var alphanumspace = new RegExp(lang.SETT_VALIDATE_ALPHA_NUM_SPACE, 'i');
   var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
   var alphabeticalspace = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');
@@ -390,7 +390,7 @@ function validateForms(form) {
       reference: lang.VALIDATE_REFERENCE,
       cardNumber: lang.VALIDATE_CARD_NUMBER,
       lockType: lang.VALIDATE_OPTION,
-      otpCode: lang.VALIDATE_OTP_CODE,
+      otpCode: lang.VALID_OTP_CODE,
       orderNumber: {
         pattern: lang.VALIDATE_BULK_NUMBER,
         require_from_group: lang.VALIDATE_SELECT_GROUP,
@@ -419,7 +419,7 @@ function validateForms(form) {
       radioName: lang.VALIDATE_NAME_LASTNAME,
       radioCard: lang.VALIDATE_CARD_NUMBER_MIN,
       documentType: lang.VALIDATE_SELECT_DOCTYPE,
-      optCode: lang.VALIDATE_OTP_CODE,
+      optCode: lang.VALID_OTP_CODE,
       firstName: lang.VALIDATE_NAME_LASTNAME,
       lastName: lang.VALIDATE_NAME_LASTNAME,
       movil: lang.VALIDATE_PHONE,
