@@ -10,4 +10,5 @@ $lang['SETT_MENU_CIRCLE'] = 'ON';
 $lang['SETT_ISSUED_MONTHLY'] = 'OFF';
 $lang['SETT_FOOTER_RATES'] = 'ON';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
+$lang['SETT_BULK_REPROCESS'] = 'ON';
 $lang['SETT_ENTERPRICE_CONTACT'] = 'ON';
