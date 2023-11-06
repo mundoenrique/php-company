@@ -301,8 +301,8 @@ class Novo_User extends NOVO_Controller
 			}
 			$this->render->userRegistered = $registeredUser;
 		}
-
 		$this->responseAttr($responseList);
+    $this->render->username = $this->session->userdata('userName');
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/' . $view];
 		$this->loadView($view);

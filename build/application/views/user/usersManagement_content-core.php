@@ -54,10 +54,12 @@
 									<button id="editButton" class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 										<i class="icon icon-edit-permits" aria-hidden="true"></i>
 									</button>
-              <button id="editAccountButton" class="btn mx-1 px-0 big-modal"
-                title="<?= lang('GEN_BTN_EDIT_ACCOUNTS'); ?>" data-toggle="tooltip">
-                <i class="icon icon-accounts" aria-hidden="true"></i>
-              </button>
+                  <?php if($username!==$user->idUser): ?>
+                  <button id="editAccountButton" class="btn mx-1 px-0 big-modal"
+                    title="<?= lang('GEN_BTN_EDIT_ACCOUNTS'); ?>" data-toggle="tooltip">
+                    <i class="icon icon-accounts" aria-hidden="true"></i>
+                  </button>
+                  <?php endif; ?>
 							<?php endif; ?>
 
 							<?php endif; ?>
