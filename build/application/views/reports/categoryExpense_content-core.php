@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_CATEGORY_EXPENSE'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
