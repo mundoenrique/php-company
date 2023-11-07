@@ -33,10 +33,12 @@ $(function () {
   });
 
   $('#system-info').on('click', '.session-close', function () {
-    toggleDisableActions(true);
     dataSignin = {
       userName: dataSignin.userName,
     };
+
+    toggleDisableActions(true);
+    $(this).html(appLoader);
     signIn('FinishSession');
   });
 
@@ -46,12 +48,9 @@ $(function () {
     formValidation(formOtp);
 
     if (formOtp.valid()) {
-      btnCalled = $(this);
-      btnSignin = $(this).html();
       const dataOtp = takeFormData(formOtp);
       dataSignin.otpCode = $('#otpCode').val();
       dataSignin.saveIP = $('#saveIp').is(':checked') ? true : false;
-      dataSignin.currentTime = new Date().getHours();
       $(this).html(appLoader);
       toggleDisableActions(true);
       getToken('verifyIP', function (recaptchaToken) {
