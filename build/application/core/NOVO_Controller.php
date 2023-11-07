@@ -311,7 +311,6 @@ class NOVO_Controller extends CI_Controller
     }
 
     if (($this->render->code === 0  && $active) || $download) {
-
       if (count($this->render->enterpriseList) > 1 || $this->session->has_userdata('products')) {
         array_push(
           $this->includeAssets->jsFiles,
