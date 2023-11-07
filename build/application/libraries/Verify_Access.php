@@ -275,6 +275,7 @@ class Verify_Access
       case 'searchExtendedAccountStatus':
       case 'exportToExcelExtendedAccountStatus':
       case 'exportToTxtExtendedAccountStatus':
+      case 'exportToPdfExtendedAccountStatus':
         $auth = ($productInf && $this->verifyAuthorization('REPEDC'));
         break;
       case 'statusMasterAccount':
@@ -285,6 +286,7 @@ class Verify_Access
         break;
       case 'closingBalance':
       case 'exportToExcel':
+      case 'exportToClosingBalance':
       case 'closingBudgets':
         $auth = ($productInf && $this->verifyAuthorization('REPSAL'));
         break;
@@ -323,9 +325,10 @@ class Verify_Access
       case 'enableUser':
         $auth = ($productInf && $this->verifyAuthorization('USEREM', 'CREUSU'));
         break;
+      case 'userAccounts':
       case 'userPermissions':
       case 'updatePermissions':
-        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER'));
+        $auth = ($productInf && $this->verifyAuthorization('USEREM', 'ASGPER', 'COACUE'));
         break;
       case 'pagoOs':
       case 'pagarOS':

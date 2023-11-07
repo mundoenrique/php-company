@@ -38,3 +38,8 @@ $lang['GEN_CONTACTS'] = [
 	'GDL' => '(33) 3669 9040',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
+$lang['GEN_SETTINGS_ENTERPRISE'] = 'Account settings';
+$lang['GEN_ENTERPRISE'] = 'Account';
+$lang['GEN_SELECT_ENTERPRISE'] = 'Select an account';
+$lang['GEN_BTN_ENTERPRISE'] = 'Accounts';
+$lang['GEN_MENU_ENTERPRISE'] = 'Account';

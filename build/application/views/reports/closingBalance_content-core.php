@@ -83,50 +83,70 @@
         </div>
         <div class="line mb-2"></div>
       </div>
-
-      <div id="blockResult" class="flex pb-5 flex-column ">
-        <span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
-        <div id="spinnerBlock" class=" hide">
-          <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-            <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-          </div>
-        </div>
-        <div id="blockBudgetResults" class="center mx-1 ">
-          <div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
-            <div class="cover-spin"></div>
-            <button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
-              <i class="icon icon-file-excel" aria-hidden="true"></i>
-            </button>
-          </div>
-          <table id="balancesClosing" class="cell-border h6 display w-100">
-            <thead class="bg-primary secondary regular">
-              <tr>
-                <th><?= lang('REPORTS_TABLE_CARD') ?></th>
-                <th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
-                <th><?= lang('REPORTS_TABLE_DNI') ?></th>
-                <th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
-                <?php if (lang('SETT_CLOSING_BALANCE_BOOL') == 'ON') : ?>
-                  <th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
-                <?php endif; ?>
-              </tr>
-            </thead>
-            <tbody id="tbody-datos-general" class="tbody-reportes">
-            </tbody>
-          </table>
-          <div id="hid" class=" hide">
-            <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-              <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-            </div>
-          </div>
-          <div class="line my-2"></div>
-        </div>
-        <div class="my-5 py-4 center none">
-          <span class="h4">No se encontraron registros</span>
-        </div>
+      <div class="flex items-center justify-end col-auto ml-auto">
+        <button id="closingBudgetsBtn" class="btn btn-primary btn-small">
+          Buscar
+        </button>
       </div>
     </div>
+    </form>
   </div>
-  <?php if ($widget) : ?>
-    <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
-  <?php endif; ?>
+  <div class="line mb-2"></div>
+</div>
+
+<div id="blockResult" class="flex pb-5 flex-column ">
+  <span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
+  <div id="spinnerBlock" class=" hide">
+    <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+      <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div id="blockBudgetResults" class="center mx-1 ">
+    <div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
+      <div class="cover-spin"></div>
+      <?php if (lang('SETT_FILE_CLOSE_BALANCE_TXT') === 'ON') : ?>
+        <button id="export_txt" class="big-modal btn px-1" title="Exportar a TXT" data-toggle="tooltip">
+          <i class="icon icon-file-txt" aria-hidden="true"></i>
+        </button>
+      <?php endif; ?>
+      <button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
+        <i class="icon icon-file-excel" aria-hidden="true"></i>
+      </button>
+      <?php if (lang('SETT_FILE_CLOSE_BALANCE_PDF') === 'ON') : ?>
+        <button id="export_pdf" class="big-modal btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+          <i class="icon icon-file-pdf" aria-hidden="true"></i>
+        </button>
+      <?php endif; ?>
+    </div>
+    <table id="balancesClosing" class="cell-border h6 display w-100">
+      <thead class="bg-primary secondary regular">
+        <tr>
+          <th><?= lang('REPORTS_TABLE_CARD') ?></th>
+          <th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
+          <th><?= lang('REPORTS_TABLE_DNI') ?></th>
+          <th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
+          <?php if (lang('SETT_CLOSING_BALANCE_BOOL') == 'ON') : ?>
+            <th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
+          <?php endif; ?>
+        </tr>
+      </thead>
+      <tbody id="tbody-datos-general" class="tbody-reportes">
+      </tbody>
+    </table>
+    <div id="hid" class=" hide">
+      <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+        <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="line my-2"></div>
+  </div>
+  <div class="my-5 py-4 center none">
+    <span class="h4">No se encontraron registros</span>
+  </div>
+</div>
+</div>
+</div>
+<?php if ($widget) : ?>
+  <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
+<?php endif; ?>
 </div>

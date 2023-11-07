@@ -27,7 +27,7 @@
 						<th>Nombre/Apellido</th>
 						<th>Correo Electrónico</th>
 						<th>Tipo usuario</th>
-						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
+						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER', 'COACUE')): ?>
 						<th>Opciones</th>
 						<?php endif; ?>
 					</tr>
@@ -39,7 +39,7 @@
 						<td><?= $user->name ?></td>
 						<td><?= $user->mail ?></td>
 						<td><?= $user->type ?></td>
-						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
+						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER', 'COACUE')): ?>
 
 						<td class="py-0 px-1 flex justify-center items-center">
 							<?php if($this->verify_access->verifyAuthorization('USEREM','CREUSU')): ?>
@@ -49,11 +49,17 @@
 									</button>
 								<?php endif; ?>
 							<?php endif; ?>
-							<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>
+							<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER','COACUE')): ?>
 								<?php if($user->registered == "true"): ?>
 									<button id="editButton" class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 										<i class="icon icon-edit-permits" aria-hidden="true"></i>
 									</button>
+                  <?php if($username!==$user->idUser): ?>
+                  <button id="editAccountButton" class="btn mx-1 px-0 big-modal"
+                    title="<?= lang('GEN_BTN_EDIT_ACCOUNTS'); ?>" data-toggle="tooltip">
+                    <i class="icon icon-accounts" aria-hidden="true"></i>
+                  </button>
+                  <?php endif; ?>
 							<?php endif; ?>
 
 							<?php endif; ?>
