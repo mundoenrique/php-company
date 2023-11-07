@@ -4,10 +4,26 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
-        <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>">
+            <?= lang('GEN_MENU_ENTERPRISE'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>">
+            <?= lang('GEN_PRODUCTS'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>">
+            <?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK') ?>">
+            <?= lang('GEN_MENU_REPORTS'); ?>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -27,8 +43,6 @@
                 <label><?= lang('GEN_ENTERPRISE') ?></label>
                 <select id="enterpriseReport" name="enterpriseReport" class="select-box custom-select mt-1 mb-1 h6 w-100">
                   <?php foreach ($enterpriseList as $enterprise) : ?>
-                    <?php if ($enterprise->acrif == $enterpriseData->idFiscal) : ?>
-                    <?php endif; ?>
                     <option code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" nomOf="<?= $enterprise->acnomcia; ?>" acrif="<?= $enterprise->acrif; ?>" value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
                       <?= $enterprise->acnomcia; ?>
                     </option>
@@ -40,17 +54,18 @@
               <div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
                 <label><?= lang('GEN_PRODUCT') ?></label>
                 <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
-                  <?php if ($productsSelect) : ?>
+                  <?php foreach ($productsSelect as $product) : ?>
+                    <option selected disabled><?= $selectProducts ?></option>
                     <?php foreach ($productsSelect as $product) : ?>
-                      <option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+                      <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
                     <?php endforeach; ?>
-                  <?php endif; ?>
+                  <?php endforeach; ?>
                 </select>
                 <input id="errProd" name="err-prod" class="hide" value="<?= $prod ?>">
                 <div class="help-block"></div>
               </div>
 
-              <?php if (lang('SETT_NIT_INPUT_BOOL') == 'ON') : ?>
+              <?php if (lang('SETT_NIT_INPUT_BOOL') === 'ON') : ?>
                 <div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
                   <label><?= lang('REPORTS_ID_FISCAL') ?></label>
                   <input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">

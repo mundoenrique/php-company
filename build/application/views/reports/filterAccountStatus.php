@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div class="search-criteria-order flex pb-3 flex-column w-100">
   <span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
   <div class="flex my-2 px-5">
@@ -7,8 +8,6 @@
           <label><?= lang('GEN_ENTERPRISE'); ?></label>
           <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
             <?php foreach ($enterpriseList as $enterprise) : ?>
-              <?php if ($enterprise->acrif === $enterpriseData->idFiscal) : ?>
-              <?php endif; ?>
               <option doc="<?= $enterprise->accodcia; ?>" name="<?= $enterprise->acrazonsocial; ?>" value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif === $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
                 <?= $enterprise->acnomcia; ?>
               </option>
@@ -20,11 +19,11 @@
           <label><?= lang('GEN_PRODUCT'); ?></label>
           <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
             <option selected disabled><?= $selectProducts ?></option>
-            <?php if ($productsSelect) : ?>
-              <?php foreach ($productsSelect as $product) : ?>
-                <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
-              <?php endforeach; ?>
-            <?php endif; ?>
+            <?php foreach ($productsSelect as $product) : ?>
+              <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>>
+                <?= $product['desc'] ?>
+              </option>
+            <?php endforeach; ?>
           </select>
           <div class="help-block"></div>
         </div>

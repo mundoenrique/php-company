@@ -12,6 +12,28 @@ class Novo_Reports extends NOVO_Controller
   {
     parent::__construct();
     writeLog('INFO', 'Reports Controller Class Initialized');
+
+    if (in_array($this->controllerMethod, [
+      'accountStatus',
+      'cardHolders',
+      'categoryExpense',
+      'closingBalance',
+      'extendedAccountStatus',
+      'replacement',
+      'statusBulk',
+    ])) {
+      $inf = $this->session->enterpriseInf;
+      $this->request->select = TRUE;
+      $this->request->idFiscal = $inf->idFiscal;
+      $this->request->enterpriseCode = $inf->enterpriseCode;
+      $this->load->model('Novo_Business_Model', 'getProducts');
+      $productsList = $this->getProducts->callWs_GetProducts_Business($this->request);
+
+      $this->render->selectProducts = $productsList->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
+      $this->render->productsSelect = $productsList->code !== 0 ? [] : $productsList->data;
+      $this->render->currentProd = $this->session->productInf->productPrefix;
+      $this->responseAttr($productsList);
+    }
   }
   /**
    * @info Método para renderizar la lista de reportes
@@ -36,7 +58,7 @@ class Novo_Reports extends NOVO_Controller
       "reports/reports"
     );
 
-    $responseReports = $this->loadModel($this->request);
+    $responseReports = $this->loadModel();
 
     foreach ($responseReports->data as $index => $render) {
       $this->render->$index = $render;
@@ -70,16 +92,7 @@ class Novo_Reports extends NOVO_Controller
       "reports/account_status",
       "reports/getproductsReports"
     );
-    $this->request->select = TRUE;
-    $logo = $this->session->enterpriseInf;
-    $this->request->idFiscal = $logo->idFiscal;
-    $this->request->enterpriseCode = $logo->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-    $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
-    $this->render->currentProd = $this->session->productInf->productPrefix;
-    $this->responseAttr($response);
+
     $this->render->titlePage = lang('GEN_MENU_REP_ACCOUNT_STATUS');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -108,16 +121,7 @@ class Novo_Reports extends NOVO_Controller
       "reports/extended_account_status",
       "reports/getproductsReports"
     );
-    $this->request->select = TRUE;
-    $logo = $this->session->enterpriseInf;
-    $this->request->idFiscal = $logo->idFiscal;
-    $this->request->enterpriseCode = $logo->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-    $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
-    $this->render->currentProd = $this->session->productInf->productPrefix;
-    $this->responseAttr($response);
+
     $this->render->titlePage = lang('GEN_MENU_REP_ACCOUNT_STATUS');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -144,7 +148,7 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/replacement"
     );
-    $this->responseAttr();
+
     $this->render->titlePage = lang('GEN_MENU_REP_CARD_REPLACE');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -174,24 +178,8 @@ class Novo_Reports extends NOVO_Controller
       "reports/closing_balance"
     );
 
-    $this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-    $this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
-    if ($this->session->has_userdata('idReportsBusiness') != null) {
-      $this->load->model('Novo_Reports_Model', 'obtenerIdEmpresa');
-      $acrif = $this->obtenerIdEmpresa->callWs_obtenerIdEmpresa_Reports($this->session->idReportsBusiness->acrif);
-      $this->request->idFiscal = $acrif->data[0];
-    }
-    if ($this->session->has_userdata('enterpriseInf') != null) {
-      $this->request->select = TRUE;
-      $this->load->model('Novo_Business_Model', 'getProducts');
-      $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-      $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-      $this->responseAttr($response);
-      $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
-      $this->render->prod = lang('GEN_NO_PRODUCT');
-      $this->render->tamP = 1000000;
-      $this->render->currentProd = $this->session->productInf->productPrefix;
-    }
+    $this->render->prod = lang('GEN_NO_PRODUCT');
+    $this->render->tamP = 1000000;
     $this->render->titlePage = lang('GEN_MENU_REP_CLOSING_BAKANCE');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -218,6 +206,7 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/user_activity"
     );
+
     $this->responseAttr();
     $this->render->titlePage = lang('GEN_MENU_REP_USER_ACT');
     $this->views = ['reports/' . $view];
@@ -245,6 +234,7 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/users_activity"
     );
+
     $this->responseAttr();
     $this->render->titlePage = lang('GEN_MENU_REP_USER_ACT');
     $this->views = ['reports/' . $view];
@@ -273,19 +263,13 @@ class Novo_Reports extends NOVO_Controller
       "reports/recharge_made"
     );
 
-    $this->request->select = TRUE;
-    $this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-    $this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-    $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
-
     if ($this->session->flashdata('download')) {
       $response = $this->session->flashdata('download');
+      $this->responseAttr($response);
+    } else {
+      $this->responseAttr();
     }
-    $this->responseAttr($response);
-    $this->render->currentProd = $this->session->productInf->productPrefix;
+
     $this->render->titlePage = lang('GEN_MENU_REP_RECHARGE_MADE');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -313,15 +297,13 @@ class Novo_Reports extends NOVO_Controller
       "reports/issued_cards"
     );
 
-    $this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-    $this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
-
     if ($this->session->flashdata('download')) {
       $response = $this->session->flashdata('download');
+      $this->responseAttr($response);
+    } else {
+      $this->responseAttr();
     }
 
-    $this->responseAttr();
-    $this->render->currentProd = $this->session->productInf->productPrefix;
     $this->render->titlePage = lang('GEN_MENU_REP_ISSUED_CARDS');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -348,7 +330,7 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/categoryExpense"
     );
-    $this->responseAttr();
+
     $this->render->titlePage = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -375,8 +357,9 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/master_account"
     );
-    $this->render->tamP = 1000000;
+
     $this->responseAttr();
+    $this->render->tamP = 1000000;
     $this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -403,8 +386,8 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/extended_master_account"
     );
+
     $this->render->tamP = 1000000;
-    $this->responseAttr();
     $this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -419,7 +402,6 @@ class Novo_Reports extends NOVO_Controller
     writeLog('INFO', 'Reports: statusBulk Method Initialized');
 
     $view = 'statusBulk';
-    $statusBulkList = FALSE;
     array_push(
       $this->includeAssets->cssFiles,
       "third_party/dataTables-1.10.20"
@@ -433,19 +415,12 @@ class Novo_Reports extends NOVO_Controller
       "reports/statusBulk",
       "reports/getproductsReports"
     );
-    $this->request->select = TRUE;
-    $this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-    $this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-    $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
 
     if ($this->session->flashdata('download')) {
       $response = $this->session->flashdata('download');
+      $this->responseAttr($response);
     }
-    $this->responseAttr($response);
-    $this->render->currentProd = $this->session->productInf->productPrefix;
+
     $this->render->titlePage = lang('GEN_MENU_REP_STATUS_BULK');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -459,8 +434,8 @@ class Novo_Reports extends NOVO_Controller
   public function cardHolders()
   {
     writeLog('INFO', 'Reports: cardHolders Method Initialized');
+
     $view = 'cardHolders';
-    $cardHoldersList = FALSE;
     array_push(
       $this->includeAssets->cssFiles,
       "third_party/dataTables-1.10.20"
@@ -475,19 +450,11 @@ class Novo_Reports extends NOVO_Controller
       "reports/getproductsReports"
     );
 
-    $this->request->select = TRUE;
-    $this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-    $this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCT') : lang('GEN_TRY_AGAIN');
-    $this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
-
     if ($this->session->flashdata('download')) {
       $response = $this->session->flashdata('download');
+      $this->responseAttr($response);
     }
-    $this->responseAttr($response);
-    $this->render->currentProd = $this->session->productInf->productPrefix;
+
     $this->render->titlePage = lang('GEN_MENU_REP_CARDHOLDERS');
     $this->views = ['reports/' . $view];
     $this->loadView($view);
@@ -514,13 +481,8 @@ class Novo_Reports extends NOVO_Controller
       "third_party/additional-methods",
       "reports/status_master_account"
     );
-    $this->request->select = TRUE;
-    $logo = $this->session->enterpriseInf;
-    $this->request->idFiscal = $logo->idFiscal;
-    $this->request->enterpriseCode = $logo->enterpriseCode;
-    $this->load->model('Novo_Business_Model', 'getProducts');
-    $response = $this->getProducts->callWs_GetProducts_Business($this->request);
-    $this->responseAttr($response);
+
+    $this->responseAttr();
     $this->render->titlePage = lang('GEN_MENU_REP_STATUS_MASTER_ACCOUNT');
     $this->views = ['reports/' . $view];
     $this->loadView($view);

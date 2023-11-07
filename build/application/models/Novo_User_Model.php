@@ -818,7 +818,7 @@ class Novo_User_Model extends NOVO_Model
 
     $this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
 
-    $response = $this->sendToWebServices('callWs_updatePermissions');
+    $this->sendToWebServices('callWs_updatePermissions');
 
     switch ($this->isResponseRc) {
       case 0:
@@ -833,6 +833,7 @@ class Novo_User_Model extends NOVO_Model
         }
         break;
     }
+
     return $this->responseToTheView('callWs_updatePermissions');
   }
   /**
@@ -857,16 +858,18 @@ class Novo_User_Model extends NOVO_Model
     $this->dataRequest->nombre1 = $name[0];
     $this->dataRequest->nombre2 = '';
     $this->dataRequest->apellido1 = $name[1];
-    if ($name[1] == NULL) {
+
+    if ($name[1] === NULL) {
       $this->dataRequest->apellido1 = "";
     }
+
     $this->dataRequest->apellido2 = '';
     $this->dataRequest->clonarPermisos = 'true';
     $this->dataRequest->mail = $dataRequest->mail;
     $this->dataRequest->empresa = $this->session->enterpriseInf->idFiscal;
     $this->dataRequest->usuarioPlantilla = $this->session->userName;
 
-    $response = $this->sendToWebServices('callWs_enableUser');
+    $this->sendToWebServices('callWs_enableUser');
 
     switch ($this->isResponseRc) {
       case 0:

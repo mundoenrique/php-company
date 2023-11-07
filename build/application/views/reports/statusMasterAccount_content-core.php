@@ -1,15 +1,29 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_STATUS_MASTER_ACCOUNT'); ?></h1>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>">
+            <?= lang('GEN_MENU_ENTERPRISE'); ?>
+          </a>
         </li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal"
-            href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
-        <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>">
+            <?= lang('GEN_PRODUCTS'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>">
+            <?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK') ?>">
+            <?= lang('GEN_MENU_REPORTS'); ?>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -28,21 +42,17 @@
               <div class="form-group col-4">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
                 <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
-                  <?php foreach($enterpriseList AS $enterprise) : ?>
-                  <?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
-                  <?php endif;?>
-                  <option doc="<?= $enterprise->accodcia; ?>" name="<?= $enterprise->acrazonsocial; ?>" value="<?= $enterprise->acrif; ?>"
-                    <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
-                    <?= $enterprise->acnomcia; ?>
-                  </option>
+                  <?php foreach ($enterpriseList as $enterprise) : ?>
+                    <option doc="<?= $enterprise->accodcia; ?>" name="<?= $enterprise->acrazonsocial; ?>" value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
+                      <?= $enterprise->acnomcia; ?>
+                    </option>
                   <?php endforeach; ?>
                 </select>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4">
                 <label for="initialDateAct"><?= lang('GEN_START_DAY'); ?></label>
-                <input id="initialDateAct" name="selected-month-year" class="form-control date-picker " type="text" placeholder="MM/AAAA" readonly=""
-                  autocomplete="off">
+                <input id="initialDateAct" name="selected-month-year" class="form-control date-picker " type="text" placeholder="MM/AAAA" readonly="" autocomplete="off">
                 <div class="help-block"></div>
               </div>
               <div class="flex items-center justify-end col-3">
@@ -63,7 +73,7 @@
       </div>
     </div>
   </div>
-  <?php if($widget): ?>
-  <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
+  <?php if ($widget) : ?>
+    <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
   <?php endif; ?>
 </div>

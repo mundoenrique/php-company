@@ -1,21 +1,28 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_ISSUED_CARDS'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>">
+            <?= lang('GEN_MENU_ENTERPRISE'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>">
+            <?= lang('GEN_PRODUCTS'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>">
+            <?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK'); ?>"><?= lang('GEN_MENU_REPORTS'); ?></a>
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK'); ?>">
+            <?= lang('GEN_MENU_REPORTS'); ?>
+          </a>
         </li>
       </ul>
     </nav>

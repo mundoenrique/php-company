@@ -20,7 +20,7 @@
           </a>
         </li> /
         <li class="inline">
-          <a class="tertiary not-pointer" href="javascript:">
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK') ?>">
             <?= lang('GEN_MENU_REPORTS'); ?>
           </a>
         </li>
@@ -43,8 +43,6 @@
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
                 <select id="enterpriseCode" name="enterpriseCode" class="form-control select-box custom-select flex h6 w-100 enterprise-getprod">
                   <?php foreach ($enterpriseList as $enterprise) : ?>
-                    <?php if ($enterprise->acrif == $enterpriseData->idFiscal) : ?>
-                    <?php endif; ?>
                     <option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
                       <?= $enterprise->acnomcia; ?>
                     </option>
