@@ -73,6 +73,8 @@
                 </div>
               <?php endif; ?>
 
+              <input type="hidden" id="typeDownload" name="typeDownload" value="<?= lang('SETT_DOWNLOAD_SERVER') ?>">
+
               <div class="flex items-center justify-end col-auto ml-auto">
                 <button id="closingBudgetsBtn" class="btn btn-primary btn-small">
                   Buscar
@@ -82,11 +84,6 @@
           </form>
         </div>
         <div class="line mb-2"></div>
-      </div>
-      <div class="flex items-center justify-end col-auto ml-auto">
-        <button id="closingBudgetsBtn" class="btn btn-primary btn-small">
-          Buscar
-        </button>
       </div>
     </div>
     </form>
