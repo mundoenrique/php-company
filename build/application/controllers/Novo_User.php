@@ -303,7 +303,6 @@ class Novo_User extends NOVO_Controller
     }
 
     $this->responseAttr($responseList);
-    $this->render->username = $this->session->userName;
     $this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
     $this->views = ['user/' . $view];
     $this->loadView($view);
@@ -332,7 +331,7 @@ class Novo_User extends NOVO_Controller
       $this->request = $userDataList;
       $this->session->set_flashdata('userDataPermissions', $userDataList);
     }
-
+    $this->render->username = $this->session->userName;
     $this->render->user = $this->request->idUser;
     $this->render->name = $this->request->nameUser;
     $this->render->email = $this->request->mailUser;
@@ -386,7 +385,7 @@ class Novo_User extends NOVO_Controller
       $this->request = $userDataList;
       $this->session->set_flashdata('userDataPermissions', $userDataList);
     }
-
+    $this->render->username = $this->session->userName;
     $this->render->user = $this->request->idUser;
     $this->render->name = $this->request->nameUser;
     $this->render->email = $this->request->mailUser;

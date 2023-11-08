@@ -44,4 +44,4 @@ $lang['GEN_SETTINGS_ENTERPRISE'] = 'Configuración de la cuenta';
 $lang['GEN_ENTERPRISE'] = 'Cuenta';
 $lang['GEN_SELECT_ENTERPRISE'] = 'Selecciona una cuenta';
 $lang['GEN_BTN_ENTERPRISE'] = 'Cuentas';
-$lang['GEN_MENU_ENTERPRISE'] = 'Cuenta';
+$lang['GEN_MENU_ENTERPRISE'] = 'Cuentas';

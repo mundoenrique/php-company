@@ -114,7 +114,7 @@
                 <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_USERS_MANAGEMENT')) ?>">
                   <?= lang('GEN_BTN_CANCEL'); ?>
                 </a>
-                <?php if($this->verify_access->verifyAuthorization('USEREM','COACUE')): ?>
+                <?php if ($username !== $user && $this->verify_access->verifyAuthorization('USEREM','COACUE')): ?>
                 <button id="updateUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
                   <?= lang('GEN_BTN_UPDATE'); ?>
                 </button>
