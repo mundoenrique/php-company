@@ -303,6 +303,7 @@ class Novo_User extends NOVO_Controller
     }
 
     $this->responseAttr($responseList);
+    $this->render->username = $this->session->userName;
     $this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
     $this->views = ['user/' . $view];
     $this->loadView($view);
@@ -359,6 +360,60 @@ class Novo_User extends NOVO_Controller
 
     $this->responseAttr($responseList);
     $this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista de cuentas de usuario
+   * @author Jennifer C. Cádiz.
+   */
+  public function userAccounts()
+
+  {
+    writeLog('INFO', 'User: userAccounts Method Initialized');
+
+    $view = 'userAccounts';
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods",
+      "user/userAccounts"
+    );
+
+    if ($this->session->flashdata('userDataPermissions') != NULL) {
+      $userDataList = $this->session->flashdata('userDataPermissions');
+      $this->request = $userDataList;
+      $this->session->set_flashdata('userDataPermissions', $userDataList);
+    }
+
+    $this->render->user = $this->request->idUser;
+    $this->render->name = $this->request->nameUser;
+    $this->render->email = $this->request->mailUser;
+    $this->render->type = $this->request->typeUser;
+    $responseList = $this->loadModel($this->request);
+
+    $arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
+    $arrayList = $responseList->data;
+
+    foreach ($arrayList as $key => $value) {
+      // Recorre subarreglo de una dimensión
+      foreach ($value as $index => $subArray) {
+        // Recorre subarreglo de dos dimensiones
+        foreach ($subArray as $subIndex => $subValue) {
+          // Si encuentra el objeto que desea eliminar
+          if (in_array($subValue->accodfuncion, $arrayDelete)) {
+            // Elimina el objeto utilizando unset
+            unset($arrayList[$key][$index][$subIndex]);
+          }
+        }
+      }
+    }
+
+    $this->render->modules = $arrayList;
+
+    $this->responseAttr($responseList);
+    $this->render->titlePage = lang('GEN_ADMIN_ACCOUNTS_TITLE');
     $this->views = ['user/' . $view];
     $this->loadView($view);
   }
