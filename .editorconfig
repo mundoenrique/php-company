@@ -6,8 +6,6 @@ root = true
 [*]
 # Set default charset
 charset = utf-8
-# Tab indentation
-indent_style = tab
 # tab size
 indent_size = 2
 # End of line format
