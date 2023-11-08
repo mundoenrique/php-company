@@ -392,6 +392,7 @@ class Novo_Reports extends NOVO_Controller
       "reports/extended_master_account"
     );
 
+    $this->responseAttr();
     $this->render->tamP = 1000000;
     $this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
     $this->views = ['reports/' . $view];
