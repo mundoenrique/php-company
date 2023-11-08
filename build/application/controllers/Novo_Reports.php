@@ -13,15 +13,20 @@ class Novo_Reports extends NOVO_Controller
     parent::__construct();
     writeLog('INFO', 'Reports Controller Class Initialized');
 
-    if (in_array($this->controllerMethod, [
-      'accountStatus',
-      'cardHolders',
-      'categoryExpense',
-      'closingBalance',
-      'extendedAccountStatus',
-      'replacement',
-      'statusBulk',
-    ])) {
+    $getProducts = in_array(
+      $this->controllerMethod,
+      [
+        'accountStatus',
+        'cardHolders',
+        'categoryExpense',
+        'closingBalance',
+        'extendedAccountStatus',
+        'replacement',
+        'statusBulk',
+      ]
+    );
+
+    if ($getProducts) {
       $inf = $this->session->enterpriseInf;
       $this->request->select = TRUE;
       $this->request->idFiscal = $inf->idFiscal;
