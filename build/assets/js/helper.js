@@ -167,7 +167,7 @@ function callNovoCore(who, where, request, _response_) {
     sessionExpire();
   }
 
-  var uri = data.route || 'async-call';
+  var uri = request.route || 'async-call';
 
   $.ajax({
     method: 'POST',
