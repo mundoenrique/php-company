@@ -35,16 +35,14 @@
   <div class="w-100 hide-out hide">
     <div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
       <div class="search-criteria-order flex pb-3 flex-column w-100">
-        <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?>"></span>
+        <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
         <div class="flex my-2 px-5">
-          <form id="categoryExpenseForm" class="w-100">
+          <form id="cateExpenseForm" class="w-100">
             <div class="row flex ">
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
-                <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
+                <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod" disabled>
                   <?php foreach ($enterpriseList as $enterprise) : ?>
-                    <?php if ($enterprise->acrif === $enterpriseData->idFiscal) : ?>
-                    <?php endif; ?>
                     <option doc="<?= $enterprise->accodcia; ?>" name="<?= $enterprise->acrazonsocial; ?>" value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif === $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
                       <?= $enterprise->acnomcia; ?>
                     </option>
@@ -54,57 +52,57 @@
               </div>
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_PRODUCT'); ?></label>
-                <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
+                <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100" disabled>
                   <option selected disabled><?= $selectProducts ?></option>
-                  <?php if ($productsSelect) : ?>
-                    <?php foreach ($productsSelect as $product) : ?>
-                      <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
-                    <?php endforeach; ?>
-                  <?php endif; ?>
+                  <?php foreach ($productsSelect as $product) : ?>
+                    <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>>
+                      <?= $product['desc'] ?>
+                    </option>
+                  <?php endforeach; ?>
                 </select>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
-                <input id="cardNumber" name="cardNumber" class="form-control h5" type="text" autocomplete="off">
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control h5" autocomplete="off" req="yes" disabled>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_TABLE_DNI'); ?></label>
-                <input id="idNumber" name="idNumber" class="form-control h5" type="text" autocomplete="off">
+                <input type="text" id="idDocument" name="idDocument" class="form-control h5" autocomplete="off" req="yes" disabled>
                 <div class="help-block"></div>
               </div>
               <div id="radio-form" class="form-group col-3">
                 <label class="block"><?= lang('GEN_TABLE_RESULTS'); ?></label>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="annual" name="results" class="custom-control-input" value="all">
+                  <input type="radio" id="annual" name="results" class="custom-control-input" disabled>
                   <label class="custom-control-label mr-1" for="annual">Anual</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="range" name="results" class="custom-control-input" value="all">
+                  <input type="radio" id="range" name="results" class="custom-control-input" checked disabled>
                   <label class="custom-control-label mr-1" for="range">Rango</label>
                 </div>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4 col-lg-3 col-xl-3 year hide">
                 <label for="yearDate">Año</label>
-                <input id="yearDate" name="datepicker_start" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_SHORT'); ?>" readonly required>
+                <input type="text" id="yearDate" name="datepicker_year" class="form-control date-picker ignore" placeholder="<?= lang('GEN_PLACE_DATE_SHORT'); ?>" readonly disabled>
                 <div class="help-block">
                 </div>
               </div>
               <div class="form-group col-4 col-lg-3 col-xl-3 range">
                 <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-                <input id="initialDate" name="datepicker_start" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
+                <input type="text" id="initialDate" name="datepicker_start" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
                 <div class="help-block">
                 </div>
               </div>
               <div class="form-group col-4 col-lg-3 col-xl-3 range">
                 <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-                <input id="finalDate" name="datepicker_end" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
+                <input type="text" id="finalDate" name="datepicker_end" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
                 <div class="help-block "></div>
               </div>
               <div class="flex items-center justify-end col-3 search-bnt">
-                <button id="searchButton" type="button" class="btn btn-primary btn-small">
+                <button id="searchButton" type="submit" class="btn btn-primary btn-small" disabled>
                   <?= lang('GEN_BTN_SEARCH'); ?>
                 </button>
               </div>
@@ -113,36 +111,39 @@
         </div>
         <div class="line mb-2"></div>
       </div>
-      <div class="flex">
-        <div id="spinnerBlock" class="mt-2 mx-auto hide">
-          <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-        </div>
-      </div>
-      <div id="categoryExpense" class="flex pb-5 flex-column">
-        <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_TABLE_RESULTS'); ?></span>
-        <div class="center mx-1">
-          <div class="flex mr-2 py-3 justify-end items-center">
-            <button id="export_excel" class="big-modal btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
-              <i class=" icon icon-file-excel" aria-hidden="true"></i>
-            </button>
-            <?php if (FALSE) : ?>
-              <button id="export_pdf" class="big-modal btn px-1" title="Exportar a PDF" data-toggle="tooltip">
-                <i class="icon icon-file-pdf" aria-hidden="true"></i>
-              </button>
-              <button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
-                <i class="icon icon-chart-pie" aria-hidden="true"></i>
-              </button>
-
-              <button class="btn px-1" title="Generar Comprobante Masivo" data-toggle="tooltip">
-                <i class="icon icon-file-blank" aria-hidden="true"></i>
-              </button>
-            <?php endif; ?>
-          </div>
-          <div id="category-expense-table"></div>
-          <div id="spinnerResults" class="mt-2 mx-auto hide">
+      <div class="flex pb-5 flex-column">
+        <div id="spinnerBlock" class=" hide">
+          <div id="preLoader" class="mt-2 mx-auto flex justify-center">
             <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
           </div>
+        </div>
+        <span id="titleResults" class="line-text mb-2 h4 semibold primary hide"><?= lang('GEN_TABLE_RESULTS'); ?></span>
+        <div id="blockResults" class="center mx-1 hide">
+          <div class="flex">
+            <div id="buttonFiles" class="flex mr-2 py-3 flex-auto justify-end items-center">
+              <button id="exportExcel" format="Excel" class="btn px-1 big-modal downloadReport" title="Exportar a EXCEL" data-toggle="tooltip">
+                <i class="icon icon-file-excel" aria-hidden="true"></i>
+              </button>
+              <button id="exportPDF" format="PDF" class="btn px-1 big-modal downloadReport" title="Exportar a PDF" data-toggle="tooltip">
+                <i class="icon icon-file-pdf" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <table id="cateExpenseTable" class="cell-border h6 display responsive w-100">
+            <thead class="bg-primary secondary regular">
+              <tr>
+                <th><?= lang('GEN_USER'); ?></th>
+                <th><?= lang('GEN_TABLE_STATUS'); ?></th>
+                <th><?= lang('GEN_TABLE_LAST_SESSION'); ?></th>
+                <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
+              </tr>
+            </thead>
+            <tbody id="usersActivityOptions"></tbody>
+          </table>
           <div class="line my-2"></div>
+        </div>
+        <div class="my-5 py-4 center none">
+          <span class="h4"><?= lang('GEN_TABLE_NO_RESULTS'); ?></span>
         </div>
       </div>
     </div>

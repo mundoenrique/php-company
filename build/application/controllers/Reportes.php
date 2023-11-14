@@ -3444,7 +3444,7 @@ class Reportes extends CI_Controller
     $response =  json_decode($jsonResponse);
 
     if ($response) {
-      log_message('info', 'GastosPorCategorias ' . $response->rc . "/" . $response->msg);
+      log_message('debug', 'GastosPorCategorias ' . json_encode($response, JSON_UNESCAPED_UNICODE));
       if ($response->rc == 0) {
         return $response;
       } else {

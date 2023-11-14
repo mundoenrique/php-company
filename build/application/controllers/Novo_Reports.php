@@ -333,7 +333,8 @@ class Novo_Reports extends NOVO_Controller
       "third_party/jquery.validate",
       "form_validation",
       "third_party/additional-methods",
-      "reports/categoryExpense"
+      "reports/categoryExpense",
+      "reports/getproductsReports"
     );
 
     $this->render->titlePage = lang('GEN_MENU_REP_CATEGORY_EXPENSE');

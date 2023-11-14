@@ -1,61 +1,105 @@
 'use strict';
-var reportsResults;
 $(function () {
+  insertFormInput(false);
   $('#pre-loader').remove();
   $('.hide-out').removeClass('hide');
+  let cateExpenseTable = $('#cateExpenseTable');
+  let cateExpenseForm = $('#cateExpenseForm');
 
-	if ($("input[name='results']:checked").val() != 0) {
-		$("#initialDate ").attr('required', 'required');
-		$("#finalDate ").attr('required', 'required');
-	}
-  $('#range').attr('checked', true);
-  $("#annual").val('12');
-	$("#range").val('0');
-
-	var datePicker = $('.date-picker');
-		datePicker.datepicker({
-		onSelect: function (selectedDate) {
-			$(this)
-				.focus()
-				.blur();
-			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
-			dateSelected = new Date(dateSelected);
-			var inputDate = $(this).attr('id');
-
-			if (inputDate == 'initialDate') {
-				$('#finalDate').datepicker('option', 'minDate', selectedDate);
-				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + lang.SETT_DATEPICKER_MONTHRANGE, dateSelected.getDate() - 1);
-
-				if (currentDate > maxTime) {
-					$('#finalDate').datepicker('option', 'maxDate', maxTime);
-				} else {
-					$('#finalDate').datepicker('option', 'maxDate', currentDate);
-				}
-			}
-		}
-	});
-
-  $("#radio-form").on('change', function(){
-		$('#finalDate').removeClass('has-error');
-		$('#initialDate').removeClass('has-error');
-		$(".help-block").text("");
-		if ($("input[name='results']:checked").val() != 0) {
-      $(".year").removeClass('hide')
-      $(".range").addClass("hide")
-      $(".search-bnt").addClass("col-6")
-		} else if ($("input[name='results']:checked").val() == 0 ){
-      $(".range").removeClass('hide')
-      $(".year").addClass("hide")
-      $(".search-bnt").removeClass("col-6")
-      $(".search-bnt").addClass("col-3")
-		}
-  });
-
-  $('#resultsAccount').DataTable({
+  const tableExpense = cateExpenseTable.DataTable({
     ordering: false,
     responsive: true,
     pagingType: 'full_numbers',
     language: dataTableLang,
+  });
+
+  $('#yearDate').datepicker({
+    changeMonth: false,
+    showButtonPanel: true,
+    dateFormat: 'yy',
+    beforeShow: function (input, inst) {
+      inst.dpDiv.addClass('ui-datepicker-month-year');
+    },
+    onSelect() {
+      $(this).focus().blur();
+    },
+    onClose: function (dateText, inst) {
+      let year = $('#ui-datepicker-div .ui-datepicker-year :selected').val();
+      $(this).datepicker('setDate', new Date(year, 1));
+    },
+  });
+
+  $('#initialDate, #finalDate').datepicker({
+    beforeShow: function (input, inst) {
+      inst.dpDiv.removeClass('ui-datepicker-month-year');
+    },
+    onSelect: function (selectedDate) {
+      $(this).focus().blur();
+      let dateSelected = selectedDate.split('/');
+      dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+      dateSelected = new Date(dateSelected);
+      let inputDate = $(this).attr('id');
+
+      if (inputDate == 'initialDate') {
+        $('#finalDate').datepicker('option', 'minDate', selectedDate);
+        let maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + 1, dateSelected.getDate() - 1);
+
+        if (currentDate > maxTime) {
+          $('#finalDate').datepicker('option', 'maxDate', maxTime);
+        } else {
+          $('#finalDate').datepicker('option', 'maxDate', currentDate);
+        }
+      }
+    },
+  });
+
+  $('#radio-form').on('change', function () {
+    $('#initialDate, #finalDate, #yearDate').removeClass('has-error').siblings('.help-block').text('');
+
+    if ($('#annual').is(':checked')) {
+      $('#yearDate').removeClass('ignore');
+      $('#initialDate, #finalDate').addClass('ignore');
+      $('.year').removeClass('hide');
+      $('.range').addClass('hide');
+      $('.search-bnt').addClass('col-6');
+      $('#initialDate').val('');
+      $('#finalDate').val('');
+    }
+
+    if ($('#range').is(':checked')) {
+      $('#initialDate, #finalDate').removeClass('ignore');
+      $('#yearDate').addClass('ignore');
+      $('.range').removeClass('hide');
+      $('.year').addClass('hide');
+      $('.search-bnt').removeClass('col-6');
+      $('#yearDate').val('');
+    }
+  });
+
+  $('#searchButton').on('click', function (e) {
+    e.preventDefault();
+    $('#cardNumber').attr('req', 'yes');
+    $('#idDocument').attr('req', 'yes');
+    cateExpenseForm = $('#cateExpenseForm');
+    validateForms(cateExpenseForm);
+
+    if (cateExpenseForm.valid()) {
+      let data = getDataForm(cateExpenseForm);
+      data.annual = $('#annual').is(':checked');
+      cateExpenseTable.dataTable().fnClearTable();
+      delete data.range;
+      insertFormInput(true);
+      $('#blockResults, #titleResults').addClass('hide');
+      $('#spinnerBlock').removeClass('hide');
+
+      who = 'Reports';
+      where = 'categoryExpense';
+      callNovoCore(who, where, data, function (response) {
+        // tableExpense.row.add(['uno', 'dos', 'tres', 'cuatro']).draw();
+        $('#spinnerBlock').addClass('hide');
+        // $('#blockResults, #titleResults').removeClass('hide');
+        insertFormInput(false);
+      });
+    }
   });
 });
