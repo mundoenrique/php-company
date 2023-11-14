@@ -68,7 +68,7 @@
               <?php if (lang('SETT_NIT_INPUT_BOOL') === 'ON') : ?>
                 <div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
                   <label><?= lang('REPORTS_ID_FISCAL') ?></label>
-                  <input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
+                  <input id="Nit" class="form-control h5" name="idDocument" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
                   <div class="help-block"></div>
                 </div>
               <?php endif; ?>

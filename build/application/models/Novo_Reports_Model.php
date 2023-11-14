@@ -1546,6 +1546,36 @@ class Novo_Reports_Model extends NOVO_Model
     return $this->responseToTheView('callWS_IssuedCardsReport');
   }
 
+  public function callWs_CategoryExpense_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: CategoryExpense Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Gastos por categoria';
+    $this->dataAccessLog->operation = 'Lista de gastos por categoria';
+
+    $initialDate = $dataRequest->initialDate;
+    $finalDate = $dataRequest->finalDate;
+
+    if ($dataRequest->annual) {
+      $initialDate = '01/01/' . $dataRequest->yearDate;
+      $finalDate = '31/12/' . $dataRequest->yearDate;
+    }
+
+    $this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
+    $this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
+    $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->producto = $dataRequest->productCode;
+    $this->dataRequest->nroTarjeta = $dataRequest->cardNumber;
+    $this->dataRequest->idPersona = $dataRequest->idDocument;
+    $this->dataRequest->fechaIni = $initialDate;
+    $this->dataRequest->fechaFin = $finalDate;
+
+    $response = $this->sendToWebServices('callWs_CategoryExpense');
+
+    $this->response->code = 0;
+    return $this->responseToTheView('callWS_CategoryExpense');
+  }
 
 
 
