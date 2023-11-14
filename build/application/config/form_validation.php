@@ -1310,6 +1310,40 @@ $config = [
       'rules' => 'trim|regex_match[/^(xls|pdf)/]'
     ]
   ],
+  'categoryExpense' => [
+    [
+      'field' => 'enterpriseCode',
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+    ],
+    [
+      'field' => 'productCode',
+      'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+    ],
+    [
+      'field' => 'cardNumber',
+      'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+    ],
+    [
+      'field' => 'idDocument',
+      'rules' => 'trim|alpha_numeric|required'
+    ],
+    [
+      'field' => 'annual',
+      'rules' => 'trim|regex_match[/^(' . TRUE . '|' . FALSE . ')/]'
+    ],
+    [
+      'field' => 'yearDate',
+      'rules' => 'trim|numeric'
+    ],
+    [
+      'field' => 'initialDate',
+      'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+    ],
+    [
+      'field' => 'finalDate',
+      'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+    ]
+  ],
   'userActivity' => [
     [
       'field' => 'enterpriseCode',

@@ -52,7 +52,14 @@ function validateForms(form) {
       'user-name': { required: true, pattern: alphanumunder },
       'id-company': { required: true, fiscalRegistry: true },
       email: { required: true, pattern: emailValid },
-      nit: { pattern: numeric },
+      idDocument: {
+        required: {
+          depends: function (element) {
+            return $(element).attr('req') === 'yes';
+          },
+        },
+        pattern: numeric,
+      },
       'current-pass': { required: true },
       'new-pass': { required: true, differs: '#currentPass', validatePass: true },
       'confirm-pass': { required: true, equalTo: '#newPass' },
@@ -98,6 +105,7 @@ function validateForms(form) {
         },
         pattern: date.dmy,
       },
+      datepicker_year: { required: true, pattern: date.y },
       'status-order': { required: true, requiredTypeOrder: true },
       'selected-date': { required: true, pattern: date.my },
       'selected-month-year': { required: true, pattern: date.my },
@@ -324,7 +332,7 @@ function validateForms(form) {
         verifyPattern: lang.VALID_USERPASS_PATTERN,
       },
       'user-name': lang.VALID_USERNAME,
-      nit: lang.VALID_USERNAME,
+      idDocument: lang.VALIDATE_NUMBER_ID,
       'id-company': lang.VALIDATE_ID_COMPANY + lang.VALIDATE_EXAMPLE_ID_FISCAL,
       'anio-consolid': lang.VALIDATE_SELECTED_YEAR,
       yearReport: lang.VALIDATE_SELECTED_YEAR,
@@ -355,6 +363,7 @@ function validateForms(form) {
       'type-order': lang.VALIDATE_ORDER_TYPE,
       datepicker_start: lang.VALIDATE_INITIAL_DATE,
       datepicker_end: lang.VALIDATE_FINAL_DATE,
+      datepicker_year: lang.VALIDATE_SELECTED_YEAR,
       'status-order': lang.VALIDATE_ORDER_STATUS,
       'selected-date': lang.VALIDATE_SELECTED_DATE,
       'selected-month-year': lang.VALIDATE_SELECTED_MONTH_YEAR,
