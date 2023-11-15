@@ -1556,10 +1556,12 @@ class Novo_Reports_Model extends NOVO_Model
 
     $initialDate = $dataRequest->initialDate;
     $finalDate = $dataRequest->finalDate;
+    $querytype = "1";
 
     if ($dataRequest->annual) {
       $initialDate = '01/01/' . $dataRequest->yearDate;
       $finalDate = '31/12/' . $dataRequest->yearDate;
+      $querytype = "0";
     }
 
     $this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
@@ -1570,6 +1572,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idPersona = $dataRequest->idDocument;
     $this->dataRequest->fechaIni = $initialDate;
     $this->dataRequest->fechaFin = $finalDate;
+    $this->dataRequest->tipoConsulta = $querytype;
 
     $response = $this->sendToWebServices('callWs_CategoryExpense');
 
