@@ -211,7 +211,6 @@ class Novo_User_Model extends NOVO_Model
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
       case 9997:
-
         $this->response->icon = lang('SETT_ICON_INFO');
         $this->response->title = lang('GEN_SYSTEM_NAME');
         $this->response->msg = lang('GEN_MAINTENANCE_MSG');
@@ -219,7 +218,6 @@ class Novo_User_Model extends NOVO_Model
         $this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
         break;
       case 9998:
-
         $this->response->icon = lang('SETT_ICON_INFO');
         $this->response->title = lang('GEN_SYSTEM_NAME');
         $this->response->msg = lang('USER_EXPIRE_TIME');

@@ -118,7 +118,7 @@ $(function () {
       response.minWidth = 470;
       response.maxHeight = 'none';
       response.posAt = 'center top';
-      response.posMy = 'center top+160';
+      response.posMy = 'center top+60';
 
       uiModalMessage(response);
     },
