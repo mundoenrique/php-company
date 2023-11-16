@@ -1,6 +1,6 @@
 import { cryptography } from './encrypt_decrypt.js';
 
-const usefulData = function () {
+const usefulData = (function () {
   const assetsTenant = cryptography.decrypt(assetsClient.payload);
   const assets = {};
 
@@ -11,24 +11,23 @@ const usefulData = function () {
   delete assetsClient.payload;
 
   return assets;
-};
+})();
 
-const assetsTenant = usefulData();
-export const response = assetsTenant.response;
-export const dataTableLang = assetsTenant.dataTableLang;
-export const datePickerLang = assetsTenant.datePickerLang;
-export const baseURL = assetsTenant.baseURL;
-export const assetUrl = assetsTenant.assetUrl;
-export const logged = assetsTenant.logged;
-export const userId = assetsTenant.userId;
-export const customerUri = assetsTenant.customerUri;
-export const customer = assetsTenant.customer;
-export const callServer = assetsTenant.callServer;
-export const lang = assetsTenant.lang;
-export const novoName = assetsTenant.novoName || '';
+export const response = usefulData.response;
+export const dataTableLang = usefulData.dataTableLang;
+export const datePickerLang = usefulData.datePickerLang;
+export const baseURL = usefulData.baseURL;
+export const assetUrl = usefulData.assetUrl;
+export const logged = usefulData.logged;
+export const userId = usefulData.userId;
+export const customerUri = usefulData.customerUri;
+export const customer = usefulData.customer;
+export const callServer = usefulData.callServer;
+export const lang = usefulData.lang;
+export const novoName = usefulData.novoName || '';
 export const novo = {
-  value: assetsTenant.novoValue || '',
+  value: usefulData.novoValue || '',
 };
 export const redirect = {
-  link: assetsTenant.redirectLink,
+  link: usefulData.redirectLink,
 };
