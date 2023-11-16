@@ -44,6 +44,9 @@ if (!function_exists('encryptData')) {
   {
     $CI = &get_instance();
     $responseData->redirectLink = uriRedirect();
+    $responseData->logged = $CI->session->has_userdata('logged');
+    $responseData->userId = $CI->session->has_userdata('userId');
+
     $responseData = [
       'payload' => $responseData
     ];
