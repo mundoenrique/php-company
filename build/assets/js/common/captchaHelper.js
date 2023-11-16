@@ -1,3 +1,5 @@
+import { lang } from './useful_data.js';
+
 export const getToken = function (module, _function_) {
   if (lang.SETT_ACTIVE_RECAPTCHA) {
     grecaptcha.ready(function () {

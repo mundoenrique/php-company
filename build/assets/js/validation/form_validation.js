@@ -1,4 +1,5 @@
-'use strict';
+import { lang } from '../common/useful_data.js';
+
 export const formValidation = function (form) {
   clearInputForm(form);
 

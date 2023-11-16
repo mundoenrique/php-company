@@ -1,4 +1,5 @@
 import { cryptography } from '../common/encrypt_decrypt.js';
+import { baseURL, lang, logged, novo, novoName, redirect, userId } from '../common/useful_data.js';
 import { uiMdalClose, uiModalMessage } from '../modal/ui_modal.js';
 import { toggleDisableActions } from '../utils.js';
 
@@ -11,11 +12,11 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     section: section,
     data: request,
   };
-  dataRequest = cryptography.encrypt(dataRequest);
+  dataRequest = cryptography.encrypt(dataRequest, novo.value);
   formData.append('payload', dataRequest);
 
   if (activeSafety) {
-    formData.append(novoName, novoValue);
+    formData.append(novoName, novo.value);
   }
 
   if (request.files) {
@@ -43,12 +44,11 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     .done(function (data, status, jqXHR) {
       const response = cryptography.decrypt(data.payload);
       const modalClose = response.keepModal ? false : true;
-      redirectLink = response.redirectLink;
+      redirect.link = response.redirectLink;
       uiMdalClose(modalClose);
 
       if (activeSafety) {
-        novoName = response.novoName;
-        novoValue = response.novoValue;
+        novo.value = response.novoValue;
       }
 
       if (response.code === lang.SETT_DEFAULT_CODE) {
@@ -70,7 +70,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
         data: {},
         modalBtn: {
           btn1: {
-            link: redirectLink,
+            link: redirect.link,
             action: 'redirect',
           },
         },
