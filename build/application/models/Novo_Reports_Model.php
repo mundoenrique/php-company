@@ -1577,10 +1577,9 @@ class Novo_Reports_Model extends NOVO_Model
     $response = $this->sendToWebServices('callWs_CategoryExpense');
 
     $this->response->code = 0;
+
     return $this->responseToTheView('callWS_CategoryExpense');
   }
-
-
 
   /**
    * @info Método para obtener actividad por ususario
