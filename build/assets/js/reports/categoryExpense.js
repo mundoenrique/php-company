@@ -7,10 +7,14 @@ $(function () {
   let cateExpenseForm = $('#cateExpenseForm');
 
   const tableExpense = cateExpenseTable.DataTable({
-    ordering: false,
-    responsive: true,
-    pagingType: 'full_numbers',
+    info: false,
     language: dataTableLang,
+    ordering: false,
+    paging: false,
+    pagingType: 'full_numbers',
+    responsive: true,
+    searching: false,
+    select: false,
   });
 
   $('#yearDate').datepicker({
@@ -91,13 +95,27 @@ $(function () {
       insertFormInput(true);
       $('#blockResults, #titleResults').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
+      $('#queryType').text(data.annual ? 'Anual' : 'Rango');
 
       who = 'Reports';
       where = 'categoryExpense';
       callNovoCore(who, where, data, function (response) {
-        // tableExpense.row.add(['uno', 'dos', 'tres', 'cuatro']).draw();
+        if (response.code !== 0) {
+          $('#buttonFiles').addClass('hide');
+        }
+
+        $.each(response.data, function (day, expense) {
+          let row = [day];
+
+          $.each(expense, function (index, value) {
+            row.push(value);
+          });
+
+          tableExpense.row.add(row).draw();
+        });
+
         $('#spinnerBlock').addClass('hide');
-        // $('#blockResults, #titleResults').removeClass('hide');
+        $('#blockResults, #titleResults').removeClass('hide');
         insertFormInput(false);
       });
     }

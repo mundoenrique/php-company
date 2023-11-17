@@ -1552,7 +1552,7 @@ class Novo_Reports_Model extends NOVO_Model
 
     $this->dataAccessLog->modulo = 'Reportes';
     $this->dataAccessLog->function = 'Gastos por categoria';
-    $this->dataAccessLog->operation = 'Lista de gastos por categoria';
+    $this->dataAccessLog->operation = 'Movimientos ' . $dataRequest->annual ? 'anual' : 'rango';
 
     $initialDate = $dataRequest->initialDate;
     $finalDate = $dataRequest->finalDate;
@@ -1575,8 +1575,68 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tipoConsulta = $querytype;
 
     $response = $this->sendToWebServices('callWs_CategoryExpense');
+    $body = [];
 
-    $this->response->code = 0;
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+        if ($querytype === '0') {
+          foreach (lang('GEN_DATEPICKER_MONTHNAMES') as $monthName) {
+            $body[$monthName] = [];
+          }
+
+          foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+            $key = strval($key);
+
+            foreach ($response->listaGrupo as $group) {
+              if ($group->idGrupo === $key) {
+                foreach ($group->gastoMensual as $expense) {
+                  $body[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+                }
+
+                $body['Total'][] = $group->totalCategoria;
+              }
+            }
+          }
+
+          foreach ($response->totalesAlMes as $expense) {
+            $body[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+          }
+
+          $body['Total'][] = $response->totalGeneral;
+        }
+
+        if ($querytype === '1') {
+          foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+            $key = strval($key);
+
+            foreach ($response->listaGrupo as $group) {
+
+              if ($group->idGrupo === $key) {
+                foreach ($group->gastoDiario as $expense) {
+                  $body[$expense->fechaDia][] = $expense->monto;
+                }
+
+                $body['Total'][] = $group->totalCategoria;
+              }
+            }
+          }
+
+          foreach ($response->totalesPorDia as $expense) {
+            $body[$expense->fechaDia][] = $expense->monto;
+          }
+
+          $body['Total'][] = $response->totalGeneral;
+        }
+        break;
+      case -150:
+        $this->response->code = 1;
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    $this->response->data = $body;
 
     return $this->responseToTheView('callWS_CategoryExpense');
   }
