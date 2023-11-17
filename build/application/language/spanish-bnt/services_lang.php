@@ -18,4 +18,4 @@ $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibido en empresa';
 $lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
 $lang["SERVICES_TYPE_CARGO"] = 'Devolver';
 $lang["SERVICES_TYPE_ABONO"] = 'Fondear';
-$lang['SERVICES_SUCCESSFUL_TRANSFER'] = 'La solicitud a cuenta maestra fue registrada exitosamente para su autorización';
+$lang['SERVICES_SUCCESSFUL_TRANSFER'] = 'La solicitud a cuenta maestra fue registrada exitosamente para su autorización.';

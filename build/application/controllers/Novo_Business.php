@@ -77,7 +77,7 @@ class Novo_Business extends NOVO_Controller {
 			$this->request->enterpriseName = $request->enterpriseName;
 			$this->request->thirdApp = $request->thirdApp;
 			$this->request->fiscalNumber = $request->fiscalNumber;
-			$this->session->set_userdata('operatingModel', $request->operatingModel);
+			$this->request->operatingModel = $request->operatingModel;
 		}
 
 		$responseList = $this->loadModel($this->request);
