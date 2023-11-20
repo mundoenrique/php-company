@@ -1575,59 +1575,61 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tipoConsulta = $querytype;
 
     $response = $this->sendToWebServices('callWs_CategoryExpense');
-    $body = [];
+    $tableData = [];
 
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
 
-        if ($querytype === '0') {
-          foreach (lang('GEN_DATEPICKER_MONTHNAMES') as $monthName) {
-            $body[$monthName] = [];
-          }
+        if ($dataRequest->type === 'list') {
+          if ($querytype === '0') {
+            foreach (lang('GEN_DATEPICKER_MONTHNAMES') as $monthName) {
+              $tableData[$monthName] = [];
+            }
 
-          foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
-            $key = strval($key);
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
 
-            foreach ($response->listaGrupo as $group) {
-              if ($group->idGrupo === $key) {
-                foreach ($group->gastoMensual as $expense) {
-                  $body[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+              foreach ($response->listaGrupo as $group) {
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoMensual as $expense) {
+                    $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+                  }
+
+                  $tableData['Total'][] = $group->totalCategoria;
                 }
-
-                $body['Total'][] = $group->totalCategoria;
               }
             }
+
+            foreach ($response->totalesAlMes as $expense) {
+              $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+            }
+
+            $tableData['Total'][] = $response->totalGeneral;
           }
 
-          foreach ($response->totalesAlMes as $expense) {
-            $body[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
-          }
+          if ($querytype === '1') {
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
 
-          $body['Total'][] = $response->totalGeneral;
-        }
+              foreach ($response->listaGrupo as $group) {
 
-        if ($querytype === '1') {
-          foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
-            $key = strval($key);
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoDiario as $expense) {
+                    $tableData[$expense->fechaDia][] = $expense->monto;
+                  }
 
-            foreach ($response->listaGrupo as $group) {
-
-              if ($group->idGrupo === $key) {
-                foreach ($group->gastoDiario as $expense) {
-                  $body[$expense->fechaDia][] = $expense->monto;
+                  $tableData['Total'][] = $group->totalCategoria;
                 }
-
-                $body['Total'][] = $group->totalCategoria;
               }
             }
-          }
 
-          foreach ($response->totalesPorDia as $expense) {
-            $body[$expense->fechaDia][] = $expense->monto;
-          }
+            foreach ($response->totalesPorDia as $expense) {
+              $tableData[$expense->fechaDia][] = $expense->monto;
+            }
 
-          $body['Total'][] = $response->totalGeneral;
+            $tableData['Total'][] = $response->totalGeneral;
+          }
         }
         break;
       case -150:
@@ -1636,7 +1638,7 @@ class Novo_Reports_Model extends NOVO_Model
         break;
     }
 
-    $this->response->data = $body;
+    $this->response->data = $tableData;
 
     return $this->responseToTheView('callWS_CategoryExpense');
   }

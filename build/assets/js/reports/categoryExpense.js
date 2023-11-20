@@ -5,6 +5,7 @@ $(function () {
   $('.hide-out').removeClass('hide');
   let cateExpenseTable = $('#cateExpenseTable');
   let cateExpenseForm = $('#cateExpenseForm');
+  let dataExpense;
 
   const tableExpense = cateExpenseTable.DataTable({
     info: false,
@@ -88,36 +89,42 @@ $(function () {
     validateForms(cateExpenseForm);
 
     if (cateExpenseForm.valid()) {
-      let data = getDataForm(cateExpenseForm);
-      data.annual = $('#annual').is(':checked');
+      dataExpense = getDataForm(cateExpenseForm);
+      dataExpense.annual = $('#annual').is(':checked');
+      dataExpense.type = 'list';
       cateExpenseTable.dataTable().fnClearTable();
-      delete data.range;
+      delete dataExpense.range;
       insertFormInput(true);
       $('#blockResults, #titleResults').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
-      $('#queryType').text(data.annual ? 'Anual' : 'Rango');
+      $('#queryType').text(dataExpense.annual ? 'Anual' : 'Rango');
 
-      who = 'Reports';
-      where = 'categoryExpense';
-      callNovoCore(who, where, data, function (response) {
-        if (response.code !== 0) {
-          $('#buttonFiles').addClass('hide');
-        }
-
-        $.each(response.data, function (day, expense) {
-          let row = [day];
-
-          $.each(expense, function (index, value) {
-            row.push(value);
-          });
-
-          tableExpense.row.add(row).draw();
-        });
-
-        $('#spinnerBlock').addClass('hide');
-        $('#blockResults, #titleResults').removeClass('hide');
-        insertFormInput(false);
-      });
+      cateExpenseRequest();
     }
   });
+
+  const cateExpenseRequest = function () {
+    who = 'Reports';
+    where = 'categoryExpense';
+
+    callNovoCore(who, where, dataExpense, function (response) {
+      if (response.code !== 0) {
+        $('#buttonFiles').addClass('hide');
+      }
+
+      $.each(response.data, function (date, expense) {
+        let row = [date];
+
+        $.each(expense, function (index, value) {
+          row.push(value);
+        });
+
+        tableExpense.row.add(row).draw();
+      });
+
+      $('#spinnerBlock').addClass('hide');
+      $('#blockResults, #titleResults').removeClass('hide');
+      insertFormInput(false);
+    });
+  };
 });
