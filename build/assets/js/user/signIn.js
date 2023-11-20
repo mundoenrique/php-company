@@ -1,6 +1,6 @@
 import { getToken } from '../common/captchaHelper.js';
 import { cryptography } from '../common/encrypt_decrypt.js';
-import { lang, novo } from '../common/useful_data.js';
+import { customer, customerUri, lang, novo } from '../common/useful_data.js';
 import { calledCoreApp } from '../connection/core_app.js';
 import { uiModalMessage } from '../modal/ui_modal.js';
 import { appLoader, takeFormData, toggleDisableActions } from '../utils.js';
