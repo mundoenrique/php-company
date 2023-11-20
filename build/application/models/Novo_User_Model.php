@@ -885,12 +885,11 @@ class Novo_User_Model extends NOVO_Model
 		writeLog('INFO', 'User Model: validateCaptcha Method Initialized');
 
 		$this->load->library('recaptcha');
-
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 
-		writeLog('DEBUG', 'RESPONSE: recaptcha, Score: ' . $result["score"] . ', Hostname: ' . $result["hostname"]);
+		writeLog('DEBUG', 'RECAPTCH RESPONSE: ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
-		$resultRecaptcha = $result["score"] <= lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+		$resultRecaptcha = $result->score < lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 
 		if ($resultRecaptcha == 9999) {
 			$this->response->code = 4;
