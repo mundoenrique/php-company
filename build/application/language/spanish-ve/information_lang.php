@@ -3,8 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang["TERMS_CONTENT"] = '
 <p>
-	<strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> y
-	<strong> Servitebca Servicio de Transferencia Electrónica de Beneficios, C.A,</strong> ambas sociedades domiciliadas
+	<strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> domiciliada
 	en la ciudad de Caracas e inscritas ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito
 	Capital y Estado Miranda, en fechas 02 de agosto de 2004 y 12 de mayo de 2005 y registradas bajo los Nos. 79 y 72,
 	Tomos 128-A-Pro. y 60-A-Pro., respectivamente, quienes en lo adelante, conjunta o indistintamente, se denominarán ”La
