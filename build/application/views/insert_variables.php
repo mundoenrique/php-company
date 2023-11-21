@@ -7,8 +7,6 @@ $dataclient->dataTableLang = NULL;
 $dataclient->datePickerLang = NULL;
 $dataclient->baseURL = base_url();
 $dataclient->assetUrl = assetUrl();
-$dataclient->logged = $logged;
-$dataclient->userId = $userId;
 $dataclient->customerUri = $customerUri;
 $dataclient->customer = $customer;
 $dataclient->sessionTime = $sessionTime;
@@ -20,6 +18,6 @@ $customerData = encryptData($dataclient);
 ?>
 <section id="calledCoreApp"></section>
 <script>
-	const activeSafety = <?= json_encode(ACTIVE_SAFETY); ?>;
-	const assetsClient = <?= $customerData; ?>;
+  const activeSafety = <?= json_encode(ACTIVE_SAFETY); ?>;
+  const assetsClient = <?= $customerData; ?>;
 </script>

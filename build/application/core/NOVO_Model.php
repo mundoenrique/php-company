@@ -173,7 +173,17 @@ class NOVO_Model extends CI_Model
     $responsetoView = new stdClass();
 
     foreach ($this->response as $pos => $response) {
-      if (is_object($response) && isset($response->file)) {
+      if ($pos === 'data' && is_object($response)) {
+        $responsetoView->$pos = new stdClass();
+
+        foreach ($response as $key => $value) {
+          if ($key === 'file') {
+            continue;
+          }
+
+          $responsetoView->$pos->$key = $value;
+        }
+
         continue;
       }
 

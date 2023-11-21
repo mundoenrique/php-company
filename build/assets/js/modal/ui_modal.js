@@ -1,3 +1,4 @@
+import { baseURL, lang } from '../common/useful_data.js';
 import { appLoader } from '../utils.js';
 
 export const uiModalMessage = function (modalArgs) {

@@ -5,12 +5,17 @@ $(function () {
   $('.hide-out').removeClass('hide');
   let cateExpenseTable = $('#cateExpenseTable');
   let cateExpenseForm = $('#cateExpenseForm');
+  let dataExpense;
 
   const tableExpense = cateExpenseTable.DataTable({
-    ordering: false,
-    responsive: true,
-    pagingType: 'full_numbers',
+    info: false,
     language: dataTableLang,
+    ordering: false,
+    paging: false,
+    pagingType: 'full_numbers',
+    responsive: true,
+    searching: false,
+    select: false,
   });
 
   $('#yearDate').datepicker({
@@ -84,22 +89,56 @@ $(function () {
     validateForms(cateExpenseForm);
 
     if (cateExpenseForm.valid()) {
-      let data = getDataForm(cateExpenseForm);
-      data.annual = $('#annual').is(':checked');
+      dataExpense = getDataForm(cateExpenseForm);
+      dataExpense.annual = $('#annual').is(':checked');
+      dataExpense.type = 'list';
       cateExpenseTable.dataTable().fnClearTable();
-      delete data.range;
+      delete dataExpense.range;
       insertFormInput(true);
       $('#blockResults, #titleResults').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
+      $('#queryType').text(dataExpense.annual ? 'Anual' : 'Rango');
 
-      who = 'Reports';
-      where = 'categoryExpense';
-      callNovoCore(who, where, data, function (response) {
-        // tableExpense.row.add(['uno', 'dos', 'tres', 'cuatro']).draw();
-        $('#spinnerBlock').addClass('hide');
-        // $('#blockResults, #titleResults').removeClass('hide');
-        insertFormInput(false);
-      });
+      cateExpenseRequest();
     }
   });
+
+  $('#buttonFiles').on('click', 'button', function (e) {
+    e.preventDefault();
+    let type = $(e.target).attr('type');
+    dataExpense.type = type;
+    insertFormInput(true);
+
+    cateExpenseRequest();
+  });
+
+  const cateExpenseRequest = function () {
+    who = 'Reports';
+    where = 'categoryExpense';
+
+    callNovoCore(who, where, dataExpense, function (response) {
+      if (response.code !== 0) {
+        $('#buttonFiles').addClass('hide');
+      }
+
+      if (dataExpense.type === 'list') {
+        $.each(response.data.tableData, function (date, expense) {
+          let row = [date];
+
+          $.each(expense, function (index, value) {
+            row.push(value);
+          });
+
+          tableExpense.row.add(row).draw();
+        });
+
+        $('#spinnerBlock').addClass('hide');
+        $('#blockResults, #titleResults').removeClass('hide');
+      } else if (response.code === 0) {
+        downLoadfiles(response.data);
+      }
+
+      insertFormInput(false);
+    });
+  };
 });

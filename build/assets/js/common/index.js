@@ -1,10 +1,8 @@
 import { spinerLoader } from '../utils.js';
 import { changeLanguage } from './change_language.js';
-import { languageTenant } from './language.js';
+import { lang } from './useful_data.js';
 
 $(function () {
-  languageTenant();
-
   $('body').on('click', '.pwd-action', function () {
     const passInput = $('body').find('.pwd-input');
     const inputType = passInput.attr('type');
@@ -38,6 +36,7 @@ $(function () {
 
   $('.widget-menu').on('click', function (e) {
     e.stopPropagation();
+
     if ($('#widget-menu').hasClass('none')) {
       $('#widget-menu').removeClass('none');
       $('#widget-menu').addClass('show');
@@ -52,6 +51,7 @@ $(function () {
 
   const hideWidgetMenu = function () {
     $('#widget-menu').removeClass('show');
+
     setTimeout(function () {
       $('#widget-menu').addClass('none');
     }, 1000);

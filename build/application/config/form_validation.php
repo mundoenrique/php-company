@@ -1342,6 +1342,10 @@ $config = [
     [
       'field' => 'finalDate',
       'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+    ],
+    [
+      'field' => 'type',
+      'rules' => 'trim|regex_match[/^(list|xls|pdf)/]|required'
     ]
   ],
   'userActivity' => [

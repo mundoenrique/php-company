@@ -1550,19 +1550,28 @@ class Novo_Reports_Model extends NOVO_Model
   {
     writeLog('INFO', 'Reports Model: CategoryExpense Method Initialized');
 
+    $operation = $dataRequest->type === 'list' ? 'Movimientos' : 'Archivo ' . $dataRequest->type;
+    $idOperation = [
+      'list' => 'buscarListadoGastosRepresentacion',
+      'xls' => 'generarArchivoXlsGastosRepresentacion',
+      'pdf' => 'generarArchivoPDFGastosRepresentacion'
+    ];
+
     $this->dataAccessLog->modulo = 'Reportes';
     $this->dataAccessLog->function = 'Gastos por categoria';
-    $this->dataAccessLog->operation = 'Lista de gastos por categoria';
+    $this->dataAccessLog->operation = $operation . ' ' . $dataRequest->annual ? 'anual' : 'rango';
 
     $initialDate = $dataRequest->initialDate;
     $finalDate = $dataRequest->finalDate;
+    $querytype = "1";
 
     if ($dataRequest->annual) {
       $initialDate = '01/01/' . $dataRequest->yearDate;
       $finalDate = '31/12/' . $dataRequest->yearDate;
+      $querytype = "0";
     }
 
-    $this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
+    $this->dataRequest->idOperation = $idOperation[$dataRequest->type];
     $this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
     $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $this->dataRequest->producto = $dataRequest->productCode;
@@ -1570,14 +1579,86 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idPersona = $dataRequest->idDocument;
     $this->dataRequest->fechaIni = $initialDate;
     $this->dataRequest->fechaFin = $finalDate;
+    $this->dataRequest->tipoConsulta = $querytype;
 
     $response = $this->sendToWebServices('callWs_CategoryExpense');
+    $tableData = [];
+    $file = [];
+    $name = '';
+    $ext = '';
 
-    $this->response->code = 0;
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+        if ($dataRequest->type === 'list') {
+          if ($querytype === '0') {
+            foreach (lang('GEN_DATEPICKER_MONTHNAMES') as $monthName) {
+              $tableData[$monthName] = [];
+            }
+
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
+
+              foreach ($response->listaGrupo as $group) {
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoMensual as $expense) {
+                    $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+                  }
+
+                  $tableData['Total'][] = $group->totalCategoria;
+                }
+              }
+            }
+
+            foreach ($response->totalesAlMes as $expense) {
+              $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+            }
+
+            $tableData['Total'][] = $response->totalGeneral;
+          }
+
+          if ($querytype === '1') {
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
+
+              foreach ($response->listaGrupo as $group) {
+
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoDiario as $expense) {
+                    $tableData[$expense->fechaDia][] = $expense->monto;
+                  }
+
+                  $tableData['Total'][] = $group->totalCategoria;
+                }
+              }
+            }
+
+            foreach ($response->totalesPorDia as $expense) {
+              $tableData[$expense->fechaDia][] = $expense->monto;
+            }
+
+            $tableData['Total'][] = $response->totalGeneral;
+          }
+        } else {
+          $file = $response->bean->archivo ?? $response->archivo;
+          $name = $response->bean->nombre ?? $response->nombre . '.' . $dataRequest->type;
+          $ext = $dataRequest->type;
+        }
+        break;
+      case -150:
+        $this->response->code = 1;
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    $this->response->data->tableData = $tableData;
+    $this->response->data->file = $file;
+    $this->response->data->name = $name;
+    $this->response->data->ext = $ext;
+
     return $this->responseToTheView('callWS_CategoryExpense');
   }
-
-
 
   /**
    * @info Método para obtener actividad por ususario

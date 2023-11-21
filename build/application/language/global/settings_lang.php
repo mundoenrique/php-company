@@ -379,3 +379,15 @@ $lang['SETT_LANGUAGE'] = [
   'es' => 'spanish',
   'en' => 'english',
 ];
+$lang['SETT_CATEG_GROUP'] = [
+  '1' => 'icon-suitcase',
+  '2' => 'icon-car',
+  '3' => 'icon-food',
+  '4' => 'icon-plane',
+  '5' => 'icon-lab',
+  '6' => 'icon-film',
+  '7' => 'icon-medkit',
+  '9' => 'icon-card',
+  'W' => 'icon-bag',
+  '8' => 'icon-asterisk'
+];

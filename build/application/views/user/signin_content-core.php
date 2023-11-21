@@ -11,12 +11,12 @@
           <form id="signInForm" name="signInForm" method="post" action="<?= base_url(('sign-in')) ?>">
             <div class="form-group">
               <label for="userName"><?= lang('GEN_USER'); ?></label>
-              <input type="text" id="userName" name="userName" class="form-control required-group" autocomplete="username" disabled>
+              <input type="text" id="userName" name="userName" class="form-control required-group" autocomplete="user-name" disabled>
             </div>
             <div class="form-group">
               <label for="userPass"><?= lang('GEN_PASSWORD'); ?></label>
               <div class="input-group">
-                <input type="password" id="userPass" name="userPass" class="form-control required-group pwd-input" autocomplete="current-password" disabled>
+                <input type="password" id="userPass" name="userPass" class="form-control required-group pwd-input" autocomplete="user-password" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
                     <i class="icon-view mr-0"></i>

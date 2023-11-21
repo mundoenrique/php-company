@@ -120,25 +120,29 @@
         <span id="titleResults" class="line-text mb-2 h4 semibold primary hide"><?= lang('GEN_TABLE_RESULTS'); ?></span>
         <div id="blockResults" class="center mx-1 hide">
           <div class="flex">
-            <div id="buttonFiles" class="flex mr-2 py-3 flex-auto justify-end items-center">
-              <button id="exportExcel" format="Excel" class="btn px-1 big-modal downloadReport" title="Exportar a EXCEL" data-toggle="tooltip">
-                <i class="icon icon-file-excel" aria-hidden="true"></i>
-              </button>
-              <button id="exportPDF" format="PDF" class="btn px-1 big-modal downloadReport" title="Exportar a PDF" data-toggle="tooltip">
-                <i class="icon icon-file-pdf" aria-hidden="true"></i>
-              </button>
+            <div class="flex mr-2 py-3 flex-auto justify-end items-center">
+              <div id="buttonFiles">
+                <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
+                  <i class="icon icon-file-excel" aria-hidden="true" type="xls"></i>
+                </button>
+                <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+                  <i class="icon icon-file-pdf" aria-hidden="true" type="pdf"></i>
+                </button>
+              </div>
             </div>
           </div>
           <table id="cateExpenseTable" class="cell-border h6 display responsive w-100">
             <thead class="bg-primary secondary regular">
               <tr>
-                <th><?= lang('GEN_USER'); ?></th>
-                <th><?= lang('GEN_TABLE_STATUS'); ?></th>
-                <th><?= lang('GEN_TABLE_LAST_SESSION'); ?></th>
-                <th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
+                <th id="queryType" class="bold"></th>
+                <?php foreach (lang('SETT_CATEG_GROUP') as $item => $value) : ?>
+                  <th>
+                    <span aria-hidden="true" class="<?= $value ?> h3" title="<?= lang('REPORTS_CATEG_GROUP')[$item] ?>" data-toggle="tooltip"></span>
+                  </th>
+                <?php endforeach; ?>
+                <th class="bold">Total <?= lang('SETT_CURRENCY') ?></th>
               </tr>
             </thead>
-            <tbody id="usersActivityOptions"></tbody>
           </table>
           <div class="line my-2"></div>
         </div>

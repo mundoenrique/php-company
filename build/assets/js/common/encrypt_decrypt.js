@@ -2,7 +2,7 @@ import { CryptoJS } from '../third_party/aes-3.1.2.min.js';
 import { CryptoJSAesJson } from './common.js';
 
 export const cryptography = {
-  encrypt: function (request) {
+  encrypt: function (request, novoValue) {
     let requestData = typeof request === 'string' ? request : JSON.stringify(request);
 
     if (activeSafety) {
@@ -17,14 +17,16 @@ export const cryptography = {
 
     return requestData;
   },
-  decrypt: function (objec) {
-    let decryptData = objec;
+  decrypt: function (response) {
+    let decryptData = response;
+
     if (activeSafety) {
       let cipher = JSON.parse(atob(decryptData));
       decryptData = JSON.parse(
         CryptoJS.AES.decrypt(cipher.code, cipher.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
       );
     }
+
     return decryptData;
   },
 };

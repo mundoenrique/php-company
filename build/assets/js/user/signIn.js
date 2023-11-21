@@ -1,5 +1,6 @@
 import { getToken } from '../common/captchaHelper.js';
 import { cryptography } from '../common/encrypt_decrypt.js';
+import { customer, customerUri, lang, novo } from '../common/useful_data.js';
 import { calledCoreApp } from '../connection/core_app.js';
 import { uiModalMessage } from '../modal/ui_modal.js';
 import { appLoader, takeFormData, toggleDisableActions } from '../utils.js';
@@ -22,7 +23,7 @@ $(function () {
       btnCalled = $(this);
       btnSignin = $(this).html();
       dataSignin = takeFormData(formSignin);
-      dataSignin.userPass = cryptography.encrypt(dataSignin.userPass);
+      dataSignin.userPass = cryptography.encrypt(dataSignin.userPass, novo.value);
       $(this).html(appLoader);
       toggleDisableActions(true);
       getToken('SignIn', function (recaptchaToken) {
@@ -118,7 +119,7 @@ $(function () {
       response.minWidth = 470;
       response.maxHeight = 'none';
       response.posAt = 'center top';
-      response.posMy = 'center top+160';
+      response.posMy = 'center top+60';
 
       uiModalMessage(response);
     },
