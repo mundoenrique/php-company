@@ -1345,7 +1345,7 @@ $config = [
     ],
     [
       'field' => 'type',
-      'rules' => 'trim|regex_match[/^(list|excel|pdf)/]|required'
+      'rules' => 'trim|regex_match[/^(list|xls|pdf)/]|required'
     ]
   ],
   'userActivity' => [

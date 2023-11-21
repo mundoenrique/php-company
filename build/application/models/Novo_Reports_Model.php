@@ -1550,9 +1550,16 @@ class Novo_Reports_Model extends NOVO_Model
   {
     writeLog('INFO', 'Reports Model: CategoryExpense Method Initialized');
 
+    $operation = $dataRequest->type === 'list' ? 'Movimientos' : 'Archivo ' . $dataRequest->type;
+    $idOperation = [
+      'list' => 'buscarListadoGastosRepresentacion',
+      'xls' => 'generarArchivoXlsGastosRepresentacion',
+      'pdf' => 'generarArchivoPDFGastosRepresentacion'
+    ];
+
     $this->dataAccessLog->modulo = 'Reportes';
     $this->dataAccessLog->function = 'Gastos por categoria';
-    $this->dataAccessLog->operation = 'Movimientos ' . $dataRequest->annual ? 'anual' : 'rango';
+    $this->dataAccessLog->operation = $operation . ' ' . $dataRequest->annual ? 'anual' : 'rango';
 
     $initialDate = $dataRequest->initialDate;
     $finalDate = $dataRequest->finalDate;
@@ -1564,7 +1571,7 @@ class Novo_Reports_Model extends NOVO_Model
       $querytype = "0";
     }
 
-    $this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
+    $this->dataRequest->idOperation = $idOperation[$dataRequest->type];
     $this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
     $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $this->dataRequest->producto = $dataRequest->productCode;
@@ -1576,6 +1583,9 @@ class Novo_Reports_Model extends NOVO_Model
 
     $response = $this->sendToWebServices('callWs_CategoryExpense');
     $tableData = [];
+    $file = [];
+    $name = '';
+    $ext = '';
 
     switch ($this->isResponseRc) {
       case 0:
@@ -1630,6 +1640,10 @@ class Novo_Reports_Model extends NOVO_Model
 
             $tableData['Total'][] = $response->totalGeneral;
           }
+        } else {
+          $file = $response->bean->archivo ?? $response->archivo;
+          $name = $response->bean->nombre ?? $response->nombre . '.' . $dataRequest->type;
+          $ext = $dataRequest->type;
         }
         break;
       case -150:
@@ -1638,7 +1652,10 @@ class Novo_Reports_Model extends NOVO_Model
         break;
     }
 
-    $this->response->data = $tableData;
+    $this->response->data->tableData = $tableData;
+    $this->response->data->file = $file;
+    $this->response->data->name = $name;
+    $this->response->data->ext = $ext;
 
     return $this->responseToTheView('callWS_CategoryExpense');
   }

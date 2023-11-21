@@ -103,6 +103,15 @@ $(function () {
     }
   });
 
+  $('#buttonFiles').on('click', 'button', function (e) {
+    e.preventDefault();
+    let type = $(e.target).attr('type');
+    dataExpense.type = type;
+    insertFormInput(true);
+
+    cateExpenseRequest();
+  });
+
   const cateExpenseRequest = function () {
     who = 'Reports';
     where = 'categoryExpense';
@@ -112,18 +121,23 @@ $(function () {
         $('#buttonFiles').addClass('hide');
       }
 
-      $.each(response.data, function (date, expense) {
-        let row = [date];
+      if (dataExpense.type === 'list') {
+        $.each(response.data.tableData, function (date, expense) {
+          let row = [date];
 
-        $.each(expense, function (index, value) {
-          row.push(value);
+          $.each(expense, function (index, value) {
+            row.push(value);
+          });
+
+          tableExpense.row.add(row).draw();
         });
 
-        tableExpense.row.add(row).draw();
-      });
+        $('#spinnerBlock').addClass('hide');
+        $('#blockResults, #titleResults').removeClass('hide');
+      } else if (response.code === 0) {
+        downLoadfiles(response.data);
+      }
 
-      $('#spinnerBlock').addClass('hide');
-      $('#blockResults, #titleResults').removeClass('hide');
       insertFormInput(false);
     });
   };
