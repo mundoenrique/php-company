@@ -4372,25 +4372,25 @@ a.ui-button:active,
 
 .bg-card-icon {
   background-image: linear-gradient(rgba(6, 0, 96, 0.9), rgba(6, 0, 96, 0.9)),
-    url('../../assets/images/icons/icon-description.svg');
+    url('../../assets/images/default/icons/icon-description.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100px;
 }
 .bg-card-bonus {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url('../../assets/images/programs/ve/bonus_alimentacion.svg');
+    url('../../assets/images/ve/programs/bonus_sin_contacto.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: 150%;
+  background-size: 90%;
   height: 10rem;
 }
 .bg-card-plata {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url('../../assets/images/programs/ve/plata_clasica.svg');
+    url('../../assets/images/ve/programs/plata_sin_contacto.svg');
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: 150%;
+  background-size: 90%;
   height: 10rem;
 }
 
