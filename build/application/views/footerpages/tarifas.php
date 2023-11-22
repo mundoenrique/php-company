@@ -220,11 +220,11 @@ $urlCdn = get_cdn();
               </th>
               <th class="table-header background-brand-bonus" width="30%">
                 Bonus Alimentación<br>
-                <?php echo insert_image_cdn('rates/header-bonus.png'); ?>
+                <?php echo insert_image_cdn('rates/header-bonus.svg'); ?>
               </th>
               <th class="table-header background-brand-plata" width="30%">
                 Plata
-                <?php echo insert_image_cdn('rates/header-plata.png'); ?>
+                <?php echo insert_image_cdn('rates/header-plata.svg'); ?>
               </th>
             </tr>
           </thead>

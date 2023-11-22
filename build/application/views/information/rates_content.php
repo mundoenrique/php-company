@@ -194,11 +194,11 @@
               </th>
               <th class="table-header background-brand-bonus" width="30%">
                 Bonus Alimentación<br>
-                <img alt="" src="<?= $this->asset->insertFile('rates-header-bonus.png', 'images', $countryFiles); ?>">
+                <img alt="" src="<?= $this->asset->insertFile('header-bonus.svg', 'images', $countryFiles); ?>">
               </th>
               <th class="table-header background-brand-plata" width="30%">
                 Plata
-                <img alt="" src="<?= $this->asset->insertFile('rates-header-plata.png', 'images', $countryFiles); ?>">
+                <img alt="" src="<?= $this->asset->insertFile('header-plata.svg', 'images', $countryFiles); ?>">
               </th>
             </tr>
           </thead>
