@@ -85,16 +85,19 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 };
 
 export const calledCoreAppForm = function (request) {
-  let formData = cryptography.encrypt({ request });
+  const uri = request.uri;
+  delete request.uri;
+  const data = request;
+  const formData = cryptography.encrypt({ data }, novo.value);
 
-  let form = document.createElement('form');
+  const form = document.createElement('form');
   form.setAttribute('id', 'payloadForm');
   form.setAttribute('name', 'payloadForm');
   form.setAttribute('method', 'post');
   form.setAttribute('enctype', 'multipart/form-data');
-  form.setAttribute('action', baseURL + 'sign-in');
+  form.setAttribute('action', baseURL + uri);
 
-  let inputData = document.createElement('input');
+  const inputData = document.createElement('input');
   inputData.setAttribute('type', 'hidden');
   inputData.setAttribute('id', 'payload');
   inputData.setAttribute('name', 'payload');
@@ -102,11 +105,11 @@ export const calledCoreAppForm = function (request) {
   form.appendChild(inputData);
 
   if (activeSafety) {
-    let inputNovo = document.createElement('input');
+    const inputNovo = document.createElement('input');
     inputNovo.setAttribute('type', 'hidden');
     inputNovo.setAttribute('id', novoName);
     inputNovo.setAttribute('name', novoName);
-    inputNovo.setAttribute('value', novoValue);
+    inputNovo.setAttribute('value', novo.value);
     form.appendChild(inputNovo);
   }
 

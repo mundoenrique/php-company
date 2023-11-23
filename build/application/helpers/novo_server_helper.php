@@ -181,3 +181,23 @@ if (!function_exists('handleLogResponse')) {
     return $logResponse;
   }
 }
+
+if (!function_exists('externalRequest')) {
+  /**
+   * @info Valid if the request is external
+   * @author epenaloza
+   * @date NoVember 22th, 2023
+   * @param string $method method to valid
+   * @return bool
+   */
+  function externalRequest($method)
+  {
+    $methodsIn = [
+      'singleSignOn',
+    ];
+
+    $external = array_search($method, $methodsIn, TRUE) !== FALSE;
+
+    return $external;
+  }
+}

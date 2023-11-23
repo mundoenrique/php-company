@@ -30,6 +30,7 @@ class NOVO_Controller extends CI_Controller
   protected $views;
   protected $isValidRequest;
   protected $wasMigrated;
+  private $externalRequest;
 
   public function __construct()
   {
@@ -56,6 +57,7 @@ class NOVO_Controller extends CI_Controller
     $this->render = new stdClass();
     $this->isValidRequest = FALSE;
     $this->wasMigrated = methodWasmigrated($method, $class);
+    $this->externalRequest = externalRequest($method);
 
     $this->optionsCheck();
   }
@@ -76,8 +78,17 @@ class NOVO_Controller extends CI_Controller
       $this->checkBrowser();
     }
 
+    if ($this->externalRequest && $this->input->post('payload') === NULL) {
+      $extReq = [
+        'data' => $_POST
+      ];
+      unset($_POST);
+      $extReq = json_encode($extReq, JSON_UNESCAPED_UNICODE);
+      $_POST['payload'] = $extReq;
+    }
+
     if ($this->input->post('payload') !== NULL) {
-      $request = decryptData($this->input->post('payload'));
+      $request = decryptData($this->input->post('payload'), $this->externalRequest);
       $this->dataRequest = json_decode($request);
       unset($_POST);
 

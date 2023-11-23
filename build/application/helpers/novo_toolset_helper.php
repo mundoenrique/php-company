@@ -363,7 +363,7 @@ if (!function_exists('setSignSessionType')) {
    * @info Set sign type cookie
    * @author epenaloza
    * @date September 17th, 2023
-   * @param string $SignSessionType type cookie signInSession | singleSignOnSession
+   * @param string $signType type cookie signInSession | singleSignOnSession
    * @return void
    */
   function setSignSessionType($signType)
@@ -372,11 +372,11 @@ if (!function_exists('setSignSessionType')) {
       delete_cookie('singleSession', config_item('cookie_domain'), config_item('cookie_path'));
     }
 
-    $SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
+    $signSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
 
     $signSessionType = [
       'name' => 'signSessionType',
-      'value' => $SignSessionType,
+      'value' => $signSessionType,
       'expire' => 1296000,
       'httponly' => TRUE
     ];
@@ -397,6 +397,8 @@ if (!function_exists('methodWasmigrated')) {
   {
     $methodsIn = [
       'signIn',
+      'singleSignOn',
+      'single',
       'login',
       'finishSession',
       'changeLanguage',
