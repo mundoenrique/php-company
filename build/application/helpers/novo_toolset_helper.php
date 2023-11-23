@@ -266,7 +266,7 @@ if (!function_exists('uriRedirect')) {
     $CI = &get_instance();
     $redirectLink = getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')
       ? lang('SETT_LINK_SIGNIN')
-      : 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
+      : lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END');
 
     if ($CI->session->has_userdata('logged')) {
       $redirectLink = lang('SETT_LINK_ENTERPRISES');
@@ -341,14 +341,21 @@ if (!function_exists('getSignSessionType ')) {
    */
   function getSignSessionType()
   {
+    $CI = &get_instance();
     $signType = SINGLE_SIGN_ON ? lang('SETT_COOKIE_SINGN_ON') : lang('SETT_COOKIE_SINGN_IN');
-
     $signValue = get_cookie('signSessionType', TRUE);
     $cookieSign = ACTIVE_SAFETY ? base64_decode($signValue) : $signValue;
-    $validCookie = in_array($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
 
+    if ($cookieSign === NULL && $CI->router->method === 'signIn') {
+      $cookieSign = lang('SETT_COOKIE_SINGN_IN');
+    }
+
+    if ($cookieSign === NULL && $CI->router->method === 'singleSignOn') {
+      $cookieSign = lang('SETT_COOKIE_SINGN_ON');
+    }
+
+    $validCookie = in_array($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
     $signType = $validCookie ? $cookieSign : $signType;
-    $signType = str_replace(config_item('cookie_prefix'), '', $signType);
 
     if (!$validCookie) {
       setSignSessionType($signType);
