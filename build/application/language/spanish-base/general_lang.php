@@ -67,6 +67,7 @@ $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
 $lang['GEN_BTN_PROCESS'] = 'Procesar';
 $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_DOWN_XLS'] = 'Descargar XLS';
+$lang['GEN_BTN_DOWN_TXT'] = 'Descargar TXT';
 $lang['GEN_BTN_SEE_GRAPH'] = 'Ver Gráfica';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';

@@ -101,6 +101,11 @@
                   <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
                     <i class="icon icon-file-pdf" aria-hidden="true"></i>
                   </button>
+                  <?php if (lang('SETT_FILE_STATUS_BULK_TXT') === 'ON') : ?>
+                    <button id="export_txt" class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_TXT'); ?>" data-toggle="tooltip">
+                      <i class="icon icon-file-txt" aria-hidden="true"></i>
+                    </button>
+                  <?php endif; ?>
                 </div>
                 <form id="download-status" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
               </div>

@@ -300,6 +300,7 @@ class Verify_Access
         $auth = ($productInf && $this->verifyAuthorization('REPCAT'));
         break;
       case 'statusBulk':
+      case 'exportToStatusBulk':
         $auth = ($productInf && $this->verifyAuthorization('REPLOT'));
         break;
       case 'exportToExcelMasterAccount':

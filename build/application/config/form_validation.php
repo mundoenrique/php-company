@@ -1226,6 +1226,28 @@ $config = [
       'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
     ]
   ],
+  'exportToStatusBulk' => [
+    [
+      'field' => 'enterpriseCode',
+      'label' => 'enterpriseCode',
+      'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+    ],
+    [
+      'field' => 'productCode',
+      'label' => 'enterpriseCode',
+      'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+    ],
+    [
+      'field' => 'initialDate',
+      'label' => 'initialDate',
+      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+    ],
+    [
+      'field' => 'finalDate',
+      'label' => 'finalDate',
+      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+    ]
+  ],
   'cardHolders' => [
     [
       'field' => 'enterpriseCode',
