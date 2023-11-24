@@ -380,11 +380,12 @@ class Novo_User extends NOVO_Controller
       "user/userAccounts"
     );
 
-    if ($this->session->flashdata('userDataPermissions') != NULL) {
-      $userDataList = $this->session->flashdata('userDataPermissions');
+    if ($this->session->flashdata('userDataAccounts') != NULL) {
+      $userDataList = $this->session->flashdata('userDataAccounts');
       $this->request = $userDataList;
-      $this->session->set_flashdata('userDataPermissions', $userDataList);
+      $this->session->set_flashdata('userDataAccounts', $userDataList);
     }
+
     $this->render->username = $this->session->userName;
     $this->render->user = $this->request->idUser;
     $this->render->name = $this->request->nameUser;
@@ -394,20 +395,6 @@ class Novo_User extends NOVO_Controller
 
     $arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
     $arrayList = $responseList->data;
-
-    foreach ($arrayList as $key => $value) {
-      // Recorre subarreglo de una dimensión
-      foreach ($value as $index => $subArray) {
-        // Recorre subarreglo de dos dimensiones
-        foreach ($subArray as $subIndex => $subValue) {
-          // Si encuentra el objeto que desea eliminar
-          if (in_array($subValue->accodfuncion, $arrayDelete)) {
-            // Elimina el objeto utilizando unset
-            unset($arrayList[$key][$index][$subIndex]);
-          }
-        }
-      }
-    }
 
     $this->render->modules = $arrayList;
 

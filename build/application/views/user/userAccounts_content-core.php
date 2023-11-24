@@ -94,22 +94,16 @@
             </div>
 
             <form id="checkFormAccounts">
-              <?php $i =0; foreach($modules as $index => $value): ?>
               <div class="row mx-3 mb-1">
-                <h4 class="col-12 pl-0 bold"><?=  $index?></h4>
-                <?php foreach($value as $index => $subArray): ?>
-                <?php foreach($subArray as $subIndex => $subValue): ?>
+                <?php $i =0; foreach($modules as $element): ?>
                 <div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-                  <input id="<?=$subValue->accodfuncion ?>" class="accounts custom-control-input" type="checkbox"
-                    name=<?="checkbox". $i; $i++;?> value="<?= $subValue->status; ?>">
-                  <label class="custom-control-label"
-                    for="<?=$subValue->accodfuncion ?>"><?= $subValue->acnomfuncion ?></span>
+                  <input id="<?=$element['rif'] ?>" class="accounts custom-control-input" type="checkbox"
+                    name=<?="checkbox". $i; $i++;?> value="<?= $element['cstatus'] ?>">
+                  <label class="custom-control-label" for="<?=$element['rif'] ?>"><?= $element['name'] ?></span>
                   </label>
                 </div>
                 <?php endforeach; ?>
-                <?php endforeach; ?>
               </div>
-              <?php endforeach; ?>
               <div class="flex row mb-2 mx-2 items-center justify-end">
                 <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_USERS_MANAGEMENT')) ?>">
                   <?= lang('GEN_BTN_CANCEL'); ?>
