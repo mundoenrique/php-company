@@ -428,6 +428,7 @@ $lang['GEN_REJECTED_REGISTRY'] = 'Todos los registros fueron rechazados';
 $lang['GEN_NO_CARD_FOUND'] = "El número de tarjeta <strong>%s</strong> no está registrado, por favor verifícalo e intenta de nuevo";
 $lang['GEN_SUCCESSFULL_UPDATE_TWIRLS'] = "La restricción de giros en comercios ha sido actualizada exitosamente";
 $lang['GEN_SUCCESSFULL_UPDATE_LIMITS'] = "Los limites de transacciones han sido actualizados exitosamente";
+$lang['GEN_SUCCESSFULL_UPDATE_ACCOUNTS'] = "Las cuentas del usuario %s han sido actualizados exitosamente";
 $lang['GEN_SUCCESSFULL_UPDATE_PERMISSIONS'] = "Los permisos del usuario %s han sido actualizados exitosamente";
 $lang['GEN_SUCCESSFULL_ENABLE_USER'] = "El usuario %s ha sido habilitado exitosamente";
 $lang['GEN_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';

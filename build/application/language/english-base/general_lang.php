@@ -409,6 +409,7 @@ $lang['GEN_REJECTED_REGISTRY'] = 'All registrations were rejected';
 $lang['GEN_NO_CARD_FOUND'] = "The card number <strong>%s</strong> is not registered, please verify it and try again";
 $lang['GEN_SUCCESSFULL_UPDATE_TWIRLS'] = "The restriction of money transfers in shops has been updated successfully";
 $lang['GEN_SUCCESSFULL_UPDATE_LIMITS'] = "Transaction limits have been successfully updated";
+$lang['GEN_SUCCESSFULL_UPDATE_ACCOUNTS'] = "Accounts for user %s have been updated successfully";
 $lang['GEN_SUCCESSFULL_UPDATE_PERMISSIONS'] = "Permissions for user %s have been updated successfully";
 $lang['GEN_SUCCESSFULL_ENABLE_USER'] = "User %s has been successfully enabled";
 $lang['GEN_AUTH_ORDER_SERV'] = 'It was not possible to obtain the data to perform the calculation of the service order';

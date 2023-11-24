@@ -1933,6 +1933,16 @@ $config = [
     [
       'field' => 'TRASAL',
       'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+    ],
+    [
+      'field' => 'COACUE',
+      'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+    ]
+  ],
+  'updateAccounts' => [
+    [
+      'field' => 'idUsuario',
+      'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
     ]
   ],
   'enableUser' => [

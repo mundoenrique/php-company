@@ -51,24 +51,21 @@ $(function () {
     var form = $('#checkFormAccounts');
     var passData = getDataForm(form);
     $('#spinnerBlock').addClass('hide');
-    passData.idUser = $('#idUser').text();
-    passData.fullName = $('#fullName').text();
-    passData.email = $('#email').text();
-    passData.typeUser = $('#typeUser').text();
+    passData.idUsuario = $('#idUser').text();
 
     validateForms(form);
 
     if (form.valid()) {
       insertFormInput(true, form);
       changeBtn.html(loader);
-      updatePermissions(passData, btnText);
+      updateAccounts(passData, btnText);
     }
   });
 });
 
-function updatePermissions(passData, btnText) {
+function updateAccounts(passData, btnText) {
   who = 'User';
-  where = 'updatePermissions';
+  where = 'updateAccounts';
   data = passData;
 
   callNovoCore(who, where, data, function (response) {
