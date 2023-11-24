@@ -765,8 +765,8 @@ class Novo_User_Model extends NOVO_Model
   }
   /**
    * @info Método para consulta de permisos de usuarios.
-   * @author Diego Acosta García
-   * @date Oct 2st, 2020
+   * @author Jennifer C. Cadiz G.
+   * @date Nov 2st, 2023
    */
   public function callWs_userAccounts_User($dataRequest)
   {
@@ -873,6 +873,75 @@ class Novo_User_Model extends NOVO_Model
     }
 
     return $this->responseToTheView('callWs_updatePermissions');
+  }
+  /**
+   * @info Método para actualizar cuentas de usuarios.
+   * @author Jennifer C. Cadiz G.
+   * @date Nov 2st, 2023
+   */
+  public function callWs_updateAccounts_User($dataRequest)
+  {
+    writeLog('INFO', 'User Model: updateAccounts Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Usuario';
+    $this->dataAccessLog->function = 'Actualizar funciones usuario';
+    $this->dataAccessLog->operation = 'Actualizar funciones usuario';
+
+    $this->dataRequest->idOperation = 'gestionUsuarios';
+    $this->dataRequest->opcion = 'actualizarEmpresasUsuario';
+    $this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+    $this->dataRequest->idUsuario = $dataRequest->idUser;
+    $this->dataRequest->userName =  $this->session->userName;
+
+
+    $userDataList = [];
+    $userData['idUsuario'] = $dataRequest->idUsuario;
+    $userData['userName'] = $dataRequest->userName;
+    $userDataList = (object) $userData;
+    $user = $dataRequest->idUsuario;
+    $this->session->set_flashdata('userDataPermissions', $userDataList);
+
+    unset($dataRequest->idUsuario);
+    unset($dataRequest->userName);
+
+    $i = 0;
+    $j = 0;
+    $functionsArray = [];
+
+    foreach ($dataRequest as $key => $value) {
+      if ($value == "off") {
+        $objet[$i] = ['accodfuncion' => $key, 'status' => 'I'];
+      } else {
+        $objet[$i] = ['accodfuncion' => $key, 'status' => 'A'];
+      }
+      $i++;
+      unset($objet[$key]);
+    }
+
+    foreach ($objet as $key => $value) {
+      $functionsArray[$j] = $value;
+      $j++;
+    };
+
+    $this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
+
+    $this->sendToWebServices('callWs_updateAccounts');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+        $this->response->icon =  lang('SETT_ICON_SUCCESS');
+        $this->response->msg = novoLang(lang('GEN_SUCCESSFULL_UPDATE_ACCOUNTS'), $user);
+
+        if ($this->userName == $user) {
+          $this->response->modalBtn['btn1']['action'] = 'redirect';
+        } else {
+          $this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_USERS_ACCOUNT');
+        }
+        break;
+    }
+
+    return $this->responseToTheView('callWs_updateAccounts');
   }
   /**
    * @info Método para habilitar usuario.
