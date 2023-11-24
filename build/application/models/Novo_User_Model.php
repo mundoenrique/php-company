@@ -789,14 +789,14 @@ class Novo_User_Model extends NOVO_Model
 
         $this->response->code = 0;
         $data = $response->bean->empresas;
-        $arrayList = array_map(function($element) {
+        $arrayList = array_map(function ($element) {
           $element->cstatus = ($element->cstatus == "A") ? "on" : "off";
           return array(
-              "rif" => $element->rif,
-              "name" => $element->nombre,
-              "cstatus" => $element->cstatus
+            "rif" => $element->rif,
+            "name" => $element->nombre,
+            "cstatus" => $element->cstatus
           );
-      }, $data);
+        }, $data);
         $this->response->data = $arrayList;
         break;
     }
@@ -890,13 +890,12 @@ class Novo_User_Model extends NOVO_Model
     $this->dataRequest->idOperation = 'gestionUsuarios';
     $this->dataRequest->opcion = 'actualizarEmpresasUsuario';
     $this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
-    $this->dataRequest->idUsuario = $dataRequest->idUser;
+    $this->dataRequest->idUsuario = $dataRequest->idUsuario;
     $this->dataRequest->userName =  $this->session->userName;
-
 
     $userDataList = [];
     $userData['idUsuario'] = $dataRequest->idUsuario;
-    $userData['userName'] = $dataRequest->userName;
+    $userData['userName'] = $this->session->userName;
     $userDataList = (object) $userData;
     $user = $dataRequest->idUsuario;
     $this->session->set_flashdata('userDataPermissions', $userDataList);
