@@ -33,9 +33,9 @@ $lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [
-	'CDMX' => '(55) 5140 5640',
-	'MTY' => '(81) 8156 9640',
-	'GDL' => '(33) 3669 9040',
+  'CDMX' => '(55) 5140 5640',
+  'MTY' => '(81) 8156 9640',
+  'GDL' => '(33) 3669 9040',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
 $lang['GEN_BTN_TRANSFER'] = 'Solicitar';
@@ -45,3 +45,4 @@ $lang['GEN_ENTERPRISE'] = 'Cuenta';
 $lang['GEN_SELECT_ENTERPRISE'] = 'Selecciona una cuenta';
 $lang['GEN_BTN_ENTERPRISE'] = 'Cuentas';
 $lang['GEN_MENU_ENTERPRISE'] = 'Cuentas';
+$lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha proceso';
