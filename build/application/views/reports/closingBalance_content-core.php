@@ -88,7 +88,6 @@
     </div>
     </form>
   </div>
-  <div class="line mb-2"></div>
 </div>
 
 <div id="blockResult" class="flex pb-5 flex-column ">
