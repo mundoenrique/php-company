@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang["TERMS_CONTENT"] = '
 <p>
-	<strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> sociedad mercantil domiciliada en la ciudad de Caracas e inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado Miranda, en fecha 02 de agosto de 2004,  bajo el  No. 79  Tomo 128-A-Pro., quien en lo adelante, se denominará ”La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta plataforma electrónica, en lo adelante “La Plataforma”:
+	<strong>Tebca Transferencia Electrónica de Beneficios, C.A,</strong> sociedad mercantil domiciliada en la ciudad de Caracas e inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado Miranda, en fecha 02 de agosto de 2004,  bajo el  No. 79  Tomo 128-A-Pro., quien en lo adelante, se denominará ”La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta plataforma electrónica, en lo adelante “La Plataforma”:
 </p>
 <p>
 	Sus Usuarios se obligan a leer las presentes Condiciones y Términos Generales de Uso y Confidencialidad cuidadosamente
