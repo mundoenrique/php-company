@@ -789,15 +789,14 @@ class Novo_User_Model extends NOVO_Model
 
         $this->response->code = 0;
         $data = $response->bean->empresas;
-        $arrayList = array_map(function ($element) {
-          $element->cstatus = ($element->cstatus == "A") ? "on" : "off";
-          return array(
-            "rif" => $element->rif,
-            "name" => $element->nombre,
-            "cstatus" => $element->cstatus
-          );
-        }, $data);
-        $this->response->data = $arrayList;
+        foreach ($data as $empresa) {
+          if ($empresa->cstatus == 'A') {
+            $empresa->cstatus = 'on';
+          } else {
+            $empresa->cstatus = 'off';
+          }
+        }
+        $this->response->data = $data;
         break;
     }
 
@@ -903,26 +902,19 @@ class Novo_User_Model extends NOVO_Model
     unset($dataRequest->idUsuario);
     unset($dataRequest->userName);
 
-    $i = 0;
-    $j = 0;
     $functionsArray = [];
 
-    foreach ($dataRequest as $key => $value) {
-      if ($value == "off") {
-        $objet[$i] = ['accodfuncion' => $key, 'status' => 'I'];
-      } else {
-        $objet[$i] = ['accodfuncion' => $key, 'status' => 'A'];
-      }
-      $i++;
-      unset($objet[$key]);
+    for ($i = 0; isset($dataRequest->{'accodcia'.$i}); $i++) {
+      $cstatus = $dataRequest->{'cstatus'.$i};
+      $empresa = [
+        'rif' => $dataRequest->{'rif'.$i},
+        'accodcia' => $dataRequest->{'accodcia'.$i},
+        'cstatus' => ($cstatus === 'on') ? 'A' : 'I'
+      ];
+
+      $functionsArray[] = $empresa;
     }
-
-    foreach ($objet as $key => $value) {
-      $functionsArray[$j] = $value;
-      $j++;
-    };
-
-    $this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
+    $this->dataRequest->empresas = $functionsArray;
 
     $this->sendToWebServices('callWs_updateAccounts');
 

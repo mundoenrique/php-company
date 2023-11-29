@@ -95,14 +95,16 @@
 
             <form id="checkFormAccounts">
               <div class="row mx-3 mb-1">
-                <?php $i =0; foreach($modules as $element): ?>
+                <?php $i = 0; foreach($modules as $empresa): ?>
+                <input type="hidden" id="accodcia<?= $i ?>" name="accodcia" value="<?= $empresa->accodcia ?>">
+                <input type="hidden" id="name<?= $i ?>" name="name" value="<?= $empresa->nombre ?>">
+                <input type="hidden" id="rif<?= $i ?>" name="rif" value="<?= $empresa->rif ?>">
                 <div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-                  <input id="<?=$element['rif'] ?>" class="accounts custom-control-input" type="checkbox"
-                    name=<?="checkbox". $i; $i++;?> value="<?= $element['cstatus'] ?>">
-                  <label class="custom-control-label" for="<?=$element['rif'] ?>"><?= $element['name'] ?></span>
-                  </label>
+                  <input id="cstatus<?= $i ?>" class="accounts custom-control-input" type="checkbox"
+                    name="<?="checkbox". $i;?>" value="<?= $empresa->cstatus ?>">
+                  <label class="custom-control-label" for="cstatus<?= $i ?>"><?= $empresa->nombre ?></label>
                 </div>
-                <?php endforeach; ?>
+                <?php $i++; endforeach; ?>
               </div>
               <div class="flex row mb-2 mx-2 items-center justify-end">
                 <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('SETT_LINK_USERS_MANAGEMENT')) ?>">
