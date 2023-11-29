@@ -1,7 +1,8 @@
-import { cryptography } from '../common/encrypt_decrypt.js';
 import { baseURL, lang, logged, novo, novoName, redirect, userId } from '../common/useful_data.js';
 import { uiMdalClose, uiModalMessage } from '../modal/ui_modal.js';
 import { toggleDisableActions } from '../utils.js';
+import { apiRequest } from './api_request.js';
+import { apiResponse } from './api_response.js';
 
 export const calledCoreApp = function (module, section, request, _response_ = false) {
   const uri = request.route || 'callCoreApp';
@@ -12,7 +13,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     section: section,
     data: request,
   };
-  dataRequest = cryptography.encrypt(dataRequest, novo.value);
+  dataRequest = apiRequest(dataRequest);
   formData.append('payload', dataRequest);
 
   if (activeSafety) {
@@ -42,7 +43,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     dataType: 'json',
   })
     .done(function (data, status, jqXHR) {
-      const response = cryptography.decrypt(data.payload);
+      const response = apiResponse(data.payload);
       const modalClose = response.keepModal ? false : true;
       redirect.link = response.redirectLink;
       uiMdalClose(modalClose);
@@ -88,7 +89,7 @@ export const calledCoreAppForm = function (request) {
   const uri = request.uri;
   delete request.uri;
   const data = request;
-  const formData = cryptography.encrypt({ data }, novo.value);
+  const formData = apiRequest({ data });
 
   const form = document.createElement('form');
   form.setAttribute('id', 'payloadForm');
