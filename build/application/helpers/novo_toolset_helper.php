@@ -343,17 +343,10 @@ if (!function_exists('getSignSessionType ')) {
   {
     $CI = &get_instance();
     $signType = SINGLE_SIGN_ON ? lang('SETT_COOKIE_SINGN_ON') : lang('SETT_COOKIE_SINGN_IN');
+    $signType = $CI->router->method === 'signIn' ? lang('SETT_COOKIE_SINGN_IN') : $signType;
+    $signType = $CI->router->method === 'singleSignOn' ? lang('SETT_COOKIE_SINGN_ON') : $signType;
     $signValue = get_cookie('signSessionType', TRUE);
-    $cookieSign = ACTIVE_SAFETY ? base64_decode($signValue) : $signValue;
-
-    if ($cookieSign === NULL && $CI->router->method === 'signIn') {
-      $cookieSign = lang('SETT_COOKIE_SINGN_IN');
-    }
-
-    if ($cookieSign === NULL && $CI->router->method === 'singleSignOn') {
-      $cookieSign = lang('SETT_COOKIE_SINGN_ON');
-    }
-
+    $cookieSign = ACTIVE_SAFETY && $signValue !== NULL ? base64_decode($signValue) : $signValue;
     $validCookie = in_array($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
     $signType = $validCookie ? $cookieSign : $signType;
 
