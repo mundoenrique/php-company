@@ -52,6 +52,9 @@ $(function () {
     var passData = getDataForm(form);
     $('#spinnerBlock').addClass('hide');
     passData.idUsuario = $('#idUser').text();
+		passData.fullName = $('#fullName').text();
+		passData.email = $('#email').text();
+		passData.typeUser = $('#typeUser').text();
 
     validateForms(form);
 

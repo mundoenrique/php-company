@@ -893,22 +893,24 @@ class Novo_User_Model extends NOVO_Model
     $this->dataRequest->userName =  $this->session->userName;
 
     $userDataList = [];
-    $userData['idUsuario'] = $dataRequest->idUsuario;
-    $userData['userName'] = $this->session->userName;
+    $userData['idUser'] = $dataRequest->idUsuario;
+    $userData['nameUser'] = $dataRequest->fullName;
+    $userData['mailUser'] = $dataRequest->email;
+    $userData['typeUser'] = $dataRequest->typeUser;
     $userDataList = (object) $userData;
     $user = $dataRequest->idUsuario;
-    $this->session->set_flashdata('userDataPermissions', $userDataList);
+    $this->session->set_flashdata('userDataAccounts', $userDataList);
 
     unset($dataRequest->idUsuario);
     unset($dataRequest->userName);
 
     $functionsArray = [];
 
-    for ($i = 0; isset($dataRequest->{'accodcia'.$i}); $i++) {
-      $cstatus = $dataRequest->{'cstatus'.$i};
+    for ($i = 0; isset($dataRequest->{'accodcia' . $i}); $i++) {
+      $cstatus = $dataRequest->{'cstatus' . $i};
       $empresa = [
-        'rif' => $dataRequest->{'rif'.$i},
-        'accodcia' => $dataRequest->{'accodcia'.$i},
+        'rif' => $dataRequest->{'rif' . $i},
+        'accodcia' => $dataRequest->{'accodcia' . $i},
         'cstatus' => ($cstatus === 'on') ? 'A' : 'I'
       ];
 
@@ -923,12 +925,8 @@ class Novo_User_Model extends NOVO_Model
         $this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
         $this->response->icon =  lang('SETT_ICON_SUCCESS');
         $this->response->msg = novoLang(lang('GEN_SUCCESSFULL_UPDATE_ACCOUNTS'), $user);
+        $this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_USERS_ACCOUNT');
 
-        if ($this->userName == $user) {
-          $this->response->modalBtn['btn1']['action'] = 'redirect';
-        } else {
-          $this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_USERS_ACCOUNT');
-        }
         break;
     }
 
