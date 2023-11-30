@@ -183,7 +183,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model
     $this->dataAccessLog->function = 'Estado de Lote';
     $this->dataAccessLog->operation = 'Descarga de archivo ' . $dataRequest->type;
 
-    $this->dataRequest->idOperation = 'generarStatusBulk' . $dataRequest->type;
+    $this->dataRequest->idOperation = $dataRequest->operation;
     $this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
     $this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
     $this->dataRequest->idProducto = $dataRequest->productCode;

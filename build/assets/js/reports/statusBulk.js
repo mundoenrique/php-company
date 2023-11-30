@@ -93,13 +93,13 @@ $(function () {
     if (lang.SETT_DOWNLOAD_SERVER === 'ON') {
       switch (action) {
         case lang.GEN_BTN_DOWN_XLS:
-          StatusBulkDownloadFiles('Xls')
+          StatusBulkDownloadFiles('generarArchivoXlsEstatusLotes','Xls')
           break;
         case lang.GEN_BTN_DOWN_PDF:
-          StatusBulkDownloadFiles('Pdf')
+          StatusBulkDownloadFiles('generarPdfEstatusLotes','Pdf')
           break;
         case lang.GEN_BTN_DOWN_TXT:
-          StatusBulkDownloadFiles('Txt')
+          StatusBulkDownloadFiles('generarTxtEstatusLotes','Txt')
           break;
       }
     } else {
@@ -123,7 +123,7 @@ $(function () {
     }, lang.SETT_TIME_DOWNLOAD_FILE);
   }
 
-  function StatusBulkDownloadFiles(type) {
+  function StatusBulkDownloadFiles(operation, type) {
     var form = $('#status-bulk-form');
     var data = getDataForm(form)
     console.log(data)
@@ -131,6 +131,7 @@ $(function () {
     insertFormInput(true);
     who = 'DownloadFiles';
     where = `exportToStatusBulk`;
+    data.operation = operation
     data.type = type
     callNovoCore(who, where, data, function (response) {
       if (response.code == 0) {
