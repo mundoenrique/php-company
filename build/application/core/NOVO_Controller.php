@@ -108,16 +108,6 @@ class NOVO_Controller extends CI_Controller
       }
 
       unset($this->dataRequest);
-      $this->isValidRequest = $this->verify_access->accessAuthorization($this->validationMethod);
-
-      if (!empty($_FILES) && $this->isValidRequest) {
-        $this->isValidRequest = $this->manageFile();
-      }
-
-      if ($this->isValidRequest) {
-        $this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
-        $this->isValidRequest = $this->verify_access->validateForm($this->validationMethod);
-      }
     }
 
     LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
@@ -127,6 +117,16 @@ class NOVO_Controller extends CI_Controller
     $this->customerStyle = $this->config->item('customer_style');
     $this->customerFiles = $this->config->item('customer_files');
     LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
+
+    $this->isValidRequest = $this->verify_access->accessAuthorization($this->validationMethod);
+
+    if (!empty($_FILES) && $this->isValidRequest && $this->wasMigrated) {
+      $this->isValidRequest = $this->manageFile();
+    }
+    if (!empty($_POST) && $this->isValidRequest && $this->wasMigrated) {
+      $this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
+      $this->isValidRequest = $this->verify_access->validateForm($this->validationMethod);
+    }
 
     if ($this->session->has_userdata('userId')) {
       if ($this->session->customerSess !== $this->config->item('customer')) {
@@ -174,16 +174,13 @@ class NOVO_Controller extends CI_Controller
           )
         )
       ) : json_decode($this->input->get_post('request'));
-    } else {
-      $access = $this->verify_access->accessAuthorization($this->validationMethod);
-      $valid = TRUE;
-
-      if ($_POST && $access && !$this->wasMigrated) {
+    } else if (!$this->input->is_ajax_request()) {
+      if (!empty($_POST) && $this->isValidRequest && !$this->wasMigrated) {
         $this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
-        $valid = $this->verify_access->validateForm($this->validationMethod);
+        $this->isValidRequest = $this->verify_access->validateForm($this->validationMethod);
       }
 
-      $this->preloadView($access && $valid);
+      $this->preloadView($this->isValidRequest);
     }
   }
   /**
