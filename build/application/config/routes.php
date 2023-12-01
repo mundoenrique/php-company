@@ -73,8 +73,8 @@ $route['(' . CUSTUMER_OLD_WAY . ')/inf-condiciones'] = "Novo_Information/terms";
 | ASYNC ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(:any)/callCoreApp'] = "Novo_LoadModels";
-$route['(:any)/single'] = "Novo_LoadModels";
+$route['(:any)/callCoreApp'] = "Novo_LoadModels/loadModels";
+$route['(:any)/single'] = "Novo_LoadModels/loadModels";
 $route['(:any)/async-call'] = "Novo_CallModels";
 /*
 |--------------------------------------------------------------------------

@@ -396,6 +396,7 @@ if (!function_exists('methodWasmigrated')) {
   function methodWasmigrated($method, $class)
   {
     $methodsIn = [
+      'loadModels',
       'signIn',
       'singleSignOn',
       'single',
