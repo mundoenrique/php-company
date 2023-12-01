@@ -24,6 +24,7 @@ class Verify_Access
   {
     writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
+    $this->CI->load->library('form_validation');
     $this->CI->form_validation->set_error_delimiters('', '---');
     $this->CI->config->set_item('language', 'global');
     $result = $this->CI->form_validation->run($validationMethod);

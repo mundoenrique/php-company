@@ -32,7 +32,7 @@ $config = [
       'rules' => lang('REGEX_SESS_ID_SERVER')
     ],
     [
-      'field' => 'clave',
+      'field' => 'Clave',
       'rules' => lang('REGEX_KEY_SERVER')
     ],
     [
@@ -40,7 +40,7 @@ $config = [
       'rules' => lang('REGEX_SERVICE_ID_SERVER')
     ],
     [
-      'field' => 'canal',
+      'field' => 'Canal',
       'rules' => lang('REGEX_CHANNEL_SERVER')
     ],
     [

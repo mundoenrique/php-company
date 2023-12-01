@@ -1791,6 +1791,8 @@ class Lotes extends CI_Controller
       );
       $_POST['data-idTicket'] = $dataRequest->data_idTicket;
       $_POST['data-pass'] = $dataRequest->data_pass;
+
+      $this->load->library('form_validation');
       $this->form_validation->set_rules('data-idTicket', 'idTicket',  'required');
       $this->form_validation->set_rules('data-pass', 'pass',  'required');
 
