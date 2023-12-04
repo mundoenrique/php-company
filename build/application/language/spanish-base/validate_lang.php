@@ -86,3 +86,4 @@ $lang['VALIDATE_MAXLENGTH_IDEXTPER'] = '20';
 $lang['VALIDATE_MAXLENGTH'] = '40';
 $lang['VALIDATE_MAXLENGTH_CARD'] = '16';
 $lang['VALIDATE_MINLENGTH_CARD'] = '6';
+$lang['VALIDATE_INVALID_DOCUMENT'] = 'Formato inválido.';
