@@ -52,6 +52,12 @@ $config = [
       'rules' => lang('REGEX_OPC_SERVER')
     ]
   ],
+  'pageNoFound' => [
+    [
+      'field' => 'any',
+      'rules' => 'trim'
+    ]
+  ],
   'finishSession' => [
     [
       'field' => 'userName',

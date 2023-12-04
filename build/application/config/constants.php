@@ -154,6 +154,8 @@ defined('PROXY_IPS')          or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] ==
 */
 defined('CUSTUMER_OLD_WAY')   or define('CUSTUMER_OLD_WAY', 'bpi|col|per|usd|ve');
 defined('CUSTUMER_DENY_WAY')  or define('CUSTUMER_DENY_WAY', explode('|', CUSTUMER_OLD_WAY));
+defined('SINGLE_SIGNON_GET')  or define('SINGLE_SIGNON_GET', in_array($uriSegments[1], ['bdb', 'bog']));
+defined('SINGLE_SIGNON_POST')  or define('SINGLE_SIGNON_POST', in_array($uriSegments[1], ['bdb', 'bog', 'bnt']));
 defined('ENGLISH_ACTIVE')     or define('ENGLISH_ACTIVE', in_array($uriSegments[1], ['vg']));
 defined('ERROR_CONTROLLER')   or define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')      or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
