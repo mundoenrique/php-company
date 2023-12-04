@@ -37,6 +37,7 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
+      $('#spinnerBlock').removeClass('hide');
 			insertFormInput(true, form);
 			form = $('#closingBudgetForm');
 			var dataForm = getDataForm(form)
