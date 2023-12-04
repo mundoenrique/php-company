@@ -1,5 +1,207 @@
+#--------------------#
+# FRAMEWORK SETTINGS #
+#--------------------#
+SetEnv CI_ENV development
+
+	#	LOCALHOST
+# SetEnv BASE_URL http://localhost/novopayment/site-conexionempresas/build/
+# SetEnv ASSET_URL ASSET_URL http://localhost/novopayment/site-conexionempresas/build/assets/
+
+	#	VIRTUALHOST
+SetEnv BASE_URL http://empresas.novopayment.lc/
+SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
+SetEnv ASSET_PATH C:/laragon/www/site-conexionempresas/build/assets/
+SetEnv LOG_PATH ''
+SetEnv ENCRYPTION_KEY n0v0p4ym3nt-KEY
+SetEnv SESS_DRIVER database
+SetEnv SESS_COOKIE_NAME empresas
+SetEnv SESS_EXPIRATION 1800
+SetEnv SESS_SAVE_PATH ceo_sessions
+#SetEnv SESS_SAVE_PATH C:/laragon/www/sessions/ceo
+SetEnv COOKIE_PREFIX 'ceo_'
+	# Si usas localhost cambiar COOKIE_DOMAIN a "localhost"
+SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+	# Si usas https cambiar COOKIE_SECURE a "ON"
+SetEnv COOKIE_SECURE OFF
+SetEnv PROXY_ENABLE OFF
+
+#----------------------#
+# APPLICATION SETTINGS #
+#----------------------#
+SetEnv ACTIVE_SAFETY ON
+SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
+SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, coop, bog, bpi, per, usd, ven, col, coop-central'
+SetEnv ACTIVE_RECAPTCHA ON
+SetEnv IP_VERIFY OFF
+SetEnv DB_VERIFY ON
+SetEnv SINGLE_SIGN_ON ON
+SetEnv API_CONTENT_URL 172.24.6.123:3001/
+SetEnv UPLOAD_PATH C:/laragon/www/upload/
+
+#-------------------------------------------------------------------#
+#																LOCAL																#
+#-------------------------------------------------------------------#
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+SetEnv DB_HOSTNAME 172.21.0.228
+SetEnv DB_PORT 3301
+SetEnv DB_USERNAME ceo_user
+SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
+
+#-------------------------------------------------------------------#
+#														DEVELOPMENT															#
+#-------------------------------------------------------------------#
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv WS_URL http://172.24.6.78:9005/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL https:/d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+# BANORTE
+# SetEnv WS_URL_BNT http://172.24.6.78:8027/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+# Coop central
+#SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+SetEnv API_URL http://172.24.6.78:8005/ceo-fuel/1.0/
+SetEnv SERVICE_URL http://172.24.6.78:9008/
+SetEnv DOWNLOAD_ROUTE 172.21.0.228/opt/downloads/site-conexionempresas/
+SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
+SetEnv BULK_FTP_USERNAME npdaemon
+SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------#
+# DATABASE CONNECTION VARIABLES #
+#-------------------------------#
+#SetEnv DB_HOSTNAME 172.0.0.1
+#SetEnv DB_PORT 3301
+#SetEnv DB_USERNAME ceo_user
+#SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
+
+#-------------------------------------------------------------------#
+#															TESTING																#
+#-------------------------------------------------------------------#
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv WS_URL http://172.24.6.77:9005/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv https:/t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT http://172.24.6.77:8027/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNT https://t-banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.77:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.77:9008/
+# SetEnv DOWNLOAD_ROUTE 172.24.6.124/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.112:22/opt/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------------------------------------------#
+#																UAT																	#
+#-------------------------------------------------------------------#
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv WS_URL http://172.24.6.73:9005/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv https:/uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT http://172.24.6.73:8027/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNT https://uat-banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.73:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.73:9008/
+# SetEnv DOWNLOAD_ROUTE 172.24.6.122/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD npd43m0n
+
+#-------------------------------------------------------------------#
+#														PRODUCTION															#
+#-------------------------------------------------------------------#
+
+#------------------------------#
+# SERVICE ENVIROMENT VARIABLES #
+#------------------------------#
+# SetEnv WS_KEY dGVzdDEyMzQ=
+# SetEnv WS_URL http://172.24.6.75:9005/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL http://172.24.6.76:9005/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv https:/web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+	# BANORTE
+# SetEnv WS_URL_BNT http://172.24.6.75:8027/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNT http://172.24.6.76:8027/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNT https://banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+#-------------------------------------#
+# OTHERS SERVICE ENVIROMENT VARIABLES #
+#-------------------------------------#
+# SetEnv API_URL http://172.24.6.75:8005/ceo-fuel/1.0/
+# SetEnv API_URL http://172.24.6.76:8005/ceo-fuel/1.0/
+# SetEnv SERVICE_URL http://172.24.6.75:9008/
+# SetEnv SERVICE_URL http://172.24.6.76:9008/
+# SetEnv DOWNLOAD_ROUTE 172.24.6.125/opt/downloads/site-conexionempresas/
+# SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+# SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+#------------------#
+# SETTINGS TO BULK #
+#------------------#
+# SetEnv BULK_FTP_URL sftp://172.24.6.130:22/opt/npdaemon/
+# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_PASSWORD #.3Nv!!
+
+#-------------------------#
+# COOKIES SameSite=strict #
+#-------------------------#
+<ifmodule mod_headers.c>
+  Header always edit Set-Cookie (.*) "$1; SameSite=strict"
+  Header onsuccess edit Set-Cookie (.*) "$1; SameSite=strict"
+  Header edit Set-Cookie ^(.*);\s?SameSite=strict;?\s?(.*);\s?SameSite=strict;?\s?(.*)$ "$1; $2; $3; SameSite=strict"
+  Header edit Set-Cookie ^(.*);\s?;\s?(.*)$ "$1; $2"
+</ifmodule>
+
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+	# si usas localhost comenta la linea siguiente
 	RewriteBase /
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
