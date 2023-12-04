@@ -177,12 +177,12 @@ function closingBudgets(dataForm) {
 			dataType: 'json',
 			cache: false,
 			data: function (req) {
-				data = req
-				if (lang.SETT_NIT_INPUT_BOOL == 'ON' ){
-					data.idExtPer = $('#Nit').val();
-				}else{
-					data.idExtPer = '';
-				}
+        data = req;
+        if (lang.SETT_NIT_INPUT_BOOL == 'ON') {
+          data.idExtPer = $('#document').val();
+        } else {
+          data.idExtPer = '';
+        }
 				data.product = $("#productCode").val();
 				data.idExt = $('#enterpriseReport').find('option:selected').attr('acrif');
 				data.screenSize = screen.width;
