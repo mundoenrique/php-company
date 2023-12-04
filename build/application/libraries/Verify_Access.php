@@ -140,11 +140,11 @@ class Verify_Access
         break;
       case 'recoverPass':
       case 'passwordRecovery':
-        $auth = lang('SETT_RECOV_PASS') == 'ON';
+        $auth = lang('SETT_RECOV_PASS') === 'ON';
         break;
       case 'recoverAccess':
       case 'validateOtp':
-        $auth = lang('SETT_RECOV_ACCESS') == 'ON';
+        $auth = lang('SETT_RECOV_ACCESS') === 'ON';
         break;
       case 'changeEmail':
       case 'changeTelephones':

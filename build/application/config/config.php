@@ -465,6 +465,7 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
   '[\w\-]+/ingresar',
+  '[\w\-]+/ingresar/(es|en)',
   '[\w\-]+/single',
   '[\w\-]+/products',
   '[\w\-]+/product-detail',
