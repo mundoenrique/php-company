@@ -1,16 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
-$lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
-$lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Venezuela";
-$lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
+defined('BASEPATH') or exit('No direct script access allowed');
+$lang['WELCOME_TITLE'] = 'Bienvenido a Conexión Empresas Online';
+$lang['WELCOME_MESSAGE'] = 'Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
+$lang['WIDGET_LOGIN_TITLE'] = "Cliente afiliado Venezuela";
+$lang['WIDGET_ADDCLIENT_TITLE'] = "Nuevo Cliente";
 
-$lang['LOGIN_INFO']='Soporte a Empresas';
-$lang['INFO-1']='Teléfono: (0212) 240.5111 - 6011 / 280.7575 opción 2';
-$lang['INFO-2']='';
-$lang['INFO-3']='E-mail: soporteempresas@tebca.com';
+$lang['LOGIN_INFO'] = 'Soporte a Empresas';
+$lang['INFO-1'] = 'Teléfono: (0212) 240.5111 - 6011 / 280.7575 opción 2';
+$lang['INFO-2'] = '';
+$lang['INFO-3'] = 'E-mail: soporteempresas@tebca.com';
 
-$lang['FOOTER'] ='Todos los derechos reservados.';
+$lang['FOOTER'] = 'Todos los derechos reservados.';
 
 $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fallido';
 
@@ -95,7 +95,7 @@ $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
 
 //TAB DESCARGAS
-$lang['DWL_MANUAL'] = "TV-MUS-002-conexion-empresas-online-V14.pdf";
+$lang['DWL_MANUAL'] = "TV-MUS-002-conexion-empresas-online-V16_0.pdf";
 
 // TAB Notificaciones
 $lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';
@@ -103,11 +103,11 @@ $lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';
 // PAGINA LOGOUT
 $lang['LOGOUT_TITULO'] = 'Gracias por usar nuestros servicios';
 $lang['LOGOUT_MSG'] = 'Su sesión en Conexión Empresas Online ha caducado';
-$lang['LOGOUT_BTN_BACK'] ='Aceptar';
+$lang['LOGOUT_BTN_BACK'] = 'Aceptar';
 
 
-$lang["TITULO_TERMINOS"]='Condiciones Generales, Términos de Uso y Confidencialidad';
-$lang["TERMINOS"] ="<p><strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> y <strong> Servitebca Servicio de Transferencia Electrónica de Beneficios, C.A,</strong> ambas sociedades domiciliadas en la ciudad de Caracas e inscritas ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado Miranda,  en fechas 02 de agosto de 2004 y 12 de mayo de 2005 y  registradas bajo los Nos. 79 y 72, Tomos 128-A-Pro. y 60-A-Pro., respectivamente,  quienes en lo adelante, conjunta o indistintamente, se denominarán ”La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta plataforma electrónica, en lo adelante “La Plataforma”:</p>
+$lang["TITULO_TERMINOS"] = 'Condiciones Generales, Términos de Uso y Confidencialidad';
+$lang["TERMINOS"] = "<p><strong>Tebca Transferencia Electrónica de Beneficios, C.A,</strong> sociedad mercantil domiciliada en la ciudad de Caracas e inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado Miranda, en fecha 02 de agosto de 2004,  bajo el  No. 79  Tomo 128-A-Pro., quien en lo adelante, se denominará ”La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta plataforma electrónica, en lo adelante “La Plataforma”:
 		<p>Sus Usuarios se obligan a leer las presentes Condiciones y Términos Generales de Uso y Confidencialidad cuidadosamente antes de continuar su recorrido en este sitio web y, de hacerlo, se entenderá que están de acuerdo con las mismas y declaran que aceptan cumplir a cabalidad con las instrucciones y obligaciones aquí contenidas. </p>
 		<p>La Empresa, no se hace responsable por las medidas de seguridad que deben ser tomadas por los Usuarios para el uso adecuado de La Plataforma; siendo así plenamente responsables del manejo de la obtención de sus claves y contraseñas personales y del uso y resguardo de las mismas; en ese sentido, La Empresa se libera de toda responsabilidad con relación al mal uso de claves, contraseñas, firmas electrónicas, certificados e incluso del hardware en donde se almacena la información que es privilegiada. Asimismo, esta liberación de responsabilidad, se extiende a cualquier daño causado por los Usuarios derivado del mal uso de la información contenida en La Plataforma. </p>
 		<p>Esta Plataforma les proporciona a sus Usuarios las herramientas necesarias para cumplir y hacer uso de los distintos programas que ofrece de manera eficaz, rápida y segura. Sin embargo, La Empresa no garantiza de forma alguna el servicio ininterrumpido o libre de error a través de este sitio  web.</p>
@@ -124,12 +124,12 @@ $lang["TERMINOS"] ="<p><strong>Tebca Transferencia Electrónica de Beneficios, C
 		<p>Igualmente, La Empresa tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en esta Plataforma a los fines de notificar a sus Usuarios. </p>";
 
 //change password
-$lang['FORGOT_PASS']= "Si ha olvidado o bloqueado su contraseña de acceso a <strong>Conexión Empresas Online</strong>, por favor ingrese los datos que se solicitan a continuación.</p>";
-$lang['USER_USER']= "Usuario";
-$lang['RIF_NIT']= "RIF de la Empresa";
-$lang['MAIL']= "Correo electrónico";
-$lang['INFO_CHANGE_PASS']= "Cambio de contraseña";
-$lang['INFO_REDIRECT']= "Redireccionando...";
-$lang['CHANGE_OK']= "Su contraseña ha sido cambiada satisfactoriamente.";
+$lang['FORGOT_PASS'] = "Si ha olvidado o bloqueado su contraseña de acceso a <strong>Conexión Empresas Online</strong>, por favor ingrese los datos que se solicitan a continuación.</p>";
+$lang['USER_USER'] = "Usuario";
+$lang['RIF_NIT'] = "RIF de la Empresa";
+$lang['MAIL'] = "Correo electrónico";
+$lang['INFO_CHANGE_PASS'] = "Cambio de contraseña";
+$lang['INFO_REDIRECT'] = "Redireccionando...";
+$lang['CHANGE_OK'] = "Su contraseña ha sido cambiada satisfactoriamente.";
 $lang['PLACE_HOLDER_NIT'] = "J-00000000-0";
 $lang['PLACE_HOLDER_MAIL'] = "usuario@ejemplo.com";
