@@ -89,6 +89,11 @@ function exportToExcel(passData) {
   who = 'Reports';
   where = 'exportToExcel';
   data = passData;
+  if (lang.SETT_NIT_INPUT_BOOL == 'ON') {
+    data.idExtPer = $('#document').val();
+  } else {
+    data.idExtPer = '';
+  }
 
   callNovoCore(who, where, data, function (response) {
     dataResponse = response.data;
