@@ -1,7 +1,7 @@
-import { cryptography } from './encrypt_decrypt.js';
+import { apiResponse } from '../connection/api_response.js';
 
 const usefulData = (function () {
-  const assetsTenant = cryptography.decrypt(assetsClient.payload);
+  const assetsTenant = apiResponse(assetsClient.payload);
   const assets = {};
 
   $.each(assetsTenant, function (item, value) {

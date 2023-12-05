@@ -114,12 +114,13 @@ class Reportes extends CI_Controller
         $_POST['fechaInicial'] = $dataRequest->fechaInicial;
         $_POST['fechaFin'] = $dataRequest->fechaFin;
 
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
         $this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_rules('paginaActual', 'paginaActual', 'trim|xss_clean|required');
-
         $this->form_validation->set_error_delimiters('', '---');
+
         if ($this->form_validation->run() == FALSE) {
           $responseError = 'La combinacion de caracteres es invalido';
           $responseError = $this->cryptography->encrypt($responseError);
@@ -870,12 +871,14 @@ class Reportes extends CI_Controller
         $_POST['fechaInicial'] = (isset($dataRequest->fechaInicial)) ? $dataRequest->fechaInicial : "";
         $_POST['fechaFin']  = (isset($dataRequest->fechaFin)) ? $dataRequest->fechaFin : "";
 
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
         $this->form_validation->set_rules('fechaMes', 'Fecha Mes', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_error_delimiters('', '---');
       }
+
       if ($this->form_validation->run() == FALSE) {
         log_message('DEBUG', 'NOVO VALIDATION ERRORS: ' . json_encode(validation_errors()));
         $responseError = 'La combinación de caracteres es inválida';
@@ -1267,6 +1270,8 @@ class Reportes extends CI_Controller
         $_POST['producto'] = $dataRequest->producto;
         $_POST['paginaActual'] = $dataRequest->paginaActual;
         $_POST['tamPg'] = $dataRequest->tamPg;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('empresa', 'empresa', 'trim|regex_match[/^([\w-]+[\s]*)+$/i]|required');
         $this->form_validation->set_rules('cedula', 'cedula',  'trim|regex_match[/^[0-9]+$/]');
         $this->form_validation->set_rules('producto', 'producto',  'trim|regex_match[/^([\w-]+[\s]*)+$/i]required');
@@ -1561,11 +1566,15 @@ class Reportes extends CI_Controller
             )
           )
         );
+
         if ($dataRequest !== null) {
           $_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
           $_POST['lotes_producto'] = $dataRequest->lotes_producto;
+
+          $this->load->library('form_validation');
           $this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
           $this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
+
           if ($this->form_validation->run() == FALSE) {
             log_message('DEBUG', 'NOVO VALIDATION ERRORS: ' . json_encode(validation_errors()));
             $responseError = 'La combinación de caracteres es inválida';
@@ -1697,6 +1706,8 @@ class Reportes extends CI_Controller
         $_POST['fechaInicial'] = $dataRequest->fechaInicial;
         $_POST['fechaFin'] = $dataRequest->fechaFin;
         $_POST['lotes_producto'] = $dataRequest->lotes_producto;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('empresa', 'empresa',  'trim|xss_clean|required');
         $this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
         $this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
@@ -2568,10 +2579,13 @@ class Reportes extends CI_Controller
         $_POST['empresa'] = $dataRequest->empresa;
         $_POST['anio'] = $dataRequest->anio;
         $_POST['mes'] = $dataRequest->mes;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
         $this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
         $this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
         $this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
+
         $this->form_validation->set_error_delimiters('', '---');
         if ($this->form_validation->run() == FALSE) {
           log_message('DEBUG', 'NOVO VALIDATION ERRORS: ' . json_encode(validation_errors()));
@@ -2957,6 +2971,8 @@ class Reportes extends CI_Controller
         );
         $_POST['fech_ini'] = $dataRequest->data_fechaIni;
         $_POST['fech_fin'] = $dataRequest->data_fechaFin;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
         $this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 
@@ -3355,6 +3371,8 @@ class Reportes extends CI_Controller
         $_POST['tipoConsulta'] =  $dataRequest->tipoConsulta;
         $_POST['cedula'] = $dataRequest->cedula;
         $_POST['tarjeta'] = $dataRequest->tarjeta;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean|required');
         $this->form_validation->set_rules('empresa', 'empresa',  'trim|xss_clean|required');
         $this->form_validation->set_rules('fechaIni', 'fechaIni',  'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
@@ -3765,6 +3783,8 @@ class Reportes extends CI_Controller
         $_POST['cedula'] = $dataRequest->cedula;
         $_POST['fechaIni'] = $dataRequest->fechaInicial;
         $_POST['fechaFin'] = $dataRequest->fechaFin;
+
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
         $this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
         $this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean|regex_match[/^[0-9]+$/]');

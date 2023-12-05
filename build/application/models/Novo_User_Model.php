@@ -306,7 +306,7 @@ class Novo_User_Model extends NOVO_Model
         ];
         $this->session->set_userdata($userData);
         $this->response->code = 0;
-        $this->response->data = base_url(lang('SETT_LINK_ENTERPRISES'));
+        $this->response->data->link = base_url(lang('SETT_LINK_ENTERPRISES'));
         break;
       case -28:
         $userData = [
@@ -318,10 +318,11 @@ class Novo_User_Model extends NOVO_Model
         ];
         $this->session->set_userdata($userData);
         $this->session->set_flashdata('unauthorized', lang('GEN_SESSION_DUPLICATE'));
-        $this->response->data = base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END'));
+        $this->response->data->link = base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END'));
         break;
       default:
-        $this->response->data = base_url('ingresar/' . lang('SETT_LINK_SIGNOUT_END'));
+        $this->session->set_flashdata('unauthorized', lang('GEN_SINGLE_SIGNON'));
+        $this->response->data->link = base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END'));
         break;
     }
 

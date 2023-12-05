@@ -24,6 +24,7 @@ class Verify_Access
   {
     writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
+    $this->CI->load->library('form_validation');
     $this->CI->form_validation->set_error_delimiters('', '---');
     $this->CI->config->set_item('language', 'global');
     $result = $this->CI->form_validation->run($validationMethod);
@@ -139,11 +140,11 @@ class Verify_Access
         break;
       case 'recoverPass':
       case 'passwordRecovery':
-        $auth = lang('SETT_RECOV_PASS') == 'ON';
+        $auth = lang('SETT_RECOV_PASS') === 'ON';
         break;
       case 'recoverAccess':
       case 'validateOtp':
-        $auth = lang('SETT_RECOV_ACCESS') == 'ON';
+        $auth = lang('SETT_RECOV_ACCESS') === 'ON';
         break;
       case 'changeEmail':
       case 'changeTelephones':

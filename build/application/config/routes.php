@@ -73,9 +73,9 @@ $route['(' . CUSTUMER_OLD_WAY . ')/inf-condiciones'] = "Novo_Information/terms";
 | ASYNC ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(:any)/callCoreApp'] = "Novo_LoadModels";
+$route['(:any)/callCoreApp'] = "Novo_LoadModels/loadModels";
+$route['(:any)/single'] = "Novo_LoadModels/loadModels";
 $route['(:any)/async-call'] = "Novo_CallModels";
-$route['(:any)/single'] = "Novo_CallModels";
 /*
 |--------------------------------------------------------------------------
 */
@@ -99,8 +99,12 @@ $route['(:any)/sign-in'] = function ($customer) {
 
   return 'Novo_User/signIn';
 };
-$route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
-$route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
+$route['(:any)/ingresar/(:any)']['GET'] = function ($customer, $sessionId) {
+  return SINGLE_SIGNON_GET ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
+};
+$route['(:any)/ingresar']['POST'] = function () {
+  return SINGLE_SIGNON_POST ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
 $route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
 $route['(:any)/recover-password'] = "Novo_User/recoverPass";
@@ -120,11 +124,14 @@ $route['(:any)/suggestion'] = "Novo_User/suggestion";
 $route['(:any)/sign-in/(es|en)'] = function () {
   return ENGLISH_ACTIVE ? "Novo_User/signIn" : ERROR_CONTROLLER;
 };
-$route['(:any)/ingresar/(:any)/(es|en)']['GET'] = function () {
-  return ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+$route['(:any)/ingresar/(:any)/(es|en)']['GET'] = function ($customer, $sessionId) {
+  return SINGLE_SIGNON_GET && ENGLISH_ACTIVE ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
 };
 $route['(:any)/ingresar/(es|en)']['POST'] = function () {
-  return ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+  return SINGLE_SIGNON_POST && ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(:any)/internal/novopayment/signin/(es/en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/signIn" : ERROR_CONTROLLER;
 };
 $route['(:any)/recover-password/(es|en)'] = function () {
   return ENGLISH_ACTIVE ? "Novo_User/recoverPass" : ERROR_CONTROLLER;

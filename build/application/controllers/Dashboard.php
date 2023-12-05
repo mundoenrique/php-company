@@ -421,6 +421,7 @@ class Dashboard extends CI_Controller
         $_POST['description'] = $acdescPost;
         $_POST['code'] = $accodciaPost;
 
+        $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('', '---');
         $result = $this->form_validation->run('enterprise');
         log_message('DEBUG', 'NOVO VALIDATION FORM enterprise: ' . json_encode($result));
@@ -518,7 +519,6 @@ class Dashboard extends CI_Controller
 
     if ($paisS == $urlCountry && $logged_in) {
       if ($this->input->post()) {
-
         $acdescPost = $this->input->post('data-acdesc');
         $acrifPost = $this->input->post('data-acrif');
         $acnomciaPost = $this->input->post('data-acnomcia');
@@ -526,6 +526,7 @@ class Dashboard extends CI_Controller
         $accodciaPost = $this->input->post('data-accodcia');
         $accodgrupoePost = $this->input->post('data-accodgrupoe');
 
+        $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('', '---');
         $result = $this->form_validation->run('dash-products');
         log_message('DEBUG', 'NOVO VALIDATION FORM dash-products: ' . json_encode($result));
@@ -644,8 +645,10 @@ class Dashboard extends CI_Controller
         $nombreProductoPost = $this->input->post('data-nombreProducto');
         $marcaProductoPost = $this->input->post('data-marcaProducto');
 
+        $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('', '---');
         $result = $this->form_validation->run('products-detail');
+
         log_message('DEBUG', 'NOVO VALIDATION FORM products-detail: ' . json_encode($result));
 
         if (!$result) {

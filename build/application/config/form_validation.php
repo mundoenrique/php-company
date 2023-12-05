@@ -29,18 +29,32 @@ $config = [
   'singleSignOn' => [
     [
       'field' => 'sessionId',
-      'rules' => 'trim'
+      'rules' => lang('REGEX_SESS_ID_SERVER')
     ],
     [
-      'field' => 'clave',
-      'rules' => 'trim'
+      'field' => 'Clave',
+      'rules' => lang('REGEX_KEY_SERVER')
     ],
     [
       'field' => 'IdServicio',
-      'rules' => 'trim'
+      'rules' => lang('REGEX_SERVICE_ID_SERVER')
     ],
     [
-      'field' => 'canal',
+      'field' => 'Canal',
+      'rules' => lang('REGEX_CHANNEL_SERVER')
+    ],
+    [
+      'field' => 'ip',
+      'rules' => lang('REGEX_IP_SERVER')
+    ],
+    [
+      'field' => 'opc',
+      'rules' => lang('REGEX_OPC_SERVER')
+    ]
+  ],
+  'pageNoFound' => [
+    [
+      'field' => 'any',
       'rules' => 'trim'
     ]
   ],

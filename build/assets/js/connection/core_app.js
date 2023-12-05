@@ -1,7 +1,8 @@
-import { cryptography } from '../common/encrypt_decrypt.js';
 import { baseURL, lang, logged, novo, novoName, redirect, userId } from '../common/useful_data.js';
 import { uiMdalClose, uiModalMessage } from '../modal/ui_modal.js';
 import { toggleDisableActions } from '../utils.js';
+import { apiRequest } from './api_request.js';
+import { apiResponse } from './api_response.js';
 
 export const calledCoreApp = function (module, section, request, _response_ = false) {
   const uri = request.route || 'callCoreApp';
@@ -12,7 +13,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     section: section,
     data: request,
   };
-  dataRequest = cryptography.encrypt(dataRequest, novo.value);
+  dataRequest = apiRequest(dataRequest);
   formData.append('payload', dataRequest);
 
   if (activeSafety) {
@@ -42,7 +43,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     dataType: 'json',
   })
     .done(function (data, status, jqXHR) {
-      const response = cryptography.decrypt(data.payload);
+      const response = apiResponse(data.payload);
       const modalClose = response.keepModal ? false : true;
       redirect.link = response.redirectLink;
       uiMdalClose(modalClose);
@@ -85,16 +86,19 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
 };
 
 export const calledCoreAppForm = function (request) {
-  let formData = cryptography.encrypt({ request });
+  const uri = request.uri;
+  delete request.uri;
+  const data = request;
+  const formData = apiRequest({ data });
 
-  let form = document.createElement('form');
+  const form = document.createElement('form');
   form.setAttribute('id', 'payloadForm');
   form.setAttribute('name', 'payloadForm');
   form.setAttribute('method', 'post');
   form.setAttribute('enctype', 'multipart/form-data');
-  form.setAttribute('action', baseURL + 'sign-in');
+  form.setAttribute('action', baseURL + uri);
 
-  let inputData = document.createElement('input');
+  const inputData = document.createElement('input');
   inputData.setAttribute('type', 'hidden');
   inputData.setAttribute('id', 'payload');
   inputData.setAttribute('name', 'payload');
@@ -102,11 +106,11 @@ export const calledCoreAppForm = function (request) {
   form.appendChild(inputData);
 
   if (activeSafety) {
-    let inputNovo = document.createElement('input');
+    const inputNovo = document.createElement('input');
     inputNovo.setAttribute('type', 'hidden');
     inputNovo.setAttribute('id', novoName);
     inputNovo.setAttribute('name', novoName);
-    inputNovo.setAttribute('value', novoValue);
+    inputNovo.setAttribute('value', novo.value);
     form.appendChild(inputNovo);
   }
 

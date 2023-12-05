@@ -266,7 +266,7 @@ if (!function_exists('uriRedirect')) {
     $CI = &get_instance();
     $redirectLink = getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')
       ? lang('SETT_LINK_SIGNIN')
-      : 'ingresar/' . lang('SETT_LINK_SIGNOUT_END');
+      : lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END');
 
     if ($CI->session->has_userdata('logged')) {
       $redirectLink = lang('SETT_LINK_ENTERPRISES');
@@ -341,14 +341,14 @@ if (!function_exists('getSignSessionType ')) {
    */
   function getSignSessionType()
   {
+    $CI = &get_instance();
     $signType = SINGLE_SIGN_ON ? lang('SETT_COOKIE_SINGN_ON') : lang('SETT_COOKIE_SINGN_IN');
-
+    $signType = $CI->router->method === 'signIn' ? lang('SETT_COOKIE_SINGN_IN') : $signType;
+    $signType = $CI->router->method === 'singleSignOn' ? lang('SETT_COOKIE_SINGN_ON') : $signType;
     $signValue = get_cookie('signSessionType', TRUE);
-    $cookieSign = ACTIVE_SAFETY ? base64_decode($signValue) : $signValue;
+    $cookieSign = ACTIVE_SAFETY && $signValue !== NULL ? base64_decode($signValue) : $signValue;
     $validCookie = in_array($cookieSign, [lang('SETT_COOKIE_SINGN_ON'), lang('SETT_COOKIE_SINGN_IN')]);
-
     $signType = $validCookie ? $cookieSign : $signType;
-    $signType = str_replace(config_item('cookie_prefix'), '', $signType);
 
     if (!$validCookie) {
       setSignSessionType($signType);
@@ -363,7 +363,7 @@ if (!function_exists('setSignSessionType')) {
    * @info Set sign type cookie
    * @author epenaloza
    * @date September 17th, 2023
-   * @param string $SignSessionType type cookie signInSession | singleSignOnSession
+   * @param string $signType type cookie signInSession | singleSignOnSession
    * @return void
    */
   function setSignSessionType($signType)
@@ -372,11 +372,11 @@ if (!function_exists('setSignSessionType')) {
       delete_cookie('singleSession', config_item('cookie_domain'), config_item('cookie_path'));
     }
 
-    $SignSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
+    $signSessionType = ACTIVE_SAFETY ? base64_encode($signType) : $signType;
 
     $signSessionType = [
       'name' => 'signSessionType',
-      'value' => $SignSessionType,
+      'value' => $signSessionType,
       'expire' => 1296000,
       'httponly' => TRUE
     ];
@@ -396,7 +396,10 @@ if (!function_exists('methodWasmigrated')) {
   function methodWasmigrated($method, $class)
   {
     $methodsIn = [
+      'loadModels',
       'signIn',
+      'singleSignOn',
+      'single',
       'login',
       'finishSession',
       'changeLanguage',

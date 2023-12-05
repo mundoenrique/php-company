@@ -7,7 +7,7 @@
 
 import { CryptoJS } from '../third_party/aes-3.1.2.min.js';
 
-export const CryptoJSAesJson = {
+export const apiConnection = {
   stringify: function (cipherParams) {
     let j = { req: cipherParams.ciphertext.toString(CryptoJS.enc.Base64) };
     if (cipherParams.iv) j.env = cipherParams.iv.toString();

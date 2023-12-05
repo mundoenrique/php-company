@@ -15,13 +15,14 @@ if (!function_exists('decryptData')) {
    * @author epenaloza
    * @date October 3rd, 2022
    * @param json $requestData data to decrypt
+   * @param bool $external externa request
    * @return object|array|string data decrypted
    */
-  function decryptData($requestData)
+  function decryptData($requestData, $external = FALSE)
   {
     $CI = &get_instance();
 
-    if (ACTIVE_SAFETY) {
+    if (ACTIVE_SAFETY && !$external) {
       $req = json_decode(base64_decode($requestData));
       $requestData = $CI->cryptography->decrypt(base64_decode($req->plot), utf8_encode($req->data));
     } else {

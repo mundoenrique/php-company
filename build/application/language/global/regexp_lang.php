@@ -12,6 +12,12 @@ $lang['REGEX_SAVE_IP'] = '(' . TRUE . '|' . FALSE . ')';
 $lang['REGEX_SAVE_IP_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_SAVE_IP'] . '/]';
 $lang['REGEX_CHANGE_LANG'] = '(es|en)';
 $lang['REGEX_CHANGE_LANG_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CHANGE_LANG'] . '/]|required';
+$lang['REGEX_SESS_ID_SERVER'] = 'trim';
+$lang['REGEX_KEY_SERVER'] = 'trim';
+$lang['REGEX_SERVICE_ID_SERVER'] = 'trim';
+$lang['REGEX_CHANNEL_SERVER'] = 'trim';
+$lang['REGEX_IP_SERVER'] = 'trim';
+$lang['REGEX_OPC_SERVER'] = 'trim';
 
 
 

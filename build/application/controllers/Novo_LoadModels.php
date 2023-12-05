@@ -23,7 +23,7 @@ class Novo_LoadModels extends NOVO_Controller
    * @author J. Enrique Peñaloza Piñero
    * @date April 20th, 2019
    */
-  public function index()
+  public function loadModels()
   {
     writeLog('INFO', 'LoadModels: index Method Initialized');
 
