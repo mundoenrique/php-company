@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 //VALIDATE FORMS
 $lang['VALIDATE_USERLOGIN'] = '';
 $lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
@@ -87,3 +87,4 @@ $lang['VALIDATE_MAXLENGTH'] = '40';
 $lang['VALIDATE_MAXLENGTH_CARD'] = '16';
 $lang['VALIDATE_MINLENGTH_CARD'] = '6';
 $lang['VALIDATE_INVALID_DOCUMENT'] = 'Formato inválido.';
+$lang['VALIDATE_LENGTH_DOCUMENT'] = 'Solo se admiten 20 caracteres.';
