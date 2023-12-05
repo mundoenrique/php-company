@@ -347,7 +347,10 @@ function validateForms(form) {
 				required: lang.VALIDATE_PHONE_REQ,
 				maxlength: lang.VALIDATE_LENGHT_NUMBER
 			},
-      document: lang.VALIDATE_INVALID_DOCUMENT,
+      document: {
+        pattern: lang.VALIDATE_INVALID_DOCUMENT,
+        maxlength: lang.VALIDATE_LENGTH_DOCUMENT,
+      },
       'card-number': lang.VALIDATE_CARD_NUMBER,
       'card-number-sel': lang.VALIDATE_CARD_NUMBER_SEL,
       'inquiry-type': lang.VALIDATE_INQUIRY_TYPE_SEL,
