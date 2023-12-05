@@ -66,8 +66,8 @@ $(function () {
     dataSignin.active = '';
     dataSignin.currentTime = new Date().getHours();
 
-    calledCoreApp(module, section, dataSignin, function (response) {
-      if (response.code !== 0 || (response.code === 0 && !response.data.link)) {
+    calledCoreApp(module, section, dataSignin, function (coreAppResp) {
+      if (coreAppResp.code !== 0 || (coreAppResp.code === 0 && !coreAppResp.data.link)) {
         $('#userPass').val('');
 
         if (lang.SETT_RESTAR_USERNAME === 'ON') {
@@ -79,53 +79,53 @@ $(function () {
         formSignin.validate().resetForm();
       }
 
-      handleSignInResponse[response.code](response);
+      handleSignInResponse[coreAppResp.code](coreAppResp);
     });
   };
 
   const handleSignInResponse = {
-    0: function (response) {
-      if (response.data.link) {
-        let link = response.data.link;
+    0: function (coreAppResp) {
+      if (coreAppResp.data.link) {
+        let link = coreAppResp.data.link;
 
-        if (response.data.link.indexOf('dashboard') !== -1) {
+        if (coreAppResp.data.link.indexOf('dashboard') !== -1) {
           link = link.replace(customerUri, customer);
         }
 
         $(location).attr('href', link);
       }
     },
-    1: function (response) {
+    1: function (coreAppResp) {
       $('#userName').showBalloon({
         html: true,
-        classname: response.data.className,
-        position: response.data.position,
-        contents: response.msg,
+        classname: coreAppResp.data.className,
+        position: coreAppResp.data.position,
+        contents: coreAppResp.msg,
       });
       setTimeout(function () {
         $('#userName').hideBalloon();
       }, 2500);
     },
-    2: function (response) {
+    2: function (coreAppResp) {
       $('#accept').addClass('send-otp');
-      response.minWidth = 470;
-      response.maxHeight = 'none';
-      response.posAt = 'center top';
-      response.posMy = 'center top+60';
+      coreAppResp.minWidth = 470;
+      coreAppResp.maxHeight = 'none';
+      coreAppResp.posAt = 'center top';
+      coreAppResp.posMy = 'center top+60';
 
-      uiModalMessage(response);
+      uiModalMessage(coreAppResp);
     },
-    3: function (response) {
-      response.minWidth = 470;
-      response.maxHeight = 'none';
-      response.posAt = 'center top';
-      response.posMy = 'center top+60';
+    3: function (coreAppResp) {
+      coreAppResp.minWidth = 470;
+      coreAppResp.maxHeight = 'none';
+      coreAppResp.posAt = 'center top';
+      coreAppResp.posMy = 'center top+60';
 
-      uiModalMessage(response);
+      uiModalMessage(coreAppResp);
     },
-    4: function (response) {
-      if (response.data.action) {
-        $('#accept').addClass(response.data.action);
+    4: function (coreAppResp) {
+      if (coreAppResp.data.action) {
+        $('#accept').addClass(coreAppResp.data.action);
       }
     },
   };

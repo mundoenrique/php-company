@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $dataclient = new stdClass();
-$dataclient->response = $response ?? NULL;
+$dataclient->htmlResp = $htmlResp ?? NULL;
 $dataclient->dataTableLang = NULL;
 $dataclient->datePickerLang = NULL;
 $dataclient->baseURL = base_url();
