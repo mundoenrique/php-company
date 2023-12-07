@@ -3,10 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * NOVOPAYMENT server Helpers
  *
- * @subpackage	Helpers
- * @category		Helpers
- * @author			J. Enrique Peñaloza P
- * @date				September 19th, 2022
+ * @subpackage  Helpers
+ * @category    Helpers
+ * @author      J. Enrique Peñaloza P
+ * @date        September 19th, 2022
  */
 
 if (!function_exists('writeLog')) {
@@ -179,25 +179,5 @@ if (!function_exists('handleLogResponse')) {
     }
 
     return $logResponse;
-  }
-}
-
-if (!function_exists('externalRequest')) {
-  /**
-   * @info Valid if the request is external
-   * @author epenaloza
-   * @date NoVember 22th, 2023
-   * @param string $method method to valid
-   * @return bool
-   */
-  function externalRequest($method)
-  {
-    $methodsIn = [
-      'singleSignOn',
-    ];
-
-    $external = array_search($method, $methodsIn, TRUE) !== FALSE;
-
-    return $external;
   }
 }
