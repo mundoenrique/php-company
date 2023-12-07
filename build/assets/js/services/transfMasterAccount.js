@@ -76,9 +76,9 @@ $(function () {
         $('#tableServicesMaster').find('thead > tr').removeClass('selected');
         var responseTable = jQuery.parseJSON(resp);
         responseTable = JSON.parse(
-          CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(
-            CryptoJS.enc.Utf8
-          )
+          CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, {
+            format: CryptoJSAesJson,
+          }).toString(CryptoJS.enc.Utf8)
         );
         var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
 
@@ -137,9 +137,15 @@ $(function () {
           return '';
         },
       },
-      { data: 'cardNumber' },
-      { data: 'name' },
-      { data: 'idNumber' },
+      {
+        data: 'cardNumber',
+      },
+      {
+        data: 'name',
+      },
+      {
+        data: 'idNumber',
+      },
       {
         data: function (data) {
           return '--';
@@ -419,8 +425,8 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
   inputModal += '</form>';
 
   if (
-    lang.SETT_REMOTE_AUTH == 'OFF' ||
-    (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)
+    lang.SETT_REMOTE_AUTH === 'OFF' ||
+    (lang.SETT_REMOTE_AUTH === 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)
   ) {
     appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
   } else if ($.inArray(currentAction, lang.SETT_AUTH_LIST) != -1) {
@@ -528,7 +534,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
       $('#tableServicesMaster').find('tbody > tr input').val('');
 
       if (response.data.balance) {
-        $('#balance-aviable').text(response.data.balance);
+        $('#balance-aviable, #master-balance-aviable').text(response.data.balance);
       }
 
       if (response.data.balanceConcentratingAccount) {
