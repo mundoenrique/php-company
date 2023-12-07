@@ -73,7 +73,7 @@ if (!function_exists('responseServer')) {
 
     switch ($responseServer->HttpCode) {
       case 200:
-        $responseServer->responseCode = 0;
+        $responseServer->responseCode =  $responseServer->data->rc ?? 0;
         break;
 
       case 502:

@@ -136,6 +136,9 @@ class NOVO_Model extends CI_Model
         $this->response->msg = lang('GEN_DUPLICATED_SESSION');
         clearSessionsVars();
         break;
+      case -134:
+        $this->response->msg = ENVIRONMENT !== 'production' ? lang('GEN_NOT_DECRYPTED') : lang('GEN_SYSTEM_MESSAGE');
+        break;
       case -259:
         $this->response->icon = lang('SETT_ICON_DANGER');
         $this->response->msg = lang('GEN_WITHOUT_AUTHORIZATION');

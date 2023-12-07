@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['GEN_SYSTEM_NAME'] = 'Conexión Empresas Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
+$lang['GEN_NOT_DECRYPTED'] = 'No fue posible desencriptar la petición';
 $lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
