@@ -20,7 +20,7 @@ $(function () {
     drawCallback: function (d) {
       $('#balance-aviable').text(balance);
 
-      if (lang.SETT_BALANCE_ACC_CONCENTRATOR === 'ON') {
+      if (lang.SETT_BALANCE_ACC_CONCENTRATOR == 'ON') {
         $('#balance-acc-concentrator').text(balanceConcentratingAccount);
       }
 
@@ -76,9 +76,9 @@ $(function () {
         $('#tableServicesMaster').find('thead > tr').removeClass('selected');
         var responseTable = jQuery.parseJSON(resp);
         responseTable = JSON.parse(
-          CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(
-            CryptoJS.enc.Utf8
-          )
+          CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, {
+            format: CryptoJSAesJson,
+          }).toString(CryptoJS.enc.Utf8)
         );
         var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
 
@@ -137,9 +137,15 @@ $(function () {
           return '';
         },
       },
-      { data: 'cardNumber' },
-      { data: 'name' },
-      { data: 'idNumber' },
+      {
+        data: 'cardNumber',
+      },
+      {
+        data: 'name',
+      },
+      {
+        data: 'idNumber',
+      },
       {
         data: function (data) {
           return '--';
@@ -528,7 +534,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
       $('#tableServicesMaster').find('tbody > tr input').val('');
 
       if (response.data.balance) {
-        $('#balance-aviable').text(response.data.balance);
+        $('#balance-aviable, #master-balance-aviable').text(response.data.balance);
       }
 
       if (response.data.balanceConcentratingAccount) {
