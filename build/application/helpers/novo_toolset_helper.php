@@ -396,13 +396,15 @@ if (!function_exists('methodWasmigrated')) {
   function methodWasmigrated($method, $class)
   {
     $methodsIn = [
-      'loadModels',
-      'signIn',
-      'singleSignOn',
-      'single',
-      'login',
-      'finishSession',
+      'benefitsInf',
       'changeLanguage',
+      'finishSession',
+      'loadModels',
+      'login',
+      'signIn',
+      'single',
+      'singleSignOn',
+      'termsInf',
     ];
 
     $migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;

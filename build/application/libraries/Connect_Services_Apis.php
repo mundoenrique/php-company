@@ -79,6 +79,13 @@ class Connect_Services_Apis
       writeLog('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
     }
 
+    $tempData = json_decode($response->data);
+    $typeData = gettype($tempData);
+
+    if ($typeData === 'object' || $typeData === 'array') {
+      $response->data = $tempData;
+    }
+
     return responseServer($response);
   }
 

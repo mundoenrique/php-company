@@ -13,6 +13,7 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     section: section,
     data: request,
   };
+  let ajaxResponse;
   dataRequest = apiRequest(dataRequest);
   formData.append('payload', dataRequest);
 
@@ -43,27 +44,27 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
     dataType: 'json',
   })
     .done(function (data, status, jqXHR) {
-      const response = apiResponse(data.payload);
-      const modalClose = response.keepModal ? false : true;
-      redirect.link = response.redirectLink;
+      ajaxResponse = apiResponse(data.payload);
+      const modalClose = ajaxResponse.keepModal ? false : true;
+      redirect.link = ajaxResponse.redirectLink;
       uiMdalClose(modalClose);
 
       if (activeSafety) {
-        novo.value = response.novoValue;
+        novo.value = ajaxResponse.novoValue;
       }
 
-      if (response.code === lang.SETT_DEFAULT_CODE) {
-        uiModalMessage(response);
+      if (ajaxResponse.code === lang.SETT_DEFAULT_CODE) {
+        uiModalMessage(ajaxResponse);
       }
 
       if (_response_) {
-        _response_(response);
+        _response_(ajaxResponse);
       }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
       toggleDisableActions(false);
       uiMdalClose(true);
-      const response = {
+      ajaxResponse = {
         code: lang.SETT_DEFAULT_CODE,
         icon: lang.SETT_ICON_DANGER,
         title: lang.GEN_SYSTEM_NAME,
@@ -77,10 +78,10 @@ export const calledCoreApp = function (module, section, request, _response_ = fa
         },
       };
 
-      uiModalMessage(response);
+      uiModalMessage(ajaxResponse);
 
       if (_response_) {
-        _response_(response);
+        _response_(ajaxResponse);
       }
     });
 };

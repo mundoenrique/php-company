@@ -18,8 +18,8 @@ $(function () {
     dataSignin.route = 'single';
     dataSignin.currentTime = new Date().getHours();
 
-    calledCoreApp(module, section, dataSignin, function (response) {
-      $(location).attr('href', response.data.link);
+    calledCoreApp(module, section, dataSignin, function (coreAppResp) {
+      $(location).attr('href', coreAppResp.data.link);
     });
   }
 });

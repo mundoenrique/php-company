@@ -20,7 +20,7 @@ $(function () {
     drawCallback: function (d) {
       $('#balance-aviable').text(balance);
 
-      if (lang.SETT_BALANCE_ACC_CONCENTRATOR == 'ON') {
+      if (lang.SETT_BALANCE_ACC_CONCENTRATOR === 'ON') {
         $('#balance-acc-concentrator').text(balanceConcentratingAccount);
       }
 
@@ -425,8 +425,8 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
   inputModal += '</form>';
 
   if (
-    lang.SETT_REMOTE_AUTH == 'OFF' ||
-    (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)
+    lang.SETT_REMOTE_AUTH === 'OFF' ||
+    (lang.SETT_REMOTE_AUTH === 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)
   ) {
     appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
   } else if ($.inArray(currentAction, lang.SETT_AUTH_LIST) != -1) {

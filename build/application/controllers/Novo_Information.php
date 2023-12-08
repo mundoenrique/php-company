@@ -59,9 +59,8 @@ class Novo_Information extends NOVO_Controller
     $this->render->titlePage = lang('GEN_FOTTER_TERMS');
     $this->render->activeHeader = TRUE;
     $this->render->referer = $this->input->server('HTTP_REFERER');
-    $baseReferer = substr($this->render->referer, 0, strlen(base_url()));
     $this->render->newUser = $newUser;
-    $this->render->goBack = ($baseReferer === base_url()) && !$newUser;
+    $this->render->goBack = base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_START'));
     $this->views = ['information/' . $view];
     $this->loadView($view);
   }

@@ -13,7 +13,7 @@ const usefulData = (function () {
   return assets;
 })();
 
-export const response = usefulData.response;
+export const htmlResp = usefulData.htmlResp;
 export const dataTableLang = usefulData.dataTableLang;
 export const datePickerLang = usefulData.datePickerLang;
 export const baseURL = usefulData.baseURL;

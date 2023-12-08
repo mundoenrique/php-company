@@ -1,5 +1,4 @@
-$(function() {
-	$('#pre-loader').remove();
-	$('.hide-out').removeClass('hide');
-	insertFormInput(false)
-})
+$(function () {
+  $('#pre-loader').remove();
+  $('.hide-out').removeClass('hide');
+});

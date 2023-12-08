@@ -1,4 +1,5 @@
-import { lang } from './useful_data.js';
+import { uiModalMessage } from '../modal/ui_modal.js';
+import { lang, redirect } from './useful_data.js';
 
 export const getToken = function (module, _function_) {
   if (lang.SETT_ACTIVE_RECAPTCHA) {
@@ -12,16 +13,19 @@ export const getToken = function (module, _function_) {
         },
         function (token) {
           if (!token) {
-            icon = lang.SETT_ICON_WARNING;
-            modalBtn = {
-              btn1: {
-                text: lang.GEN_BTN_ACCEPT,
-                link: lang.SETT_LINK_SIGNIN,
-                action: 'redirect',
+            const failCaptcha = {
+              icon: lang.SETT_ICON_WARNING,
+              title: lang.GEN_SYSTEM_NAME,
+              msg: lang.GEN_SYSTEM_MESSAGE,
+              modalBtn: {
+                btn1: {
+                  link: redirect.link,
+                  action: 'redirect',
+                },
               },
             };
 
-            appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, modalBtn);
+            uiModalMessage(failCaptcha);
           }
         }
       );
