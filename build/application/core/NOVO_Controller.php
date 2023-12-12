@@ -78,7 +78,7 @@ class NOVO_Controller extends CI_Controller
       $this->checkBrowser();
     }
 
-    if (!empty($_POST) && $this->input->post('payload') === NULL) {
+    if (!empty($_POST) && $this->input->post('payload') === NULL && $this->wasMigrated) {
       $extReq = [
         'data' => $_POST
       ];
@@ -88,7 +88,7 @@ class NOVO_Controller extends CI_Controller
       $this->externalRequest = TRUE;
     }
 
-    if ($this->input->post('payload') !== NULL) {
+    if ($this->input->post('payload') !== NULL && $this->wasMigrated) {
       $request = decryptData($this->input->post('payload'), $this->externalRequest);
       $this->dataRequest = json_decode($request);
       unset($_POST);
