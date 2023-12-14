@@ -124,7 +124,8 @@ $timeZone = [
   'ven' => 'America/Caracas',
   'vg' => 'America/Lima',
 ];
-$errorController = in_array($uriSegments[1], ['assets', 'bpi', 'col', 'per', 'usd', 've',]) ? '' : 'Novo_Errors/pageNoFound';
+$emptyErrCtr = ['assets', 'default', 'bpi', 'col', 'per', 'usd', 've',];
+$errorController = in_array($uriSegments[1], $emptyErrCtr) ? '' : 'Novo_Errors/pageNoFound';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 
@@ -183,4 +184,4 @@ defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL
 defined('SERVICE_CLIENT_ID')      or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')  or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($uriSegments, $timeZone, $errorController);
+unset($uriSegments, $timeZone, $errorController, $emptyErrCtr);
