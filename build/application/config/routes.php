@@ -103,6 +103,10 @@ $route['(:any)/ingresar/(:any)']['GET'] = function ($customer, $sessionId) {
   return SINGLE_SIGNON_GET ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
 };
 $route['(:any)/ingresar']['POST'] = function () {
+  $_POST['external'] = TRUE;
+  return SINGLE_SIGNON_POST ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(:any)/ingress']['POST'] = function () {
   return SINGLE_SIGNON_POST ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
 };
 $route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
@@ -128,6 +132,10 @@ $route['(:any)/ingresar/(:any)/(es|en)']['GET'] = function ($customer, $sessionI
   return SINGLE_SIGNON_GET && ENGLISH_ACTIVE ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
 };
 $route['(:any)/ingresar/(es|en)']['POST'] = function () {
+  $_POST['external'] = TRUE;
+  return SINGLE_SIGNON_POST && ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(:any)/ingress/(es|en)']['POST'] = function () {
   return SINGLE_SIGNON_POST && ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
 };
 $route['(:any)/internal/novopayment/signin/(es/en)'] = function () {

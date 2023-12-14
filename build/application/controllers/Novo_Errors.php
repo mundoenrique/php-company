@@ -31,15 +31,16 @@ class Novo_Errors extends NOVO_Controller
   public function pageNoFound()
   {
     writeLog('INFO', 'errors: pageNoFound Method Initialized');
+    set_status_header(404);
 
     if ($this->input->is_ajax_request()) {
-      $this->output->set_content_type('application/json')->set_status_header(404);
+      $this->output->set_content_type('application/json')->set_output('Resource not found');
+    } else {
+      $view = 'html/error_404';
+      $this->render->activeHeader = TRUE;
+      $this->render->titlePage = lang('ERROR_PAGE_404');
+      $this->views = ['errors/' . $view];
+      $this->loadView($view);
     }
-
-    $view = 'html/error_404';
-    $this->render->activeHeader = TRUE;
-    $this->render->titlePage = lang('ERROR_PAGE_404');
-    $this->views = ['errors/' . $view];
-    $this->loadView($view);
   }
 }
