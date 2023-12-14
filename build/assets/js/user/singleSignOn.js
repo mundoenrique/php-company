@@ -3,13 +3,13 @@ import { takeFormData, toggleDisableActions } from '../utils.js';
 
 $(function () {
   const form = $('#single-signin-form');
-  const send = $('#single-signin-form').attr('send');
+  const submit = $('#single-signin-form').attr('submit');
   let dataSignin;
 
-  if (send) {
+  if (submit === '1') {
     toggleDisableActions(true);
     dataSignin = takeFormData(form);
-    dataSignin.uri = 'ingresar';
+    dataSignin.uri = 'ingress';
     calledCoreAppForm(dataSignin);
   } else {
     const module = 'User';
