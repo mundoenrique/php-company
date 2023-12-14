@@ -78,7 +78,8 @@ class NOVO_Controller extends CI_Controller
       $this->checkBrowser();
     }
 
-    if (!empty($_POST) && $this->input->post('payload') === NULL && $this->wasMigrated) {
+    if (isset($_POST['external']) && $this->input->post('payload') === NULL) {
+      unset($_POST['external']);
       $extReq = [
         'data' => $_POST
       ];
@@ -124,6 +125,7 @@ class NOVO_Controller extends CI_Controller
     if (!empty($_FILES) && $this->isValidRequest && $this->wasMigrated) {
       $this->isValidRequest = $this->manageFile();
     }
+
     if (!empty($_POST) && $this->isValidRequest && $this->wasMigrated) {
       $this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
       $this->isValidRequest = $this->verify_access->validateForm($this->validationMethod);
@@ -337,7 +339,7 @@ class NOVO_Controller extends CI_Controller
       $this->render->title = $responseView->title;
       $this->render->msg = $responseView->msg;
       $this->render->icon = $responseView->icon;
-      $this->render->modalBtn = $responseView->modalBtn;
+      $this->render->modalBtn = json_encode($responseView->modalBtn);
     } elseif (isset($responseView->data->params)) {
       $this->render->params = json_encode($responseView->data->params);
     }

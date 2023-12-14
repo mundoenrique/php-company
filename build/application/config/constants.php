@@ -124,7 +124,7 @@ $timeZone = [
   'ven' => 'America/Caracas',
   'vg' => 'America/Lima',
 ];
-$errorController = in_array($uriSegments[1], ['bpi', 'col', 'per', 'usd', 've',]) ? '' : 'Novo_Errors/pageNoFound';
+$errorController = in_array($uriSegments[1], ['assets', 'bpi', 'col', 'per', 'usd', 've',]) ? '' : 'Novo_Errors/pageNoFound';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 

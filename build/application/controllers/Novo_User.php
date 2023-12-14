@@ -49,41 +49,30 @@ class Novo_User extends NOVO_Controller
    * @info Método para el cierre de sesión
    * @author J. Enrique Peñaloza Piñero.
    */
-  public function singleSignOn($sessionId = FALSE)
+  public function singleSignOn($sessionId = NULL)
   {
     writeLog('INFO', 'User: singleSignOn Method Initialized');
 
     clearSessionsVars();
     $view = 'singleSignOn';
-    $this->render->send = FALSE;
+    $this->render->submit = FALSE;
 
     if ($sessionId) {
       $this->render->form['sessionId'] = $sessionId;
-      $this->render->send = TRUE;
+      $this->render->submit = TRUE;
     } else {
       $this->render->form = $this->request;
     }
 
-    if ($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
-      $view = 'finish';
-      $this->render->activeHeader = TRUE;
-      $this->render->showBtn = FALSE;
-      $this->render->sessionEnd = lang('GEN_SINGLE_SIGNON');
-
-      if ($this->session->flashdata('unauthorized') !== NULL) {
-        $this->render->sessionEnd = $this->session->flashdata('unauthorized');
-      }
-    } else {
-      array_push(
-        $this->includeAssets->jsFiles,
-        'user/singleSignOn'
-      );
-      $this->render->skipmenu = TRUE;
-    }
+    array_push(
+      $this->includeAssets->jsFiles,
+      'user/singleSignOn'
+    );
 
     SetSignSessionType(lang('SETT_COOKIE_SINGN_ON'));
 
     $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->render->skipmenu = TRUE;
     $this->render->skipProductInf = TRUE;
     $this->views = ['user/' . $view];
     $this->loadView($view);
