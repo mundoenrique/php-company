@@ -67,12 +67,17 @@ class Asset
 
     $script = NULL;
     $fileExt = 'js';
-    $typeScript = $wasMigrated ? 'module' : 'text/javascript';
+    $type = 'text/javascript';
 
     foreach ($this->jsFiles as $fileName) {
       $filePath = assetPath('js/' . $fileName);
       $fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
-      $script .= '<script type="' . $typeScript . '" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
+
+      if ($wasMigrated) {
+        $type = strpos($filePath, 'third_party') !== FALSE ? 'text/javascript' : 'module';
+      }
+
+      $script .= '<script type="' . $type . '" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
     }
 
     return $script;
