@@ -401,6 +401,7 @@ if (!function_exists('methodWasmigrated')) {
       'finishSession',
       'loadModels',
       'login',
+      'ratesInf',
       'signIn',
       'single',
       'singleSignOn',
