@@ -1784,6 +1784,56 @@ class Novo_Reports_Model extends NOVO_Model
   }
 
   /**
+   * @info Método para obtener reportes de activades por usario
+   * @author Yelsyns Lopez
+   * @date Dic 15, 2023
+   */
+  public function callWs_exportToActivityUser_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: exportTo' . $dataRequest->type . ' Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Actividad por usuario';
+    $this->dataAccessLog->operation = 'Descarga reporte ' . $dataRequest->type;
+
+    $this->dataRequest->idOperation = $dataRequest->operation;
+    $this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+    $this->dataRequest->rifEmpresa = $dataRequest->rifEnterprise;
+    $this->dataRequest->fechaIni =  $dataRequest->initialDate;
+    $this->dataRequest->fechaFin =  $dataRequest->finalDate;
+    $this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+    $this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+    $response = $this->sendToWebServices('callWs_exportToActivityUser');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->icon = lang('SETT_ICON_DANGER');
+        $this->response->title = lang('REPORTS_TITLE');
+        $this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+
+        if (file_exists(assetPath('downloads/' . $response->bean))) {
+          $this->response->code = 0;
+          $this->response->msg = lang('GEN_MSG_RC_0');
+          $this->response->data = [
+            'file' => assetUrl('downloads/' . $response->bean),
+            'name' => $response->bean
+          ];
+        }
+        break;
+      default:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    return $this->response;
+  }
+
+
+  /**
    * @info Método para obtener actividad por usuario (Produbanco)
    * @author Jhonnatan Vega
    * @date October 13, 2020

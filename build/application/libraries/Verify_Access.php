@@ -260,6 +260,7 @@ class Verify_Access
         break;
       case 'userActivity':
       case 'exportReportUserActivity':
+      case 'exportToActivityUser':
         $auth = ($productInf && $this->verifyAuthorization('REPUSU') && lang('SETT_USER_ACTIVITY') === 'ON');
         break;
       case 'usersActivity':

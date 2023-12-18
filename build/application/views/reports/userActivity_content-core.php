@@ -81,6 +81,11 @@
         <div id="blockResultsUser" class="center mx-1 hide">
           <div class="flex">
             <div id="buttonFiles" class="flex mr-2 py-3 flex-auto justify-end items-center">
+              <?php if (lang('SETT_FILE_USER_ACTIVITY_TXT') === 'ON') : ?>
+                <button id="exportTxt" format="Txt" class="big-modal btn px-1 downloadReport" title="Exportar a TXT" data-toggle="tooltip">
+                  <i class="icon icon-file-txt" aria-hidden="true"></i>
+                </button>
+              <?php endif; ?>
               <button id="exportExcel" format="Excel" class="btn px-1 big-modal downloadReport" title="Exportar a EXCEL" data-toggle="tooltip">
                 <i class="icon icon-file-excel" aria-hidden="true"></i>
               </button>
