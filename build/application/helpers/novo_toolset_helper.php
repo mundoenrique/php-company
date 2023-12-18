@@ -395,6 +395,7 @@ if (!function_exists('methodWasmigrated')) {
    */
   function methodWasmigrated($method, $class)
   {
+    $CI = &get_instance();
     $methodsIn = [
       'benefitsInf',
       'changeLanguage',
@@ -415,6 +416,7 @@ if (!function_exists('methodWasmigrated')) {
       '************************ METHOD ' . $method . ' FROM CLASS ' . $class . ' MIGRATED ************************: ' .
         json_encode($migratedModule, JSON_UNESCAPED_UNICODE)
     );
+    writeLog('INFO', 'accessAuthorization by uri ****** ' . $CI->uri->uri_string());
 
     return $migratedModule;
   }
