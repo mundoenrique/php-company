@@ -38,8 +38,6 @@ $lang['SETT_AUTH_LIST'] = [
   'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'LOCK_TYPES', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT', 'CARD_CANCELLATION'
 ];
 $lang['SETT_AUTH_VALIDATE'] = ['LOCK_TYPES', 'CREDIT_TO_CARD', 'CARD_ASSIGNMENT', 'UPDATE_DATA', 'CARD_CANCELLATION'];
-// https://15.128.26.90/NBEM03/AALoginNew.aspx
-// https://15.128.26.90/NBEM11/AALoginNew.aspx
 $lang['SETT_AUTH_LOADING_URL'] = [
   'development' => [
     'ANY' =>  '',
@@ -60,18 +58,36 @@ $lang['SETT_AUTH_LOADING_URL'] = [
 $lang['SETT_AUTH_URL'] = [
   'development' => [
     'ANY' => '',
-    'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-    'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    'BEM' => [
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
+      'BNC' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    ],
   ],
   'testing' => [
     'ANY' => '',
-    'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-    'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    'BEM' => [
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
+      'BNC' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    ],
   ],
   'production' => [
     'ANY' => '',
-    'BEM' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx',
-    'BEP' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
+    'BEM' => [
+      'BNT' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx',
+      'BNC' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx',
+      'BNC' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
+    ],
   ]
 ];
 $lang['SETT_SECTION_COMMISSION'] = 'OFF';

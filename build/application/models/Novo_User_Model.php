@@ -96,6 +96,7 @@ class Novo_User_Model extends NOVO_Model
           'customerUri' => $this->config->item('customer_uri'),
           'clientAgent' => $this->agent->agent_string(),
           'autoLogin' => 'false',
+          'tokenType' => 'BNT',
           // Eliminar al finalizar la migración
           'idUsuario' => $response->usuario->idUsuario,
           'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -302,7 +303,8 @@ class Novo_User_Model extends NOVO_Model
           'autoLogin' => 'true',
           'enterpriseInf' => [
             'thirdApp' => $dataRequest->Canal ?? ''
-          ]
+          ],
+          'tokenType' => $dataRequest->OPC ?? 'BNT'
         ];
         $this->session->set_userdata($userData);
         $this->response->code = 0;

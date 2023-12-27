@@ -404,15 +404,13 @@ function downLoadfiles(data) {
 
 function getauhtKey() {
   // NO BORRAR DEJAR PARA PRUEBAS INTERNAS
-  /*if (lang.SETT_REMOTE_AUTH == 'ON') {
-		$('#accept').addClass('sender');
-		$('#system-info').on('click', '.sender', function () {
-			$('#accept')
-				.prop('disabled', false)
-				.removeClass('sender');
-			getResponse('true', 'EXITOSO')
-		});
-	}*/
+  /* if (lang.SETT_REMOTE_AUTH === 'ON') {
+    $('#accept').addClass('sender');
+    $('#system-info').on('click', '.sender', function () {
+      $('#accept').prop('disabled', false).removeClass('sender');
+      getResponse('true', 'EXITOSO');
+    });
+  } */
   //HASTA AQUI
   $('#accept').removeClass('get-auth-key');
   $('#accept').removeClass('send-request');
@@ -430,9 +428,9 @@ function getauhtKey() {
       data = {
         // NO BORRAR DEJAR PARA PRUEBAS INTERNAS
         /* btn1: {
-					text: lang.GEN_BTN_ACCEPT,
-					action: 'none'
-				},*/
+          text: lang.GEN_BTN_ACCEPT,
+          action: 'none',
+        }, */
         // HASTA AQUI
         minHeight: 650,
         width: 1000,

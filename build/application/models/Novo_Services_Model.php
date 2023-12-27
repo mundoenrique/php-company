@@ -1364,14 +1364,15 @@ class Novo_Services_Model extends NOVO_Model
 
     // NO BORRAR
     /* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
-		$this->isResponseRc = 0; */
+    $this->isResponseRc = 0; */
 
     switch ($this->isResponseRc) {
       case 0:
+        $tokenType = $this->session->tokenType;
         $this->response->code = 0;
         $this->response->data = [
           'authKey' => $response->bean->tranClave,
-          'urlApp' => lang('SETT_AUTH_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp],
+          'urlApp' => lang('SETT_AUTH_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp][$tokenType],
           'urlLoad' => lang('SETT_AUTH_LOADING_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp]
         ];
         break;

@@ -48,7 +48,7 @@ $config = [
       'rules' => lang('REGEX_IP_SERVER')
     ],
     [
-      'field' => 'opc',
+      'field' => 'OPC',
       'rules' => lang('REGEX_OPC_SERVER')
     ]
   ],
