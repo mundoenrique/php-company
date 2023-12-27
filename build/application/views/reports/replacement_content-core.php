@@ -39,7 +39,7 @@
         <div class="flex my-2 px-5">
           <form id="cateExpenseForm" class="w-100">
             <div class="row flex ">
-              <div class="form-group col-4 col-xl-3">
+              <div class="form-group col-4 col-lg-4">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
                 <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod" disabled>
                   <?php foreach ($enterpriseList as $enterprise) : ?>
@@ -50,7 +50,7 @@
                 </select>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-4 col-xl-3">
+              <div class="form-group col-4 col-lg-4">
                 <label><?= lang('GEN_PRODUCT'); ?></label>
                 <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100" disabled>
                   <option selected disabled><?= $selectProducts ?></option>
@@ -62,35 +62,8 @@
                 </select>
                 <div class="help-block"></div>
               </div>
-              <div id="radio-form" class="form-group col-4">
-                <label class="block"><?= lang('GEN_TABLE_RESULTS'); ?></label>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="quarterly" name="results" class="custom-control-input" disabled>
-                  <label class="custom-control-label mr-1" for="quarterly">Trimestre</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="biannual" name="results" class="custom-control-input" disabled>
-                  <label class="custom-control-label mr-1" for="biannual">Semestre</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="range" name="results" class="custom-control-input" checked disabled>
-                  <label class="custom-control-label mr-1" for="range">Rango</label>
-                </div>
-                <div class="help-block"></div>
-              </div>
-              <div class="form-group col-4 col-lg-3 col-xl-3 range">
-                <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-                <input type="text" id="initialDate" name="datepicker_start" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
-                <div class="help-block">
-                </div>
-              </div>
-              <div class="form-group col-4 col-lg-3 col-xl-3 range">
-                <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-                <input type="text" id="finalDate" name="datepicker_end" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
-                <div class="help-block "></div>
-              </div>
-              <div class="form-group col-4 col-xl-3">
-                <label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
+              <div class="form-group col-4 col-lg-4">
+                <label><?= "Tipo"; ?></label>
                 <select name="type" id="type" class="select-box custom-select flex h6 w-100" disabled>
                   <option selected disabled>Selecciona una opción</option>
                   <option value="01">Tarjeta</option>
@@ -98,7 +71,39 @@
                 </select>
                 <div class="help-block"></div>
               </div>
-              <div class="flex items-center justify-end col-3 search-bnt">
+              <div id="radio-form" class="form-group col-4 col-lg-4">
+                <label class="block"><?= lang('GEN_TABLE_RESULTS'); ?></label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="biannual" name="results" class="custom-control-input" disabled>
+                  <label class="custom-control-label mr-1" for="biannual">Semestre</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="quarterly" name="results" class="custom-control-input" checked disabled>
+                  <label class="custom-control-label mr-1" for="quarterly">Trimestre</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="range" name="results" class="custom-control-input" checked disabled>
+                  <label class="custom-control-label mr-1" for="range">Rango</label>
+                </div>
+                <div class="help-block"></div>
+              </div>
+              <div class="form-group col-4 col-lg-4">
+                <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
+                <input type="text" id="initialDate" name="datepicker_start" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
+                <div class="help-block">
+                </div>
+              </div>
+              <div class="form-group col-4 col-lg-4">
+                <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
+                <input type="text" id="finalDate" name="datepicker_end" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
+                <div class="help-block "></div>
+              </div>
+              <div class="form-group col-4 col-lg-4">
+                <label><?= lang('GEN_TABLE_DNI'); ?> (Opcional)</label>
+                <input type="text" id="idDocument" name="idDocument" class="form-control h5" autocomplete="off" disabled>
+                <div class="help-block"></div>
+              </div>
+              <div class="flex items-center justify-end col-8">
                 <button id="searchButton" type="submit" class="btn btn-primary btn-small" disabled>
                   <?= lang('GEN_BTN_SEARCH'); ?>
                 </button>
