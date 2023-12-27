@@ -124,6 +124,8 @@ $timeZone = [
   'ven' => 'America/Caracas',
   'vg' => 'America/Lima',
 ];
+$ftpPass = $_SERVER['BULK_FTP_PASSWORD'];
+$ftpPass =  ENVIRONMENT !==  'production' ? base64_decode($ftpPass) : $ftpPass;
 $emptyErrCtr = ['assets', 'default', 'images', 'bpi', 'col', 'per', 'usd', 've',];
 $errorController = in_array($uriSegments[1], $emptyErrCtr) ? '' : 'Novo_Errors/pageNoFound';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
@@ -177,11 +179,11 @@ defined('UPLOAD_PATH')        or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 defined('WS_KEY')                 or define('WS_KEY', $_SERVER['WS_KEY']);
 defined('DOWNLOAD_ROUTE')         or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
 defined('BULK_FTP_USERNAME')      or define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
-defined('BULK_FTP_PASSWORD')      or define('BULK_FTP_PASSWORD', base64_decode($_SERVER['BULK_FTP_PASSWORD']));
+defined('BULK_FTP_PASSWORD')      or define('BULK_FTP_PASSWORD', $ftpPass);
 defined('BULK_FTP_URL')           or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
 defined('API_URL')                or define('API_URL', $_SERVER['API_URL']);
 defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
 defined('SERVICE_CLIENT_ID')      or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')  or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($uriSegments, $timeZone, $errorController, $emptyErrCtr);
+unset($ftpPass, $uriSegments, $timeZone, $errorController, $emptyErrCtr);
