@@ -189,6 +189,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model
     $this->dataRequest->idProducto = $dataRequest->productCode;
     $this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
     $this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
+    $this->dataRequest->nombreEmpresa =  $this->session->enterpriseInf->enterpriseName;
+    $this->dataRequest->descProd =  $this->session->productInf->productName;
     $this->dataRequest->ruta = DOWNLOAD_ROUTE;
 
     $response = $this->sendToWebServices('callWs_exportToStatusBulk');
