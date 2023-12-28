@@ -37,7 +37,7 @@
       <div class="search-criteria-order flex pb-3 flex-column w-100">
         <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
         <div class="flex my-2 px-5">
-          <form id="cateExpenseForm" class="w-100">
+          <form id="replacementForm" class="w-100">
             <div class="row flex ">
               <div class="form-group col-4 col-lg-4">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
@@ -63,9 +63,9 @@
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4 col-lg-4">
-                <label><?= "Tipo"; ?></label>
+                <label><?= "Tipo de reposición"; ?></label>
                 <select name="type" id="type" class="select-box custom-select flex h6 w-100" disabled>
-                  <option selected disabled>Selecciona una opción</option>
+                  <option selected disabled>Selecciona un tipo</option>
                   <option value="01">Tarjeta</option>
                   <option value="02">Clave</option>
                 </select>
@@ -87,13 +87,13 @@
                 </div>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-4 col-lg-4">
+              <div class="form-group col-4 col-lg-2">
                 <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
                 <input type="text" id="initialDate" name="datepicker_start" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
                 <div class="help-block">
                 </div>
               </div>
-              <div class="form-group col-4 col-lg-4">
+              <div class="form-group col-4 col-lg-2">
                 <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
                 <input type="text" id="finalDate" name="datepicker_end" class="form-control date-picker" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly disabled>
                 <div class="help-block "></div>
@@ -103,7 +103,7 @@
                 <input type="text" id="idDocument" name="idDocument" class="form-control h5" autocomplete="off" disabled>
                 <div class="help-block"></div>
               </div>
-              <div class="flex items-center justify-end col-8">
+              <div class="flex items-center justify-end col-8 col-lg-12">
                 <button id="searchButton" type="submit" class="btn btn-primary btn-small" disabled>
                   <?= lang('GEN_BTN_SEARCH'); ?>
                 </button>
@@ -133,7 +133,7 @@
               </div>
             </div>
           </div>
-          <table id="cateExpenseTable" class="cell-border h6 display responsive w-100">
+          <table id="replacementTable" class="cell-border h6 display responsive w-100">
             <thead class="bg-primary secondary regular">
               <tr>
                 <th id="queryType" class="bold"></th>

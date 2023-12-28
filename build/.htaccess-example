@@ -295,7 +295,7 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 # SetEnv WS_URL_VG https://peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# BANORTE
-# SetEnv WS_URL_BNT https://banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNT https://banorte-service-aws.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# Coop central
 # SetEnv WS_URL_COOP https://b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS

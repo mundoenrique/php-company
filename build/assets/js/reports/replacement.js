@@ -1,22 +1,23 @@
 'use strict';
-var reportsResults;
 $(function () {
   insertFormInput(false);
   $('#pre-loader').remove();
   $('.hide-out').removeClass('hide');
+  let replacementTable = $('#replacementTable');
+  let replacementForm = $('#replacementForm');
+  let dataReplacement;
 
-  $('#resultsAccount').DataTable({
-    ordering: false,
-    responsive: true,
-    pagingType: 'full_numbers',
+  const tablRreplacement = replacementTable.DataTable({
     language: dataTableLang,
+    ordering: false,
+    pagingType: 'full_numbers',
+    responsive: true,
+    select: false,
   });
 
   $('#initialDate, #finalDate').datepicker({
-    beforeShow: function (input, inst) {
-      inst.dpDiv.removeClass('ui-datepicker-month-year');
-    },
     onSelect: function (selectedDate) {
+      $('#range').prop('checked', true);
       $(this).focus().blur();
       let dateSelected = selectedDate.split('/');
       dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
@@ -30,7 +31,7 @@ $(function () {
         if (currentDate > maxTime) {
           $('#finalDate').datepicker('option', 'maxDate', maxTime);
         } else {
-          $('#finalDate').datepicker('option', 'maxDate', currentDate);
+          $('#finalDate').datepicker('option', 'maxDate', 'today');
         }
       }
     },
@@ -38,15 +39,20 @@ $(function () {
 
   $('#radio-form').on('change', function () {
     $('#initialDate, #finalDate').removeClass('has-error').siblings('.help-block').text('');
+    $('#finalDate').datepicker('option', 'maxDate', 'today');
+    $('#finalDate').datepicker('setDate', 'today');
 
-    if ($('#quarterly').is(':checked') || $('#biannual').is(':checked')) {
-      $('#initialDate, #finalDate').addClass('ignore').attr('disabled', true);
-      $('#initialDate').val('');
-      $('#finalDate').val('');
+    if ($('#biannual').is(':checked')) {
+      $('#initialDate').datepicker('setDate', '-6m');
+    }
+
+    if ($('#quarterly').is(':checked')) {
+      $('#initialDate').datepicker('setDate', '-3m');
     }
 
     if ($('#range').is(':checked')) {
-      $('#initialDate, #finalDate').removeClass('ignore').attr('disabled', false);
+      $('#initialDate').val('');
+      $('#finalDate').val('');
     }
   });
 });
