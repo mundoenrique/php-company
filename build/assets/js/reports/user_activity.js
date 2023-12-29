@@ -147,30 +147,77 @@ $(function () {
 	});
 
 	//Descargar reporte en formato Excel o PDF
-	$('.downloadReport').on('click', function(e) {
-		e.preventDefault();
-		form = $('#userActivityForm');
-		validateForms(form);
+  $('.downloadReport').on('click', function (e) {
 
-		if (form.valid()) {
-			$('.cover-spin').show();
-			who = 'Reports';
-			where = 'exportReportUserActivity';
-			data = getDataForm(form);
-			data.rifEnterprise = $('#enterpriseCode').find('option:selected').attr('acrif');
-			data.downloadFormat = $(this).attr('format');
+    var action = $(this).attr('format');
 
-			callNovoCore(who, where, data, function(response) {
+    if (lang.SETT_DOWNLOAD_SERVER === 'ON') {
+      switch (action) {
+        case 'Excel':
+          ActivityUserDownloadFiles('generarArchivoXlsActividadesXUsuario','Xls')
+          break;
+        case 'PDF':
+          ActivityUserDownloadFiles('generarPdfActividadesXUsuario','Pdf')
+          break;
+        case 'Txt':
+          ActivityUserDownloadFiles('generarTxtActividadesXUsuario','Txt')
+          break;
+      }
+    } else {
+      downLoadReport(e)
+    }
+  });
 
-				if (response.code == 0) {
-					downLoadfiles (response.data);
-				}
+  function downLoadReport(e) {
+    e.preventDefault();
+      form = $('#userActivityForm');
+      validateForms(form);
 
-				$('.cover-spin').hide();
-			});
-		}
-	});
+      if (form.valid()) {
+        $('.cover-spin').show();
+        who = 'Reports';
+        where = 'exportReportUserActivity';
+        data = getDataForm(form);
+        data.rifEnterprise = $('#enterpriseCode').find('option:selected').attr('acrif');
+        data.downloadFormat = $(this).attr('format');
+
+        callNovoCore(who, where, data, function(response) {
+
+          if (response.code == 0) {
+            downLoadfiles (response.data);
+          }
+
+          $('.cover-spin').hide();
+        });
+      }
+  }
+
+  function ActivityUserDownloadFiles(operation, type) {
+    var form = $('#userActivityForm');
+    var data = getDataForm(form)
+    insertFormInput(true);
+    who = 'Reports';
+    where = `exportToActivityUser`;
+    data.rifEnterprise = $('#enterpriseCode').find('option:selected').attr('acrif');
+    data.operation = operation
+    data.type = type
+    callNovoCore(who, where, data, function (response) {
+      if (response.code == 0) {
+        $('#download-file').attr('href', response.data.file);
+        document.getElementById('download-file').click();
+        who = 'DownloadFiles';
+        where = 'DeleteFile';
+        data.fileName = response.data.name
+        callNovoCore(who, where, data, function (response) {})
+      }
+      insertFormInput(false);
+      $('.cover-spin').hide();
+    })
+  }
 });
+
+
+
 
 //Tabla principal
 function createTable(usersActivityData){

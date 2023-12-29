@@ -89,7 +89,6 @@ $(function () {
     var event = $(e.currentTarget);
     var action = event.attr('title');
 
-    console.log(action)
     if (lang.SETT_DOWNLOAD_SERVER === 'ON') {
       switch (action) {
         case lang.GEN_BTN_DOWN_XLS:
@@ -126,8 +125,6 @@ $(function () {
   function StatusBulkDownloadFiles(operation, type) {
     var form = $('#status-bulk-form');
     var data = getDataForm(form)
-    console.log(data)
-    console.log(type)
     insertFormInput(true);
     who = 'DownloadFiles';
     where = `exportToStatusBulk`;
