@@ -722,30 +722,6 @@ class Novo_Reports_Model extends NOVO_Model
     return $this->responseToTheView('callWs_StatusBulk');
   }
   /**
-   * @info Método para Obtener la posicion de la empresa
-   * @author Diego Acosta García
-   * @date May 21, 2020
-   */
-  public function callWs_obtenerIdEmpresa_Reports($dataRequest)
-  {
-    writeLog('INFO', 'Reports Model: obtenerIdEmpresa Method Initialized');
-
-    $this->dataAccessLog->modulo = 'Reportes';
-    $this->dataAccessLog->function = 'Id empresa';
-    $this->dataAccessLog->operation = 'Obtener id de empresa';
-
-    $this->dataRequest->idOperation = 'buscarIdEmpresa';
-    $response =  $dataRequest;
-
-    switch ($this->isResponseRc = 0) {
-      case 0:
-        $user = $response;
-        $this->response->data =  (array)$user;
-    }
-
-    return $this->response;
-  }
-  /**
    * @info Método para obtener la lista de reposiciones
    * @param object $dataRequest
    */
@@ -769,13 +745,27 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tamanoPagina = $dataRequest->length;
     $this->dataRequest->paginaActual = $dataRequest->start + 1;
 
+    $response = $this->sendToWebServices('callWs_closingBudgets');
     $this->response->recordsTotal = 0;
     $this->response->recordsFiltered = 0;
     $this->response->draw = $dataRequest->draw;
     $this->response->data = [];
-    $this->response->code = 0;
 
-    return $this->responseToTheView('callWs_closingBudgets');
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+        break;
+      case -115:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = 'No fue posible obtener las reposiciones';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+      case -150:
+        $this->response->code = 1;
+        break;
+    }
+
+    return $this->responseToTheView('callWs_Replacement');
   }
   /**
    * @info Método para obtener la lista de saldos amanecidos

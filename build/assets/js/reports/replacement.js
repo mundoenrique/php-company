@@ -58,9 +58,6 @@ $(function () {
       delete dataReplacement.biannual;
       delete dataReplacement.quarterly;
       delete dataReplacement.range;
-      // replacementTable.dataTable().fnClearTable();
-      // replacementTable.dataTable().fnDestroy();
-
       insertFormInput(true);
       $('#blockResults, #titleResults').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
@@ -69,6 +66,8 @@ $(function () {
   });
 
   const replacementRenderTable = function () {
+    replacementTable.dataTable().fnClearTable();
+    replacementTable.dataTable().fnDestroy();
     replacementTable.DataTable({
       drawCallback: function (d) {
         insertFormInput(false);
@@ -163,7 +162,11 @@ $(function () {
           if (responseTable.code === codeDefaul) {
             appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.modalBtn);
           }
-          console.log(responseTable);
+
+          if (responseTable.code !== 0) {
+            $('#buttonFiles').addClass('hide');
+          }
+
           return JSON.stringify(responseTable);
         },
       },
