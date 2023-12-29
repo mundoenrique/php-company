@@ -12,3 +12,7 @@ $lang['SETT_FOOTER_RATES'] = 'ON';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
 $lang['SETT_BULK_REPROCESS'] = 'ON';
 $lang['SETT_ENTERPRICE_CONTACT'] = 'ON';
+$lang['SETT_REPLACE_ISSUE_DATE'] = 'OFF';
+$lang['SETT_REPLACE_BULK_ID'] = 'ON';
+$lang['SETT_REPLACE_SERV_ORDER'] = 'ON';
+$lang['SETT_REPLACE_INV_NUMBER'] = 'ON';

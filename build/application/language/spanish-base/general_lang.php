@@ -171,6 +171,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
 $lang['GEN_TABLE_TYPE'] = 'Tipo';
 $lang['GEN_TABLE_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_STATUS'] = 'Estado';
+$lang['GEN_INVOICE_NUMBER'] = 'Nro. Factura';
 $lang['GEN_TABLE_AFFILIATED_CARDS'] = 'Tarjetas afiliadas';
 $lang['GEN_TABLE_FOR_AFFILIATE_CARDS'] = 'Tarjetas por afiliar';
 $lang['GEN_TABLE_AVAILABLE_CARDS'] = 'Tarjetas disponibles';

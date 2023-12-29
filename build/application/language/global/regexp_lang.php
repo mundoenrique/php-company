@@ -18,6 +18,17 @@ $lang['REGEX_SERVICE_ID_SERVER'] = 'trim';
 $lang['REGEX_CHANNEL_SERVER'] = 'trim';
 $lang['REGEX_IP_SERVER'] = 'trim';
 $lang['REGEX_OPC_SERVER'] = 'trim';
+$lang['REGEX_ENTERPRISE_CODE'] = '^([a-z0-9\-\.])+$';
+$lang['REGEX_ENTERPRISE_CODE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ENTERPRISE_CODE'] . '/i]|required';
+$lang['REGEX_PRODUCT_CODE'] = '^([a-z0-9])+$';
+$lang['REGEX_PRODUCT_CODE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_PRODUCT_CODE'] . '/i]|required';
+$lang['REGEX_REPLACE_TYPE'] = '(01|02)';
+$lang['REGEX_REPLACE_TYPE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_REPLACE_TYPE'] . '/]|required';
+$lang['REGEX_DATE_DMY'] = '^([0-9\/])+$';
+$lang['REGEX_DATE_DMY_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_DATE_DMY'] . '/]|required';
+$lang['REGEX_DRAW_SERVER'] = 'trim|integer|required';
+$lang['REGEX_START_SERVER'] = 'trim|integer|required';
+$lang['REGEX_START_LENGHT'] = 'trim|integer|required';
 
 
 

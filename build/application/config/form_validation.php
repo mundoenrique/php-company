@@ -125,6 +125,44 @@ $config = [
       'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
     ]
   ],
+  'replacement' => [
+    [
+      'field' => 'enterpriseCode',
+      'rules' => lang('REGEX_ENTERPRISE_CODE_SERVER')
+    ],
+    [
+      'field' => 'productCode',
+      'rules' => lang('REGEX_PRODUCT_CODE_SERVER')
+    ],
+    [
+      'field' => 'replaceType',
+      'rules' => lang('REGEX_REPLACE_TYPE_SERVER')
+    ],
+    [
+      'field' => 'initialDate',
+      'rules' => lang('REGEX_DATE_DMY_SERVER')
+    ],
+    [
+      'field' => 'finalDate',
+      'rules' => lang('REGEX_DATE_DMY_SERVER')
+    ],
+    [
+      'field' => 'idDocument',
+      'rules' => lang('REGEX_ALPHA_NUM_SERVER')
+    ],
+    [
+      'field' => 'draw',
+      'rules' => lang('REGEX_DRAW_SERVER')
+    ],
+    [
+      'field' => 'start',
+      'rules' => lang('REGEX_START_SERVER')
+    ],
+    [
+      'field' => 'length',
+      'rules' => lang('REGEX_START_LENGHT')
+    ],
+  ],
   'closingBudgets' => [
     [
       'field' => 'idExtPer',

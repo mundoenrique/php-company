@@ -41,7 +41,7 @@
             <div class="row flex ">
               <div class="form-group col-4 col-lg-4">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
-                <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod" disabled>
+                <select id="enterpriseCode" name="enterpriseCode" class="form-control select-box custom-select flex h6 w-100 enterprise-getprod" disabled>
                   <?php foreach ($enterpriseList as $enterprise) : ?>
                     <option doc="<?= $enterprise->accodcia; ?>" name="<?= $enterprise->acrazonsocial; ?>" value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif === $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
                       <?= $enterprise->acnomcia; ?>
@@ -52,7 +52,7 @@
               </div>
               <div class="form-group col-4 col-lg-4">
                 <label><?= lang('GEN_PRODUCT'); ?></label>
-                <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100" disabled>
+                <select id="productCode" name="productCode" class="form-control select-box custom-select flex h6 w-100" disabled>
                   <option selected disabled><?= $selectProducts ?></option>
                   <?php foreach ($productsSelect as $product) : ?>
                     <option doc="<?= $product['desc'] ?>" value="<?= $product['id']; ?>" <?= $product['id'] === $currentProd ? 'selected' : ''; ?>>
@@ -64,8 +64,8 @@
               </div>
               <div class="form-group col-4 col-lg-4">
                 <label><?= "Tipo de reposición"; ?></label>
-                <select name="type" id="type" class="select-box custom-select flex h6 w-100" disabled>
-                  <option selected disabled>Selecciona un tipo</option>
+                <select name="replaceType" id="replaceType" class="form-control select-box custom-select flex h6 w-100" disabled>
+                  <option selected disabled><?= lang('VALIDATE_OPTION'); ?></option>
                   <option value="01">Tarjeta</option>
                   <option value="02">Clave</option>
                 </select>
@@ -136,13 +136,13 @@
           <table id="replacementTable" class="cell-border h6 display responsive w-100">
             <thead class="bg-primary secondary regular">
               <tr>
-                <th id="queryType" class="bold"></th>
-                <?php foreach (lang('SETT_CATEG_GROUP') as $item => $value) : ?>
-                  <th>
-                    <span aria-hidden="true" class="<?= $value ?> h3" title="<?= lang('REPORTS_CATEG_GROUP')[$item] ?>" data-toggle="tooltip"></span>
-                  </th>
-                <?php endforeach; ?>
-                <th class="bold">Total <?= lang('SETT_CURRENCY') ?></th>
+                <th><?= lang('GEN_CARD_NUMBER'); ?></th>
+                <th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
+                <th><?= lang('GEN_TABLE_DNI'); ?></th>
+                <th><?= lang('GEN_TABLE_BULK_ISSUE_DATE'); ?></th>
+                <th><?= lang('GEN_TABLE_BULK_ID'); ?></th>
+                <th><?= lang('GEN_ORDER_TITLE'); ?></th>
+                <th><?= lang('GEN_INVOICE_NUMBER'); ?></th>
               </tr>
             </thead>
           </table>

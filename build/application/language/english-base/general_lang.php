@@ -163,6 +163,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Filename';
 $lang['GEN_TABLE_TYPE'] = 'Type';
 $lang['GEN_TABLE_TYPE_ID'] = 'Type ID';
 $lang['GEN_TABLE_STATUS'] = 'Status';
+$lang['GEN_INVOICE_NUMBER'] = 'Invoice Number';
 $lang['GEN_TABLE_AFFILIATED_CARDS'] = 'Affiliated cards';
 $lang['GEN_TABLE_FOR_AFFILIATE_CARDS'] = 'Cards to affiliate';
 $lang['GEN_TABLE_AVAILABLE_CARDS'] = 'Available cards';

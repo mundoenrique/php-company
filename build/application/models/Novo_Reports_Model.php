@@ -746,6 +746,38 @@ class Novo_Reports_Model extends NOVO_Model
     return $this->response;
   }
   /**
+   * @info Método para obtener la lista de reposiciones
+   * @param object $dataRequest
+   */
+  public function callWs_Replacement_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: Replacement Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Reposiciones';
+    $this->dataAccessLog->operation = 'Listado de reposiciones';
+
+    $this->dataRequest->idOperation = 'buscarReposicionesDetalle';
+    $this->dataRequest->className = 'com.novo.objects.MO.ReposicionesMO';
+    $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->producto = $dataRequest->productCode;
+    $this->dataRequest->tipoRep = $dataRequest->replaceType;
+    $this->dataRequest->tipoRep = $dataRequest->replaceType;
+    $this->dataRequest->fechaIni = $dataRequest->initialDate;
+    $this->dataRequest->fechaFin = $dataRequest->finalDate;
+    $this->dataRequest->paginar = true;
+    $this->dataRequest->tamanoPagina = $dataRequest->length;
+    $this->dataRequest->paginaActual = $dataRequest->start + 1;
+
+    $this->response->recordsTotal = 0;
+    $this->response->recordsFiltered = 0;
+    $this->response->draw = $dataRequest->draw;
+    $this->response->data = [];
+    $this->response->code = 0;
+
+    return $this->responseToTheView('callWs_closingBudgets');
+  }
+  /**
    * @info Método para obtener la lista de saldos amanecidos
    * @author Diego Acosta García
    * @date May 21, 2020

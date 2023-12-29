@@ -324,6 +324,7 @@ function validateForms(form) {
       idExtPer: { required: true, pattern: idNumber },
       contactEmail: { required: true, pattern: emailValid },
       contactType: { required: true, pattern: contactType },
+      replaceType: { required: true, requiredSelect: true },
     },
     messages: {
       userName: lang.VALIDATE_USERLOGIN,
@@ -693,6 +694,7 @@ function validateForms(form) {
         required: lang.VALIDATE_CONTACT_TYPE_SELECT,
         pattern: lang.VALIDATE_CONTACT_TYPE_SELECT,
       },
+      replaceType: lang.VALIDATE_OPTION,
     },
     errorPlacement: function (error, element) {
       $(element).closest('.form-group').find('.help-block').html(error.html());
@@ -744,7 +746,6 @@ function validateForms(form) {
 
   $.validator.methods.requiredSelect = function (value, element, param) {
     var valid = true;
-
     if ($(element).find('option').length > 0) {
       valid = alphanumunder.test($(element).find('option:selected').val().trim());
     }
