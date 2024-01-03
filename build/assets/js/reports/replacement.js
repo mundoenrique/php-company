@@ -90,6 +90,7 @@ $(function () {
         { data: 'bulkId' },
         { data: 'servOrder' },
         { data: 'invNumber' },
+        { data: 'fiscalId' },
       ],
       columnDefs: [
         {
@@ -126,6 +127,11 @@ $(function () {
           targets: 6,
           className: 'invNumber',
           visible: lang.SETT_REPLACE_INV_NUMBER === 'ON',
+        },
+        {
+          targets: 7,
+          className: 'fiscalId',
+          visible: lang.SETT_REPLACE_FISCAL_ID === 'ON',
         },
       ],
       ajax: {

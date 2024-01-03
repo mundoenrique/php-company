@@ -127,9 +127,6 @@
                 <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
                   <i class="icon icon-file-excel" aria-hidden="true" type="xls"></i>
                 </button>
-                <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
-                  <i class="icon icon-file-pdf" aria-hidden="true" type="pdf"></i>
-                </button>
               </div>
             </div>
           </div>

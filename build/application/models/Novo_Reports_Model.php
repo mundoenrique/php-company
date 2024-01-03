@@ -736,6 +736,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idOperation = 'buscarReposicionesDetalle';
     $this->dataRequest->className = 'com.novo.objects.MO.ReposicionesMO';
     $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->idExtPer = $dataRequest->idDocument;
     $this->dataRequest->producto = $dataRequest->productCode;
     $this->dataRequest->tipoRep = $dataRequest->replaceType;
     $this->dataRequest->tipoRep = $dataRequest->replaceType;
@@ -745,7 +746,8 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tamanoPagina = $dataRequest->length;
     $this->dataRequest->paginaActual = $dataRequest->start + 1;
 
-    $response = $this->sendToWebServices('callWs_closingBudgets');
+    $response = $this->sendToWebServices('callWs_Replacement');
+
     $this->response->recordsTotal = 0;
     $this->response->recordsFiltered = 0;
     $this->response->draw = $dataRequest->draw;
@@ -754,6 +756,22 @@ class Novo_Reports_Model extends NOVO_Model
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
+        $this->response->recordsTotal = $response->totalRegistros;
+        $this->response->recordsFiltered = $response->totalRegistros;
+
+        foreach ($response->listadoReposiciones as $replace) {
+          $replacement = new stdClass();
+          $replacement->cardNumber = $replace->tarjeta ?? '';
+          $replacement->cardholder = $replace->tarjetahabiente ?? '';
+          $replacement->documentId = $replace->idExtPer ?? '';
+          $replacement->issueDate = $replace->fechaExp ?? '';
+          $replacement->bulkId = $replace->idLote ?? '';
+          $replacement->servOrder = $replace->idOrden ?? '';
+          $replacement->invNumber = $replace->numFactura ?? '';
+          $replacement->fiscalId = $replace->rif ?? '';
+
+          array_push($this->response->data, $replacement);
+        }
         break;
       case -115:
         $this->response->icon = lang('SETT_ICON_WARNING');
