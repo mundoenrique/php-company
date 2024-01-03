@@ -151,6 +151,18 @@ $config = [
       'rules' => lang('REGEX_ALPHA_NUM_SERVER')
     ],
     [
+      'field' => 'type',
+      'rules' => lang('REGEX_REPORT_TYPE_SERVER')
+    ],
+    [
+      'field' => 'enterpriseName',
+      'rules' => lang('REGEX_ENTERPRISE_NAME_SERVER')
+    ],
+    [
+      'field' => 'productName',
+      'rules' => lang('REGEX_PRODUCT_NAME_SERVER')
+    ],
+    [
       'field' => 'draw',
       'rules' => lang('REGEX_DRAW_SERVER')
     ],

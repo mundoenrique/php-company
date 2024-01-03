@@ -66,8 +66,9 @@
                 <label><?= "Tipo de reposición"; ?></label>
                 <select name="replaceType" id="replaceType" class="form-control select-box custom-select flex h6 w-100" disabled>
                   <option selected disabled><?= lang('VALIDATE_OPTION'); ?></option>
-                  <option value="01">Tarjeta</option>
-                  <option value="02">Clave</option>
+                  <?php foreach (lang('REPORTS_TYPE') as $pos => $value) : ?>
+                    <option value="<?= $pos ?>"><?= $value ?></option>
+                  <?php endforeach; ?>
                 </select>
                 <div class="help-block"></div>
               </div>
@@ -140,6 +141,7 @@
                 <th><?= lang('GEN_TABLE_BULK_ID'); ?></th>
                 <th><?= lang('GEN_ORDER_TITLE'); ?></th>
                 <th><?= lang('GEN_INVOICE_NUMBER'); ?></th>
+                <th><?= lang('GEN_FISCAL_REGISTRY'); ?></th>
               </tr>
             </thead>
           </table>

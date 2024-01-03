@@ -729,48 +729,65 @@ class Novo_Reports_Model extends NOVO_Model
   {
     writeLog('INFO', 'Reports Model: Replacement Method Initialized');
 
+    $type = $dataRequest->type === 'list' ? 'Listado' : 'Archivo';
+    $replaceType = lang('REPORTS_TYPE')[$dataRequest->replaceType];
+    $operation = $type . ' de reposición de ' . $replaceType;
+    $idOperation = [
+      'list' => 'buscarReposicionesDetalle',
+      'xls' => 'reposicionesGeneraArchivo',
+      'pdf' => 'reposicionesGeneraArchivoPdf'
+    ];
+
     $this->dataAccessLog->modulo = 'Reportes';
     $this->dataAccessLog->function = 'Reposiciones';
-    $this->dataAccessLog->operation = 'Listado de reposiciones';
+    $this->dataAccessLog->operation = $operation;
 
-    $this->dataRequest->idOperation = 'buscarReposicionesDetalle';
+    $this->dataRequest->idOperation = $idOperation[$dataRequest->type];
     $this->dataRequest->className = 'com.novo.objects.MO.ReposicionesMO';
     $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName ?? '';
     $this->dataRequest->idExtPer = $dataRequest->idDocument;
     $this->dataRequest->producto = $dataRequest->productCode;
-    $this->dataRequest->tipoRep = $dataRequest->replaceType;
+    $this->dataRequest->descProducto = $dataRequest->productName ?? '';
     $this->dataRequest->tipoRep = $dataRequest->replaceType;
     $this->dataRequest->fechaIni = $dataRequest->initialDate;
     $this->dataRequest->fechaFin = $dataRequest->finalDate;
-    $this->dataRequest->paginar = true;
-    $this->dataRequest->tamanoPagina = $dataRequest->length;
-    $this->dataRequest->paginaActual = $dataRequest->start + 1;
+    $this->dataRequest->paginar = $dataRequest->type === 'list' ? TRUE : 'false';
+    $this->dataRequest->tamanoPagina = $dataRequest->type === 'list' ? $dataRequest->length : '10';
+    $this->dataRequest->paginaActual = strval($dataRequest->start + 1);
 
     $response = $this->sendToWebServices('callWs_Replacement');
 
-    $this->response->recordsTotal = 0;
-    $this->response->recordsFiltered = 0;
+    $this->response->data->recordsTotal = 0;
+    $this->response->data->recordsFiltered = 0;
     $this->response->draw = $dataRequest->draw;
-    $this->response->data = [];
+    $this->response->data->data = [];
+    $this->response->data->file = [];
+    $this->response->data->ext = $dataRequest->type;
+    $this->response->data->name = 'reposición-de-' . $replaceType . '-' . time() . '.' . $this->response->data->ext;
 
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-        $this->response->recordsTotal = $response->totalRegistros;
-        $this->response->recordsFiltered = $response->totalRegistros;
+        if ($dataRequest->type === 'list') {
+          $this->response->data->recordsTotal = $response->totalRegistros;
+          $this->response->data->recordsFiltered = $response->totalRegistros;
 
-        foreach ($response->listadoReposiciones as $replace) {
-          $replacement = new stdClass();
-          $replacement->cardNumber = $replace->tarjeta ?? '';
-          $replacement->cardholder = $replace->tarjetahabiente ?? '';
-          $replacement->documentId = $replace->idExtPer ?? '';
-          $replacement->issueDate = $replace->fechaExp ?? '';
-          $replacement->bulkId = $replace->idLote ?? '';
-          $replacement->servOrder = $replace->idOrden ?? '';
-          $replacement->invNumber = $replace->numFactura ?? '';
-          $replacement->fiscalId = $replace->rif ?? '';
+          foreach ($response->listadoReposiciones as $replace) {
+            $replacement = new stdClass();
+            $replacement->cardNumber = $replace->tarjeta ?? '';
+            $replacement->cardholder = $replace->tarjetahabiente ?? '';
+            $replacement->documentId = $replace->idExtPer ?? '';
+            $replacement->issueDate = $replace->fechaExp ?? '';
+            $replacement->bulkId = $replace->idLote ?? '';
+            $replacement->servOrder = $replace->idOrden ?? '';
+            $replacement->invNumber = $replace->numFactura ?? '';
+            $replacement->fiscalId = $replace->rif ?? '';
 
-          array_push($this->response->data, $replacement);
+            array_push($this->response->data->data, $replacement);
+          }
+        } else {
+          $this->response->data->file = $response->bean->archivo ?? $response->archivo;
         }
         break;
       case -115:
@@ -1592,7 +1609,7 @@ class Novo_Reports_Model extends NOVO_Model
   {
     writeLog('INFO', 'Reports Model: CategoryExpense Method Initialized');
 
-    $operation = $dataRequest->type === 'list' ? 'Movimientos' : 'Archivo ' . $dataRequest->type;
+    $operation = $dataRequest->type === 'list' ? 'Movimientos ' : 'Archivo ' . $dataRequest->type;
     $idOperation = [
       'list' => 'buscarListadoGastosRepresentacion',
       'xls' => 'generarArchivoXlsGastosRepresentacion',

@@ -55,6 +55,7 @@ $(function () {
 
     if (replacementForm.valid()) {
       dataReplacement = getDataForm(replacementForm);
+      dataReplacement.type = 'list';
       delete dataReplacement.biannual;
       delete dataReplacement.quarterly;
       delete dataReplacement.range;
@@ -65,8 +66,18 @@ $(function () {
     }
   });
 
+  $('#buttonFiles').on('click', 'button', function (e) {
+    e.preventDefault();
+    let type = $(e.target).attr('type');
+    dataReplacement.type = type;
+    dataReplacement.enterpriseName = $('#enterpriseCode option:selected').text().trim();
+    dataReplacement.productName = $('#productCode option:selected').text().trim();
+    insertFormInput(true);
+
+    replacementDownloadfile();
+  });
+
   const replacementRenderTable = function () {
-    replacementTable.dataTable().fnClearTable();
     replacementTable.dataTable().fnDestroy();
     replacementTable.DataTable({
       drawCallback: function (d) {
@@ -74,11 +85,16 @@ $(function () {
         $('#spinnerBlock').addClass('hide');
         $('#blockResults, #titleResults').removeClass('hide');
       },
+      autoWidth: true,
+      lengthChange: false,
+      destroy: true,
       language: dataTableLang,
       ordering: false,
+      pageLength: 10,
       pagingType: 'full_numbers',
       processing: true,
       responsive: true,
+      retrive: true,
       searching: false,
       select: false,
       serverSide: true,
@@ -140,13 +156,14 @@ $(function () {
         dataType: 'json',
         cache: false,
         data: function (req) {
+          dataReplacement = {
+            ...dataReplacement,
+            ...req,
+          };
           let dataRequest = JSON.stringify({
             who: 'Reports',
             where: 'replacement',
-            data: {
-              ...dataReplacement,
-              ...req,
-            },
+            data: dataReplacement,
           });
           dataRequest = {
             request: cryptoPass(dataRequest, true),
@@ -173,9 +190,22 @@ $(function () {
             $('#buttonFiles').addClass('hide');
           }
 
-          return JSON.stringify(responseTable);
+          return JSON.stringify(responseTable.data);
         },
       },
+    });
+  };
+
+  const replacementDownloadfile = function () {
+    who = 'Reports';
+    where = 'replacement';
+
+    callNovoCore(who, where, dataReplacement, function (response) {
+      if (response.code === 0) {
+        downLoadfiles(response.data);
+      }
+
+      insertFormInput(false);
     });
   };
 });

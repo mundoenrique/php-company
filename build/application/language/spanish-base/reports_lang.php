@@ -61,3 +61,7 @@ $lang['REPORTS_CATEG_GROUP'] = [
   'W' => 'Comercios y Tiendas por Departamento',
   '8' => 'Otros'
 ];
+$lang['REPORTS_TYPE'] = [
+  '01' => 'Tarjeta',
+  '02' => 'clave'
+];
