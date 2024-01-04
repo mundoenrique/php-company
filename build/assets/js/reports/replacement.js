@@ -55,12 +55,12 @@ $(function () {
 
     if (replacementForm.valid()) {
       dataReplacement = getDataForm(replacementForm);
-      dataReplacement.type = 'list';
       delete dataReplacement.biannual;
       delete dataReplacement.quarterly;
       delete dataReplacement.range;
       insertFormInput(true);
       $('#blockResults, #titleResults').addClass('hide');
+      $('#buttonFiles').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
       replacementRenderTable();
     }
@@ -68,8 +68,7 @@ $(function () {
 
   $('#buttonFiles').on('click', 'button', function (e) {
     e.preventDefault();
-    let type = $(e.target).attr('type');
-    dataReplacement.type = type;
+    dataReplacement.type = $(e.target).attr('type');
     dataReplacement.enterpriseName = $('#enterpriseCode option:selected').text().trim();
     dataReplacement.productName = $('#productCode option:selected').text().trim();
     insertFormInput(true);
@@ -86,9 +85,10 @@ $(function () {
         $('#blockResults, #titleResults').removeClass('hide');
       },
       autoWidth: true,
-      lengthChange: false,
       destroy: true,
       language: dataTableLang,
+      lengthChange: true,
+      lengthMenu: [5, 10, 20, 50],
       ordering: false,
       pageLength: 10,
       pagingType: 'full_numbers',
@@ -156,6 +156,7 @@ $(function () {
         dataType: 'json',
         cache: false,
         data: function (req) {
+          dataReplacement.type = 'list';
           dataReplacement = {
             ...dataReplacement,
             ...req,
@@ -174,20 +175,22 @@ $(function () {
           return dataRequest;
         },
         dataFilter: function (resp) {
-          var responseTable = jQuery.parseJSON(resp);
+          let responseTable = jQuery.parseJSON(resp);
 
           responseTable = JSON.parse(
             CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(
               CryptoJS.enc.Utf8
             )
           );
-          var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
+
+          const codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
+
           if (responseTable.code === codeDefaul) {
             appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.modalBtn);
           }
 
-          if (responseTable.code !== 0) {
-            $('#buttonFiles').addClass('hide');
+          if (responseTable.data.data.length > 0) {
+            $('#buttonFiles').removeClass('hide');
           }
 
           return JSON.stringify(responseTable.data);

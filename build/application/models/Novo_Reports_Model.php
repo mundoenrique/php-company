@@ -7,7 +7,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Novo_Reports_Model extends NOVO_Model
 {
-
   public function __construct()
   {
     parent::__construct();
@@ -752,9 +751,9 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tipoRep = $dataRequest->replaceType;
     $this->dataRequest->fechaIni = $dataRequest->initialDate;
     $this->dataRequest->fechaFin = $dataRequest->finalDate;
-    $this->dataRequest->paginar = $dataRequest->type === 'list' ? TRUE : 'false';
-    $this->dataRequest->tamanoPagina = $dataRequest->type === 'list' ? $dataRequest->length : '10';
-    $this->dataRequest->paginaActual = strval($dataRequest->start + 1);
+    $this->dataRequest->paginar = $dataRequest->type === 'list';
+    $this->dataRequest->tamanoPagina = $dataRequest->length;
+    $this->dataRequest->paginaActual = (int) ($dataRequest->start / $dataRequest->length) + 1;
 
     $response = $this->sendToWebServices('callWs_Replacement');
 
