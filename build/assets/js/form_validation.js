@@ -44,25 +44,26 @@ function validateForms(form) {
 	form.validate({
 		focusInvalid: false,
 		rules: {
-			"userName": { required: true, pattern: alphanumunder },
-			"userPass": { verifyRequired: '#userName', verifyPattern: '#userName' },
-			"user-name": { required: true, pattern: alphanumunder },
-			"id-company": { required: true, fiscalRegistry: true },
-			"email": { required: true, pattern: emailValid },
-			"nit": { pattern: numeric },
-			"current-pass": { required: true },
-			"new-pass": { required: true, differs: "#currentPass", validatePass: true },
-			"confirm-pass": { required: true, equalTo: "#newPass" },
-			"branch-office": { requiredBranchOffice: true },
-			"type-bulk": { requiredTypeBulk: true },
-			"file-bulk": { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
-			"fileBranch": { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
-			"password": { required: true, pattern: userPassword },
-			"type-order": { required: true },
-			"datepicker_start": {
-				required: {
-					depends: function (element) {
-						var requireEl = true;
+      userName: { required: true, pattern: alphanumunder },
+      userPass: { verifyRequired: '#userName', verifyPattern: '#userName' },
+      'user-name': { required: true, pattern: alphanumunder },
+      'id-company': { required: true, fiscalRegistry: true },
+      email: { required: true, pattern: emailValid },
+      nit: { pattern: numeric },
+      document: { pattern: alphanum },
+      'current-pass': { required: true },
+      'new-pass': { required: true, differs: '#currentPass', validatePass: true },
+      'confirm-pass': { required: true, equalTo: '#newPass' },
+      'branch-office': { requiredBranchOffice: true },
+      'type-bulk': { requiredTypeBulk: true },
+      'file-bulk': { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
+      fileBranch: { required: true, extension: lang.SETT_FILES_EXTENSION, sizeFile: true },
+      password: { required: true, pattern: userPassword },
+      'type-order': { required: true },
+      datepicker_start: {
+        required: {
+          depends: function (element) {
+            var requireEl = true;
 
 						if (form.attr('id') === 'service-orders-form') {
 							requireEl = !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
@@ -346,29 +347,33 @@ function validateForms(form) {
 				required: lang.VALIDATE_PHONE_REQ,
 				maxlength: lang.VALIDATE_LENGHT_NUMBER
 			},
-			"card-number": lang.VALIDATE_CARD_NUMBER,
-			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
-			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
-			"expired-date": lang.VALIDATE_SELECTED_DATE,
-			"max-cards": lang.VALIDATE_TOTAL_CARDS,
-			"starting-line1": lang.VALIDATE_STARTING_LINE,
-			"starting-line2": lang.VALIDATE_STARTING_LINE,
-			"bulk-number": lang.VALIDATE_BULK_NUMBER,
-			"enterpriseCode": lang.VALIDATE_SELECT_ENTERPRISE,
-			"productCode": lang.VALIDATE_SELECT_PRODUCT,
-			"initDate": lang.VALIDATE_DATE_DMY,
-			"initialDate": lang.VALIDATE_DATE_DMY,
-			"finalDate": lang.VALIDATE_DATE_DMY,
-			"initialDatemy": lang.VALIDATE_DATE_MY,
-			"monthYear": lang.VALIDATE_DATE_MY,
-			"selection": lang.VALIDATE_OPTION,
-			"idNumber": lang.VALIDATE_ID_NUMBER,
-			"reference": lang.VALIDATE_REFERENCE,
-			"cardNumber": lang.VALIDATE_CARD_NUMBER,
-			"lockType": lang.VALIDATE_OPTION,
-			"otpCode": lang.VALIDATE_OTP_CODE,
-			"orderNumber": {
-				pattern: lang.VALIDATE_BULK_NUMBER,
+      document: {
+        pattern: lang.VALIDATE_INVALID_DOCUMENT,
+        maxlength: lang.VALIDATE_LENGTH_DOCUMENT,
+      },
+      'card-number': lang.VALIDATE_CARD_NUMBER,
+      'card-number-sel': lang.VALIDATE_CARD_NUMBER_SEL,
+      'inquiry-type': lang.VALIDATE_INQUIRY_TYPE_SEL,
+      'expired-date': lang.VALIDATE_SELECTED_DATE,
+      'max-cards': lang.VALIDATE_TOTAL_CARDS,
+      'starting-line1': lang.VALIDATE_STARTING_LINE,
+      'starting-line2': lang.VALIDATE_STARTING_LINE,
+      'bulk-number': lang.VALIDATE_BULK_NUMBER,
+      enterpriseCode: lang.VALIDATE_SELECT_ENTERPRISE,
+      productCode: lang.VALIDATE_SELECT_PRODUCT,
+      initDate: lang.VALIDATE_DATE_DMY,
+      initialDate: lang.VALIDATE_DATE_DMY,
+      finalDate: lang.VALIDATE_DATE_DMY,
+      initialDatemy: lang.VALIDATE_DATE_MY,
+      monthYear: lang.VALIDATE_DATE_MY,
+      selection: lang.VALIDATE_OPTION,
+      idNumber: lang.VALIDATE_ID_NUMBER,
+      reference: lang.VALIDATE_REFERENCE,
+      cardNumber: lang.VALIDATE_CARD_NUMBER,
+      lockType: lang.VALIDATE_OPTION,
+      otpCode: lang.VALIDATE_OTP_CODE,
+      orderNumber: {
+        pattern: lang.VALIDATE_BULK_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 
 			},
