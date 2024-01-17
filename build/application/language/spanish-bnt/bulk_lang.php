@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['BULK_UNNA_REQ_NONCARDS'] = 'No tienes tarjetas disponibles para afiliar, verifica la confirmación de entrega de las tarjetas del lote';
 $lang['BULK_DELETE'] = '¿Estás Seguro que deseas eliminar el lote?';
 $lang['BULK_DISASS'] = '¿Estás Seguro que deseas  desasociar el lote?';
@@ -11,3 +11,4 @@ $lang['BULK_DETAIL_FAIL_COST'] = 'En este momento la consulta de costos no está
 $lang['BULK_NOT_DELETED'] = 'No fue posible eliminar el lote: %d.';
 $lang['BULK_NOT_DISASS'] = 'No fue posible desasociar el lote: %d.';
 $lang['BULK_SO_CREATE_FAILED'] = 'No fue posible generar la orden de servicio.';
+$lang['BULK_INSUFFICIENT_BALANCE'] = 'Saldo insuficiente en cuenta cargo.';
