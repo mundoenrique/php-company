@@ -1,12 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+$lang['REGEX_NUMERIC'] = '^[0-9]+$';
+$lang['REGEX_ALPHA_NUM'] = '^[a-z0-9]+$';
+$lang['REGEX_INT_REQUIRED'] = 'trim|integer|required';
 $lang['REGEX_USER_NAME'] = '^([\w\.\-\+&ñÑ\s]+)+$';
 $lang['REGEX_USER_NAME_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_USER_NAME'] . '/i]|required';
 $lang['REGEX_PASSWORD'] = '^([\w!@\*\-\?¡¿+\/.,#ñÑ]+)+$';
 $regexPass = ACTIVE_SAFETY ? '^([a-zA-Z0-9=]+)+$' : $lang['REGEX_PASSWORD'];
 $lang['REGEX_PASSWORD_SERVER'] = 'trim|regex_match[/' . $regexPass . '/i]|required';
-$lang['REGEX_ALPHA_NUM'] = '^[a-z0-9]+$';
 $lang['REGEX_ALPHA_NUM_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_NUM'] . '/i]';
 $lang['REGEX_SAVE_IP'] = '(' . TRUE . '|' . FALSE . ')';
 $lang['REGEX_SAVE_IP_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_SAVE_IP'] . '/]';
@@ -32,9 +34,11 @@ $lang['REGEX_DATE_DMY'] = '^([0-9\/])+$';
 $lang['REGEX_DATE_DMY_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_DATE_DMY'] . '/]|required';
 $lang['REGEX_REPORT_TYPE'] = '(list|xls|pdf)';
 $lang['REGEX_REPORT_TYPE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_REPORT_TYPE'] . '/]|required';
-$lang['REGEX_DRAW_SERVER'] = 'trim|integer|required';
-$lang['REGEX_START_SERVER'] = 'trim|integer|required';
-$lang['REGEX_START_LENGHT'] = 'trim|integer|required';
+$lang['REGEX_DRAW_SERVER'] = $lang['REGEX_INT_REQUIRED'];
+$lang['REGEX_START_SERVER'] = $lang['REGEX_INT_REQUIRED'];
+$lang['REGEX_LENGHT_SERVER'] = $lang['REGEX_INT_REQUIRED'];
+$lang['REGEX_DOCUMENT_ID'] = $lang['REGEX_NUMERIC'];
+$lang['REGEX_DOCUMENT_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_DOCUMENT_ID'] . '/i]';
 
 
 
@@ -46,6 +50,3 @@ $lang['REGEX_PHONE'] = '^([0-9]{6,15}$)';
 $lang['REGEX_PHONE_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_PHONE'] . '/]';
 $lang['REGEX_ALPHA_STRING'] = '^([\wñáéíóúüÀÈÌÒÙÜ\s]{2,50}$)';
 $lang['REGEX_ALPHA_STRING_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_STRING'] . '/i]|required';
-
-
-$lang['REGEX_NUMERIC'] = '^[0-9]+$';

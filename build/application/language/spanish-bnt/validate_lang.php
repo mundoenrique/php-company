@@ -2,7 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['VALID_USERNAME'] = 'Debes indicar un nombre de usuario válido.';
-
+$lang['VALID_DOC_ID'] = 'Indica un CURP válido, (letras y números)';
+$lang['VALID_DOC_ID'] = 'Indica un CURP válido, (números y letras)';
 
 
 

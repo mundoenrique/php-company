@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['GEN_DOCUMENT_ID'] = 'Identity document';
+
+
 $lang['GEN_SYSTEM_NAME'] = 'Enterprise Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'At this time we cannot accommodate your request, please try again later.';
 $lang['GEN_NOT_DECRYPTED'] = 'The request could not be decrypted';
@@ -263,7 +267,7 @@ $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Change password';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Change email';
 $lang['GEN_DOCUMENT_TYPE'] = 'Document type';
-$lang['GEN_DOCUMENT_ID'] = 'Identity document';
+
 $lang['GEN_USER_TITLE'] = 'Get user';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_TITLE_NAVBAR'] = 'Enterprise';

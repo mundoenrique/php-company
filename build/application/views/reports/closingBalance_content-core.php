@@ -51,8 +51,8 @@
 
               <?php if (lang('SETT_NIT_INPUT_BOOL') === 'ON') : ?>
                 <div class="form-group <?= lang('SETT_SETT_STYLE_SKIN') ?>">
-                  <label><?= lang('REPORTS_ID_FISCAL') ?></label>
-                  <input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
+                  <label><?= lang('GEN_DOCUMENT_ID') ?> (Opcional)</label>
+                  <input type="text" id="idDocument" class="form-control h5" name="idDocument">
                   <div class="help-block"></div>
                 </div>
               <?php endif; ?>
@@ -99,9 +99,9 @@
               <tr>
                 <th><?= lang('REPORTS_TABLE_CARD') ?></th>
                 <th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
-                <th><?= lang('REPORTS_TABLE_DNI') ?></th>
+                <th><?= lang('GEN_DOCUMENT_ID') ?></th>
                 <th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
-                <?php if (lang('SETT_CLOSING_BALANCE_BOOL') == 'ON') : ?>
+                <?php if (lang('SETT_CLOSING_BALANCE_BOOL') === 'ON') : ?>
                   <th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
                 <?php endif; ?>
               </tr>

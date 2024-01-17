@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['GEN_DOCUMENT_ID'] = 'CURP';
+
+
 $lang['GEN_SYSTEM_MESSAGE'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas'; //COPELO

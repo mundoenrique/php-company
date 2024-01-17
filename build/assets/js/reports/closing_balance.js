@@ -31,16 +31,16 @@ $(function () {
   });
 
   $('#closingBudgetsBtn').on('click', function (e) {
-    $('#spinnerBlock').removeClass('hide');
-    $('#blockBudgetResults').addClass('hide');
-    $('#export_excel').removeClass('hide');
-    $('#export_txt').removeClass('hide');
-    $('#export_pdf').removeClass('hide');
     e.preventDefault();
     form = $('#closingBudgetForm');
     validateForms(form);
 
     if (form.valid()) {
+      $('#spinnerBlock').removeClass('hide');
+      $('#blockBudgetResults').addClass('hide');
+      $('#export_excel').removeClass('hide');
+      $('#export_txt').removeClass('hide');
+      $('#export_pdf').removeClass('hide');
       insertFormInput(true, form);
       form = $('#closingBudgetForm');
       var dataForm = getDataForm(form);
@@ -215,8 +215,8 @@ function closingBudgets(dataForm) {
       cache: false,
       data: function (req) {
         data = req;
-        if (lang.SETT_NIT_INPUT_BOOL == 'ON') {
-          data.idExtPer = $('#Nit').val();
+        if (lang.SETT_NIT_INPUT_BOOL === 'ON') {
+          data.idExtPer = $('#idDocument').val();
         } else {
           data.idExtPer = '';
         }

@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
+
+
 $lang['GEN_SYSTEM_NAME'] = 'Conexión Empresas Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
 $lang['GEN_NOT_DECRYPTED'] = 'No fue posible desencriptar la petición';
@@ -273,7 +276,6 @@ $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Cambiar email';
 $lang['GEN_DOCUMENT_TYPE'] = 'Tipo de documento';
-$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
 $lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_TITLE_NAVBAR'] = 'Empresas';

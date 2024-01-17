@@ -26,6 +26,7 @@ function validateForms(form) {
   var fiscalReg = lang.SETT_VALIDATE_FISCAL_REGISTRY;
   var idNumberReg = new RegExp(lang.SETT_VALIDATE_REG_ID_NUMBER, 'i');
   var rechargeDesc = new RegExp(lang.SETT_VALIDATE_RECHAR_REGEX_DESC, 'i');
+  var documentId = new RegExp(lang.REGEX_DOCUMENT_ID, 'i');
   var date = {
     dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
     my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -58,7 +59,7 @@ function validateForms(form) {
             return $(element).attr('req') === 'yes';
           },
         },
-        pattern: numeric,
+        pattern: documentId,
       },
       'current-pass': { required: true },
       'new-pass': { required: true, differs: '#currentPass', validatePass: true },
@@ -333,7 +334,7 @@ function validateForms(form) {
         verifyPattern: lang.VALID_USERPASS_PATTERN,
       },
       'user-name': lang.VALID_USERNAME,
-      idDocument: lang.VALIDATE_NUMBER_ID,
+      idDocument: lang.VALID_DOC_ID,
       'id-company': lang.VALIDATE_ID_COMPANY + lang.VALIDATE_EXAMPLE_ID_FISCAL,
       'anio-consolid': lang.VALIDATE_SELECTED_YEAR,
       yearReport: lang.VALIDATE_SELECTED_YEAR,

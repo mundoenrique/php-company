@@ -172,7 +172,7 @@ $config = [
     ],
     [
       'field' => 'length',
-      'rules' => lang('REGEX_START_LENGHT')
+      'rules' => lang('REGEX_LENGHT_SERVER')
     ],
   ],
   'closingBudgets' => [
