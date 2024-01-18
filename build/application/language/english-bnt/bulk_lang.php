@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['BULK_UNNA_REQ_NONCARDS'] = 'You do not have cards available to affiliate, check the delivery confirmation of the cards in the bulk';
 $lang['BULK_DELETE'] = 'Are you sure you want to delete the bulk?';
 $lang['BULK_DISASS'] = 'Are you sure you want to disassociate the batch?';
@@ -11,4 +12,3 @@ $lang['BULK_DETAIL_FAIL_COST'] = 'At this time the cost inquiry is not available
 $lang['BULK_NOT_DELETED'] = 'Could not delete bulk: %d.';
 $lang['BULK_NOT_DISASS'] = 'Could not detach bulk: %d.';
 $lang['BULK_SO_CREATE_FAILED'] = 'The service order could not be generated.';
-$lang['BULK_INSUFFICIENT_BALANCE'] = 'Insufficient balance in load account.';
