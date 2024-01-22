@@ -58,7 +58,27 @@ $(function () {
     },
   });
 
-  $('#radio-form').on('change', function () {
+  $('#radio-type').on('change', function () {
+    $('#idDocument, #cardNumber').removeClass('has-error').siblings('.help-block').text('');
+
+    if ($('#dni').is(':checked')) {
+      $('#idDocument').removeClass('ignore');
+      $('#cardNumber').addClass('ignore');
+      $('.card-number').addClass('hide');
+      $('.dni').removeClass('hide');
+      $('#cardNumber').val('');
+    }
+
+    if ($('#card').is(':checked')) {
+      $('#cardNumber').removeClass('ignore');
+      $('#idDocument').addClass('ignore');
+      $('.dni').addClass('hide');
+      $('.card-number').removeClass('hide');
+      $('#idDocument').val('');
+    }
+  });
+
+  $('#radio-date').on('change', function () {
     $('#initialDate, #finalDate, #yearDate').removeClass('has-error').siblings('.help-block').text('');
 
     if ($('#annual').is(':checked')) {
@@ -91,11 +111,15 @@ $(function () {
     if (cateExpenseForm.valid()) {
       dataExpense = getDataForm(cateExpenseForm);
       dataExpense.annual = $('#annual').is(':checked');
+      dataExpense.idDocument = $('#dni').is(':checked') ? dataExpense.idDocument : '';
+      dataExpense.cardNumber = $('#card').is(':checked') ? dataExpense.cardNumber : '';
       dataExpense.type = 'list';
       cateExpenseTable.dataTable().fnClearTable();
       delete dataExpense.range;
+      delete dataExpense.dni;
+      delete dataExpense.card;
       insertFormInput(true);
-      $('#blockResults, #titleResults').addClass('hide');
+      $('#blockResults').addClass('hide');
       $('#spinnerBlock').removeClass('hide');
       $('#queryType').text(dataExpense.annual ? 'Anual' : 'Rango');
 

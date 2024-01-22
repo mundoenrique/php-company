@@ -62,24 +62,36 @@
                 </select>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-4 col-xl-3">
-                <label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
-                <input type="text" id="cardNumber" name="cardNumber" class="form-control h5" autocomplete="off" req="yes" disabled>
+              <div id="radio-type" class="form-group col-4 col-xl-3">
+                <label class="block"><?= lang('GEN_QUERY_TYPE') ?></label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="dni" name="selection" class="form-control custom-control-input" value="dni" checked disabled>
+                  <label class="custom-control-label mr-1" for="dni"><?= lang('GEN_TABLE_DNI') ?></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="card" name="selection" class="form-control custom-control-input" value="card" disabled>
+                  <label class="custom-control-label mr-1" for="card"><?= "tarjeta" ?></label>
+                </div>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-4 col-xl-3">
+              <div class="form-group col-4 col-xl-3 dni">
                 <label><?= lang('GEN_TABLE_DNI'); ?></label>
                 <input type="text" id="idDocument" name="idDocument" class="form-control h5" autocomplete="off" req="yes" disabled>
                 <div class="help-block"></div>
               </div>
-              <div id="radio-form" class="form-group col-3">
+              <div class="form-group col-4 col-xl-3 hide card-number">
+                <label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control h5 ignore" autocomplete="off" req="yes" disabled>
+                <div class="help-block"></div>
+              </div>
+              <div id="radio-date" class="form-group col-3">
                 <label class="block"><?= lang('GEN_TABLE_RESULTS'); ?></label>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="annual" name="results" class="custom-control-input" disabled>
+                  <input type="radio" id="annual" name="results" class="form-control custom-control-input" disabled>
                   <label class="custom-control-label mr-1" for="annual">Anual</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="range" name="results" class="custom-control-input" checked disabled>
+                  <input type="radio" id="range" name="results" class="form-control custom-control-input" checked disabled>
                   <label class="custom-control-label mr-1" for="range">Rango</label>
                 </div>
                 <div class="help-block"></div>
@@ -112,12 +124,12 @@
         <div class="line mb-2"></div>
       </div>
       <div class="flex pb-5 flex-column">
+        <span id="titleResults" class="line-text mb-2 h4 semibold primary hide"><?= lang('GEN_TABLE_RESULTS'); ?></span>
         <div id="spinnerBlock" class=" hide">
           <div id="preLoader" class="mt-2 mx-auto flex justify-center">
             <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
           </div>
         </div>
-        <span id="titleResults" class="line-text mb-2 h4 semibold primary hide"><?= lang('GEN_TABLE_RESULTS'); ?></span>
         <div id="blockResults" class="center mx-1 hide">
           <div class="flex">
             <div class="flex mr-2 py-3 flex-auto justify-end items-center">

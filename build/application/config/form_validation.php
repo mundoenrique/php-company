@@ -1407,11 +1407,11 @@ $config = [
     ],
     [
       'field' => 'cardNumber',
-      'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+      'rules' => 'trim|regex_match[/^[0-9]*$/i]'
     ],
     [
       'field' => 'idDocument',
-      'rules' => 'trim|alpha_numeric|required'
+      'rules' => 'trim|alpha_numeric'
     ],
     [
       'field' => 'annual',
