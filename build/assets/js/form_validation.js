@@ -1,17 +1,15 @@
 'use strict';
 function validateForms(form) {
   formInputTrim(form);
-  var onlyNumber = /^[0-9]{6,8}$/;
-  var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-  var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
-  var regNumberValid = /^['a-z0-9']{6,45}$/i;
-  var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
-  var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-  var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ# (),.-])+$/i;
+
+  var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\# (),.-\/])+$/i;
   var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
   var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
   var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
   var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
+  var address = new RegExp(lang.REGEX_ADDRESS, 'i');
+  var addressCod = new RegExp(lang.REGEX_ADDRESS_COD, 'i');
+  var contact = new RegExp(lang.REGEX_CONTACT, 'i');
   var phoneNumber = new RegExp(lang.REGEX_PHONE);
   var userPassword = new RegExp(lang.REGEX_PASSWORD, 'i');
   var alphaString = new RegExp(lang.REGEX_ALPHA_STRING, 'i');
@@ -289,27 +287,27 @@ function validateForms(form) {
         maxAmountTransweekly: true,
       },
       description: { required: true, pattern: rechargeDesc },
-      branchName: { required: true, pattern: longPhraseUpper },
-      zoneName: { required: true, pattern: numeric },
+      branchName: { required: true, pattern: address },
+      zoneName: { required: true, pattern: address },
       address: { required: true, pattern: longPhraseUpper },
-      address1: { required: true, pattern: longPhraseUpper },
-      address2: { pattern: longPhraseUpper },
-      address3: { pattern: longPhraseUpper },
+      address1: { required: true, pattern: address },
+      address2: { pattern: address },
+      address3: { pattern: address },
       billingAddress: { required: true, pattern: longPhraseUpper },
       countryCode: { required: true, pattern: numeric },
       countryCodBranch: { required: true, pattern: numeric },
-      stateCodBranch: { required: true, pattern: numeric },
-      cityCodBranch: { required: true, pattern: numeric },
-      districtCodBranch: { required: true, pattern: numeric },
+      stateCodBranch: { required: true, pattern: addressCod },
+      cityCodBranch: { required: true, pattern: addressCod },
+      districtCodBranch: { required: true, pattern: addressCod },
       idFiscalList: { required: true },
       idEnterpriseList: { required: true },
-      areaCode: { required: true, pattern: numeric },
+      areaCode: { required: true, pattern: addressCod },
       phone: { required: true, pattern: phoneNumber },
       phone1: { required: true, pattern: phoneNumber },
       phone2: { pattern: phoneNumber },
       phone3: { pattern: phoneNumber },
-      person: { required: true, pattern: alphanumspace },
-      branchCode: { required: true, pattern: numeric },
+      person: { pattern: contact },
+      branchCode: { required: true, pattern: addressCod },
       surnameModifyContact: { required: true, pattern: alphanumspace },
       positionModifyContact: { required: true, pattern: alphanumspace },
       typeModifyContact: { required: true },

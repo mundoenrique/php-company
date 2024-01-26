@@ -574,9 +574,15 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataAccessLog->modulo = 'Sucursales';
     $this->dataAccessLog->function = 'Agregar Sucursales';
     $this->dataAccessLog->operation = 'Agregar';
+
+    $password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+    if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
+      $password = $this->session->passWord ?: md5($password);
+    }
+
     $this->dataRequest->idOperation = 'getAgregarSucursales';
     $this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
-
     $this->dataRequest->rif = $dataRequest->idFiscal;
     $this->dataRequest->codigo = $dataRequest->branchCode;
     $this->dataRequest->nomb_cia = $dataRequest->branchName;
@@ -594,9 +600,7 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->costoUnitDistribucion = '0';
     $this->dataRequest->costoMinimo = '0';
     $this->dataRequest->costoDistribRep = '0';
-
-    $password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
-
+    $this->dataRequest->usuario = $this->userName;
     $this->dataRequest->password = $password;
 
     $response = $this->sendToWebServices('CallWs_addBranches');
@@ -606,7 +610,19 @@ class Novo_Tools_Model extends NOVO_Model
         $this->response->code = 0;
         $this->response->icon =  lang('SETT_ICON_SUCCESS');
         $this->response->msg = lang('TOOLS_BRANCH_ADD');
-        $this->response->modalBtn['btn1']['action'] = 'none';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+      case -1:
+        $this->response->code = 4;
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+      case -168:
+        $this->response->code = 4;
+        $this->response->icon = lang('SETT_ICON_INFO');
+        $this->response->msg = lang('TOOLS_BRANCH_EXISTS');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
     }
 
@@ -627,9 +643,15 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataAccessLog->modulo = 'Sucursales';
     $this->dataAccessLog->function = 'Actualizar Sucursales';
     $this->dataAccessLog->operation = 'Actualizar';
+
+    $password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+    if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
+      $password = $this->session->passWord ?: md5($password);
+    }
+
     $this->dataRequest->idOperation = 'getActualizarSucursal';
     $this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
-
     $this->dataRequest->rif = $dataRequest->idFiscal;
     $this->dataRequest->cod = $dataRequest->codB;
     $this->dataRequest->nom_cia = $dataRequest->branchName;
@@ -643,14 +665,7 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->persona = $dataRequest->person;
     $this->dataRequest->cod_area = $dataRequest->areaCode;
     $this->dataRequest->telefono = $dataRequest->phone;
-    $this->dataRequest->usuario = $dataRequest->userNameB;
-
-    $password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
-
-    if (getSignSessionType() === lang('SETT_COOKIE_SINGN_IN')) {
-      $password = $this->session->pass ?: md5($password);
-    }
-
+    $this->dataRequest->usuario = $this->userName;
     $this->dataRequest->password = $password;
 
     $this->sendToWebServices('CallWs_updateBranches');
@@ -661,6 +676,12 @@ class Novo_Tools_Model extends NOVO_Model
         $this->response->icon =  lang('SETT_ICON_SUCCESS');
         $this->response->msg = lang('TOOLS_BRANCH_UPDATE');
         $this->response->modalBtn['btn1']['action'] = 'none';
+        break;
+      case -1:
+        $this->response->code = 4;
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
     }
 

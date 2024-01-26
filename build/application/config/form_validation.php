@@ -979,67 +979,59 @@ $config = [
   'geoFilter' => [
     [
       'field' => 'data[]',
-      'label' => 'data',
       'rules' => 'required'
     ]
   ],
   'getBranches' => [
     [
       'field' => 'idFiscalList',
-      'label' => 'idFiscalList',
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
     ]
   ],
   'addBranches' => [
     [
       'field' => 'idFiscal',
-      'label' => 'idFiscal',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+      'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ],
     [
       'field' => 'branchName',
-      'label' => 'branchName',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_REQ_SERVER')
     ],
     [
       'field' => 'zoneName',
-      'label' => 'zoneName',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
       'field' => 'address1',
-      'label' => 'address1',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_REQ_SERVER')
     ],
     [
       'field' => 'address2',
-      'label' => 'address2',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
       'field' => 'address3',
-      'label' => 'address3',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
       'field' => 'countryCodBranch',
-      'label' => 'countryCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'stateCodBranch',
-      'label' => 'stateCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'cityCodBranch',
-      'label' => 'cityCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
+    ],
+    [
+      'field' => 'person',
+      'rules' => lang('REGEX_CONTACT_SERVER')
     ],
     [
       'field' => 'areaCode',
-      'label' => 'areaCode',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'phone',
@@ -1047,70 +1039,57 @@ $config = [
     ],
     [
       'field' => 'branchCode',
-      'label' => 'branchCode',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
-      'field' => 'password1',
-      'label' => 'password1',
-      'rules' => 'trim|required'
+      'field' => 'pass',
+      'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
   'updateBranches' => [
     [
       'field' => 'idFiscal',
-      'label' => 'idFiscal',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+      'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ],
     [
       'field' => 'codB',
-      'label' => 'codB',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'branchName',
-      'label' => 'branchName',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_REQ_SERVER')
     ],
     [
       'field' => 'address1',
-      'label' => 'address1',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_REQ_SERVER')
     ],
     [
       'field' => 'address2',
-      'label' => 'address2',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
       'field' => 'address3',
-      'label' => 'address3',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
       'field' => 'countryCodBranch',
-      'label' => 'countryCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'stateCodBranch',
-      'label' => 'stateCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'cityCodBranch',
-      'label' => 'cityCodBranch',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'person',
-      'label' => 'person',
-      'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]'
+      'rules' => lang('REGEX_CONTACT_SERVER')
     ],
     [
       'field' => 'areaCode',
-      'label' => 'areaCode',
-      'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+      'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
       'field' => 'phone',
@@ -1118,24 +1097,20 @@ $config = [
     ],
     [
       'field' => 'userNameB',
-      'label' => 'userNameB',
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]|required'
     ],
     [
-      'field' => 'password1',
-      'label' => 'password1',
-      'rules' => 'trim|required'
+      'field' => 'pass',
+      'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
   'uploadFileBranches' => [
     [
       'field' => 'idFiscal',
-      'label' => 'idFiscal',
       'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
     ],
     [
       'field' => 'typeBulkText',
-      'label' => 'typeBulkText',
       'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
     ]
   ],

@@ -2170,8 +2170,9 @@ class Users extends CI_Controller
           )
         )
       );
+
       $rif = $dataRequest->rif;
-      $paginaActual = $dataRequest->paginaActual;
+      $paginaActual = $dataRequest->paginaActual ?? '1';
       $cantItems = $dataRequest->data_cantItems;
       $paginar = $dataRequest->data_paginar;
 
