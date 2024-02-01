@@ -31,13 +31,6 @@ $(function () {
 
     $('input, select').removeClass('has-error');
     $('.help-block').text('');
-
-    if ($('#enterpriseList > option').length > 1) {
-      $('#enterpriseList').prop('selectedIndex', 0);
-      $('#enterpriseDataForm')[0].reset();
-      $('#passwordChangeForm')[0].reset();
-      $('#enterpriseData').addClass('hide');
-    }
   });
 
   $('.nav-item-config:first-child').addClass('active');
