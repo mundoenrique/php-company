@@ -50,6 +50,7 @@ $lang['VALIDATE_SELECT_PRODUCT'] = 'You must select a product';
 $lang['VALIDATE_DATE_DMY'] = 'Enter a valid date mm / dd / yyyy';
 $lang['VALIDATE_DATE_MY'] = 'Please indicate a valid date mm / yyyy';
 $lang['VALIDATE_SELECT'] = 'Select at least one record';
+$lang['VALIDATE_SELECT_CONTENT'] = 'Registry content is invalid';
 $lang['VALIDATE_OS_OTP'] = 'Please enter a valid security code';
 $lang['VALIDATE_SELECT_GROUP'] = 'Complete any of these fields';
 $lang['VALIDATE_OPTION'] = 'Please select an option';

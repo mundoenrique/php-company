@@ -3,8 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['REGEX_NUMERIC'] = '^[0-9]+$';
 $lang['REGEX_ALPHA_NUM'] = '^[a-z0-9]+$';
-$lang['REGEX_ALPHA_NUM_SPECIAL'] = '^[\w\d-\/]+$';
-$lang['REGEX_ALPHA_NUM_CHAR'] = '^[\w\dñÑáéíóúÁÉÍÓÚ #(),.\-\/]+$';
+$lang['REGEX_ALPHA_NUM_SPECIAL'] = '^[\w\-\/]+$';
+$lang['REGEX_ALPHA_NUM_CHAR'] = '^[\w\sñÑáéíóúÁÉÍÓÚ\#\(\)\,\.\-\/]+$';
 $lang['REGEX_ALPHA_NUM_SPACE'] = '^[\w\d\sñÑáéíóúÁÉÍÓÚ]+$';
 $lang['REGEX_INT_REQUIRED'] = 'trim|integer|required';
 $lang['REGEX_USER_NAME'] = '^([\w\.\-\+&ñÑ\s]+)+$';
@@ -48,7 +48,7 @@ $lang['REGEX_ADDRESS_REQ_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS'
 $lang['REGEX_ADDRESS_COD'] = $lang['REGEX_NUMERIC'];
 $lang['REGEX_ADDRESS_COD_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS_COD'] . '/i]|required';
 $lang['REGEX_FISCAL_ID'] = $lang['REGEX_ALPHA_NUM_SPECIAL'];
-$lang['REGEX_FISCAL_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS'] . '/i]|required';
+$lang['REGEX_FISCAL_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_NUM_SPECIAL'] . '/i]|required';
 $lang['REGEX_CONTACT'] = $lang['REGEX_ALPHA_NUM_SPACE'];
 $lang['REGEX_CONTACT_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CONTACT'] . '/i]';
 

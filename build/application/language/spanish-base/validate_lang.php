@@ -52,6 +52,7 @@ $lang['VALIDATE_SELECT_PRODUCT'] = 'Debes seleccionar un producto';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
 $lang['VALIDATE_DATE_MY'] = 'Indica una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECT'] = 'Selecciona al menos un registro';
+$lang['VALIDATE_SELECT_CONTENT'] = 'El contenido del registro no es válido';
 $lang['VALIDATE_OS_OTP'] = 'Indica un código de seguridad válido';
 $lang['VALIDATE_SELECT_GROUP'] = 'Completa alguno de estos campos';
 $lang['VALIDATE_OPTION'] = 'Selecciona una opción';

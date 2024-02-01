@@ -985,10 +985,10 @@ $config = [
   'getBranches' => [
     [
       'field' => 'idFiscalList',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9-\/]+$/i]|required'
+      'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ]
   ],
-  'addBranches' => [
+  'addBranche' => [
     [
       'field' => 'idFiscal',
       'rules' => lang('REGEX_FISCAL_ID_SERVER')
@@ -1014,7 +1014,7 @@ $config = [
       'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
-      'field' => 'countryCodBranch',
+      'field' => 'countryCod',
       'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
@@ -1046,13 +1046,13 @@ $config = [
       'rules' => lang('REGEX_PASSWORD_SERVER')
     ]
   ],
-  'updateBranches' => [
+  'updateBranche' => [
     [
       'field' => 'idFiscal',
       'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ],
     [
-      'field' => 'codB',
+      'field' => 'codeUpdate',
       'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
@@ -1072,7 +1072,7 @@ $config = [
       'rules' => lang('REGEX_ADDRESS_SERVER')
     ],
     [
-      'field' => 'countryCodBranch',
+      'field' => 'countryCod',
       'rules' => lang('REGEX_ADDRESS_COD_SERVER')
     ],
     [
@@ -1094,10 +1094,6 @@ $config = [
     [
       'field' => 'phone',
       'rules' => lang('REGEX_PHONE_SERVER')
-    ],
-    [
-      'field' => 'userNameB',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]|required'
     ],
     [
       'field' => 'pass',

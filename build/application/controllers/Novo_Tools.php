@@ -68,7 +68,7 @@ class Novo_Tools extends NOVO_Controller
       $this->render->enterpriseSettList = $enterpriseList;
       $this->render->countEnterpriseList = count($enterpriseList);
 
-      if ($this->render->countEnterpriseList == 1) {
+      if ($this->render->countEnterpriseList === 1) {
         foreach ((object)lang('TOOLS_RENDER_CONTROLLER_VARIABLES') as $key => $value) {
           $valuesArr[$key] = $this->render->enterpriseSettList[0]->$value;
         }

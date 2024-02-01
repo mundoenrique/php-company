@@ -506,6 +506,7 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataAccessLog->modulo = 'Sucursales';
     $this->dataAccessLog->function = 'Búsqueda de sucursales';
     $this->dataAccessLog->operation = 'Buscar sucursales';
+
     $this->dataRequest->idOperation = 'getConsultarSucursales';
     $this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
     $this->dataRequest->paginaActual = 1;
@@ -516,37 +517,35 @@ class Novo_Tools_Model extends NOVO_Model
         "rif" => $dataRequest->idFiscalList
       ]
     ];
-    $profile = 'S';
-    $country = $this->session->customerSess;
 
     $response = $this->sendToWebServices('CallWs_getBranches');
-    $listBranches = [];
+    $branchesList = [];
 
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
 
         foreach ($response->lista as $key => $detailBranches) {
-          $record = new stdClass();
-          $record->codB = $detailBranches->cod;
-          $record->person = $detailBranches->persona;
-          $record->userNameB = $detailBranches->usuario;
-          $record->branchName = $detailBranches->nomb_cia;
-          $record->branchCode = $detailBranches->codigo;
-          $record->contact = $detailBranches->persona;
-          $record->phone = $detailBranches->telefono;
-          $record->zoneName = $detailBranches->zona;
-          $record->address1 = $detailBranches->direccion_1;
-          $record->address2 = $detailBranches->direccion_2;
-          $record->address3 = $detailBranches->direccion_3;
-          $record->areaCode = $detailBranches->cod_area;
-          $record->countryCod = $detailBranches->codPais;
-          $record->stateCod = $detailBranches->estado;
-          $record->cityCod = $detailBranches->ciudad;
-          $record->branchRow = $key;
+          $record = [];
+          $record['codeUpdate'] = $detailBranches->cod;
+          $record['person'] = $detailBranches->persona;
+          $record['userName'] = $detailBranches->usuario;
+          $record['branchName'] = $detailBranches->nomb_cia;
+          $record['branchCode'] = $detailBranches->codigo;
+          $record['contact'] = $detailBranches->persona;
+          $record['phone'] = $detailBranches->telefono;
+          $record['zoneName'] = $detailBranches->zona;
+          $record['address1'] = $detailBranches->direccion_1;
+          $record['address2'] = $detailBranches->direccion_2;
+          $record['address3'] = $detailBranches->direccion_3;
+          $record['areaCode'] = $detailBranches->cod_area;
+          $record['countryCod'] = $detailBranches->codPais;
+          $record['stateCod'] = $detailBranches->estado;
+          $record['cityCod'] = $detailBranches->ciudad;
+          $record['branchRow'] = $key;
 
           array_push(
-            $listBranches,
+            $branchesList,
             $record
           );
         };
@@ -556,8 +555,8 @@ class Novo_Tools_Model extends NOVO_Model
         break;
     };
 
-    $this->response->data = $listBranches;
-    $this->response->paisTo = isset($response->paisTo) ? $response->paisTo : '';
+    $this->response->data->branchesList = $branchesList;
+    $this->response->data->regionsList = isset($response->paisTo) ? $response->paisTo : '';
 
     return $this->responseToTheView('CallWs_getBranches');
   }
@@ -567,9 +566,9 @@ class Novo_Tools_Model extends NOVO_Model
    * @author Luis Molina
    * @date JUn 06th, 2022
    */
-  public function CallWs_addBranches_Tools($dataRequest)
+  public function CallWs_addBranche_Tools($dataRequest)
   {
-    writeLog('INFO', 'Tools Model: addBranches Method Initialized');
+    writeLog('INFO', 'Tools Model: addBranche Method Initialized');
 
     $this->dataAccessLog->modulo = 'Sucursales';
     $this->dataAccessLog->function = 'Agregar Sucursales';
@@ -590,7 +589,7 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->direccion_2 = $dataRequest->address2 ?? '';
     $this->dataRequest->direccion_3 = $dataRequest->address3 ?? '';
     $this->dataRequest->zona = $dataRequest->zoneName ?? '';
-    $this->dataRequest->codPais = $dataRequest->countryCodBranch;
+    $this->dataRequest->codPais = $dataRequest->countryCod;
     $this->dataRequest->estado = $dataRequest->stateCodBranch;
     $this->dataRequest->ciudad = $dataRequest->cityCodBranch;
     $this->dataRequest->persona = $dataRequest->person;
@@ -603,14 +602,15 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->usuario = $this->userName;
     $this->dataRequest->password = $password;
 
-    $response = $this->sendToWebServices('CallWs_addBranches');
+    $response = $this->sendToWebServices('CallWs_addBranche');
 
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
         $this->response->icon =  lang('SETT_ICON_SUCCESS');
+        $this->response->title = lang('GEN_BRANC_OFFICES');
         $this->response->msg = lang('TOOLS_BRANCH_ADD');
-        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        $this->response->modalBtn['btn1']['action'] = 'none';
         break;
       case -1:
         $this->response->code = 4;
@@ -626,7 +626,7 @@ class Novo_Tools_Model extends NOVO_Model
         break;
     }
 
-    return $this->responseToTheView('CallWs_addBranches');
+    return $this->responseToTheView('CallWs_addBranche');
   }
 
   /**
@@ -636,9 +636,9 @@ class Novo_Tools_Model extends NOVO_Model
    * @info Actualizado por Luis Molina
    * @date Oct 17th, 2022
    */
-  public function CallWs_updateBranches_Tools($dataRequest)
+  public function CallWs_updateBranche_Tools($dataRequest)
   {
-    writeLog('INFO', 'Tools Model: updateBranches Method Initialized');
+    writeLog('INFO', 'Tools Model: updateBranche Method Initialized');
 
     $this->dataAccessLog->modulo = 'Sucursales';
     $this->dataAccessLog->function = 'Actualizar Sucursales';
@@ -653,13 +653,13 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->idOperation = 'getActualizarSucursal';
     $this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
     $this->dataRequest->rif = $dataRequest->idFiscal;
-    $this->dataRequest->cod = $dataRequest->codB;
+    $this->dataRequest->cod = $dataRequest->codeUpdate;
     $this->dataRequest->nom_cia = $dataRequest->branchName;
     $this->dataRequest->direccion_1 = $dataRequest->address1 ?? '';
     $this->dataRequest->direccion_2 = $dataRequest->address2 ?? '';
     $this->dataRequest->direccion_3 = $dataRequest->address3 ?? '';
-    $this->dataRequest->zona = $dataRequest->branchCode ?? '';
-    $this->dataRequest->codPais = $dataRequest->countryCodBranch;
+    $this->dataRequest->zona = $dataRequest->zoneName ?? '';
+    $this->dataRequest->codPais = $dataRequest->countryCod;
     $this->dataRequest->estado = $dataRequest->stateCodBranch;
     $this->dataRequest->ciudad = $dataRequest->cityCodBranch;
     $this->dataRequest->persona = $dataRequest->person;
@@ -668,12 +668,13 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->usuario = $this->userName;
     $this->dataRequest->password = $password;
 
-    $this->sendToWebServices('CallWs_updateBranches');
+    $this->sendToWebServices('CallWs_updateBranche');
 
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
         $this->response->icon =  lang('SETT_ICON_SUCCESS');
+        $this->response->title = lang('GEN_BRANC_OFFICES');
         $this->response->msg = lang('TOOLS_BRANCH_UPDATE');
         $this->response->modalBtn['btn1']['action'] = 'none';
         break;
@@ -685,7 +686,7 @@ class Novo_Tools_Model extends NOVO_Model
         break;
     }
 
-    return $this->responseToTheView('CallWs_updateBranches');
+    return $this->responseToTheView('CallWs_updateBranche');
   }
 
   /**

@@ -8,6 +8,7 @@ function validateForms(form) {
   var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
   var alphanumspecial = /^([a-zA-Z0-9\ñ\Ñ]{1}[a-zA-Z0-9-z\.\-\_\ \#\%\/\Ñ\ñ]{0,39})+$/i;
   var address = new RegExp(lang.REGEX_ADDRESS, 'i');
+  var fiscalId = new RegExp(lang.REGEX_FISCAL_ID, 'i');
   var addressCod = new RegExp(lang.REGEX_ADDRESS_COD, 'i');
   var contact = new RegExp(lang.REGEX_CONTACT, 'i');
   var phoneNumber = new RegExp(lang.REGEX_PHONE);
@@ -299,7 +300,7 @@ function validateForms(form) {
       stateCodBranch: { required: true, pattern: addressCod },
       cityCodBranch: { required: true, pattern: addressCod },
       districtCodBranch: { required: true, pattern: addressCod },
-      idFiscalList: { required: true },
+      idFiscalList: { required: true, selectRequired: [fiscalId, address] },
       idEnterpriseList: { required: true },
       areaCode: { required: true, pattern: addressCod },
       phone: { required: true, pattern: phoneNumber },
@@ -630,6 +631,7 @@ function validateForms(form) {
       },
       idFiscalList: {
         required: lang.VALIDATE_SELECT,
+        selectRequired: lang.VALIDATE_SELECT_CONTENT,
       },
       idEnterpriseList: {
         required: lang.VALIDATE_SELECT,
@@ -750,6 +752,14 @@ function validateForms(form) {
     }
 
     return valid;
+  };
+
+  $.validator.methods.selectRequired = function (value, element, param) {
+    const text = $(element).find('option:selected').text();
+    const validValue = param[0].test(value);
+    const validtext = param[1].test(text);
+
+    return validValue && validtext;
   };
 
   $.validator.methods.maxcards = function (value, element, param) {
