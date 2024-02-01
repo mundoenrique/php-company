@@ -55,8 +55,8 @@ $lang['SETT_AUTH_LOADING_URL'] = [
     'BEP' =>  'https://nixe.ixe.com.mx/nbxi/images/loader.gif'
   ]
 ];
-// Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
-// Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
+// BEM Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
+// BEM Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
 $lang['SETT_AUTH_URL'] = [
   'development' => [
     'ANY' => '',
