@@ -10,13 +10,13 @@
       "items": [
         {
           "name": "Servicio administrativo mínimo",
-          "description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 350,00",
-          "rates": ["Bs. 350,00", "Bs. 350,00"]
+          "description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 400,00",
+          "rates": ["Bs. 400,00", "Bs. 400,00"]
         },
         {
           "name": "Servicios operativos y de logística (cobro único mensual)",
           "description": null,
-          "rates": ["Bs. 350,00", "Bs. 350,00"]
+          "rates": ["Bs. 400,00", "Bs. 400,00"]
         }
       ]
     },
@@ -27,12 +27,12 @@
         {
           "name": "Emisión (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
           "description": null,
-          "rates": ["Bs. 70,00 <br> Bs. 120,00", "Bs. 70,00 <br> Bs. 120,00"]
+          "rates": ["Bs. 80,00 <br> Bs. 120,00", "Bs. 80,00 <br> Bs. 120,00"]
         },
         {
           "name": "Reposición / Renovación (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
           "description": null,
-          "rates": ["Bs. 70,00 <br> Bs. 120,00", "Bs. 70,00 <br> Bs. 120,00"]
+          "rates": ["Bs. 80,00 <br> Bs. 120,00", "Bs. 80,00 <br> Bs. 120,00"]
         }
       ]
     },
@@ -43,7 +43,7 @@
         {
           "name": "Reposición",
           "description": null,
-          "rates": ["Bs. 70,00", "Bs. 70,00"]
+          "rates": ["Bs. 80,00", "Bs. 80,00"]
         }
       ]
     },
@@ -83,9 +83,9 @@
           "rates": [null, "0.85%"]
         },
         {
-          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 15,00)",
+          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 20,00)",
           "description": null,
-          "rates": [null, "Bs. 15,00"]
+          "rates": [null, "Bs. 20,00"]
         }
       ]
     },
