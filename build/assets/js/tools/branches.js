@@ -55,13 +55,14 @@ $(function () {
 
   const getstates = function () {
     $('#countryCod').val(regionsList.codPais);
+
     $.each(regionsList.listaEstados, function (key, val) {
       $('#stateCodBranch').append('<option value="' + val['codEstado'] + '">' + val['estados'] + '</option>');
     });
   };
 
   const getCities = function (codState, codCity = null) {
-    let indexState = null;
+    let indexState = 0;
     clearCities();
 
     $.each(regionsList.listaEstados, function (index, value) {
@@ -70,12 +71,14 @@ $(function () {
       }
     });
 
-    $.each(regionsList.listaEstados[indexState].listaCiudad, function (index, value) {
-      let selected = codCity === value['codCiudad'] ? 'selected' : '';
-      $('#cityCodBranch').append(
-        '<option value="' + value['codCiudad'] + '"' + selected + '>' + value['ciudad'] + '</option>'
-      );
-    });
+    if (typeof regionsList.listaEstados === 'object') {
+      $.each(regionsList.listaEstados[indexState].listaCiudad, function (index, value) {
+        let selected = codCity === value['codCiudad'] ? 'selected' : '';
+        $('#cityCodBranch').append(
+          '<option value="' + value['codCiudad'] + '"' + selected + '>' + value['ciudad'] + '</option>'
+        );
+      });
+    }
   };
 
   const sendDataBranch = function (dataBranch, btnContent) {
