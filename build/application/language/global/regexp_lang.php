@@ -51,7 +51,7 @@ $lang['REGEX_FISCAL_ID'] = $lang['REGEX_ALPHA_NUM_SPECIAL'];
 $lang['REGEX_FISCAL_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_NUM_SPECIAL'] . '/i]|required';
 $lang['REGEX_CONTACT'] = $lang['REGEX_ALPHA_NUM_SPACE'];
 $lang['REGEX_CONTACT_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CONTACT'] . '/i]';
-
+$lang['REGEX_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 
 
 $lang['REGEX_ID_NUMBER'] = '^([0-9]{7,9}$)';

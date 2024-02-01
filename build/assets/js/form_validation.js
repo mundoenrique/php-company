@@ -22,7 +22,7 @@ function validateForms(form) {
   var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
   var alphabeticalspace = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');
   var floatAmount = new RegExp(lang.SETT_VALIDATE_FLOAT_AMOUNT, 'i');
-  var fiscalReg = lang.SETT_VALIDATE_FISCAL_REGISTRY;
+  var fiscalReg = lang.REGEX_FISCAL_REGISTRY;
   var idNumberReg = new RegExp(lang.SETT_VALIDATE_REG_ID_NUMBER, 'i');
   var rechargeDesc = new RegExp(lang.SETT_VALIDATE_RECHAR_REGEX_DESC, 'i');
   var documentId = new RegExp(lang.REGEX_DOCUMENT_ID, 'i');

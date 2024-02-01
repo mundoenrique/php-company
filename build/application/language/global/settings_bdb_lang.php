@@ -24,6 +24,5 @@ $lang['SETT_SETTINGS_BRANCHES'] = 'OFF';
 $lang['SETT_SERVICEORDERS_ICON'] = 'ON';
 $lang['SETT_FILE'] = 'Archivos de Autogestión %s';
 $lang['SETT_FRANCHISE_LOGO'] = 'OFF';
-$lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^([0-9]{9,17})';
 $lang['SETT_FILES_EXTENSION'] = 'xls|xlsx|txt|pgp';
 $lang['SETT_POSTMY_OTP'] = 'center top+100';
