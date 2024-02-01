@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['BULK_UNNA_REQ_NONCARDS'] = 'You do not have cards available to affiliate, check the delivery confirmation of the cards in the bulk';
 $lang['BULK_DELETE'] = 'Are you sure you want to delete the bulk?';
 $lang['BULK_DISASS'] = 'Are you sure you want to disassociate the batch?';

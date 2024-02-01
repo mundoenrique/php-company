@@ -91,3 +91,4 @@ $lang["BULK_LIMIT_EXCEEDED"] = 'Límite Excedido.';
 $lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Tu lote supera el límite diario de emisiones, solo quedan %s y estás cargando %s.';
 $lang["BULK_PROCESS_FUND_REGISTRY"] = 'No se puede ejecutar el fondeo de saldo en estos momentos. Intente más tarde.';
 $lang["BULK_PROCESS_RETURN_REGISTRY"] = 'No se puede ejecutar la devolución de saldo en estos momentos. Intente más tarde.';
+$lang['BULK_INSUFFICIENT_BALANCE'] = 'Saldo insuficiente en cuenta cargo.';

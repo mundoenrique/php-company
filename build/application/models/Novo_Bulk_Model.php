@@ -1092,6 +1092,13 @@ class Novo_Bulk_Model extends NOVO_Model
         $this->response->icon = lang('SETT_ICON_INFO');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
+      case -472:
+        $this->response->title = lang('BULK_SO_CREATE_TITLE');
+        $this->response->msg = lang('BULK_INSUFFICIENT_BALANCE');
+        $this->response->icon = lang('SETT_ICON_INFO');
+        $this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_BULK_AUTH');
+        $this->response->modalBtn['btn1']['action'] = 'redirect';
+        break;
     }
 
     if ($this->isResponseRc !== 0) {

@@ -90,3 +90,4 @@ $lang['BULK_FILE_ROW_LIMIT_EXCEEDED'] = 'The content of the file exceeds the lim
 $lang["BULK_LIMIT_EXCEEDED_DAILY_EMISSIONS"] = 'Your batch exceeds the daily emission limit, there are only %s left and you are loading %s.';
 $lang["BULK_PROCESS_FUND_REGISTRY"] = 'Balance funding cannot be executed at this time. Please try again later.';
 $lang["BULK_PROCESS_RETURN_REGISTRY"] = 'The balance refund cannot be executed at this time. Please try again later.';
+$lang['BULK_INSUFFICIENT_BALANCE'] = 'Insufficient balance in load account.';
