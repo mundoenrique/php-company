@@ -160,7 +160,7 @@ $(function () {
           ActivityUserDownloadFiles('generarPdfActividadesXUsuario','Pdf')
           break;
         case 'Txt':
-          ActivityUserDownloadFiles('generarTxtActividadesXUsuario','Txt')
+          ActivityUserDownloadFiles('generarArchivoTxtActividadesXUsuario','Txt')
           break;
       }
     } else {
