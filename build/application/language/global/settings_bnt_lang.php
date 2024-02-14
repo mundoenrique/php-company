@@ -57,12 +57,13 @@ $lang['SETT_AUTH_LOADING_URL'] = [
 ];
 // BEM Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
 // BEM Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
+// BEM old https://15.128.26.90/nbem03/AutorizacionRemota.aspx
 $lang['SETT_AUTH_URL'] = [
   'development' => [
     'ANY' => '',
     'BEM' => [
-      'BNT' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-      'BNC' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx'
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
     ],
     'BEP' => [
       'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
@@ -72,8 +73,8 @@ $lang['SETT_AUTH_URL'] = [
   'testing' => [
     'ANY' => '',
     'BEM' => [
-      'BNT' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-      'BNC' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx'
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
     ],
     'BEP' => [
       'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
