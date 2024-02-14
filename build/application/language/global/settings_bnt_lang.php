@@ -55,8 +55,8 @@ $lang['SETT_AUTH_LOADING_URL'] = [
     'BEP' =>  'https://nixe.ixe.com.mx/nbxi/images/loader.gif'
   ]
 ];
-// Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
-// Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
+// BEM Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
+// BEM Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
 $lang['SETT_AUTH_URL'] = [
   'development' => [
     'ANY' => '',
@@ -101,7 +101,6 @@ $lang['SETT_FOTTER_NETWORKS_LINK'] = [
   'youtube' => 'https://www.youtube.com/user/banortemovil',
   'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
-$lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^["a-z0-9"]{8,9}';
 $lang['SETT_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['SETT_VALIDATE_MINLENGTH'] = 16;
 $lang['SETT_PADDING_LOGO'] = 'OFF';

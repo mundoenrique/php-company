@@ -6,6 +6,17 @@ $(function () {
   let branchesList = null;
   let fiscalID = null;
 
+  const resetForm = function (forms) {
+    $.each(forms, function (index, form) {
+      let novalidate = $(form).attr('novalidate');
+
+      if (novalidate) {
+        $(form).validate().resetForm();
+        $(form).find('.help-block').text('');
+      }
+    });
+  };
+
   const getBranchesList = function () {
     let dataBranchList = null;
     let formBranchList = $('#branchSettListForm');
@@ -13,7 +24,9 @@ $(function () {
 
     if (formBranchList.valid()) {
       $('#partedSection').hide();
+      $('#editAddBranchSection').hide();
       $('#loaderBranches').removeClass('hide');
+      resetForm(['#branchInfoForm', '#txtBranchesForm']);
       who = 'Tools';
       where = 'getBranches';
       dataBranchList = getDataForm(formBranchList);
@@ -42,13 +55,14 @@ $(function () {
 
   const getstates = function () {
     $('#countryCod').val(regionsList.codPais);
+
     $.each(regionsList.listaEstados, function (key, val) {
       $('#stateCodBranch').append('<option value="' + val['codEstado'] + '">' + val['estados'] + '</option>');
     });
   };
 
   const getCities = function (codState, codCity = null) {
-    let indexState = null;
+    let indexState = 0;
     clearCities();
 
     $.each(regionsList.listaEstados, function (index, value) {
@@ -57,12 +71,14 @@ $(function () {
       }
     });
 
-    $.each(regionsList.listaEstados[indexState].listaCiudad, function (index, value) {
-      let selected = codCity === value['codCiudad'] ? 'selected' : '';
-      $('#cityCodBranch').append(
-        '<option value="' + value['codCiudad'] + '"' + selected + '>' + value['ciudad'] + '</option>'
-      );
-    });
+    if (typeof regionsList.listaEstados === 'object') {
+      $.each(regionsList.listaEstados[indexState].listaCiudad, function (index, value) {
+        let selected = codCity === value['codCiudad'] ? 'selected' : '';
+        $('#cityCodBranch').append(
+          '<option value="' + value['codCiudad'] + '"' + selected + '>' + value['ciudad'] + '</option>'
+        );
+      });
+    }
   };
 
   const sendDataBranch = function (dataBranch, btnContent) {
@@ -84,14 +100,13 @@ $(function () {
     });
   };
 
-  const gobrancheslist = function () {
+  const goBrancheslist = function () {
     $('#btnSaveBranch').removeAttr('action');
     $('#editAddBranchSection').hide();
     $('#stateCodBranch').prop('selectedIndex', 0);
     clearCities();
     $('#editAddBranchText').text('');
-    $('#branchInfoForm').validate().resetForm();
-    $('.help-block').text('');
+    resetForm(['#branchInfoForm', '#branchSettListForm', '#txtBranchesForm']);
   };
 
   const branchesTable = $('#tableBranches').DataTable({
@@ -142,9 +157,9 @@ $(function () {
     ],
   });
 
-  $('ul.nav-config-box, .slide-slow').on('click', function (e) {
+  $('li#branch').on('click', function (e) {
     e.preventDefault();
-    gobrancheslist();
+    goBrancheslist();
 
     if (TotalEnterpriseList > 1) {
       $('#partedSection').hide();
@@ -197,7 +212,7 @@ $(function () {
 
   $('#backBranchBtn').on('click', function (e) {
     e.preventDefault();
-    gobrancheslist();
+    goBrancheslist();
     $('#partedSection').fadeIn(700, 'linear');
   });
 
@@ -232,7 +247,7 @@ $(function () {
 
   $('#system-info').on('click', '.getBranches', function () {
     getBranchesList();
-    gobrancheslist();
+    goBrancheslist();
     modalDestroy(true);
   });
 });

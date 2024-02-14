@@ -86,7 +86,6 @@ $lang['SETT_FOTTER_NETWORKS_LINK'] = [
   'youtube' => 'https://www.youtube.com/user/banortemovil',
   'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
-$lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^["a-z0-9"]{8,9}';
 $lang['SETT_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['SETT_VALIDATE_MINLENGTH'] = 16;
 $lang['SETT_PADDING_LOGO'] = 'OFF';

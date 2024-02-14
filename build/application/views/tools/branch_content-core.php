@@ -36,9 +36,11 @@
       <div class="my-3 px-2">
         <span class="flex line-text mb-2 h4 semibold primary"></span>
         <div class="m-4 flex justify-end">
-          <button id="loadBranchBtn" class="btn btn-primary btn-small mr-1">
-            <i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
-          </button>
+          <?php if (lang('SETT_BRANCH_UPLOAD_FILE') === 'ON') : ?>
+            <button id="loadBranchBtn" class="btn btn-primary btn-small mr-1">
+              <i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
+            </button>
+          <?php endif; ?>
           <button id="newBranchBtn" class="btn btn-primary btn-small" action="create">
             <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW_BRANCH') ?>
           </button>
