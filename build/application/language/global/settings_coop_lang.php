@@ -17,3 +17,4 @@ $lang['SETT_FOTTER_NETWORKS_LINK'] = [
   'linkedin' => 'https://www.linkedin.com/company/banco-cooperativo-coopcentral'
 ];
 $lang['SETT_INPUT_GET_TOKEN'] = 'ON';
+$lang['SETT_UNNA_EXPIRED_DATE'] = 'OFF';

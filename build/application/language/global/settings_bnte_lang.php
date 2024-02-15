@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$lang['SETT_SCORE_CAPTCHA'] = [
-  'development' => 0,
-  'testing' => 0,
-  'production' => 0
-];
 $lang['SETT_SIGIN_RECOVER_PASS'] = 'OFF';
 $lang['SETT_WIDGET_REST_COUNTRY'] = 'ON';
 $lang['SETT_AGENT_INFO'] = 'ON';

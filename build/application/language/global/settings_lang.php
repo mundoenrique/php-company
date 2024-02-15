@@ -401,3 +401,4 @@ $lang['SETT_CATEG_GROUP'] = [
   'W' => 'icon-bag',
   '8' => 'icon-asterisk'
 ];
+$lang['SETT_CEL_TOKEN'] = 'OFF';

@@ -42,16 +42,15 @@ $lang['REGEX_START_SERVER'] = $lang['REGEX_INT_REQUIRED'];
 $lang['REGEX_LENGHT_SERVER'] = $lang['REGEX_INT_REQUIRED'];
 $lang['REGEX_DOCUMENT_ID'] = $lang['REGEX_NUMERIC'];
 $lang['REGEX_DOCUMENT_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_DOCUMENT_ID'] . '/i]';
-$lang['REGEX_ADDRESS'] = $lang['REGEX_ALPHA_NUM_CHAR'];
+$lang['REGEX_ADDRESS'] = setRegex('address');;
 $lang['REGEX_ADDRESS_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS'] . '/i]';
 $lang['REGEX_ADDRESS_REQ_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS'] . '/i]|required';
 $lang['REGEX_ADDRESS_COD'] = $lang['REGEX_NUMERIC'];
 $lang['REGEX_ADDRESS_COD_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ADDRESS_COD'] . '/i]|required';
-$lang['REGEX_FISCAL_ID'] = $lang['REGEX_ALPHA_NUM_SPECIAL'];
-$lang['REGEX_FISCAL_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_ALPHA_NUM_SPECIAL'] . '/i]|required';
-$lang['REGEX_CONTACT'] = $lang['REGEX_ALPHA_NUM_SPACE'];
+$lang['REGEX_FISCAL_ID'] = setRegex('fiscal_id_col');
+$lang['REGEX_FISCAL_ID_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_FISCAL_ID'] . '/]|required';
+$lang['REGEX_CONTACT'] = setRegex('people_name');
 $lang['REGEX_CONTACT_SERVER'] = 'trim|regex_match[/' . $lang['REGEX_CONTACT'] . '/i]';
-$lang['REGEX_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 
 
 $lang['REGEX_ID_NUMBER'] = '^([0-9]{7,9}$)';

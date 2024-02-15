@@ -22,7 +22,7 @@ function validateForms(form) {
   var alphabetical = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL, 'i');
   var alphabeticalspace = new RegExp(lang.SETT_VALIDATE_ALPHABETICAL_SPACE, 'i');
   var floatAmount = new RegExp(lang.SETT_VALIDATE_FLOAT_AMOUNT, 'i');
-  var fiscalReg = lang.REGEX_FISCAL_REGISTRY;
+  var fiscalReg = lang.REGEX_FISCAL_ID;
   var idNumberReg = new RegExp(lang.SETT_VALIDATE_REG_ID_NUMBER, 'i');
   var rechargeDesc = new RegExp(lang.SETT_VALIDATE_RECHAR_REGEX_DESC, 'i');
   var documentId = new RegExp(lang.REGEX_DOCUMENT_ID, 'i');
@@ -288,12 +288,12 @@ function validateForms(form) {
         maxAmountTransweekly: true,
       },
       description: { required: true, pattern: rechargeDesc },
-      branchName: { required: true, pattern: address },
-      zoneName: { required: true, pattern: address },
-      address: { required: true, pattern: longPhraseUpper },
-      address1: { required: true, pattern: address },
-      address2: { pattern: address },
-      address3: { pattern: address },
+      branchName: { required: true, pattern: address, rangelength: [5, 100] },
+      zoneName: { required: true, pattern: address, rangelength: [5, 100] },
+      address: { required: true, pattern: longPhraseUpper, rangelength: [10, 100] },
+      address1: { required: true, pattern: address, rangelength: [10, 100] },
+      address2: { pattern: address, rangelength: [10, 100] },
+      address3: { pattern: address, rangelength: [10, 100] },
       billingAddress: { required: true, pattern: longPhraseUpper },
       countryCode: { required: true, pattern: numeric },
       countryCodBranch: { required: true, pattern: numeric },
@@ -302,13 +302,13 @@ function validateForms(form) {
       districtCodBranch: { required: true, pattern: addressCod },
       idFiscalList: { required: true, selectRequired: [fiscalId, address] },
       idEnterpriseList: { required: true },
-      areaCode: { required: true, pattern: addressCod },
+      areaCode: { required: true, pattern: addressCod, rangelength: [1, 3] },
       phone: { required: true, pattern: phoneNumber },
       phone1: { required: true, pattern: phoneNumber },
       phone2: { pattern: phoneNumber },
       phone3: { pattern: phoneNumber },
-      person: { pattern: contact },
-      branchCode: { required: true, pattern: addressCod },
+      person: { pattern: contact, rangelength: [5, 100] },
+      branchCode: { required: true, pattern: addressCod, rangelength: [1, 3] },
       surnameModifyContact: { required: true, pattern: alphanumspace },
       positionModifyContact: { required: true, pattern: alphanumspace },
       typeModifyContact: { required: true },
@@ -582,27 +582,22 @@ function validateForms(form) {
         pattern: lang.VALIDATE_NAME_BRANCHES,
       },
       branchName: {
-        required: lang.VALIDATE_NAME_BRANCHES,
         pattern: lang.VALIDATE_NAME_BRANCHES,
       },
       zoneName: {
-        required: lang.VALIDATE_ZONE_BRANCHES,
-        pattern: lang.VALIDATE_NIT,
+        pattern: lang.VALIDATE_NAME_BRANCHES,
       },
       address: {
         required: lang.VALIDATE_ADDRESS_ENTERPRICE,
         pattern: lang.VALIDATE_ADDRESS_BRANCHES,
       },
       address1: {
-        required: lang.VALIDATE_ADDRESS_BRANCHES,
         pattern: lang.VALIDATE_ADDRESS_BRANCHES,
       },
       address2: {
-        required: lang.VALID_REQUIRED,
         pattern: lang.VALIDATE_ADDRESS_BRANCHES,
       },
       address3: {
-        required: lang.VALID_REQUIRED,
         pattern: lang.VALIDATE_ADDRESS_BRANCHES,
       },
       billingAddress: {
@@ -637,7 +632,6 @@ function validateForms(form) {
         required: lang.VALIDATE_SELECT,
       },
       areaCode: {
-        required: lang.VALID_REQUIRED,
         pattern: lang.VALIDATE_NIT,
       },
       phone: {
@@ -657,11 +651,9 @@ function validateForms(form) {
         pattern: lang.VALIDATE_PHONE_NUMBER,
       },
       person: {
-        required: lang.VALID_REQUIRED,
         pattern: lang.VALIDATE_NAME_BRANCHES,
       },
       branchCode: {
-        required: lang.VALIDATE_CODE_BRANCHES,
         pattern: lang.VALIDATE_NIT,
       },
       surnameModifyContact: {
@@ -754,8 +746,15 @@ function validateForms(form) {
     return valid;
   };
 
+  $.validator.methods.staticlength = function (value, element, param) {
+    let valid = value.length === param[0];
+
+    return valid;
+  };
+
   $.validator.methods.selectRequired = function (value, element, param) {
-    const text = $(element).find('option:selected').text();
+    value = value.trim();
+    const text = $(element).find('option:selected').text().trim();
     const validValue = param[0].test(value);
     const validtext = param[1].test(text);
 

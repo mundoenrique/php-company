@@ -2,6 +2,10 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['VALID_REQUIRED'] = 'Este campo es requerido.';
+$lang['VALID_STATIC_LENGTH'] = 'Indica {0} caracteres {1}.';
+$lang['VALID_MAX_LENGTH'] = 'Indica menos de {0} caracteres.';
+$lang['VALID_MIN_LENGTH'] = 'Indica al menos {0} caracteres.';
+$lang['VALID_RANGE_LENGTH'] = 'Indica entre {0} y {1} caracteres.';
 $lang['VALID_USERNAME'] = 'Indica un usuario válido.';
 $lang['VALID_PASSWORD'] = 'La contraseña debe cumplir los requisitos.';
 $lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';

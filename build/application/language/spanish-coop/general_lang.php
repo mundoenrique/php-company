@@ -9,3 +9,5 @@ $lang['GEN_CONTACTS'] = [
 ];
 $lang['GEN_FOTTER_RIGHTS'] = '© Banco Cooperativo Coopcentral - ';
 $lang['GEN_TABLE_DNI'] = 'Documento de identidad';
+$lang["GEN_PROVINCE"] = "Departamento";
+$lang["GEN_DEPARTMENT"] = "Municipio";

@@ -71,24 +71,20 @@ $config = [
     ],
     [
       'field' => 'idEmpresa',
-      'label' => 'idEmpresa',
-      'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
+      'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ],
     [
       'field' => 'email',
-      'label' => 'email',
       'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
     ]
   ],
   'recoverAccess' => [
     [
       'field' => 'documentType',
-      'label' => 'documentType',
       'rules' => 'trim|alpha|required'
     ],
     [
       'field' => 'documentId',
-      'label' => 'documentId',
       'rules' => 'trim|alpha_numeric|required'
     ],
     [

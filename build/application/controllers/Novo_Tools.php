@@ -37,6 +37,7 @@ class Novo_Tools extends NOVO_Controller
       "third_party/jquery.validate",
       "form_validation",
       "third_party/additional-methods",
+      "messages_validation",
       "tools/options",
       "tools/company",
       "tools/regions",

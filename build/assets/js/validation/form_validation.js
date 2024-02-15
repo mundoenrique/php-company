@@ -1,7 +1,7 @@
 import { lang } from '../common/useful_data.js';
 
 export const formValidation = function (form) {
-  clearInputForm(form);
+  trimFormTags(form);
 
   const formId = form.prop('id');
   const regExpUserName = new RegExp(lang.REGEX_USER_NAME, 'i');
@@ -71,7 +71,7 @@ export const formValidation = function (form) {
   };
 };
 
-const clearInputForm = function (form) {
+const trimFormTags = function (form) {
   form.find('input:not([type=file]), select, textarea').each(function () {
     let thisValInput = $(this).val();
 
@@ -82,7 +82,9 @@ const clearInputForm = function (form) {
     let trimVal = thisValInput.trim();
 
     if ($(this).prop('tagName') === 'SELECT') {
+      let textSelect = $(this).find('option:selected').val(trimVal);
       $(this).find('option:selected').val(trimVal);
+      $(this).find('option:selected').text(textSelect);
     } else {
       $(this).val(trimVal);
     }

@@ -1,5 +1,3 @@
-import { lang } from '../common/useful_data.js';
-
 $(function () {
   (function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -37,6 +35,7 @@ $(function () {
       nieES: 'Por favor, escribe un NIE válido.',
       cifES: 'Por favor, escribe un CIF válido.',
     });
+
     return $;
   });
 });

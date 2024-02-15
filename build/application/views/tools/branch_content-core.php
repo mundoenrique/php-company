@@ -155,7 +155,7 @@
                 <?php endif; ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
-                  <input id="areaCode" name="areaCode" type="text" class="form-control" />
+                  <input id="areaCode" name="areaCode" type="text" class="form-control" maxlength="3" />
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
@@ -170,7 +170,7 @@
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?></label>
-                  <input id="branchCode" name="branchCode" type="text" class="form-control" />
+                  <input id="branchCode" name="branchCode" type="text" class="form-control" maxlength="3" />
                   <div class="help-block"></div>
                 </div>
               </div>

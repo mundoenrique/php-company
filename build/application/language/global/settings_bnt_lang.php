@@ -122,3 +122,4 @@ $lang['SETT_FILE_STATUS_BULK_TXT'] = 'ON';
 $lang['SETT_FILE_USER_ACTIVITY_TXT'] = 'ON';
 $lang['SETT_DOWNLOAD_SERVER'] = 'ON';
 $lang['SETT_BULK_TYPE_EXCLUDED'] = ['Y', 'Z'];
+$lang['SETT_CEL_TOKEN'] = 'ON';

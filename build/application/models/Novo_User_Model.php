@@ -36,13 +36,17 @@ class Novo_User_Model extends NOVO_Model
     $this->dataRequest->password = md5($password);
     $this->dataRequest->ctipo = $dataRequest->active;
 
-    if (IP_VERIFY) {
+    if (IP_VERIFY || lang('SETT_CEL_TOKEN') === 'ON') {
       $this->dataRequest->codigoOtp = [
         'tokenCliente' => $dataRequest->otpCode ?? '',
-        'authToken' => $authToken
+        'authToken' => $authToken,
       ];
 
-      if (isset($dataRequest->saveIP)) {
+      if (lang('SETT_CEL_TOKEN') === 'ON') {
+        $this->dataRequest->codigoOtp['access_token'] = 'BNT';
+      }
+
+      if (IP_VERIFY && isset($dataRequest->saveIP)) {
         $this->dataRequest->guardaIp = $dataRequest->saveIP;
       }
     }
@@ -256,6 +260,7 @@ class Novo_User_Model extends NOVO_Model
         $this->dataRequest->codigoOtp = [
           'tokenCliente' => $dataRequest->ip ?? $this->input->ip_address(),
           'authToken' => $dataRequest->IdServicio,
+          'access_token' => $dataRequest->OPC ?? 'BNT'
         ];
         $this->dataRequest->guardaIp = FALSE;
         $this->token = $dataRequest->Clave;
@@ -350,7 +355,7 @@ class Novo_User_Model extends NOVO_Model
     $this->dataRequest->userName = $userName;
     $this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
     $this->dataRequest->email = $dataRequest->email;
-    $maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
+    $maskMail = maskString($dataRequest->email, 4, 6, '@');
 
     $this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 

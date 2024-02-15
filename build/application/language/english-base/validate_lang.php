@@ -2,7 +2,11 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['VALID_REQUIRED'] = 'This field is required.';
-$lang['VALID_USERNAME'] = 'Please indicate a valid user.';
+$lang['VALID_STATIC_LENGTH'] = 'Enter {0} characters {1}.';
+$lang['VALID_MAX_LENGTH'] = 'Enter no more than {0} characters.';
+$lang['VALID_MIN_LENGTH'] = 'Enter at least {0} characters.';
+$lang['VALID_RANGE_LENGTH'] = 'Enter between {0} and {1} characters.';
+$lang['VALID_USERNAME'] = 'Enter a valid user.';
 $lang['VALID_PASSWORD'] = 'The password must meet the requirements.';
 $lang['VALID_USERPASS_REQ'] = 'Both fields are required.';
 $lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.';
