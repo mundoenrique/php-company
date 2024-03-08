@@ -1816,6 +1816,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->fechaIni =  $dataRequest->initialDate;
     $this->dataRequest->fechaFin =  $dataRequest->finalDate;
     $this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+    $this->dataRequest->downloadFormat = $dataRequest->downloadFormat;
 
     $response = $this->sendToWebServices('callWs_exportReportUserActivity');
 

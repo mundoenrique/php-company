@@ -164,12 +164,12 @@ $(function () {
           break;
       }
     } else {
-      downLoadReport(e)
+      downLoadReport(action)
     }
   });
 
-  function downLoadReport(e) {
-    e.preventDefault();
+  function downLoadReport(action) {
+
       form = $('#userActivityForm');
       validateForms(form);
 
@@ -179,7 +179,7 @@ $(function () {
         where = 'exportReportUserActivity';
         data = getDataForm(form);
         data.rifEnterprise = $('#enterpriseCode').find('option:selected').attr('acrif');
-        data.downloadFormat = $(this).attr('format');
+        data.downloadFormat = action
 
         callNovoCore(who, where, data, function(response) {
 
