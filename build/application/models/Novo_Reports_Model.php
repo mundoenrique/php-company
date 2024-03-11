@@ -922,7 +922,8 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
     $this->dataRequest->paginar = $dataRequest->paged;
     $this->dataRequest->paginaActual = $dataRequest->actualPage;
-    $this->dataRequest->descProd =  $dataRequest->descProd;
+    $this->dataRequest->descProd = $dataRequest->descProd;
+    $this->dataRequest->idExtPer = $dataRequest->idExtPer;
 
     $response = $this->sendToWebServices('callWs_exportToExcel');
 

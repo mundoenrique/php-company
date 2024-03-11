@@ -121,12 +121,17 @@ $(function () {
     });
   }
 
-  function exportToExcel(passData) {
+  function exportToExcel(dataReq) {
     who = 'Reports';
     where = 'exportToExcel';
-    data = passData;
 
-    callNovoCore(who, where, data, function (response) {
+    if (lang.SETT_NIT_INPUT_BOOL == 'ON') {
+      dataReq.idExtPer = $('#idDocument').val();
+    } else {
+      dataReq.idExtPer = '';
+    }
+
+    callNovoCore(who, where, dataReq, function (response) {
       dataResponse = response.data;
       code = response.code;
       var info = dataResponse;
@@ -140,8 +145,8 @@ $(function () {
           file: info.archivo,
         };
         downLoadfiles(data);
-        $('.cover-spin').removeAttr('style');
       }
+      $('.cover-spin').removeAttr('style');
     });
   }
 });
@@ -167,10 +172,6 @@ function closingBudgets(dataForm) {
     pagelength: 10,
     pagingType: 'full_numbers',
     'table-layout': 'fixed',
-    select: {
-      style: 'multi',
-      info: false,
-    },
     language: dataTableLang,
     processing: true,
     serverSide: true,
