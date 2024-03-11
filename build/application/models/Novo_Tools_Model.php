@@ -654,7 +654,7 @@ class Novo_Tools_Model extends NOVO_Model
     $this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
     $this->dataRequest->rif = $dataRequest->idFiscal;
     $this->dataRequest->cod = $dataRequest->codeUpdate;
-    $this->dataRequest->nom_cia = $dataRequest->branchName;
+    $this->dataRequest->nomb_cia = $dataRequest->branchName;
     $this->dataRequest->direccion_1 = $dataRequest->address1 ?? '';
     $this->dataRequest->direccion_2 = $dataRequest->address2 ?? '';
     $this->dataRequest->direccion_3 = $dataRequest->address3 ?? '';
