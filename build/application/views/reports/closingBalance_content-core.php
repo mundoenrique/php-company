@@ -41,7 +41,7 @@
                 <select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
                   <?php if ($productsSelect) : ?>
                     <?php foreach ($productsSelect as $product) : ?>
-                      <option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+                      <option value="<?= $product['id']; ?>" nomProd="<?= $product['desc'] ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </select>

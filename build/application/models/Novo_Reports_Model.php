@@ -917,6 +917,7 @@ class Novo_Reports_Model extends NOVO_Model
 
     $this->dataRequest->idOperation = 'generaArchivoXls';
     $this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+    $this->dataRequest->nombreEmpresa =  $dataRequest->enterpriseName;
     $this->dataRequest->producto =  $dataRequest->product;
     $this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
     $this->dataRequest->tamanoPagina = $dataRequest->pageLenght;

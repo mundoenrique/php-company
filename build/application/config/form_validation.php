@@ -212,7 +212,7 @@ $config = [
     ],
     [
       'field' => 'descProd',
-      'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+      'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ., ]*$/i]'
     ],
   ],
   'exportToClosingBalance' => [

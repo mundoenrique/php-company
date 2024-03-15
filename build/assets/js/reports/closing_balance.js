@@ -88,9 +88,10 @@ $(function () {
   function downLoadReport({ type }) {
     var form = $('#closingBudgetForm');
     var data = {
+      enterpriseName: $('#enterpriseReport').find('option:selected').attr('nomof'),
       identificationCard: $('#enterpriseReport').find('option:selected').attr('acrif'),
       product: $('#productCode').val(),
-      descProd: $('#productCode').find('option:selected').attr('value'),
+      descProd: $('#productCode').find('option:selected').attr('nomprod'),
       actualPage: 1,
       paged: true,
       pageLenght: $('#tamP').val(),
