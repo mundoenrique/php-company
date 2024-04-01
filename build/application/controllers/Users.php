@@ -2612,7 +2612,6 @@ class Users extends CI_Controller
         $LOTES_USERPASS = BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
         curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES . $nombreArchivoNuevo);
-        curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
         curl_setopt($ch, CURLOPT_SSH_PRIVATE_KEYFILE, '/var/www/key/id_rsa_docker_dtu');
         curl_setopt($ch, CURLOPT_UPLOAD, 1);
         curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);

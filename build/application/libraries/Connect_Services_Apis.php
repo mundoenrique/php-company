@@ -107,7 +107,6 @@ class Connect_Services_Apis
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_USERPWD => $userpassBulk,
       CURLOPT_SSH_PRIVATE_KEYFILE => '/var/www/key/id_rsa_docker_dtu',
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
