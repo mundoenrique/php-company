@@ -103,7 +103,7 @@ class Connect_Services_Apis
 
     // Set up the private key for SFTP connection
     $privateKey = file_get_contents(BULK_FTP_PASSWORD);
-    curl_setopt($curl, CURLOPT_SSH_PRIVATE_KEYFILE, $privateKey);
+    curl_setopt($curl, CURLOPT_SSH_PRIVATE_KEYFILE, BULK_FTP_PASSWORD);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($curl, CURLOPT_SSH_KNOWNHOSTS, FALSE);
