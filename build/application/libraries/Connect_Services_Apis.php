@@ -101,13 +101,18 @@ class Connect_Services_Apis
     $curl = curl_init();
     $sftp = fopen(UPLOAD_PATH . $file, 'r');
 
+    // Set up the private key for SFTP connection
+    $privateKey = file_get_contents(BULK_FTP_PASSWORD);
+    curl_setopt($curl, CURLOPT_SSH_PRIVATE_KEYFILE, $privateKey);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl, CURLOPT_SSH_KNOWNHOSTS, FALSE);
+
     curl_setopt_array($curl, [
       CURLOPT_URL => $urlBulkService . $file,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_SSH_PRIVATE_KEYFILE => BULK_FTP_PASSWORD,
-      CURLOPT_FTP_AUTH_TYPE => 'SFTP',
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
@@ -141,7 +146,6 @@ class Connect_Services_Apis
 
     return responseServer($response);
   }
-
   public function connectMfaServices($request)
   {
     writeLog('INFO', 'Connect_Services_Apis: connectMfaServices Method Initialized');
