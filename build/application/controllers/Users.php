@@ -2612,7 +2612,7 @@ class Users extends CI_Controller
         $LOTES_USERPASS = BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
         curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES . $nombreArchivoNuevo);
-        curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
+        curl_setopt($ch, CURLOPT_KEYFILE, BULK_FTP_PASSWORD);
         curl_setopt($ch, CURLOPT_UPLOAD, 1);
         curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
         curl_setopt($ch, CURLOPT_INFILE, $fp);
