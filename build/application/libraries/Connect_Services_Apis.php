@@ -95,24 +95,19 @@ class Connect_Services_Apis
 
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
     $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
+    $sshPrivateKey = '/var/www/key/id_rsa_docker_dtu';
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 
     $curl = curl_init();
     $sftp = fopen(UPLOAD_PATH . $file, 'r');
 
-    // Set up the private key for SFTP connection
-    $privateKey = file_get_contents(BULK_FTP_PASSWORD);
-    curl_setopt($curl, CURLOPT_SSH_PRIVATE_KEYFILE, BULK_FTP_PASSWORD);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($curl, CURLOPT_SSH_KNOWNHOSTS, FALSE);
-
     curl_setopt_array($curl, [
       CURLOPT_URL => $urlBulkService . $file,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
+      CURLOPT_SSH_PRIVATE_KEYFILE => $sshPrivateKey,
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
@@ -146,6 +141,7 @@ class Connect_Services_Apis
 
     return responseServer($response);
   }
+
   public function connectMfaServices($request)
   {
     writeLog('INFO', 'Connect_Services_Apis: connectMfaServices Method Initialized');
