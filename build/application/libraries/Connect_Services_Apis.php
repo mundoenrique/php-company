@@ -107,9 +107,12 @@ class Connect_Services_Apis
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_SSH_PRIVATE_KEYFILE => $sshPrivateKey,
+      CURLOPT_KEY => $sshPrivateKey,
+      CURLOPT_KEYPASSWD => '',
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
+      CURLOPT_SSL_VERIFYHOST => FALSE,
+      CURLOPT_SSL_VERIFYPEER => FALSE,
       CURLOPT_INFILE => $sftp,
       CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file)
     ]);
