@@ -102,18 +102,29 @@ class Connect_Services_Apis
     $curl = curl_init();
     $sftp = fopen(UPLOAD_PATH . $file, 'r');
 
+    $context = stream_context_create();
+    stream_context_set_params($context, [
+      'ssl' => [
+        'local_cert' => $sshPrivateKey,
+        'verify_peer' => false
+      ]
+    ]);
+
+    $curl = curl_init();
     curl_setopt_array($curl, [
       CURLOPT_URL => $urlBulkService . $file,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_SSH_PRIVATE_KEY => $sshPrivateKey,
-      CURLOPT_SSH_AUTH_TYPES => CURLAUTH_PUBLICKEY,
-      CURLOPT_KEYPASSWD => '',
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
-      CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file)
+      CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file),
+      CURLOPT_SSH_AUTH_TYPES => CURLAUTH_KEYBOARD_INTERACTIVE,
+      CURLOPT_SSH_PRIVATE_KEYFILE => $sshPrivateKey,
+      CURLOPT_CONNECTTIMEOUT => 30,
+      CURLOPT_RETURNTRANSFER => TRUE,
+      CURLOPT_CONTEXT => $context
     ]);
 
     curl_exec($curl);
