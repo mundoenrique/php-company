@@ -93,7 +93,7 @@ class Connect_Services_Apis
   {
     writeLog('INFO', 'Connect_Services_Apis: moveFileToWebService Method Initialized');
 
-    $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
+    $urlBulkService = BULK_FTP_URL;
     $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
@@ -111,7 +111,7 @@ class Connect_Services_Apis
     }
 
     $sftp = ssh2_sftp($connect);
-    $stream = fopen("ssh2.sftp://$sftp/$file", 'w');
+    $stream = fopen('ssh2.sftp://' . $sftp . '/sftp_data/DEV/Archivos_lote' . $this->CI->config->item('customer') . '/' . $file, 'w');
 
     $localFile = fopen(UPLOAD_PATH . $file, 'r');
     stream_copy_to_stream($localFile, $stream);
