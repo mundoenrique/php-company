@@ -96,8 +96,6 @@ class Connect_Services_Apis
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
     $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
     $sshPrivateKey = '/var/www/key/id_rsa_docker_dtu';
-    // Convert the private key to the required format
-    $privKey = openssl_pkey_get_private($sshPrivateKey);
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 
@@ -109,8 +107,10 @@ class Connect_Services_Apis
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_SSH_PRIVATE_KEYFILE => $privKey,
-      CURLOPT_SSLKEYTYPE => 'ssh-rsa',
+      CURLOPT_USERPWD => "batch_user:",
+      CURLOPT_KEYPASSWD => $sshPrivateKey,
+      CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_VERBOSE => true,
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
@@ -118,6 +118,9 @@ class Connect_Services_Apis
     ]);
 
     curl_exec($curl);
+    if (curl_errno($curl)) {
+      writeLog('ERROR', 'ERROR CURL: ' . curl_error($curl));
+    }
     $executionTime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
 
     $response = new stdClass();
