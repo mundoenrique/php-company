@@ -103,6 +103,7 @@ class Connect_Services_Apis
     $sftp = fopen(UPLOAD_PATH . $file, 'r');
 
     curl_setopt_array($curl, [
+      CURLOPT_FAILONERROR => true,
       CURLOPT_URL => $urlBulkService . $file,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
