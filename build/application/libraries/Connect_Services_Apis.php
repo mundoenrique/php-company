@@ -95,56 +95,39 @@ class Connect_Services_Apis
 
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
     $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
-    $sshPrivateKey = '/var/www/key/id_rsa_docker_dtu';
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 
-    $curl = curl_init();
-    $sftp = fopen(UPLOAD_PATH . $file, 'r');
-
-    curl_setopt_array($curl, [
-      CURLOPT_FAILONERROR => true,
-      CURLOPT_URL => $urlBulkService . $file,
-      CURLOPT_RETURNTRANSFER => TRUE,
-      CURLOPT_TIMEOUT => 58,
-      CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_USERPWD => "batch_user:",
-      CURLOPT_KEYPASSWD => $sshPrivateKey,
-      CURLOPT_SSL_VERIFYPEER => false,
-      CURLOPT_VERBOSE => true,
-      CURLOPT_UPLOAD => 1,
-      CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
-      CURLOPT_INFILE => $sftp,
-      CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file)
-    ]);
-
-    curl_exec($curl);
-    if (curl_errno($curl)) {
-      writeLog('ERROR', 'ERROR CURL: ' . curl_error($curl));
+    $connect = ssh2_connect($urlBulkService, 22);
+    if (!$connect) {
+      writeLog('ERROR', 'Could not connect to the SFTP server.');
+      return responseServer(['HttpCode' => 100, 'code' => -105, 'errorNo' => -1, 'error' => 'Could not connect to the SFTP server.']);
     }
-    $executionTime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+
+    $privateKey = file_get_contents('/var/www/key/id_rsa_docker_dtu');
+    if (!ssh2_auth_pubkey_add($connect, BULK_FTP_USERNAME, $privateKey, '')) {
+      writeLog('ERROR', 'Could not authenticate with the SFTP server.');
+      return responseServer(['HttpCode' => 100, 'code' => -105, 'errorNo' => -1, 'error' => 'Could not authenticate with the SFTP server.']);
+    }
+
+    $sftp = ssh2_sftp($connect);
+    $stream = fopen("ssh2.sftp://$sftp/$file", 'w');
+
+    $localFile = fopen(UPLOAD_PATH . $file, 'r');
+    stream_copy_to_stream($localFile, $stream);
+
+    fclose($localFile);
+    fclose($stream);
+    unlink(UPLOAD_PATH . $file);
 
     $response = new stdClass();
-    $response->HttpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-    $response->code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+    $response->HttpCode = 200;
+    $response->code = 0;
     $response->data = new stdClass();
-    $response->errorNo = (int) curl_errno($curl);
-    $response->error = curl_error($curl);
+    $response->errorNo = 0;
+    $response->error = '';
 
-    curl_close($curl);
-    fclose($sftp);
-    unlink(UPLOAD_PATH . $file);
-    $executionTime = round($executionTime, 2, PHP_ROUND_HALF_UP);
-    $msg = $response->errorNo === 0 ? ' ' . lang('SETT_UPLOAD_SFTP(0)') : '';
-
-    writeLog('DEBUG', 'RESPONSE IN ' . $executionTime . ' SEC, UPLOAD FILE RESPONSE CODE: ' . $response->code . $msg);
-
-
-    if ($response->errorNo !== 0) {
-      $response->HttpCode = 100;
-      $response->code = -105;
-      writeLog('ERROR', 'UPLOAD FILE ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
-    }
+    //writeLog('DEBUG', 'RESPONSE IN '. $executionTime. ' SEC, UPLOAD FILE RESPONSE CODE: '. $response->code. $msg);
 
     return responseServer($response);
   }
