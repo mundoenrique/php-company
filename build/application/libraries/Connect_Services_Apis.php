@@ -96,35 +96,25 @@ class Connect_Services_Apis
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
     $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
     $sshPrivateKey = '/var/www/key/id_rsa_docker_dtu';
+    // Convert the private key to the required format
+    $privKey = openssl_pkey_get_private($sshPrivateKey);
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 
     $curl = curl_init();
     $sftp = fopen(UPLOAD_PATH . $file, 'r');
 
-    $context = stream_context_create();
-    stream_context_set_params($context, [
-      'ssl' => [
-        'local_cert' => $sshPrivateKey,
-        'verify_peer' => false
-      ]
-    ]);
-
-    $curl = curl_init();
     curl_setopt_array($curl, [
       CURLOPT_URL => $urlBulkService . $file,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
+      CURLOPT_SSH_PRIVATE_KEYFILE => $privKey,
+      CURLOPT_SSLKEYTYPE => 'ssh-rsa',
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
-      CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file),
-      CURLOPT_SSH_AUTH_TYPES => CURLAUTH_KEYBOARD_INTERACTIVE,
-      CURLOPT_SSH_PRIVATE_KEYFILE => $sshPrivateKey,
-      CURLOPT_CONNECTTIMEOUT => 30,
-      CURLOPT_RETURNTRANSFER => TRUE,
-      CURLOPT_CONTEXT => $context
+      CURLOPT_INFILESIZE => filesize(UPLOAD_PATH . $file)
     ]);
 
     curl_exec($curl);
