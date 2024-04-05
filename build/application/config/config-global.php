@@ -14,4 +14,4 @@ $config['client_id'] = SERVICE_CLIENT_ID;
 $config['client_secret'] = SERVICE_CLIENT_SECRET;
 $config['customer_style'] = 'default';
 $config['customer_files'] = 'default';
-$config['customer_db'] = ['bg', 'bdb', 'bnt', 'bp', 'co', 'coop', 'pb', 'pe', 'us', 've', 'vg'];
+$config['customer_db'] = ['bg', 'bdb', 'bnt', 'bnte', 'bp', 'co', 'coop', 'pb', 'pe', 'us', 've', 'vg'];
