@@ -30,7 +30,7 @@ class Connect_Services_Apis
       $wsUrl = $_SERVER['WS_URL' . $subFix];
     }
 
-    writeLog('DEBUG', 'REQUEST BY WEB SERVICE URL: ' . $wsUrl);
+    writeLog('DEBUG', $subFix . ' REQUEST BY WEB SERVICE URL: ' . $wsUrl);
 
     $method = $request->method ?? 'POST';
     unset($request->method);
