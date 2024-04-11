@@ -36,7 +36,6 @@ SetEnv SESS_DRIVER files
 SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
 # SetEnv SESS_DRIVER database
 # SetEnv SESS_SAVE_PATH ceo_sessions
-
 SetEnv SESS_COOKIE_NAME empresas
 SetEnv SESS_EXPIRATION 1800
 SetEnv COOKIE_PREFIX 'ceo_'
@@ -47,7 +46,7 @@ SetEnv PROXY_ENABLE OFF
 #----------------------#
 SetEnv ACTIVE_SAFETY ON
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'pe, bdb, bnt, bnte, bp, co, us, ve, pb, bg, vg, vgy, coop, bog, bpi, per, usd, ven, col'
+SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, vgy, coop, bog, bpi, per, usd, ven, col, bnte'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
@@ -77,8 +76,8 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # SetEnv DB_HOSTNAME 172.21.0.228
 # SetEnv DB_PORT 3301
-# SetEnv DB_USERNAME cpo_user
-# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+# SetEnv DB_USERNAME ceo_user
+# SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
 
 #------------------------------#
 # SERVICE ENVIROMENT VARIABLES #
@@ -100,10 +99,8 @@ SetEnv WS_URL_VG https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webres
 SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# BANORTE
-SetEnv WS_URL_BNTE https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNTE https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
-	# Coop central
-# SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -196,9 +193,9 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.154:22/opt/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
-# SetEnv BULK_FTP_PASSWORD QiE5ek1nTHR4RWtTUFEkeQ==
+SetEnv BULK_FTP_URL sftp://172.24.6.154:22/opt/npdaemon/
+SetEnv BULK_FTP_USERNAME npdaemon
+SetEnv BULK_FTP_PASSWORD QiE5ek1nTHR4RWtTUFEkeQ==
 
 #-------------------------------------------------------------------#
 #																UAT																	#
