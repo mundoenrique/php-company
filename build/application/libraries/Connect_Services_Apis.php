@@ -94,7 +94,7 @@ class Connect_Services_Apis
     writeLog('INFO', 'Connect_Services_Apis: moveFileToWebService Method Initialized');
 
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
-    $sshPrivateKey = BULK_FTP_PASSWORD;
+    $userpassBulk =  BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
     writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
 
@@ -106,7 +106,7 @@ class Connect_Services_Apis
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_TIMEOUT => 58,
       CURLOPT_FOLLOWLOCATION => TRUE,
-      CURLOPT_SSH_PRIVATE_KEYFILE => $sshPrivateKey,
+      CURLOPT_USERPWD => $userpassBulk,
       CURLOPT_UPLOAD => 1,
       CURLOPT_PROTOCOLS => CURLPROTO_SFTP,
       CURLOPT_INFILE => $sftp,
