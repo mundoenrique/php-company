@@ -180,6 +180,7 @@ defined('WS_KEY')                 or define('WS_KEY', $_SERVER['WS_KEY']);
 defined('DOWNLOAD_ROUTE')         or define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
 defined('BULK_FTP_USERNAME')      or define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
 defined('BULK_FTP_PASSWORD')      or define('BULK_FTP_PASSWORD', $ftpPass);
+defined('BULK_FTP_PRIVATEKEY')    or define('BULK_FTP_PRIVATEKEY', $_SERVER['BULK_FTP_PRIVATEKEY']);
 defined('BULK_FTP_URL')           or define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
 defined('API_URL')                or define('API_URL', $_SERVER['API_URL']);
 defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL']);
