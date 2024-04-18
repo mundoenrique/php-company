@@ -94,46 +94,49 @@ class Connect_Services_Apis
     writeLog('INFO', 'Connect_Services_Apis: moveFileToWebService Method Initialized');
 
     $urlBulkService = BULK_FTP_URL . $this->CI->config->item('customer') . '/';
-    $privateKey = '/var/www/key/id_rsa_docker_dtu';
 
-    writeLog('DEBUG', 'UPLOAD FILE TO: ' . $urlBulkService . $file);
+    writeLog('DEBUG', 'UPLOAD FILE TO: ' . BULK_FTP_HOST  . $urlBulkService . $file);
 
-    $conn = ssh2_connect(BULK_FTP_URL, 22);
+    $conn = ssh2_connect(BULK_FTP_HOST, 22);
 
+    $response = new stdClass();
+    $response->data = new stdClass();
+    $response->error = '';
+    $logLevel = 'ERROR';
+    $msg = '';
     // Autenticarse utilizando la clave pública
-    if (ssh2_auth_pubkey_file($conn, 'batch_user', $privateKey . '.pub', $privateKey)) {
+    if (ssh2_auth_pubkey_file($conn, BULK_FTP_USERNAME, BULK_FTP_KEYFILE . '.pub', BULK_FTP_KEYFILE)) {
       writeLog('DEBUG', 'Successful connection to sftp server');
 
       // Iniciar una sesión SFTP
-      $sftp = ssh2_sftp($conn);
+      ssh2_sftp($conn);
 
       // Subir el archivo al servidor remoto
-      if (ssh2_scp_send($conn, UPLOAD_PATH . $file, "/sftp_data/DEV/Archivos_lote/" . $this->CI->config->item('customer') . $file)) {
-        $response = new stdClass();
+      if (ssh2_scp_send($conn, UPLOAD_PATH . $file, $urlBulkService . $file)) {
         $response->HttpCode = 200;
         $response->code = 0;
-        $response->data = new stdClass();
         $response->errorNo = 0;
-        $response->error = '';
+        $logLevel = 'DEBUG';
+        $msg = 'Process Ok';
       } else {
-        writeLog('ERROR', 'Could not connect to the SFTP server.');
-        $response = new stdClass();
         $response->HttpCode = 100;
-        $response->code = -105;
-        $response->data = new stdClass();
-        $response->errorNo = -1;
-        $response->error = 'Could not load file to the SFTP server.';
+        $response->code = -21;
+        $response->errorNo = 96;
+        $response->error = 'SSH2_QUIC_CONNECT_ERROR';
+        $msg = 'Connection error';
       }
     } else {
-      $response = new stdClass();
       $response->HttpCode = 100;
-      $response->code = -105;
-      $response->data = new stdClass();
-      $response->errorNo = -1;
-      $response->error = 'Could not authenticate with the SFTP server.';
+      $response->code = -1;
+      $response->errorNo = 94;
+      $response->error = 'SSH2_AUTH_ERROR';
+      $msg = 'Authentication error';
     }
 
     ssh2_disconnect($conn);
+    unlink(UPLOAD_PATH . $file);
+
+    writeLog($logLevel, 'UPLOAD FILE RESPONSE CODE ' . $response->code . ' ERROR NUMBER ' . $response->errorNo . ' MESSAGE ' . $msg);
 
     return responseServer($response);
   }

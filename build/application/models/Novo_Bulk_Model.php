@@ -260,7 +260,8 @@ class Novo_Bulk_Model extends NOVO_Model
       }
     } else {
       switch ($this->isResponseRc) {
-        case -105:
+        case -1:
+        case -21:
           $this->response->code = 2;
           $this->response->title = lang('BULK_TITLE_PAGE');
           $this->response->msg = lang('BULK_FILE_NO_MOVE');
