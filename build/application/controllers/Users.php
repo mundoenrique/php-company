@@ -2604,25 +2604,51 @@ class Users extends CI_Controller
         $rutaArchivo = $data["upload_data"]["file_path"];
         $extensionArchivo = $data["upload_data"]["file_ext"];
 
-        $ch = curl_init();
         $localfile = $config['upload_path'] . $nombreArchivo . $extensionArchivo;
-        $fp = fopen($localfile, 'r');
         $nombreArchivoNuevo = date("YmdHis") . $nombreArchivo . $extensionArchivo;
-        $URL_TEMPLOTES = BULK_FTP_URL . $this->config->item('country') . '/';
-        $LOTES_USERPASS = BULK_FTP_USERNAME . ':' . BULK_FTP_PASSWORD;
 
-        curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES . $nombreArchivoNuevo);
-        curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
-        curl_setopt($ch, CURLOPT_UPLOAD, 1);
-        curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
-        curl_setopt($ch, CURLOPT_INFILE, $fp);
-        curl_setopt($ch, CURLOPT_INFILESIZE, filesize($localfile));
-        curl_exec($ch);
-        $error_no = curl_errno($ch);
-        log_message('ERROR', "subiendo archivo sftp " . $error_no . "/" . lang("SFTP(" . $error_no . ")"));
-        curl_close($ch);
+        $urlBulkService = BULK_FTP_URL . $this->config->item('country') . '/';
+
+        log_message('DEBUG', 'UPLOAD FILE TO: ' . BULK_FTP_HOST  . $urlBulkService . $nombreArchivoNuevo);
+
+        $conn = ssh2_connect(BULK_FTP_HOST, 22);
+
+        $error = '';
+        $logLevel = 'ERROR';
+        $msg = '';
+
+        if (ssh2_auth_pubkey_file($conn, BULK_FTP_USERNAME, BULK_FTP_KEYFILE . '.pub', BULK_FTP_KEYFILE)) {
+          log_message('DEBUG', 'Successful connection to sftp server');
+
+          // Iniciar una sesión SFTP
+          ssh2_sftp($conn);
+
+          // Subir el archivo al servidor remoto
+          if (ssh2_scp_send($conn, $localfile, $urlBulkService . $nombreArchivoNuevo)) {
+            $code = 0;
+            $error_no = 0;
+            $logLevel = 'DEBUG';
+            $msg = 'Process Ok';
+          } else {
+            $code = -21;
+            $error_no = 96;
+            $error = 'SSH2_QUIC_CONNECT_ERROR';
+            $msg = 'Connection error';
+          }
+        } else {
+          $code = -1;
+          $error_no = 94;
+          $error = 'SSH2_AUTH_ERROR';
+          $msg = 'Authentication error';
+        }
+
+        ssh2_disconnect($conn);
+        unlink($localfile); //BORRAR ARCHIVO
+
+        log_message($logLevel, 'UPLOAD FILE RESPONSE CODE ' . $code . ' ERROR NUMBER ' . $error_no . ' MESSAGE ' . $msg);
+
+
         if ($error_no == 0) {
-          unlink("$localfile"); //BORRAR ARCHIVO
           $error = 'Archivo Movido.';
 
           //COLOCAR LLAMADO DE LA FUNCION CUANDO ESTE CORRECTO
