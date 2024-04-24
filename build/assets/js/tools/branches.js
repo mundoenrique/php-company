@@ -107,6 +107,7 @@ $(function () {
     clearCities();
     $('#editAddBranchText').text('');
     resetForm(['#branchInfoForm', '#branchSettListForm', '#txtBranchesForm']);
+    $('#partedSection').fadeIn(700, 'linear');
   };
 
   const branchesTable = $('#tableBranches').DataTable({
@@ -157,6 +158,10 @@ $(function () {
     ],
   });
 
+  if (TotalEnterpriseList === 1) {
+    getBranchesList();
+  }
+
   $('li#branch').on('click', function (e) {
     e.preventDefault();
     goBrancheslist();
@@ -172,10 +177,6 @@ $(function () {
     e.preventDefault();
     getBranchesList();
   });
-
-  if (TotalEnterpriseList === 1) {
-    getBranchesList();
-  }
 
   $('#newBranchBtn').on('click', function (e) {
     e.preventDefault();
@@ -213,7 +214,6 @@ $(function () {
   $('#backBranchBtn').on('click', function (e) {
     e.preventDefault();
     goBrancheslist();
-    $('#partedSection').fadeIn(700, 'linear');
   });
 
   $('#stateCodBranch').on('change', function (e) {

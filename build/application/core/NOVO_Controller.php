@@ -114,10 +114,10 @@ class NOVO_Controller extends CI_Controller
 
     LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
     clientUrlValidate($this->customerUri);
-    $this->customerUri = $this->config->item('customer_uri');
-    $this->customerLang = $this->config->item('customer_lang');
-    $this->customerStyle = $this->config->item('customer_style');
-    $this->customerFiles = $this->config->item('customer_files');
+    $this->customerUri = config_item('customer_uri');
+    $this->customerLang = config_item('customer_lang');
+    $this->customerStyle = config_item('customer_style');
+    $this->customerFiles = config_item('customer_files');
     LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
     $this->isValidRequest = $this->verify_access->accessAuthorization($this->validationMethod);

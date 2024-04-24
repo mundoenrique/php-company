@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$CustomerOldway = explode('|', CUSTOMER_OLD_WAY);
 //País
 $config['country'] = 'Ve';
-$config['countryUri'] = in_array('ven', CUSTUMER_DENY_WAY, TRUE) ? 'ven' : 've';
-$config['sess_expiration'] = 7200;
+$config['base_url'] = BASE_URL;
+$config['countryUri'] = in_array('ven', $CustomerOldway, TRUE) ? 'ven' : 've';
 
 /*
 |--------------------------------------------------------------------------

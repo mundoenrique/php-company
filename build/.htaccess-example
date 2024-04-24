@@ -18,16 +18,16 @@ SetEnv CI_ENV development
 # SetEnv COOKIE_SECURE ON
 
 	#	VIRTUALHOST HTTP
-# SetEnv BASE_URL http://empresas.novopayment.lc/
-# SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
-# SetEnv COOKIE_DOMAIN empresas.novopayment.lc
-# SetEnv COOKIE_SECURE OFF
+SetEnv BASE_URL http://empresas.novopayment.lc/
+SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
+SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+SetEnv COOKIE_SECURE OFF
 
 	#	VIRTUALHOST HTTPS
-SetEnv BASE_URL https://empresas.novopayment.lc/
-SetEnv ASSET_URL https://empresas.novopayment.lc/assets/
-SetEnv COOKIE_DOMAIN empresas.novopayment.lc
-SetEnv COOKIE_SECURE ON
+# SetEnv BASE_URL https://empresas.novopayment.lc/
+# SetEnv ASSET_URL https://empresas.novopayment.lc/assets/
+# SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+# SetEnv COOKIE_SECURE ON
 
 SetEnv ASSET_PATH {{ubicación-física}}/site-conexionempresas/build/assets/
 SetEnv LOG_PATH ''
@@ -36,7 +36,6 @@ SetEnv SESS_DRIVER files
 SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
 # SetEnv SESS_DRIVER database
 # SetEnv SESS_SAVE_PATH ceo_sessions
-
 SetEnv SESS_COOKIE_NAME empresas
 SetEnv SESS_EXPIRATION 1800
 SetEnv COOKIE_PREFIX 'ceo_'
@@ -47,7 +46,7 @@ SetEnv PROXY_ENABLE OFF
 #----------------------#
 SetEnv ACTIVE_SAFETY ON
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, vgy, coop, bog, bpi, per, usd, ven, col'
+SetEnv ACCESS_URL 'pe, per, co, col, us, usd, ve, ven, vg, vgy, bg, bdb, bog, bnt, bnte, bp, bpi, pb, coop'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
@@ -63,10 +62,10 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME {{ip-loval}}
-# SetEnv DB_PORT {{puerto-local}}
-# SetEnv DB_USERNAME {{usuario-lolca}}
-# SetEnv DB_PASSWORD {{clave-lolca}}
+SetEnv DB_HOSTNAME localhost
+SetEnv DB_PORT 3300
+SetEnv DB_USERNAME ceo_user
+SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
 
 #-------------------------------------------------------------------#
 #														DEVELOPMENT															#
@@ -77,8 +76,8 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # SetEnv DB_HOSTNAME 172.21.0.228
 # SetEnv DB_PORT 3301
-# SetEnv DB_USERNAME cpo_user
-# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+# SetEnv DB_USERNAME ceo_user
+# SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
 
 #------------------------------#
 # SERVICE ENVIROMENT VARIABLES #
@@ -88,10 +87,10 @@ SetEnv WS_URL https://d-web-service.novopayment.net/NovoEolWebInterfaceWS/webres
 SetEnv URL_MFA_SERV https://d-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
 	# SOLES
-SetEnv WS_URL_PE https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_PER https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# DÓLARES
-SetEnv WS_URL_US https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_USD https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 	# VOYGO
 SetEnv WS_URL_VG https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
@@ -99,8 +98,9 @@ SetEnv WS_URL_VG https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webres
 	# BANORTE
 SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
-	# Coop central
-# SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+	# BANORTE
+SetEnv WS_URL_BNTE https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -130,8 +130,10 @@ SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
-SetEnv BULK_FTP_USERNAME npdaemon
+SetEnv BULK_FTP_URL /sftp_data/DEV/Archivos_lote/
+SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+SetEnv BULK_FTP_USERNAME batch_user
+SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
 SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 
 #-------------------------------------------------------------------#
@@ -193,8 +195,10 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.154:22/opt/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_URL /sftp_data/TEST/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
 # SetEnv BULK_FTP_PASSWORD QiE5ek1nTHR4RWtTUFEkeQ==
 
 #-------------------------------------------------------------------#
@@ -256,8 +260,10 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.155:22/opt/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_URL /sftp_data/UAT/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
 # SetEnv BULK_FTP_PASSWORD M1BaZVMhSFF3ckNLOFhFJA==
 
 #-------------------------------------------------------------------#
@@ -327,8 +333,10 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.130:22/home/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_URL /sftp_data/PROD/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
 # SetEnv BULK_FTP_PASSWORD #.3Nv!!
 
 #-------------------------#
