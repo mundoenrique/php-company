@@ -107,7 +107,11 @@ $(function () {
     clearCities();
     $('#editAddBranchText').text('');
     resetForm(['#branchInfoForm', '#branchSettListForm', '#txtBranchesForm']);
-    $('#partedSection').fadeIn(700, 'linear');
+    const rows = branchesTable.page.info().recordsTotal;
+
+    if (rows > 0) {
+      $('#partedSection').fadeIn(700, 'linear');
+    }
   };
 
   const branchesTable = $('#tableBranches').DataTable({

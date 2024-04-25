@@ -259,7 +259,7 @@ class NOVO_Controller extends CI_Controller
         if (lang('SETT_REMOTE_AUTH') === 'ON') {
           array_push(
             $this->includeAssets->jsFiles,
-            "remote_connect/$this->customerUri-remoteConnect"
+            "remote_connect/$this->customerFiles-remoteConnect"
           );
         }
       }
