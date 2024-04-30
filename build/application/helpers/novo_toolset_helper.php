@@ -394,6 +394,7 @@ if (!function_exists('methodWasmigrated')) {
       'single',
       'singleSignOn',
       'termsInf',
+      'terms',
     ];
 
     $migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;

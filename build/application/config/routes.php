@@ -150,7 +150,7 @@ $route['(' . CUSTUMER_ALLOWED . ')/recover-access/(es|en)'] = function () {
 */
 
 $route['(' . CUSTUMER_ALLOWED . ')/rates'] = "Novo_Information/ratesInf";
-$route['(' . CUSTUMER_ALLOWED . ')/sign-out/(:any)'] = "Novo_User/finishSession/$2";
+$route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/sign-out/(:any)'] = "Novo_User/finishSession/$2";
 $route['(' . CUSTUMER_ALLOWED . ')/users-management'] = "Novo_User/usersManagement";
 $route['(' . CUSTUMER_ALLOWED . ')/user-permissions'] = "Novo_User/userPermissions";
 $route['(' . CUSTUMER_ALLOWED . ')/user-accounts'] = "Novo_User/userAccounts";
