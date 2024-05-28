@@ -30,24 +30,25 @@
 
 	/* Brand colors */
 	--color-primary: #012c71;
-	--color-secondary: #ffffff;
-	--color-tertiary: #ececec;
+	--color-secondary: #012c71a6;
+	--color-tertiary: #1a417f;
 	--color-room: #435168;
-	--color-fifth: #D2D3D4;
-	--color-sixth: #7b7b7b;
-	--color-seventh: #1a417f;
-	--color-eighth: #d8d8d8;
+	--color-fifth: #ffffff;
+	--color-sixth: #f4f4f4;
+	--color-seventh: #f2f2f2;
+	--color-eighth: #7b7b7b;
 
 	/* Others */
 	--color-nineth: #f6f3f1;
-	--color-thirteenth: #f4f4f4;
+	--color-tenth: #d8d8d8;
+	--color-eleventh: #b5bac3;
+	--color-twelfth: #bcc0c6;
+	--color-thirteenth: #ececec;
 	--color-fourteenth: #ffb400;
-	--option-active: #012c71;
 	--black: #111111;
 
 	/* Typography */
-	--font-family-base-first: 'Open Sans', sans-serif;
-	--font-family-base: 'Open Sans', sans-serif;
+  --font-family-base: 'Open Sans', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
 
