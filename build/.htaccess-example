@@ -91,28 +91,28 @@ SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceW
 SetEnv WS_URL_BNTE https://d-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # BOGOTA
-# SetEnv WS_URL_BDBO https://d-bdbo.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_BDBO https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # COOPCENTRAL
-# SetEnv WS_URL_COOPC https://d-coopc.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_COOPC https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # DÓLARES
 SetEnv WS_URL_USD https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # GUAYAQUIL
-# SetEnv WS_URL_BGU https://d-bgu.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_BGU https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PICHINCHA
-# SetEnv WS_URL_BPIC https://d-bpic.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_BPIC https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PRODUBANCO
-# SetEnv WS_URL_PBA https://d-pba.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_PBA https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # SOLES
 SetEnv WS_URL_PER https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VENEZUELA
-# SetEnv WS_URL_VEN https://d-ven.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_VEN https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VOYGO
 SetEnv WS_URL_VGY https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
@@ -175,28 +175,28 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 # SetEnv WS_URL_BNTE https://t-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # BOGOTA
-# SetEnv WS_URL_BDBO https://t-bdbo.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BDBO https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # COOPCENTRAL
-# SetEnv WS_URL_COOPC https://t-coopc.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_COOPC https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # DÓLARES
 # SetEnv WS_URL_USD https://t-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # GUAYAQUIL
-# SetEnv WS_URL_BGU https://t-bgu.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BGU https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PICHINCHA
-# SetEnv WS_URL_BPIC https://t-bpic.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BPIC https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PRODUBANCO
-# SetEnv WS_URL_PBA https://t-pba.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_PBA https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # SOLES
 # SetEnv WS_URL_PER https://t-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VENEZUELA
-# SetEnv WS_URL_VEN https://t-ven.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_VEN https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VOYGO
 # SetEnv WS_URL_VGY https://t-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
@@ -256,28 +256,28 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 # SetEnv WS_URL_BNTE https://uat-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # BOGOTA
-# SetEnv WS_URL_BDBO https://uat-bdbo.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BDBO https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # COOPCENTRAL
-# SetEnv WS_URL_COOPC https://uat-coopc.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_COOPC https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # DÓLARES
 # SetEnv WS_URL_USD https://uat-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # GUAYAQUIL
-# SetEnv WS_URL_BGU https://uat-bgu.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BGU https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PICHINCHA
-# SetEnv WS_URL_BPIC https://uat-bpic.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BPIC https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PRODUBANCO
-# SetEnv WS_URL_PBA https://uat-pba.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_PBA https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # SOLES
 # SetEnv WS_URL_PER https://uat-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VENEZUELA
-# SetEnv WS_URL_VEN https://uat-ven.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_VEN https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VOYGO
 # SetEnv WS_URL_VGY https://uat-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
@@ -343,28 +343,28 @@ SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 # SetEnv WS_URL_BNTE https://banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # BOGOTA
-# SetEnv WS_URL_BDBO https://bdbo.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BDBO https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # COOPCENTRAL
-# SetEnv WS_URL_COOPC https://coopc.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_COOPC https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # DÓLARES
 # SetEnv WS_URL_USD https://peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # GUAYAQUIL
-# SetEnv WS_URL_BGU https://bgu.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BGU https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PICHINCHA
-# SetEnv WS_URL_BPIC https://bpic.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BPIC https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # PRODUBANCO
-# SetEnv WS_URL_PBA https://pba.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_PBA https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # SOLES
 # SetEnv WS_URL_PER https://peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VENEZUELA
-# SetEnv WS_URL_VEN https://ven.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_VEN https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
   # VOYGO
 # SetEnv WS_URL_VGY https://peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
