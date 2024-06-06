@@ -20,3 +20,4 @@ $lang['SETT_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['SETT_SERVICE_ORDER_OTP'] = 'ON';
 $lang['SETT_FOOTER_INFO'] = 'OFF';
 $lang['SETT_PADDING_LOGO'] = 'OFF';
+$lang['SETT_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
