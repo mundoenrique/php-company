@@ -58,7 +58,7 @@
                 <div class="help-block"></div>
               </div>
               <div class="col-xl-auto flex items-center ml-auto mr-2">
-                <button id="service-orders-btn" class="btn btn-primary btn-small btn-loading">
+                <button id="service-orders-btn" class="btn btn-primary btn-small btn-loading mb-2">
                   <?= lang('GEN_BTN_SEARCH'); ?>
                 </button>
               </div>

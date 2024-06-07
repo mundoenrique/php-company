@@ -325,6 +325,9 @@ function validateForms(form) {
       contactEmail: { required: true, pattern: emailValid },
       contactType: { required: true, pattern: contactType },
       replaceType: { required: true, requiredSelect: true },
+      paymentConcept: { required: true, selectRequired: [alphaString, alphaString] },
+      embLine1: { required: true, selectRequired: [alphaString, alphaString] },
+      embLine2: { required: true, selectRequired: [alphaString, alphaString] },
     },
     messages: {
       userName: lang.VALIDATE_USERLOGIN,
@@ -688,6 +691,9 @@ function validateForms(form) {
         pattern: lang.VALIDATE_CONTACT_TYPE_SELECT,
       },
       replaceType: lang.VALIDATE_OPTION,
+      paymentConcept: lang.VALIDATE_OPTION,
+      embLine1: lang.VALIDATE_OPTION,
+      embLine2: lang.VALIDATE_OPTION,
     },
     errorPlacement: function (error, element) {
       $(element).closest('.form-group').find('.help-block').html(error.html());
