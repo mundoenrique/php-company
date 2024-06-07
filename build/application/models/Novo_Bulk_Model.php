@@ -377,10 +377,6 @@ class Novo_Bulk_Model extends NOVO_Model
         $detailBulk['embLine1List'] = $response->lotesTO->lineasEmbozo1 ?? [];
         $detailBulk['embLine2List'] = $response->lotesTO->lineasEmbozo2 ?? [];
 
-        $detailBulk['dinamicConcept'] = json_decode('[{"idConcepto":"6411","concepto":"BONO ALIMENTACION","estatus":"1"},{"idConcepto":"6412","concepto":"COMPLEMENTO DE ALIMENTACION","estatus":"1"},{"idConcepto":"6413","concepto":"RECARGA TEBCA","estatus":"1"},{"idConcepto":"6437","concepto":"ABONO BONUS ALIMENTACION LEY","estatus":"1"},{"idConcepto":"6438","concepto":"ABONO EXTRAORDINARIO DE ALIMENTACION","estatus":"1"},{"idConcepto":"6439","concepto":"ABONO LEY COMPLEMENTO CESTA BASICA","estatus":"1"}]');
-        $detailBulk['embLine1List'] = json_decode('[{"idEmbozo": "EBL", "textoEmbozo": ""}]');
-        $detailBulk['embLine2List'] = json_decode('[{"idEmbozo": "EMP", "textoEmbozo": "NOMBRE DEL EMPLEADO"}]');
-
         if (!empty($response->lotesTO->mensajes)) {
           foreach ($response->lotesTO->mensajes as $msg) {
             $error['line'] = 'Línea: ' . $msg->linea;
