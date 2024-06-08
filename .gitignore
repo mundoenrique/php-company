@@ -35,3 +35,5 @@ Thumbs.db
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+**/docker-compose.yml

@@ -1,9 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+defined('BASEPATH') or exit('No direct script access allowed');
+$CustomerOldway = explode('|', CUSTOMER_OLD_WAY);
 //País
-$config['country']='Co';
-$config['countryUri']='co';
+$config['country'] = 'Co';
+$config['base_url'] = BASE_URL;
+$config['countryUri'] = in_array('col', $CustomerOldway, TRUE) ? 'col' : 'co';
 $config['sess_expiration'] = 7200;
 
 /*
@@ -13,10 +14,10 @@ $config['sess_expiration'] = 7200;
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Co/
-$config['base_url_cdn'] = ASSET_URL.$config['country'].'/';
+$config['base_url_cdn'] = ASSET_URL . $config['country'] . '/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = ASSET_PATH.$config['country'].'/';
+$config['CDN'] = ASSET_PATH . $config['country'] . '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ $config['CDN'] = ASSET_PATH.$config['country'].'/';
 | than english.
 |
 */
-$config['language']	= 'co-spanish';
+$config['language'] = 'co-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

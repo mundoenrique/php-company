@@ -63,7 +63,14 @@ $(function () {
 				form.attr('action', baseURL + lang.SETT_LINK_USERS_PERMISSIONS);
 				form.append('<input type="hidden" name="editPermits" value="edit">');
 				form.submit();
-				break;
+        break;
+      case lang.GEN_BTN_EDIT_ACCOUNTS:
+        form = $(this).parent().find('form[name=formManagement]');
+        insertFormInput(true, form);
+        form.attr('action', baseURL + lang.SETT_LINK_USERS_ACCOUNT);
+        form.append('<input type="hidden" name="editPermits" value="edit">');
+        form.submit();
+        break;
 		}
 		insertFormInput(false);
 	});

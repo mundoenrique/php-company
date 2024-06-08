@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$lang['SETT_SCORE_CAPTCHA'] = [
-	'development' => 0,
-	'testing' => 0,
-	'production' => 0
-];
 $lang['SETT_SIGIN_RECOVER_PASS'] = 'OFF';
 $lang['SETT_WIDGET_REST_COUNTRY'] = 'ON';
 $lang['SETT_AGENT_INFO'] = 'ON';
@@ -40,53 +35,73 @@ $lang['SETT_INPUT_UPPERCASE'] = 'ON';
 $lang['SETT_REFERENCE'] = 'ON';
 $lang['SETT_REMOTE_AUTH'] = 'ON';
 $lang['SETT_AUTH_LIST'] = [
-	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'LOCK_TYPES', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT', 'CARD_CANCELLATION'
+  'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'LOCK_TYPES', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT', 'CARD_CANCELLATION'
 ];
 $lang['SETT_AUTH_VALIDATE'] = ['LOCK_TYPES', 'CREDIT_TO_CARD', 'CARD_ASSIGNMENT', 'UPDATE_DATA', 'CARD_CANCELLATION'];
 $lang['SETT_AUTH_LOADING_URL'] = [
-	'development' => [
-		'ANY' =>	'',
-		'BEM' =>	'https://15.128.26.90/nbem03/images/loader.gif',
-		'BEP' =>	'https://15.128.26.90/nbem03/images/loader.gif'
-	],
-	'testing' => [
-		'ANY' =>	'',
-		'BEM' =>	'https://15.128.26.90/nbem03/images/loader.gif',
-		'BEP' =>	'https://15.128.26.90/nbem03/images/loader.gif'
-	],
-	'production' => [
-		'ANY' =>	'',
-		'BEM' =>	'https://nbem.banorte.com/nbxi/images/loader.gif',
-		'BEP' =>	'https://nixe.ixe.com.mx/nbxi/images/loader.gif'
-	]
+  'development' => [
+    'ANY' =>  '',
+    'BEM' =>  'https://15.128.26.90/nbem03/images/loader.gif',
+    'BEP' =>  'https://15.128.26.90/nbem03/images/loader.gif'
+  ],
+  'testing' => [
+    'ANY' =>  '',
+    'BEM' =>  'https://15.128.26.90/nbem03/images/loader.gif',
+    'BEP' =>  'https://15.128.26.90/nbem03/images/loader.gif'
+  ],
+  'production' => [
+    'ANY' =>  '',
+    'BEM' =>  'https://nbem.banorte.com/nbxi/images/loader.gif',
+    'BEP' =>  'https://nixe.ixe.com.mx/nbxi/images/loader.gif'
+  ]
 ];
+// BEM Token fisico BNT https://15.128.26.90/NBEM03/AALoginNew.aspx
+// BEM Token celular BNC https://15.128.26.90/NBEM11/AALoginNew.aspx
+// BEM old https://15.128.26.90/nbem03/AutorizacionRemota.aspx
 $lang['SETT_AUTH_URL'] = [
-	'development' => [
-		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
-	],
-	'testing' => [
-		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
-	],
-	'production' => [
-		'ANY' => '',
-		'BEM' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx',
-		'BEP' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
-	]
+  'development' => [
+    'ANY' => '',
+    'BEM' => [
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
+      'BNC' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    ],
+  ],
+  'testing' => [
+    'ANY' => '',
+    'BEM' => [
+      'BNT' => 'https://15.128.26.90/NBEM03/AALoginNew.aspx',
+      'BNC' => 'https://15.128.26.90/NBEM11/AALoginNew.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx',
+      'BNC' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
+    ],
+  ],
+  'production' => [
+    'ANY' => '',
+    'BEM' => [
+      'BNT' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx',
+      'BNC' => 'https://nbem.banorte.com/nbxi/autorizacionremota.aspx'
+    ],
+    'BEP' => [
+      'BNT' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx',
+      'BNC' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
+    ],
+  ]
 ];
 $lang['SETT_SECTION_COMMISSION'] = 'OFF';
 $lang['SETT_BALANCE_ACC_CONCENTRATOR'] = 'ON';
 $lang['SETT_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 $lang['SETT_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => 'https://www.facebook.com/banorte',
-	'twitter' => 'https://www.twitter.com/Banorte_mx',
-	'youtube' => 'https://www.youtube.com/user/banortemovil',
-	'instagram' => 'https://www.instagram.com/banorte_mx',
+  'facebook' => 'https://www.facebook.com/banorte',
+  'twitter' => 'https://www.twitter.com/Banorte_mx',
+  'youtube' => 'https://www.youtube.com/user/banortemovil',
+  'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
-$lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^["a-z0-9"]{8,9}';
 $lang['SETT_VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['SETT_VALIDATE_MINLENGTH'] = 16;
 $lang['SETT_PADDING_LOGO'] = 'OFF';
@@ -99,5 +114,12 @@ $lang['SETT_REDIRECT_TRANSF_MASTER_ACCOUNT'] = 'OFF';
 $lang['SETT_VALIDATE_PARAMS'] = 'ON';
 $lang['SETT_ACCOUNT_NAME'] = 'ON';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'ON';
+$lang['SETT_FILE_STATUS_ACCOUNT_PDF'] = 'OFF';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'ON';
+$lang['SETT_FILE_CLOSE_BALANCE_TXT'] = 'OFF';
+$lang['SETT_FILE_CLOSE_BALANCE_PDF'] = 'OFF';
+$lang['SETT_FILE_STATUS_BULK_TXT'] = 'OFF';
+$lang['SETT_FILE_USER_ACTIVITY_TXT'] = 'OFF';
+$lang['SETT_DOWNLOAD_SERVER'] = 'OFF';
 $lang['SETT_BULK_TYPE_EXCLUDED'] = ['Y', 'Z'];
+$lang['SETT_CEL_TOKEN'] = 'ON';

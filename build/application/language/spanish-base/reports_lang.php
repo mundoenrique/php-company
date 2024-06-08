@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['REPORTS_TITLE'] = 'Reportes';
 $lang['REPORTS_SELECT'] = 'Selección de reporte';
 $lang['REPORTS_NO_CARDS'] = 'Empresa sin tarjetas asociadas';
@@ -15,47 +16,52 @@ $lang['REPORTS_FOUND_CARD'] = 'La tarjeta no fue encontrada';
 $lang['REPORTS_NO_CLIENT_STATEMENT'] = 'El extracto del mes seleccionado no está disponible.';
 $lang['REPORTS_NO_GMF'] = 'No existen certificados GMF disponibles';
 $lang['REPORTS_NO_GMF_FOR_YEAR'] = 'El certificado GMF para el año %s, no esta disponible';
-$lang['REPORTS_ID_FISCAL']= "NIT. (Opcional)";
-$lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa NIT.";
-$lang['REPORTS_REQUEST_NO_RESULTS']= "No se encontraron resultados con la empresa y fecha seleccionada.";
-//MASTER ACCOUNT
-$lang['REPORTS_TABLE_DATE']="Fecha";
-$lang['REPORTS_TABLE_REFERENCE']="Ref.";
-$lang['REPORTS_TABLE_DEBIT']="Cargo";
-$lang['REPORTS_TABLE_CREDIT']="Abono";
-$lang['REPORTS_TABLE_BALANCE']="Saldo";
-//CLOSING BALANCE
-$lang['REPORTS_TABLE_CARD']="Tarjeta";
-$lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
-$lang['REPORTS_TABLE_DNI']="NIT";
-$lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
-//USERS ACTIVITY
-$lang['REPORTS_USERS_ACT_DATE_ACTION']="Fecha acción";
-$lang['REPORTS_USERS_ACT_DATE_ACTIVITY']="Fecha última actividad";
-$lang['REPORTS_USERS_ACT_MODULE']="Módulo";
-$lang['REPORTS_USERS_ACT_FUNCTION']="Función";
-$lang['REPORTS_USERS_ACT_RESULT']="Resultado (Cod. error / respuesta)";
-$lang['REPORTS_USERS_ACT_OBSERVATION']="Observación";
-$lang['REPORTS_USERS_ACT_STATE']="Estado";
-//MOVEMENTS BY ENTERPRISE
+$lang['REPORTS_ID_FISCAL'] = "NIT. (Opcional)";
+$lang['REPORTS_ID_FISCAL_INPUT'] = "Ingresa NIT.";
+$lang['REPORTS_REQUEST_NO_RESULTS'] = "No se encontraron resultados con la empresa y fecha seleccionada.";
+$lang['REPORTS_TABLE_DATE'] = "Fecha";
+$lang['REPORTS_TABLE_REFERENCE'] = "Ref.";
+$lang['REPORTS_TABLE_DEBIT'] = "Cargo";
+$lang['REPORTS_TABLE_CREDIT'] = "Abono";
+$lang['REPORTS_TABLE_BALANCE'] = "Saldo";
+$lang['REPORTS_TABLE_CARD'] = "Tarjeta";
+$lang['REPORTS_TABLE_CARDHOLDER'] = "Tarjetahabiente";
+$lang['REPORTS_TABLE_DNI'] = "NIT";
+$lang['REPORTS_TABLE_LAST_ACTIVITY'] = "Última actividad";
+$lang['REPORTS_USERS_ACT_DATE_ACTION'] = "Fecha acción";
+$lang['REPORTS_USERS_ACT_DATE_ACTIVITY'] = "Fecha última actividad";
+$lang['REPORTS_USERS_ACT_MODULE'] = "Módulo";
+$lang['REPORTS_USERS_ACT_FUNCTION'] = "Función";
+$lang['REPORTS_USERS_ACT_RESULT'] = "Resultado (Cod. error / respuesta)";
+$lang['REPORTS_USERS_ACT_OBSERVATION'] = "Observación";
+$lang['REPORTS_USERS_ACT_STATE'] = "Estado";
 $lang['REPORTS_DATE_RANGE_ERROR'] = 'No se pueden mostrar transacciones con fecha inferior a un año atrás';
 $lang['REPORTS_DATE_RANGE_NOT_ALLOWED'] = 'El rango de fecha permitido es de máximo un mes';
 $lang['REPORTS_BY_INDENTIFICATION_NUMBER'] = 'Por número de identificación';
 $lang['REPORTS_BY_CARD_NUMBER'] = 'Por número de tarjeta';
-//ACCOUNT STATUS
-$lang['REPORTS_ACCOUNT_CARD']="Tarjeta";
-$lang['REPORTS_ACCOUNT_FID']="Fid";
-$lang['REPORTS_ACCOUNT_TERMINAL']="Terminal";
-$lang['REPORTS_ACCOUNT_SECUENCE']="Secuencia";
-$lang['REPORTS_ACCOUNT_REFERENCE']="Referencia";
-$lang['REPORTS_ACCOUNT_DESCRIPTION']="Descripción";
-$lang['REPORTS_ACCOUNT_OPERATION']="Operación(+/-)";
-$lang['REPORTS_ACCOUNT_AMOUNT']="Monto";
-$lang['REPORTS_ACCOUNT_STATUS']="Estado";
-$lang['REPORTS_ACCOUNT_NAME']="Nombre y apellido";
-
-
-
-
-
-
+$lang['REPORTS_ACCOUNT_CARD'] = "Tarjeta";
+$lang['REPORTS_ACCOUNT_FID'] = "Fid";
+$lang['REPORTS_ACCOUNT_TERMINAL'] = "Terminal";
+$lang['REPORTS_ACCOUNT_SECUENCE'] = "Secuencia";
+$lang['REPORTS_ACCOUNT_REFERENCE'] = "Referencia";
+$lang['REPORTS_ACCOUNT_DESCRIPTION'] = "Descripción";
+$lang['REPORTS_ACCOUNT_OPERATION'] = "Operación(+/-)";
+$lang['REPORTS_ACCOUNT_AMOUNT'] = "Monto";
+$lang['REPORTS_ACCOUNT_STATUS'] = "Estado";
+$lang['REPORTS_ACCOUNT_NAME'] = "Nombre y apellido";
+$lang['REPORTS_CATEG_GROUP'] = [
+  '1' => 'Hoteles',
+  '2' => 'Alquiler de vehículos',
+  '3' => 'Comida, Despensa y restaurantes',
+  '4' => 'Líneas Aéreas y Transporte',
+  '5' => 'Farmacias',
+  '6' => 'Diversión y entretenimiento',
+  '7' => 'Servicios médicos',
+  '9' => 'Cajeros Automáticos',
+  'W' => 'Comercios y Tiendas por Departamento',
+  '8' => 'Otros'
+];
+$lang['REPORTS_TYPE'] = [
+  '01' => 'Tarjeta',
+  '02' => 'clave'
+];

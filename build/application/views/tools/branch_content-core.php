@@ -8,37 +8,40 @@
           <div class="form-group col-7">
             <form id="branchSettListForm">
               <label class="mt-1"><?= lang('GEN_ENTERPRISE') ?></label>
-              <select id="idFiscalList" name="idFiscalList" class="select-box custom-select mt-3 mb-4 h6 w-100" countEnterpriseList=<?= $countEnterpriseList ?>>
-                <?php if ($countEnterpriseList == 1): ?>
-                <option selected disabled value="<?= $enterpriseSettList[0]->acrif; ?>">
-                  <?= $enterpriseSettList[0]->enterpriseName; ?></option>
-                <?php else: ?>
-                <option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
-                <?php foreach ($enterpriseSettList as $enterprise) : ?>
-                <option value="<?= $enterprise->acrif; ?>">
-                  <?= $enterprise->enterpriseName; ?>
-                </option>
-                <?php endforeach; ?>
+              <select id="idFiscalList" name="idFiscalList" class="select-box custom-select h6 w-100 form-control" countEnterpriseList=<?= $countEnterpriseList ?>>
+                <?php if ($countEnterpriseList === 1) : ?>
+                  <option selected value="<?= $enterpriseSettList[0]->acrif; ?>">
+                    <?= $enterpriseSettList[0]->enterpriseName; ?></option>
+                <?php else : ?>
+                  <option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
+                  <?php foreach ($enterpriseSettList as $enterprise) : ?>
+                    <option value="<?= $enterprise->acrif; ?>">
+                      <?= $enterprise->enterpriseName; ?>
+                    </option>
+                  <?php endforeach; ?>
                 <?php endif; ?>
               </select>
+              <div class="help-block"></div>
             </form>
-          </div>
-        </div>
-        <div class="hide-out hide">
-          <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-            <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
           </div>
         </div>
       </div>
     </div>
-    <div id="partedSection" class="figure">
+    <div id="loaderBranches" class="hide">
+      <div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+        <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div id="partedSection" class="figure" style="display:none">
       <div class="my-3 px-2">
         <span class="flex line-text mb-2 h4 semibold primary"></span>
         <div class="m-4 flex justify-end">
-          <button id="loadBranchBtn" class="btn btn-primary btn-small mr-1">
-            <i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
-          </button>
-          <button id="newBranchBtn" class="btn btn-primary btn-small" data-action="create">
+          <?php if (lang('SETT_BRANCH_UPLOAD_FILE') === 'ON') : ?>
+            <button id="loadBranchBtn" class="btn btn-primary btn-small mr-1">
+              <i class="icon icon-upload mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_LOAD_BRANCH') ?>
+            </button>
+          <?php endif; ?>
+          <button id="newBranchBtn" class="btn btn-primary btn-small" action="create">
             <i class="icon icon-plus mr-1" aria-hidden="true"></i><?= lang('GEN_BTN_NEW_BRANCH') ?>
           </button>
         </div>
@@ -96,98 +99,97 @@
           <form id="branchInfoForm" method="post">
             <div class="container">
               <div class="row">
-                <input id="codB" name="codB" type="text" class="form-control hidden" />
-                <input id="userNameB" name="userNameB" type="text" class="form-control hidden" />
+                <input id="codeUpdate" name="codeUpdate" type="hidden">
+                <input id="countryCod" name="countryCod" type="hidden">
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="branchName"><?= lang('GEN_NAME') ?></label>
                   <input id="branchName" name="branchName" type="text" class="form-control" />
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('SETT_BRANCH_FIELD') == 'ON'): ?>
-                <div class="form-group mb-1 col-6 col-lg-4">
-                  <label for="zoneName"><?= lang('GEN_ZONE') ?></label>
-                  <input id="zoneName" name="zoneName" type="text" class="form-control" />
-                  <div class="help-block"></div>
-                </div>
+                <?php if (lang('SETT_BRANCH_FIELD') === 'ON') : ?>
+                  <div class="form-group mb-1 col-6 col-lg-4">
+                    <label for="zoneName"><?= lang('GEN_ZONE') ?></label>
+                    <input id="zoneName" name="zoneName" type="text" class="form-control" />
+                    <div class="help-block"></div>
+                  </div>
                 <?php endif; ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="address1">
-                    <?= lang('SETT_BRANCH_FIELD') == 'ON' ? novoLang(lang('GEN_ADDRESS'), "1") : novoLang(lang('GEN_ADDRESS'), "")  ?>
+                    <?= lang('SETT_BRANCH_FIELD') === 'ON' ? novoLang(lang('GEN_ADDRESS'), "1") : novoLang(lang('GEN_ADDRESS'), "")  ?>
                   </label>
                   <input id="address1" name="address1" type="text" class="form-control" />
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('SETT_BRANCH_FIELD') == 'ON'): ?>
-                <div class="form-group mb-1 col-6 col-lg-4">
-                  <label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
-                  <input id="address2" name="address2" type="text" class="form-control" />
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group mb-1 col-6 col-lg-4">
-                  <label for="address3"><?= novoLang(lang('GEN_ADDRESS'), "3") ?></label>
-                  <input id="address3" name="address3" type="text" class="form-control" />
-                  <div class="help-block"></div>
-                </div>
+                <?php if (lang('SETT_BRANCH_FIELD') === 'ON') : ?>
+                  <div class="form-group mb-1 col-6 col-lg-4">
+                    <label for="address2"><?= novoLang(lang('GEN_ADDRESS'), "2") ?></label>
+                    <input id="address2" name="address2" type="text" class="form-control" />
+                    <div class="help-block"></div>
+                  </div>
+                  <div class="form-group mb-1 col-6 col-lg-4">
+                    <label for="address3"><?= novoLang(lang('GEN_ADDRESS'), "3") ?></label>
+                    <input id="address3" name="address3" type="text" class="form-control" />
+                    <div class="help-block"></div>
+                  </div>
                 <?php endif; ?>
-                <div class="form-group mb-1 col-6 col-lg-4 hidden">
-                  <label for="countryCodBranch"><?= lang('GEN_COUNTRY') ?></label>
-                  <select id="countryCodBranch" name="countryCodBranch" class="form-control select-box custom-select h6 w-100"></select>
-                  <div class="help-block"></div>
-                </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="stateCodBranch"><?= lang('GEN_PROVINCE') ?></label>
-                  <select id="stateCodBranch" name="stateCodBranch" class="form-control select-box custom-select h6 w-100"></select>
+                  <select id="stateCodBranch" name="stateCodBranch" class="form-control select-box custom-select h6 w-100">
+                    <option selected disabled><?= lang('GEN_BTN_SELECT'); ?></option>
+                  </select>
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="cityCodBranch"><?= lang('GEN_DEPARTMENT') ?></label>
-                  <select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100"></select>
+                  <select id="cityCodBranch" name="cityCodBranch" class="form-control select-box custom-select h6 w-100">
+                    <option selected disabled><?= lang('GEN_BTN_SELECT'); ?></option>
+                  </select>
                   <div class="help-block"></div>
                 </div>
-                <?php if (lang('SETT_SETTINGS_DISCTRICT') == 'ON') : ?>
-                <div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
-                  <label for="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
-                  <select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100"></select>
-                  <div class="help-block"></div>
-                </div>
+                <?php if (lang('SETT_SETTINGS_DISCTRICT') === 'ON') : ?>
+                  <div id="districtBlock" class="form-group mb-1 col-6 col-lg-4">
+                    <label for="districtCodBranch"><?= lang('GEN_DISTRICT') ?></label>
+                    <select id="districtCodBranch" name="districtCodBranch" class="form-control select-box custom-select h6 w-100"></select>
+                    <div class="help-block"></div>
+                  </div>
                 <?php endif; ?>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="areaCode"><?= lang('GEN_AREA_CODE') ?></label>
-                  <input id="areaCode" name="areaCode" type="text" class="form-control ignore" />
+                  <input id="areaCode" name="areaCode" type="text" class="form-control" maxlength="3" />
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="phone"><?= novoLang(lang('GEN_TELEPHONE'), "") ?></label>
-                  <input id="phone" name="phone" type="text" class="form-control ignore" maxlength="15">
+                  <input id="phone" name="phone" type="text" class="form-control" maxlength="15">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="person"><?= lang('GEN_CONTACT_NAME') ?></label>
-                  <input id="person" name="person" type="text" class="form-control ignore" />
+                  <input id="person" name="person" type="text" class="form-control" />
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group mb-1 col-6 col-lg-4">
                   <label for="branchCode"><?= lang('GEN_BRANCH_CODE') ?></label>
-                  <input id="branchCode" name="branchCode" type="text" class="form-control" />
+                  <input id="branchCode" name="branchCode" type="text" class="form-control" maxlength="3" />
                   <div class="help-block"></div>
                 </div>
               </div>
               <div class="row flex mb-4 mt-2 pl-5 justify-end form-group">
                 <div class="col-4 form-group">
                   <div class="input-group">
-                    <input id="password1" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
+                    <input id="password-user" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off" name="password" placeholder="Contraseña">
                     <div class="input-group-append">
                       <span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
-												<i class="icon-view mr-0"></i>
-											</span>
+                        <i class="icon-view mr-0"></i>
+                      </span>
                     </div>
                   </div>
                   <div class="help-block text-left"></div>
                 </div>
                 <div class="col-auto">
-                  <button id="btnSaveBranch" type="button" class="btn btn-primary btn-small btn-loading flex mx-auto justify-center">
-										<?= lang('GEN_BTN_SAVE') ?>
-									</button>
+                  <button id="btnSaveBranch" type="submit" class="btn btn-primary btn-small btn-loading flex mx-auto justify-center">
+                    <?= lang('GEN_BTN_SAVE') ?>
+                  </button>
                 </div>
               </div>
             </div>

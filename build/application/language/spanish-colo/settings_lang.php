@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_VIEW_SUFFIX'] = '';
 $lang['SETT_SIGIN_RECOVER_PASS'] = 'OFF';
 $lang['SETT_MAINTENANCE'] = 'ON';
@@ -17,3 +18,7 @@ $lang['SETT_LINK_CHANGE_PASS'] = 'cambiar-clave';
 $lang['SETT_LINK_ENTERPRISES'] = 'dashboard';
 $lang['SETT_LINK_TERMS'] = 'inf-condiciones';
 $lang['SETT_LINK_SUGGESTION'] = 'browsers';
+$lang['SETT_MODAL_BTN_CLASS'] = [
+  'cancel' => 'btn-modal cancel-button novo-btn-secondary-modal dialog-buttons',
+  'accept' => 'btn-modal novo-btn-primary-modal dialog-buttons'
+];

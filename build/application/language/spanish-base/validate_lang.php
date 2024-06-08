@@ -1,10 +1,25 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-//VALIDATE FORMS
-$lang['VALIDATE_USERLOGIN'] = '';
-$lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
-$lang['VALIDATE_USERPASS_PATT'] = 'Combinación incorrecta de usuario y contraseña';
-$lang['VALIDATE_USERNAME'] = 'Indica un usuario válido';
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['VALID_REQUIRED'] = 'Este campo es requerido.';
+$lang['VALID_STATIC_LENGTH'] = 'Indica {0} caracteres {1}.';
+$lang['VALID_MAX_LENGTH'] = 'Indica menos de {0} caracteres.';
+$lang['VALID_MIN_LENGTH'] = 'Indica al menos {0} caracteres.';
+$lang['VALID_RANGE_LENGTH'] = 'Indica entre {0} y {1} caracteres.';
+$lang['VALID_USERNAME'] = 'Indica un usuario válido.';
+$lang['VALID_PASSWORD'] = 'La contraseña debe cumplir los requisitos.';
+$lang['VALID_USERPASS_REQ'] = 'Ambos campos son requeridos.';
+$lang['VALID_USERPASS_PATTERN'] = 'Combinación incorrecta de usuario y contraseña.';
+$lang['VALID_OTP_CODE'] = 'Indica un código válido (letras y números)';
+
+
+$lang['VALIDATE_PHONE_NUMBER'] = 'Indica un número telefónico válido mín 6 máx 15.';
+$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, mín 7 máx 9.';
+$lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (xls, xlsx, txt)';
+$lang['VALID_DOC_ID'] = 'Indica un documento de identidad válido, (números)';
+
+
+
 $lang['VALIDATE_NIT'] = 'Indica un número válido';
 $lang['VALIDATE_ID_COMPANY'] = 'Indica un RUC válido';
 $lang['VALIDATE_EMAIL'] = 'Indica un correo válido';
@@ -12,11 +27,9 @@ $lang['VALIDATE_CURRENT_PASS'] = 'Indica tu contraseña actual';
 $lang['VALIDATE_NEW_PASS'] = 'Indica tu nueva contraseña';
 $lang['VALIDATE_DIFFERS_PASS'] = 'La nueva contraseña debe ser diferente a la actual';
 $lang['VALIDATE_EQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';
-$lang['VALIDATE_REQUIREMENTS_PASS'] = 'La contraseña debe cumplir los requisitos';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Selecciona una sucursal';
 $lang['VALIDATE_BULK_TYPE'] = 'Selecciona un tipo de lote';
-$lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (xls, xlsx, txt)';
 $lang['VALIDATE_FILE_SIZE'] = 'El archivo no debe estar vacío';
 $lang['VALIDATE_PASS'] = 'Indica una contraseña válida';
 $lang['VALIDATE_ORDER_TYPE'] = 'Selecciona un tipo de orden';
@@ -27,7 +40,7 @@ $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
 $lang['VALIDATE_SELECTED_MONTH_YEAR'] = 'Selecciona una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECTED_YEAR'] = 'Selecciona un año disponible';
 $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
-$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
+$lang['VALIDATE_NUMBER_ID'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_LENGHT_NUMBER'] = 'El número es demasiado largo';
 $lang['VALIDATE_PHONE_REQ'] = 'Este teléfono es requerido';
 $lang['VALIDATE_REFERENCE'] = 'Indica un número de referencia válido';
@@ -43,13 +56,13 @@ $lang['VALIDATE_SELECT_PRODUCT'] = 'Debes seleccionar un producto';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
 $lang['VALIDATE_DATE_MY'] = 'Indica una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECT'] = 'Selecciona al menos un registro';
+$lang['VALIDATE_SELECT_CONTENT'] = 'El contenido del registro no es válido';
 $lang['VALIDATE_OS_OTP'] = 'Indica un código de seguridad válido';
 $lang['VALIDATE_SELECT_GROUP'] = 'Completa alguno de estos campos';
 $lang['VALIDATE_OPTION'] = 'Selecciona una opción';
 $lang['VALIDATE_SELECT_GROUP'] = 'Selecciona alguno de estos criterios';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Indica un número de identificación válido';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Selecciona un tipo de documento de identidad';
-$lang['VALIDATE_OTP_CODE'] = 'Ingresa un código de seguridad válido (letras y números)';
 $lang['VALIDATE_MAX_WEEK'] = 'Monto diario no puede ser mayor al semanal';
 $lang['VALIDATE_MAX_MONTH'] = 'Monto semanal no puede ser mayor al mensual';
 $lang['VALIDATE_MAX_DAY'] = 'Monto de transacción no puede ser mayor al monto diario';
@@ -77,7 +90,6 @@ $lang['VALIDATE_CODE_BRANCHES'] = 'Indica un código válido';
 $lang['VALIDATE_ADDRESS_BRANCHES'] = 'Indica una dirección válida';
 $lang['VALIDATE_PROVINCE_BRANCHES'] = 'Selecciona una provincia';
 $lang['VALIDATE_DEPARTMENT_BRANCHES'] = 'Selecciona un departamento';
-$lang['VALIDATE_INPUT_REQUIRED'] = 'Este campo es requerido';
 $lang['VALIDATE_INPUT_POSITION'] = 'Indica un cargo válido';
 $lang['VALIDATE_INPUT_SURNAME'] = 'Indica un apellido válido';
 $lang['VALIDATE_ADDRESS_ENTERPRICE'] = 'Indica la dirección';
@@ -86,3 +98,5 @@ $lang['VALIDATE_MAXLENGTH_IDEXTPER'] = '20';
 $lang['VALIDATE_MAXLENGTH'] = '40';
 $lang['VALIDATE_MAXLENGTH_CARD'] = '16';
 $lang['VALIDATE_MINLENGTH_CARD'] = '6';
+$lang['VALIDATE_INVALID_DOCUMENT'] = 'Formato inválido.';
+$lang['VALIDATE_LENGTH_DOCUMENT'] = 'Solo se admiten 20 caracteres.';

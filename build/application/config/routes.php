@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -49,93 +49,159 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Novo_User/login';
+$route['default_controller'] = 'Novo_User/sign-in';
 $route['404_override'] = ERROR_CONTROLLER;
 $route['translate_uri_dashes'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | TEMPORAL ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(bpi|co|pe|us|ve)/browsers'] = "Novo_User/browsers";
-$route['(bpi|co|pe|us|ve)/inicio'] = "Novo_User/login";
-$route['(bpi|co|pe|us|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
-$route['(bpi|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePass";
-$route['(bpi|co|pe|us|ve)/inf-beneficios'] = "Novo_Information/benefits";
-$route['(bpi|co|pe|us|ve)/inf-condiciones'] = "Novo_Information/terms";
+$route['(' . CUSTOMER_OLD_WAY . ')/browsers'] = "Novo_User/browsers";
+$route['(' . CUSTOMER_OLD_WAY . ')/inicio'] = "Novo_User/login";
+$route['(' . CUSTOMER_OLD_WAY . ')/recuperar-clave'] = "Novo_User/passwordRecovery";
+$route['(' . CUSTOMER_OLD_WAY . ')/cambiar-clave'] = "Novo_User/changePass";
+$route['(' . CUSTOMER_OLD_WAY . ')/inf-beneficios'] = "Novo_Information/benefits";
+$route['(' . CUSTOMER_OLD_WAY . ')/inf-condiciones'] = "Novo_Information/terms";
 /*
 |--------------------------------------------------------------------------
-| CURRENT ROUTES
+*/
+
+/*
+|--------------------------------------------------------------------------
+| ASYNC ROUTES
 |--------------------------------------------------------------------------
 */
-$route['(:any)/async-call'] = "Novo_CallModels";
-$route['(:any)/single'] = "Novo_CallModels";
-$route['(:any)/inicio'] = function ($customer) {
-	header('Location: '.BASE_URL.$customer.'/sign-in', 302);
-	exit;
+$route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/callCoreApp'] = "Novo_LoadModels/loadModels";
+$route['(' . CUSTUMER_ALLOWED . ')/single'] = "Novo_LoadModels/loadModels";
+$route['(' . CUSTUMER_ALLOWED . ')/async-call'] = "Novo_CallModels";
+/*
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| EXTERNAL ROUTES
+|--------------------------------------------------------------------------
+*/
+$route['(' . CUSTUMER_ALLOWED . ')/inicio'] = function ($customer) {
+  header('Location: ' . BASE_URL . $customer . '/sign-in', 302);
+  exit;
 };
-$route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
-$route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
-$route['(:any)/suggestion'] = "Novo_User/suggestion";
-$route['(:any)/sign-in'] = "Novo_User/signIn";
-$route['(:any)/sign-in/(:any)'] = "Novo_User/signIn";
-$route['(:any)/internal/novopayment/signin'] = "Novo_User/signIn";
-$route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
-$route['(:any)/recover-password'] = "Novo_User/recoverPass";
-$route['(:any)/recover-password/(:any)'] = "Novo_User/recoverPass";
-$route['(:any)/recover-access'] = "Novo_User/recoverAccess";
-$route['(:any)/recover-access/(:any)'] = "Novo_User/recoverAccess";
-$route['(:any)/change-password'] = "Novo_User/changePassword";
-$route['(:any)/users-management'] = "Novo_User/usersManagement";
-$route['(:any)/user-permissions'] = "Novo_User/userPermissions";
-$route['(:any)/terms'] = "Novo_Information/termsInf";
-$route['(:any)/benefits'] = "Novo_Information/benefitsInf";
-$route['(:any)/rates'] = "Novo_Information/ratesInf";
-$route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
-$route['(:any)/products'] = "Novo_Business/getProducts";
-$route['(:any)/product-detail'] = "Novo_Business/getProductDetail";
-$route['(:any)/bulk-load'] = "Novo_Bulk/getPendingBulk";
-$route['(:any)/bulk-detail'] = "Novo_Bulk/getDetailBulk";
-$route['(:any)/bulk-confirm'] = "Novo_Bulk/confirmBulk";
-$route['(:any)/bulk-authorize'] = "Novo_Bulk/authorizeBulkList";
-$route['(:any)/unnamed-request'] = "Novo_Bulk/unnamedRequest";
-$route['(:any)/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
-$route['(:any)/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
-$route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
-$route['(:any)/service-orders'] = "Novo_Inquiries/serviceOrders";
-$route['(:any)/inquiry-bulk-detail'] = "Novo_Inquiries/bulkDetail";
-$route['(:any)/transf-master-account'] = "Novo_Services/transfMasterAccount";
-$route['(:any)/cards-inquiry'] = "Novo_Services/cardsInquiry";
-$route['(:any)/transactional-limits'] = "Novo_Services/transactionalLimits";
-$route['(:any)/commercial-twirls'] = "Novo_Services/commercialTwirls";
-$route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
-$route['(:any)/reports'] = "Novo_Reports/getReportsList";
-$route['(:any)/account-status'] = "Novo_Reports/accountStatus";
-$route['(:any)/replacement'] = "Novo_Reports/replacement";
-$route['(:any)/extended-account-status'] = "Novo_Reports/extendedAccountStatus";
-$route['(:any)/closing-balance'] = "Novo_Reports/closingBalance";
-$route['(:any)/user-activity'] = "Novo_Reports/userActivity";
-$route['(:any)/users-activity'] = "Novo_Reports/usersActivity";
-$route['(:any)/recharge-made'] = "Novo_Reports/rechargeMade";
-$route['(:any)/issued-cards'] = "Novo_Reports/issuedCards";
-$route['(:any)/category-expense'] = "Novo_Reports/categoryExpense";
-$route['(:any)/master-account'] = "Novo_Reports/masterAccount";
-$route['(:any)/extended-master-account'] = "Novo_Reports/extendedMasterAccount";
-$route['(:any)/status-master-account'] = "Novo_Reports/statusMasterAccount";
-$route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
-$route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
-$route['(:any)/tools'] = "Novo_Tools/options";
-$route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
-$route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
-$route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
-$route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount";
-$route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
-$route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
-$route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
-$route['(:any)/empresa'] = "Novo_Tools/getEnterprise";
-$route['(:any)/Contact'] = "Novo_Tools/addContact";
-$route['(:any)/cambiar-email'] = "Novo_Tools/changeEmail";
-$route['(:any)/cambiar-telefonos'] = "Novo_Tools/changeTelephones";
+$route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/sign-in'] = function ($customer) {
+  if (DENY_WAY) {
+    header('Location: ' . BASE_URL . $customer . '/inicio', 302);
+    exit;
+  }
+
+  return 'Novo_User/signIn';
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingresar/(:any)']['GET'] = function ($customer, $sessionId) {
+  return SINGLE_SIGNON_GET ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingresar']['POST'] = function () {
+  $_POST['external'] = TRUE;
+  return SINGLE_SIGNON_POST ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingress']['POST'] = function () {
+  return SINGLE_SIGNON_POST ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/internal/novopayment/signin'] = "Novo_User/signIn";
+$route['(' . CUSTUMER_ALLOWED . ')/change-password'] = "Novo_User/changePassword";
+$route['(' . CUSTUMER_ALLOWED . ')/recover-password'] = "Novo_User/recoverPass";
+$route['(' . CUSTUMER_ALLOWED . ')/recover-access'] = "Novo_User/recoverAccess";
+$route['(' . CUSTUMER_ALLOWED . ')/terms'] = "Novo_Information/termsInf";
+$route['(' . CUSTUMER_ALLOWED . ')/benefits'] = "Novo_Information/benefitsInf";
+$route['(' . CUSTUMER_ALLOWED . ')/suggestion'] = "Novo_User/suggestion";
+/*
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| EXTERNAL ROUTES WITH LANGUAGE
+|--------------------------------------------------------------------------
+*/
+$route['(' . CUSTUMER_ALLOWED . ')/sign-in/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/signIn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingresar/(:any)/(es|en)']['GET'] = function ($customer, $sessionId) {
+  return SINGLE_SIGNON_GET && ENGLISH_ACTIVE ? "Novo_User/singleSignOn/$sessionId" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingresar/(es|en)']['POST'] = function () {
+  $_POST['external'] = TRUE;
+  return SINGLE_SIGNON_POST && ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/ingress/(es|en)']['POST'] = function () {
+  return SINGLE_SIGNON_POST && ENGLISH_ACTIVE ? "Novo_User/singleSignOn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/internal/novopayment/signin/(es/en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/signIn" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/recover-password/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/recoverPass" : ERROR_CONTROLLER;
+};
+$route['(' . CUSTUMER_ALLOWED . ')/recover-access/(es|en)'] = function () {
+  return ENGLISH_ACTIVE ? "Novo_User/recoverAccess" : ERROR_CONTROLLER;
+};
+/*
+|--------------------------------------------------------------------------
+*/
+
+$route['(' . CUSTUMER_ALLOWED . ')/rates'] = "Novo_Information/ratesInf";
+$route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/sign-out/(:any)'] = "Novo_User/finishSession/$2";
+$route['(' . CUSTUMER_ALLOWED . ')/users-management'] = "Novo_User/usersManagement";
+$route['(' . CUSTUMER_ALLOWED . ')/user-permissions'] = "Novo_User/userPermissions";
+$route['(' . CUSTUMER_ALLOWED . ')/user-accounts'] = "Novo_User/userAccounts";
+$route['(' . CUSTUMER_ALLOWED . ')/enterprises'] = "Novo_Business/getEnterprises";
+$route['(' . CUSTUMER_ALLOWED . ')/products'] = "Novo_Business/getProducts";
+$route['(' . CUSTUMER_ALLOWED . ')/product-detail'] = "Novo_Business/getProductDetail";
+$route['(' . CUSTUMER_ALLOWED . ')/bulk-load'] = "Novo_Bulk/getPendingBulk";
+$route['(' . CUSTUMER_ALLOWED . ')/bulk-detail'] = "Novo_Bulk/getDetailBulk";
+$route['(' . CUSTUMER_ALLOWED . ')/bulk-confirm'] = "Novo_Bulk/confirmBulk";
+$route['(' . CUSTUMER_ALLOWED . ')/bulk-authorize'] = "Novo_Bulk/authorizeBulkList";
+$route['(' . CUSTUMER_ALLOWED . ')/unnamed-request'] = "Novo_Bulk/unnamedRequest";
+$route['(' . CUSTUMER_ALLOWED . ')/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
+$route['(' . CUSTUMER_ALLOWED . ')/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
+$route['(' . CUSTUMER_ALLOWED . ')/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
+$route['(' . CUSTUMER_ALLOWED . ')/service-orders'] = "Novo_Inquiries/serviceOrders";
+$route['(' . CUSTUMER_ALLOWED . ')/inquiry-bulk-detail'] = "Novo_Inquiries/bulkDetail";
+$route['(' . CUSTUMER_ALLOWED . ')/transf-master-account'] = "Novo_Services/transfMasterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/cards-inquiry'] = "Novo_Services/cardsInquiry";
+$route['(' . CUSTUMER_ALLOWED . ')/transactional-limits'] = "Novo_Services/transactionalLimits";
+$route['(' . CUSTUMER_ALLOWED . ')/commercial-twirls'] = "Novo_Services/commercialTwirls";
+$route['(' . CUSTUMER_ALLOWED . ')/download-files'] = "Novo_DownloadFiles/exportFiles";
+$route['(' . CUSTUMER_ALLOWED . ')/reports'] = "Novo_Reports/getReportsList";
+$route['(' . CUSTUMER_ALLOWED . ')/account-status'] = "Novo_Reports/accountStatus";
+$route['(' . CUSTUMER_ALLOWED . ')/replacement'] = "Novo_Reports/replacement";
+$route['(' . CUSTUMER_ALLOWED . ')/extended-account-status'] = "Novo_Reports/extendedAccountStatus";
+$route['(' . CUSTUMER_ALLOWED . ')/closing-balance'] = "Novo_Reports/closingBalance";
+$route['(' . CUSTUMER_ALLOWED . ')/user-activity'] = "Novo_Reports/userActivity";
+$route['(' . CUSTUMER_ALLOWED . ')/users-activity'] = "Novo_Reports/usersActivity";
+$route['(' . CUSTUMER_ALLOWED . ')/recharge-made'] = "Novo_Reports/rechargeMade";
+$route['(' . CUSTUMER_ALLOWED . ')/issued-cards'] = "Novo_Reports/issuedCards";
+$route['(' . CUSTUMER_ALLOWED . ')/category-expense'] = "Novo_Reports/categoryExpense";
+$route['(' . CUSTUMER_ALLOWED . ')/master-account'] = "Novo_Reports/masterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/extended-master-account'] = "Novo_Reports/extendedMasterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/status-master-account'] = "Novo_Reports/statusMasterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/status-bulk'] = "Novo_Reports/statusBulk";
+$route['(' . CUSTUMER_ALLOWED . ')/card-holders'] = "Novo_Reports/cardHolders";
+$route['(' . CUSTUMER_ALLOWED . ')/tools'] = "Novo_Tools/options";
+$route['(' . CUSTUMER_ALLOWED . ')/closing-budgets'] = "Novo_Reports/closingBudgets";
+$route['(' . CUSTUMER_ALLOWED . ')/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
+$route['(' . CUSTUMER_ALLOWED . ')/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
+$route['(' . CUSTUMER_ALLOWED . ')/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
+$route['(' . CUSTUMER_ALLOWED . ')/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
+$route['(' . CUSTUMER_ALLOWED . ')/empresa'] = "Novo_Tools/getEnterprise";
+$route['(' . CUSTUMER_ALLOWED . ')/Contact'] = "Novo_Tools/addContact";
+$route['(' . CUSTUMER_ALLOWED . ')/cambiar-email'] = "Novo_Tools/changeEmail";
+$route['(' . CUSTUMER_ALLOWED . ')/cambiar-telefonos'] = "Novo_Tools/changeTelephones";
+$route['(' . CUSTUMER_ALLOWED . ')/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
+$route['(' . CUSTUMER_ALLOWED . ')/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
+$route['(' . CUSTUMER_ALLOWED . ')/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
+
 /*
 |--------------------------------------------------------------------------
 | OLD ROUTES
@@ -167,7 +233,6 @@ $route['(:any)/empresas/config'] = "users/configEmpresa/$1";
 $route['(:any)/empresas/configsuc'] = "users/configSucursal/$1";
 $route['(:any)/empresas/configdesc'] = "users/configDescargas/$1";
 $route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
-//$route['(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
 $route['(:any)/tarifas'] = "footer/pantallaTarifas/$1";
@@ -178,7 +243,6 @@ $route['(:any)/dashboard'] = "dashboard/index/$1";
 $route['(:any)/dashboard/productos'] = "dashboard/dashboardProductos/$1";
 $route['(:any)/dashboard/productos/detalle'] = "dashboard/dashboardProductosDetalle/$1";
 $route['(:any)/dashboard/programas'] = "dashboard/programas/$1";
-//ROUTE FOR LOTES
 $route['(:any)/lotes'] = "lotes/pantallaCarga/$1";
 $route['(:any)/lotes/carga'] = "lotes/pantallaCarga/$1";
 $route['(:any)/lotes/detalle'] = "lotes/pantallaDetalleLote/$1";
@@ -208,9 +272,8 @@ $route['(:any)/lotes/calculo'] = "lotes/pantallaCalculoOSLote/$1";
 $route['(:any)/lotes/autorizacion/eliminarAuth'] = "lotes/eliminarLotesPorAutorizar/$1";
 $route['(:any)/lotes/autorizacion/detalle'] = "lotes/detalleLoteAuth/$1";
 $route['api/v1/(:any)/reportes/detalleLoteAuthExpPDF'] = "lotes/expdetalleLoteAuthPDF/$1";
-$route['api/v1/(:any)/reportes/detalleLoteAuthExpXLS']= "lotes/expdetalleLoteAuthXLS/$1";
+$route['api/v1/(:any)/reportes/detalleLoteAuthExpXLS'] = "lotes/expdetalleLoteAuthXLS/$1";
 $route['api/v1/(:any)/lotes/confirmarPreOSL'] = "lotes/callAutorizarLote/$1";
-//RUTAS DE ACCESO DESDE JS
 $route['api/v1/(:any)/lotes/reproceso/crear'] = "lotes/crearBeneficiario/$1";
 $route['api/v1/(:any)/lotes/reproceso/cargarMasivo'] = "lotes/cargarMasivoReproceso/$1";
 $route['api/v1/(:any)/lotes/reproceso/buscar'] = "lotes/buscarListaBeneficiarios/$1";
@@ -228,7 +291,7 @@ $route['api/v1/(:any)/login'] = "users/validationAuth/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradora'] = "reportes/getCuentaConcentradora/$1";
 $route['api/v1/(:any)/reportes/graficoCuentaConcentradora'] = "reportes/graficoCuentaConcentradora/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraExpPDF'] = "reportes/expCuentaConcentradoraPDF/$1";
-$route['api/v1/(:any)/reportes/cuentaConcentradoraExpXLS']= "reportes/expCuentaConcentradoraXLS/$1";
+$route['api/v1/(:any)/reportes/cuentaConcentradoraExpXLS'] = "reportes/expCuentaConcentradoraXLS/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraConsolidadoExpXLS'] = "reportes/expCuentaConcentradoraConsolidadoXLS/$1";
 $route['api/v1/(:any)/reportes/cuentaConcentradoraConsolidadoExpPDF'] = "reportes/expCuentaConcentradoraConsolidadoPDF/$1";
 $route['api/v1/(:any)/reportes/tarjetasEmitidasExpXLS'] = "reportes/expTarjetasEmitidasXLS/$1";
@@ -263,7 +326,6 @@ $route['api/v1/(:any)/reportes/downPDFactividadUsuario'] = "reportes/downPDFacti
 $route['api/v1/(:any)/reportes/downXLSactividadUsuario'] = "reportes/downXLSactividadUsuario/$1";
 $route['api/v1/(:any)/reportes/guarderiaExpPDF'] = "reportes/guarderiaExpPDF/$1";
 $route['api/v1/(:any)/reportes/guarderiaExpXLS'] = "reportes/guarderiaExpXLS/$1";
-//REPORTES
 $route['(:any)/reportes/cuenta-concentradora'] = "reportes/cuentaConcentradora/$1";
 $route['(:any)/reportes/tarjetas-emitidas'] = "reportes/tarjetasemitidas/$1";
 $route['(:any)/reportes/saldos-al-cierre'] = "reportes/saldosamanecidos/$1";
@@ -280,7 +342,6 @@ $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
 $route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/$1";
 $route['(:any)/reportes/comisiones-recarga'] = "reports_additional/callSystem/$1";
 $route['(:any)/reportes/eliminar'] = "reports_additional/deleteReport/$1";
-//CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
 $route['(:any)/consulta/embozado'] = "consultas/embozado/$1";
 $route['(:any)/consulta/lotes-por-facturar'] = "additional_inquiries/batchesByInvoice/$1";
@@ -310,33 +371,23 @@ $route['(:any)/servicios/actualizar-datos'] = "servicios/actualizarDatos/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/cargarArchivo'] = "servicios/cargarArchivo/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/buscar-datos'] = "servicios/buscarDatos/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/downXLS'] = "servicios/downXLS_AD/$1";
-//Routes for Combustible
 $route['(:any)/trayectos'] = "combustible/home/$1";
 $route['(:any)/trayectos/modelo'] = "combustible/callAPImodel/$1";
-//Drivers
 $route['(:any)/trayectos/conductores'] = "combustible/drivers/$1";
 $route['(:any)/trayectos/conductores/perfil'] = "combustible/driversAddEdit/$1";
-//vehicle Groups
 $route['(:any)/trayectos/gruposVehiculos'] = "combustible/vehicleGroups/$1";
 $route['(:any)/trayectos/vehiculos'] = "combustible/vehicles/$1";
 $route['(:any)/trayectos/vehiculos/incluir'] = "combustible/carsAdd/$1";
-//Accounts
 $route['(:any)/trayectos/cuentas'] = "combustible/accounts/$1";
 $route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
-//travels
 $route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
 $route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
-//guides
 $route['(:any)/guias'] = "guides/all_guides/$1";
 $route['(:any)/guias/(:any)'] = "guides/category_guides/$1/$2";
 $route['(:any)/guias-detalle/(:any)'] = "guides/guides_detail/$1/$2";
-//controles de pago visa
 $route['(:any)/controles/visa'] = "visa/index/$1";
 $route['(:any)/card-list'] = "visa/callWsCardList/$1";
 $route['(:any)/visa'] = "visa/callWSVisaModel/$1";
 $route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
 $route['(:any)/pagos'] = "payment/payments/$1";
 $route['(:any)/payments'] = "payment/callAPImodel/$1";
-//cuenta maestra
-$route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
-$route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
