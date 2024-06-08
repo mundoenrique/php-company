@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var table;
 var access;
 var costs;
@@ -20,7 +20,7 @@ $(function () {
     drawCallback: function (d) {
       $('#balance-aviable').text(balance);
 
-      if (lang.SETT_BALANCE_ACC_CONCENTRATOR == 'ON') {
+      if (lang.SETT_BALANCE_ACC_CONCENTRATOR === 'ON') {
         $('#balance-acc-concentrator').text(balanceConcentratingAccount);
       }
 
@@ -34,21 +34,21 @@ $(function () {
       $('.disabled-recharge').prop('disabled', false);
       $('.hide-out').removeClass('hide');
     },
-    "autoWidth": false,
-    "ordering": false,
-    "searching": false,
-    "lengthChange": false,
-    "pagelength": 10,
-    "pagingType": "full_numbers",
-    "table-layout": "fixed",
-    "select": {
-      "style": "multi",
-      "info": false
+    autoWidth: false,
+    ordering: false,
+    searching: false,
+    lengthChange: false,
+    pagelength: 10,
+    pagingType: 'full_numbers',
+    'table-layout': 'fixed',
+    select: {
+      style: 'multi',
+      info: false,
     },
-    "language": dataTableLang,
-    "processing": true,
-    "serverSide": true,
-    "ajax": {
+    language: dataTableLang,
+    processing: true,
+    serverSide: true,
+    ajax: {
       url: baseURL + 'async-call',
       method: 'POST',
       dataType: 'json',
@@ -61,23 +61,23 @@ $(function () {
         var dataRequest = JSON.stringify({
           who: 'Services',
           where: 'TransfMasterAccount',
-          data: data
+          data: data,
         });
 
         dataRequest = cryptoPass(dataRequest, true);
         var request = {
           request: dataRequest,
           ceo_name: ceo_cook,
-          plot: btoa(ceo_cook)
-        }
+          plot: btoa(ceo_cook),
+        };
         return request;
       },
       dataFilter: function (resp) {
-        $('#tableServicesMaster').find('thead > tr').removeClass("selected")
-        var responseTable = jQuery.parseJSON(resp)
+        $('#tableServicesMaster').find('thead > tr').removeClass('selected');
+        var responseTable = jQuery.parseJSON(resp);
         responseTable = JSON.parse(
           CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, {
-            format: CryptoJSAesJson
+            format: CryptoJSAesJson,
           }).toString(CryptoJS.enc.Utf8)
         );
         var codeDefaul = parseInt(lang.SETT_DEFAULT_CODE);
@@ -89,116 +89,120 @@ $(function () {
         access = responseTable.access;
         balance = responseTable.balance;
         $('#balance-aviable').addClass(responseTable.cssNegativeBalance);
-        balanceConcentratingAccount = responseTable.balanceConcentratingAccount
+        balanceConcentratingAccount = responseTable.balanceConcentratingAccount;
         costs = responseTable.params;
         return JSON.stringify(responseTable);
-      }
+      },
     },
-    "columnDefs": [{
-        "targets": 0,
-        "className": "select-checkbox",
-        "checkboxes": {
-          "selectRow": true
+    columnDefs: [
+      {
+        targets: 0,
+        className: 'select-checkbox',
+        checkboxes: {
+          selectRow: true,
         },
       },
       {
-        "targets": 1,
-        "className": "card-number",
-        "width": "200px"
+        targets: 1,
+        className: 'card-number',
+        width: '200px',
       },
       {
-        "targets": 2,
-        "width": "200px",
+        targets: 2,
+        width: '200px',
       },
       {
-        "targets": 3,
-        "className": "user-id",
-        "width": "auto"
+        targets: 3,
+        className: 'user-id',
+        width: 'auto',
       },
       {
-        "targets": 4,
-        "className": "balance",
-        "width": "120px"
+        targets: 4,
+        className: 'balance',
+        width: '120px',
       },
       {
-        "targets": 5,
-        "className": "amount-cc",
-        "width": "150px",
+        targets: 5,
+        className: 'amount-cc',
+        width: '150px',
       },
       {
-        "targets": 6,
-        "width": "200px"
-      }
+        targets: 6,
+        width: '200px',
+      },
     ],
-    "columns": [{
-        data: function (data) {
-          return ''
-        }
-      },
-      {
-        data: 'cardNumber'
-      },
-      {
-        data: 'name'
-      },
-      {
-        data: 'idNumber'
-      },
+    columns: [
       {
         data: function (data) {
-          return '--'
-        }
+          return '';
+        },
+      },
+      {
+        data: 'cardNumber',
+      },
+      {
+        data: 'name',
+      },
+      {
+        data: 'idNumber',
+      },
+      {
+        data: function (data) {
+          return '--';
+        },
       },
       {
         data: function (data) {
           var ammount;
-          var disabeldInput = data.status == '' ? '' : 'disabled'
+          var disabeldInput = data.status == '' ? '' : 'disabled';
           ammount = '<form>';
           ammount += '<input class="form-control h6 text-right" type="text" placeholder="';
           ammount += data.amount + '" ' + disabeldInput + '">';
           ammount += '</form>';
 
-          return ammount
-        }
+          return ammount;
+        },
       },
       {
         data: function (data) {
           var options = '';
 
           if (access.TRASAL && data.status == '') {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE +
-              '" data-toggle="tooltip" amount="0" ';
+            options +=
+              '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0" ';
             options += 'action="CHECK_BALANCE">';
             options += '<i class="icon icon-envelope-open" aria-hidden="true"></i>';
             options += '</button>';
           }
 
           if (access.TRACAR && data.status == '') {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD +
-              '" data-toggle="tooltip" amount="1" ';
+            options +=
+              '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
             options += 'action="CREDIT_TO_CARD">';
             options += '<i class="icon icon-credit-card" aria-hidden="true"></i>';
             options += '</button>';
           }
 
           if (access.TRAABO && data.status == '') {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD +
-              '" data-toggle="tooltip" amount="1" ';
+            options +=
+              '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
             options += 'action="DEBIT_TO_CARD">';
             options += '<i class="icon icon-card-fee" aria-hidden="true"></i>';
             options += '</button>';
           }
 
           if (access.TRABLQ && data.status == '') {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_LOCK_TYPES +
-              '" data-toggle="tooltip" amount="0" ';
+            options +=
+              '<button class="btn mx-1 px-0" title="' + lang.GEN_LOCK_TYPES + '" data-toggle="tooltip" amount="0" ';
             options += 'action="LOCK_TYPES">';
             options += '<i class="icon icon-lock" aria-hidden="true"></i>';
             options += '</button>';
           }
 
           if (access.TRADBL && data.status == 'pb') {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_UNLOCK +
+            options +=
+              '<button class="btn mx-1 px-0" title="' +
+              lang.GEN_TEMPORARY_UNLOCK +
               '" data-toggle="tooltip" amount="0" ';
             options += 'action="TEMPORARY_UNLOCK">';
             options += '<i class="icon icon-unlock" aria-hidden="true"></i>';
@@ -206,7 +210,9 @@ $(function () {
           }
 
           if (access.TRAASG) {
-            options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT +
+            options +=
+              '<button class="btn mx-1 px-0" title="' +
+              lang.GEN_CARD_ASSIGNMENT +
               '" data-toggle="tooltip" amount="0" ';
             options += 'action="CARD_ASSIGNMENT">';
             options += '<i class="icon icon-deliver-card" aria-hidden="true"></i>';
@@ -214,14 +220,14 @@ $(function () {
           }
 
           return options;
-        }
-      }
-    ]
+        },
+      },
+    ],
   });
 
   $('#masterAccountBtn').on('click', function (e) {
     e.preventDefault();
-    $('#tableServicesMaster').find('thead > tr').removeClass("selected");
+    $('#tableServicesMaster').find('thead > tr').removeClass('selected');
     $('.help-block').text('');
     $('input, select').removeClass('has-error');
     form = $('#masterAccountForm');
@@ -235,8 +241,8 @@ $(function () {
   });
 
   $('#tableServicesMaster').on('click', '.toggle-all', function () {
-    $(this).closest("tr").toggleClass("selected");
-    if ($(this).closest("tr").hasClass("selected")) {
+    $(this).closest('tr').toggleClass('selected');
+    if ($(this).closest('tr').hasClass('selected')) {
       table.rows().select();
     } else {
       table.rows().deselect();
@@ -249,8 +255,8 @@ $(function () {
     title = event.attr('title');
     getAmount = event.attr('amount');
     table.rows().deselect();
-    $('#tableServicesMaster').find('thead > tr').removeClass("selected");
-    $('#tableServicesMaster').find('tbody > tr').removeClass("selected");
+    $('#tableServicesMaster').find('thead > tr').removeClass('selected');
+    $('#tableServicesMaster').find('tbody > tr').removeClass('selected');
     $(this).closest('tr').addClass('selected');
 
     if (amountValidate(getAmount, title)) {
@@ -265,7 +271,7 @@ $(function () {
   $('#system-info').on('click', '.send-request', function () {
     form = $('#password-modal');
     btnText = $(this).text().trim();
-    sendRequest(action, title, $(this))
+    sendRequest(action, title, $(this));
   });
 
   $('#system-info').on('click', '.get-auth-key', function () {
@@ -281,7 +287,7 @@ $(function () {
   });
 
   $('#Consulta, #Abono, #Cargo').on('click', function (e) {
-    e.preventDefault()
+    e.preventDefault();
     title = $(this).attr('id');
     action = $(this).attr('action');
     getAmount = $(this).attr('amount');
@@ -290,16 +296,18 @@ $(function () {
       form = $('#password-table');
       btnText = $(this).text().trim();
 
-      if (lang.SETT_REMOTE_AUTH == 'OFF' || (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(action, lang
-          .SETT_AUTH_LIST) == -1)) {
+      if (
+        lang.SETT_REMOTE_AUTH == 'OFF' ||
+        (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(action, lang.SETT_AUTH_LIST) == -1)
+      ) {
         if (formValidateTrim(form, title) && lang.SETT_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
-          modalReference(action, title, $(this))
+          modalReference(action, title, $(this));
         } else {
           sendRequest(action, title, $(this));
         }
       } else if (formValidateTrim(form, title)) {
         if (lang.SETT_REFERENCE == 'ON' && action == 'CREDIT_TO_CARD') {
-          modalReference(action, title, $(this))
+          modalReference(action, title, $(this));
         } else {
           btnRemote = $(this);
           remoteAuthArgs.action = action;
@@ -312,13 +320,13 @@ $(function () {
 
   $('#system-info').on('click', '#cancel', function () {
     $('#tableServicesMaster').find('tr').removeClass('selected');
-  })
+  });
 
-  $("#tableServicesMaster").on({
-    "focus": function (event) {
+  $('#tableServicesMaster').on({
+    focus: function (event) {
       $(event.target).select();
     },
-    "keyup": function (event) {
+    keyup: function (event) {
       $(event.target).val(function (index, value) {
         if (value.indexOf('0') != -1 && value.indexOf('0') == 0) {
           value = value.replace(0, '');
@@ -328,13 +336,14 @@ $(function () {
           value = '00' + value;
         }
 
-        value = value.replace(/\D/g, "")
+        value = value
+          .replace(/\D/g, '')
           .replace(/([0-9])([0-9]{2})$/, '$1' + lang.SETT_DECIMAL + '$2')
           .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.SETT_THOUSANDS);
 
-        return value
+        return value;
       }, 'input');
-    }
+    },
   });
 });
 
@@ -342,13 +351,13 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
   modalBtn = {
     btn1: {
       text: lang.GEN_BTN_ACCEPT,
-      action: 'none'
+      action: 'none',
     },
     btn2: {
       text: lang.GEN_BTN_CANCEL,
-      action: 'destroy'
-    }
-  }
+      action: 'destroy',
+    },
+  };
   inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 
   if (currentAction == 'CREDIT_TO_CARD' && lang.SETT_REFERENCE == 'ON') {
@@ -373,12 +382,12 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 
   if (currentAction == 'LOCK_TYPES') {
     inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
-    inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>'
-    inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">'
-    inputModal += '<option value="" selected>' + lang.SERVICES_REASON_LOCK_TYPES + '</option>'
+    inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>';
+    inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">';
+    inputModal += '<option value="" selected>' + lang.SERVICES_REASON_LOCK_TYPES + '</option>';
 
     $.each(lang.SERVICES_LOCK_TYPES_BLOCK, function (key, element) {
-      inputModal += '<option value="' + key + '">' + element + '</option>'
+      inputModal += '<option value="' + key + '">' + element + '</option>';
     });
 
     inputModal += '</select>';
@@ -395,7 +404,9 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
       '<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
     inputModal += 'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
     inputModal += '<div class="input-group-append">';
-    inputModal += '<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS +
+    inputModal +=
+      '<span class="input-group-text pwd-action" title="' +
+      lang.GEN_SHOW_PASS +
       '"><i class="icon-view mr-0"></i></span>';
     inputModal += '</div>';
     inputModal += '</div>';
@@ -413,8 +424,10 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 
   inputModal += '</form>';
 
-  if (lang.SETT_REMOTE_AUTH == 'OFF' || (lang.SETT_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang
-      .SETT_AUTH_VALIDATE) != -1)) {
+  if (
+    lang.SETT_REMOTE_AUTH === 'OFF' ||
+    (lang.SETT_REMOTE_AUTH === 'ON' && $.inArray(currentAction, lang.SETT_AUTH_VALIDATE) != -1)
+  ) {
     appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
   } else if ($.inArray(currentAction, lang.SETT_AUTH_LIST) != -1) {
     remoteAuthArgs.action = currentAction;
@@ -426,28 +439,30 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 }
 
 function amountValidate(getAmount, currentTitle) {
-  var valid = true
+  var valid = true;
   cardsData = table.rows('.selected').data();
 
   if (getAmount == '1') {
-    var currentamount
+    var currentamount;
     for (var i = 0; i < cardsData.length; i++) {
-      $('#tableServicesMaster').find('tbody > tr.selected').each(function (index, element) {
-        currentamount = $(element).find('td.amount-cc input').val();
-        var amountArr = currentamount.split(lang.SETT_DECIMAL);
-        amountArr[0] = amountArr[0].replace(/[,.]/g, '');
-        currentamount = amountArr[0] + '.' + amountArr[1];
-        currentamount = parseFloat(currentamount).toFixed(2)
+      $('#tableServicesMaster')
+        .find('tbody > tr.selected')
+        .each(function (index, element) {
+          currentamount = $(element).find('td.amount-cc input').val();
+          var amountArr = currentamount.split(lang.SETT_DECIMAL);
+          amountArr[0] = amountArr[0].replace(/[,.]/g, '');
+          currentamount = amountArr[0] + '.' + amountArr[1];
+          currentamount = parseFloat(currentamount).toFixed(2);
 
-        if (currentamount == 'NaN' || currentamount <= 0) {
-          $(element).find('td.amount-cc input').addClass('has-error');
-          valid = false;
-        }
+          if (currentamount == 'NaN' || currentamount <= 0) {
+            $(element).find('td.amount-cc input').addClass('has-error');
+            valid = false;
+          }
 
-        if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
-          cardsData[i].amount = currentamount;
-        }
-      })
+          if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
+            cardsData[i].amount = currentamount;
+          }
+        });
     }
   }
 
@@ -455,12 +470,12 @@ function amountValidate(getAmount, currentTitle) {
     modalBtn = {
       btn1: {
         text: lang.GEN_BTN_ACCEPT,
-        action: 'destroy'
-      }
-    }
+        action: 'destroy',
+      },
+    };
 
     appMessages(currentTitle, lang.GEN_VALID_AMOUNT, lang.SETT_ICON_WARNING, modalBtn);
-    $('#tableServicesMaster').find('thead > tr').removeClass("selected");
+    $('#tableServicesMaster').find('thead > tr').removeClass('selected');
     table.rows().deselect();
   }
 
@@ -490,14 +505,12 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
       cardsInfo.push(JSON.stringify(info));
     }
 
-    currentBtn
-      .html(loader)
-      .prop('disabled', true);
+    currentBtn.html(loader).prop('disabled', true);
     insertFormInput(true);
     data = {
       cards: cardsInfo,
-      action: currentAction
-    }
+      action: currentAction,
+    };
 
     if (currentAction == 'CREDIT_TO_CARD' && lang.SETT_REFERENCE == 'ON') {
       data.reference = cardHolderInf.reference;
@@ -511,12 +524,11 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
     where = 'ActionMasterAccount';
 
     callNovoCore(who, where, data, function (response) {
-      $('#tableServicesMaster').find('thead > tr').removeClass("selected");
+      $('#tableServicesMaster').find('thead > tr').removeClass('selected');
       table.rows().deselect();
 
-      if (currentAction == 'CHECK_BALANCE' || currentAction == 'DEBIT_TO_CARD' || currentAction ==
-        'CREDIT_TO_CARD') {
-        currentBtn.html(btnText)
+      if (currentAction == 'CHECK_BALANCE' || currentAction == 'DEBIT_TO_CARD' || currentAction == 'CREDIT_TO_CARD') {
+        currentBtn.html(btnText);
       }
 
       $('#tableServicesMaster').find('tbody > tr input').val('');
@@ -533,8 +545,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
         cardCheckBalance(response, currentTitle);
       }
 
-      if (currentAction == 'LOCK_TYPES' || currentAction == 'TEMPORARY_UNLOCK' || currentAction ==
-        'CARD_ASSIGNMENT') {
+      if (currentAction == 'LOCK_TYPES' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
         cardBlockUnblock(response);
       }
 
@@ -552,31 +563,33 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 
 function cardCheckBalance(response, currentTitle) {
   $.each(response.data.listResponse, function (key, value) {
-    $('#tableServicesMaster').find('tbody > tr').each(function (index, element) {
-      if (value.cardNumber == $(element).find('td.card-number').text()) {
-        $(element).find('td.balance').text(value.balance);
+    $('#tableServicesMaster')
+      .find('tbody > tr')
+      .each(function (index, element) {
+        if (value.cardNumber == $(element).find('td.card-number').text()) {
+          $(element).find('td.balance').text(value.balance);
 
-        if (value.balance != '--') {
-          $(element).find('td.balance').addClass('text-right');
-        } else {
-          $(element).find('td.balance').removeClass('text-right');
+          if (value.balance != '--') {
+            $(element).find('td.balance').addClass('text-right');
+          } else {
+            $(element).find('td.balance').removeClass('text-right');
+          }
         }
-      }
-    })
-  })
+      });
+  });
 
   if (response.code == 2) {
     modalBtn = {
       btn1: {
         text: lang.GEN_BTN_ACCEPT,
-        action: 'destroy'
-      }
-    }
+        action: 'destroy',
+      },
+    };
 
     inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
     $.each(response.data.listFail, function (index, value) {
       inputModal += '<h6 class="light mr-1">' + value + '</h6>';
-    })
+    });
 
     appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
   }
@@ -604,30 +617,29 @@ function buildList(response, currentTitle) {
     modalBtn = {
       btn1: {
         text: lang.GEN_BTN_ACCEPT,
-        action: 'destroy'
-      }
-    }
+        action: 'destroy',
+      },
+    };
 
     inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
     $.each(response.data.listResponse, function (index, value) {
       inputModal += '<div class= "mb-1">';
-      inputModal += '<h6 class="light mr-1 mb-0">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount +
-        '</h6>';
+      inputModal += '<h6 class="light mr-1 mb-0">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
       inputModal += '<span class=' + (value.codelist != 0 ? 'danger' : '') + '>(' + value.msglist + ')</span>';
       inputModal += '</div>';
-    })
+    });
 
     appMessages(currentTitle, inputModal, lang.SETT_ICON_INFO, modalBtn);
     $('#accept').addClass('update');
     $('.update').on('click', function () {
       $('#accept').removeClass('update');
       dataTableReload(false);
-    })
+    });
   }
 }
 
 function verifyOperations() {
-  var column
+  var column;
 
   if (!access.TRASAL) {
     column = table.column('4');
@@ -658,9 +670,9 @@ function formValidateTrim(currentForm, currentTitle) {
     modalBtn = {
       btn1: {
         text: lang.GEN_BTN_ACCEPT,
-        action: 'destroy'
-      }
-    }
+        action: 'destroy',
+      },
+    };
 
     appMessages(currentTitle, lang.VALIDATE_SELECT, lang.SETT_ICON_WARNING, modalBtn);
   }
@@ -672,24 +684,22 @@ function formValidateTrim(currentForm, currentTitle) {
   return cardsData.length > 0 && form.valid();
 }
 
-
 function modalReference(currentAction, currentTitle, currentBtn) {
-
   var formPassAction = $('#password-table');
   var dataPassAction = getDataForm(formPassAction);
-  var password = dataPassAction.passAction != undefined && dataPassAction.passAction != null ? dataPassAction
-    .passAction : '';
+  var password =
+    dataPassAction.passAction != undefined && dataPassAction.passAction != null ? dataPassAction.passAction : '';
 
   modalBtn = {
     btn1: {
       text: lang.GEN_BTN_ACCEPT,
-      action: 'none'
+      action: 'none',
     },
     btn2: {
       text: lang.GEN_BTN_CANCEL,
-      action: 'destroy'
-    }
-  }
+      action: 'destroy',
+    },
+  };
   inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
   inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
   inputModal += '<div class="input-group">';
@@ -699,8 +709,8 @@ function modalReference(currentAction, currentTitle, currentBtn) {
   if (lang.SETT_REMOTE_AUTH == 'OFF') {
     inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
     inputModal += '<div class="input-group">';
-    inputModal += '<input class="form-control pwd-input pwd" type="hidden" id="password" name="password" value = ' +
-      password + '>';
+    inputModal +=
+      '<input class="form-control pwd-input pwd" type="hidden" id="password" name="password" value = ' + password + '>';
     inputModal += '</div>';
   }
   inputModal += '<div class="help-block"></div>';

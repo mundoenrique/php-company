@@ -1,13 +1,29 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_STATUS_BULK'); ?></h1>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a></li> /
-        <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>">
+            <?= lang('GEN_MENU_ENTERPRISE'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>">
+            <?= lang('GEN_PRODUCTS'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>">
+            <?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?>
+          </a>
+        </li> /
+        <li class="inline">
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK') ?>">
+            <?= lang('GEN_MENU_REPORTS'); ?>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -26,13 +42,10 @@
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>
                 <select id="enterpriseCode" name="enterpriseCode" class="form-control select-box custom-select flex h6 w-100 enterprise-getprod">
-                  <?php foreach($enterpriseList AS $enterprise) : ?>
-                  <?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
-                  <?php endif;?>
-                  <option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
-                    id-fiscal="<?= $enterprise->acrif; ?>">
-                    <?= $enterprise->acnomcia; ?>
-                  </option>
+                  <?php foreach ($enterpriseList as $enterprise) : ?>
+                    <option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
+                      <?= $enterprise->acnomcia; ?>
+                    </option>
                   <?php endforeach; ?>
                 </select>
                 <div class="help-block"></div>
@@ -41,25 +54,23 @@
                 <label><?= lang('GEN_PRODUCT'); ?></label>
                 <select id="productCode" name="productCode" class="form-control select-box custom-select flex h6 w-100">
                   <option disabled value=""><?= $selectProducts ?></option>
-                  <?php if($productsSelect): ?>
-                  <?php foreach($productsSelect AS $product): ?>
-                  <option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
-                  <?php endforeach; ?>
+                  <?php if ($productsSelect) : ?>
+                    <?php foreach ($productsSelect as $product) : ?>
+                      <option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+                    <?php endforeach; ?>
                   <?php endif; ?>
                 </select>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-4 col-lg-3 col-xl-3">
                 <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-                <input id="initialDate" name="initialDate" class="form-control date-picker" type="text"
-                  placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+                <input id="initialDate" name="initialDate" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
                 <div class="help-block">
                 </div>
               </div>
               <div class="form-group col-4 col-lg-3 col-xl-3">
                 <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-                <input id="finalDate" name="finalDate" class="form-control date-picker" type="text"
-                  placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+                <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
                 <div class="help-block "></div>
               </div>
               <div class="col-xl-auto flex items-center ml-auto mr-2">
@@ -90,6 +101,11 @@
                   <button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
                     <i class="icon icon-file-pdf" aria-hidden="true"></i>
                   </button>
+                  <?php if (lang('SETT_FILE_STATUS_BULK_TXT') === 'ON') : ?>
+                    <button id="export_txt" class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_TXT'); ?>" data-toggle="tooltip">
+                      <i class="icon icon-file-txt" aria-hidden="true"></i>
+                    </button>
+                  <?php endif; ?>
                 </div>
                 <form id="download-status" action="<?= base_url(lang('SETT_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
               </div>
@@ -115,7 +131,7 @@
 
     </div>
   </div>
-  <?php if($widget): ?>
-  <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
+  <?php if ($widget) : ?>
+    <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
   <?php endif; ?>
 </div>

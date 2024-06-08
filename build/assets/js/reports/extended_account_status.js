@@ -94,6 +94,14 @@ $(function () {
 			insertFormInput(true, form);
 			searchExtAccountStatus(data);
 		}
+  });
+
+  $("#export_pdf").click(function(){
+		validateForms(formFileDownload);
+		if (formFileDownload.valid()) {
+			var dataPdf = getDataForm(formFileDownload)
+			extendedDownloadFiles(dataPdf, 'exportToPdfExtendedAccountStatus');
+		}
 	});
 
 	$("#export_excel").click(function(){
@@ -107,8 +115,8 @@ $(function () {
 	$("#export_txt").click(function(){
 		validateForms(formFileDownload);
 		if (formFileDownload.valid()) {
-			var dataXls = getDataForm(formFileDownload)
-			extendedDownloadFiles(dataXls, 'exportToTxtExtendedAccountStatus');
+			var dataTxt = getDataForm(formFileDownload)
+			extendedDownloadFiles(dataTxt, 'exportToTxtExtendedAccountStatus');
 		}
 	});
 });

@@ -4,26 +4,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_MAINTENANCE'] = 'OFF';
 $lang['SETT_MAINT_NOTIF'] = 'OFF';
 $lang['SETT_MAINTENANCE_RC'] = 9997;
+$lang['SETT_RC_DEFAULT'] = -9999;
 $lang['SETT_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['SETT_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
-$lang['SETT_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
-$lang['SETT_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
+$lang['SETT_ACTIVE_SAFETY'] = ACTIVE_SAFETY;
 $lang['SETT_VIEW_SUFFIX'] = '-core';
-$lang['SETT_RC_DEFAULT'] = -9999;
 $lang['SETT_DEFAULT_CODE'] = 4;
 $lang['SETT_VALIDATE_CAPTCHA'] = [
-	'signIn',
-	'login',
-	'recoverAccess',
-	'recoverPass',
-	'passwordRecovery'
+  'signIn',
+  'login',
+  'recoverAccess',
+  'recoverPass',
+  'passwordRecovery'
 ];
 $lang['SETT_AGENT_INFO'] = 'OFF';
 $lang['SETT_SCORE_CAPTCHA'] = [
-	'development' => 0,
-	'testing' => 0,
-	'production' => 0
+  'development' => 0,
+  'testing' => 0,
+  'production' => 0
 ];
+$lang['SETT_COOKIE_SINGN_IN'] = 'signInSession';
+$lang['SETT_COOKIE_SINGN_ON'] = 'singleSignOnSession';
 $lang['SETT_VALID_ERROR'] = 'has-error';
 $lang['SETT_VALID_VALID'] = 'has-success';
 $lang['SETT_VALID_SUCCESS'] = ' ';
@@ -35,6 +36,9 @@ $lang['SETT_VALID_POSITION'] = 'left';
 $lang['SETT_HEADER_BORDER'] = 'OFF';
 $lang['SETT_PADDING_LOGO'] = 'ON';
 $lang['SETT_MODAL_WIDTH'] = 370;
+$lang['SETT_MODAL_HEIGHT'] = 'auto';
+$lang['SETT_MODAL_MINHEIGHT'] = 100;
+$lang['SETT_MODAL_MAXHEIGHT'] = 350;
 $lang['SETT_ICON'] = 'ui-icon mt-0';
 $lang['SETT_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['SETT_ICON_INFO'] = 'ui-icon-info';
@@ -82,7 +86,6 @@ $lang['SETT_BULK_SELECT_ALL_AUTH'] = 'ON';
 $lang['SETT_BULK_AUTH_MSG_SERV'] = 'OFF';
 $lang['SETT_ACCOUNT_STATUS_CARD'] = 'OFF';
 $lang['SETT_IMAGE_CLOCK'] = 'OFF';
-$lang['SETT_HASH_PASS'] = 'ON';
 $lang['SETT_NIT_INPUT_BOOL'] = 'ON';
 $lang['SETT_SELECT_TYPE'] = 'OFF';
 $lang['SETT_SELECT_ACCOUNT'] = 'OFF';
@@ -101,6 +104,14 @@ $lang['SETT_NAME_COLUMN'] = 'ON';
 $lang['SETT_ID_COLUMN'] = 'ON';
 $lang['SETT_BALANCE_COLUMN'] = 'ON';
 $lang['SETT_LAST_UPDATE_COLUMN'] = 'ON';
+$lang['SETT_REPLACE_CARD_NUMBER'] = 'ON';
+$lang['SETT_REPLACE_CARD_HOLDER'] = 'ON';
+$lang['SETT_REPLACE_DOCUMENT_ID'] = 'ON';
+$lang['SETT_REPLACE_ISSUE_DATE'] = 'ON';
+$lang['SETT_REPLACE_BULK_ID'] = 'OFF';
+$lang['SETT_REPLACE_SERV_ORDER'] = 'OFF';
+$lang['SETT_REPLACE_INV_NUMBER'] = 'OFF';
+$lang['SETT_REPLACE_FISCAL_ID'] = 'OFF';
 $lang['SETT_CARD_STATUS_COLUMN'] = 'ON';
 $lang['SETT_DATE_COLUMN'] = 'ON';
 $lang['SETT_DNI_COLUMN'] = 'ON';
@@ -154,20 +165,20 @@ $lang['SETT_REMOTE_AUTH'] = 'OFF';
 $lang['SETT_AUTH_LIST'] = [];
 $lang['SETT_AUTH_VALIDATE'] = [];
 $lang['SETT_AUTH_LOADING_URL'] = [
-	'development' => [
-		'ANY' => ''
-	],
+  'development' => [
+    'ANY' => ''
+  ],
 ];
 $lang['SETT_AUTH_URL'] = [
-	'development' => [
-		'ANY' => ''
-	],
-	'testing' => [
-		'ANY' => ''
-	],
-	'production' => [
-		'ANY' => ''
-	]
+  'development' => [
+    'ANY' => ''
+  ],
+  'testing' => [
+    'ANY' => ''
+  ],
+  'production' => [
+    'ANY' => ''
+  ]
 ];
 $lang['SETT_USER_ACTIVITY'] = 'ON';
 $lang['SETT_USERS_ACTIVITY'] = 'OFF';
@@ -189,14 +200,15 @@ $lang['SETT_LINK_ENTERPRISES'] = 'enterprises';
 $lang['SETT_LINK_PRODUCTS'] = 'products';
 $lang['SETT_LINK_PRODUCT_DETAIL'] = 'product-detail';
 $lang['SETT_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['SETT_NO_LINK'],
-	'twitter' => $lang['SETT_NO_LINK'],
-	'youtube' => $lang['SETT_NO_LINK'],
-	'instagram' => $lang['SETT_NO_LINK'],
-	'linkedin' => $lang['SETT_NO_LINK'],
+  'facebook' => $lang['SETT_NO_LINK'],
+  'twitter' => $lang['SETT_NO_LINK'],
+  'youtube' => $lang['SETT_NO_LINK'],
+  'instagram' => $lang['SETT_NO_LINK'],
+  'linkedin' => $lang['SETT_NO_LINK'],
 ];
 $lang['SETT_LINK_USERS_MANAGEMENT'] = 'users-management'; //permiso asociado USEREM
 $lang['SETT_LINK_USERS_PERMISSIONS'] = 'user-permissions'; //permiso asociado USEREM-->CREUSU y USEREM-->ASGPER
+$lang['SETT_LINK_USERS_ACCOUNT'] = 'user-accounts'; //permiso asociado USEREM-->CREUSU y USEREM-->COACUE
 $lang['SETT_LINK_BULK_LOAD'] = 'bulk-load'; //permiso asociado TEBCAR
 $lang['SETT_LINK_BULK_DETAIL'] = 'bulk-detail'; //permiso asociado TEBCAR
 $lang['SETT_LINK_BULK_CONFIRM'] = 'bulk-confirm'; //permiso asociado TEBCAR-->TEBCON
@@ -230,11 +242,27 @@ $lang['SETT_LINK_STATUS_MASTER_ACCOUNT'] = 'status-master-account'; //permiso as
 $lang['SETT_LINK_SUGGESTION'] = 'suggestion';
 $lang['SETT_LINK_RATES'] = 'rates';
 $lang['SETT_LINK_UPDATE_ADDRESS_ENTERPRICE'] = 'changeTelephones';
-$lang['SETT_BTN_LANG'] = 'OFF';
+$lang['SETT_CHANGE_LANG'] = ENGLISH_ACTIVE ? 'ON' : 'OFF';
 $lang['SETT_MENU_CIRCLE'] = 'OFF';
 $lang['SETT_FRANCHISE_LOGO'] = 'ON';
 $lang['SETT_TIME_DOWNLOAD_FILE'] = '7000';
 $lang['SETT_STATUS_REJECTED'] = '5';
+$lang['SETT_SAVE_IP_FORM'] = '
+<form id="otpForm" name="otpForm" class="mr-2" method="post" onsubmit="return false;">
+  <p class="pt-0 p-0">%s</p>
+  <div class="row">
+    <div class="form-group col-8">
+      <label for="otpCode">%s</label>
+      <input type="text" id="otpCode" name="otpCode" class="form-control" autocomplete="off" maxlength="10" />
+      <div class="help-block"></div>
+    </div>
+  </div>
+  <div class="form-group custom-control custom-switch mb-0">
+    <input type="checkbox" id="saveIp" name="saveIp" class="custom-control-input" />
+    <label class="custom-control-label" for="saveIp">%s</label>
+  </div>
+</form>
+';
 $lang['SETT_UPLOAD_SFTP(0)'] = 'CURLE_PROCESS_OK';
 $lang['SETT_UPLOAD_SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL';
 $lang['SETT_UPLOAD_SFTP(2)'] = 'CURLE_FAILED_INIT';
@@ -329,28 +357,48 @@ $lang['SETT_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['SETT_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 $lang['SETT_MIN_WIDTH_OTP'] = '480';
 $lang['SETT_POSTMY_OTP'] = 'center top+160';
-$lang['SETT_VALIDATE_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 $lang['SETT_VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú,.:()]+$';
 $lang['SETT_FILES_EXTENSION'] = 'xls|xlsx|txt';
 $lang['SETT_MAX_FILE_SIZE'] = '2048';
-$lang['SETT_VALIDATE_EMAIL'] = '^([a-zA-Z0-9]+[a-zA-Z0-9_.+-]*)+\@(([a-zA-Z0-9_-])+\.)+([a-zA-Z0-9]{2,4})+$';
 $lang['SETT_VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';
 $lang['SETT_VALIDATE_MINLENGTH'] = 1;
 $lang['SETT_DATATABLE_SLEEP'] = '10000';
 $lang['SETT_DATATABLE_ARRAY_CHUNK'] = '50';
 $lang['SETT_BRANCH_FIELD'] = 'ON';
+$lang['SETT_BRANCH_UPLOAD_FILE'] = 'OFF';
 $lang['SETT_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{4,25}$';
-$lang['SETT_VALIDATE_ALPHA_NUM'] = '^[a-z0-9]+$';
-$lang['SETT_VALIDATE_NUMERIC'] = '^[0-9]+$';
 $lang['SETT_VALIDATE_ALPHABETICAL'] = '^[a-z]+$';
 $lang['SETT_VALIDATE_ALPHABETICAL_SPACE'] = '^[a-z-ñáéíóú ]{3,40}$';
 $lang['SETT_VALIDATE_FLOAT_AMOUNT'] = '^[0-9,.]+$';
 $lang['SETT_MODAL_BTN_CLASS'] = [
-	'cancel' => 'btn-modal btn btn-small btn-link',
-	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+  'cancel' => 'btn-modal btn btn-small btn-link',
+  'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
 $lang['SETT_ACCOUNT_NAME'] = 'OFF';
 $lang['SETT_STATUS_MOVEMENT'] = 'OFF';
 $lang['SETT_FILE_STATUS_ACCOUNT_TXT'] = 'OFF';
+$lang['SETT_FILE_STATUS_ACCOUNT_PDF'] = 'OFF';
 $lang['SETT_FILE_MASTER_ACCOUNT_TXT'] = 'OFF';
+$lang['SETT_FILE_CLOSE_BALANCE_TXT'] = 'OFF';
+$lang['SETT_FILE_CLOSE_BALANCE_PDF'] = 'OFF';
+$lang['SETT_FILE_STATUS_BULK_TXT'] = 'OFF';
+$lang['SETT_FILE_USER_ACTIVITY_TXT'] = 'OFF';
+$lang['SETT_DOWNLOAD_SERVER'] = 'OFF';
 $lang['SETT_BULK_TYPE_EXCLUDED'] = [];
+$lang['SETT_LANGUAGE'] = [
+  'es' => 'spanish',
+  'en' => 'english',
+];
+$lang['SETT_CATEG_GROUP'] = [
+  '1' => 'icon-suitcase',
+  '2' => 'icon-car',
+  '3' => 'icon-food',
+  '4' => 'icon-plane',
+  '5' => 'icon-lab',
+  '6' => 'icon-film',
+  '7' => 'icon-medkit',
+  '9' => 'icon-card',
+  'W' => 'icon-bag',
+  '8' => 'icon-asterisk'
+];
+$lang['SETT_CEL_TOKEN'] = 'OFF';

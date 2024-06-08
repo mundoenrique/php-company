@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
-$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['USER_SIGNIN_INVALID_USER'] = "Usuario o contraseña inválido";
+$lang['USER_SIGNIN_WILL_BLOKED'] = "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
 $lang['USER_SIGNIN_BLOCKED'] = 'Usuario bloqueado por intentos fallidos.';
-$lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
+$lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado <b>%s</b> tu usuario no ha sido migrado de la aplicación anterior';
 $lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
 $lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
 $lang['USER_WELCOME_TITLE'] = '';
 $lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
-$lang['LOGIN_WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
+$lang['LOGIN_WELCOME_MESSAGE'] = 'Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
 $lang['LOGIN_BTN'] = 'Ingresar';
 $lang['LOGIN_SECURE_OPER_TITLE'] = 'Operaciones seguras';
 $lang['LOGIN_SECURE_OPER_MSG'] = 'Resguardamos la integridad y la privacidad de la información cumpliendo los más altos estándares internacionales de seguridad.';
@@ -31,14 +32,16 @@ $lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
 $lang['LOGIN_SIGNIN'] = 'Ingresar';
 $lang['LOGIN_RECOVERY_PASSWORD'] = 'Restablecer contraseña';
 $lang['LOGIN_RECOVERY_PASS_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';
-$lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
-$lang['USER_RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
+$lang['RECOVER_PASS_FORGOTTEN'] = "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
+$lang['USER_RECOVER_PASS_FISCAL_REGISTRY'] = '%s de la Empresa';
 $lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['MANAGEMENT_LIST_USERS'] = 'Listado de usuarios';
 $lang['PERMITS_DELETE_ALL_PERMITS'] = 'Eliminar todos los permisos';
+$lang['ACCOUNTS_DELETE_ALL_ACCOUNTS'] = 'Eliminar todas las cuentas';
 $lang['PERMITS_ALL_PERMITS'] = 'Todos los permisos';
+$lang['ACCOUNTS_ALL_ACCOUNTS'] = 'Todas las cuentas';
 $lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
 	'tranIdEmpresa' => 'idEnterprise',
 	'tranIdUsuario' => 'idUser',

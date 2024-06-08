@@ -1,21 +1,28 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_ISSUED_CARDS'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_ENTERPRISES')) ?>">
+            <?= lang('GEN_MENU_ENTERPRISE'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCTS')) ?>">
+            <?= lang('GEN_PRODUCTS'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>"><?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?></a>
+          <a class="tertiary big-modal" href="<?= base_url(lang('SETT_LINK_PRODUCT_DETAIL')) ?>">
+            <?= lang('GEN_PRODUCTS_DETAIL_TITLE'); ?>
+          </a>
         </li> /
         <li class="inline">
-          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK'); ?>"><?= lang('GEN_MENU_REPORTS'); ?></a>
+          <a class="tertiary not-pointer" href="<?= lang('SETT_NO_LINK'); ?>">
+            <?= lang('GEN_MENU_REPORTS'); ?>
+          </a>
         </li>
       </ul>
     </nav>
@@ -35,11 +42,10 @@
               <div class="form-group col-6 col-lg-4 col-xl-4">
                 <label><?= lang('GEN_ENTERPRISE') ?></label>
                 <select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
-                  <?php foreach($enterpriseList AS $enterprise) : ?>
-                  <option value="<?= $enterprise->accodcia ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
-                    id-fiscal="<?= $enterprise->acrif; ?>">
-                    <?= $enterprise->acnomcia; ?>
-                  </option>
+                  <?php foreach ($enterpriseList as $enterprise) : ?>
+                    <option value="<?= $enterprise->accodcia ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?> id-fiscal="<?= $enterprise->acrif; ?>">
+                      <?= $enterprise->acnomcia; ?>
+                    </option>
                   <?php endforeach; ?>
                 </select>
                 <div class="help-block"></div>
@@ -47,24 +53,21 @@
 
               <div class="form-group col-4 col-lg-3 col-xl-3">
                 <label for="monthYear"><?= lang('GEN_TABLE_DATE'); ?></label>
-                <input id="monthYear" name="monthYear" class="form-control" name="datepicker" type="text"
-                  placeholder="<?= lang('GEN_PLACE_DATE_MEDIUM'); ?>" readonly>
+                <input id="monthYear" name="monthYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_MEDIUM'); ?>" readonly>
                 <input id="endDate" name="endDate" class="form-control date-picker" type="hidden">
                 <div class="help-block"></div>
               </div>
 
               <div class="form-group col-4 col-lg-3 col-xl-3">
                 <label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-                <input id="initialDate" name="initialDate" class="form-control date-picker" type="text"
-                  placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+                <input id="initialDate" name="initialDate" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
                 <div class="help-block">
                 </div>
               </div>
 
               <div class="form-group col-4 col-lg-3 col-xl-3">
                 <label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-                <input id="finalDate" name="finalDate" class="form-control date-picker" type="text"
-                  placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+                <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
                 <div class="help-block "></div>
               </div>
 
@@ -223,8 +226,7 @@
               </div>
             </div>
 
-            <table class="cell-border h6 display responsive center w-100 my-5 dataTable no-footer dtr-inline" id="resultsIssued" role="grid"
-              style="width: 0px;">
+            <table class="cell-border h6 display responsive center w-100 my-5 dataTable no-footer dtr-inline" id="resultsIssued" role="grid" style="width: 0px;">
               <thead class="bg-primary secondary regular">
                 <tr role="row">
                   <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Producto</th>
@@ -257,7 +259,7 @@
       </div>
     </div>
   </div>
-  <?php if($widget): ?>
-  <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
+  <?php if ($widget) : ?>
+    <?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
   <?php endif; ?>
 </div>

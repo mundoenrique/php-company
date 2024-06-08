@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['REPORTS_TITLE'] = 'Reports';
 $lang['REPORTS_SELECT'] = 'Report selection';
 $lang['REPORTS_NO_CARDS'] = 'Company without associated cards';
@@ -15,35 +15,38 @@ $lang['REPORTS_FOUND_CARD'] = 'The card was not found';
 $lang['REPORTS_NO_CLIENT_STATEMENT'] = 'The statement for the selected month is not available.';
 $lang['REPORTS_NO_GMF'] = 'There are no GMF certificates available';
 $lang['REPORTS_NO_GMF_FOR_YEAR'] = 'GMF certificate for year %s is not available';
-$lang['REPORTS_ID_FISCAL']= "NIT. (Optional)";
-$lang['REPORTS_ID_FISCAL_INPUT']= "Enter NIT.";
-$lang['REPORTS_REQUEST_NO_RESULTS']= "No results were found with the company and date selected.";
-//MASTER ACCOUNT
-$lang['REPORTS_TABLE_DATE']="Date";
-$lang['REPORTS_TABLE_REFERENCE']="Ref.";
-$lang['REPORTS_TABLE_DEBIT']="Debit";
-$lang['REPORTS_TABLE_CREDIT']="Credit";
-$lang['REPORTS_TABLE_BALANCE']="Balance";
-//CLOSING BALANCE
-$lang['REPORTS_TABLE_CARD']="Card";
-$lang['REPORTS_TABLE_CARDHOLDER']="Cardholder";
-$lang['REPORTS_TABLE_DNI']="NIT";
-$lang['REPORTS_TABLE_LAST_ACTIVITY']="Last activity";
-//USERS ACTIVITY
-$lang['REPORTS_USERS_ACT_DATE_ACTION']="Date action";
-$lang['REPORTS_USERS_ACT_DATE_ACTIVITY']="Date last activity";
-$lang['REPORTS_USERS_ACT_MODULE']="Module";
-$lang['REPORTS_USERS_ACT_FUNCTION']="Function";
-$lang['REPORTS_USERS_ACT_RESULT']="Result (Error / response code)";
-$lang['REPORTS_USERS_ACT_OBSERVATION']="Observation";
-$lang['REPORTS_USERS_ACT_STATE']="State";
-//MOVEMENTS BY ENTERPRISE
+$lang['REPORTS_ID_FISCAL'] = "NIT. (Optional)";
+$lang['REPORTS_ID_FISCAL_INPUT'] = "Enter NIT.";
+$lang['REPORTS_REQUEST_NO_RESULTS'] = "No results were found with the company and date selected.";
+$lang['REPORTS_TABLE_DATE'] = "Date";
+$lang['REPORTS_TABLE_REFERENCE'] = "Ref.";
+$lang['REPORTS_TABLE_DEBIT'] = "Debit";
+$lang['REPORTS_TABLE_CREDIT'] = "Credit";
+$lang['REPORTS_TABLE_BALANCE'] = "Balance";
+$lang['REPORTS_TABLE_CARD'] = "Card";
+$lang['REPORTS_TABLE_CARDHOLDER'] = "Cardholder";
+$lang['REPORTS_TABLE_DNI'] = "NIT";
+$lang['REPORTS_TABLE_LAST_ACTIVITY'] = "Last activity";
+$lang['REPORTS_USERS_ACT_DATE_ACTION'] = "Date action";
+$lang['REPORTS_USERS_ACT_DATE_ACTIVITY'] = "Date last activity";
+$lang['REPORTS_USERS_ACT_MODULE'] = "Module";
+$lang['REPORTS_USERS_ACT_FUNCTION'] = "Function";
+$lang['REPORTS_USERS_ACT_RESULT'] = "Result (Error / response code)";
+$lang['REPORTS_USERS_ACT_OBSERVATION'] = "Observation";
+$lang['REPORTS_USERS_ACT_STATE'] = "State";
 $lang['REPORTS_DATE_RANGE_ERROR'] = 'Transactions dated less than one year ago cannot be displayed';
 $lang['REPORTS_DATE_RANGE_NOT_ALLOWED'] = 'The date range allowed is a maximum of one month';
 $lang['REPORTS_BY_INDENTIFICATION_NUMBER'] = 'By identification number';
 $lang['REPORTS_BY_CARD_NUMBER'] = 'By card number';
-
-
-
-
-
+$lang['REPORTS_CATEG_GROUP'] = [
+  '1' => 'Hotels',
+  '2' => 'Car renting',
+  '3' => 'Food, pantry and restaurants',
+  '4' => 'Airlines and transportation',
+  '5' => 'Pharmacy',
+  '6' => 'Fun and entertainment',
+  '7' => 'Medical services',
+  '9' => 'ATMs',
+  'W' => 'Shops and department stores ',
+  '8' => 'Others'
+];

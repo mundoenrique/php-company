@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol'] = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'global';
+$config['language'] = 'global';
 
 /*
 |--------------------------------------------------------------------------
@@ -390,7 +390,7 @@ $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 70 : SESS_EXPIRATION;
 $config['sess_save_path'] =  SESS_SAVE_PATH;
 $config['sess_match_ip'] = TRUE;
-$config['sess_time_to_update'] = ACTIVE_SAFETY === 'ON' ? 60 : 0;
+$config['sess_time_to_update'] = ACTIVE_SAFETY ? 60 : 0;
 $config['sess_regenerate_destroy'] = TRUE;
 
 /*
@@ -409,12 +409,12 @@ $config['sess_regenerate_destroy'] = TRUE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= COOKIE_PREFIX;
-$config['cookie_domain']	= COOKIE_DOMAIN;
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= COOKIE_SECURE == 'ON' ? TRUE : FALSE;
-$config['cookie_httponly'] 	= FALSE;
-$config['cookie_samesite'] 	= 'Lax';
+$config['cookie_prefix'] = COOKIE_PREFIX;
+$config['cookie_domain'] = COOKIE_DOMAIN;
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = COOKIE_SECURE == 'ON' ? TRUE : FALSE;
+$config['cookie_httponly'] = FALSE;
+$config['cookie_samesite'] = 'Lax';
 
 /*
 |--------------------------------------------------------------------------
@@ -458,35 +458,36 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = ACTIVE_SAFETY == 'ON' ? TRUE : FALSE;
+$config['csrf_protection'] = ACTIVE_SAFETY;
 $config['csrf_token_name'] = 'ceo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
-	'[\w\-]+/ingresar',
-	'[\w\-]+/single',
-	'[\w\-]+/products',
-	'[\w\-]+/product-detail',
-	'[\w\-]+/bulk-detail',
-	'[\w\-]+/bulk-confirm',
-	'[\w\-]+/unnamed-affiliation',
-	'[\w\-]+/inquiry-bulk-detail',
-	'[\w\-]+/detalle-orden-de-servicio',
-	'[\w\-]+/unnmamed-detail',
-	'[\w\-]+/status-bulk',
-	'[\w\-]+/user-permissions',
-	'[\w\-]+/dashboard/productos',
-	'[\w\-]+/dashboard/productos/detalle',
-	'[\w\-]+/consulta/ordenes-de-servicio',
-	'[\w\-]+/lotes/autorizacion/detalle',
-	'[\w\-]+/lotes/confirmacion',
-	'[\w\-]+/lotes/detalle',
-	'[\w\-]+/lotes/calculo',
-	'[\w\-]+/lotes/innominada/detalle',
-	'[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
-	'[\w\-]+/reportes/saldosamanecidosExpXLS',
-	'[\w\-]+/lotes/innominada/afiliacion',
+  '[\w\-]+/ingresar',
+  '[\w\-]+/ingresar/(es|en)',
+  '[\w\-]+/single',
+  '[\w\-]+/products',
+  '[\w\-]+/product-detail',
+  '[\w\-]+/bulk-detail',
+  '[\w\-]+/bulk-confirm',
+  '[\w\-]+/unnamed-affiliation',
+  '[\w\-]+/inquiry-bulk-detail',
+  '[\w\-]+/detalle-orden-de-servicio',
+  '[\w\-]+/unnmamed-detail',
+  '[\w\-]+/status-bulk',
+  '[\w\-]+/user-permissions',
+  '[\w\-]+/dashboard/productos',
+  '[\w\-]+/dashboard/productos/detalle',
+  '[\w\-]+/consulta/ordenes-de-servicio',
+  '[\w\-]+/lotes/autorizacion/detalle',
+  '[\w\-]+/lotes/confirmacion',
+  '[\w\-]+/lotes/detalle',
+  '[\w\-]+/lotes/calculo',
+  '[\w\-]+/lotes/innominada/detalle',
+  '[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
+  '[\w\-]+/reportes/saldosamanecidosExpXLS',
+  '[\w\-]+/lotes/innominada/afiliacion',
 );
 
 /*

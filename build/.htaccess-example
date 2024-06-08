@@ -12,30 +12,30 @@ SetEnv CI_ENV development
 # SetEnv COOKIE_SECURE OFF
 
 	#	LOCALHOST HTTPS
-# SetEnv BASE_URL https://localhost:8443/site-conexionempresas/build/
-# SetEnv ASSET_URL https://localhost:8443/site-conexionempresas/build/assets/
+# SetEnv BASE_URL https://localhost:443/site-conexionempresas/build/
+# SetEnv ASSET_URL https://localhost:443/site-conexionempresas/build/assets/
 # SetEnv COOKIE_DOMAIN localhost
 # SetEnv COOKIE_SECURE ON
 
 	#	VIRTUALHOST HTTP
-# SetEnv BASE_URL http://empresas.novopayment.lc/
-# SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
-# SetEnv COOKIE_DOMAIN empresas.novopayment.lc
-# SetEnv COOKIE_SECURE OFF
+SetEnv BASE_URL http://empresas.novopayment.lc/
+SetEnv ASSET_URL http://empresas.novopayment.lc/assets/
+SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+SetEnv COOKIE_SECURE OFF
 
 	#	VIRTUALHOST HTTPS
-SetEnv BASE_URL https://empresas.novopayment.lc/
-SetEnv ASSET_URL https://empresas.novopayment.lc/assets/
-SetEnv COOKIE_DOMAIN empresas.novopayment.lc
-SetEnv COOKIE_SECURE ON
+# SetEnv BASE_URL https://empresas.novopayment.lc/
+# SetEnv ASSET_URL https://empresas.novopayment.lc/assets/
+# SetEnv COOKIE_DOMAIN empresas.novopayment.lc
+# SetEnv COOKIE_SECURE ON
 
 SetEnv ASSET_PATH {{ubicación-física}}/site-conexionempresas/build/assets/
 SetEnv LOG_PATH ''
 SetEnv ENCRYPTION_KEY n0v0p4ym3nt-k3y
-# SetEnv SESS_DRIVER database
-# SetEnv SESS_SAVE_PATH ceo_sessions
 SetEnv SESS_DRIVER files
 SetEnv SESS_SAVE_PATH {{ubicación-física}}/sessions/ceo
+# SetEnv SESS_DRIVER database
+# SetEnv SESS_SAVE_PATH ceo_sessions
 SetEnv SESS_COOKIE_NAME empresas
 SetEnv SESS_EXPIRATION 1800
 SetEnv COOKIE_PREFIX 'ceo_'
@@ -46,11 +46,11 @@ SetEnv PROXY_ENABLE OFF
 #----------------------#
 SetEnv ACTIVE_SAFETY ON
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'pe, bdb, bnt, bp, co, us, ve, pb, bg, vg, coop, bog, bpi, per, usd, ven, col'
+SetEnv ACCESS_URL 'pe, per, co, col, us, usd, ve, ven, vg, vgy, bg, bgu, bdb, bdbo, bog, bnt, bnte, bp, bpi, bpic, pb, pba, coop, coopc'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
-SetEnv SINGLE_SIGN_ON ON
+SetEnv SINGLE_SIGN_ON OFF
 SetEnv API_CONTENT_URL 172.24.6.123:3001/
 SetEnv UPLOAD_PATH {{ubicación-física}}/upload/
 SetEnv API_GEE_WAY OFF
@@ -62,10 +62,10 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME ip-loval
-# SetEnv DB_PORT 3306
-# SetEnv DB_USERNAME cpo_user
-# SetEnv DB_PASSWORD **contraseña**
+SetEnv DB_HOSTNAME localhost
+SetEnv DB_PORT 3300
+SetEnv DB_USERNAME ceo_user
+SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
 
 #-------------------------------------------------------------------#
 #														DEVELOPMENT															#
@@ -74,10 +74,10 @@ SetEnv API_GEE_WAY OFF
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_HOSTNAME 172.21.0.228
 # SetEnv DB_PORT 3301
-# SetEnv DB_USERNAME cpo_user
-# SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
+# SetEnv DB_USERNAME ceo_user
+# SetEnv DB_PASSWORD N0v0P4ym3ntCe0.S3ss10n
 
 #------------------------------#
 # SERVICE ENVIROMENT VARIABLES #
@@ -86,17 +86,36 @@ SetEnv WS_KEY dGVzdDEyMzQ=
 SetEnv WS_URL https://d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 SetEnv URL_MFA_SERV https://d-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
-	# SOLES
-# SetEnv WS_URL_PE https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
-
-	# DÓLARES
-# SetEnv WS_URL_US https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
-
-	# BANORTE
+  # BANORTE
 SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+SetEnv WS_URL_BNTE https://d-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
-	# Coop central
-# SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+  # BOGOTA
+SetEnv WS_URL_BDBO https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # COOPCENTRAL
+SetEnv WS_URL_COOPC https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # DÓLARES
+SetEnv WS_URL_USD https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # GUAYAQUIL
+SetEnv WS_URL_BGU https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PICHINCHA
+SetEnv WS_URL_BPIC https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PRODUBANCO
+SetEnv WS_URL_PBA https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # SOLES
+SetEnv WS_URL_PER https://d-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VENEZUELA
+SetEnv WS_URL_VEN https://tomcat-d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VOYGO
+SetEnv WS_URL_VGY https://d-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -126,9 +145,11 @@ SetEnv KEY_API b4556ab03a8a120d1e77abfc55f515e3
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
-SetEnv BULK_FTP_USERNAME npdaemon
-SetEnv BULK_FTP_PASSWORD npd43m0n
+SetEnv BULK_FTP_URL /sftp_data/DEV/Archivos_lote/
+SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+SetEnv BULK_FTP_USERNAME batch_user
+SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
+SetEnv BULK_FTP_PASSWORD JHIzRzk0MWJoZWdYNnJQdlQ=
 
 #-------------------------------------------------------------------#
 #															TESTING																#
@@ -137,7 +158,7 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_HOSTNAME 172.21.19.240
 # SetEnv DB_PORT 3302
 # SetEnv DB_USERNAME cpo_user
 # SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
@@ -147,9 +168,38 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------------------#
 # SetEnv WS_KEY dGVzdDEyMzQ=
 # SetEnv WS_URL https://t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv URL_MFA_SERV https://t-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
-	# BANORTE
+  # BANORTE
 # SetEnv WS_URL_BNT https://t-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNTE https://t-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # BOGOTA
+# SetEnv WS_URL_BDBO https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # COOPCENTRAL
+# SetEnv WS_URL_COOPC https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # DÓLARES
+# SetEnv WS_URL_USD https://t-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # GUAYAQUIL
+# SetEnv WS_URL_BGU https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PICHINCHA
+# SetEnv WS_URL_BPIC https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PRODUBANCO
+# SetEnv WS_URL_PBA https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # SOLES
+# SetEnv WS_URL_PER https://t-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VENEZUELA
+# SetEnv WS_URL_VEN https://tomcat-t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VOYGO
+# SetEnv WS_URL_VGY https://t-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -176,9 +226,11 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
-# SetEnv BULK_FTP_PASSWORD npd43m0n
+# SetEnv BULK_FTP_URL /sftp_data/TEST/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
+# SetEnv BULK_FTP_PASSWORD QiE5ek1nTHR4RWtTUFEkeQ==
 
 #-------------------------------------------------------------------#
 #																UAT																	#
@@ -187,7 +239,7 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #-------------------------------#
 # DATABASE CONNECTION VARIABLES #
 #-------------------------------#
-# SetEnv DB_HOSTNAME 172.24.6.66
+# SetEnv DB_HOSTNAME 172.24.6.122
 # SetEnv DB_PORT 3303
 # SetEnv DB_USERNAME cpo_user
 # SetEnv DB_PASSWORD N0v0P4ym3nt.S3ss10n
@@ -196,10 +248,39 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 # SERVICE ENVIROMENT VARIABLES #
 #------------------------------#
 # SetEnv WS_KEY dGVzdDEyMzQ=
-# SetEnv https:/uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL https://uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv URL_MFA_SERV https://uat-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
-	# BANORTE
-# SetEnv WS_URL_BNT https://uat-banorte-service-wlf.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+  # BANORTE
+# SetEnv WS_URL_BNT https://uat-banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNTE https://uat-banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # BOGOTA
+# SetEnv WS_URL_BDBO https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # COOPCENTRAL
+# SetEnv WS_URL_COOPC https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # DÓLARES
+# SetEnv WS_URL_USD https://uat-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # GUAYAQUIL
+# SetEnv WS_URL_BGU https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PICHINCHA
+# SetEnv WS_URL_BPIC https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PRODUBANCO
+# SetEnv WS_URL_PBA https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # SOLES
+# SetEnv WS_URL_PER https://uat-peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VENEZUELA
+# SetEnv WS_URL_VEN https://tomcat-uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VOYGO
+# SetEnv WS_URL_VGY https://uat-peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -226,9 +307,11 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.153:22/opt/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
-# SetEnv BULK_FTP_PASSWORD npd43m0n
+# SetEnv BULK_FTP_URL /sftp_data/UAT/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
+# SetEnv BULK_FTP_PASSWORD M1BaZVMhSFF3ckNLOFhFJA==
 
 #-------------------------------------------------------------------#
 #														PRODUCTION															#
@@ -252,10 +335,39 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 # SERVICE ENVIROMENT VARIABLES #
 #------------------------------#
 # SetEnv WS_KEY dGVzdDEyMzQ=
-# SetEnv https:/web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL https://web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv URL_MFA_SERV https://mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
-	# BANORTE
-# SetEnv WS_URL_BNT https://banorte-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+  # BANORTE
+# SetEnv WS_URL_BNT https://banorte-service-aws.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+# SetEnv WS_URL_BNTE https://banorte-server.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # BOGOTA
+# SetEnv WS_URL_BDBO https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # COOPCENTRAL
+# SetEnv WS_URL_COOPC https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # DÓLARES
+# SetEnv WS_URL_USD https://peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # GUAYAQUIL
+# SetEnv WS_URL_BGU https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PICHINCHA
+# SetEnv WS_URL_BPIC https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # PRODUBANCO
+# SetEnv WS_URL_PBA https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # SOLES
+# SetEnv WS_URL_PER https://peru-soles.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VENEZUELA
+# SetEnv WS_URL_VEN https://tomcat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
+
+  # VOYGO
+# SetEnv WS_URL_VGY https://peru-usd.novopayment.net/NovoEolWebInterfaceWS/webresources/eolwebInterfaceWS
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
@@ -284,8 +396,10 @@ SetEnv BULK_FTP_PASSWORD npd43m0n
 #------------------#
 # SETTINGS TO BULK #
 #------------------#
-# SetEnv BULK_FTP_URL sftp://172.24.6.130:22/home/npdaemon/
-# SetEnv BULK_FTP_USERNAME npdaemon
+# SetEnv BULK_FTP_URL /sftp_data/PROD/Archivos_lote/
+# SetEnv BULK_FTP_HOST dtusftp.novopayment.dom
+# SetEnv BULK_FTP_USERNAME batch_user
+# SetEnv BULK_FTP_KEYFILE {{ubicación-física}}/id_rsa_docker_dtu
 # SetEnv BULK_FTP_PASSWORD #.3Nv!!
 
 #-------------------------#

@@ -1,7 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
+
+
 $lang['GEN_SYSTEM_NAME'] = 'Conexión Empresas Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
+$lang['GEN_NOT_DECRYPTED'] = 'No fue posible desencriptar la petición';
 $lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -66,6 +71,7 @@ $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
 $lang['GEN_BTN_PROCESS'] = 'Procesar';
 $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_DOWN_XLS'] = 'Descargar XLS';
+$lang['GEN_BTN_DOWN_TXT'] = 'Descargar TXT';
 $lang['GEN_BTN_SEE_GRAPH'] = 'Ver Gráfica';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
@@ -76,6 +82,7 @@ $lang['GEN_BTN_BRANCH'] = 'Sucursales';
 $lang['GEN_BTN_DOWNLOADS'] = 'Descargas';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
 $lang['GEN_BTN_EDIT_PERMITS'] = 'Editar permisos';
+$lang['GEN_BTN_EDIT_ACCOUNTS'] = 'Editar cuenta';
 $lang['GEN_BTN_ENABLE_USER'] = 'Habilitar usuario';
 $lang['GEN_BTN_ALL'] = 'Todos';
 $lang['GEN_BTN_ENABLE'] = 'Habilitar';
@@ -103,6 +110,7 @@ $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
+$lang['GEN_NON_BILLABLE'] = 'Lotes no facturables';
 $lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo, por favor intentalo de nuevo.';
 $lang['GEN_COMMERCIAL_TWIRLS_TITTLE'] = 'Giros comerciales';
@@ -144,8 +152,10 @@ $lang['GEN_CONTACTS'] = [
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
+$lang['GEN_ADMIN_ACCOUNTS_TITLE'] = 'Administración de cuentas';
 $lang['GEN_USER_DATA'] = 'Datos del usuario';
 $lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
+$lang['GEN_LIST_ACCOUNTS'] = 'Listado de cuentas';
 $lang['GEN_NOTE'] = 'Nota:';
 $lang['GEN_CHECK_COLOR'] = 'Si el check se encuentra en color';
 $lang['GEN_FOTTER_START'] = 'Inicio';
@@ -164,6 +174,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
 $lang['GEN_TABLE_TYPE'] = 'Tipo';
 $lang['GEN_TABLE_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_STATUS'] = 'Estado';
+$lang['GEN_INVOICE_NUMBER'] = 'Nro. Factura';
 $lang['GEN_TABLE_AFFILIATED_CARDS'] = 'Tarjetas afiliadas';
 $lang['GEN_TABLE_FOR_AFFILIATE_CARDS'] = 'Tarjetas por afiliar';
 $lang['GEN_TABLE_AVAILABLE_CARDS'] = 'Tarjetas disponibles';
@@ -265,7 +276,6 @@ $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Cambiar email';
 $lang['GEN_DOCUMENT_TYPE'] = 'Tipo de documento';
-$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
 $lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_TITLE_NAVBAR'] = 'Empresas';
@@ -280,9 +290,9 @@ $lang['GEN_CONTAC_TYPE'] = 'Tipo';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
-$lang['GEN_ENTERPRISE_NOT_OBTEIN'] = 'No fue posible obtener el listado de empresas';
-$lang['GEN_NO_PRODUCTS'] = 'No fue posible obtener productos';
-$lang['GEN_SELECT_ENTERPRISE'] = 'Selecciona una empresa';
+$lang['GEN_ENTERPRISE_NOT_OBTEIN']  = 'No fue posible obtener el listado de empresas';
+$lang['GEN_NO_PRODUCTS']  = 'No fue posible obtener productos';
+$lang['GEN_SELECT_ENTERPRISE']  = 'Selecciona una empresa';
 $lang['GEN_SELECT_PRODUCT'] = 'Selecciona un producto';
 $lang['GEN_WAIT_PRODUCTS'] = 'Esperando productos...';
 $lang['GEN_FINISH_TITLE'] = 'Cierre de sesión';
@@ -386,7 +396,14 @@ $lang['GEN_UNREGISTERED_USER'] = 'Usuario no registrado en el sistema.';
 $lang['GEN_SUPPORT'] = '';
 $lang['GEN_SUPPORT_MAIL'] = '';
 $lang['GEN_SUPPORT_TELF'] = '';
-$lang['GEN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
+$lang['GEN_INCORRECTLY_CLOSED'] = '
+<div>
+	<h5 class="regular">
+		Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar
+		<b>"Cerrar Sesión"</b>.
+	</h5>
+</div>
+';
 $lang['GEN_SESSION_DUPLICATE'] = '<div><h5 class="regular">Se detectó que ya tienes una sesión abierta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['GEN_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
 $lang['GEN_TEMP_PASS'] = '%s, enviamos un correo a %s, con una contraseña temporal.';
@@ -415,6 +432,7 @@ $lang['GEN_REJECTED_REGISTRY'] = 'Todos los registros fueron rechazados';
 $lang['GEN_NO_CARD_FOUND'] = "El número de tarjeta <strong>%s</strong> no está registrado, por favor verifícalo e intenta de nuevo";
 $lang['GEN_SUCCESSFULL_UPDATE_TWIRLS'] = "La restricción de giros en comercios ha sido actualizada exitosamente";
 $lang['GEN_SUCCESSFULL_UPDATE_LIMITS'] = "Los limites de transacciones han sido actualizados exitosamente";
+$lang['GEN_SUCCESSFULL_UPDATE_ACCOUNTS'] = "Las cuentas del usuario %s han sido actualizados exitosamente";
 $lang['GEN_SUCCESSFULL_UPDATE_PERMISSIONS'] = "Los permisos del usuario %s han sido actualizados exitosamente";
 $lang['GEN_SUCCESSFULL_ENABLE_USER'] = "El usuario %s ha sido habilitado exitosamente";
 $lang['GEN_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';

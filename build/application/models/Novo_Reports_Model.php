@@ -7,7 +7,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Novo_Reports_Model extends NOVO_Model
 {
-
   public function __construct()
   {
     parent::__construct();
@@ -722,28 +721,85 @@ class Novo_Reports_Model extends NOVO_Model
     return $this->responseToTheView('callWs_StatusBulk');
   }
   /**
-   * @info Método para Obtener la posicion de la empresa
-   * @author Diego Acosta García
-   * @date May 21, 2020
+   * @info Método para obtener la lista de reposiciones
+   * @param object $dataRequest
    */
-  public function callWs_obtenerIdEmpresa_Reports($dataRequest)
+  public function callWs_Replacement_Reports($dataRequest)
   {
-    writeLog('INFO', 'Reports Model: obtenerIdEmpresa Method Initialized');
+    writeLog('INFO', 'Reports Model: Replacement Method Initialized');
+
+    $type = $dataRequest->type === 'list' ? 'Listado' : 'Archivo';
+    $replaceType = lang('REPORTS_TYPE')[$dataRequest->replaceType];
+    $operation = $type . ' de reposición de ' . $replaceType;
+    $idOperation = [
+      'list' => 'buscarReposicionesDetalle',
+      'xls' => 'reposicionesGeneraArchivo',
+      'pdf' => 'reposicionesGeneraArchivoPdf'
+    ];
 
     $this->dataAccessLog->modulo = 'Reportes';
-    $this->dataAccessLog->function = 'Id empresa';
-    $this->dataAccessLog->operation = 'Obtener id de empresa';
+    $this->dataAccessLog->function = 'Reposiciones';
+    $this->dataAccessLog->operation = $operation;
 
-    $this->dataRequest->idOperation = 'buscarIdEmpresa';
-    $response =  $dataRequest;
+    $this->dataRequest->idOperation = $idOperation[$dataRequest->type];
+    $this->dataRequest->className = 'com.novo.objects.MO.ReposicionesMO';
+    $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName ?? '';
+    $this->dataRequest->idExtPer = $dataRequest->idDocument;
+    $this->dataRequest->producto = $dataRequest->productCode;
+    $this->dataRequest->descProducto = $dataRequest->productName ?? '';
+    $this->dataRequest->tipoRep = $dataRequest->replaceType;
+    $this->dataRequest->fechaIni = $dataRequest->initialDate;
+    $this->dataRequest->fechaFin = $dataRequest->finalDate;
+    $this->dataRequest->paginar = $dataRequest->type === 'list';
+    $this->dataRequest->tamanoPagina = $dataRequest->length;
+    $this->dataRequest->paginaActual = (int) ($dataRequest->start / $dataRequest->length) + 1;
 
-    switch ($this->isResponseRc = 0) {
+    $response = $this->sendToWebServices('callWs_Replacement');
+
+    $this->response->data->recordsTotal = 0;
+    $this->response->data->recordsFiltered = 0;
+    $this->response->draw = $dataRequest->draw;
+    $this->response->data->data = [];
+    $this->response->data->file = [];
+    $this->response->data->ext = $dataRequest->type;
+    $this->response->data->name = 'reposición-de-' . $replaceType . '-' . time() . '.' . $this->response->data->ext;
+
+    switch ($this->isResponseRc) {
       case 0:
-        $user = $response;
-        $this->response->data =  (array)$user;
+        $this->response->code = 0;
+        if ($dataRequest->type === 'list') {
+          $this->response->data->recordsTotal = $response->totalRegistros;
+          $this->response->data->recordsFiltered = $response->totalRegistros;
+
+          foreach ($response->listadoReposiciones as $replace) {
+            $replacement = new stdClass();
+            $replacement->cardNumber = $replace->tarjeta ?? '';
+            $replacement->cardholder = $replace->tarjetahabiente ?? '';
+            $replacement->documentId = $replace->idExtPer ?? '';
+            $replacement->issueDate = $replace->fechaExp ?? '';
+            $replacement->bulkId = $replace->idLote ?? '';
+            $replacement->servOrder = $replace->idOrden ?? '';
+            $replacement->invNumber = $replace->numFactura ?? '';
+            $replacement->fiscalId = $replace->rif ?? '';
+
+            array_push($this->response->data->data, $replacement);
+          }
+        } else {
+          $this->response->data->file = $response->bean->archivo ?? $response->archivo;
+        }
+        break;
+      case -115:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = 'No fue posible obtener las reposiciones';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+      case -150:
+        $this->response->code = 1;
+        break;
     }
 
-    return $this->response;
+    return $this->responseToTheView('callWs_Replacement');
   }
   /**
    * @info Método para obtener la lista de saldos amanecidos
@@ -792,6 +848,60 @@ class Novo_Reports_Model extends NOVO_Model
 
     return $this->responseToTheView('callWs_closingBudgets');
   }
+
+  /**
+   * @info Método para obtener reportes de tabla saldos al cierre
+   * @author Yelsyns Lopez
+   * @date May 21, 2020
+   */
+  public function callWs_exportToClosingBalance_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: exportTo' . $dataRequest->type . ' Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Saldos amanecidos';
+    $this->dataAccessLog->operation = 'Obtener ' . $dataRequest->type . ' de tabla';
+
+    $this->dataRequest->idOperation = 'generarClosingBalance' . $dataRequest->type;
+    $this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+    $this->dataRequest->producto =  $dataRequest->product;
+    $this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
+    $this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
+    $this->dataRequest->paginar = $dataRequest->paged;
+    $this->dataRequest->paginaActual = $dataRequest->actualPage;
+    $this->dataRequest->descProd =  $dataRequest->descProd;
+    $this->dataRequest->nombreEmpresa =  $this->session->enterpriseInf->enterpriseName;
+    $this->dataRequest->descProd =  $this->session->productInf->productName;
+    $this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+    $response = $this->sendToWebServices('callWs_exportToClosingBalance');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->icon = lang('SETT_ICON_DANGER');
+        $this->response->title = lang('REPORTS_TITLE');
+        $this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+
+        if (file_exists(assetPath('downloads/' . $response->bean))) {
+          $this->response->code = 0;
+          $this->response->msg = lang('GEN_MSG_RC_0');
+          $this->response->data = [
+            'file' => assetUrl('downloads/' . $response->bean),
+            'name' => $response->bean
+          ];
+        }
+        break;
+      default:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    return $this->response;
+  }
+
   /**
    * @info Método para obtener excel de tabla saldos al cierre
    * @author Diego Acosta García
@@ -807,17 +917,14 @@ class Novo_Reports_Model extends NOVO_Model
 
     $this->dataRequest->idOperation = 'generaArchivoXls';
     $this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
-    $this->dataRequest->idExtPer = $dataRequest->idExtPer;
+    $this->dataRequest->nombreEmpresa =  $dataRequest->enterpriseName;
     $this->dataRequest->producto =  $dataRequest->product;
     $this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
     $this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
     $this->dataRequest->paginar = $dataRequest->paged;
     $this->dataRequest->paginaActual = $dataRequest->actualPage;
-    $this->dataRequest->nombreEmpresa =  $this->session->enterpriseInf->enterpriseName;
-    $this->dataRequest->descProd =  $this->session->productInf->productName;
-
-    writelog('INFO', '*********************DATA******************* ' . $this->session->enterpriseInf->enterpriseName);
-    writelog('INFO', '*********************DATA******************* ' . $this->session->productInf->productName);
+    $this->dataRequest->descProd = $dataRequest->descProd;
+    $this->dataRequest->idExtPer = $dataRequest->idExtPer;
 
     $response = $this->sendToWebServices('callWs_exportToExcel');
 
@@ -847,8 +954,8 @@ class Novo_Reports_Model extends NOVO_Model
     writeLog('INFO', 'Reports Model: masterAccount Method Initialized');
 
     $this->dataAccessLog->modulo = 'Reportes';
-    $this->dataAccessLog->function = 'Obtener resultados de busqueda';
-    $this->dataAccessLog->operation = 'Cuenta maestra';
+    $this->dataAccessLog->function = 'Cuenta maestra';
+    $this->dataAccessLog->operation = 'Obtener resultados de busqueda';
 
     $this->dataRequest->idOperation = 'buscarDepositoGarantia';
     $this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
@@ -1014,6 +1121,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
     $this->dataRequest->fechaIni =  $dataRequest->dateStart;
     $this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+    $this->dataRequest->tipoNota =  $dataRequest->typeNote;
     $this->dataRequest->filtroFecha = $dataRequest->dateFilter;
     $this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
     $this->dataRequest->paginaActual = $dataRequest->actualPage;
@@ -1025,8 +1133,8 @@ class Novo_Reports_Model extends NOVO_Model
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-        $user = $response;
-        $this->response->data =  (array)$user;
+        $fileData = $response;
+        $this->response->data =  (array)$fileData;
         break;
       default:
         $this->response->title = lang('REPORTS_TITLE');
@@ -1119,6 +1227,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
     $this->dataRequest->fechaIni =  $dataRequest->dateStart;
     $this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+    $this->dataRequest->tipoNota =  $dataRequest->typeNote;
     $this->dataRequest->filtroFecha = $dataRequest->dateFilter;
     $this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
     $this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
@@ -1484,7 +1593,7 @@ class Novo_Reports_Model extends NOVO_Model
           $this->response->data->ext = $dataRequest->format;
 
           if ($dataRequest->detailType != '') {
-            $this->response->modal = TRUE;
+            $this->response->keepModal = TRUE;
           }
         }
         break;
@@ -1499,8 +1608,119 @@ class Novo_Reports_Model extends NOVO_Model
     return $this->responseToTheView('callWS_IssuedCardsReport');
   }
 
+  public function callWs_CategoryExpense_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: CategoryExpense Method Initialized');
 
+    $operation = $dataRequest->type === 'list' ? 'Movimientos ' : 'Archivo ' . $dataRequest->type;
+    $idOperation = [
+      'list' => 'buscarListadoGastosRepresentacion',
+      'xls' => 'generarArchivoXlsGastosRepresentacion',
+      'pdf' => 'generarArchivoPDFGastosRepresentacion'
+    ];
 
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Gastos por categoria';
+    $this->dataAccessLog->operation = $operation . ' ' . $dataRequest->annual ? 'anual' : 'rango';
+
+    $initialDate = $dataRequest->initialDate;
+    $finalDate = $dataRequest->finalDate;
+    $querytype = "1";
+
+    if ($dataRequest->annual) {
+      $initialDate = '01/01/' . $dataRequest->yearDate;
+      $finalDate = '31/12/' . $dataRequest->yearDate;
+      $querytype = "0";
+    }
+
+    $this->dataRequest->idOperation = $idOperation[$dataRequest->type];
+    $this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
+    $this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $this->dataRequest->producto = $dataRequest->productCode;
+    $this->dataRequest->nroTarjeta = $dataRequest->cardNumber;
+    $this->dataRequest->idPersona = $dataRequest->idDocument;
+    $this->dataRequest->fechaIni = $initialDate;
+    $this->dataRequest->fechaFin = $finalDate;
+    $this->dataRequest->tipoConsulta = $querytype;
+
+    $response = $this->sendToWebServices('callWs_CategoryExpense');
+    $tableData = [];
+    $file = [];
+    $name = '';
+    $ext = '';
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+        if ($dataRequest->type === 'list') {
+          if ($querytype === '0') {
+            foreach (lang('GEN_DATEPICKER_MONTHNAMES') as $monthName) {
+              $tableData[$monthName] = [];
+            }
+
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
+
+              foreach ($response->listaGrupo as $group) {
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoMensual as $expense) {
+                    $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+                  }
+
+                  $tableData['Total'][] = $group->totalCategoria;
+                }
+              }
+            }
+
+            foreach ($response->totalesAlMes as $expense) {
+              $tableData[manageString($expense->mes, 'lower', 'first')][] = $expense->monto;
+            }
+
+            $tableData['Total'][] = $response->totalGeneral;
+          }
+
+          if ($querytype === '1') {
+            foreach (lang('REPORTS_CATEG_GROUP') as $key => $value) {
+              $key = strval($key);
+
+              foreach ($response->listaGrupo as $group) {
+
+                if ($group->idGrupo === $key) {
+                  foreach ($group->gastoDiario as $expense) {
+                    $tableData[$expense->fechaDia][] = $expense->monto;
+                  }
+
+                  $tableData['Total'][] = $group->totalCategoria;
+                }
+              }
+            }
+
+            foreach ($response->totalesPorDia as $expense) {
+              $tableData[$expense->fechaDia][] = $expense->monto;
+            }
+
+            $tableData['Total'][] = $response->totalGeneral;
+          }
+        } else {
+          $file = $response->bean->archivo ?? $response->archivo;
+          $name = $response->bean->nombre ?? $response->nombre . '.' . $dataRequest->type;
+          $ext = $dataRequest->type;
+        }
+        break;
+      case -150:
+        $this->response->code = 1;
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    $this->response->data->tableData = $tableData;
+    $this->response->data->file = $file;
+    $this->response->data->name = $name;
+    $this->response->data->ext = $ext;
+
+    return $this->responseToTheView('callWS_CategoryExpense');
+  }
 
   /**
    * @info Método para obtener actividad por ususario
@@ -1600,6 +1820,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->fechaIni =  $dataRequest->initialDate;
     $this->dataRequest->fechaFin =  $dataRequest->finalDate;
     $this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+    $this->dataRequest->downloadFormat = $dataRequest->downloadFormat;
 
     $response = $this->sendToWebServices('callWs_exportReportUserActivity');
 
@@ -1622,6 +1843,56 @@ class Novo_Reports_Model extends NOVO_Model
 
     return $this->responseToTheView('callWs_exportReportUserActivity');
   }
+
+  /**
+   * @info Método para obtener reportes de activades por usario
+   * @author Yelsyns Lopez
+   * @date Dic 15, 2023
+   */
+  public function callWs_exportToActivityUser_Reports($dataRequest)
+  {
+    writeLog('INFO', 'Reports Model: exportTo' . $dataRequest->type . ' Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Reportes';
+    $this->dataAccessLog->function = 'Actividad por usuario';
+    $this->dataAccessLog->operation = 'Descarga reporte ' . $dataRequest->type;
+
+    $this->dataRequest->idOperation = $dataRequest->operation;
+    $this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+    $this->dataRequest->rifEmpresa = $dataRequest->rifEnterprise;
+    $this->dataRequest->fechaIni =  $dataRequest->initialDate;
+    $this->dataRequest->fechaFin =  $dataRequest->finalDate;
+    $this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+    $this->dataRequest->ruta = DOWNLOAD_ROUTE;
+
+    $response = $this->sendToWebServices('callWs_exportToActivityUser');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->icon = lang('SETT_ICON_DANGER');
+        $this->response->title = lang('REPORTS_TITLE');
+        $this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+
+        if (file_exists(assetPath('downloads/' . $response->bean))) {
+          $this->response->code = 0;
+          $this->response->msg = lang('GEN_MSG_RC_0');
+          $this->response->data = [
+            'file' => assetUrl('downloads/' . $response->bean),
+            'name' => $response->bean
+          ];
+        }
+        break;
+      default:
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    return $this->response;
+  }
+
 
   /**
    * @info Método para obtener actividad por usuario (Produbanco)
@@ -2028,6 +2299,11 @@ class Novo_Reports_Model extends NOVO_Model
   public function callWs_exportToTxtExtendedAccountStatus_Reports($dataRequest)
   {
     return $this->downLoadFileReportStatusAccount($dataRequest, 'Txt');
+  }
+
+  public function callWs_exportToPdfExtendedAccountStatus_Reports($dataRequest)
+  {
+    return $this->downLoadFileReportStatusAccount($dataRequest, 'Pdf');
   }
 
   /**

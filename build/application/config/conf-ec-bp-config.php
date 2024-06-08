@@ -1,9 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+defined('BASEPATH') or exit('No direct script access allowed');
+$CustomerOldway = explode('|', CUSTOMER_OLD_WAY);
 //País
-$config['country']='Ec-bp';
-$config['countryUri']='bp';
+$config['country'] = 'Ec-bp';
+$config['base_url'] = BASE_URL;
+$config['countryUri'] = in_array('bpi', $CustomerOldway, TRUE) ? 'bpi' : 'bp';
 $config['sess_expiration'] = 7200;
 $config['client'] = 'pichincha';
 /*
@@ -13,10 +14,10 @@ $config['client'] = 'pichincha';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Usd/
-$config['base_url_cdn'] =  ASSET_URL.$config['country'].'/';
+$config['base_url_cdn'] =  ASSET_URL . $config['country'] . '/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = ASSET_PATH.$config['country'].'/';
+$config['CDN'] = ASSET_PATH . $config['country'] . '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ $config['CDN'] = ASSET_PATH.$config['country'].'/';
 | than english.
 |
 */
-$config['language']	= 'ec-bp-spanish';
+$config['language'] = 'ec-bp-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

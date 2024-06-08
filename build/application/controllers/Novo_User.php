@@ -1,546 +1,539 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Controlador para la vista principal de la aplicación
  * @author J. Enrique Peñaloza Piñero
-*/
-class Novo_User extends NOVO_Controller {
+ */
+class Novo_User extends NOVO_Controller
+{
+  public function __construct()
+  {
+    parent::__construct();
+    writeLog('INFO', 'User Controller Class Initialized');
+  }
+  /**
+   * @info Método que renderiza la vista de inicio de sesión
+   * @author J. Enrique Peñaloza Piñero.
+   * @date October 24th, 2020
+   */
+  public function signIn()
+  {
+    writeLog('INFO', 'User: signIn Method Initialized');
 
-	public function __construct()
-	{
-		parent:: __construct();
-		writeLog('INFO', 'User Controller Class Initialized');
-	}
-	/**
-	 * @info Método que renderiza la vista de inicio de sesión
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date October 24th, 2020
-	 */
-	public function signIn()
-	{
-		writeLog('INFO', 'User: signIn Method Initialized');
+    clearSessionsVars();
+    SetSignSessionType(lang('SETT_COOKIE_SINGN_IN'));
+    $view = 'signIn';
 
-		languageCookie(BASE_LANGUAGE);
-		$view = 'signIn';
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/jquery.balloon",
+      "third_party/jquery.validate-1.19.5",
+      "third_party/additional-methods-1.19.5",
+      "validation/messages_validation",
+      "user/signIn"
+    );
 
-		if($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('SETT_LINK_ENTERPRISES')), 'Location', 302);
-			exit();
-		}
+    if ($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
+      array_push(
+        $this->includeAssets->jsFiles,
+        "third_party/borders"
+      );
+    }
 
-		clearSessionsVars();
+    $this->render->skipProductInf = TRUE;
+    $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->views = ['user/signin'];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método para el cierre de sesión
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function singleSignOn($sessionId = NULL)
+  {
+    writeLog('INFO', 'User: singleSignOn Method Initialized');
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods",
-			"user/signIn"
-		);
+    clearSessionsVars();
+    $view = 'singleSignOn';
+    $this->render->submit = FALSE;
 
-		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/borders"
-			);
-		}
+    if ($sessionId) {
+      $this->render->form['sessionId'] = $sessionId;
+      $this->render->submit = TRUE;
+    } else {
+      $this->render->form = $this->request;
+    }
 
-		$singleSession = [
-			'name' => 'singleSession',
-			'value' => base64_encode('signIn'),
-			'expire' => 0,
-			'httponly' => TRUE
-		];
+    array_push(
+      $this->includeAssets->jsFiles,
+      'user/singleSignOn'
+    );
 
-		set_cookie($singleSession);
+    SetSignSessionType(lang('SETT_COOKIE_SINGN_ON'));
 
-		$this->render->skipProductInf = TRUE;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = ['user/signin'];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function singleSignOn($sessionId = FALSE)
-	{
-		writeLog('INFO', 'User: singleSignOn Method Initialized');
+    $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->render->skipmenu = TRUE;
+    $this->render->skipProductInf = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista para recuperar la contraseña
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function recoverPass()
+  {
+    writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
-		languageCookie(BASE_LANGUAGE);
-		clearSessionsVars();
-		$view = 'singleSignOn';
-		$this->render->send = FALSE;
+    clearSessionsVars();
+    $view = 'recoverPass';
 
-		if ($sessionId) {
-			$this->render->form['sessionId'] = $sessionId;
-			$this->render->send = TRUE;
-		} else {
-			$this->render->form = $this->request;
-		}
+    array_push(
+      $this->includeAssets->jsFiles,
+      "user/recoverPass",
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods"
+    );
 
-		if($sessionId == lang('SETT_LINK_SIGNOUT_END')) {
-			$view = 'finish';
-			$this->render->activeHeader = TRUE;
-			$this->render->showBtn = FALSE;
-			$this->render->sessionEnd = lang('GEN_SINGLE_SIGNON');
+    $this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+    $this->render->activeHeader = TRUE;
+    $this->render->skipProductInf = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista para recuperar los datos de acceso
+   * @author Jhonnatan Vega.
+   */
+  public function recoverAccess()
+  {
+    writeLog('INFO', 'User: recoverAccess Method Initialized');
 
-			if ($this->session->flashdata('unauthorized') != NULL) {
-				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
-			}
-		} else {
-			array_push(
-				$this->includeAssets->jsFiles,
-				'user/singleSignOn'
-			);
-			$this->render->skipmenu = TRUE;
-		}
+    clearSessionsVars();
+    $view = 'recoverAccess';
 
-		$singleSession = [
-			'name' => 'singleSession',
-			'value' => base64_encode('SignThird'),
-			'expire' => 0,
-			'httponly' => TRUE
-		];
+    array_push(
+      $this->includeAssets->jsFiles,
+      "user/recoverAccess",
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods"
+    );
+    $this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+    $this->render->activeHeader = TRUE;
+    $this->render->skipProductInf = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista para cambiar la contraseña
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function changePassword()
+  {
+    writeLog('INFO', 'User: changePassword Method Initialized');
 
-		set_cookie($singleSession);
+    $view = 'changePassword';
 
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
+    if (!$this->session->flashdata('changePassword')) {
+      redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
+      exit;
+    }
 
-	}
-	/**
-	 * @info Método que renderiza la vista para recuperar la contraseña
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function recoverPass()
-	{
-		writeLog('INFO', 'User: passwordRecovery Method Initialized');
+    array_push(
+      $this->includeAssets->jsFiles,
+      "user/changePassword-core",
+      "user/passValidate",
+      "third_party/jquery.balloon",
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods"
+    );
 
-		languageCookie(BASE_LANGUAGE);
-		clearSessionsVars();
-		$view = 'recoverPass';
+    switch ($this->session->flashdata('changePassword')) {
+      case 'newUser':
+        $this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
+        break;
+      case 'expiredPass':
+        $this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+        break;
+    }
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/recoverPass",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods"
-		);
+    $this->render->userType = $this->session->flashdata('userType');
+    $this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+    $this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+    $this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
+    $this->render->activeHeader = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método para el cierre de sesión
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function finishSession($redirect)
+  {
+    writeLog('INFO', 'User: finishSession Method Initialized');
 
-		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
-		$this->render->activeHeader = TRUE;
-		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista para recuperar los datos de acceso
-	 * @author Jhonnatan Vega.
-	 */
-	public function recoverAccess()
-	{
-		writeLog('INFO', 'User: recoverAccess Method Initialized');
+    $view = 'finish';
+    $thirdPartySession = getSignSessionType() === lang('SETT_COOKIE_SINGN_ON');
 
-		languageCookie(BASE_LANGUAGE);
-		clearSessionsVars();
-		$view = 'recoverAccess';
+    if ($this->session->has_userdata('userId')) {
+      $this->load->model('Novo_User_Model', 'finishSession');
+      $this->finishSession->callWs_FinishSession_User();
+    }
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/recoverAccess",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods"
-		);
-		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
-		$this->render->activeHeader = TRUE;
-		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista para cambiar la contraseña
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function changePassword()
-	{
-		writeLog('INFO', 'User: changePassword Method Initialized');
+    if ($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
+      $pos = array_search('sessionControl', $this->includeAssets->jsFiles);
+      $this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
+      $this->render->showBtn = !$thirdPartySession;
+      $this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
-		$view = 'changePassword';
+      if ($this->session->flashdata('unauthorized') !== NULL) {
+        $this->render->sessionEnd = $this->session->flashdata('unauthorized');
+      }
 
-		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
-			exit;
-		}
+      if ($redirect == lang('SETT_LINK_SIGNOUT_START')) {
+        $this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
+      }
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/changePassword-core",
-			"user/passValidate",
-			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods"
-		);
+      unset($this->includeAssets->jsFiles[$pos]);
+      $this->render->activeHeader = TRUE;
+      $this->render->skipProductInf = TRUE;
+      $this->render->titlePage = lang('GEN_FINISH_TITLE');
+      $this->views = ['user/' . $view];
+      $this->loadView($view);
+    } else {
+      redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
+      exit;
+    }
+  }
+  /**
+   * @info Método que renderiza la vista de segerencias de navegador
+   * @author J. Enrique Peñaloza Piñero.
+   * @date November 25th, 2020
+   */
+  public function suggestion()
+  {
+    writeLog('INFO', 'User: suggestion Method Initialized');
 
-		switch($this->session->flashdata('changePassword')) {
-			case 'newUser':
-				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
-			break;
-			case 'expiredPass':
-				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
-			break;
-		}
+    $view = 'suggestion';
 
-		$this->render->userType = $this->session->flashdata('userType');
-		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
-		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
-		$this->render->activeHeader = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function finishSession($redirect)
-	{
-		writeLog('INFO', 'User: finishSession Method Initialized');
+    if (!$this->session->flashdata('messageBrowser')) {
+      redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
+      exit;
+    }
 
-		$view = 'finish';
-		$thirdPartySession = $this->singleSession == 'SignThird';
+    $views = ['staticpages/content-browser'];
 
-		if($this->session->has_userdata('userId')) {
-			$this->load->model('Novo_User_Model', 'finishSession');
-			$this->finishSession->callWs_FinishSession_User();
-		}
+    $this->includeAssets->cssFiles = [
+      "$this->customerStyle/$this->customerStyle-browser",
+      "$this->customerStyle/$this->customerStyle-root",
+      "general-root",
+      "reboot",
+      "$this->customerStyle/" . "$this->customerStyle-base"
+    ];
 
-		if($redirect == lang('SETT_LINK_SIGNOUT_END') || $thirdPartySession) {
-			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
-			$this->render->showBtn = !$thirdPartySession;
-			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
+    $messageBrowser = $this->session->flashdata('messageBrowser');
+    $this->render->activeHeader = TRUE;
+    $this->render->platform = $messageBrowser->platform;
+    $this->render->title = $messageBrowser->title;
+    $this->render->msg1 = $messageBrowser->msg1;
+    $this->render->msg2 = $messageBrowser->msg2;
+    $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->views = $views;
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista de administración de usuarios
+   * @author Hector D. Corredor.
+   *
+   */
+  public function usersManagement()
+  {
+    writeLog('INFO', 'User: usersManagement Method Initialized');
 
-			if ($this->session->flashdata('unauthorized') != NULL) {
-				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
-			}
+    $view = 'usersManagement';
+    array_push(
+      $this->includeAssets->cssFiles,
+      "third_party/dataTables-1.10.20"
+    );
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/dataTables-1.10.20",
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods",
+      "user/usersManagement"
+    );
 
-			if($redirect == lang('SETT_LINK_SIGNOUT_START')) {
-				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
-			}
+    $responseList = $this->loadModel();
+    $data = $responseList->data;
+    $code = $responseList->code;
 
-			unset($this->includeAssets->jsFiles[$pos]);
-			$this->render->activeHeader = TRUE;
-			$this->render->skipProductInf = TRUE;
-			$this->render->titlePage = lang('GEN_FINISH_TITLE');
-			$this->views = ['user/'.$view];
-			$this->loadView($view);
-		} else {
-			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
-			exit;
-		}
+    if (($code) == 4) {
+      $this->render->userList = [];
+      $this->render->userRegistered = '';
+    } else {
+      $this->render->userList = $data;
+      $registeredUser = 'OFF';
+      $countRegisteredUser = 0;
+      foreach ($data as $key => $value) {
+        if ($data[$key]->registered == "false") {
+          $countRegisteredUser++;
+        }
+      }
 
-	}
-	/**
-	 * @info Método que renderiza la vista de segerencias de navegador
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date November 25th, 2020
-	 */
-	public function suggestion()
-	{
-		writeLog('INFO', 'User: suggestion Method Initialized');
+      if ($countRegisteredUser > 0) {
+        $registeredUser = 'ON';
+      }
+      $this->render->userRegistered = $registeredUser;
+    }
 
-		$view = 'suggestion';
+    $this->responseAttr($responseList);
+    $this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
 
-		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
-			exit;
-		}
+  /**
+   * @info Método que renderiza la vista de permisos de usuario
+   * @author Jennifer C. Cádiz.
+   */
+  public function userPermissions()
 
-		$views = ['staticpages/content-browser'];
+  {
+    writeLog('INFO', 'User: userPermissions Method Initialized');
 
-		$this->includeAssets->cssFiles = [
-			"$this->customerStyle/$this->customerStyle-browser",
-			"$this->customerStyle/$this->customerStyle-root",
-			"general-root",
-			"reboot",
-			"$this->customerStyle/"."$this->customerStyle-base"
-		];
+    $view = 'userPermissions';
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods",
+      "user/userPermissions"
+    );
 
-		$messageBrowser = $this->session->flashdata('messageBrowser');
-		$this->render->activeHeader = TRUE;
-		$this->render->platform = $messageBrowser->platform;
-		$this->render->title = $messageBrowser->title;
-		$this->render->msg1 = $messageBrowser->msg1;
-		$this->render->msg2 = $messageBrowser->msg2;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
-		$this->loadView($view);
-	}
-		/**
-	 * @info Método que renderiza la vista de administración de usuarios
-	 * @author Hector D. Corredor.
-	 *
-	 */
-	public function usersManagement()
-	{
-		writeLog('INFO', 'User: usersManagement Method Initialized');
+    if ($this->session->flashdata('userDataPermissions') != NULL) {
+      $userDataList = $this->session->flashdata('userDataPermissions');
+      $this->request = $userDataList;
+      $this->session->set_flashdata('userDataPermissions', $userDataList);
+    }
+    $this->render->username = $this->session->userName;
+    $this->render->user = $this->request->idUser;
+    $this->render->name = $this->request->nameUser;
+    $this->render->email = $this->request->mailUser;
+    $this->render->type = $this->request->typeUser;
+    $responseList = $this->loadModel($this->request);
 
-		$view = 'usersManagement';
-		array_push(
-			$this->includeAssets->cssFiles,
-			"third_party/dataTables-1.10.20"
-		);
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/dataTables-1.10.20",
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods",
-			"user/usersManagement"
-		);
+    $arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
+    $arrayList = $responseList->data;
 
-		$responseList = $this->loadModel();
-		$data = $responseList->data;
-		$code = $responseList->code;
+    foreach ($arrayList as $key => $value) {
+      // Recorre subarreglo de una dimensión
+      foreach ($value as $index => $subArray) {
+        // Recorre subarreglo de dos dimensiones
+        foreach ($subArray as $subIndex => $subValue) {
+          // Si encuentra el objeto que desea eliminar
+          if (in_array($subValue->accodfuncion, $arrayDelete)) {
+            // Elimina el objeto utilizando unset
+            unset($arrayList[$key][$index][$subIndex]);
+          }
+        }
+      }
+    }
 
-		if (($code) == 4) {
-			$this->render->userList= [];
-			$this->render->userRegistered = '';
-		}else{
-			$this->render->userList = $data;
-			$registeredUser = 'OFF';
-			$countRegisteredUser = 0;
-			foreach ($data as $key => $value) {
-				if ($data[$key]->registered == "false") {
-					$countRegisteredUser++;
-				}
-			}
+    $this->render->modules = $arrayList;
 
-			if ($countRegisteredUser > 0) {
-				$registeredUser = 'ON';
-			}
-			$this->render->userRegistered = $registeredUser;
-		}
+    $this->responseAttr($responseList);
+    $this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista de cuentas de usuario
+   * @author Jennifer C. Cádiz.
+   */
+  public function userAccounts()
 
-		$this->responseAttr($responseList);
-		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
+  {
+    writeLog('INFO', 'User: userAccounts Method Initialized');
 
-		/**
-	 * @info Método que renderiza la vista de permisos de usuario
-	 * @author Jennifer C. Cádiz.
-	 */
-	public function userPermissions()
+    $view = 'userAccounts';
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/jquery.validate",
+      "form_validation",
+      "third_party/additional-methods",
+      "user/userAccounts"
+    );
 
-	{
-		writeLog('INFO', 'User: userPermissions Method Initialized');
+    if ($this->session->flashdata('userDataAccounts') != NULL) {
+      $userDataList = $this->session->flashdata('userDataAccounts');
+      $this->request = $userDataList;
+      $this->session->set_flashdata('userDataAccounts', $userDataList);
+    }
 
-		$view = 'userPermissions';
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods",
-			"user/userPermissions"
-		);
+    $this->render->username = $this->session->userName;
+    $this->render->user = $this->request->idUser;
+    $this->render->name = $this->request->nameUser;
+    $this->render->email = $this->request->mailUser;
+    $this->render->type = $this->request->typeUser;
+    $responseList = $this->loadModel($this->request);
 
-		if ($this->session->flashdata('userDataPermissions') != NULL) {
-			$userDataList = $this->session->flashdata('userDataPermissions');
-			$this->request = $userDataList;
-			$this->session->set_flashdata('userDataPermissions', $userDataList);
-		}
+    $arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
+    $arrayList = $responseList->data;
 
-		$this->render->user = $this->request->idUser;
-		$this->render->name = $this->request->nameUser;
-		$this->render->email = $this->request->mailUser;
-		$this->render->type = $this->request->typeUser;
-		$responseList = $this->loadModel($this->request);
+    $this->render->modules = $arrayList;
 
-		$arrayDelete = $this->session->enterpriseInf->operatingModel === 'BRAND-2023' ? [] : lang('PERMISSIONS_EXCLUDED');
-		$arrayList = $responseList->data;
-
-		foreach ($arrayList as $key => $value) {
-			// Recorre subarreglo de una dimensión
-			foreach ($value as $index => $subArray) {
-				// Recorre subarreglo de dos dimensiones
-				foreach ($subArray as $subIndex => $subValue) {
-					// Si encuentra el objeto que desea eliminar
-					if (in_array($subValue->accodfuncion, $arrayDelete)) {
-						// Elimina el objeto utilizando unset
-						unset($arrayList[$key][$index][$subIndex]);
-					}
-				}
-			}
-		}
-
-		$this->render->modules = $arrayList;
-
-		$this->responseAttr($responseList);
-		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/*
+    $this->responseAttr($responseList);
+    $this->render->titlePage = lang('GEN_ADMIN_ACCOUNTS_TITLE');
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /*
 	|--------------------------------------------------------------------------
 	| TEMPORAL METHODS
 	|--------------------------------------------------------------------------
 	*/
-	/**
-	 * @info Método que renderiza la vista de login
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function login()
-	{
-		writeLog('INFO', 'User: index Method Initialized');
+  /**
+   * @info Método que renderiza la vista de login
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function login()
+  {
+    writeLog('INFO', 'User: index Method Initialized');
+    clearSessionsVars();
 
-		if($this->session->has_userdata('logged')) {
-			$urlRedirect = str_replace(
-				$this->customerUri . '/', $this->config->item('customer') . '/',
-				base_url('dashboard')
-			);
-			redirect($urlRedirect, 'Location', 302);
-			exit;
-		}
+    $view = 'login';
+    $views = ['user/login', 'user/signin'];
 
-		clearSessionsVars();
+    if ($this->customerUri == 'bpi') {
+      $views = ['user/signin'];
+    }
 
-		$view = 'login';
-		$views = ['user/login', 'user/signin'];
+    array_push(
+      $this->includeAssets->jsFiles,
+      "third_party/jquery.balloon",
+      "third_party/jquery.validate-1.19.5",
+      "third_party/additional-methods-1.19.5",
+      "validation/messages_validation",
+      "user/signIn"
+    );
 
-		if($this->customerUri == 'bpi') {
-			$views = ['user/signin'];
-		}
+    if ($this->customerUri !== 'bpi') {
+      array_push(
+        $this->includeAssets->jsFiles,
+        "third_party/jquery.kwicks",
+        "user/kwicks"
+      );
+    }
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods",
-			"user/login"
-		);
+    if ($this->customerUri === 'bpi' && ENVIRONMENT === 'production') {
+      array_push(
+        $this->includeAssets->jsFiles,
+        "third_party/borders"
+      );
+    }
 
-		if($this->customerUri !== 'bpi') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/jquery.kwicks",
-				"user/kwicks"
-			);
-		}
+    $this->render->skipProductInf = TRUE;
+    $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->views = $views;
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista para recuperar la contraseña
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function passwordRecovery()
+  {
+    writeLog('INFO', 'User: passwordRecovery Method Initialized');
 
-		if($this->customerUri === 'bpi' && ENVIRONMENT === 'production') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/borders"
-			);
-		}
+    $view = 'recoverPass';
 
-		$this->render->skipProductInf = TRUE;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista para recuperar la contraseña
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function passwordRecovery()
-	{
-		writeLog('INFO', 'User: passwordRecovery Method Initialized');
+    array_push(
+      $this->includeAssets->jsFiles,
+      "user/recoverPass",
+      "third_party/jquery.validate",
+      "validate-forms",
+      "third_party/additional-methods"
+    );
 
-		$view = 'recoverPass';
+    $this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+    $this->render->activeHeader = TRUE;
+    $this->render->skipProductInf = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista para cambiar la contraseña
+   * @author J. Enrique Peñaloza Piñero.
+   */
+  public function changePass()
+  {
+    writeLog('INFO', 'User: changePass Method Initialized');
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/recoverPass",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods"
-		);
+    $view = 'changePassword';
 
-		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
-		$this->render->activeHeader = TRUE;
-		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista para cambiar la contraseña
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function changePass()
-	{
-		writeLog('INFO', 'User: changePass Method Initialized');
+    if (!$this->session->flashdata('changePassword')) {
+      redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
+      exit;
+    }
 
-		$view = 'changePassword';
+    array_push(
+      $this->includeAssets->jsFiles,
+      "user/changePassword",
+      "user/passValidate",
+      "third_party/jquery.balloon",
+      "third_party/jquery.validate",
+      "validate-forms",
+      "third_party/additional-methods"
+    );
 
-		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
-			exit;
-		}
+    switch ($this->session->flashdata('changePassword')) {
+      case 'newUser':
+        $this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
+        break;
+      case 'expiredPass':
+        $this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+        break;
+    }
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/changePassword",
-			"user/passValidate",
-			"third_party/jquery.balloon",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods"
-		);
+    $this->render->userType = $this->session->flashdata('userType');
+    $this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+    $this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+    $this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
+    $this->render->activeHeader = TRUE;
+    $this->views = ['user/' . $view];
+    $this->loadView($view);
+  }
+  /**
+   * @info Método que renderiza la vista de segerencias de navegador
+   * @author J. Enrique Peñaloza Piñero.
+   * @date November 25th, 2020
+   */
+  public function browsers()
+  {
+    writeLog('INFO', 'User: browsers Method Initialized');
 
-		switch($this->session->flashdata('changePassword')) {
-			case 'newUser':
-				$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
-			break;
-			case 'expiredPass':
-				$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
-			break;
-		}
+    $view = 'browsers';
 
-		$this->render->userType = $this->session->flashdata('userType');
-		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
-		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
-		$this->render->activeHeader = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista de segerencias de navegador
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date November 25th, 2020
-	 */
-	public function browsers()
-	{
-		writeLog('INFO', 'User: browsers Method Initialized');
+    if (!$this->session->flashdata('messageBrowser')) {
+      redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
+      exit;
+    }
 
-		$view = 'browsers';
+    $views = ['staticpages/content-browser'];
 
-		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 302);
-			exit;
-		}
-
-		$views = ['staticpages/content-browser'];
-
-		$messageBrowser = $this->session->flashdata('messageBrowser');
-		$this->render->activeHeader = TRUE;
-		$this->render->platform = $messageBrowser->platform;
-		$this->render->title = $messageBrowser->title;
-		$this->render->msg1 = $messageBrowser->msg1;
-		$this->render->msg2 = $messageBrowser->msg2;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
-		$this->loadView($view);
-	}
+    $messageBrowser = $this->session->flashdata('messageBrowser');
+    $this->render->activeHeader = TRUE;
+    $this->render->platform = $messageBrowser->platform;
+    $this->render->title = $messageBrowser->title;
+    $this->render->msg1 = $messageBrowser->msg1;
+    $this->render->msg2 = $messageBrowser->msg2;
+    $this->render->titlePage = lang('GEN_SYSTEM_NAME');
+    $this->views = $views;
+    $this->loadView($view);
+  }
 }

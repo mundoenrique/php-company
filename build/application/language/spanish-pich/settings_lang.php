@@ -1,11 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_VIEW_SUFFIX'] = '';
-$lang['SETT_SCORE_CAPTCHA'] = [
-	'development' => 0,
-	'testing' => 0,
-	'production' => 0
-];
 $lang['SETT_ICON'] = '';
 $lang['SETT_ICON_SUCCESS'] = '';
 $lang['SETT_ICON_INFO'] = '';

@@ -1,148 +1,132 @@
-'use strict';
+import { getToken } from '../common/captchaHelper.js';
+import { customer, customerUri, lang } from '../common/useful_data.js';
+import { apiRequest } from '../connection/api_request.js';
+import { calledCoreApp } from '../connection/core_app.js';
+import { uiModalMessage } from '../modal/ui_modal.js';
+import { appLoader, takeFormData, toggleDisableActions } from '../utils.js';
+import { formValidation } from '../validation/form_validation.js';
+
 $(function () {
-	$.balloon.defaults.css = null;
-	insertFormInput(false);
+  $.balloon.defaults.css = null;
+  toggleDisableActions(false);
+  let btnCalled;
+  let btnSignin;
+  let dataSignin;
+  let formSignin;
 
-	if (lang.SETT_MAINT_NOTIF === 'ON') {
-		var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', assetUrl + 'images/ve/maint_notif3.png');
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'destroy',
-			},
-			maxHeight: 'none',
-			minWidth: 480,
-			posAt: 'center top',
-			posMy: 'center top+100',
-		};
+  $('#signInBtn').on('click', function (e) {
+    e.preventDefault();
+    formSignin = $('#signInForm');
+    formValidation(formSignin);
 
-		appMessages(lang.GEN_SYSTEM_NAME, mesgNotif, '', modalBtn);
-	}
+    if (formSignin.valid()) {
+      btnCalled = $(this);
+      btnSignin = $(this).html();
+      dataSignin = takeFormData(formSignin);
+      dataSignin.userPass = apiRequest(dataSignin.userPass);
+      $(this).html(appLoader);
+      toggleDisableActions(true);
+      getToken('SignIn', function (recaptchaToken) {
+        dataSignin.token = recaptchaToken;
+        signIn('SignIn');
+      });
+    }
+  });
 
-	$('#userPass').on('keyup', function () {
-		$(this).attr('type', 'password');
+  $('#system-info').on('click', '.session-close', function () {
+    dataSignin = {
+      userName: dataSignin.userName,
+    };
 
-		if ($(this).val() === '') {
-			$(this).attr('type', 'text');
-		}
-	});
+    toggleDisableActions(true);
+    $(this).html(appLoader);
+    signIn('FinishSession');
+  });
 
-	$('#signInBtn').on('click', function (e) {
-		e.preventDefault();
-		form = $('#signInForm');
-		validateForms(form);
+  $('#system-info').on('click', '.send-otp', function (e) {
+    e.preventDefault();
+    const formOtp = $('#otpForm');
+    formValidation(formOtp);
 
-		if (form.valid()) {
-			btnText = $(this).html();
-			data = getDataForm(form);
-			data.userPass = cryptoPass(data.userPass);
-			data.active = '';
-			data.currentTime = new Date().getHours();
-			$(this).html(loader);
-			insertFormInput(true);
+    if (formOtp.valid()) {
+      const dataOtp = takeFormData(formOtp);
+      dataSignin.otpCode = $('#otpCode').val();
+      dataSignin.saveIP = $('#saveIp').is(':checked') ? true : false;
+      $(this).html(appLoader);
+      toggleDisableActions(true);
+      getToken('verifyIP', function (recaptchaToken) {
+        dataSignin.token = recaptchaToken;
+        signIn('SignIn');
+      });
+    }
+  });
 
-			getRecaptchaToken('SignIn', function (recaptchaToken) {
-				data.token = recaptchaToken;
-				getSignIn('SignIn');
-			});
-		}
-	});
+  const signIn = function (section) {
+    const module = 'User';
+    dataSignin.active = '';
+    dataSignin.currentTime = new Date().getHours();
 
-	$('#system-info').on('click', '.session-close', function () {
-		$(this).html(loader).prop('disabled', true).removeClass('session-close');
+    calledCoreApp(module, section, dataSignin, function (coreAppResp) {
+      if (coreAppResp.code !== 0 || (coreAppResp.code === 0 && !coreAppResp.data.link)) {
+        $('#userPass').val('');
 
-		getSignIn('FinishSession');
-	});
+        if (lang.SETT_RESTAR_USERNAME === 'ON') {
+          $('#userName').val('');
+        }
 
-	$('#system-info').on('click', '.send-otp', function () {
-		form = $('#formVerificationOTP');
-		validateForms(form);
+        toggleDisableActions(false);
+        btnCalled.html(btnSignin);
+        formSignin.validate().resetForm();
+      }
 
-		if (form.valid()) {
-			$(this).html(loader).prop('disabled', true).removeClass('send-otp');
-			insertFormInput(true);
+      handleSignInResponse[coreAppResp.code](coreAppResp);
+    });
+  };
 
-			getRecaptchaToken('verifyIP', function (recaptchaToken) {
-				data.token = recaptchaToken;
-				data.otpCode = $('#otpCode').val();
-				data.saveIP = $('#acceptAssert').is(':checked') ? true : false;
-				getSignIn('SignIn');
-			});
-		}
-	});
+  const handleSignInResponse = {
+    0: function (coreAppResp) {
+      if (coreAppResp.data.link) {
+        let link = coreAppResp.data.link;
+
+        if (coreAppResp.data.link.indexOf('dashboard') !== -1) {
+          link = link.replace(customerUri, customer);
+        }
+
+        $(location).attr('href', link);
+      }
+    },
+    1: function (coreAppResp) {
+      $('#userName').showBalloon({
+        html: true,
+        classname: coreAppResp.data.className,
+        position: coreAppResp.data.position,
+        contents: coreAppResp.msg,
+      });
+      setTimeout(function () {
+        $('#userName').hideBalloon();
+      }, 2500);
+    },
+    2: function (coreAppResp) {
+      $('#accept').addClass('send-otp');
+      coreAppResp.minWidth = 470;
+      coreAppResp.maxHeight = 'none';
+      coreAppResp.posAt = 'center top';
+      coreAppResp.posMy = 'center top+60';
+
+      uiModalMessage(coreAppResp);
+    },
+    3: function (coreAppResp) {
+      coreAppResp.minWidth = 470;
+      coreAppResp.maxHeight = 'none';
+      coreAppResp.posAt = 'center top';
+      coreAppResp.posMy = 'center top+60';
+
+      uiModalMessage(coreAppResp);
+    },
+    4: function (coreAppResp) {
+      if (coreAppResp.data.action) {
+        $('#accept').addClass(coreAppResp.data.action);
+      }
+    },
+  };
 });
-
-function getSignIn(forWhere) {
-	who = 'User';
-	where = forWhere;
-
-	callNovoCore(who, where, data, function (response) {
-		switch (response.code) {
-			case 0:
-				if (forWhere == 'SignIn') {
-					$(location).attr('href', response.data);
-				}
-				break;
-			case 1:
-				$('#userName').showBalloon({
-					html: true,
-					classname: response.className,
-					position: response.position,
-					contents: response.msg,
-				});
-				break;
-			case 2:
-				$('#accept').addClass('send-otp');
-				response.modalBtn.minWidth = 480;
-				response.modalBtn.maxHeight = 'none';
-				response.modalBtn.posAt = 'center top';
-				response.modalBtn.posMy = 'center top+160';
-
-				inputModal =
-					'<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
-				inputModal += '<p class="pt-0 p-0">' + response.msg + '</p>';
-				inputModal += '<div class="row">';
-				inputModal += '<div class="form-group col-8">';
-				inputModal += '<label for="otpCode">' + response.labelInput + '</label>';
-				inputModal +=
-					'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
-				inputModal += '<div class="help-block"></div>';
-				inputModal += '</div">';
-				inputModal += '</div>';
-				inputModal += '<div class="form-group custom-control custom-switch mb-0">';
-				inputModal += '<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">';
-				inputModal += '<label class="custom-control-label" for="acceptAssert">' + response.assert + '</label>';
-				inputModal += '</div">';
-				inputModal += '</form>';
-
-				appMessages(response.title, inputModal, response.icon, response.modalBtn);
-				break;
-			case 3:
-				response.modalBtn.minWidth = 480;
-				response.modalBtn.maxHeight = 'none';
-				response.modalBtn.posAt = 'center top';
-				response.modalBtn.posMy = 'center top+160';
-				inputModal = response.msg;
-				appMessages(response.title, inputModal, response.icon, response.modalBtn);
-				break;
-			default:
-				if (response.data == 'session-close') {
-					$('#accept').addClass(response.data);
-				}
-		}
-
-		if (response.code != 0) {
-			$('#userPass').val('');
-			$('#signInBtn').html(btnText);
-			insertFormInput(false);
-
-			if (lang.SETT_RESTAR_USERNAME == 'ON') {
-				$('#userName').val('');
-			}
-
-			setTimeout(function () {
-				$('#userName').hideBalloon();
-			}, 2000);
-		}
-	});
-}

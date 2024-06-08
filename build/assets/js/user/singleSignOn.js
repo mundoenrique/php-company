@@ -1,19 +1,25 @@
-'use strict'
-$(function() {
-	form = $('#single-signin-form');
-	var send = $('#single-signin-form').attr('send');
+import { calledCoreApp, calledCoreAppForm } from '../connection/core_app.js';
+import { takeFormData, toggleDisableActions } from '../utils.js';
 
-	if(send) {
-		insertFormInput(true, form);
-		form.submit()
-	} else {
-		who = 'User';
-		where = 'singleSignOn';
-		data = getDataForm(form)
-		data.currentTime = new Date().getHours();
+$(function () {
+  const form = $('#single-signin-form');
+  const submit = $('#single-signin-form').attr('submit');
+  let dataSignin;
 
-		callNovoCore(who, where, data, function (response) {
-			$(location).attr('href', response.data)
-		})
-	}
-})
+  if (submit === '1') {
+    toggleDisableActions(true);
+    dataSignin = takeFormData(form);
+    dataSignin.uri = 'ingress';
+    calledCoreAppForm(dataSignin);
+  } else {
+    const module = 'User';
+    const section = 'singleSignOn';
+    dataSignin = takeFormData(form);
+    dataSignin.route = 'single';
+    dataSignin.currentTime = new Date().getHours();
+
+    calledCoreApp(module, section, dataSignin, function (coreAppResp) {
+      $(location).attr('href', coreAppResp.data.link);
+    });
+  }
+});

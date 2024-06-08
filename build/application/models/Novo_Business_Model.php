@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info clase para obtener los datos del negocio
  * @author J. Enrique peñaloza Piñero
  * @date October 31st, 2019
  */
-class Novo_Business_Model extends NOVO_Model {
+class Novo_Business_Model extends NOVO_Model
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		writeLog('INFO', 'Business Model Class Initialized');
 
 		$this->load->library('Request_Data');
@@ -22,6 +23,15 @@ class Novo_Business_Model extends NOVO_Model {
 	public function callWs_GetEnterprises_Business($dataRequest)
 	{
 		writeLog('INFO', 'Business Model: getEnterprises Method Initialized');
+
+		if (!$dataRequest) {
+			$access = [
+				'user_access',
+				'productInf',
+				'enterpriseInf'
+			];
+			$this->session->unset_userdata($access);
+		}
 
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Empresas';
@@ -39,20 +49,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$response = $this->sendToWebServices('callWs_GetEnterprises');
 		$filters = $this->request_data->setFilters();
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$enterpriseArgs = $response->listadoEmpresas;
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
-				if(!$dataRequest) {
-					$access = [
-						'user_access',
-						'productInf',
-						'enterpriseInf'
-					];
-					$this->session->unset_userdata($access);
+				if (!$dataRequest) {
 					$this->response->data->filters = $enterpriseList->filters;
 					$this->response->data->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
 					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal / $sizePage);
@@ -71,39 +75,39 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 1;
 				$this->response->title = lang('BUSINESS_ENTERPRISE_TITLE');
 				$this->response->data->text = lang('BUSINESS_ENTERPRISE_NOT_ASSIGNED');
-			break;
+				break;
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('GEN_SINGLE_SIGNON'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('GEN_NO_PERMISSIONS'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('BUSINESS_ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
 
-				if ($this->isResponseRc ==! -29 || $this->isResponseRc ==! -61) {
+				if ($this->isResponseRc == !-29 || $this->isResponseRc == !-61) {
 					clearSessionsVars();
 				}
 		}
 
-		if($this->response->code !== 0) {
+		if ($this->response->code !== 0) {
 
-			if(!$dataRequest)	{
+			if (!$dataRequest) {
 				$this->response->data->filters = $filters;
 				$this->response->data->enterprisesTotal = 0;
-				$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+				$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal / $sizePage);
 			}
 
 			$this->response->data->list = [];
@@ -147,22 +151,22 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->makeAnswer($dataRequest, 'callWs_GetBranchOffices');
 		}
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 
-				if($select && count($response->lista) > 1) {
+				if ($select && count($response->lista) > 1) {
 					$branchOffice[] = (object) [
 						'key' => '',
 						'text' => lang('BULK_SELECT_BRANCH_OFFICE')
 					];
 				}
 
-				foreach($response->lista AS $pos => $branchs) {
+				foreach ($response->lista as $pos => $branchs) {
 					$branch = [];
 
-					if($select) {
-						$text = ( lang('SETT_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')
+					if ($select) {
+						$text = (lang('SETT_BULK_BRANCHOFFICE_VIEW') === 'ADDRESS')
 							? $response->lista[$pos]->direccion_1 : $response->lista[$pos]->nomb_cia;
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($text));
@@ -174,10 +178,10 @@ class Novo_Business_Model extends NOVO_Model {
 					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
 					$branchOffice[] = (object) $branch;
 				}
-			break;
+				break;
 		}
 
-		if($this->isResponseRc != 0) {
+		if ($this->isResponseRc != 0) {
 			$this->response->code = 1;
 			$branchOffice[] = (object) [
 				'key' => '',
@@ -199,7 +203,7 @@ class Novo_Business_Model extends NOVO_Model {
 		writeLog('INFO', 'Business Model: getProducts Method Initialized');
 
 		$select = isset($dataRequest->select);
-		if(!$select) {
+		if (!$select) {
 			$access = [
 				'user_access',
 				'productInf',
@@ -220,14 +224,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
-		if($this->session->has_userdata('thirdEnterprise')) {
+		if ($this->session->has_userdata('thirdEnterprise')) {
 			$this->dataRequest->listaCuentasCBP_BDB = $this->session->thirdEnterprise->cbpAccounts;
 			$this->dataRequest->listaCuentasICBS_BDB = $this->session->thirdEnterprise->icbsAccounts;
 		}
 
 		$response = $this->sendToWebServices('callWs_GetProducts');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$select ?: $this->session->set_userdata('enterpriseInf', $dataRequest);
@@ -235,39 +239,39 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->session->unset_userdata('products');
 				count($response->productos) < 2 ?: $this->session->set_userdata('products', TRUE);
 
-				if($select) {
+				if ($select) {
 					$this->response->data = $productList;
 				} else {
 					$this->response->data->categoriesList = $productList->categorieList;
 					$this->response->data->brandList = $productList->brandList;
 					$this->response->data->productList = $productList->productList;
 				}
-			break;
+				break;
 			case -138:
 				$this->response->code = 3;
 				$this->response->msg = lang('GEN_WARNING_PRODUCTS_LIST');
-			break;
+				break;
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('GEN_SINGLE_SIGNON'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('GEN_NO_PERMISSIONS'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('BUSINESS_ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
+				redirect(base_url(lang('SETT_LINK_SIGNOUT') . lang('SETT_LINK_SIGNOUT_END')), 'Localtion', 302);
 				exit;
-			break;
+				break;
 		}
 
-		if($this->response->code != 0 && !$select) {
+		if ($this->response->code != 0 && !$select) {
 			$this->response->data->categoriesList = [];
 			$this->response->data->brandList = [];
 			$this->response->data->productList = [];
@@ -352,16 +356,16 @@ class Novo_Business_Model extends NOVO_Model {
 			'inactiveCards' => '--'
 		];
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
-				writeLog('INFO', 'callWs_GetProductDetail USER_ACCESS LIST: ' . json_encode($response->lista));
+				writeLog('INFO', 'USER_ACCESS LIST: ' . json_encode($response->lista, JSON_UNESCAPED_UNICODE));
 
 				$this->response->code = 0;
 
-				if(isset($response->estadistica->producto->idProducto)) {
+				if (isset($response->estadistica->producto->idProducto)) {
 					if (isset($dataRequest->isGet)) {
 						$productName = trim(ucwords(mb_strtolower($response->estadistica->producto->descripcion)));
-						$productImgName = normalizeName(mb_strtolower($productName));
+						$productImgName = normalizeName($productName);
 						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
 
 						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
@@ -400,47 +404,47 @@ class Novo_Business_Model extends NOVO_Model {
 				$productSummary['toAuthorize'] = trim($response->estadistica->lote->numPorAutorizar);
 
 
-				if(isset($response->estadistica->ordenServicio)) {
+				if (isset($response->estadistica->ordenServicio)) {
 					$productSummary['serviceOrders'] = trim($response->estadistica->ordenServicio->Total);
 					$productSummary['serviceOrdersCon'] = trim($response->estadistica->ordenServicio->numConciliada);
 					$productSummary['serviceOrdersNoCon'] = trim($response->estadistica->ordenServicio->numNoConciliada);
 				}
 
-				if(isset($response->estadistica->listadoTarjeta)) {
+				if (isset($response->estadistica->listadoTarjeta)) {
 					$productSummary['totalCards'] = trim($response->estadistica->listadoTarjeta->numeroTarjetas);
 					$productSummary['activeCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasActivas);
 					$productSummary['inactiveCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasInactivas);
 				}
 
-				if(isset($response->estadistica->producto->mesesVencimiento)) {
+				if (isset($response->estadistica->producto->mesesVencimiento)) {
 					$expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
 					$currentDate = date('Y-m');
-					$newDate = strtotime('+'.$expMaxMonths.' month' , strtotime($currentDate));
-					$expireDate = date('m/Y' , $newDate);
+					$newDate = strtotime('+' . $expMaxMonths . ' month', strtotime($currentDate));
+					$expireDate = date('m/Y', $newDate);
 					$productInf->expMaxMonths = $expireDate;
 					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('productInf', $productInf);
 				}
-			break;
+				break;
 			case -38:
 				$this->response->code = 3;
 				$this->response->msg = lang('BUSINESS_NO_PRODUCT_INFO');
 				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_PRODUCTS');
-			break;
+				break;
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('GEN_NO_ACCESS'), $this->userName);
 				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_PRODUCTS');
-			break;
+				break;
 		}
 
-		if(array_key_exists($imgBrand, lang('IMG_BRANDS'))) {
+		if (array_key_exists($imgBrand, lang('IMG_BRANDS'))) {
 			$imgBrand = lang('IMG_BRANDS')[$imgBrand];
 		} else {
 			$imgBrand = lang('IMG_BRAND_DEFAULT');
 		}
 
-		$imgBrand = $brandName === 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
+		$imgBrand = $brandName === 'Visa' ? lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand .= '_card.svg';
 		$productDetail['imgBrand'] = $imgBrand;
 
 		$this->response->data->productDetail = (object) $productDetail;

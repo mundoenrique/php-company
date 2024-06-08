@@ -1,21 +1,33 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-//VALIDATE FORMS
-$lang['VALIDATE_USERLOGIN'] = '';
-$lang['VALIDATE_USERPASS_REQ'] = 'Both fields are required';
-$lang['VALIDATE_USERPASS_PATT'] = 'Incorrect username and password combination';
-$lang['VALIDATE_USERNAME'] = 'Please indicate a valid user';
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$lang['VALID_REQUIRED'] = 'This field is required.';
+$lang['VALID_STATIC_LENGTH'] = 'Enter {0} characters {1}.';
+$lang['VALID_MAX_LENGTH'] = 'Enter no more than {0} characters.';
+$lang['VALID_MIN_LENGTH'] = 'Enter at least {0} characters.';
+$lang['VALID_RANGE_LENGTH'] = 'Enter between {0} and {1} characters.';
+$lang['VALID_USERNAME'] = 'Enter a valid user.';
+$lang['VALID_PASSWORD'] = 'The password must meet the requirements.';
+$lang['VALID_USERPASS_REQ'] = 'Both fields are required.';
+$lang['VALID_USERPASS_PATTERN'] = 'Incorrect username and password combination.';
+$lang['VALID_OTP_CODE'] = 'Enter a valid code (letters and/or numbers)';
+
+
+$lang['VALIDATE_PHONE_NUMBER'] = 'Enter a valid phone number  min 6 max 15.';
+$lang['VALIDATE_ID_NUMBER'] = 'Enter a valid identification number, min 7 max 9.';
+$lang['VALIDATE_FILE_TYPE'] = 'Choose an allowed file (xls, xlsx, txt)';
+
+
+
 $lang['VALIDATE_NIT'] = 'Please enter a valid number';
 $lang['VALIDATE_ID_COMPANY'] = 'Indicate a valid RUC';
 $lang['VALIDATE_EMAIL'] = 'Indicate a valid email';
 $lang['VALIDATE_CURRENT_PASS'] = 'Enter your current password';
 $lang['VALIDATE_NEW_PASS'] = 'Enter your new password';
 $lang['VALIDATE_DIFFERS_PASS'] = 'The new password must be different from the current one';
-$lang['VALIDATE_REQUIREMENTS_PASS'] = 'The password must meet the requirements';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirm your password';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Select a branch';
 $lang['VALIDATE_BULK_TYPE'] = 'Select a bulk type';
-$lang['VALIDATE_FILE_TYPE'] = 'Choose an allowed file (xls, xlsx, txt)';
 $lang['VALIDATE_FILE_SIZE'] = 'The file must not be empty';
 $lang['VALIDATE_PASS'] = 'Please enter a valid password';
 $lang['VALIDATE_ORDER_TYPE'] = 'Select an order type';
@@ -26,7 +38,7 @@ $lang['VALIDATE_SELECTED_DATE'] = 'Select a valid date mm / yy';
 $lang['VALIDATE_SELECTED_MONTH_YEAR'] = 'Select a valid date mm / yyyy';
 $lang['VALIDATE_SELECTED_YEAR'] = 'Select an available year';
 $lang['VALIDATE_ID_TYPE'] = 'Select a type of identification';
-$lang['VALIDATE_ID_NUMBER'] = 'Indicates a valid identification number, digits only';
+$lang['VALIDATE_NUMBER_ID'] = 'Indicates a valid identification number, digits only';
 $lang['VALIDATE_LENGHT_NUMBER'] = 'The number is too long';
 $lang['VALIDATE_PHONE_REQ'] = 'This phone is required';
 $lang['VALIDATE_REFERENCE'] = 'Indicates a valid reference number';
@@ -42,13 +54,13 @@ $lang['VALIDATE_SELECT_PRODUCT'] = 'You must select a product';
 $lang['VALIDATE_DATE_DMY'] = 'Enter a valid date mm / dd / yyyy';
 $lang['VALIDATE_DATE_MY'] = 'Please indicate a valid date mm / yyyy';
 $lang['VALIDATE_SELECT'] = 'Select at least one record';
+$lang['VALIDATE_SELECT_CONTENT'] = 'Registry content is invalid';
 $lang['VALIDATE_OS_OTP'] = 'Please enter a valid security code';
 $lang['VALIDATE_SELECT_GROUP'] = 'Complete any of these fields';
 $lang['VALIDATE_OPTION'] = 'Please select an option';
 $lang['VALIDATE_SELECT_GROUP'] = 'Select any of these criteria';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Please enter a valid identification number';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Select a type of identity document';
-$lang['VALIDATE_OTP_CODE'] = 'Please enter a valid security code (letters and numbers)';
 $lang['VALIDATE_MAX_WEEK'] = 'Daily amount cannot be higher than weekly';
 $lang['VALIDATE_MAX_MONTH'] = 'Weekly amount cannot be greater than monthly';
 $lang['VALIDATE_MAX_DAY'] = 'Transaction amount cannot be greater than the daily amount';
