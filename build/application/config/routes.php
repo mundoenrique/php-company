@@ -75,7 +75,7 @@ $route['(' . CUSTOMER_OLD_WAY . ')/inf-condiciones'] = "Novo_Information/terms";
 */
 $route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/callCoreApp'] = "Novo_LoadModels/loadModels";
 $route['(' . CUSTUMER_ALLOWED . ')/single'] = "Novo_LoadModels/loadModels";
-$route['(' . CUSTUMER_ALLOWED . ')/async-call'] = "Novo_CallModels";
+$route['(' . CUSTOMER_OLD_WAY . '|' . CUSTUMER_ALLOWED . ')/async-call'] = "Novo_CallModels";
 /*
 |--------------------------------------------------------------------------
 */
