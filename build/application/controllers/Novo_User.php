@@ -55,11 +55,11 @@ class Novo_User extends NOVO_Controller
 
     clearSessionsVars();
     $view = 'singleSignOn';
-    $this->render->submit = FALSE;
+    $this->render->submit = '0';
 
     if ($sessionId) {
-      $this->render->form['sessionId'] = $sessionId;
-      $this->render->submit = TRUE;
+      $this->render->form['sessionId'] = base64_encode($sessionId);
+      $this->render->submit = '1';
     } else {
       $this->render->form = $this->request;
     }

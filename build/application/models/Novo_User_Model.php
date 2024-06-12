@@ -251,7 +251,7 @@ class Novo_User_Model extends NOVO_Model
 
     switch ($this->customer) {
       case 'Bdb':
-        $this->token = $dataRequest->sessionId;
+        $this->token = base64_decode($dataRequest->sessionId);
         break;
       case 'Mx-Bn':
         $this->dataRequest->userName = '';
@@ -263,7 +263,7 @@ class Novo_User_Model extends NOVO_Model
           'access_token' => $dataRequest->OPC ?? 'BNT'
         ];
         $this->dataRequest->guardaIp = FALSE;
-        $this->token = $dataRequest->Clave;
+        $this->token = base64_decode($dataRequest->Clave);
         break;
     }
 
