@@ -83,9 +83,9 @@
           "rates": [null, "0.85%"]
         },
         {
-          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 20,00)",
+          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 25,00)",
           "description": null,
-          "rates": [null, "Bs. 20,00"]
+          "rates": [null, "Bs. 25,00"]
         }
       ]
     },
