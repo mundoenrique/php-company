@@ -72,27 +72,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-$dbName = dbSearch(explode('/', $_SERVER['REQUEST_URI'])[1]);
+$dbName = DB_VERIFY ? DB_NAME : 'alpha';
 
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => DB_HOSTNAME,
-	'port' => DB_PORT,
-	'username' => DB_USERNAME,
-	'password' => DB_PASSWORD,
-	'database' => $dbName,
-	'dbdriver' => DB_DRIVER,
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => DB_CHARSET,
-	'dbcollat' => DB_COLLATION,
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
+  'dsn' => '',
+  'hostname' => DB_HOSTNAME,
+  'port' => DB_PORT,
+  'username' => DB_USERNAME,
+  'password' => DB_PASSWORD,
+  'database' => COOKIE_PREFIX . $dbName,
+  'dbdriver' => DB_DRIVER,
+  'dbprefix' => '',
+  'pconnect' => FALSE,
+  'db_debug' => (ENVIRONMENT !== 'production'),
+  'cache_on' => FALSE,
+  'cachedir' => '',
+  'char_set' => DB_CHARSET,
+  'dbcollat' => DB_COLLATION,
+  'swap_pre' => '',
+  'encrypt' => FALSE,
+  'compress' => FALSE,
+  'stricton' => FALSE,
+  'failover' => array(),
+  'save_queries' => TRUE
 );

@@ -80,6 +80,15 @@ class NOVO_Controller extends CI_Controller
 
     if (isset($_POST['external']) && $this->input->post('payload') === NULL) {
       unset($_POST['external']);
+
+      if (isset($_POST['Clave'])) {
+        $_POST['Clave'] = base64_encode($_POST['Clave']);
+      }
+
+      if (isset($_POST['sessionId'])) {
+        $_POST['sessionId'] = base64_encode($_POST['sessionId']);
+      }
+
       $extReq = [
         'data' => $_POST
       ];
@@ -114,10 +123,10 @@ class NOVO_Controller extends CI_Controller
 
     LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
     clientUrlValidate($this->customerUri);
-    $this->customerUri = $this->config->item('customer_uri');
-    $this->customerLang = $this->config->item('customer_lang');
-    $this->customerStyle = $this->config->item('customer_style');
-    $this->customerFiles = $this->config->item('customer_files');
+    $this->customerUri = config_item('customer_uri');
+    $this->customerLang = config_item('customer_lang');
+    $this->customerStyle = config_item('customer_style');
+    $this->customerFiles = config_item('customer_files');
     LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
     $this->isValidRequest = $this->verify_access->accessAuthorization($this->validationMethod);
@@ -259,7 +268,7 @@ class NOVO_Controller extends CI_Controller
         if (lang('SETT_REMOTE_AUTH') === 'ON') {
           array_push(
             $this->includeAssets->jsFiles,
-            "remote_connect/$this->customerUri-remoteConnect"
+            "remote_connect/$this->customerFiles-remoteConnect"
           );
         }
       }

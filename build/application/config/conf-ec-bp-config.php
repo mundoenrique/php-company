@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$CustomerOldway = explode('|', CUSTOMER_OLD_WAY);
 //País
 $config['country'] = 'Ec-bp';
-$config['countryUri'] = in_array('bpi', CUSTUMER_DENY_WAY, TRUE) ? 'bpi' : 'bp';
+$config['base_url'] = BASE_URL;
+$config['countryUri'] = in_array('bpi', $CustomerOldway, TRUE) ? 'bpi' : 'bp';
 $config['sess_expiration'] = 7200;
 $config['client'] = 'pichincha';
 /*

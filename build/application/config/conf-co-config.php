@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$CustomerOldway = explode('|', CUSTOMER_OLD_WAY);
 //País
 $config['country'] = 'Co';
-$config['countryUri'] = in_array('col', CUSTUMER_DENY_WAY, TRUE) ? 'col' : 'co';
+$config['base_url'] = BASE_URL;
+$config['countryUri'] = in_array('col', $CustomerOldway, TRUE) ? 'col' : 'co';
 $config['sess_expiration'] = 7200;
 
 /*

@@ -1421,12 +1421,10 @@ $config = [
   'exportReportUserActivity' => [
     [
       'field' => 'initialDate',
-      'label' => 'initialDate',
       'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
     ],
     [
       'field' => 'finalDate',
-      'label' => 'finalDate',
       'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
     ],
     [
@@ -1435,7 +1433,7 @@ $config = [
     ],
     [
       'field' => 'rifEnterprise',
-      'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+      'rules' => lang('REGEX_FISCAL_ID_SERVER')
     ],
     [
       'field' => 'downloadFormat',

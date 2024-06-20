@@ -954,8 +954,8 @@ class Novo_Reports_Model extends NOVO_Model
     writeLog('INFO', 'Reports Model: masterAccount Method Initialized');
 
     $this->dataAccessLog->modulo = 'Reportes';
-    $this->dataAccessLog->function = 'Obtener resultados de busqueda';
-    $this->dataAccessLog->operation = 'Cuenta maestra';
+    $this->dataAccessLog->function = 'Cuenta maestra';
+    $this->dataAccessLog->operation = 'Obtener resultados de busqueda';
 
     $this->dataRequest->idOperation = 'buscarDepositoGarantia';
     $this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
@@ -1121,6 +1121,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
     $this->dataRequest->fechaIni =  $dataRequest->dateStart;
     $this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+    $this->dataRequest->tipoNota =  $dataRequest->typeNote;
     $this->dataRequest->filtroFecha = $dataRequest->dateFilter;
     $this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
     $this->dataRequest->paginaActual = $dataRequest->actualPage;
@@ -1132,8 +1133,8 @@ class Novo_Reports_Model extends NOVO_Model
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-        $user = $response;
-        $this->response->data =  (array)$user;
+        $fileData = $response;
+        $this->response->data =  (array)$fileData;
         break;
       default:
         $this->response->title = lang('REPORTS_TITLE');
@@ -1226,6 +1227,7 @@ class Novo_Reports_Model extends NOVO_Model
     $this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
     $this->dataRequest->fechaIni =  $dataRequest->dateStart;
     $this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+    $this->dataRequest->tipoNota =  $dataRequest->typeNote;
     $this->dataRequest->filtroFecha = $dataRequest->dateFilter;
     $this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
     $this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;

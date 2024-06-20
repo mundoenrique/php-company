@@ -86,10 +86,59 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
+| Environment variables
+|--------------------------------------------------------------------------
+|
+| Constants expected as environment variables on the instance to be used
+| as part of global configuration settings.
+|
+*/
+$customerUri  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))[1];
+$accessUrl = explode(',', str_replace(' ', '', $_SERVER['ACCESS_URL']));
+$oldWay = 'bpi|col|pe|us|ve';
+$denyWay = explode('|', $oldWay);
+$allow = array_diff($accessUrl, $denyWay);
+$allowed = implode('|', $allow);
+$ableDBs = ['bdb', 'bg', 'bnt', 'bp', 'co', 'coop', 'pb', 'pe', 'us', 've', 'vg'];
+$ableDBs = array_diff($ableDBs, $denyWay);
+$dbName = in_array($customerUri, $ableDBs) ? $customerUri : 'alpha';
+$emptyErrCtr = ['assets', 'default', 'images'];
+$emptyErrCtr = array_merge($emptyErrCtr, $denyWay);
+$errorController = in_array($customerUri, $emptyErrCtr) ? '' : 'Novo_Errors/pageNoFound';
+$db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
+$ftpPass = $_SERVER['BULK_FTP_PASSWORD'];
+$ftpPass =  ENVIRONMENT !==  'production' ? base64_decode($ftpPass) : $ftpPass;
+$timeZone = [
+  'bdb' => 'America/Bogota',
+  'bg' => 'America/Guayaquil',
+  'bnt' => 'America/Mexico_City',
+  'bnte' => 'America/Mexico_City',
+  'bog' => 'America/Bogota',
+  'bp' => 'America/Guayaquil',
+  'bpi' => 'America/Guayaquil',
+  'co' => 'America/Bogota',
+  'col' => 'America/Bogota',
+  'coop' => 'America/Bogota',
+  'pb' => 'America/Guayaquil',
+  'pe' => 'America/Lima',
+  'per' => 'America/Lima',
+  'us' => 'America/Lima',
+  'usd' => 'America/Lima',
+  've' => 'America/Caracas',
+  'ven' => 'America/Caracas',
+  'vg' => 'America/Lima',
+  'vgy' => 'America/Lima',
+];
+
+$timeZone = array_key_exists($customerUri, $timeZone) ? $timeZone[$customerUri] : 'America/New_York';
+date_default_timezone_set($timeZone);
+
+/*
+|--------------------------------------------------------------------------
 | DATABASE CONNECTION VARIABLES
 |--------------------------------------------------------------------------
 */
-$db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
+defined('DB_NAME')        or define('DB_NAME', $dbName);
 defined('DB_HOSTNAME')    or define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME'] ?? NULL);
 defined('DB_PORT')        or define('DB_PORT', $db_port);
 defined('DB_USERNAME')    or define('DB_USERNAME', $_SERVER['DB_USERNAME'] ?? NULL);
@@ -98,38 +147,6 @@ defined('DB_DRIVER')      or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysql
 defined('DB_CHARSET')     or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
 defined('DB_COLLATION')   or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
 defined('DB_VERIFY')      or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
-
-/*
-|--------------------------------------------------------------------------
-| Environment variables
-|--------------------------------------------------------------------------
-|
-| Constants expected as environment variables on the instance to be used
-| as part of global configuration settings.
-|
-*/
-$uriSegments  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-$timeZone = [
-  'bdb' => 'America/Bogota',
-  'bg' => 'America/Guayaquil',
-  'bnt' => 'America/Mexico_City',
-  'bog' => 'America/Bogota',
-  'bp' => 'America/Guayaquil',
-  'co' => 'America/Bogota',
-  'coop' => 'America/Bogota',
-  'pb' => 'America/Guayaquil',
-  'pe' => 'America/Lima',
-  'us' => 'America/Lima',
-  've' => 'America/Caracas',
-  'ven' => 'America/Caracas',
-  'vg' => 'America/Lima',
-];
-$ftpPass = $_SERVER['BULK_FTP_PASSWORD'];
-$ftpPass =  ENVIRONMENT !==  'production' ? base64_decode($ftpPass) : $ftpPass;
-$emptyErrCtr = ['assets', 'default', 'images', 'bpi', 'col', 'per', 'usd', 've',];
-$errorController = in_array($uriSegments[1], $emptyErrCtr) ? '' : 'Novo_Errors/pageNoFound';
-$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
-date_default_timezone_set($timeZone);
 
 /*
 |--------------------------------------------------------------------------
@@ -156,15 +173,17 @@ defined('PROXY_IPS')          or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] ==
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
-defined('CUSTUMER_OLD_WAY')   or define('CUSTUMER_OLD_WAY', 'bpi|col|per|usd|ve');
-defined('CUSTUMER_DENY_WAY')  or define('CUSTUMER_DENY_WAY', explode('|', CUSTUMER_OLD_WAY));
-defined('SINGLE_SIGNON_GET')  or define('SINGLE_SIGNON_GET', in_array($uriSegments[1], ['bdb', 'bog']));
-defined('SINGLE_SIGNON_POST')  or define('SINGLE_SIGNON_POST', in_array($uriSegments[1], ['bdb', 'bog', 'bnt']));
-defined('ENGLISH_ACTIVE')     or define('ENGLISH_ACTIVE', in_array($uriSegments[1], ['vg']));
+defined('CUSTOMER_URI')       or define('CUSTOMER_URI', $customerUri);
+defined('CUSTOMER_OLD_WAY')   or define('CUSTOMER_OLD_WAY', $oldWay);
+defined('CUSTUMER_ALLOWED')   or define('CUSTUMER_ALLOWED', $allowed);
+defined('DENY_WAY')           or define('DENY_WAY', in_array(CUSTOMER_URI, $denyWay, TRUE));
+defined('SINGLE_SIGNON_GET')  or define('SINGLE_SIGNON_GET', in_array(CUSTOMER_URI, ['bdb', 'bog', 'bdbo']));
+defined('SINGLE_SIGNON_POST') or define('SINGLE_SIGNON_POST', in_array(CUSTOMER_URI, ['bdb', 'bog', 'bdbo', 'bnt', 'bnte']));
+defined('ENGLISH_ACTIVE')     or define('ENGLISH_ACTIVE', in_array(CUSTOMER_URI, ['vg', 'vgy']));
 defined('ERROR_CONTROLLER')   or define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')      or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')        or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
-defined('ACCESS_URL')         or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
+defined('ACCESS_URL')         or define('ACCESS_URL', $accessUrl);
 defined('ACTIVE_RECAPTCHA')   or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('IP_VERIFY')          or define('IP_VERIFY', $_SERVER['IP_VERIFY'] === 'ON' ? TRUE : FALSE);
 defined('SINGLE_SIGN_ON')     or define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] === 'ON' ? TRUE : FALSE);
@@ -188,4 +207,4 @@ defined('SERVICE_URL')            or define('SERVICE_URL', $_SERVER['SERVICE_URL
 defined('SERVICE_CLIENT_ID')      or define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
 defined('SERVICE_CLIENT_SECRET')  or define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
 
-unset($ftpPass, $uriSegments, $timeZone, $errorController, $emptyErrCtr);
+unset($customerUri, $accessUrl, $oldWay, $denyWay, $allow, $allowed, $ableDBs, $dbName, $emptyErrCtr,  $errorController, $db_port, $ftpPass, $timeZone);

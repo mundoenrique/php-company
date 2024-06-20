@@ -26,13 +26,11 @@ if (!function_exists('clientUrlValidate')) {
   function clientUrlValidate($customer)
   {
     $CI = &get_instance();
-    $accessUrl = explode(',', ACCESS_URL);
-    array_walk($accessUrl, 'arrayTrim');
-    reset($accessUrl);
+    $accessUrl = ACCESS_URL;
 
-    if (!in_array($customer, $accessUrl)) {
-      $customer = current($accessUrl);
-      redirect(base_url($customer . '/inicio'), 'Location', 302);
+    if (!in_array($customer, $accessUrl) || $customer === 0) {
+      $baseUrl = str_replace("$customer/", "$accessUrl[0]/", base_url('sign-in'));
+      redirect($baseUrl, 'Location', 302);
       exit;
     }
 
@@ -46,17 +44,6 @@ if (!function_exists('arrayTrim')) {
     $value = trim($value);
 
     return $value;
-  }
-}
-
-if (!function_exists('dbSearch')) {
-  function dbSearch($uri)
-  {
-    $defaulDb = 'alpha';
-    $TempDb = in_array($uri, config_item('customer_db'), TRUE) && DB_VERIFY ? $uri : $defaulDb;
-    $dbName = in_array($TempDb, CUSTUMER_DENY_WAY, TRUE) ? $defaulDb : $TempDb;
-
-    return COOKIE_PREFIX . $dbName;
   }
 }
 
@@ -220,8 +207,36 @@ if (!function_exists('currencyFormat')) {
 if (!function_exists('tenantSameSettings')) {
   function tenantSameSettings($customer)
   {
-    $pattern = ['/bog/', '/col/', '/per/', '/usd/', '/ven/'];
-    $replace = ['bdb', 'co', 'pe', 'us', 've'];
+    $pattern = [
+      '/bdbo/',
+      '/bog/',
+      '/bgu/',
+      '/bnte/',
+      '/bpi/',
+      '/bpic/',
+      '/col/',
+      '/coopc/',
+      '/pba/',
+      '/per/',
+      '/usd/',
+      '/ven/',
+      '/vgy/',
+    ];
+    $replace = [
+      'bdb',
+      'bdb',
+      'bg',
+      'bnt',
+      'bp',
+      'bp',
+      'co',
+      'coop',
+      'pb',
+      'pe',
+      'us',
+      've',
+      'vg',
+    ];
     $customer = preg_replace($pattern, $replace, $customer);
 
     return $customer;
@@ -407,6 +422,7 @@ if (!function_exists('methodWasmigrated')) {
       'single',
       'singleSignOn',
       'termsInf',
+      'terms',
     ];
 
     $migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;
