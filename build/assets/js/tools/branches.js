@@ -191,7 +191,11 @@ $(function () {
     });
 
     $('#editAddBranchText').text(lang.GEN_NEW + ' ' + lang.GEN_BRANC_OFFICE.toLowerCase());
-    $('#branchCode').prop('readonly', false).removeClass('bg-tertiary border');
+    $('#branchCode')
+      .prop('readonly', false)
+      .removeClass('bg-tertiary border')
+      .removeClass('ignore')
+      .prop('maxlength', '3');
     $('#partedSection').hide();
     $('#editAddBranchSection').fadeIn(700, 'linear');
   });
@@ -205,7 +209,7 @@ $(function () {
       $('#' + index).val(value);
     });
 
-    $('#branchCode').prop('readonly', true).addClass('bg-tertiary border');
+    $('#branchCode').prop('readonly', true).addClass('bg-tertiary border').addClass('ignore').removeAttr('maxlength');
     $('#stateCodBranch  option[value="' + branchData.stateCod + '"]').prop('selected', true);
 
     getCities(branchData.stateCod, branchData.cityCod);

@@ -14,3 +14,6 @@ $lang['SETT_REPLACE_ISSUE_DATE'] = 'OFF';
 $lang['SETT_REPLACE_BULK_ID'] = 'ON';
 $lang['SETT_REPLACE_SERV_ORDER'] = 'ON';
 $lang['SETT_REPLACE_INV_NUMBER'] = 'ON';
+$lang['SETT_CURRENCY'] = 'Bs.';
+$lang['SETT_DECIMAL'] = ',';
+$lang['SETT_THOUSANDS'] = '.';
