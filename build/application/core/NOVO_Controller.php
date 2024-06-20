@@ -80,6 +80,15 @@ class NOVO_Controller extends CI_Controller
 
     if (isset($_POST['external']) && $this->input->post('payload') === NULL) {
       unset($_POST['external']);
+
+      if (isset($_POST['Clave'])) {
+        $_POST['Clave'] = base64_encode($_POST['Clave']);
+      }
+
+      if (isset($_POST['sessionId'])) {
+        $_POST['sessionId'] = base64_encode($_POST['sessionId']);
+      }
+
       $extReq = [
         'data' => $_POST
       ];
@@ -259,7 +268,7 @@ class NOVO_Controller extends CI_Controller
         if (lang('SETT_REMOTE_AUTH') === 'ON') {
           array_push(
             $this->includeAssets->jsFiles,
-            "remote_connect/$this->customerUri-remoteConnect"
+            "remote_connect/$this->customerFiles-remoteConnect"
           );
         }
       }

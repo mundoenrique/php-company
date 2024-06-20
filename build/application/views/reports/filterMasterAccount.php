@@ -20,16 +20,16 @@
         <div id="checked-form" class="form-group col-4">
           <label class="block">Procedimiento</label>
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="debit" name="procedure" class="custom-control-input" value="all">
+            <input type="radio" id="debit" name="procedure" class="custom-control-input" value="D">
             <label class="custom-control-label mr-1" for="debit">Cargo</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="credit" name="procedure" class="custom-control-input" value="all">
+            <input type="radio" id="credit" name="procedure" class="custom-control-input" value="C">
             <label class="custom-control-label mr-1" for="credit">Abono</label>
           </div>
 
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="allProcedures" name="procedure" class="custom-control-input" value="all">
+            <input type="radio" id="allProcedures" name="procedure" class="custom-control-input" value="">
             <label class="custom-control-label mr-1" for="allProcedures">Todos</label>
           </div>
           <div class="help-block"></div>

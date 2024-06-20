@@ -14,6 +14,9 @@ $(function () {
       $(this).html(loader);
       data = {
         bulkTicked: $('#bulkTicked').val(),
+        paymentConcept: $('#paymentConcept').val(),
+        embLine1: $('#embLine1').val(),
+        embLine2: $('#embLine2').val(),
       };
 
       if (lang.SETT_REMOTE_AUTH === 'OFF') {

@@ -68,6 +68,7 @@ $lang['BULK_NOT_DISASS'] = 'Could not detach bulk: %d, please try again.';
 $lang['BULK_UNNA_REQUEST'] = 'Request';
 $lang['BULK_UNNA_EXPIRED_DATE'] = 'Expiration date';
 $lang['BULK_UNNA_MAX_CARDS'] = 'Number of cards';
+$lang['BULK_DINAMIC_CONCEPT'] = 'Dinamic concept';
 $lang['BULK_UNNA_STARTING_LINE1'] = 'Starting line 1';
 $lang['BULK_UNNA_STARTING_LINE2'] = 'Starting line 2';
 $lang['BULK_UNNA_ACCOUNT'] = 'Unnamed cards';

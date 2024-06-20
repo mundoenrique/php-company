@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['SETT_SETTINGS_EMAIL_UPDATE'] = 'OFF';
-$lang['SETT_SETTINGS_BRANCHES'] = 'ON';
+$lang['SETT_SETTINGS_BRANCHES'] = 'OFF';
 $lang['SETT_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['SETT_VALIDATE_ALPHA_NUM_SPACE'] = '^[a-z0-9 ]{3,25}$';
 $lang['SETT_INPUT_PASS'] = 'OFF';

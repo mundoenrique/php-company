@@ -373,6 +373,9 @@ class Novo_Bulk_Model extends NOVO_Model
         $detailBulk['amount'] = $response->lotesTO->monto !== '' ? currencyFormat($response->lotesTO->monto) : '';
         $detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
         $detailBulk['success'] = 'Lote cargado exitosamente';
+        $detailBulk['dinamicConcept'] = $response->lotesTO->conceptosDinamicos ?? [];
+        $detailBulk['embLine1List'] = $response->lotesTO->lineasEmbozo1 ?? [];
+        $detailBulk['embLine2List'] = $response->lotesTO->lineasEmbozo2 ?? [];
 
         if (!empty($response->lotesTO->mensajes)) {
           foreach ($response->lotesTO->mensajes as $msg) {
@@ -423,10 +426,10 @@ class Novo_Bulk_Model extends NOVO_Model
     $this->dataAccessLog->operation = 'Confirmar Lote';
 
     $bulkConfirmInfo = $this->session->flashdata('bulkConfirmInfo');
-    $bulkConfirmInfo->lineaEmbozo1 = isset($dataRequest->enbLine1)
-      ? $dataRequest->enbLine1 : $bulkConfirmInfo->lineaEmbozo1;
-    $bulkConfirmInfo->lineaEmbozo2 = isset($dataRequest->enbLine2)
-      ? $dataRequest->enbLine2 : $bulkConfirmInfo->lineaEmbozo2;
+    $bulkConfirmInfo->lineaEmbozo1 = isset($dataRequest->embLine1)
+      ? $dataRequest->embLine1 : $bulkConfirmInfo->lineaEmbozo1;
+    $bulkConfirmInfo->lineaEmbozo2 = isset($dataRequest->embLine2)
+      ? $dataRequest->embLine2 : $bulkConfirmInfo->lineaEmbozo2;
     $bulkConfirmInfo->conceptoAbono = isset($dataRequest->paymentConcept)
       ? $dataRequest->paymentConcept : $bulkConfirmInfo->conceptoAbono;
     $bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;

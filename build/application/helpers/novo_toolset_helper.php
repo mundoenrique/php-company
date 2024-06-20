@@ -207,8 +207,36 @@ if (!function_exists('currencyFormat')) {
 if (!function_exists('tenantSameSettings')) {
   function tenantSameSettings($customer)
   {
-    $pattern = ['/bog/', '/bpi/', '/col/', '/per/', '/usd/', '/ven/'];
-    $replace = ['bdb', 'bp', 'co', 'pe', 'us', 've'];
+    $pattern = [
+      '/bdbo/',
+      '/bog/',
+      '/bgu/',
+      '/bnte/',
+      '/bpi/',
+      '/bpic/',
+      '/col/',
+      '/coopc/',
+      '/pba/',
+      '/per/',
+      '/usd/',
+      '/ven/',
+      '/vgy/',
+    ];
+    $replace = [
+      'bdb',
+      'bdb',
+      'bg',
+      'bnt',
+      'bp',
+      'bp',
+      'co',
+      'coop',
+      'pb',
+      'pe',
+      'us',
+      've',
+      'vg',
+    ];
     $customer = preg_replace($pattern, $replace, $customer);
 
     return $customer;
@@ -394,6 +422,7 @@ if (!function_exists('methodWasmigrated')) {
       'single',
       'singleSignOn',
       'termsInf',
+      'terms',
     ];
 
     $migratedModule = array_search($method, $methodsIn, TRUE) !== FALSE;
