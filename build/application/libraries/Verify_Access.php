@@ -305,8 +305,10 @@ class Verify_Access
       case 'exportToStatusBulk':
         $auth = ($productInf && $this->verifyAuthorization('REPLOT'));
         break;
-      case 'exportToExcelMasterAccount':
       case 'exportToPDFMasterAccount':
+        $auth = ($productInf && ($this->verifyAuthorization('REPCON') || $this->verifyAuthorization('REPCMT')));
+        break;
+      case 'exportToExcelMasterAccount':
       case 'exportToExcelMasterAccountConsolid':
       case 'exportToPDFMasterAccountConsolid':
       case 'masterAccount':
@@ -388,7 +390,7 @@ class Verify_Access
       $prompter = $function ? '->' . $function : '';
       $auth = in_array($access, $items);
 
-      writeLog('INFO', 'verifyAuthorization ' . $moduleLink . $prompter . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
+      writeLog('DEBUG', 'verifyAuthorization ' . $moduleLink . $prompter . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
     }
 
 
