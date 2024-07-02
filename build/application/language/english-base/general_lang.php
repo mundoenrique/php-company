@@ -70,6 +70,7 @@ $lang['GEN_BTN_PROCESS'] = 'Process';
 $lang['GEN_BTN_DOWN_PDF'] = 'Download PDF';
 $lang['GEN_BTN_DOWN_XLS'] = 'Download XLS';
 $lang['GEN_BTN_DOWN_TXT'] = 'Download TXT';
+$lang['GEN_BTN_SHOW_BILL'] = 'Show bill';
 $lang['GEN_BTN_SEE_GRAPH'] = 'See graph';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Cancel order';
 $lang['GEN_BTN_SEARCH'] = 'Search';

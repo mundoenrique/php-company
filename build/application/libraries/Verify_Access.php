@@ -223,6 +223,7 @@ class Verify_Access
       case 'exportFiles':
       case 'serviceOrders':
       case 'getServiceOrders':
+      case 'deliverInvoice':
         $auth = ($productInf && $this->verifyAuthorization('TEBORS'));
         break;
       case 'clearServiceOrders':

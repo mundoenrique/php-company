@@ -17,3 +17,4 @@ $lang['SETT_REPLACE_INV_NUMBER'] = 'ON';
 $lang['SETT_CURRENCY'] = 'Bs.';
 $lang['SETT_DECIMAL'] = ',';
 $lang['SETT_THOUSANDS'] = '.';
+$lang['SETT_SERVICEORDERS_BILLING'] = 'ON';

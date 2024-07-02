@@ -289,11 +289,11 @@ function validateForms(form) {
       },
       description: { required: true, pattern: rechargeDesc },
       branchName: { required: true, pattern: address, rangelength: [5, 100] },
-      zoneName: { required: true, pattern: address, rangelength: [5, 100] },
-      address: { required: true, pattern: longPhraseUpper, rangelength: [10, 100] },
-      address1: { required: true, pattern: address, rangelength: [10, 100] },
-      address2: { pattern: address, rangelength: [10, 100] },
-      address3: { pattern: address, rangelength: [10, 100] },
+      zoneName: { required: true, pattern: address, rangelength: [3, 100] },
+      address: { required: true, pattern: longPhraseUpper, rangelength: [10, 150] },
+      address1: { required: true, pattern: address, rangelength: [10, 150] },
+      address2: { pattern: address, rangelength: [10, 150] },
+      address3: { pattern: address, rangelength: [10, 150] },
       billingAddress: { required: true, pattern: longPhraseUpper },
       countryCode: { required: true, pattern: numeric },
       countryCodBranch: { required: true, pattern: numeric },
@@ -302,7 +302,7 @@ function validateForms(form) {
       districtCodBranch: { required: true, pattern: addressCod },
       idFiscalList: { required: true, selectRequired: [fiscalId, address] },
       idEnterpriseList: { required: true },
-      areaCode: { required: true, pattern: addressCod, rangelength: [1, 3] },
+      areaCode: { required: true, pattern: addressCod, rangelength: [3, 4] },
       phone: { required: true, pattern: phoneNumber },
       phone1: { required: true, pattern: phoneNumber },
       phone2: { pattern: phoneNumber },
@@ -763,6 +763,8 @@ function validateForms(form) {
     const text = $(element).find('option:selected').text().trim();
     const validValue = param[0].test(value);
     const validtext = param[1].test(text);
+    console.log(validValue);
+    console.log(validtext);
 
     return validValue && validtext;
   };
