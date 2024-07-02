@@ -54,11 +54,11 @@ if (!function_exists('np_hoplite_countryCheck')) {
 
     switch ($countryISO) {
       case 'Ve':
-      case 've':
+      case 'ven':
         $CI->config->load('conf-ve-config');
         break;
       case 'Co':
-      case 'co':
+      case 'col':
         $CI->config->load('conf-co-config');
         break;
       case 'Pe':
@@ -70,7 +70,7 @@ if (!function_exists('np_hoplite_countryCheck')) {
         $CI->config->load('conf-usd-config');
         break;
       case 'Ec-bp':
-      case 'bp':
+      case 'bpi':
         $CI->config->load('conf-ec-bp-config');
         break;
       default:

@@ -12,3 +12,6 @@ $lang["GEN_PROVINCE"] = "Estado";
 $lang["GEN_DEPARTMENT"] = "Ciudad";
 $lang['GEN_FISCAL_REGISTRY'] = 'RIF.';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
+$lang['GEN_TABLE_AMOUNT_SO'] = 'Sub total';
+$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Total a Pagar';
+$lang['GEN_TABLE_COMMISSION_GMF'] = 'Monto comisión';

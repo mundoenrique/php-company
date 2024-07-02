@@ -856,13 +856,17 @@ $config = [
   'exportFiles' => [
     [
       'field' => 'OrderNumber',
-      'label' => 'OrderNumber',
       'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
     ],
     [
       'field' => 'bulkNumber',
-      'label' => 'bulkNumber',
       'rules' => 'trim|integer'
+    ]
+  ],
+  'deliverInvoice' => [
+    [
+      'field' => 'OrderNumber',
+      'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
     ]
   ],
   'getServiceOrders' => [

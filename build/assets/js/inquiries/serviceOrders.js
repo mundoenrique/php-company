@@ -200,7 +200,7 @@ $(function () {
         modalBtn = {
           btn1: {
             text: lang.GEN_BTN_CANCEL_ORDER,
-            action: 'none',
+            action: 'destroy',
           },
           btn2: {
             text: lang.GEN_BTN_CANCEL,
@@ -233,6 +233,28 @@ $(function () {
           $('#pending-bulk').find('tr').removeClass('select');
           $('#delete-bulk-btn').attr('id', oldID);
         });
+        break;
+      case lang.GEN_BTN_SHOW_BILL:
+        who = 'Inquiries';
+        where = 'DeliverInvoice';
+        data = {
+          OrderNumber: form.find('input[name="OrderNumber"]').val(),
+        };
+
+        callNovoCore(who, where, data, function (response) {
+          console.log(response);
+          switch (response.code) {
+            case 0:
+              downLoadfiles(response.data);
+              break;
+            case 1:
+              appMessages(response.title, response.msg, response.icon, response.modalBtn);
+              break;
+          }
+
+          $('.cover-spin').hide();
+        });
+
         break;
       case lang.PAG_OS_TITLE:
         var idOS = form.find('input[name="OrderNumber"]').val();
@@ -304,7 +326,7 @@ function format(bulk) {
     body += '<tr>';
     body += '<td>';
     body += '<a class="btn-link big-modal this-bulk">' + value.bulkNumber + '</a>';
-    body += '<form class="form-group" action="' + baseURL + lang.SETT_LINK_INQUIRY_BULK_DETAIL + '" method="post">';
+    body += '<form action="' + baseURL + lang.SETT_LINK_INQUIRY_BULK_DETAIL + '" method="post">';
     body += '<input type="hidden" name="bulkId" value="' + value.bulkId + '">';
     body += '<input type="hidden" name="orderList" value="' + orderList + '">';
     body += '<input type="hidden" name="nonBillable" value="' + nonBillable + '">';

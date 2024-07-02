@@ -100,6 +100,9 @@ class Novo_Inquiries_Model extends NOVO_Model
           $serviceOrders->OrderStatus = $dataOrder->estatus;
           $serviceOrders->Orderdate = $dataOrder->fechaGeneracion;
           $serviceOrders->noFactura = $dataOrder->nofactura;
+          $serviceOrders->showBill = $dataOrder->nofactura !== '' && $dataOrder->fechafactura !== '';
+          $serviceOrders->billing = $response->facturacion;
+          $serviceOrders->reprocessing = $response->reproceso;
           $serviceOrders->pagoOS['factura'] = $dataOrder->nofactura;
           $serviceOrders->pagoOS['total'] = $dataOrder->montoDeposito;
           $serviceOrders->OrderDeposit = currencyFormat($dataOrder->montoDeposito);
@@ -509,7 +512,7 @@ class Novo_Inquiries_Model extends NOVO_Model
 
       if (in_array('nombre', $acceptAttr) && in_array('apellido', $acceptAttr)) {
         $recordDetail->nombre = $recordDetail->nombre . ' ' . $recordDetail->apellido;
-        unset($recordDetail->apellidos);
+        unset($recordDetail->apellido);
       }
 
       $bulkDetail[] = $recordDetail;
@@ -554,6 +557,48 @@ class Novo_Inquiries_Model extends NOVO_Model
     return $detailRecords;
   }
   /**
+   * @info Exporta factura .pdf de una orden de servicio
+   * @author Enrique Peñaloza
+   * @date July 01st, 2024
+   */
+  public function callWs_DeliverInvoice_Inquiries($dataRequest)
+  {
+    writeLog('INFO', 'Inquiries Model: DeliverInvoice Method Initialized');
+
+    $this->dataAccessLog->modulo = 'Consultas';
+    $this->dataAccessLog->function = 'Ordenes de servicio';
+    $this->dataAccessLog->operation = 'Descargar factura';
+
+    $this->dataRequest->idOperation = 'descargarFactura';
+    $this->dataRequest->className = 'com.novo.objects.TOs.FacturaTO';
+    $this->dataRequest->idOrdenS = $dataRequest->OrderNumber;
+    $this->dataRequest->dFecha = date("m/d/Y H:i");
+
+    $response = $this->sendToWebServices('callWs_DeliverInvoice');
+
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+        $file = $response->archivo;
+        $name = explode('.', $response->nombre);
+        $ext = manageString($response->formatoArchivo, 'lower', 'none');
+
+        $this->response->data->file = $file;
+        $this->response->data->name = $name[0] . '_' . time() . '.' . $ext;
+        $this->response->data->ext = $ext;
+        break;
+      case -56:
+        $this->response->code = 1;
+        $this->response->icon = lang('SETT_ICON_WARNING');
+        $this->response->title = lang('GEN_ORDER_TITLE');
+        $this->response->msg = lang('INQ_NO_INVOICE');
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
+        break;
+    }
+
+    return $this->responseToTheView('callWs_DeliverInvoice');
+  }
+  /**
    * @info Exporta archivo .pdf de una orden de servicio
    * @author Luis Molina
    * @date March 10th, 2020
@@ -562,7 +607,7 @@ class Novo_Inquiries_Model extends NOVO_Model
    */
   public function callWs_ExportFiles_Inquiries($dataRequest)
   {
-    writeLog('INFO', 'DownloadFiles Model: exportFiles Method Initialized');
+    writeLog('INFO', 'Inquiries Model: exportFiles Method Initialized');
 
     $this->dataAccessLog->modulo = 'Consultas';
     $this->dataAccessLog->function = 'Ordenes de servicio';

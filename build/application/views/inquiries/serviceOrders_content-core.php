@@ -111,6 +111,11 @@
                           <button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
                             <i class="icon icon-file-pdf" aria-hidden="true"></i>
                           </button>
+                          <?php if ($this->verify_access->verifyAuthorization('TEBORS') && lang('SETT_SERVICEORDERS_BILLING') === 'ON' && $list->showBill) : ?>
+                            <button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SHOW_BILL'); ?>" data-toggle="tooltip" billing=<?= $list->billing; ?>>
+                              <i class="icon icon-document" aria-hidden="true"></i>
+                            </button>
+                          <?php endif; ?>
                           <?php if ($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable) : ?>
                             <button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
                               <i class="icon icon-remove" aria-hidden="true"></i>
@@ -157,7 +162,7 @@
                       <tr>
                         <td>
                           <a class="btn-link big-modal this-bulk"><?= $bulk->bulkNumber; ?></a>
-                          <form class="form-group" action="<?= base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
+                          <form action="<?= base_url(lang('SETT_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                             <input type="hidden" name="bulkId" value="<?= $bulk->bulkId; ?>">
                             <input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">
                           </form>

@@ -187,6 +187,7 @@ $lang['SETT_BALANCE_ACC_CONCENTRATOR'] = 'OFF';
 $lang['SETT_TABLE_UNNAMED_CARDS'] = 'ON';
 $lang['SETT_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 $lang['SETT_SERVICEORDERS_ICON'] = 'OFF';
+$lang['SETT_SERVICEORDERS_BILLING'] = 'OFF';
 $lang['SETT_NO_LINK'] = 'javascript:';
 $lang['SETT_LINK_SIGNIN'] = SINGLE_SIGN_ON && ENVIRONMENT === 'production' ? 'internal/novopayment/signin' : 'sign-in';
 $lang['SETT_LINK_SIGNOUT'] = 'sign-out/';

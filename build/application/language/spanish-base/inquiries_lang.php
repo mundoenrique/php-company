@@ -1,12 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['INQ_NO_SERVICE_ORDER'] = 'No fue posible obtener las órdenes de servicio';
+$lang['INQ_NO_INVOICE'] = 'No fue posible generar la factura, Por favor intente más tarde.';
 
 $lang['PAG_OS_TITLE'] = 'Pagar Orden de Servicio';
 $lang['PAG_OS_ENV_OK'] = 'Envío exitoso';
 $lang['PAG_OS_OK'] = 'El pago fue realizado de forma exitosa';
-$lang['PAGO_OS_CONECTION_ERROR']= "Ocurrio un error de conexión con el servicio";
+$lang['PAGO_OS_CONECTION_ERROR'] = "Ocurrio un error de conexión con el servicio";
 $lang['PAGO_OS_UNAVAILABLE_BALANCE'] = "La empresa no posee saldo disponible para realizar la operación";
 $lang['PAGO_OS_GENERAL_MSG'] = "En este momento no podemos procesar tu solicitud,<br> por favor intenta más tarde";
 $lang['PAGO_OS_PARAMS_INVALID'] = "Parámetros inválidos";
