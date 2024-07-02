@@ -163,12 +163,11 @@ if (!function_exists('languageCookie')) {
 if (!function_exists('BulkAttrEmissionA')) {
   function BulkAttrEmissionA()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
     $tableContent->body = ['idExtPer', 'nombres', 'apellidos', 'status'];
 
-    switch ($CI->config->item('customer_uri')) {
+    switch (config_item('customer_uri')) {
       case 'pb':
       case 'bp':
         $tableContent->header = [
@@ -185,7 +184,6 @@ if (!function_exists('BulkAttrEmissionA')) {
 if (!function_exists('BulkAttrEmissionB')) {
   function BulkAttrEmissionB()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
     $tableContent->body = ['idExtPer', 'nombres', 'apellidos', 'nroTarjeta'];
@@ -197,7 +195,6 @@ if (!function_exists('BulkAttrEmissionB')) {
 if (!function_exists('BulkAttrEmissionC')) {
   function BulkAttrEmissionC()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_EMAIL'), lang('GEN_TABLE_STATUS')];
     $tableContent->body = ['idExtPer', 'nombres', 'apellidos', 'email', 'status'];
@@ -209,7 +206,6 @@ if (!function_exists('BulkAttrEmissionC')) {
 if (!function_exists('BulkAttrCreditsA')) {
   function BulkAttrCreditsA()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
     $tableContent->body = ['id_ext_per', 'monto', 'nro_cuenta'];
@@ -221,7 +217,6 @@ if (!function_exists('BulkAttrCreditsA')) {
 if (!function_exists('BulkAttrCreditsB')) {
   function BulkAttrCreditsB()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
     $tableContent->body = ['id_ext_per', 'monto', 'nro_cuenta', 'status'];
@@ -233,7 +228,6 @@ if (!function_exists('BulkAttrCreditsB')) {
 if (!function_exists('BulkAttrCreditsC')) {
   function BulkAttrCreditsC()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
     $tableContent->body = ['id_ext_per', 'monto', 'nro_cuenta', 'status'];
@@ -245,10 +239,9 @@ if (!function_exists('BulkAttrCreditsC')) {
 if (!function_exists('BulkAttrKindergastenA')) {
   function BulkAttrKindergastenA()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
-    $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY')];
-    $tableContent->body = ['idExtPer', 'nombre', 'apellido', 'beneficiario'];
+    $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY'), lang('GEN_TABLE_AMOUNT')];
+    $tableContent->body = ['id_per', 'nombre', 'apellido', 'beneficiario', 'nro_cuenta', 'monto_total'];
 
     return $tableContent;
   }
@@ -257,10 +250,9 @@ if (!function_exists('BulkAttrKindergastenA')) {
 if (!function_exists('BulkAttrKindergastenB')) {
   function BulkAttrKindergastenB()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
-    $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY')];
-    $tableContent->body = ['idExtPer', 'nombre', 'apellido', 'beneficiario', 'nro_cuenta'];
+    $tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_AMOUNT')];
+    $tableContent->body = ['id_per', 'nombre', 'apellido', 'beneficiario', 'monto_total'];
 
     return $tableContent;
   }
@@ -269,7 +261,6 @@ if (!function_exists('BulkAttrKindergastenB')) {
 if (!function_exists('BulkAttrReplacementA')) {
   function BulkAttrReplacementA()
   {
-    $CI = &get_instance();
     $tableContent = new stdClass();
     $tableContent->header = [lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_DNI')];
     $tableContent->body = ['aced_rif', 'nocuenta'];
