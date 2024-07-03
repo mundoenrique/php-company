@@ -95,7 +95,7 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 */
 $customerUri  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))[1];
 $accessUrl = explode(',', str_replace(' ', '', $_SERVER['ACCESS_URL']));
-$oldWay = 'bpi|col|per|usd|ve';
+$oldWay = 'bpi|col|per|usd|ven';
 $denyWay = explode('|', $oldWay);
 $allow = array_diff($accessUrl, $denyWay);
 $allowed = implode('|', $allow);
