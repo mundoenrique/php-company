@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['SETT_BULK_AUTHORIZE'] = 'OFF';
 $lang['SETT_BULK_TYPE_SERVICE_ORDER'] = '1';
-$lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("23-07-2023 14:00:00") ? 'ON' : 'OFF';
+$lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("30-08-2024 23:59:00") ? 'ON' : 'OFF';
 $lang['SETT_MENU_CIRCLE'] = 'ON';
 $lang['SETT_ISSUED_MONTHLY'] = 'OFF';
 $lang['SETT_FOOTER_RATES'] = 'ON';
