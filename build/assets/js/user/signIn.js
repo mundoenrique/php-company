@@ -15,7 +15,7 @@ $(function () {
   let formSignin;
 
   if (lang.SETT_MAINT_NOTIF === 'ON') {
-    var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', '/assets/images/' + customerUri + '/maint_notif3.png');
+    var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', '/assets/images/' + customerUri + '/maint_notif4.png');
 
     console.log(mesgNotif);
     var message = {
