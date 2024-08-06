@@ -14,6 +14,27 @@ $(function () {
   let dataSignin;
   let formSignin;
 
+  if (lang.SETT_MAINT_NOTIF === 'ON') {
+    var mesgNotif = lang.GEN_MSG_MAINT_NOTIF.replace('%s', '/assets/images/' + customerUri + '/maint_notif4.png');
+
+    console.log(mesgNotif);
+    var message = {
+      msg: mesgNotif,
+      modalBtn: {
+        btn1: {
+          text: lang.GEN_BTN_ACCEPT,
+          action: 'destroy',
+        }
+      },
+      maxHeight: 'none',
+      minWidth: 500,
+      posAt: 'center top',
+      posMy: 'center top+100',
+    };
+
+    uiModalMessage(message);
+  }
+
   $('#signInBtn').on('click', function (e) {
     e.preventDefault();
     formSignin = $('#signInForm');
