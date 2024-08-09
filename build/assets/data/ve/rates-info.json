@@ -54,38 +54,28 @@
         {
           "name": "Retiro de cajeros",
           "description": null,
-          "rates": []
-        },
-        {
-          "name": "Otros bancos",
-          "description": null,
-          "rates": [null, "5%"]
+          "rates": ["N/A","Según tarifa del banco"]
         },
         {
           "name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
           "description": null,
-          "rates": []
-        },
-        {
-          "name": "Otros bancos",
-          "description": null,
-          "rates": [null, "Bs. 0,01"]
+          "rates": ["N/A","Según tarifa del banco"]
         }
       ]
     },
     {
-      "name": "Pago Móvil*",
+      "name": "Pago Móvil**",
       "description": null,
       "items": [
         {
           "name": "Comisión general",
           "description": null,
-          "rates": [null, "0.85%"]
+          "rates": ["N/A", "0.85%"]
         },
         {
           "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 30,00)",
           "description": null,
-          "rates": [null, "Bs. 30,00"]
+          "rates": ["N/A", "Bs. 30,00"]
         }
       ]
     },
@@ -96,7 +86,7 @@
         {
           "name": "Consulta de saldo",
           "description": null,
-          "rates": [0.0, 0.0]
+          "rates": ["Bs. 0,00", "Bs. 0,00"]
         }
       ]
     }
