@@ -30,7 +30,7 @@ if (!function_exists('setRegex')) {
       'fiscal_id_per' => '^(10|15|16|17|20)(\d){9}$',
       'fiscal_id_usa' => '^([\w\-])+$',
       'fiscal_id_ecu' => '^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)(6|9)(\d){5,6}(\d){3,4}$',
-      'fiscal_id_mex' => '^([\w\d]{8,9}$)',
+      'fiscal_id_mex' => '^([\w\d]{8,10}$)',
     ];
 
     return $regex[$regexName];
