@@ -2,7 +2,7 @@
   "source_type": "rates",
   "currency": "ves",
   "currency_symbol": "Bs.",
-  "last_update": "2023-05-16",
+  "last_update": "2024-08-08",
   "data": [
     {
       "name": "Servicios",
@@ -10,13 +10,13 @@
       "items": [
         {
           "name": "Servicio administrativo mínimo",
-          "description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 500,00",
-          "rates": ["Bs. 500,00", "Bs. 500,00"]
+          "description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 625,00",
+          "rates": ["Bs. 625,00", "Bs. 625,00"]
         },
         {
           "name": "Servicios operativos y de logística (cobro único mensual)",
           "description": null,
-          "rates": ["Bs. 500,00", "Bs. 500,00"]
+          "rates": ["Bs. 625,00", "Bs. 625,00"]
         }
       ]
     },
@@ -27,12 +27,12 @@
         {
           "name": "Emisión (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
           "description": null,
-          "rates": ["Bs. 80,00 <br> Bs. 150,00", "Bs. 80,00 <br> Bs. 150,00"]
+          "rates": ["Bs. 80,00 <br> Bs. 190,00", "Bs. 80,00 <br> Bs. 190,00"]
         },
         {
           "name": "Reposición / Renovación (c/u) <br><li>Banda</li><li>Chip Contactless </li>",
           "description": null,
-          "rates": ["Bs. 80,00 <br> Bs. 150,00", "Bs. 80,00 <br> Bs. 150,00"]
+          "rates": ["Bs. 80,00 <br> Bs. 190,00", "Bs. 80,00 <br> Bs. 190,00"]
         }
       ]
     },
@@ -54,38 +54,28 @@
         {
           "name": "Retiro de cajeros",
           "description": null,
-          "rates": []
-        },
-        {
-          "name": "Otros bancos",
-          "description": null,
-          "rates": [null, "5%"]
+          "rates": ["N/A","Según tarifa del banco"]
         },
         {
           "name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
           "description": null,
-          "rates": []
-        },
-        {
-          "name": "Otros bancos",
-          "description": null,
-          "rates": [null, "Bs. 0,01"]
+          "rates": ["N/A","Según tarifa del banco"]
         }
       ]
     },
     {
-      "name": "Pago Móvil*",
+      "name": "Pago Móvil**",
       "description": null,
       "items": [
         {
           "name": "Comisión general",
           "description": null,
-          "rates": [null, "0.85%"]
+          "rates": ["N/A", "0.85%"]
         },
         {
-          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 25,00)",
+          "name": "Comisión mínima (Aplica a transacciones con comisión calculada menor o igual a Bs. 30,00)",
           "description": null,
-          "rates": [null, "Bs. 25,00"]
+          "rates": ["N/A", "Bs. 30,00"]
         }
       ]
     },
@@ -96,7 +86,7 @@
         {
           "name": "Consulta de saldo",
           "description": null,
-          "rates": [0.0, 0.0]
+          "rates": ["Bs. 0,00", "Bs. 0,00"]
         }
       ]
     }
